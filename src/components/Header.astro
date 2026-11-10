@@ -1,0 +1,24 @@
+---
+const links = [
+  { href: '#servicios', label: 'Servicios' },
+  { href: '#nosotros', label: 'Nosotros' },
+  { href: '#contacto', label: 'Contacto' },
+];
+---
+
+<header class="absolute inset-x-0 top-0 z-20 flex h-24 items-center justify-between pl-6 pr-6 md:pl-[54px] md:pr-[38px]">
+  <div class="flex items-center gap-10 lg:gap-20">
+    <a href="/" class="text-[17px] font-semibold tracking-tight">NEXA</a>
+    <nav class="hidden items-center gap-12 md:flex" aria-label="Principal">
+      {links.map((l) => (
+        <a href={l.href} class="text-[17px] font-medium tracking-tight transition-opacity hover:opacity-70">{l.label}</a>
+      ))}
+    </nav>
+  </div>
+  <a
+    href="#contacto"
+    class="rounded-full border border-white/15 bg-white/10 px-8 py-[17px] text-[17px] font-medium leading-none tracking-tight backdrop-blur-sm transition-colors hover:bg-white/20"
+  >
+    Hablemos
+  </a>
+</header>
