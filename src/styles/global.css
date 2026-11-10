@@ -1,11 +1,60 @@
 @import "tailwindcss";
 @import "@fontsource-variable/inter-tight";
+@import "@fontsource/lato/latin-300.css";
+@import "@fontsource/lato/latin-400.css";
+@import "@fontsource/lato/latin-700.css";
 
 @theme {
   --font-sans: "Inter Tight Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Lato", ui-sans-serif, system-ui, sans-serif;
+  --color-paper: #f6f5f2;
+  --color-ink: #14161c;
+  --color-mute: #6b6f78;
+  --color-line: #e4e2dc;
 }
 
 html {
   background: #0b1a4a;
   -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+}
+
+/* Entrance on load */
+@keyframes rise {
+  from { opacity: 0; transform: translate3d(0, 18px, 0); }
+}
+@keyframes drop {
+  from { opacity: 0; transform: translate3d(0, -16px, 0); }
+}
+.rise { animation: rise 1.2s cubic-bezier(0.22, 1, 0.36, 1) both; animation-delay: var(--d, 0s); }
+.drop { animation: drop 1s cubic-bezier(0.22, 1, 0.36, 1) both; animation-delay: var(--d, 0s); }
+
+/* Reveal on scroll (only when JS is on, so content never stays hidden) */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--i, 0) * 90ms);
+}
+.js [data-reveal].is-in { opacity: 1; transform: none; }
+
+/* Silk-like card visual */
+.silk {
+  background:
+    radial-gradient(55% 70% at 20% 30%, var(--c1), transparent 70%),
+    radial-gradient(65% 80% at 80% 70%, var(--c2), transparent 72%),
+    var(--c3);
+  background-size: 180% 180%;
+  transform: translate3d(0, calc(var(--py, 0) * 1px), 0) scale(1.2);
+  animation: drift 16s ease-in-out infinite alternate;
+}
+@keyframes drift {
+  from { background-position: 0% 20%; }
+  to { background-position: 100% 80%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .rise, .drop, .silk { animation: none; }
+  .js [data-reveal] { opacity: 1; transform: none; transition: none; }
 }

@@ -1,0 +1,53 @@
+---
+import Icon from './Icon.astro';
+import { services } from '../data/services';
+---
+
+<section data-tone="light" class="bg-paper font-body text-ink">
+  <div class="mx-auto max-w-[1280px] px-6 pb-24 pt-8 md:px-10 md:pb-32 md:pt-12">
+    <div class="grid gap-8 md:grid-cols-12 md:items-end">
+      <h2 data-reveal class="max-w-[16ch] text-[clamp(2.25rem,4.2vw,3.5rem)] font-normal leading-[1.08] tracking-[-0.02em] md:col-span-7">
+        Ocho áreas para cada parte de tu empresa
+      </h2>
+      <div data-reveal style="--i:1" class="md:col-span-4 md:col-start-9">
+        <p class="text-[15px] leading-relaxed text-mute">
+          Desde la identidad de marca hasta los datos y la seguridad: soluciones que funcionan por separado y mejor juntas.
+        </p>
+        <a href="/servicios" class="group mt-6 inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-bold text-white transition-transform hover:scale-[1.03]">
+          Ver todos los servicios
+          <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
+        </a>
+      </div>
+    </div>
+
+    <ul class="mt-14 grid gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 md:mt-20">
+      {services.map((s, i) => (
+        <li data-reveal style={`--i:${i % 4}`}>
+          <a href={`/servicios#${s.slug}`} class="group block">
+            <div class="relative aspect-[4/3] overflow-hidden rounded-[4px] bg-[#12308a]">
+              <div
+                data-parallax
+                class="silk absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-[1.06]"
+                style={`--c1:${s.silk[0]};--c2:${s.silk[1]};--c3:${s.silk[2]};animation-delay:-${i * 3}s`}
+              ></div>
+              <span class="absolute left-4 top-4 rounded-full bg-white/15 px-3 py-1 text-xs font-bold tabular-nums text-white backdrop-blur-md">0{i + 1}</span>
+              <Icon name={s.icon} class="absolute bottom-4 right-4 size-9 text-white/90 transition-transform duration-500 group-hover:-translate-y-1 group-hover:rotate-[-6deg]" />
+            </div>
+            <div class="pt-5">
+              <h3 class="text-[19px] font-bold leading-snug tracking-tight">{s.title}</h3>
+              <p class="mt-1.5 text-[13px] leading-relaxed text-mute">{s.description}</p>
+              <ul class="mt-4 space-y-2 border-t border-line pt-4">
+                {s.items.map((it) => (
+                  <li class="flex items-center gap-2.5 text-[13px] text-mute">
+                    <Icon name={it.icon} class="size-4 shrink-0 text-ink/60 transition-colors group-hover:text-[#1d4bb8]" />
+                    {it.label}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

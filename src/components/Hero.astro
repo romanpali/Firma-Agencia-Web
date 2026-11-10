@@ -3,6 +3,7 @@ import Header from './Header.astro';
 ---
 
 <section
+  data-tone="dark"
   class="relative h-svh min-h-[560px] overflow-hidden text-white"
   style="background:linear-gradient(115deg,#17389a,#2a55b8 60%,#1b3f9a)"
 >
@@ -13,8 +14,8 @@ import Header from './Header.astro';
 
   <Header />
 
-  <h1 id="hero-title" class="absolute inset-x-0 top-[51.5%] -translate-y-1/2 text-center text-[clamp(2rem,2.7vw,3.25rem)] leading-none tracking-[-0.01em]"aria-label="HumanCorp"><span class="font-light">HUMAN</span> <span class="font-semibold">C<span id="hero-o">O</span>RP</span></h1>
-  <p class="absolute inset-x-0 bottom-[10%] mx-auto max-w-[22rem] px-6 text-center text-[clamp(1.125rem,1.25vw,1.5rem)] font-medium leading-[1.5] tracking-tight text-balance md:max-w-none">
+  <h1 id="hero-title" style="--d:.2s" class="rise absolute inset-x-0 top-[51.5%] -translate-y-1/2 text-center text-[clamp(2rem,2.7vw,3.25rem)] leading-none tracking-[-0.01em]"aria-label="HumanCorp"><span class="font-light">HUMAN</span> <span class="font-semibold">C<span id="hero-o">O</span>RP</span></h1>
+  <p style="--d:.5s" class="rise absolute inset-x-0 bottom-[10%] mx-auto max-w-[22rem] px-6 text-center text-[clamp(1.125rem,1.25vw,1.5rem)] font-medium leading-[1.5] tracking-tight text-balance md:max-w-none">
     Todo lo que hace funcionar a una empresa,<br class="hidden md:block" /> conectado bajo un solo estándar.
   </p>
 
@@ -30,7 +31,7 @@ import Header from './Header.astro';
   // Cursor dot: follows the pointer with easing; rests above the wordmark.
   const rest = () => {
     const r = mark.getBoundingClientRect();
-    return { x: r.left + r.width / 2, y: r.top - 8 };
+    return { x: r.left + r.width / 2, y: r.top - 16 };
   };
   let target = rest();
   let pos = { ...target };

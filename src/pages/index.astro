@@ -1,6 +1,9 @@
 ---
 import '../styles/global.css';
 import Hero from '../components/Hero.astro';
+import Intro from '../components/Intro.astro';
+import ServicesPreview from '../components/ServicesPreview.astro';
+import ScrollFx from '../components/ScrollFx.astro';
 ---
 
 <!doctype html>
@@ -9,9 +12,15 @@ import Hero from '../components/Hero.astro';
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Diseño, tecnología y operaciones empresariales." />
+    <script is:inline>document.documentElement.classList.add('js')</script>
     <title>HumanCorp — Diseño, tecnología y operaciones empresariales</title>
   </head>
   <body class="font-sans">
-    <Hero />
+    <main>
+      <Hero />
+      <Intro />
+      <ServicesPreview />
+    </main>
+    <ScrollFx />
   </body>
 </html>

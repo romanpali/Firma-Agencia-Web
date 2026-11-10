@@ -1,0 +1,42 @@
+<script>
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Reveal on scroll (staggering comes from --i in CSS).
+  const io = new IntersectionObserver(
+    (entries) => {
+      for (const e of entries) {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-in');
+          io.unobserve(e.target);
+        }
+      }
+    },
+    { threshold: 0.12, rootMargin: '0px 0px -6% 0px' },
+  );
+  document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el));
+
+  // Navbar tone (follows the section under it) + card parallax.
+  const header = document.querySelector<HTMLElement>('[data-header]');
+  const sections = [...document.querySelectorAll<HTMLElement>('[data-tone]')].filter((el) => el !== header);
+  const parallax = [...document.querySelectorAll<HTMLElement>('[data-parallax]')];
+  let queued = false;
+  const update = () => {
+    queued = false;
+    let tone = 'dark';
+    for (const s of sections) {
+      const r = s.getBoundingClientRect();
+      if (r.top <= 40 && r.bottom > 40) { tone = s.dataset.tone!; break; }
+    }
+    header?.setAttribute('data-tone', tone);
+    if (reduced) return;
+    for (const el of parallax) {
+      const r = el.parentElement!.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > innerHeight) continue;
+      const c = (r.top + r.height / 2 - innerHeight / 2) / innerHeight;
+      el.style.setProperty('--py', (c * -26).toFixed(1));
+    }
+  };
+  addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(update); } }, { passive: true });
+  addEventListener('resize', update);
+  update();
+</script>
