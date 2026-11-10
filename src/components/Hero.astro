@@ -1,45 +1,95 @@
 ---
-import Header from './Header.astro';
 ---
 
 <section
+  data-pin
+  data-hero
   data-tone="dark"
-  class="relative h-svh min-h-[560px] overflow-hidden text-white"
-  style="background:linear-gradient(115deg,#17389a,#2a55b8 60%,#1b3f9a)"
+  class="relative h-svh min-h-[560px] overflow-hidden bg-paper text-white"
 >
-  <canvas id="hero-canvas" class="absolute inset-0 size-full opacity-0 transition-opacity duration-1000" aria-hidden="true"></canvas>
-  <div class="pointer-events-none absolute inset-0 bg-black/20"></div>
-  <div class="pointer-events-none absolute inset-x-0 top-0 h-[12%] bg-gradient-to-b from-black/90 to-transparent"></div>
-  <div class="pointer-events-none absolute inset-0" style="background:linear-gradient(to bottom,transparent 60%,rgba(2,8,36,.5))"></div>
+  <!-- Preloader (lives on the white page background, under the media) -->
+  <div data-preloader class="absolute inset-0 grid place-items-center">
+    <div aria-hidden="true" class="whitespace-nowrap text-[13.8vw] leading-none tracking-[-0.04em] text-[#99B6D2]/15">
+      <span class="font-light">HUMAN</span> <span class="font-semibold">CORP</span>
+    </div>
+    <div class="absolute text-[calc(28*0.915*var(--u))] leading-none text-[#151515] tabular-nums">
+      <span data-count>00</span>%
+    </div>
+  </div>
 
-  <Header />
+  <!-- Media: animated background -->
+  <div data-media class="absolute inset-0 z-[1] overflow-hidden" style="background:linear-gradient(115deg,#17389a,#2a55b8 60%,#1b3f9a)">
+    <div data-camera class="absolute inset-0 will-change-transform">
+      <canvas id="hero-canvas" class="absolute inset-0 size-full opacity-0 transition-opacity duration-1000" aria-hidden="true"></canvas>
+    </div>
+    <div class="pointer-events-none absolute inset-0 bg-black/20"></div>
+    <div class="pointer-events-none absolute inset-x-0 top-0 h-[12%] bg-gradient-to-b from-black/90 to-transparent"></div>
+    <div class="pointer-events-none absolute inset-0" style="background:linear-gradient(to bottom,transparent 60%,rgba(2,8,36,.5))"></div>
+    <div class="pointer-events-none absolute inset-0 flex items-center justify-center" style="perspective:1400px">
+      <div data-portal data-plane class="relative will-change-transform" style="height:min(var(--portal-h,58svh),640px);aspect-ratio:652/1024">
+      <div data-glass class="absolute inset-0">
+          <div class="absolute inset-0 rounded-[28px] border border-white/35 bg-gradient-to-br from-white/20 via-white/[0.06] to-transparent shadow-[inset_0_2px_2px_rgba(255,255,255,0.25)] backdrop-blur-[10px]"></div>
+          <div
+            class="absolute inset-0 rounded-[28px] border-[2px] border-white shadow-[0_0_3px_rgba(255,255,255,0.95),0_0_14px_rgba(255,255,255,0.55)]"
+            style="mask-image:linear-gradient(to bottom left,#000 20%,rgba(0,0,0,.45) 60%,transparent 92%)"
+          ></div>
+          <div class="absolute inset-0 flex flex-col justify-between p-6 text-white">
+            <span class="relative size-6 rounded-full border border-white/80"><span class="absolute left-1/2 top-[-5px] size-1.5 -translate-x-1/2 rounded-full bg-white"></span></span>
+            <div class="text-[13px] leading-snug tracking-[0.02em]">
+              <span class="font-light">HUMAN</span> <span class="font-semibold">CORP</span>
+              <div class="mt-1 text-[11px] text-white/70">Diseño · Tecnología · Operaciones</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <h1 id="hero-title" style="--d:.2s" class="rise absolute inset-x-0 top-[51.5%] -translate-y-1/2 text-center text-[clamp(2rem,2.7vw,3.25rem)] leading-none tracking-[-0.01em]"aria-label="HumanCorp"><span class="font-light">HUMAN</span> <span class="font-semibold">C<span id="hero-o">O</span>RP</span></h1>
-  <p style="--d:.5s" class="rise absolute inset-x-0 bottom-[10%] mx-auto max-w-[22rem] px-6 text-center text-[clamp(1.125rem,1.25vw,1.5rem)] font-medium leading-[1.5] tracking-tight text-balance md:max-w-none">
-    Todo lo que hace funcionar a una empresa,<br class="hidden md:block" /> conectado bajo un solo estándar.
-  </p>
+  <!-- Copy -->
+  <div data-copy class="pointer-events-none absolute inset-0 z-[2] will-change-transform">
+    <h1
+      data-intro
+      aria-label="HumanCorp"
+      class="absolute inset-x-0 top-[51.5%] -translate-y-1/2 text-center text-[clamp(2rem,2.7vw,3.25rem)] leading-none tracking-[-0.01em]"
+    >
+      <span data-word class="inline-block font-light">HUMAN</span>{" "}<span data-word class="inline-block font-semibold">C<span id="hero-o" class="relative inline-block before:absolute before:left-1/2 before:-top-[0.3em] before:size-[0.16em] before:-translate-x-1/2 before:rounded-full before:bg-white before:content-['']">O</span>RP</span>
+    </h1>
+    <p
+      data-intro="lead"
+      class="absolute inset-x-0 bottom-[10%] mx-auto max-w-[22rem] px-6 text-center text-[clamp(1.125rem,1.25vw,1.5rem)] font-medium leading-[1.5] tracking-tight text-balance md:max-w-none"
+    >
+      Todo lo que hace funcionar a una empresa,<br class="hidden md:block" /> conectado bajo un solo estándar.
+    </p>
+  </div>
 
-  <span id="hero-dot" class="pointer-events-none absolute left-0 top-0 z-30 size-2.5 rounded-full bg-white will-change-transform" aria-hidden="true"></span>
+  <!-- Portal: a glass panel that lights up, opens and becomes the next screen -->
+  <div data-over class="pointer-events-none absolute inset-0 z-[3] flex items-center justify-center overflow-hidden" style="perspective:1400px">
+    <div data-portal data-plane class="relative will-change-transform" style="height:min(var(--portal-h,58svh),640px);aspect-ratio:652/1024">
+      <div data-fill class="absolute inset-0 rounded-[28px] bg-paper opacity-0"></div>
+      <div
+        data-rim
+        class="absolute inset-0 rounded-[28px] border-[16px] border-white opacity-0 shadow-[0_0_36px_8px_rgba(255,255,255,0.85),inset_0_0_28px_6px_rgba(255,255,255,0.7)]"
+      ></div>
+    </div>
+  </div>
 </section>
 
 <script>
   const canvas = document.getElementById('hero-canvas') as HTMLCanvasElement;
-  const dot = document.getElementById('hero-dot') as HTMLElement;
-  const mark = document.getElementById('hero-o') as HTMLElement;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  // Cursor dot: follows the pointer with easing; rests above the wordmark.
-  const rest = () => {
-    const r = mark.getBoundingClientRect();
-    return { x: r.left + r.width / 2, y: r.top - 16 };
+  const ready = () => {
+    (window as any).__heroReady = true;
+    dispatchEvent(new Event('hero:ready'));
   };
-  let target = rest();
-  let pos = { ...target };
-  const place = () => (dot.style.transform = `translate3d(${pos.x - 5}px,${pos.y - 5}px,0)`);
-  place();
-  addEventListener('pointermove', (e) => { if (e.pointerType === 'mouse' && (e.clientX || e.clientY)) target = { x: e.clientX, y: e.clientY }; });
-  document.documentElement.addEventListener('pointerleave', () => (target = rest()));
-  addEventListener('resize', () => { if (!matchMedia('(hover:hover)').matches) target = rest(); });
+
+  // Pointer parallax for the flow (smoothed, in -0.5..0.5).
+  const mp = { x: 0, y: 0 };
+  const target = { x: 0, y: 0 };
+  addEventListener('pointermove', (e) => {
+    if (e.pointerType !== 'mouse') return;
+    target.x = e.clientX / innerWidth - 0.5;
+    target.y = 0.5 - e.clientY / innerHeight;
+  });
 
   // Animated background: procedural silk-like flow (domain-warped sine field), rendered at full resolution.
   const VS = 'attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
@@ -76,8 +126,6 @@ void main(){
   gl_FragColor = vec4(col, 1.);
 }`;
 
-  // Pointer parallax for the flow (smoothed, in -0.5..0.5).
-  const mp = { x: 0, y: 0 };
   let render: ((t: number) => void) | null = null;
   const gl = canvas.getContext('webgl', { antialias: false, alpha: false });
   if (gl) {
@@ -101,6 +149,10 @@ void main(){
       const uRes = gl.getUniformLocation(prog, 'res');
       const uT = gl.getUniformLocation(prog, 't');
       const uM = gl.getUniformLocation(prog, 'm');
+      const draw = (t: number) => {
+        gl.uniform1f(uT, t);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      };
       const fit = () => {
         // Full device resolution, capped at ~2.5 MP so weak GPUs keep 60 fps (the content is smooth, so it stays sharp).
         const dpr = Math.min(devicePixelRatio, 2);
@@ -110,10 +162,6 @@ void main(){
         gl.viewport(0, 0, canvas.width, canvas.height);
         gl.uniform2f(uRes, canvas.width, canvas.height);
         if (reduced) draw(4);
-      };
-      const draw = (t: number) => {
-        gl.uniform1f(uT, t);
-        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       };
       render = (ms) => {
         gl.uniform2f(uM, mp.x, mp.y);
@@ -125,13 +173,11 @@ void main(){
       canvas.style.opacity = '1';
     }
   }
+  ready();
 
   const loop = (t: number) => {
-    pos.x += (target.x - pos.x) * 0.08;
-    pos.y += (target.y - pos.y) * 0.08;
-    mp.x += (pos.x / innerWidth - 0.5 - mp.x) * 0.05;
-    mp.y += (0.5 - pos.y / innerHeight - mp.y) * 0.05;
-    place();
+    mp.x += (target.x - mp.x) * 0.05;
+    mp.y += (target.y - mp.y) * 0.05;
     if (render && !reduced) render(t);
     if (!document.hidden) requestAnimationFrame(loop);
   };

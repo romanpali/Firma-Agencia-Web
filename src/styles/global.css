@@ -19,15 +19,17 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Entrance on load */
-@keyframes rise {
-  from { opacity: 0; transform: translate3d(0, 18px, 0); }
+/* Intro: initial states (only when the intro will run) */
+html[data-locked] { overflow: hidden; }
+@media (max-width: 767px) { [data-hero] { --portal-h: 52svh; } }
+.anim [data-media], .anim [data-over] { transform: scale(0); }
+.anim [data-nav], .anim [data-intro] { opacity: 0; }
+html:not(.anim) [data-preloader] { display: none; }
+
+/* Custom cursor: hide the system one on mouse devices */
+@media (hover: hover) and (pointer: fine) {
+  html, body, a, button { cursor: none; }
 }
-@keyframes drop {
-  from { opacity: 0; transform: translate3d(0, -16px, 0); }
-}
-.rise { animation: rise 1.2s cubic-bezier(0.22, 1, 0.36, 1) both; animation-delay: var(--d, 0s); }
-.drop { animation: drop 1s cubic-bezier(0.22, 1, 0.36, 1) both; animation-delay: var(--d, 0s); }
 
 /* Reveal on scroll (only when JS is on, so content never stays hidden) */
 .js [data-reveal] {
@@ -37,6 +39,17 @@ html {
   transition-delay: calc(var(--i, 0) * 90ms);
 }
 .js [data-reveal].is-in { opacity: 1; transform: none; }
+
+/* Words that blur in as headings enter the viewport */
+.js [data-words] .w {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(12px);
+  transform: translate3d(0, 25%, 0);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), filter 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--w, 0) * 70ms);
+}
+.js [data-words].is-in .w { opacity: 1; filter: none; transform: none; }
 
 /* Silk-like card visual */
 .silk {
@@ -55,6 +68,7 @@ html {
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .rise, .drop, .silk { animation: none; }
+  .silk { animation: none; }
+  .js [data-words] .w { opacity: 1; filter: none; transform: none; transition: none; }
   .js [data-reveal] { opacity: 1; transform: none; transition: none; }
 }

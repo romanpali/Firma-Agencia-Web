@@ -1,4 +1,6 @@
 <script>
+  import { splitWords } from '../scripts/words';
+
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // Reveal on scroll (staggering comes from --i in CSS).
@@ -13,7 +15,10 @@
     },
     { threshold: 0.12, rootMargin: '0px 0px -6% 0px' },
   );
-  document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el));
+  document.querySelectorAll<HTMLElement>('[data-words]').forEach((el) => {
+    splitWords(el).forEach((w, i) => w.style.setProperty('--w', String(i)));
+  });
+  document.querySelectorAll('[data-reveal],[data-words]').forEach((el) => io.observe(el));
 
   // Navbar tone (follows the section under it) + card parallax.
   const header = document.querySelector<HTMLElement>('[data-header]');
@@ -38,5 +43,6 @@
   };
   addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(update); } }, { passive: true });
   addEventListener('resize', update);
+  addEventListener('hero:tone', update);
   update();
 </script>
