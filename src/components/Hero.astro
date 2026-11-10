@@ -1,131 +1,171 @@
 ---
-import IsoTower from './IsoTower.astro';
+import { arts, orbs } from '../data/orbs';
+
+const g1 = ['Diseño', 'que', 'se', 'siente.'];
+const g2 = ['Sistemas', 'que', 'funcionan.'];
 ---
 
-<section data-hero data-tone="dark" class="relative min-h-svh overflow-hidden bg-[#050a09] text-white md:sticky md:top-0 md:h-svh">
-  <canvas id="hero-canvas" class="hf-fade absolute inset-0 size-full" aria-hidden="true"></canvas>
-  <!-- Architectural sheet: fine grid + soft light on the text side -->
-  <div
-    class="pointer-events-none absolute inset-0"
-    style="background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:96px 96px;mask-image:radial-gradient(90% 80% at 62% 50%,#000 20%,transparent 100%)"
-  ></div>
-  <div class="pointer-events-none absolute inset-0" style="background:linear-gradient(to right,rgba(3,8,7,.6),transparent 62%),linear-gradient(to top,rgba(3,8,7,.7),transparent 30%)"></div>
+<section data-hero data-tone="dark" class="relative h-svh min-h-[640px] overflow-hidden bg-[#1d0618] text-white md:sticky md:top-0">
+  <!-- Stage: deep wine with a luminous arc -->
+  <div class="pointer-events-none absolute inset-0" style="background:linear-gradient(to bottom,#1f0619 0%,#2c0721 50%,#3b0a2b 100%)"></div>
+  <div class="pointer-events-none absolute -bottom-[72%] -left-[26%] -right-[26%] h-[100%] rounded-[50%] blur-[2px]" style="background:radial-gradient(ellipse at 50% 12%,#ffe1ec 0%,#ff7db3 10%,#ff3d8f 22%,#c2105f 42%,#7a0a48 62%,#3b0a2b 82%)"></div>
+  <div class="pointer-events-none absolute -bottom-[79%] -left-[16%] -right-[16%] h-[100%] rounded-[50%]" style="background:radial-gradient(ellipse at 50% 20%,#1d0618 0%,#2a0720 60%,#35092a 100%);box-shadow:0 -2px 80px 10px rgba(255,61,143,.45)"></div>
+  <div class="pointer-events-none absolute inset-0 opacity-[0.08] mix-blend-overlay" style="background-image:url(&quot;data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>&quot;)"></div>
 
-  <div data-hero-inner class="relative mx-auto flex min-h-svh max-w-[1280px] flex-col px-6 pb-10 pt-28 md:h-full md:px-10 md:pb-0 md:pt-0">
-    <div class="grid flex-1 items-center gap-6 md:grid-cols-12 md:gap-8 md:pb-16 md:pt-24">
-      <div class="md:col-span-6">
-        <p class="hf-rise font-mono text-[11px] uppercase tracking-[0.16em] text-[#34d399]" style="--d:.1s">Diseño · Tecnología · Operaciones empresariales</p>
-        <h1 data-words class="mt-6 max-w-[17ch] text-[clamp(2.4rem,4.7vw,4.9rem)] font-medium leading-[1.02] tracking-[-0.035em] text-balance">
-          Todo lo que hace funcionar a una empresa, conectado bajo un solo estándar.
-        </h1>
-        <p class="hf-rise mt-7 max-w-[30rem] text-[17px] leading-relaxed text-white/65" style="--d:.9s">
-          HumanCorp diseña, desarrolla y conecta los sistemas de tu empresa, paso a paso, hasta que funcionen como uno solo.
-        </p>
-        <div class="hf-rise mt-9 flex flex-wrap gap-3" style="--d:1.05s">
-          <a href="/contacto" class="group inline-flex items-center gap-2 rounded-full bg-[#34d399] px-6 py-3.5 text-[15px] font-medium text-[#04120d] transition-transform duration-200 hover:scale-[1.03] active:scale-[0.98]">
-            Hablemos de tu empresa
-            <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
-          </a>
-          <a href="#construccion" class="inline-flex items-center rounded-full border border-white/25 px-6 py-3.5 text-[15px] font-medium transition-[background-color,transform] duration-200 hover:bg-white/10 active:scale-[0.98]">
-            Ver cómo lo construimos
-          </a>
+  <!-- Technical wiring (behind the orbs) -->
+  <canvas data-wires class="hf-fade pointer-events-none absolute inset-0 size-full" style="--d:1.6s" aria-hidden="true"></canvas>
+
+  <!-- Orbs: the creative layer -->
+  <div data-orbs class="pointer-events-none absolute inset-0" aria-hidden="true">
+    {orbs.map((o, i) => (
+      <div
+        data-orb
+        data-depth={o.d}
+        class:list={['absolute', !o.m && 'max-md:hidden']}
+        style={`left:${o.x}%;top:${o.y}%;width:calc(${o.s} * 1vw * var(--om, 1));min-width:${Math.round(o.s * 4.2)}px;aspect-ratio:1;margin:calc(${o.s} * -0.5vw * var(--om, 1)) 0 0 calc(${o.s} * -0.5vw * var(--om, 1))`}
+      >
+        <div class="orb-in size-full" style={`--d:${0.5 + i * 0.09}s`}>
+          <div class="orb size-full" style={`--dur:${o.dur}s;--dx:${(i % 2 ? 1 : -1) * (6 + (i % 4) * 3)}px;--dy:${(i % 3 ? -1 : 1) * (8 + (i % 3) * 4)}px;filter:blur(${o.b ?? 0}px)`} set:html={arts[o.art]} />
         </div>
       </div>
+    ))}
+  </div>
 
-      <div class="relative h-[44svh] md:col-span-6 md:h-[76svh]"><IsoTower mode="hero" /></div>
+  <div data-hero-inner class="relative mx-auto flex h-full max-w-[1280px] flex-col items-center px-6 pt-[18svh] text-center md:pt-[17svh]">
+    <p class="hf-rise inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/[0.06] py-1.5 pl-1.5 pr-4 text-[12.5px] text-white/75 backdrop-blur-md" style="--d:.2s">
+      <span class="flex -space-x-1.5" aria-hidden="true">
+        <i class="size-5 rounded-full border border-[#1d0618]" style="background:radial-gradient(circle at 30% 30%,#ffe1ec,#ff3d8f)"></i>
+        <i class="size-5 rounded-full border border-[#1d0618]" style="background:radial-gradient(circle at 30% 30%,#fff2c4,#ff9a3d)"></i>
+        <i class="size-5 rounded-full border border-[#1d0618]" style="background:radial-gradient(circle at 30% 30%,#d7f7ff,#2ec8ff)"></i>
+      </span>
+      8 áreas conectadas bajo un solo estándar
+    </p>
+
+    <h1 data-phase="a" id="hero-h1" class="mt-7 max-w-[15ch] text-[clamp(2.9rem,6.9vw,7.4rem)] font-semibold leading-[0.98] tracking-[-0.045em] md:max-w-none">
+      <span class="block md:inline">{g1.map((w, i) => <><span class="hw g1" style={`--w:${i}`}>{w}</span>{' '}</>)}</span>
+      <span class="block md:inline">{g2.map((w, i) => <><span class="hw g2" style={`--w:${i + g1.length}`}>{w}</span>{i < g2.length - 1 ? ' ' : ''}</>)}</span>
+    </h1>
+
+    <p class="hf-rise mt-6 max-w-[34rem] text-[clamp(15px,1.25vw,18px)] leading-relaxed text-white/70" style="--d:1.1s">
+      Todo lo que hace funcionar a una empresa, conectado bajo un solo estándar.
+    </p>
+
+    <div class="hf-rise relative z-20 mt-8 flex flex-wrap justify-center gap-3" style="--d:1.25s">
+      <a href="/contacto" class="group inline-flex items-center gap-2 rounded-full bg-[#ff5ea6] px-6 py-3.5 text-[15px] font-medium text-[#2a0720] shadow-[0_8px_30px_-6px_rgba(255,61,143,0.7)] transition-transform duration-200 hover:scale-[1.04] active:scale-[0.98]">
+        Hablemos de tu empresa
+        <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
+      </a>
+      <a href="#construccion" class="inline-flex items-center rounded-full border border-white/30 bg-white/[0.06] px-6 py-3.5 text-[15px] font-medium backdrop-blur-md transition-[background-color,transform] duration-200 hover:bg-white/15 active:scale-[0.98]">
+        Ver cómo lo construimos
+      </a>
     </div>
   </div>
 
-  <!-- Drawing annotations -->
-  <p class="hf-fade pointer-events-none absolute left-6 top-8 hidden font-mono text-[10.5px] uppercase tracking-[0.16em] text-white/35 md:left-10 md:block" style="--d:1.2s">Plano 01 — Ecosistema empresarial</p>
-  <p class="hf-fade pointer-events-none absolute right-6 top-8 hidden font-mono text-[10.5px] uppercase tracking-[0.16em] text-white/35 md:right-10 md:block" style="--d:1.2s">Esc. 1:1</p>
-  <div class="hf-fade pointer-events-none absolute bottom-6 left-6 hidden items-center gap-3 font-mono text-[10.5px] uppercase tracking-[0.16em] text-white/45 md:left-10 md:flex" style="--d:1.6s">
-    <span class="relative block h-px w-12 overflow-hidden bg-white/25"><i class="scroll-line absolute inset-y-0 left-0 w-1/2 bg-[#34d399]"></i></span>
-    Desliza para construir
+  <!-- Legend: the duality -->
+  <div class="hf-fade pointer-events-none absolute bottom-5 left-8 z-20 hidden items-center gap-5 rounded-full border border-white/20 bg-black/25 px-5 py-2 font-mono text-[10.5px] uppercase tracking-[0.14em] text-white/80 backdrop-blur-md md:flex" style="--d:2.4s">
+    <span class="flex items-center gap-2"><i class="size-2.5 rounded-full bg-gradient-to-br from-[#ffd23f] to-[#ff3d8f]"></i>Lo que se diseña</span>
+    <span class="flex items-center gap-2"><i class="block h-px w-5 bg-[#6ee7ff]"></i><i class="-ml-1 size-1.5 bg-[#6ee7ff]"></i>Lo que se conecta</span>
   </div>
 </section>
 
 <script>
-  const canvas = document.getElementById('hero-canvas') as HTMLCanvasElement;
+  const hero = document.querySelector<HTMLElement>('[data-hero]')!;
+  const h1 = document.getElementById('hero-h1')!;
+  const orbEls = [...hero.querySelectorAll<HTMLElement>('[data-orb]')];
+  const canvas = hero.querySelector<HTMLCanvasElement>('[data-wires]')!;
+  const ctx = canvas.getContext('2d')!;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const mp = { x: 0, y: 0 };
-  const target = { x: 0, y: 0 };
+  const mobile = matchMedia('(max-width: 767px)');
+  hero.style.setProperty('--om', mobile.matches ? '2.3' : '1');
+  mobile.addEventListener('change', () => hero.style.setProperty('--om', mobile.matches ? '2.3' : '1'));
+
+  // Headline: emphasis alternates between the creative and the systems phrase
+  if (!reduced) {
+    let phase = 'a';
+    setTimeout(() => {
+      setInterval(() => {
+        if (document.hidden) return;
+        phase = phase === 'a' ? 'b' : 'a';
+        h1.dataset.phase = phase;
+      }, 3800);
+    }, 3200);
+  }
+
+  // Pointer parallax by depth
+  const ptr = { x: 0, y: 0 }, tgt = { x: 0, y: 0 };
   addEventListener('pointermove', (e) => {
     if (e.pointerType !== 'mouse') return;
-    target.x = e.clientX / innerWidth - 0.5;
-    target.y = 0.5 - e.clientY / innerHeight;
+    tgt.x = e.clientX / innerWidth - 0.5;
+    tgt.y = e.clientY / innerHeight - 0.5;
   });
 
-  const VS = 'attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
-  const FS = `#ifdef GL_FRAGMENT_PRECISION_HIGH
-precision highp float;
-#else
-precision mediump float;
-#endif
-uniform vec2 res;
-uniform vec2 m;
-uniform float t;
-float hash(vec2 p){ return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453); }
-void main(){
-  vec2 p = gl_FragCoord.xy / res.y + m * .08;
-  float a = t * .09;
-  p += .2 * vec2(sin(p.y * 2.1 + a * 1.3), cos(p.x * 1.7 - a));
-  p += .08 * vec2(sin(p.y * 4.3 - a * 1.9), cos(p.x * 3.9 + a * 1.6));
-  float s = p.x * .75 - p.y * .75;
-  float w = .5 + .5 * sin(s * 5.6 + a * 2. + .9 * sin(p.y * 2.4 - a));
-  float ribbon = smoothstep(.72, .96, w);
-  float d = .5 + .5 * sin(p.x * 1.5 + p.y * 1.9 - a * 1.5 + 1.6 * sin(p.x * 2.2 + a));
-  vec3 base = mix(vec3(.012, .030, .027), vec3(.030, .090, .078), smoothstep(.15, .95, d));
-  vec3 col = mix(base, vec3(.045, .175, .145), ribbon * .7);
-  col += vec3(.006, .03, .022) * smoothstep(.45, .7, w) * (1. - ribbon);
-  col += (hash(gl_FragCoord.xy + t) - .5) / 128.;
-  gl_FragColor = vec4(col, 1.);
-}`;
-
-  let render: ((t: number) => void) | null = null;
-  const gl = canvas.getContext('webgl', { antialias: false, alpha: false });
-  if (gl) {
-    const sh = (type: number, src: string) => {
-      const s = gl.createShader(type)!;
-      gl.shaderSource(s, src);
-      gl.compileShader(s);
-      return s;
-    };
-    const prog = gl.createProgram()!;
-    gl.attachShader(prog, sh(gl.VERTEX_SHADER, VS));
-    gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, FS));
-    gl.linkProgram(prog);
-    if (gl.getProgramParameter(prog, gl.LINK_STATUS)) {
-      gl.useProgram(prog);
-      gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
-      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
-      const loc = gl.getAttribLocation(prog, 'p');
-      gl.enableVertexAttribArray(loc);
-      gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-      const uRes = gl.getUniformLocation(prog, 'res');
-      const uT = gl.getUniformLocation(prog, 't');
-      const uM = gl.getUniformLocation(prog, 'm');
-      const draw = (t: number) => { gl.uniform1f(uT, t); gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); };
-      const fit = () => {
-        const dpr = Math.min(devicePixelRatio, 2);
-        const k = Math.min(dpr, Math.sqrt(2.5e6 / (canvas.clientWidth * canvas.clientHeight)));
-        canvas.width = Math.max(1, Math.round(canvas.clientWidth * k));
-        canvas.height = Math.max(1, Math.round(canvas.clientHeight * k));
-        gl.viewport(0, 0, canvas.width, canvas.height);
-        gl.uniform2f(uRes, canvas.width, canvas.height);
-        if (reduced) draw(4);
-      };
-      render = (ms) => { gl.uniform2f(uM, mp.x, mp.y); draw(ms / 1000); };
-      fit(); draw(4);
-      addEventListener('resize', fit);
-    }
-  }
-  const loop = (t: number) => {
-    mp.x += (target.x - mp.x) * 0.04;
-    mp.y += (target.y - mp.y) * 0.04;
-    if (render && !reduced) render(t);
-    if (!document.hidden) requestAnimationFrame(loop);
+  // Wiring: orthogonal routes between orbs, with data pulses
+  const links: [number, number][] = [[0,1],[1,3],[3,4],[4,5],[4,6],[6,7],[7,9],[9,10],[10,11],[6,8],[8,9],[0,12],[10,13],[2,4],[14,6]];
+  let W = 0, H = 0, dpr = 1;
+  const fit = () => {
+    const r = hero.getBoundingClientRect();
+    W = r.width; H = r.height; dpr = Math.min(devicePixelRatio, 2);
+    canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   };
-  requestAnimationFrame(loop);
-  document.addEventListener('visibilitychange', () => { if (!document.hidden) requestAnimationFrame(loop); });
+  fit();
+  addEventListener('resize', fit);
+
+  const centers = () => orbEls.map((el) => {
+    const r = el.getBoundingClientRect();
+    return r.width < 4 ? null : { x: r.left + r.width / 2, y: r.top + r.height / 2 - hero.getBoundingClientRect().top };
+  });
+
+  const route = (a: { x: number; y: number }, b: { x: number; y: number }, i: number) =>
+    i % 2 ? [a, { x: b.x, y: a.y }, b] : [a, { x: a.x, y: b.y }, b];
+
+  const frame = (now: number) => {
+    const t = now / 1000;
+    ptr.x += (tgt.x - ptr.x) * 0.05; ptr.y += (tgt.y - ptr.y) * 0.05;
+    const hp = Math.min(1, Math.max(0, scrollY / innerHeight));
+    orbEls.forEach((el) => {
+      const d = parseFloat(el.dataset.depth!);
+      el.style.transform = `translate3d(${(-ptr.x * 46 * d).toFixed(1)}px, ${(-ptr.y * 30 * d - hp * 160 * d).toFixed(1)}px, 0)`;
+    });
+
+    ctx.clearRect(0, 0, W, H);
+    const c = centers();
+    links.forEach(([ai, bi], k) => {
+      const A = c[ai], B = c[bi];
+      if (!A || !B) return;
+      const pts = route(A, B, k);
+      const grow = reduced ? 1 : Math.min(1, Math.max(0, (t - 1.8 - k * 0.12) / 1.2));
+      if (grow <= 0) return;
+      const segs = [Math.hypot(pts[1].x - pts[0].x, pts[1].y - pts[0].y), Math.hypot(pts[2].x - pts[1].x, pts[2].y - pts[1].y)];
+      const total = segs[0] + segs[1];
+      const at = (u: number) => {
+        const d = u * total;
+        return d <= segs[0]
+          ? { x: pts[0].x + (pts[1].x - pts[0].x) * (d / (segs[0] || 1)), y: pts[0].y + (pts[1].y - pts[0].y) * (d / (segs[0] || 1)) }
+          : { x: pts[1].x + (pts[2].x - pts[1].x) * ((d - segs[0]) / (segs[1] || 1)), y: pts[1].y + (pts[2].y - pts[1].y) * ((d - segs[0]) / (segs[1] || 1)) };
+      };
+      ctx.strokeStyle = 'rgba(110,231,255,0.38)';
+      ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(pts[0].x, pts[0].y);
+      if (grow >= 1) { ctx.lineTo(pts[1].x, pts[1].y); ctx.lineTo(pts[2].x, pts[2].y); }
+      else { const e = at(grow); if (grow * total > segs[0]) ctx.lineTo(pts[1].x, pts[1].y); ctx.lineTo(e.x, e.y); }
+      ctx.stroke();
+      if (grow < 1) return;
+      ctx.fillStyle = 'rgba(110,231,255,0.9)';
+      ctx.fillRect(pts[1].x - 2, pts[1].y - 2, 4, 4);
+      if (!reduced) {
+        const u = ((t * 0.16 + k * 0.173) % 1);
+        const p = at(u);
+        const tail = at(Math.max(0, u - 0.08));
+        const g = ctx.createLinearGradient(tail.x, tail.y, p.x, p.y);
+        g.addColorStop(0, 'rgba(110,231,255,0)'); g.addColorStop(1, 'rgba(207,250,254,0.95)');
+        ctx.strokeStyle = g; ctx.lineWidth = 1.6;
+        ctx.beginPath(); ctx.moveTo(tail.x, tail.y); ctx.lineTo(p.x, p.y); ctx.stroke();
+        ctx.fillStyle = '#e6fcff'; ctx.fillRect(p.x - 2, p.y - 2, 4, 4);
+      }
+    });
+    if (!document.hidden) requestAnimationFrame(frame);
+  };
+  requestAnimationFrame(frame);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) requestAnimationFrame(frame); });
 </script>

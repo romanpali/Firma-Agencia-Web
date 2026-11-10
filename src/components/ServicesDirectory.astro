@@ -11,7 +11,7 @@ import { services } from '../data/services';
       </h2>
       <div data-reveal style="--i:1" class="md:col-span-4 md:col-start-9">
         <p class="text-[16px] leading-relaxed text-mute">Soluciones que funcionan por separado y mejor juntas, de la identidad de marca a los datos y la seguridad.</p>
-        <a href="/servicios" class="group mt-6 inline-flex items-center gap-2 rounded-full bg-[#34d399] px-6 py-3 text-sm font-medium text-[#04120d] transition-transform hover:scale-[1.03]">
+        <a href="/servicios" class="group mt-6 inline-flex items-center gap-2 rounded-full bg-[#ff5ea6] px-6 py-3 text-sm font-medium text-[#2a0720] transition-transform hover:scale-[1.03]">
           Ver todos los servicios
           <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
         </a>
@@ -22,7 +22,7 @@ import { services } from '../data/services';
       {services.map((s, i) => (
         <li data-reveal style={`--i:${i % 3}`} class="row relative">
           <a href={`/servicios#${s.slug}`} class="group grid grid-cols-[2.5rem_minmax(0,1fr)_2rem] items-center gap-x-4 py-7 md:grid-cols-[5rem_minmax(0,1.15fr)_minmax(0,1.5fr)_2.5rem] md:gap-x-8 md:py-10">
-            <span class="font-mono text-[12px] tabular-nums text-white/35 transition-colors duration-300 group-hover:text-[#34d399]">{String(i + 1).padStart(2, '0')}</span>
+            <span class="font-mono text-[12px] tabular-nums text-white/35 transition-colors duration-300 group-hover:text-[#6ee7ff]">{String(i + 1).padStart(2, '0')}</span>
             <h3 class="text-[clamp(1.35rem,2.5vw,2.4rem)] font-medium leading-[1.1] tracking-[-0.03em] transition-transform duration-500 ease-out group-hover:translate-x-2">{s.title}</h3>
             <div class="hidden md:block">
               <p class="max-w-[34rem] text-[14.5px] leading-relaxed text-mute transition-colors duration-300 group-hover:text-white/80">{s.description}</p>
@@ -34,7 +34,7 @@ import { services } from '../data/services';
                 ))}
               </ul>
             </div>
-            <span class="justify-self-end text-xl text-white/40 transition-[transform,color] duration-300 group-hover:translate-x-1 group-hover:text-[#34d399]">→</span>
+            <span class="justify-self-end text-xl text-white/40 transition-[transform,color] duration-300 group-hover:translate-x-1 group-hover:text-[#6ee7ff]">→</span>
           </a>
         </li>
       ))}
