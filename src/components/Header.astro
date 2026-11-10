@@ -6,19 +6,21 @@ const links = [
 ];
 ---
 
-<header class="absolute inset-x-0 top-0 z-20 flex h-24 items-center justify-between pl-6 pr-6 md:pl-[54px] md:pr-[38px]">
-  <div class="flex items-center gap-10 lg:gap-20">
+<header class="fixed inset-x-0 top-4 z-50 flex justify-center px-4 md:top-6">
+  <div
+    class="flex h-14 w-full max-w-[680px] items-center justify-between rounded-full border border-white/15 bg-white/10 py-2 pl-6 pr-2 shadow-[0_8px_32px_rgba(0,0,0,0.25),inset_0_1px_0_rgba(255,255,255,0.18)] backdrop-blur-2xl backdrop-saturate-150"
+  >
     <a href="/" class="text-[17px] font-semibold tracking-tight">NEXA</a>
-    <nav class="hidden items-center gap-12 md:flex" aria-label="Principal">
+    <nav class="hidden items-center gap-8 md:flex" aria-label="Principal">
       {links.map((l) => (
-        <a href={l.href} class="text-[17px] font-medium tracking-tight transition-opacity hover:opacity-70">{l.label}</a>
+        <a href={l.href} class="text-[15px] font-medium tracking-tight text-white/80 transition-colors hover:text-white">{l.label}</a>
       ))}
     </nav>
+    <a
+      href="#contacto"
+      class="rounded-full bg-white px-5 py-2.5 text-[15px] font-medium leading-none tracking-tight text-[#0b1a4a] transition-transform hover:scale-[1.03]"
+    >
+      Hablemos
+    </a>
   </div>
-  <a
-    href="#contacto"
-    class="rounded-full border border-white/15 bg-white/10 px-8 py-[17px] text-[17px] font-medium leading-none tracking-tight backdrop-blur-sm transition-colors hover:bg-white/20"
-  >
-    Hablemos
-  </a>
 </header>
