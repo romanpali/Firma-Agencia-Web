@@ -1,0 +1,149 @@
+---
+import { floors, floorGeom, bounds, groundLines, plot, scatter, rightMost, leftMost, roofTop, baseCenter, mid, iso, AMAX } from '../data/tower';
+
+interface Props { mode: 'hero' | 'story' }
+const { mode } = Astro.props;
+const story = mode === 'story';
+
+const busX = bounds.maxX + 44;
+const vb = story
+  ? { x: bounds.minX - 250, y: bounds.minY - 90, w: bounds.maxX - bounds.minX + 250 + 330, h: bounds.maxY - bounds.minY + 90 + 110 }
+  : { x: bounds.minX - 250, y: bounds.minY - 60, w: bounds.maxX - bounds.minX + 250 + 50, h: bounds.maxY - bounds.minY + 60 + 90 };
+
+const geoms = floors.map((f) => ({ f, g: floorGeom(f) }));
+const labelYs = floors.map((f) => rightMost(f).y);
+
+// Floating dashboards (left of the tower)
+const f3 = floors[3], f5 = floors[5], f6 = floors[6];
+const panels = [
+  { x: bounds.minX - 232, y: iso(AMAX / 2, AMAX / 2, mid(f3)).y - 34, kind: 'bars', from: leftMost(f3), k: 0 },
+  { x: bounds.minX - 168, y: iso(AMAX / 2, AMAX / 2, mid(f5)).y - 30, kind: 'line', from: leftMost(f5), k: 1 },
+  { x: bounds.minX - 214, y: iso(AMAX / 2, AMAX / 2, mid(f6)).y - 70, kind: 'ring', from: leftMost(f6), k: 2 },
+];
+const barH = [26, 40, 32, 52, 44, 58];
+---
+
+<svg
+  viewBox={`${vb.x.toFixed(0)} ${vb.y.toFixed(0)} ${vb.w.toFixed(0)} ${vb.h.toFixed(0)}`}
+  class:list={['iso h-full w-full overflow-visible', story ? 'iso-story' : 'hero-t']}
+  role="img"
+  aria-label="Torre isométrica que representa el ecosistema de la empresa construido por pisos"
+  preserveAspectRatio="xMidYMid meet"
+>
+  <defs>
+    <radialGradient id={`fade-${mode}`} cx="50%" cy="50%" r="50%">
+      <stop offset="0.35" stop-color="#fff" /><stop offset="1" stop-color="#000" />
+    </radialGradient>
+    <mask id={`gmask-${mode}`} maskUnits="userSpaceOnUse" x={bounds.minX - 300} y={bounds.minY - 100} width={bounds.maxX - bounds.minX + 600} height={bounds.maxY - bounds.minY + 360}>
+      <ellipse cx={baseCenter.x} cy={baseCenter.y} rx="420" ry="240" fill={`url(#fade-${mode})`} />
+    </mask>
+  </defs>
+
+  <!-- Ground -->
+  <g mask={`url(#gmask-${mode})`}>
+    <path d={groundLines.join('')} fill="none" stroke="#34d399" stroke-opacity="0.13" stroke-width="1" />
+  </g>
+  <path d={plot} fill="rgba(52,211,153,0.05)" stroke="#34d399" stroke-opacity="0.55" stroke-width="1" stroke-dasharray="4 5" />
+
+  <!-- Waves radiating from the base (the ecosystem) -->
+  <g data-links style="--k:1">
+    {[0, 1, 2].map((i) => (
+      <ellipse class="wave" cx={baseCenter.x} cy={baseCenter.y} rx="208" ry="120" fill="none" stroke="#34d399" stroke-width="1" style={`animation-delay:${i * 2.2}s`} />
+    ))}
+  </g>
+
+  {story && (
+    <g>
+      {geoms.slice(1).map(({ f, g }) => (
+        <g class="ghost" data-ghost={f.i} style="--k:0">
+          <path d={g.left + g.right + g.top} fill="none" stroke="#34d399" stroke-opacity="0.5" stroke-width="1" stroke-dasharray="3 4" />
+        </g>
+      ))}
+    </g>
+  )}
+
+  {story && (
+    <g data-scatter style="--k:1">
+      {scatter.map((s) => (
+        <g class="scatter">
+          <path d={s.left} fill="#0c1f1a" stroke="#8c9b95" stroke-opacity="0.7" stroke-dasharray="2 3" />
+          <path d={s.right} fill="#0f2a23" stroke="#8c9b95" stroke-opacity="0.7" stroke-dasharray="2 3" />
+          <path d={s.top} fill="#16352c" stroke="#8c9b95" stroke-opacity="0.7" stroke-dasharray="2 3" />
+          <text x={s.at.x} y={s.at.y} text-anchor="middle" class="font-mono" font-size="10" fill="#8c9b95" letter-spacing="0.06em">{s.label.toUpperCase()}</text>
+        </g>
+      ))}
+    </g>
+  )}
+
+  <!-- Floors -->
+  {geoms.map(({ f, g }) => (
+    <g class="fl" data-floor={f.i} style={`--i:${f.i}`}>
+      <path class="fc" d={g.left} fill="#0b1c17" />
+      <path class="fc" d={g.right} fill="#0f2a23" />
+      <path class="fc" d={g.top} fill="#17402f" />
+      {g.solids.map((d) => <path class="fc" d={d} fill="#050d0b" />)}
+      {g.wins.map((d, n) => <path class:list={['wn', n % 4 === 1 && 'wn-lit']} d={d} style={`animation-delay:${(n * 0.37) % 4}s`} />)}
+      {g.lines.map((d) => <path class="st thin" pathLength="1" d={d} />)}
+      <path class="st" pathLength="1" d={g.left} />
+      <path class="st" pathLength="1" d={g.right} />
+      <path class="st" pathLength="1" d={g.top} />
+      {f.id === 'f6' && (
+        <g>
+          <path class="st" pathLength="1" d={`M${roofTop.x.toFixed(1)} ${roofTop.y.toFixed(1)}V${(roofTop.y - 58).toFixed(1)}`} />
+          <circle class="ring2" cx={roofTop.x} cy={roofTop.y - 64} r="5" fill="none" stroke="#34d399" />
+          <circle class="ring2" cx={roofTop.x} cy={roofTop.y - 64} r="5" fill="none" stroke="#34d399" style="animation-delay:1.4s" />
+          <circle cx={roofTop.x} cy={roofTop.y - 64} r="4.5" fill="#34d399" />
+        </g>
+      )}
+    </g>
+  ))}
+
+  <!-- Floating dashboards -->
+  {panels.map((p, n) => (
+    <g class="dp" data-dash={n} style={`--n:${n}`}>
+      <path d={`M${(p.x + 118).toFixed(1)} ${(p.y + 37).toFixed(1)}L${p.from.x.toFixed(1)} ${p.from.y.toFixed(1)}`} stroke="#34d399" stroke-opacity="0.45" stroke-dasharray="2 4" fill="none" />
+      <rect x={p.x} y={p.y} width="118" height="74" rx="4" fill="rgba(7,16,13,0.82)" stroke="#34d399" stroke-opacity="0.6" />
+      <rect x={p.x + 10} y={p.y + 10} width="34" height="3" rx="1.5" fill="#34d399" />
+      <rect x={p.x + 50} y={p.y + 10} width="18" height="3" rx="1.5" fill="#8c9b95" fill-opacity="0.6" />
+      {p.kind === 'bars' && barH.map((h, i) => (
+        <rect class="bar" x={p.x + 12 + i * 17} y={p.y + 66 - h} width="10" height={h} rx="1.5" fill="#34d399" fill-opacity={0.35 + i * 0.1} style={`animation-delay:${i * 0.25}s`} />
+      ))}
+      {p.kind === 'line' && (
+        <g>
+          <path d={`M${p.x + 10} ${p.y + 56} C ${p.x + 30} ${p.y + 48}, ${p.x + 40} ${p.y + 30}, ${p.x + 60} ${p.y + 36} S ${p.x + 90} ${p.y + 22}, ${p.x + 108} ${p.y + 20}`} fill="none" stroke="#34d399" stroke-width="1.6" />
+          <path d={`M${p.x + 10} ${p.y + 62} C ${p.x + 40} ${p.y + 58}, ${p.x + 70} ${p.y + 52}, ${p.x + 108} ${p.y + 48}`} fill="none" stroke="#8c9b95" stroke-opacity="0.6" />
+        </g>
+      )}
+      {p.kind === 'ring' && (
+        <g>
+          <circle cx={p.x + 36} cy={p.y + 44} r="17" fill="none" stroke="#8c9b95" stroke-opacity="0.3" stroke-width="5" />
+          <circle class="donut" cx={p.x + 36} cy={p.y + 44} r="17" fill="none" stroke="#34d399" stroke-width="5" stroke-linecap="round" pathLength="1" />
+          <rect x={p.x + 66} y={p.y + 34} width="36" height="3" rx="1.5" fill="#8c9b95" fill-opacity="0.5" />
+          <rect x={p.x + 66} y={p.y + 44} width="28" height="3" rx="1.5" fill="#8c9b95" fill-opacity="0.35" />
+          <rect x={p.x + 66} y={p.y + 54} width="32" height="3" rx="1.5" fill="#8c9b95" fill-opacity="0.35" />
+        </g>
+      )}
+    </g>
+  ))}
+
+  {story && (
+    <g>
+      {floors.map((f, i) => {
+        const p = rightMost(f);
+        return (
+          <g class="lb" data-label={i}>
+            <path d={`M${(p.x + 6).toFixed(1)} ${p.y.toFixed(1)}H${busX.toFixed(1)}`} stroke="#34d399" stroke-opacity="0.5" stroke-width="1" fill="none" />
+            <circle cx={busX} cy={p.y} r="2.6" fill="#34d399" />
+            <text x={busX + 12} y={p.y + 4} font-size="11.5" class="font-mono" fill="#e8efec" letter-spacing="0.04em">
+              <tspan fill="#34d399">{String(i).padStart(2, '0')}</tspan>  {f.label}
+            </text>
+          </g>
+        );
+      })}
+      <g data-bus style="--k:0">
+        <path class="bus st" pathLength="1" d={`M${busX} ${Math.min(...labelYs).toFixed(1)}V${Math.max(...labelYs).toFixed(1)}`} />
+        <circle class="bus-dot" cx={busX} cy="0" r="3.2" fill="#a7f3d0" style={`--y0:${Math.max(...labelYs).toFixed(0)}px;--y1:${Math.min(...labelYs).toFixed(0)}px`} />
+      </g>
+    </g>
+  )}
+</svg>

@@ -1,217 +1,131 @@
 ---
-import HeroWorld from './HeroWorld.astro';
-import { nodes, edges } from '../data/constellation';
+import IsoTower from './IsoTower.astro';
 ---
 
-<section data-hero data-tone="dark" class="relative h-svh min-h-[620px] bg-paper p-2 md:sticky md:top-0 md:p-3">
+<section data-hero data-tone="dark" class="relative min-h-svh overflow-hidden bg-[#050a09] text-white md:sticky md:top-0 md:h-svh">
+  <canvas id="hero-canvas" class="hf-fade absolute inset-0 size-full" aria-hidden="true"></canvas>
+  <!-- Architectural sheet: fine grid + soft light on the text side -->
   <div
-    data-stage
-    data-hero-inner
-    data-nodes={JSON.stringify(nodes)}
-    data-edges={JSON.stringify(edges)}
-    class="relative size-full overflow-hidden rounded-[22px] text-white md:rounded-[28px]"
-    style="background:linear-gradient(to bottom,#060920 0%,#12104a 34%,#34246b 58%,#7a3d7d 76%,#cf5f7a 100%)"
-  >
-    <!-- World 1: dusk (design) -->
-    <HeroWorld
-      mode="a"
-      title={['Diseño', 'que se nota.']}
-      desc="Identidad, sitios web y producción creativa para empresas que quieren verse como lo que son."
-      chips={['Branding', 'Web', 'Producción creativa']}
-    />
+    class="pointer-events-none absolute inset-0"
+    style="background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:96px 96px;mask-image:radial-gradient(90% 80% at 62% 50%,#000 20%,transparent 100%)"
+  ></div>
+  <div class="pointer-events-none absolute inset-0" style="background:linear-gradient(to right,rgba(3,8,7,.6),transparent 62%),linear-gradient(to top,rgba(3,8,7,.7),transparent 30%)"></div>
 
-    <!-- World 2: constellation (system), revealed by the lens -->
-    <div data-layer-b aria-hidden="true" class="absolute inset-0 bg-[#050a22]" style="clip-path:circle(0px at 70% 50%)">
-      <div class="absolute inset-0" style="background:radial-gradient(60% 55% at 50% 50%,rgba(40,90,220,.22),transparent 70%)"></div>
-      <div
-        class="absolute inset-0 opacity-60"
-        style="background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(75% 70% at 50% 50%,#000 25%,transparent 100%)"
-      ></div>
-      <HeroWorld
-        mode="b"
-        title={['Sistema', 'que opera.']}
-        desc="CRM, facturación, inteligencia artificial y datos conectados para que cada área trabaje con la misma información."
-        chips={['CRM', 'CFDI 4.0', 'IA y datos']}
-        labels={nodes.slice(1).map((n) => n.l)}
-      />
-    </div>
-    <div data-ring class="pointer-events-none absolute left-0 top-0 rounded-full border border-white/60 opacity-0"></div>
-
-    <!-- Film grain -->
-    <div class="pointer-events-none absolute inset-0 opacity-[0.07] mix-blend-overlay" style="background-image:url(&quot;data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>&quot;)"></div>
-
-    <!-- Foreground -->
-    <div class="pointer-events-none absolute inset-0 z-30 text-white">
-      <p class="hf-fade absolute bottom-[4.9rem] left-6 max-w-[16rem] text-[13px] font-medium leading-snug [text-shadow:0_1px_12px_rgba(0,0,0,0.35)] md:bottom-8 md:left-[6%]" style="--d:1.3s">
-        Todo lo que hace funcionar a una empresa, conectado bajo un solo estándar.
-      </p>
-      <div class="hf-fade pointer-events-auto absolute bottom-5 left-5 right-5 flex flex-wrap items-center gap-2 md:bottom-8 md:left-auto md:right-[6%]" style="--d:1.4s">
-        <button
-          type="button"
-          data-toggle
-          aria-pressed="false"
-          class="inline-flex items-center gap-2 rounded-full border border-white/70 px-4 py-2.5 text-[14px] font-medium backdrop-blur-sm transition-[background-color,transform] duration-200 hover:bg-white/15 active:scale-[0.97]"
-        >
-          <span class="size-3 rounded-full border border-white" style="background:linear-gradient(90deg,#fff 50%,transparent 50%)"></span>
-          <span data-toggle-label>Ver el sistema</span>
-        </button>
-        <a href="/servicios" class="hidden rounded-full border border-white/70 px-4 py-2.5 text-[14px] font-medium backdrop-blur-sm transition-[background-color,transform] duration-200 hover:bg-white/15 active:scale-[0.97] md:inline-flex">→ Servicios</a>
-        <a href="/contacto" class="rounded-full bg-white px-4 py-2.5 text-[14px] font-medium text-[#0b0f2e] transition-transform duration-200 hover:scale-[1.03] active:scale-[0.97]">→ Hablemos</a>
+  <div data-hero-inner class="relative mx-auto flex min-h-svh max-w-[1280px] flex-col px-6 pb-10 pt-28 md:h-full md:px-10 md:pb-0 md:pt-0">
+    <div class="grid flex-1 items-center gap-6 md:grid-cols-12 md:gap-8 md:pb-16 md:pt-24">
+      <div class="md:col-span-6">
+        <p class="hf-rise font-mono text-[11px] uppercase tracking-[0.16em] text-[#34d399]" style="--d:.1s">Diseño · Tecnología · Operaciones empresariales</p>
+        <h1 data-words class="mt-6 max-w-[17ch] text-[clamp(2.4rem,4.7vw,4.9rem)] font-medium leading-[1.02] tracking-[-0.035em] text-balance">
+          Todo lo que hace funcionar a una empresa, conectado bajo un solo estándar.
+        </h1>
+        <p class="hf-rise mt-7 max-w-[30rem] text-[17px] leading-relaxed text-white/65" style="--d:.9s">
+          HumanCorp diseña, desarrolla y conecta los sistemas de tu empresa, paso a paso, hasta que funcionen como uno solo.
+        </p>
+        <div class="hf-rise mt-9 flex flex-wrap gap-3" style="--d:1.05s">
+          <a href="/contacto" class="group inline-flex items-center gap-2 rounded-full bg-[#34d399] px-6 py-3.5 text-[15px] font-medium text-[#04120d] transition-transform duration-200 hover:scale-[1.03] active:scale-[0.98]">
+            Hablemos de tu empresa
+            <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
+          </a>
+          <a href="#construccion" class="inline-flex items-center rounded-full border border-white/25 px-6 py-3.5 text-[15px] font-medium transition-[background-color,transform] duration-200 hover:bg-white/10 active:scale-[0.98]">
+            Ver cómo lo construimos
+          </a>
+        </div>
       </div>
+
+      <div class="relative h-[44svh] md:col-span-6 md:h-[76svh]"><IsoTower mode="hero" /></div>
     </div>
+  </div>
+
+  <!-- Drawing annotations -->
+  <p class="hf-fade pointer-events-none absolute left-6 top-8 hidden font-mono text-[10.5px] uppercase tracking-[0.16em] text-white/35 md:left-10 md:block" style="--d:1.2s">Plano 01 — Ecosistema empresarial</p>
+  <p class="hf-fade pointer-events-none absolute right-6 top-8 hidden font-mono text-[10.5px] uppercase tracking-[0.16em] text-white/35 md:right-10 md:block" style="--d:1.2s">Esc. 1:1</p>
+  <div class="hf-fade pointer-events-none absolute bottom-6 left-6 hidden items-center gap-3 font-mono text-[10.5px] uppercase tracking-[0.16em] text-white/45 md:left-10 md:flex" style="--d:1.6s">
+    <span class="relative block h-px w-12 overflow-hidden bg-white/25"><i class="scroll-line absolute inset-y-0 left-0 w-1/2 bg-[#34d399]"></i></span>
+    Desliza para construir
   </div>
 </section>
 
 <script>
-  const stage = document.querySelector<HTMLElement>('[data-stage]')!;
-  const layerB = document.querySelector<HTMLElement>('[data-layer-b]')!;
-  const ring = document.querySelector<HTMLElement>('[data-ring]')!;
-  const toggle = document.querySelector<HTMLButtonElement>('[data-toggle]')!;
-  const toggleLabel = document.querySelector<HTMLElement>('[data-toggle-label]')!;
-  const canvasA = stage.querySelector<HTMLCanvasElement>('[data-canvas="a"]')!;
-  const canvasB = stage.querySelector<HTMLCanvasElement>('[data-canvas="b"]')!;
-  const ctxA = canvasA.getContext('2d')!;
-  const ctxB = canvasB.getContext('2d')!;
-  const labels = [...stage.querySelectorAll<HTMLElement>('[data-node-label]')];
-  const nodes: { x: number; y: number }[] = JSON.parse(stage.dataset.nodes!);
-  const edges: [number, number][] = JSON.parse(stage.dataset.edges!);
+  const canvas = document.getElementById('hero-canvas') as HTMLCanvasElement;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  // Deterministic stars (same sky in both worlds)
-  const rng = (seed: number) => () => {
-    seed |= 0; seed = (seed + 0x6d2b79f5) | 0;
-    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-  const rand = rng(11);
-  const stars = Array.from({ length: 240 }, () => ({
-    x: rand(), y: rand() ** 1.35, r: 0.4 + rand() ** 3 * 1.5,
-    a: 0.35 + rand() * 0.6, sp: 0.6 + rand() * 1.8, ph: rand() * 6.28, warm: rand() > 0.72,
-  }));
-
-  let W = 0, H = 0, dpr = 1, cover = 0, portrait = false;
-  const pos = (i: number) => {
-    const n = nodes[i];
-    const y = portrait ? 0.3 + (n.y - 0.15) * 0.72 : n.y;
-    return { x: n.x * W, y: y * H };
-  };
-  const fit = () => {
-    const r = stage.getBoundingClientRect();
-    W = r.width; H = r.height; cover = Math.hypot(W, H); portrait = W / H < 0.8;
-    dpr = Math.min(devicePixelRatio, 2);
-    for (const c of [canvasA, canvasB]) { c.width = Math.round(W * dpr); c.height = Math.round(H * dpr); }
-    ctxA.setTransform(dpr, 0, 0, dpr, 0, 0);
-    ctxB.setTransform(dpr, 0, 0, dpr, 0, 0);
-    labels.forEach((el, i) => { const p = pos(i + 1); el.style.left = p.x + 'px'; el.style.top = p.y + 12 + 'px'; });
-  };
-  fit();
-  addEventListener('resize', fit);
-
-  const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
-  const easeOut = (v: number) => 1 - (1 - v) ** 3;
-
-  const drawA = (t: number) => {
-    const c = ctxA;
-    c.clearRect(0, 0, W, H);
-    for (const s of stars) {
-      const tw = reduced ? 1 : 0.62 + 0.38 * Math.sin(t * s.sp + s.ph);
-      const a = s.a * tw * (1 - s.y * s.y * 0.85);
-      c.fillStyle = s.warm ? `rgba(255,218,196,${a})` : `rgba(228,232,255,${a})`;
-      c.beginPath(); c.arc(s.x * W, s.y * H, s.r, 0, 6.2832); c.fill();
-    }
-    // The constellation's stars shine brighter
-    for (let i = 1; i < nodes.length; i++) {
-      const p = pos(i);
-      const tw = reduced ? 1 : 0.75 + 0.25 * Math.sin(t * 1.3 + i * 1.7);
-      const g = c.createRadialGradient(p.x, p.y, 0, p.x, p.y, 22);
-      g.addColorStop(0, `rgba(255,236,220,${0.95 * tw})`);
-      g.addColorStop(0.18, `rgba(255,200,180,${0.35 * tw})`);
-      g.addColorStop(1, 'rgba(255,200,180,0)');
-      c.fillStyle = g; c.beginPath(); c.arc(p.x, p.y, 22, 0, 6.2832); c.fill();
-      c.fillStyle = `rgba(255,248,240,${tw})`; c.beginPath(); c.arc(p.x, p.y, 2.3, 0, 6.2832); c.fill();
-      c.strokeStyle = `rgba(255,236,220,${0.5 * tw})`; c.lineWidth = 1;
-      c.beginPath(); c.moveTo(p.x - 9, p.y); c.lineTo(p.x + 9, p.y); c.moveTo(p.x, p.y - 9); c.lineTo(p.x, p.y + 9); c.stroke();
-    }
-  };
-
-  const drawB = (t: number) => {
-    const c = ctxB;
-    c.clearRect(0, 0, W, H);
-    for (const s of stars) {
-      c.fillStyle = `rgba(160,190,255,${s.a * 0.3 * (1 - s.y * s.y * 0.6)})`;
-      c.beginPath(); c.arc(s.x * W, s.y * H, s.r * 0.8, 0, 6.2832); c.fill();
-    }
-    // Edges draw themselves in
-    edges.forEach(([a, b], k) => {
-      const A = pos(a), B = pos(b);
-      const p = reduced ? 1 : easeOut(clamp01((t - 1.3 - k * 0.07) / 1.3));
-      c.strokeStyle = 'rgba(127,166,245,0.3)';
-      c.lineWidth = 1;
-      c.beginPath(); c.moveTo(A.x, A.y); c.lineTo(A.x + (B.x - A.x) * p, A.y + (B.y - A.y) * p); c.stroke();
-      if (p < 1 || reduced) return;
-      // Data pulse travelling along the edge
-      const period = 3.4 + (k % 5) * 0.7;
-      const u = ((t + k * 0.93) / period) % 1;
-      const tail = Math.max(0, u - 0.14);
-      const g = c.createLinearGradient(A.x + (B.x - A.x) * tail, A.y + (B.y - A.y) * tail, A.x + (B.x - A.x) * u, A.y + (B.y - A.y) * u);
-      g.addColorStop(0, 'rgba(127,166,245,0)'); g.addColorStop(1, 'rgba(160,200,255,0.95)');
-      c.strokeStyle = g; c.lineWidth = 1.6;
-      c.beginPath(); c.moveTo(A.x + (B.x - A.x) * tail, A.y + (B.y - A.y) * tail); c.lineTo(A.x + (B.x - A.x) * u, A.y + (B.y - A.y) * u); c.stroke();
-      c.fillStyle = '#cfe0ff';
-      c.beginPath(); c.arc(A.x + (B.x - A.x) * u, A.y + (B.y - A.y) * u, 2, 0, 6.2832); c.fill();
-    });
-    // Nodes
-    for (let i = 1; i < nodes.length; i++) {
-      const p = pos(i);
-      const on = reduced ? 1 : easeOut(clamp01((t - 1.2 - i * 0.08) / 0.8));
-      const g = c.createRadialGradient(p.x, p.y, 0, p.x, p.y, 18);
-      g.addColorStop(0, `rgba(110,160,255,${0.55 * on})`); g.addColorStop(1, 'rgba(110,160,255,0)');
-      c.fillStyle = g; c.beginPath(); c.arc(p.x, p.y, 18, 0, 6.2832); c.fill();
-      c.fillStyle = '#071033'; c.strokeStyle = `rgba(157,184,245,${on})`; c.lineWidth = 1.5;
-      c.beginPath(); c.arc(p.x, p.y, 4.5 * on, 0, 6.2832); c.fill(); c.stroke();
-    }
-  };
-
-  // Lens state
-  let lx = 0.7, ly = 0.5, lr = 0, tx = 0.7, ty = 0.5;
-  let last = -1e9, hover = false, full = false;
-  stage.addEventListener('pointermove', (e) => {
+  const mp = { x: 0, y: 0 };
+  const target = { x: 0, y: 0 };
+  addEventListener('pointermove', (e) => {
     if (e.pointerType !== 'mouse') return;
-    const r = stage.getBoundingClientRect();
-    tx = (e.clientX - r.left) / r.width; ty = (e.clientY - r.top) / r.height;
-    last = performance.now(); hover = true;
-  });
-  stage.addEventListener('pointerleave', () => { hover = false; last = -1e9; });
-  toggle.addEventListener('click', () => {
-    full = !full;
-    toggle.setAttribute('aria-pressed', String(full));
-    toggleLabel.textContent = full ? 'Ver el diseño' : 'Ver el sistema';
+    target.x = e.clientX / innerWidth - 0.5;
+    target.y = 0.5 - e.clientY / innerHeight;
   });
 
-  const frame = (now: number) => {
-    const t = now / 1000;
-    drawA(t);
+  const VS = 'attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
+  const FS = `#ifdef GL_FRAGMENT_PRECISION_HIGH
+precision highp float;
+#else
+precision mediump float;
+#endif
+uniform vec2 res;
+uniform vec2 m;
+uniform float t;
+float hash(vec2 p){ return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453); }
+void main(){
+  vec2 p = gl_FragCoord.xy / res.y + m * .08;
+  float a = t * .09;
+  p += .2 * vec2(sin(p.y * 2.1 + a * 1.3), cos(p.x * 1.7 - a));
+  p += .08 * vec2(sin(p.y * 4.3 - a * 1.9), cos(p.x * 3.9 + a * 1.6));
+  float s = p.x * .75 - p.y * .75;
+  float w = .5 + .5 * sin(s * 5.6 + a * 2. + .9 * sin(p.y * 2.4 - a));
+  float ribbon = smoothstep(.72, .96, w);
+  float d = .5 + .5 * sin(p.x * 1.5 + p.y * 1.9 - a * 1.5 + 1.6 * sin(p.x * 2.2 + a));
+  vec3 base = mix(vec3(.012, .030, .027), vec3(.030, .090, .078), smoothstep(.15, .95, d));
+  vec3 col = mix(base, vec3(.045, .175, .145), ribbon * .7);
+  col += vec3(.006, .03, .022) * smoothstep(.45, .7, w) * (1. - ribbon);
+  col += (hash(gl_FragCoord.xy + t) - .5) / 128.;
+  gl_FragColor = vec4(col, 1.);
+}`;
 
-    const idle = now - last > 2500;
-    if (idle && !reduced) {
-      tx = 0.5 + 0.3 * Math.sin(now / 3200);
-      ty = 0.52 + 0.17 * Math.sin(now / 2300 + 1);
-    } else if (idle) { tx = 0.7; ty = 0.5; }
-    const hp = clamp01(scrollY / innerHeight);
-    const base = Math.min(W, H) * (hover ? 0.3 : 0.25);
-    const target = (full ? cover : base) + hp * cover;
-    const open = now > 600 ? 1 : 0;
-    lx += (tx - lx) * 0.1; ly += (ty - ly) * 0.1; lr += (target * open - lr) * 0.07;
-    const cx = lx * W, cy = ly * H;
-    layerB.style.clipPath = `circle(${lr.toFixed(1)}px at ${cx.toFixed(1)}px ${cy.toFixed(1)}px)`;
-    if (lr > 4) drawB(t);
-    const showRing = lr > 8 && lr < cover * 0.85;
-    ring.style.opacity = showRing ? '1' : '0';
-    ring.style.width = ring.style.height = lr * 2 + 'px';
-    ring.style.transform = `translate3d(${cx - lr}px, ${cy - lr}px, 0)`;
-    if (!document.hidden) requestAnimationFrame(frame);
+  let render: ((t: number) => void) | null = null;
+  const gl = canvas.getContext('webgl', { antialias: false, alpha: false });
+  if (gl) {
+    const sh = (type: number, src: string) => {
+      const s = gl.createShader(type)!;
+      gl.shaderSource(s, src);
+      gl.compileShader(s);
+      return s;
+    };
+    const prog = gl.createProgram()!;
+    gl.attachShader(prog, sh(gl.VERTEX_SHADER, VS));
+    gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, FS));
+    gl.linkProgram(prog);
+    if (gl.getProgramParameter(prog, gl.LINK_STATUS)) {
+      gl.useProgram(prog);
+      gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+      const loc = gl.getAttribLocation(prog, 'p');
+      gl.enableVertexAttribArray(loc);
+      gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+      const uRes = gl.getUniformLocation(prog, 'res');
+      const uT = gl.getUniformLocation(prog, 't');
+      const uM = gl.getUniformLocation(prog, 'm');
+      const draw = (t: number) => { gl.uniform1f(uT, t); gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); };
+      const fit = () => {
+        const dpr = Math.min(devicePixelRatio, 2);
+        const k = Math.min(dpr, Math.sqrt(2.5e6 / (canvas.clientWidth * canvas.clientHeight)));
+        canvas.width = Math.max(1, Math.round(canvas.clientWidth * k));
+        canvas.height = Math.max(1, Math.round(canvas.clientHeight * k));
+        gl.viewport(0, 0, canvas.width, canvas.height);
+        gl.uniform2f(uRes, canvas.width, canvas.height);
+        if (reduced) draw(4);
+      };
+      render = (ms) => { gl.uniform2f(uM, mp.x, mp.y); draw(ms / 1000); };
+      fit(); draw(4);
+      addEventListener('resize', fit);
+    }
+  }
+  const loop = (t: number) => {
+    mp.x += (target.x - mp.x) * 0.04;
+    mp.y += (target.y - mp.y) * 0.04;
+    if (render && !reduced) render(t);
+    if (!document.hidden) requestAnimationFrame(loop);
   };
-  requestAnimationFrame(frame);
-  document.addEventListener('visibilitychange', () => { if (!document.hidden) requestAnimationFrame(frame); });
+  requestAnimationFrame(loop);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) requestAnimationFrame(loop); });
 </script>

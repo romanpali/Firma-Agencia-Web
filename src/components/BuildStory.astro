@@ -1,0 +1,96 @@
+---
+import IsoTower from './IsoTower.astro';
+
+const steps = [
+  { t: 'Tu negocio, hoy', d: 'Cada área trabaja con sus propias herramientas: hojas de cálculo, redes, facturas y contactos sueltos. Funciona, pero no se conecta.', tag: 'Punto de partida' },
+  { t: 'Identidad y diseño', d: 'Empezamos por lo que se ve: marca, diseño gráfico y producción creativa que dan una sola cara a la empresa.', tag: 'Branding · Creativo' },
+  { t: 'Presencia digital', d: 'Sitio web, comercio electrónico y plataformas que dan a tu empresa un lugar propio en internet.', tag: 'Web · E-commerce' },
+  { t: 'Ventas y CRM', d: 'Prospectos, cotizaciones y clientes en un mismo lugar, con un seguimiento que no se pierde.', tag: 'CRM · Propuestas' },
+  { t: 'Finanzas y administración', d: 'Facturación electrónica CFDI 4.0 y organización financiera, trabajando junto a tus contadores y asesores.', tag: 'CFDI 4.0 · Administración' },
+  { t: 'Operaciones y datos', d: 'Procesos, proyectos e inventarios con tableros que muestran cómo está funcionando todo.', tag: 'Dashboards · BI' },
+  { t: 'IA y automatización', d: 'Agentes y automatizaciones que reducen el trabajo manual y mueven la información entre las áreas.', tag: 'Agentes · Flujos' },
+  { t: 'Un solo ecosistema', d: 'Cada pieza conversa con las demás bajo un solo estándar: el sistema que construimos contigo, paso a paso.', tag: 'Todo conectado' },
+];
+---
+
+<section id="construccion" data-build data-tone="dark" class="relative z-10 h-[640vh] bg-paper">
+  <div data-build-inner class="sticky top-0 h-svh overflow-hidden">
+    <div
+      class="pointer-events-none absolute inset-0"
+      style="background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:96px 96px;mask-image:radial-gradient(80% 70% at 65% 50%,#000 15%,transparent 100%)"
+    ></div>
+
+    <div class="relative mx-auto grid h-full max-w-[1280px] grid-rows-[auto_minmax(0,1fr)] gap-2 px-6 pb-4 pt-24 md:grid-cols-12 md:grid-rows-1 md:gap-8 md:px-10 md:py-24">
+      <div class="flex flex-col justify-center md:col-span-4">
+        <p class="font-mono text-[11px] uppercase tracking-[0.16em] text-[#34d399]">Construcción · paso a paso</p>
+        <div class="bs-steps relative mt-5 h-[12.5rem] md:h-[19rem]">
+          {steps.map((s, i) => (
+            <div class="bs-step absolute inset-x-0 top-0" data-step={i}>
+              <p class="font-mono text-[12px] tabular-nums text-white/40">{String(i).padStart(2, '0')} / 07</p>
+              <h3 class="mt-3 text-[clamp(1.75rem,3.1vw,2.9rem)] font-medium leading-[1.04] tracking-[-0.03em]">{s.t}</h3>
+              <p class="mt-4 max-w-[26rem] text-[15px] leading-relaxed text-mute md:text-[16px]">{s.d}</p>
+              <p class="mt-5 inline-block rounded-full border border-white/20 px-3 py-1.5 font-mono text-[10.5px] uppercase tracking-[0.12em] text-white/70">{s.tag}</p>
+            </div>
+          ))}
+        </div>
+        <ol class="bs-rail mt-2 hidden gap-1.5 md:flex" aria-hidden="true">
+          {steps.map((_, i) => <li data-tick={i} class="h-[3px] w-8 rounded-full bg-white/15 transition-colors duration-500"></li>)}
+        </ol>
+      </div>
+
+      <div class="relative min-h-0 md:col-span-8">
+        <div data-tower class="absolute inset-0 will-change-transform max-md:origin-[46%_50%] max-md:scale-[2.2]"><IsoTower mode="story" /></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const sec = document.querySelector<HTMLElement>('[data-build]')!;
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const q = (s: string) => [...sec.querySelectorAll<HTMLElement | SVGElement>(s)];
+  const floors = q('[data-floor]');
+  const ghosts = q('[data-ghost]');
+  const labels = q('[data-label]');
+  const dashes = q('[data-dash]');
+  const scatter = sec.querySelector<SVGElement>('[data-scatter]')!;
+  const bus = sec.querySelector<SVGElement>('[data-bus]')!;
+  const waves = sec.querySelector<SVGElement>('[data-links]')!;
+  const tower = sec.querySelector<HTMLElement>('[data-tower]')!;
+  const steps = q('[data-step]');
+  const ticks = q('[data-tick]');
+  const clamp = (v: number) => Math.min(1, Math.max(0, v));
+  const set = (el: Element, k: number) => (el as HTMLElement).style.setProperty('--k', k.toFixed(3));
+  let active = -1;
+
+  const update = () => {
+    const r = sec.getBoundingClientRect();
+    const p = reduced ? 1 : clamp(-r.top / Math.max(1, r.height - innerHeight));
+    const t = reduced ? 8 : p * 7.999;
+    floors.forEach((el, i) => set(el, i === 0 ? 1 : clamp((t - (i - 0.3)) / 0.85)));
+    ghosts.forEach((el, n) => set(el, clamp((t - (n + 1 - 0.3)) / 0.85)));
+    labels.forEach((el, i) => set(el, i === 0 ? 1 : clamp((t - (i - 0.3)) / 0.85)));
+    dashes.forEach((el, n) => set(el, clamp((t - (4.9 + n * 0.25)) / 0.9)));
+    set(scatter, 1 - clamp((t - 0.4) / 1.1));
+    const k7 = clamp((t - 6.9) / 0.9);
+    set(bus, k7);
+    set(waves, k7);
+    tower.style.transform = `translate3d(0, ${(-p * 16).toFixed(1)}px, 0) scale(${(1 + p * 0.035).toFixed(4)})`;
+    const idx = reduced ? -1 : Math.min(7, Math.floor(t));
+    if (idx !== active) {
+      active = idx;
+      steps.forEach((el, i) => el.classList.toggle('is-on', i === idx));
+      ticks.forEach((el, i) => el.classList.toggle('is-on', i <= idx));
+    }
+  };
+
+  if (reduced) {
+    update();
+  } else {
+    let queued = false;
+    const onScroll = () => { if (!queued) { queued = true; requestAnimationFrame(() => { queued = false; update(); }); } };
+    addEventListener('scroll', onScroll, { passive: true });
+    addEventListener('resize', onScroll);
+    update();
+  }
+</script>
