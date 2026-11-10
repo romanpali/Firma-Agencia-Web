@@ -1,8 +1,8 @@
 @import "tailwindcss";
-@import "@fontsource-variable/inter";
+@import "@fontsource-variable/inter-tight";
 
 @theme {
-  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter Tight Variable", ui-sans-serif, system-ui, sans-serif;
 }
 
 html {

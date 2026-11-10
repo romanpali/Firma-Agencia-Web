@@ -10,7 +10,7 @@ const links = [
   <div
     class="flex h-14 w-full max-w-[680px] items-center justify-between rounded-full border border-white/15 bg-white/10 py-2 pl-6 pr-2 shadow-[0_8px_32px_rgba(0,0,0,0.25),inset_0_1px_0_rgba(255,255,255,0.18)] backdrop-blur-2xl backdrop-saturate-150"
   >
-    <a href="/" class="text-[17px] font-semibold tracking-tight">NEXA</a>
+    <a href="/" class="text-[17px] leading-none tracking-tight" aria-label="HumanCorp"><span class="font-light">HUMAN</span> <span class="font-semibold">CORP</span></a>
     <nav class="hidden items-center gap-8 md:flex" aria-label="Principal">
       {links.map((l) => (
         <a href={l.href} class="text-[15px] font-medium tracking-tight text-white/80 transition-colors hover:text-white">{l.label}</a>
