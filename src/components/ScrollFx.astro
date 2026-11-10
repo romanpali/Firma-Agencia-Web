@@ -23,15 +23,17 @@
   // Navbar tone (follows the section under it) + card parallax.
   const header = document.querySelector<HTMLElement>('[data-header]');
   const sections = [...document.querySelectorAll<HTMLElement>('[data-tone]')].filter((el) => el !== header);
+  const heroInner = document.querySelector<HTMLElement>('[data-hero-inner]');
   const parallax = [...document.querySelectorAll<HTMLElement>('[data-parallax]')];
   let queued = false;
   const update = () => {
     queued = false;
     let tone = 'dark';
-    for (const s of sections) {
+    for (const s of [...sections].reverse()) { // later sections overlap earlier (sticky) ones
       const r = s.getBoundingClientRect();
       if (r.top <= 40 && r.bottom > 40) { tone = s.dataset.tone!; break; }
     }
+    heroInner?.parentElement?.style.setProperty('--hp', Math.min(1, Math.max(0, scrollY / innerHeight)).toFixed(3));
     header?.setAttribute('data-tone', tone);
     if (reduced) return;
     for (const el of parallax) {
@@ -43,6 +45,5 @@
   };
   addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(update); } }, { passive: true });
   addEventListener('resize', update);
-  addEventListener('hero:tone', update);
   update();
 </script>

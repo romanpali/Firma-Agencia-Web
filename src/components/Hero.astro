@@ -1,186 +1,77 @@
 ---
+import AppFrame from './AppFrame.astro';
+
+const facts = [
+  { k: '08', v: 'Áreas de servicio' },
+  { k: 'CRM', v: 'Ventas conectadas' },
+  { k: 'CFDI 4.0', v: 'Facturación electrónica' },
+  { k: 'IA', v: 'Agentes y automatización' },
+];
 ---
 
 <section
-  data-pin
   data-hero
   data-tone="dark"
-  class="relative h-svh min-h-[560px] overflow-hidden bg-paper text-white"
+  class="relative min-h-svh overflow-hidden bg-[#06102b] text-white md:sticky md:top-0 md:h-svh"
 >
-  <!-- Preloader (lives on the white page background, under the media) -->
-  <div data-preloader class="absolute inset-0 grid place-items-center">
-    <div aria-hidden="true" class="whitespace-nowrap text-[13.8vw] leading-none tracking-[-0.04em] text-[#99B6D2]/15">
-      <span class="font-light">HUMAN</span> <span class="font-semibold">CORP</span>
-    </div>
-    <div class="absolute text-[calc(28*0.915*var(--u))] leading-none text-[#151515] tabular-nums">
-      <span data-count>00</span>%
-    </div>
-  </div>
+  <!-- Technical ground: fine grid + a spotlight that follows the pointer -->
+  <div
+    class="pointer-events-none absolute inset-0 opacity-70"
+    style="background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(80% 70% at 62% 45%,#000 30%,transparent 100%)"
+  ></div>
+  <div
+    data-spot
+    class="pointer-events-none absolute inset-0"
+    style="background:radial-gradient(520px circle at var(--mx,70%) var(--my,40%),rgba(59,110,230,.22),transparent 70%)"
+  ></div>
+  <div class="pointer-events-none absolute -right-40 top-1/4 h-[560px] w-[560px] rounded-full bg-[#1d4bb8]/25 blur-[120px]"></div>
 
-  <!-- Media: animated background -->
-  <div data-media class="absolute inset-0 z-[1] overflow-hidden" style="background:linear-gradient(115deg,#17389a,#2a55b8 60%,#1b3f9a)">
-    <div data-camera class="absolute inset-0 will-change-transform">
-      <canvas id="hero-canvas" class="absolute inset-0 size-full opacity-0 transition-opacity duration-1000" aria-hidden="true"></canvas>
-    </div>
-    <div class="pointer-events-none absolute inset-0 bg-black/20"></div>
-    <div class="pointer-events-none absolute inset-x-0 top-0 h-[12%] bg-gradient-to-b from-black/90 to-transparent"></div>
-    <div class="pointer-events-none absolute inset-0" style="background:linear-gradient(to bottom,transparent 60%,rgba(2,8,36,.5))"></div>
-    <div class="pointer-events-none absolute inset-0 flex items-center justify-center" style="perspective:1400px">
-      <div data-portal data-plane class="relative will-change-transform" style="height:min(var(--portal-h,58svh),640px);aspect-ratio:652/1024">
-      <div data-glass class="absolute inset-0">
-          <div class="absolute inset-0 rounded-[28px] border border-white/35 bg-gradient-to-br from-white/20 via-white/[0.06] to-transparent shadow-[inset_0_2px_2px_rgba(255,255,255,0.25)] backdrop-blur-[10px]"></div>
-          <div
-            class="absolute inset-0 rounded-[28px] border-[2px] border-white shadow-[0_0_3px_rgba(255,255,255,0.95),0_0_14px_rgba(255,255,255,0.55)]"
-            style="mask-image:linear-gradient(to bottom left,#000 20%,rgba(0,0,0,.45) 60%,transparent 92%)"
-          ></div>
-          <div class="absolute inset-0 flex flex-col justify-between p-6 text-white">
-            <span class="relative size-6 rounded-full border border-white/80"><span class="absolute left-1/2 top-[-5px] size-1.5 -translate-x-1/2 rounded-full bg-white"></span></span>
-            <div class="text-[13px] leading-snug tracking-[0.02em]">
-              <span class="font-light">HUMAN</span> <span class="font-semibold">CORP</span>
-              <div class="mt-1 text-[11px] text-white/70">Diseño · Tecnología · Operaciones</div>
-            </div>
-          </div>
+  <div data-hero-inner class="relative mx-auto flex min-h-svh max-w-[1280px] flex-col px-6 pb-8 pt-28 md:h-full md:px-10 md:pb-0 md:pt-24">
+    <div class="grid flex-1 items-center gap-10 md:grid-cols-12 md:gap-8 md:pb-24">
+      <div class="md:col-span-5">
+        <p class="hf-rise inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.12em] text-white/70" style="--d:.1s">
+          <span class="hf-dot size-1.5 rounded-full bg-[#4ade80]"></span>
+          Diseño, tecnología y operaciones empresariales
+        </p>
+        <h1 class="hf-rise mt-6 max-w-[16ch] text-[clamp(2.1rem,3.2vw,3.2rem)] font-medium leading-[1.04] tracking-[-0.03em] text-balance" style="--d:.2s">
+          Todo lo que hace funcionar a una empresa, conectado bajo un solo estándar.
+        </h1>
+        <p class="hf-rise mt-6 max-w-[34rem] font-body text-[17px] leading-relaxed text-white/70" style="--d:.35s">
+          HumanCorp diseña, desarrolla y automatiza las ventas, las finanzas, las operaciones y los datos de tu empresa, para que trabajen como un solo sistema.
+        </p>
+        <div class="hf-rise mt-8 flex flex-wrap gap-3" style="--d:.5s">
+          <a href="/contacto" class="group inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-[15px] font-medium text-[#06102b] transition-transform duration-200 hover:scale-[1.03] active:scale-[0.98]">
+            Hablemos de tu empresa
+            <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
+          </a>
+          <a href="/servicios" class="inline-flex items-center rounded-full border border-white/25 px-6 py-3.5 text-[15px] font-medium transition-[background-color,transform] duration-200 hover:bg-white/10 active:scale-[0.98]">
+            Ver los servicios
+          </a>
         </div>
       </div>
-    </div>
-  </div>
 
-  <!-- Copy -->
-  <div data-copy class="pointer-events-none absolute inset-0 z-[2] will-change-transform">
-    <h1
-      data-intro
-      aria-label="HumanCorp"
-      class="absolute inset-x-0 top-[51.5%] -translate-y-1/2 text-center text-[clamp(2rem,2.7vw,3.25rem)] leading-none tracking-[-0.01em]"
-    >
-      <span data-word class="inline-block font-light">HUMAN</span>{" "}<span data-word class="inline-block font-semibold">C<span id="hero-o" class="relative inline-block before:absolute before:left-1/2 before:-top-[0.3em] before:size-[0.16em] before:-translate-x-1/2 before:rounded-full before:bg-white before:content-['']">O</span>RP</span>
-    </h1>
-    <p
-      data-intro="lead"
-      class="absolute inset-x-0 bottom-[10%] mx-auto max-w-[22rem] px-6 text-center text-[clamp(1.125rem,1.25vw,1.5rem)] font-medium leading-[1.5] tracking-tight text-balance md:max-w-none"
-    >
-      Todo lo que hace funcionar a una empresa,<br class="hidden md:block" /> conectado bajo un solo estándar.
-    </p>
-  </div>
-
-  <!-- Portal: a glass panel that lights up, opens and becomes the next screen -->
-  <div data-over class="pointer-events-none absolute inset-0 z-[3] flex items-center justify-center overflow-hidden" style="perspective:1400px">
-    <div data-portal data-plane class="relative will-change-transform" style="height:min(var(--portal-h,58svh),640px);aspect-ratio:652/1024">
-      <div data-fill class="absolute inset-0 rounded-[28px] bg-paper opacity-0"></div>
-      <div
-        data-rim
-        class="absolute inset-0 rounded-[28px] border-[16px] border-white opacity-0 shadow-[0_0_36px_8px_rgba(255,255,255,0.85),inset_0_0_28px_6px_rgba(255,255,255,0.7)]"
-      ></div>
+      <div class="md:col-span-7"><AppFrame /></div>
     </div>
+
+    <!-- Docked strip: hard facts -->
+    <ul class="hf-rise mt-10 grid grid-cols-2 gap-y-5 border-t border-white/10 py-5 md:absolute md:inset-x-10 md:bottom-0 md:mt-0 md:grid-cols-4 md:py-6" style="--d:1.2s">
+      {facts.map((f) => (
+        <li class="pr-4">
+          <p class="font-mono text-[11px] uppercase tracking-[0.12em] text-[#7fa6f5]">{f.k}</p>
+          <p class="mt-1 font-body text-[14px] text-white/70">{f.v}</p>
+        </li>
+      ))}
+    </ul>
   </div>
 </section>
 
 <script>
-  const canvas = document.getElementById('hero-canvas') as HTMLCanvasElement;
-  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const ready = () => {
-    (window as any).__heroReady = true;
-    dispatchEvent(new Event('hero:ready'));
-  };
-
-  // Pointer parallax for the flow (smoothed, in -0.5..0.5).
-  const mp = { x: 0, y: 0 };
-  const target = { x: 0, y: 0 };
-  addEventListener('pointermove', (e) => {
-    if (e.pointerType !== 'mouse') return;
-    target.x = e.clientX / innerWidth - 0.5;
-    target.y = 0.5 - e.clientY / innerHeight;
-  });
-
-  // Animated background: procedural silk-like flow (domain-warped sine field), rendered at full resolution.
-  const VS = 'attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
-  const FS = `#ifdef GL_FRAGMENT_PRECISION_HIGH
-precision highp float;
-#else
-precision mediump float;
-#endif
-uniform vec2 res;
-uniform vec2 m;
-uniform float t;
-
-float hash(vec2 p){ return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453); }
-
-void main(){
-  vec2 p = gl_FragCoord.xy / res.y + m * .1;
-  float a = t * .14;
-  p += .2 * vec2(sin(p.y * 2.1 + a * 1.3), cos(p.x * 1.7 - a));
-  p += .08 * vec2(sin(p.y * 4.3 - a * 1.9), cos(p.x * 3.9 + a * 1.6));
-
-  // Violet ribbons: thin diagonal bands that drift and undulate.
-  float s = p.x * .75 - p.y * .75;
-  float w = .5 + .5 * sin(s * 5.6 + a * 2. + .9 * sin(p.y * 2.4 - a));
-  float ribbon = smoothstep(.72, .96, w);
-
-  // Blue depth: slow large-scale light/deep variation.
-  float d = .5 + .5 * sin(p.x * 1.5 + p.y * 1.9 - a * 1.5 + 1.6 * sin(p.x * 2.2 + a));
-  vec3 blue = mix(vec3(.09, .24, .64), vec3(.17, .35, .78), smoothstep(.15, .95, d));
-  vec3 violet = vec3(.36, .30, .72);
-
-  vec3 col = mix(blue, violet, ribbon * .8);
-  col += vec3(.03, .05, .12) * smoothstep(.45, .7, w) * (1. - ribbon);
-  col += (hash(gl_FragCoord.xy + t) - .5) / 128.;
-  gl_FragColor = vec4(col, 1.);
-}`;
-
-  let render: ((t: number) => void) | null = null;
-  const gl = canvas.getContext('webgl', { antialias: false, alpha: false });
-  if (gl) {
-    const sh = (type: number, src: string) => {
-      const s = gl.createShader(type)!;
-      gl.shaderSource(s, src);
-      gl.compileShader(s);
-      return s;
-    };
-    const prog = gl.createProgram()!;
-    gl.attachShader(prog, sh(gl.VERTEX_SHADER, VS));
-    gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, FS));
-    gl.linkProgram(prog);
-    if (gl.getProgramParameter(prog, gl.LINK_STATUS)) {
-      gl.useProgram(prog);
-      gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
-      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
-      const loc = gl.getAttribLocation(prog, 'p');
-      gl.enableVertexAttribArray(loc);
-      gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-      const uRes = gl.getUniformLocation(prog, 'res');
-      const uT = gl.getUniformLocation(prog, 't');
-      const uM = gl.getUniformLocation(prog, 'm');
-      const draw = (t: number) => {
-        gl.uniform1f(uT, t);
-        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-      };
-      const fit = () => {
-        // Full device resolution, capped at ~2.5 MP so weak GPUs keep 60 fps (the content is smooth, so it stays sharp).
-        const dpr = Math.min(devicePixelRatio, 2);
-        const k = Math.min(dpr, Math.sqrt(2.5e6 / (canvas.clientWidth * canvas.clientHeight)));
-        canvas.width = Math.max(1, Math.round(canvas.clientWidth * k));
-        canvas.height = Math.max(1, Math.round(canvas.clientHeight * k));
-        gl.viewport(0, 0, canvas.width, canvas.height);
-        gl.uniform2f(uRes, canvas.width, canvas.height);
-        if (reduced) draw(4);
-      };
-      render = (ms) => {
-        gl.uniform2f(uM, mp.x, mp.y);
-        draw(ms / 1000);
-      };
-      fit();
-      draw(4);
-      addEventListener('resize', fit);
-      canvas.style.opacity = '1';
-    }
+  const hero = document.querySelector<HTMLElement>('[data-hero]');
+  if (hero && matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    hero.addEventListener('pointermove', (e) => {
+      const r = hero.getBoundingClientRect();
+      hero.style.setProperty('--mx', e.clientX - r.left + 'px');
+      hero.style.setProperty('--my', e.clientY - r.top + 'px');
+    });
   }
-  ready();
-
-  const loop = (t: number) => {
-    mp.x += (target.x - mp.x) * 0.05;
-    mp.y += (target.y - mp.y) * 0.05;
-    if (render && !reduced) render(t);
-    if (!document.hidden) requestAnimationFrame(loop);
-  };
-  requestAnimationFrame(loop);
-  document.addEventListener('visibilitychange', () => { if (!document.hidden) requestAnimationFrame(loop); });
 </script>

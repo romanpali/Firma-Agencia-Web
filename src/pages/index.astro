@@ -4,9 +4,7 @@ import Hero from '../components/Hero.astro';
 import Intro from '../components/Intro.astro';
 import ServicesPreview from '../components/ServicesPreview.astro';
 import ScrollFx from '../components/ScrollFx.astro';
-import HeroMotion from '../components/HeroMotion.astro';
 import Header from '../components/Header.astro';
-import Cursor from '../components/Cursor.astro';
 ---
 
 <!doctype html>
@@ -15,20 +13,7 @@ import Cursor from '../components/Cursor.astro';
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Diseño, tecnología y operaciones empresariales." />
-    <script is:inline>
-      (function () {
-        var r = document.documentElement;
-        r.classList.add('js');
-        if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
-          r.classList.add('anim');
-          r.setAttribute('data-locked', '');
-          // Safety net: never leave the page hidden or locked if the intro fails.
-          setTimeout(function () {
-            if (!window.__introDone) { r.classList.remove('anim'); r.removeAttribute('data-locked'); }
-          }, 9000);
-        }
-      })();
-    </script>
+    <script is:inline>document.documentElement.classList.add('js')</script>
     <title>HumanCorp — Diseño, tecnología y operaciones empresariales</title>
   </head>
   <body class="font-sans">
@@ -38,8 +23,6 @@ import Cursor from '../components/Cursor.astro';
       <Intro />
       <ServicesPreview />
     </main>
-    <HeroMotion />
     <ScrollFx />
-    <Cursor />
   </body>
 </html>
