@@ -1,0 +1,31 @@
+---
+interface Props {
+  mode: 'a' | 'b';
+  cards: string[];
+  line1: string;
+  line2: string;
+  caption: string;
+}
+const { mode, cards, line1, line2, caption } = Astro.props;
+const a = mode === 'a';
+// Same composition in both worlds, so the lens always lines up.
+const L1 = a
+  ? 'font-serif text-[27vw] leading-[0.82] tracking-[-0.025em] md:text-[clamp(5.5rem,18.5vw,20rem)]'
+  : 'font-mono font-medium text-[15.5vw] leading-[1.1] tracking-[-0.07em] md:text-[clamp(3.5rem,11.4vw,12.5rem)]';
+const L2 = a
+  ? 'font-sans font-medium text-[14vw] leading-none tracking-[-0.045em] md:text-[clamp(2.75rem,9.4vw,10.5rem)]'
+  : 'font-mono font-medium text-[10vw] leading-none tracking-[-0.07em] md:text-[clamp(2.25rem,7.6vw,8.5rem)]';
+const PATH = 'M -180 850 C 90 820 300 680 600 665 C 900 650 1090 700 1250 560 C 1360 465 1440 330 1640 235';
+---
+
+<div class="absolute inset-0">
+  <div class="absolute inset-x-0 top-[13%] text-center md:top-[15%]">
+    <span class="block overflow-hidden pb-[0.06em]"><span class={`rl block ${L1}`} style="--d:.2s">{line1}</span></span>
+    <p class="hf-fade mx-auto mt-2 max-w-[15rem] text-[12px] leading-snug md:mt-3 md:max-w-[17rem] md:text-[13px]" style="--d:1s">{caption}</p>
+    <span class="mt-1 block overflow-hidden pb-[0.08em] md:mt-3"><span class={`rl block ${L2}`} style="--d:.4s">{line2}</span></span>
+  </div>
+
+  <div data-ribbon class="absolute bottom-[7.5rem] left-1/2 h-[900px] w-[1440px] origin-bottom md:bottom-0" style={`--path:path('${PATH}');transform:translateX(-50%) scale(.7)`}>
+    {cards.map((html, i) => <div data-card class="rc" style={`--i:${i}`} set:html={html} />)}
+  </div>
+</div>
