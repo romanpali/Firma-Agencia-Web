@@ -2,7 +2,7 @@
 import { principles } from '../data/services';
 ---
 
-<section data-tone="light" class="relative z-10 rounded-t-[2rem] bg-paper shadow-[0_-30px_60px_rgba(0,0,0,0.25)] font-body text-ink">
+<section data-tone="dark" class="relative z-10 rounded-t-[2rem] bg-paper shadow-[0_-30px_60px_rgba(0,0,0,0.35)] font-body text-ink">
   <div class="mx-auto max-w-[1280px] px-6 pb-16 pt-20 md:px-10 md:pb-24 md:pt-28">
     <div class="grid gap-8 md:grid-cols-12 md:items-start">
       <h2 data-words class="max-w-[18ch] text-[clamp(2.25rem,4.2vw,3.5rem)] font-normal leading-[1.08] tracking-[-0.02em] md:col-span-7">
@@ -18,7 +18,7 @@ import { principles } from '../data/services';
     <ul class="mt-16 grid border-t border-line sm:grid-cols-2 lg:grid-cols-5 md:mt-20">
       {principles.map((p, i) => (
         <li data-reveal style={`--i:${i}`} class="border-b border-line py-7 pr-6 lg:border-b-0">
-          <span class="text-[13px] font-bold tabular-nums text-[#1d4bb8]">0{i + 1}</span>
+          <span class="text-[13px] font-bold tabular-nums text-[#7fa6f5]">0{i + 1}</span>
           <h3 class="mt-3 text-lg font-bold tracking-tight">{p.title}</h3>
           <p class="mt-2 text-sm leading-relaxed text-mute">{p.text}</p>
         </li>
