@@ -2,17 +2,18 @@
 import Icon from './Icon.astro';
 import ServiceVisual from './ServiceVisual.astro';
 import { services } from '../data/services';
+const palette = ['#ff6fae', '#ff8a5b', '#ffd23f', '#6fd0ff', '#7fe3b5', '#ff6fae', '#ff8a5b', '#6fd0ff'];
 ---
 
 <section data-tone="dark" class="relative z-10 bg-paper">
   <div class="mx-auto max-w-[1280px] px-6 pb-24 pt-8 md:px-10 md:pb-36 md:pt-12">
     <div class="grid gap-8 md:grid-cols-12 md:items-end">
-      <h2 data-words class="max-w-[16ch] text-[clamp(2.25rem,4.4vw,4rem)] font-medium leading-[1.04] tracking-[-0.035em] md:col-span-7">
-        Ocho áreas para cada parte de tu empresa
+      <h2 data-words class="max-w-[16ch] text-[clamp(2.4rem,4.8vw,4.4rem)] font-medium leading-[1.02] tracking-[-0.035em] md:col-span-7">
+        Ocho áreas para cada parte de <em>tu empresa</em>
       </h2>
       <div data-reveal style="--i:1" class="md:col-span-4 md:col-start-9">
         <p class="text-[16px] leading-relaxed text-mute">Soluciones que funcionan por separado y mejor juntas, de la identidad de marca a los datos y la seguridad.</p>
-        <a href="/servicios" class="group mt-6 inline-flex items-center gap-2 rounded-full bg-[#d6c4ff] px-6 py-3 text-sm font-medium text-[#150633] shadow-[0_8px_30px_-8px_rgba(140,95,255,0.8)] transition-transform hover:scale-[1.03]">
+        <a href="/servicios" class="group mt-6 inline-flex items-center gap-2 rounded-full bg-[#f6f2ee] px-6 py-3 text-sm font-medium text-[#17140f] transition-[transform,background-color] hover:scale-[1.03] hover:bg-[#ffd23f]">
           Ver todos los servicios
           <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
         </a>
@@ -21,22 +22,22 @@ import { services } from '../data/services';
 
     <ul class="mt-14 md:mt-20">
       {services.map((s, i) => (
-        <li data-reveal style={`--i:${i % 3}`} class="row relative">
+        <li data-reveal style={`--i:${i % 3};--c:${palette[i]}`} class="row relative">
           <a href={`/servicios#${s.slug}`} class="group grid grid-cols-[2rem_7.5rem_minmax(0,1fr)_1.5rem] items-center gap-x-4 py-6 md:grid-cols-[3.5rem_9rem_minmax(0,1fr)_minmax(0,1.3fr)_2.5rem] md:gap-x-8 md:py-8">
-            <span class="font-mono text-[12px] tabular-nums text-white/35 transition-colors duration-300 group-hover:text-[#d6c4ff]">{String(i + 1).padStart(2, '0')}</span>
+            <span class="text-[13px] tabular-nums text-white/35 transition-colors duration-300 group-hover:text-[var(--c)]">{String(i + 1).padStart(2, '0')}</span>
             <ServiceVisual slug={s.slug} />
             <h3 class="text-[clamp(1.15rem,2.1vw,2rem)] font-medium leading-[1.12] tracking-[-0.03em] transition-transform duration-500 ease-out group-hover:translate-x-2">{s.title}</h3>
             <div class="hidden md:block">
               <p class="max-w-[34rem] text-[14.5px] leading-relaxed text-mute transition-colors duration-300 group-hover:text-white/80">{s.description}</p>
               <ul class="mt-3 flex flex-wrap gap-x-5 gap-y-1.5">
                 {s.items.map((it) => (
-                  <li class="flex items-center gap-1.5 font-mono text-[10.5px] uppercase tracking-[0.1em] text-white/45">
+                  <li class="flex items-center gap-1.5 text-[12.5px] text-white/50">
                     <Icon name={it.icon} class="size-3.5" />{it.label}
                   </li>
                 ))}
               </ul>
             </div>
-            <span class="justify-self-end text-xl text-white/40 transition-[transform,color] duration-300 group-hover:translate-x-1 group-hover:text-[#d6c4ff]">→</span>
+            <span class="justify-self-end text-xl text-white/40 transition-[transform,color] duration-300 group-hover:translate-x-1 group-hover:text-[var(--c)]">→</span>
           </a>
         </li>
       ))}
