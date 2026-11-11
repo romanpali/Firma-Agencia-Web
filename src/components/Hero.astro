@@ -1,70 +1,97 @@
 ---
-import Scene from './Scene.astro';
-import { areas } from '../data/areas';
 ---
 
-<section data-hero class="relative h-[180svh] bg-[#0b0c0f]">
-  <div class="sticky top-0 h-svh overflow-hidden">
-    <div class="absolute inset-0" style="background:linear-gradient(to bottom,#d79d84 0%,#a87b6e 16%,#5b4a52 34%,#22212a 56%,#0d0e12 78%,#08090c 100%)"></div>
-    <i class="absolute left-1/2 top-[-18%] h-[60%] w-[70%] -translate-x-1/2 rounded-[50%] bg-[#ffd8b8]/45 blur-[90px]"></i>
-    <i class="grain pointer-events-none absolute inset-0"></i>
+<section data-hero class="relative h-svh min-h-[600px] overflow-hidden bg-[#1f4cb8] text-white">
+  <canvas id="hero-canvas" class="absolute inset-0 size-full" aria-hidden="true"></canvas>
+  <div class="pointer-events-none absolute inset-0 bg-black/20"></div>
+  <div class="pointer-events-none absolute inset-x-0 top-0 h-[12%] bg-gradient-to-b from-black/90 to-transparent"></div>
+  <div class="pointer-events-none absolute inset-0" style="background:linear-gradient(to bottom,transparent 60%,rgba(2,8,36,.5))"></div>
 
-    <div data-hero-copy class="absolute inset-x-0 top-[13svh] z-10 px-6 text-center will-change-transform">
-      <h1 data-words class="mx-auto max-w-[19ch] text-[clamp(2.1rem,4.7vw,5.2rem)] font-light leading-[1.02] tracking-[-0.045em] text-white text-balance">
-        Todo lo que hace funcionar a una empresa, conectado bajo un solo estándar.
-      </h1>
-      <p class="hf-rise mx-auto mt-6 max-w-[27rem] text-[13.5px] leading-relaxed text-white/75" style="--d:1s">
-        HumanCorp diseña, desarrolla y conecta los sistemas de tu empresa, paso a paso, hasta que funcionen como uno solo.
-      </p>
-    </div>
-
-    <!-- Ring of the eight areas -->
-    <div data-ring-wrap class="pointer-events-none absolute left-1/2 top-0 z-0 h-0 w-0" style="perspective:2200px">
-      <div data-ring style="transform-style:preserve-3d">
-        <i class="absolute left-1/2 top-[120px] h-[560px] w-[1200px] -translate-x-1/2 rounded-[50%] bg-black/40 blur-[50px]"></i>
-        <div data-spin style="transform-style:preserve-3d">
-          {areas.map((a, i) => (
-            <figure class="pn" style={`--i:${i}`}>
-              <Scene kind={a.scene} lite />
-            </figure>
-          ))}
-        </div>
-      </div>
-    </div>
-
-    <div class="hf-fade pointer-events-none absolute bottom-6 left-1/2 z-10 -translate-x-1/2 text-[11px] uppercase tracking-[0.3em] text-white/45" style="--d:1.6s">Desliza</div>
-  </div>
+  <h1 class="hf-rise absolute inset-x-0 top-[51.5%] -translate-y-1/2 text-center text-[clamp(2.2rem,3.4vw,4.2rem)] leading-none tracking-[-0.01em]" style="--d:.2s" aria-label="HumanCorp">
+    <span class="font-light">HUMAN</span> <span class="font-semibold">CORP</span>
+  </h1>
+  <p class="hf-rise absolute inset-x-0 bottom-[10%] mx-auto max-w-[22rem] px-6 text-center text-[clamp(1.05rem,1.35vw,1.5rem)] font-medium leading-[1.5] tracking-tight text-balance md:max-w-none" style="--d:.5s">
+    Todo lo que hace funcionar a una empresa,<br class="hidden md:block" /> conectado bajo un solo estándar.
+  </p>
 </section>
 
 <script>
-  const hero = document.querySelector<HTMLElement>('[data-hero]')!;
-  const wrap = hero.querySelector<HTMLElement>('[data-ring-wrap]')!;
-  const ring = hero.querySelector<HTMLElement>('[data-ring]')!;
-  const spin = hero.querySelector<HTMLElement>('[data-spin]')!;
-  const copy = hero.querySelector<HTMLElement>('[data-hero-copy]')!;
+  const canvas = document.getElementById('hero-canvas') as HTMLCanvasElement;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const clamp = (v: number) => Math.min(1, Math.max(0, v));
-  const ease = (t: number) => t * t * (3 - 2 * t);
-  const ptr = { x: 0 }, tgt = { x: 0 };
-  addEventListener('pointermove', (e) => { if (e.pointerType === 'mouse') tgt.x = e.clientX / innerWidth - 0.5; });
+  const mp = { x: 0, y: 0 }, target = { x: 0, y: 0 };
+  addEventListener('pointermove', (e) => {
+    if (e.pointerType !== 'mouse') return;
+    target.x = e.clientX / innerWidth - 0.5;
+    target.y = 0.5 - e.clientY / innerHeight;
+  });
+  const VS = 'attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
+  const FS = `#ifdef GL_FRAGMENT_PRECISION_HIGH
+precision highp float;
+#else
+precision mediump float;
+#endif
+uniform vec2 res;
+uniform float t;
 
-  let ry = 0, last = performance.now();
-  const frame = (now: number) => {
-    const dt = Math.min(0.05, (now - last) / 1000); last = now;
-    const H = innerHeight, W = innerWidth;
-    const p = clamp(scrollY / Math.max(1, hero.offsetHeight - H));
-    const e = ease(p);
-    ptr.x += (tgt.x - ptr.x) * 0.05;
-    if (!reduced) ry += dt * 5;
-    const k = W < 768 ? 0.5 : W < 1100 ? 0.78 : 1;
-    const y = (0.9 - 0.4 * e) * H; // rises from the lower edge towards the centre
-    wrap.style.transform = `translate3d(0, ${y.toFixed(1)}px, 0) scale(${((0.96 + 0.1 * e) * k).toFixed(3)})`;
-    ring.style.transform = `rotateX(${(19 - 6 * e).toFixed(2)}deg)`;
-    spin.style.transform = `rotateY(${(ry + scrollY * 0.07 + ptr.x * 14).toFixed(2)}deg)`;
-    copy.style.transform = `translate3d(0, ${(-e * 90).toFixed(1)}px, 0)`;
-    copy.style.opacity = String(1 - clamp(e * 1.5));
-    if (!document.hidden) requestAnimationFrame(frame);
+float hash(vec2 p){ return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453); }
+
+void main(){
+  vec2 uv = gl_FragCoord.xy / res.y;
+  vec2 p = uv * 1.7;
+  float a = t * .3;
+  for (int i = 1; i < 5; i++) {
+    float k = float(i);
+    p += .42 / (k * k) * vec2(sin(k * 1.7 * p.y + a + k), sin(k * 1.5 * p.x - a * .8 + k * 1.7)) * 2.1;
+  }
+  float f = .5 + .5 * sin(p.x * 2.4 + p.y * 1.3 + a * .4);
+  
+  vec3 purple = vec3(.43, .35, .66);
+  vec3 deep   = vec3(.10, .28, .70);
+  vec3 light  = vec3(.23, .39, .79);
+  vec3 blue = mix(light, deep, smoothstep(.5, .85, f));
+  vec3 col = mix(purple, blue, smoothstep(.26, .56, f));
+  col += vec3(.04, .06, .13) * exp(-pow((f - .46) * 9., 2.));
+  col += (hash(gl_FragCoord.xy + t) - .5) / 128.;
+  gl_FragColor = vec4(col, 1.);
+}`;
+  let render: ((t: number) => void) | null = null;
+  const gl = canvas.getContext('webgl', { antialias: false, alpha: false });
+  if (gl) {
+    const sh = (type: number, src: string) => { const s = gl.createShader(type)!; gl.shaderSource(s, src); gl.compileShader(s); return s; };
+    const prog = gl.createProgram()!;
+    gl.attachShader(prog, sh(gl.VERTEX_SHADER, VS));
+    gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, FS));
+    gl.linkProgram(prog);
+    if (gl.getProgramParameter(prog, gl.LINK_STATUS)) {
+      gl.useProgram(prog);
+      gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+      const loc = gl.getAttribLocation(prog, 'p');
+      gl.enableVertexAttribArray(loc);
+      gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+      const uRes = gl.getUniformLocation(prog, 'res');
+      const uT = gl.getUniformLocation(prog, 't');
+      const uM = gl.getUniformLocation(prog, 'm');
+      const draw = (t: number) => { gl.uniform1f(uT, t); gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); };
+      const fit = () => {
+        const dpr = Math.min(devicePixelRatio, 2);
+        const k = Math.min(dpr, Math.sqrt(2.5e6 / (canvas.clientWidth * canvas.clientHeight)));
+        canvas.width = Math.max(1, Math.round(canvas.clientWidth * k));
+        canvas.height = Math.max(1, Math.round(canvas.clientHeight * k));
+        gl.viewport(0, 0, canvas.width, canvas.height);
+        gl.uniform2f(uRes, canvas.width, canvas.height);
+        if (reduced) draw(4);
+      };
+      render = (ms) => { gl.uniform2f(uM, mp.x, mp.y); draw(ms / 1000); };
+      fit(); draw(4);
+      addEventListener('resize', fit);
+    }
+  }
+  const loop = (t: number) => {
+    mp.x += (target.x - mp.x) * 0.05; mp.y += (target.y - mp.y) * 0.05;
+    if (render && !reduced) render(t);
+    if (!document.hidden) requestAnimationFrame(loop);
   };
-  requestAnimationFrame(frame);
-  document.addEventListener('visibilitychange', () => { if (!document.hidden) { last = performance.now(); requestAnimationFrame(frame); } });
+  requestAnimationFrame(loop);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) requestAnimationFrame(loop); });
 </script>
