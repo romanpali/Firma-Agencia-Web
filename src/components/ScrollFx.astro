@@ -21,7 +21,7 @@
   document.querySelectorAll('[data-reveal],[data-words]').forEach((el) => io.observe(el));
 
   // Navbar tone (follows the section under it) + card parallax.
-  const header = document.querySelector<HTMLElement>('[data-header]');
+  const header = document.querySelector<HTMLElement>('[data-nav]');
   const sections = [...document.querySelectorAll<HTMLElement>('[data-tone]')].filter((el) => el !== header);
   const heroInner = document.querySelector<HTMLElement>('[data-hero-inner]');
   const parallax = [...document.querySelectorAll<HTMLElement>('[data-parallax]')];

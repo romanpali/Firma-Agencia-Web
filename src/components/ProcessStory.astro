@@ -9,235 +9,188 @@ const steps = [
   { t: 'IA y automatización', d: 'Asistentes que cotizan, dan seguimiento y preparan la factura, para reducir el trabajo manual.', items: ['Agentes de IA', 'Flujos automáticos', 'Asistentes internos'] },
   { t: 'Un solo ecosistema', d: 'Cada módulo comparte información con los demás bajo un solo estándar. Es el sistema que construimos contigo, paso a paso.', items: ['Un solo estándar', 'Información compartida', 'Crece contigo'] },
 ];
-const ST = 'fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"';
-const tools = [
-  { key: 'Redes', cx: 86, cy: 96, ax: 22, ay: 18, fx: 0.42, fy: 0.33, ph: 0.4, rot: -8, art: `<rect x="-26" y="-26" width="52" height="52" rx="9"/><circle cx="-9" cy="-9" r="5.5"/><path d="M-26 17L-7 0L7 13L16 5L26 15"/>` },
-  { key: 'Correo', cx: 388, cy: 84, ax: 26, ay: 16, fx: 0.31, fy: 0.46, ph: 1.9, rot: 7, art: `<rect x="-30" y="-21" width="60" height="42" rx="6"/><path d="M-30 -17L0 6L30 -17"/>` },
-  { key: 'Chat', cx: 238, cy: 196, ax: 30, ay: 22, fx: 0.37, fy: 0.29, ph: 3.1, rot: -5, art: `<path d="M-24 -24H24a8 8 0 0 1 8 8V8a8 8 0 0 1-8 8H-4L-18 28V16H-24a8 8 0 0 1-8-8V-16a8 8 0 0 1 8-8Z"/><path d="M-16 -9H14M-16 2H4"/>` },
-  { key: 'Facturas PDF', cx: 84, cy: 300, ax: 20, ay: 26, fx: 0.48, fy: 0.36, ph: 5.2, rot: 9, art: `<path d="M-20 -30H8L22 -16V30H-20Z"/><path d="M8 -30V-16H22"/><path d="M-12 -2H14M-12 9H14M-12 20H6"/>` },
-  { key: 'Hojas de cálculo', cx: 392, cy: 300, ax: 24, ay: 20, fx: 0.34, fy: 0.5, ph: 2.6, rot: -7, art: `<rect x="-30" y="-24" width="60" height="48" rx="6"/><path d="M-10 -24V24M10 -24V24M-30 -8H30M-30 8H30"/><rect x="10" y="-8" width="20" height="16" fill="currentColor" fill-opacity=".35" stroke="none"/>` },
-  { key: 'Notas', cx: 250, cy: 338, ax: 28, ay: 14, fx: 0.4, fy: 0.44, ph: 4.4, rot: 6, art: `<rect x="-26" y="-28" width="44" height="44" rx="3" transform="rotate(-9)"/><path d="M-16 -8H10M-16 4H2" transform="rotate(-9)"/><path d="M-6 -12H26V20H-2L-6 16Z" fill="var(--bgf, #0b0b0c)"/><path d="M-6 -12H26V20H-2L-6 16Z"/><path d="M2 0H18M2 9H12"/>` },
-];
 const mods = [
-  { n: 'Identidad', sx: 14, sy: 18, sr: -9, gx: 12, gy: 76 },
-  { n: 'Sitio web', sx: 318, sy: 6, sr: 7, gx: 172, gy: 76 },
-  { n: 'Ventas', sx: 168, sy: 150, sr: -4, gx: 332, gy: 76 },
-  { n: 'Finanzas', sx: 6, sy: 296, sr: 8, gx: 12, gy: 212 },
-  { n: 'Datos', sx: 326, sy: 276, sr: -7, gx: 172, gy: 212 },
-  { n: 'IA', sx: 210, sy: 328, sr: 5, gx: 332, gy: 212 },
+  { raw: 'Logos sueltos', to: 'Identidad', gx: 0, gy: 0, w: 160, h: 150, sx: 292, sy: 246, sr: 8, fx: 0.9, ph: 0.4 },
+  { raw: 'Página desactualizada', to: 'Sitio web', gx: 172, gy: 0, w: 368, h: 150, sx: 14, sy: 226, sr: -6, fx: 0.7, ph: 1.9 },
+  { raw: 'Hoja de cálculo', to: 'Ventas', gx: 0, gy: 162, w: 200, h: 238, sx: 352, sy: 8, sr: 7, fx: 1.1, ph: 3.1 },
+  { raw: 'Facturas en PDF', to: 'Finanzas', gx: 212, gy: 162, w: 160, h: 114, sx: 84, sy: 24, sr: -8, fx: 0.8, ph: 5.2 },
+  { raw: 'Reportes a mano', to: 'Datos', gx: 384, gy: 162, w: 156, h: 114, sx: 226, sy: 128, sr: 5, fx: 1.0, ph: 2.6 },
+  { raw: 'Chats', to: 'IA', gx: 212, gy: 288, w: 328, h: 112, sx: 150, sy: 296, sr: -4, fx: 0.6, ph: 4.4 },
 ];
 ---
 
-<section id="construccion" data-process data-tone="dark" class="relative z-10 h-[620vh] text-[#f5f4f1]">
-  <div data-process-inner class="sticky top-0 h-svh overflow-hidden">
-    <div class="relative mx-auto grid h-full max-w-[1280px] grid-rows-[auto_minmax(0,1fr)] gap-4 px-6 pb-6 pt-24 md:grid-cols-12 md:grid-rows-1 md:items-center md:gap-10 md:px-10 md:py-24">
-      <div class="md:col-span-6">
-        <p class="text-[14px] text-white/45">Cómo lo construimos</p>
-        <div class="mt-5 space-y-1 md:mt-8 md:space-y-2.5">
-          {steps.map((s, i) => (
-            <div class="ps-row" data-row={i}>
-              <div class="flex items-baseline gap-4">
-                <span class="ps-num w-6 text-[12px] tabular-nums md:w-8 md:text-[13px]">{String(i + 1).padStart(2, '0')}</span>
-                <h3 class="ps-title text-[clamp(1.3rem,3vw,2.8rem)] font-light leading-[1.18] tracking-[-0.04em]">{s.t}</h3>
-              </div>
-              <div class="ps-body pl-10 md:pl-12">
-                <div>
-                  <p class="max-w-[32rem] pt-2.5 text-[14px] leading-relaxed text-white/65 md:text-[17px]">{s.d}</p>
-                  <p class="max-w-[32rem] pb-2 pt-2.5 text-[13px] text-white/40 md:text-[14.5px]">{s.items.join('  ·  ')}</p>
+<section id="construccion" data-tone="light" class="relative z-10 font-goog text-[#202124]">
+  <div data-process class="h-[560vh] bg-white">
+    <div data-process-inner class="sticky top-0 h-svh overflow-hidden">
+      <div class="relative mx-auto grid h-full max-w-[1280px] grid-rows-[auto_minmax(0,1fr)] gap-3 px-6 pb-6 pt-24 md:grid-cols-12 md:grid-rows-1 md:items-center md:gap-14 md:px-10 md:py-24">
+        <div class="md:col-span-5">
+          <p class="text-[15px] text-[#5f6368]">Cómo lo construimos</p>
+          <div class="relative mt-4 md:mt-7">
+            <i class="absolute bottom-1 left-0 top-1 w-px bg-[#e8eaed]" aria-hidden="true"><b data-rail class="absolute inset-0 origin-top scale-y-0 bg-[#1a56db]"></b></i>
+            <div class="space-y-0.5 md:space-y-2">
+              {steps.map((s, i) => (
+                <div class="ps-row" data-row={i}>
+                  <div class="flex items-baseline gap-3">
+                    <span class="ps-num w-5 text-[12px] tabular-nums md:text-[13px]">{String(i + 1).padStart(2, '0')}</span>
+                    <h3 class="ps-title text-[clamp(1.2rem,2.5vw,2.2rem)] font-normal leading-[1.2] tracking-[-0.025em]">{s.t}</h3>
+                  </div>
+                  <div class="ps-body pl-8">
+                    <div>
+                      <p class="max-w-[30rem] pt-2 text-[14px] leading-relaxed text-[#5f6368] md:text-[16.5px]">{s.d}</p>
+                      <ul class="flex max-w-[30rem] flex-wrap gap-1.5 pb-1.5 pt-3">
+                        {s.items.map((l) => <li class="rounded-full border border-[#dadce0] px-3 py-1 text-[12px] text-[#3c4043] md:text-[13.5px]">{l}</li>)}
+                      </ul>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
-      </div>
 
-      <div data-stagewrap class="relative min-h-0 md:col-span-6 md:h-[28rem]">
-        <div data-fit class="absolute left-1/2 top-1/2 h-[400px] w-[480px]" role="img" aria-label="Las herramientas sueltas de una empresa se funden, una por una, en módulos que forman un solo sistema">
-          <i class="ps-frame"></i>
-          {mods.map((m, i) => (
-            <div class="mod" data-mod={i} data-gx={m.gx} data-gy={m.gy} style={`--sx:${m.sx}px;--sy:${m.sy}px;--sr:${m.sr}deg;--gx:${m.gx}px;--gy:${m.gy}px`}>
-              <span class="absolute left-4 top-3.5 text-[11px] tabular-nums">{String(i + 1).padStart(2, '0')}</span>
-              <svg viewBox="-34 -34 68 68" class="ico absolute right-3 top-3 size-8" style="--bgf:#f5f4f1" set:html={tools[i].art} {...{ fill: 'none', stroke: 'currentColor', 'stroke-width': 1.6, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }} aria-hidden="true" />
-              <span class="absolute bottom-3.5 left-4 text-[16px] font-medium tracking-tight">{m.n}</span>
+        <div data-stagewrap class="relative min-h-0 md:col-span-7 md:h-[30rem]">
+          <div data-fit class="absolute left-1/2 top-1/2 h-[420px] w-[560px]" role="img" aria-label="Piezas sueltas de una empresa se ordenan, una por una, en módulos conectados que forman un solo sistema">
+            <div class="absolute inset-[10px]">
+              {mods.map((m, i) => (
+                <div class="pm" data-mod={i} style={`--gx:${m.gx}px;--gy:${m.gy}px;--w:${m.w}px;--h:${m.h}px;--k:${i}`}>
+                  {i === 0 && (<>
+                    <svg class="pop absolute left-4 top-4" width="70" height="46" viewBox="0 0 70 46" aria-hidden="true"><circle cx="23" cy="23" r="19" fill="#202124"/><circle cx="45" cy="23" r="19" fill="#1a56db" fill-opacity=".92"/></svg>
+                    <span class="pop absolute right-4 top-4 text-[38px] font-medium leading-[46px] tracking-[-0.03em]" style="--k:1">Aa</span>
+                    <div class="absolute left-4 top-[74px] flex gap-2">
+                      {['#202124', '#1a56db', '#8ab4f8', '#e8eaed'].map((c, k) => <i class="pop size-[18px] rounded-full" style={`background:${c};--k:${k + 2}`}></i>)}
+                    </div>
+                  </>)}
+                  {i === 1 && (<>
+                    <div class="absolute inset-x-0 top-0 flex h-[30px] items-center gap-1.5 border-b border-[#e8eaed] px-4" aria-hidden="true">
+                      <i class="size-2 rounded-full bg-[#dadce0]"></i><i class="size-2 rounded-full bg-[#dadce0]"></i><i class="size-2 rounded-full bg-[#dadce0]"></i>
+                      <i class="ml-3 h-[14px] flex-1 rounded-full bg-[#f1f3f4]"></i>
+                    </div>
+                    <div class="absolute left-4 top-[44px] w-[190px]" aria-hidden="true">
+                      <i class="pop block h-[11px] w-[170px] rounded-full bg-[#202124]" style="--k:0"></i>
+                      <i class="pop mt-2 block h-[11px] w-[120px] rounded-full bg-[#202124]" style="--k:1"></i>
+                      <i class="pop mt-3 block h-[6px] w-[150px] rounded-full bg-[#dadce0]" style="--k:2"></i>
+                      <i class="pop mt-1.5 block h-[6px] w-[110px] rounded-full bg-[#dadce0]" style="--k:2"></i>
+                      <i class="pop mt-3 block h-[20px] w-[74px] rounded-full bg-[#1a56db]" style="--k:3"></i>
+                    </div>
+                    <i class="pop absolute right-4 top-[44px] h-[64px] w-[132px] rounded-[12px] bg-gradient-to-br from-[#dbe6fd] to-[#8ab4f8]" style="--k:2" aria-hidden="true"></i>
+                  </>)}
+                  {i === 2 && (<>
+                    <div class="absolute inset-x-4 top-4 flex gap-2" aria-hidden="true">
+                      {[3, 2, 1].map((n, c) => (
+                        <div class="flex-1">
+                          <i class="block h-[6px] w-7 rounded-full bg-[#bdc1c6]"></i>
+                          <div class="mt-2.5 space-y-2">
+                            {Array.from({ length: n }).map((_, r) => (
+                              <i class={`pop block h-[40px] rounded-[10px] ${c === 2 ? 'bg-[#1a56db]' : 'bg-[#f1f3f4]'}`} style={`--k:${c * 2 + r}`}>
+                                <b class={`ml-2 mt-2.5 block h-[5px] w-8 rounded-full ${c === 2 ? 'bg-white/80' : 'bg-[#bdc1c6]'}`}></b>
+                                <b class={`ml-2 mt-1.5 block h-[5px] w-5 rounded-full ${c === 2 ? 'bg-white/50' : 'bg-[#dadce0]'}`}></b>
+                              </i>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    <div class="absolute inset-x-4 bottom-[46px] space-y-1.5" aria-hidden="true">
+                      {[100, 72, 44].map((w, k) => <i class="pop block h-[7px] rounded-full bg-[#1a56db]" style={`width:${w}%;opacity:${1 - k * 0.28};--k:${k + 6}`}></i>)}
+                    </div>
+                  </>)}
+                  {i === 3 && (
+                    <div class="absolute bottom-[40px] left-4 flex h-[56px] items-end gap-2.5" aria-hidden="true">
+                      {[18, 30, 24, 42, 56].map((h, k) => <i class={`g block w-[18px] rounded-[5px] ${k === 4 ? 'bg-[#1a56db]' : 'bg-[#dbe6fd]'}`} style={`height:${h}px;transition-delay:${k * 0.08}s`}></i>)}
+                    </div>
+                  )}
+                  {i === 4 && (<>
+                    <svg class="absolute left-3 top-3" width="68" height="68" viewBox="0 0 68 68" aria-hidden="true">
+                      <circle cx="34" cy="34" r="25" fill="none" stroke="#e8eaed" stroke-width="9"/>
+                      <circle class="dr" cx="34" cy="34" r="25" fill="none" stroke="#1a56db" stroke-width="9" stroke-linecap="round" pathLength="100" style="--len:100;--end:28" transform="rotate(-90 34 34)"/>
+                    </svg>
+                    <svg class="absolute right-3 top-5" width="56" height="34" viewBox="0 0 56 34" aria-hidden="true">
+                      <path class="dr" d="M2 28 L14 20 L26 23 L40 8 L54 12" fill="none" stroke="#202124" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" pathLength="100" style="--len:100"/>
+                    </svg>
+                  </>)}
+                  {i === 5 && (<>
+                    <div class="absolute left-4 top-4 flex h-[26px] w-[150px] items-center gap-1.5 rounded-full bg-[#f1f3f4] px-3" aria-hidden="true"><i class="pop h-[5px] w-[44px] rounded-full bg-[#bdc1c6]" style="--k:0"></i><i class="pop h-[5px] w-[60px] rounded-full bg-[#dadce0]" style="--k:1"></i></div>
+                    <div class="pop absolute right-4 top-[26px] flex h-[34px] w-[186px] items-center gap-2 rounded-full bg-[#1a56db] px-3.5" style="--k:2" aria-hidden="true">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4z"/></svg>
+                      <i class="h-[5px] w-[96px] rounded-full bg-white/80"></i>
+                    </div>
+                    <div class="dot3 pop absolute right-5 top-[68px] flex gap-1" style="--k:3" aria-hidden="true"><i class="size-1.5 rounded-full bg-[#1a56db]"></i><i class="size-1.5 rounded-full bg-[#1a56db]"></i><i class="size-1.5 rounded-full bg-[#1a56db]"></i></div>
+                  </>)}
+                  <span class="tag"><span class="from">{m.raw}</span><span class="to">{m.to}</span></span>
+                </div>
+              ))}
             </div>
-          ))}
-          <canvas data-trails class="pointer-events-none absolute inset-0 size-full" aria-hidden="true"></canvas>
-          <svg data-glyphs viewBox="0 0 480 400" class="pointer-events-none absolute inset-0 size-full overflow-visible text-[#f5f4f1]" aria-hidden="true">
-            <g data-links>
-              {[0, 1, 2, 3, 4, 5].map((i) => <g data-link={i}><line stroke="currentColor" stroke-dasharray="3 7" stroke-width="1" /><path stroke="currentColor" stroke-width="1.2" fill="none" /></g>)}
-            </g>
-            {tools.map((t, i) => (
-              <g data-glyph={i}>
-                <g {...{ fill: 'none', stroke: 'currentColor', 'stroke-width': 1.5, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }} set:html={t.art} />
-                <text y="50" text-anchor="middle" font-size="12" fill="currentColor" fill-opacity=".6" font-family="Inter Tight Variable, sans-serif">{t.key}</text>
-              </g>
-            ))}
-          </svg>
-          <p data-cap class="absolute inset-x-0 top-full mt-3 text-center text-[15px] text-white/55 transition-opacity duration-700">Cada herramienta, por su lado.</p>
-          <i data-pointer class="pointer-events-none absolute left-0 top-0 size-[100px] rounded-full border border-white/25 opacity-0 transition-opacity duration-300"></i>
+            <svg class="pointer-events-none absolute inset-0 size-full overflow-visible" viewBox="0 0 560 420" aria-hidden="true">
+              <rect class="ps-frame" x="1" y="1" width="558" height="418" rx="30" pathLength="2000" />
+            </svg>
+            <p data-cap class="absolute inset-x-0 top-full mt-4 text-center text-[15px] text-[#5f6368]">Cada herramienta, por su lado.</p>
+          </div>
         </div>
       </div>
     </div>
   </div>
+  <!-- the white chapter dissolves into the night -->
+  <div class="pointer-events-none h-[30svh] bg-gradient-to-b from-white to-white/0" aria-hidden="true"></div>
 </section>
 
-<script>
-  const sec = document.querySelector<HTMLElement>('[data-process]')!;
+<script define:vars={{ mods }}>
+  const sec = document.querySelector('[data-process]');
+  const rows = [...sec.querySelectorAll('[data-row]')];
+  const els = [...sec.querySelectorAll('[data-mod]')];
+  const stage = sec.querySelector('[data-fit]');
+  const wrap = sec.querySelector('[data-stagewrap]');
+  const rail = sec.querySelector('[data-rail]');
+  const cap = sec.querySelector('[data-cap]');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const rows = [...sec.querySelectorAll<HTMLElement>('[data-row]')];
-  const mods = [...sec.querySelectorAll<HTMLElement>('[data-mod]')];
-  const fitEl = sec.querySelector<HTMLElement>('[data-fit]')!;
-  const wrap = sec.querySelector<HTMLElement>('[data-stagewrap]')!;
-  const trails = sec.querySelector<HTMLCanvasElement>('[data-trails]')!;
-  const tctx = trails.getContext('2d')!;
-  const glyphEls = [...sec.querySelectorAll<SVGGElement>('[data-glyph]')];
-  const linkEls = [...sec.querySelectorAll<SVGGElement>('[data-link]')];
-  const capEl = sec.querySelector<HTMLElement>('[data-cap]')!;
-  const ptrEl = sec.querySelector<HTMLElement>('[data-pointer]')!;
-  const clamp = (v: number) => Math.min(1, Math.max(0, v));
-  const BW = 480, BH = 400;
-
-  // Loose tools: where they drift today (cx, cy, amplitudes, speeds) and the slot they fall into
-  const cfg = [
-    { cx: 86, cy: 96, ax: 22, ay: 18, fx: 0.42, fy: 0.33, ph: 0.4, rot: -8 },
-    { cx: 388, cy: 84, ax: 26, ay: 16, fx: 0.31, fy: 0.46, ph: 1.9, rot: 7 },
-    { cx: 238, cy: 196, ax: 30, ay: 22, fx: 0.37, fy: 0.29, ph: 3.1, rot: -5 },
-    { cx: 84, cy: 300, ax: 20, ay: 26, fx: 0.48, fy: 0.36, ph: 5.2, rot: 9 },
-    { cx: 392, cy: 300, ax: 24, ay: 20, fx: 0.34, fy: 0.5, ph: 2.6, rot: -7 },
-    { cx: 250, cy: 338, ax: 28, ay: 14, fx: 0.4, fy: 0.44, ph: 4.4, rot: 6 },
-  ];
-  const slots = mods.map((m) => ({ x: Number(m.dataset.gx) + 68, y: Number(m.dataset.gy) + 56 }));
-  const g = cfg.map(() => ({ p: 0, off: { x: 0, y: 0 }, x: 0, y: 0, ready: false }));
-  const pairs: [number, number][] = [[0, 2], [1, 3], [2, 4], [3, 5], [4, 0], [5, 1]];
-
-  const dpr = Math.min(devicePixelRatio || 1, 2);
-  trails.width = BW * dpr; trails.height = BH * dpr;
-  tctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-  let scale = 1;
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+  const BW = 560, BH = 420;
   const fit = () => {
     const r = wrap.getBoundingClientRect();
-    scale = Math.min(r.width / BW, r.height / BH);
-    fitEl.style.transform = `translate(-50%, -50%) scale(${scale.toFixed(4)})`;
+    const sc = Math.min(r.width / BW, (r.height - 34) / BH, 1.2);
+    stage.style.transform = `translate(-50%, -50%) scale(${sc.toFixed(4)})`;
   };
   fit();
   addEventListener('resize', fit);
 
-  // Pointer inside the board (design coordinates)
-  const ptr = { x: -999, y: -999, in: false };
-  wrap.addEventListener('pointermove', (e) => {
-    if (e.pointerType !== 'mouse') return;
-    const r = fitEl.getBoundingClientRect();
-    ptr.x = (e.clientX - r.left) / scale; ptr.y = (e.clientY - r.top) / scale; ptr.in = true;
-  });
-  wrap.addEventListener('pointerleave', () => { ptr.in = false; ptr.x = ptr.y = -999; });
-
-  let active = -2;
-  let idx = 0;
-  const update = () => {
+  let target = 0, F = 0, shown = -1, visible = true;
+  const read = () => {
     const r = sec.getBoundingClientRect();
-    const p = reduced ? 1 : clamp(-r.top / Math.max(1, r.height - innerHeight));
-    const next = reduced ? 7 : Math.min(7, Math.floor(p * 7.999));
-    if (next === active) return;
-    const prev = active;
-    active = idx = next;
-    rows.forEach((el, i) => {
-      el.classList.toggle('is-on', i === next);
-      el.classList.toggle('is-done', i < next);
-    });
-    mods.forEach((el, i) => {
-      const on = next >= i + 1;
-      if (on && !el.classList.contains('is-in') && prev !== -2) {
-        setTimeout(() => { el.classList.add('pop'); setTimeout(() => el.classList.remove('pop'), 800); }, 650);
-      }
-      el.classList.toggle('is-in', on);
-    });
-    fitEl.classList.toggle('ps-on-final', next === 7);
-    capEl.style.opacity = next === 0 ? '1' : '0';
+    const p = clamp(-r.top / Math.max(1, r.height - innerHeight));
+    target = reduced ? 7 : clamp(p * 7.7 - 0.5, 0, 7);
   };
-  update();
-
-  const R = 120; // repel radius
-  let last = performance.now();
-  const frame = (now: number) => {
-    const dt = Math.min(0.05, (now - last) / 1000); last = now;
-    const t = now / 1000;
-    // fade previous trails
-    tctx.globalCompositeOperation = 'destination-out';
-    tctx.fillStyle = 'rgba(0,0,0,0.09)';
-    tctx.fillRect(0, 0, BW, BH);
-    tctx.globalCompositeOperation = 'source-over';
-
-    const pos: { x: number; y: number }[] = [];
-    cfg.forEach((c, i) => {
-      const st = g[i];
-      const target = idx >= i + 1 ? 1 : 0;
-      st.p += (target - st.p) * Math.min(1, dt * 2.6);
-      const e = st.p * st.p * (3 - 2 * st.p);
-      // drift
-      let x = c.cx + c.ax * Math.sin(t * c.fx * 2 + c.ph) + Math.sin(t * 0.9 + i) * 4;
-      let y = c.cy + c.ay * Math.cos(t * c.fy * 2 + c.ph * 1.3) + Math.cos(t * 0.7 + i) * 4;
-      // repel from the pointer
-      let fx = 0, fy = 0;
-      if (ptr.in && st.p < 0.05) {
-        const dx = x - ptr.x, dy = y - ptr.y, d = Math.hypot(dx, dy) || 1;
-        if (d < R) { const f = (1 - d / R) ** 2 * 90; fx = (dx / d) * f; fy = (dy / d) * f; }
-      }
-      st.off.x += (fx - st.off.x) * Math.min(1, dt * 7);
-      st.off.y += (fy - st.off.y) * Math.min(1, dt * 7);
-      x += st.off.x; y += st.off.y;
-      const px = x + (slots[i].x - x) * e;
-      const py = y + (slots[i].y - y) * e;
-      const rot = c.rot * (1 - e) + Math.sin(t * c.fx + c.ph) * 5 * (1 - e);
-      const sc = 1 - 0.5 * e;
-      const op = 1 - clamp((st.p - 0.78) / 0.22);
-      glyphEls[i].setAttribute('transform', `translate(${px.toFixed(1)} ${py.toFixed(1)}) rotate(${rot.toFixed(1)}) scale(${sc.toFixed(3)})`);
-      glyphEls[i].style.opacity = op.toFixed(3);
-      pos.push({ x: px, y: py });
-      // light trail behind each moving tool
-      if (st.ready && op > 0.02) {
-        tctx.strokeStyle = `rgba(245,244,241,${(0.28 * op).toFixed(3)})`;
-        tctx.lineWidth = 1.4; tctx.lineCap = 'round';
-        tctx.beginPath(); tctx.moveTo(st.x, st.y); tctx.lineTo(px, py); tctx.stroke();
-      }
-      st.x = px; st.y = py; st.ready = true;
+  const capText = ['Cada herramienta, por su lado.', 'Cada pieza encuentra su lugar.', 'Un solo sistema, conectado.'];
+  const render = (time) => {
+    F += (target - F) * (reduced ? 1 : 0.14);
+    els.forEach((el, i) => {
+      const m = mods[i];
+      const t = clamp(F - i, 0, 1);
+      const e = reduced ? 1 : ease(t);
+      const c = 1 - e;
+      const dx = (m.sx - m.gx) * c + Math.sin(time * 0.0007 * m.fx + m.ph) * 9 * c;
+      const dy = (m.sy - m.gy) * c + Math.cos(time * 0.0006 * m.fx + m.ph) * 9 * c;
+      el.style.transform = `translate(${dx.toFixed(1)}px, ${dy.toFixed(1)}px) rotate(${(m.sr * c).toFixed(2)}deg) scale(${(1 - 0.3 * c).toFixed(3)})`;
+      el.style.filter = c > 0.01 ? `grayscale(${c.toFixed(2)})` : 'none';
+      el.style.zIndex = String(c > 0.01 ? i : 0);
+      el.classList.toggle('is-in', t > 0.96);
     });
-
-    // broken connections: dashed lines with a cross that never close
-    pairs.forEach(([a, b], k) => {
-      const el = linkEls[k];
-      const A = pos[a], B = pos[b];
-      const vis = (1 - g[a].p) * (1 - g[b].p);
-      const line = el.firstElementChild as SVGLineElement;
-      const cross = el.lastElementChild as SVGPathElement;
-      line.setAttribute('x1', A.x.toFixed(1)); line.setAttribute('y1', A.y.toFixed(1));
-      line.setAttribute('x2', B.x.toFixed(1)); line.setAttribute('y2', B.y.toFixed(1));
-      const mx = (A.x + B.x) / 2, my = (A.y + B.y) / 2;
-      cross.setAttribute('d', `M${(mx - 4).toFixed(1)} ${(my - 4).toFixed(1)}l8 8M${(mx + 4).toFixed(1)} ${(my - 4).toFixed(1)}l-8 8`);
-      const blink = 0.55 + 0.45 * Math.sin(t * 2.2 + k * 1.7);
-      line.style.opacity = (0.28 * vis).toFixed(3);
-      cross.style.opacity = (0.5 * vis * blink).toFixed(3);
-    });
-
-    // pointer ring
-    const showRing = ptr.in && idx === 0;
-    ptrEl.style.opacity = showRing ? '1' : '0';
-    ptrEl.style.transform = `translate3d(${ptr.x - 50}px, ${ptr.y - 50}px, 0)`;
-
-    if (!document.hidden) requestAnimationFrame(frame);
+    rail.style.transform = `scaleY(${(F / 7).toFixed(3)})`;
+    const idx = clamp(Math.round(F), 0, 7);
+    if (idx !== shown) {
+      shown = idx;
+      rows.forEach((r, i) => { r.classList.toggle('is-on', i === idx); r.classList.toggle('is-done', i < idx); });
+      stage.classList.toggle('ps-eco', idx === 7);
+      cap.textContent = capText[idx === 0 ? 0 : idx === 7 ? 2 : 1];
+    }
   };
-
-  if (!reduced) {
-    let queued = false;
-    const onScroll = () => { if (!queued) { queued = true; requestAnimationFrame(() => { queued = false; update(); }); } };
-    addEventListener('scroll', onScroll, { passive: true });
-    addEventListener('resize', onScroll);
-    requestAnimationFrame(frame);
-    document.addEventListener('visibilitychange', () => { if (!document.hidden) { last = performance.now(); requestAnimationFrame(frame); } });
+  read();
+  if (reduced) {
+    render(0);
+    rows.forEach((r) => r.classList.add('is-on'));
   } else {
-    rows.forEach((el) => el.classList.add('is-done'));
-    glyphEls.forEach((el) => (el.style.opacity = '0'));
-    linkEls.forEach((el) => (el.style.display = 'none'));
-    capEl.style.display = 'none';
+    new IntersectionObserver((en) => { visible = en[0].isIntersecting; }, { rootMargin: '10% 0px' }).observe(sec);
+    addEventListener('scroll', read, { passive: true });
+    const loop = (time) => { if (visible) render(time); requestAnimationFrame(loop); };
+    requestAnimationFrame(loop);
   }
 </script>
