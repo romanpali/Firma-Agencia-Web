@@ -1,0 +1,47 @@
+---
+const lines = [
+  'Una campaña publicitaria puede conectarse con una landing page.',
+  'La landing page puede alimentar un CRM.',
+  'El CRM puede activar un agente de seguimiento.',
+  'Una venta puede iniciar un proceso administrativo.',
+  'El proceso administrativo puede actualizar la información financiera.',
+  'Los datos comerciales y financieros pueden alimentar un dashboard ejecutivo.',
+];
+---
+
+<section data-chain class="relative z-10">
+  <div class="mx-auto max-w-[1100px] px-6 pb-[14svh] pt-[12svh] md:px-10">
+    <p data-reveal class="text-[14px] text-white/55">Todo se conecta</p>
+    <h2 data-words class="mt-4 max-w-[20ch] text-[clamp(2.2rem,4.6vw,4.6rem)] font-light leading-[1.03] tracking-[-0.045em]">No vendemos tecnología por ser novedosa</h2>
+    <p data-reveal style="--i:1" class="mt-6 max-w-[34rem] text-[15.5px] leading-relaxed text-white/70">Entendemos cómo se relacionan las áreas de tu empresa y construimos soluciones que dan continuidad entre ellas.</p>
+
+    <ol class="mt-[16svh] space-y-[14svh]">
+      {lines.map((l, i) => (
+        <li data-line class="ch-line flex items-baseline gap-5 md:gap-8">
+          <span class="w-8 shrink-0 text-[13px] tabular-nums text-white/50 md:w-10">0{i + 1}</span>
+          <p class="text-[clamp(1.55rem,3.4vw,3.3rem)] font-light leading-[1.12] tracking-[-0.035em]">{l}</p>
+        </li>
+      ))}
+    </ol>
+    <p data-line class="ch-line mt-[16svh] max-w-[22ch] text-[clamp(1.9rem,4.2vw,4.2rem)] font-light leading-[1.06] tracking-[-0.04em]">Las soluciones individuales forman parte de un sistema empresarial más amplio.</p>
+  </div>
+</section>
+
+<script>
+  const lines = [...document.querySelectorAll<HTMLElement>('[data-chain] [data-line]')];
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const update = () => {
+    const c = innerHeight * 0.52;
+    for (const el of lines) {
+      const r = el.getBoundingClientRect();
+      const d = Math.abs(r.top + r.height / 2 - c) / (innerHeight * 0.36);
+      const o = reduced ? 1 : Math.max(0.16, 1 - d);
+      el.style.opacity = o.toFixed(3);
+      el.style.transform = reduced ? '' : `translate3d(${((1 - Math.min(1, o)) * 26).toFixed(1)}px, 0, 0)`;
+    }
+  };
+  let q = false;
+  addEventListener('scroll', () => { if (!q) { q = true; requestAnimationFrame(() => { q = false; update(); }); } }, { passive: true });
+  addEventListener('resize', update);
+  update();
+</script>
