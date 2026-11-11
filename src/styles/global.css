@@ -86,8 +86,12 @@ html {
 .ps-body { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows 0.7s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.6s ease; }
 .ps-row.is-on .ps-body { grid-template-rows: 1fr; opacity: 1; }
 .ps-body > div { overflow: hidden; }
-.mod { position: absolute; left: 0; top: 0; width: 136px; height: 112px; border-radius: 14px; border: 1px dashed rgba(245, 244, 241, 0.42); color: transparent; transform: translate(var(--sx), var(--sy)) rotate(var(--sr)) scale(0.55); transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.7s ease, color 0.7s ease, border-color 0.7s ease; }
-.mod.is-in { transform: translate(var(--gx), var(--gy)) rotate(0deg) scale(1); background: #f5f4f1; color: #0b0b0c; border: 1px solid #f5f4f1; }
+.mod { position: absolute; left: 0; top: 0; width: 136px; height: 112px; border-radius: 14px; border: 1px dashed rgba(245, 244, 241, 0.22); color: transparent; opacity: 0.7; transform: translate(var(--gx), var(--gy)); transition: background-color 0.8s ease, color 0.7s ease, border-color 0.7s ease, opacity 0.7s ease; }
+.mod.is-in { opacity: 1; background: #f5f4f1; color: #0b0b0c; border: 1px solid #f5f4f1; }
+.mod .ico { opacity: 0; transition: opacity 0.6s ease 0.5s; }
+.mod.is-in .ico { opacity: 1; }
+@keyframes modPop { 0% { box-shadow: 0 0 0 0 rgba(245, 244, 241, 0.5); } 100% { box-shadow: 0 0 0 22px rgba(245, 244, 241, 0); } }
+.mod.pop { animation: modPop 0.8s ease-out; }
 .ps-frame { position: absolute; left: 0; top: 60px; width: 480px; height: 280px; border-radius: 22px; border: 1px solid rgba(245, 244, 241, 0.5); opacity: 0; transform: scale(0.96); transition: opacity 0.8s ease, transform 1s cubic-bezier(0.22, 1, 0.36, 1); }
 .ps-on-final .ps-frame { opacity: 1; transform: none; }
 
@@ -119,7 +123,7 @@ html {
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .orb, .orb-in, .hw, .mv-check, .pg-spin, .pg-spin-fast, .pg-spin-back, .pg-grow, .pg-breath, .hf-rise, .hf-fade, .scroll-line { animation: none !important; }
+  .orb, .orb-in, .hw, .mv-check, .pg-spin, .pg-spin-fast, .pg-spin-back, .pg-grow, .pg-breath, .hf-rise, .hf-fade, .scroll-line, .mod.pop { animation: none !important; }
   .js [data-words] .w { opacity: 1; filter: none; transform: none; transition: none; }
   .js [data-reveal] { opacity: 1; transform: none; transition: none; }
   [data-hero-inner] { transform: none; opacity: 1; }
