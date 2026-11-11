@@ -1,23 +1,28 @@
 ---
-import IsoTower from './IsoTower.astro';
-
 const steps = [
-  { t: 'Tu negocio, hoy', d: 'Cada área trabaja con sus propias herramientas: hojas de cálculo, redes, facturas y contactos sueltos. Funciona, pero no se conecta.', tag: 'Punto de partida' },
-  { t: 'Identidad y diseño', d: 'Empezamos por lo que se ve: marca, diseño gráfico y producción creativa que dan una sola cara a la empresa.', tag: 'Branding · Creativo' },
-  { t: 'Presencia digital', d: 'Sitio web, comercio electrónico y plataformas que dan a tu empresa un lugar propio en internet.', tag: 'Web · E-commerce' },
-  { t: 'Ventas y CRM', d: 'Prospectos, cotizaciones y clientes en un mismo lugar, con un seguimiento que no se pierde.', tag: 'CRM · Propuestas' },
-  { t: 'Finanzas y administración', d: 'Facturación electrónica CFDI 4.0 y organización financiera, trabajando junto a tus contadores y asesores.', tag: 'CFDI 4.0 · Administración' },
-  { t: 'Operaciones y datos', d: 'Procesos, proyectos e inventarios con tableros que muestran cómo está funcionando todo.', tag: 'Dashboards · BI' },
-  { t: 'IA y automatización', d: 'Agentes y automatizaciones que reducen el trabajo manual y mueven la información entre las áreas.', tag: 'Agentes · Flujos' },
-  { t: 'Un solo ecosistema', d: 'Cada pieza conversa con las demás bajo un solo estándar: el sistema que construimos contigo, paso a paso.', tag: 'Todo conectado' },
+  { t: 'Tu empresa, hoy', d: 'Las ventas viven en una hoja de cálculo, las conversaciones en el chat, las facturas en PDF y los pendientes en notas. Funciona, pero nada se conecta.', tag: 'Punto de partida' },
+  { t: 'Identidad y diseño', d: 'Empezamos por lo que se ve: marca, paleta y tipografía que dan una sola cara a toda la empresa.', tag: 'Branding · Creativo' },
+  { t: 'Presencia digital', d: 'Un sitio web propio, con tu identidad, que informa y vende las 24 horas.', tag: 'Web · E-commerce' },
+  { t: 'Ventas y CRM', d: 'Cada prospecto avanza por un embudo claro. Ningún seguimiento se pierde en un chat.', tag: 'CRM · Propuestas' },
+  { t: 'Finanzas y administración', d: 'Facturación CFDI 4.0 y flujo de caja en orden, preparados para revisión de tus contadores y asesores.', tag: 'CFDI 4.0 · Administración' },
+  { t: 'Operaciones y datos', d: 'Un panel con indicadores de todas las áreas, en lugar de reportes armados a mano.', tag: 'Dashboards · BI' },
+  { t: 'IA y automatización', d: 'Un agente que cotiza, da seguimiento y prepara la factura, para reducir el trabajo manual.', tag: 'Agentes · Flujos' },
+  { t: 'Un solo ecosistema', d: 'Cada módulo comparte información con los demás bajo un solo estándar: el sistema que construimos contigo, paso a paso.', tag: 'Todo conectado' },
 ];
+
+const win = 'win absolute overflow-hidden rounded-2xl border border-white/[0.12] bg-[#0d0a26]/90 shadow-[0_24px_60px_-24px_rgba(0,0,0,0.9)]';
+const bar = 'flex items-center justify-between border-b border-white/10 px-3 py-[7px]';
+const lab = 'font-mono text-[9px] uppercase tracking-[0.14em] text-white/55';
+const dots = '<span class="flex gap-1"><i class="size-1.5 rounded-full bg-white/25"></i><i class="size-1.5 rounded-full bg-white/25"></i><i class="size-1.5 rounded-full bg-white/25"></i></span>';
+const tool = 'tool absolute overflow-hidden rounded-lg border border-dashed border-white/30 bg-[#17122f]/90 text-white/80';
 ---
 
 <section id="construccion" data-build data-tone="dark" class="relative z-10 h-[640vh] bg-paper">
   <div data-build-inner class="sticky top-0 h-svh overflow-hidden">
+    <div class="pointer-events-none absolute inset-0" style="background:radial-gradient(60% 60% at 68% 52%,rgba(110,70,255,.2),transparent 70%)"></div>
     <div
       class="pointer-events-none absolute inset-0"
-      style="background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:96px 96px;mask-image:radial-gradient(80% 70% at 65% 50%,#000 15%,transparent 100%)"
+      style="background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(80% 70% at 65% 50%,#000 15%,transparent 100%)"
     ></div>
 
     <div class="relative mx-auto grid h-full max-w-[1280px] grid-rows-[auto_minmax(0,1fr)] gap-2 px-6 pb-4 pt-24 md:grid-cols-12 md:grid-rows-1 md:gap-8 md:px-10 md:py-24">
@@ -38,8 +43,190 @@ const steps = [
         </ol>
       </div>
 
-      <div class="relative min-h-0 md:col-span-8">
-        <div data-tower class="absolute inset-0 will-change-transform max-md:origin-[46%_50%] max-md:scale-[2.2]"><IsoTower mode="story" /></div>
+      <div data-stagewrap class="relative min-h-0 md:col-span-8">
+        <div data-fit class="absolute left-1/2 top-1/2 h-[560px] w-[760px]" role="img" aria-label="Pantallas de la plataforma: identidad, sitio web, CRM, finanzas, panel de datos y agente de IA, conectadas entre sí">
+          <!-- 1 · Identity -->
+          <div class={win} data-win="1" style="left:0;top:0;width:244px;height:190px">
+            <div class={bar}><span class={lab}>Identidad</span><span set:html={dots} /></div>
+            <div class="flex gap-3 p-3">
+              <div class="flex flex-col items-center gap-2">
+                <span class="relative grid size-[66px] place-items-center rounded-2xl" style="background:linear-gradient(135deg,#7c4dff,#cdb8ff)">
+                  <i class="relative block size-8 rounded-full border-[1.5px] border-white"><i class="absolute -top-[5px] left-1/2 size-[7px] -translate-x-1/2 rounded-full bg-white"></i></i>
+                </span>
+                <span class="text-[10px] tracking-wide"><b class="font-light">HUMAN</b> <b>CORP</b></span>
+              </div>
+              <div class="min-w-0 flex-1">
+                <p class={lab}>Paleta</p>
+                <div class="mt-1.5 flex gap-1.5">
+                  {['#7c4dff', '#cdb8ff', '#a9c4ff', '#ff7fb5', '#f7f3ff'].map((c) => <i class="size-6 rounded-md" style={`background:${c}`}></i>)}
+                </div>
+                <p class={`${lab} mt-3`}>Tipografía</p>
+                <p class="mt-1 text-[38px] font-semibold leading-none tracking-[-0.045em]">Aa</p>
+                <p class="mt-0.5 font-mono text-[8.5px] text-white/45">Inter Tight · Medium</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2 · Website -->
+          <div class={win} data-win="2" style="left:258px;top:0;width:502px;height:190px">
+            <div class={bar}>
+              <span set:html={dots} />
+              <span class="rounded-full bg-white/10 px-3 py-0.5 font-mono text-[9px] text-white/60">tuempresa.com</span>
+              <span class="w-8"></span>
+            </div>
+            <div class="px-4 pt-2.5">
+              <div class="flex items-center gap-3">
+                <span class="text-[9px] tracking-wide"><b class="font-light">HUMAN</b> <b>CORP</b></span>
+                <span class="ml-auto flex gap-3 text-[9px] text-white/55"><i>Servicios</i><i>Nosotros</i><i>Contacto</i></span>
+                <i class="rounded-full bg-[#cdb8ff] px-2.5 py-1 text-[8px] font-medium not-italic text-[#150633]">Hablemos</i>
+              </div>
+              <div class="mt-3 grid grid-cols-[1.15fr_1fr] gap-4">
+                <div>
+                  <p class="text-[23px] font-semibold leading-[1.05] tracking-[-0.04em]">Tu empresa,<br />en línea.</p>
+                  <p class="mt-2 text-[9.5px] leading-snug text-white/55">Un sitio claro, rápido y con tu identidad.</p>
+                  <i class="mt-3 inline-block rounded-full bg-white px-3 py-1.5 text-[9px] font-medium not-italic text-[#150633]">Ver servicios →</i>
+                </div>
+                <div class="grid grid-cols-3 gap-1.5">
+                  <i class="h-[84px] rounded-lg" style="background:linear-gradient(160deg,#7c4dff,#2a0f7a)"></i>
+                  <i class="mt-4 h-[84px] rounded-lg" style="background:linear-gradient(160deg,#ff7fb5,#7c4dff)"></i>
+                  <i class="h-[84px] rounded-lg" style="background:linear-gradient(160deg,#a9c4ff,#5b2fd0)"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3 · CRM -->
+          <div class={win} data-win="3" style="left:0;top:204px;width:244px;height:220px">
+            <div class={bar}><span class={lab}>CRM · Embudo</span><span set:html={dots} /></div>
+            <div class="relative grid grid-cols-3 gap-1.5 p-2.5">
+              {[['Nuevo', ['A', 'M']], ['Propuesta', ['L']], ['Cierre', ['R', 'S']]].map(([h, cards]) => (
+                <div>
+                  <p class="mb-1.5 font-mono text-[8px] uppercase tracking-wider text-white/45">{h}</p>
+                  <div class="space-y-1.5">
+                    {(cards as string[]).map((c, i) => (
+                      <div class="rounded-md bg-white/[0.07] p-1.5">
+                        <div class="flex items-center gap-1"><i class="grid size-3.5 place-items-center rounded-full bg-[#7c4dff] text-[7px] not-italic">{c}</i><i class="h-1.5 w-9 rounded bg-white/45"></i></div>
+                        <i class="mt-1.5 block h-1 w-11 rounded bg-white/20"></i>
+                        <i class={`mt-1 inline-block rounded-full px-1.5 py-[1px] font-mono text-[6.5px] not-italic ${i ? 'bg-[#a9c4ff]/20 text-[#a9c4ff]' : 'bg-[#4ade80]/15 text-[#4ade80]'}`}>{i ? 'SEGUIMIENTO' : 'NUEVO'}</i>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+              <div class="mv-card absolute left-[10px] top-[78px] w-[70px] rounded-md border border-[#cdb8ff] bg-[#2a1d66] p-1.5 shadow-[0_0_18px_rgba(150,110,255,0.6)]">
+                <div class="flex items-center gap-1"><i class="grid size-3.5 place-items-center rounded-full bg-[#ff7fb5] text-[7px] not-italic">C</i><i class="h-1.5 w-9 rounded bg-white/70"></i></div>
+                <i class="mt-1.5 block h-1 w-11 rounded bg-white/30"></i>
+              </div>
+              <svg class="mv-cursor absolute left-[50px] top-[96px] size-4" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 1l11 6-5 1.3L6 13z" fill="#fff" stroke="#150633" stroke-width="1"/></svg>
+            </div>
+          </div>
+
+          <!-- 4 · Finance -->
+          <div class={win} data-win="4" style="left:258px;top:204px;width:244px;height:220px">
+            <div class={bar}><span class={lab}>Finanzas</span><span set:html={dots} /></div>
+            <div class="p-3">
+              <div class="rounded-lg bg-white/[0.06] p-2.5">
+                <div class="flex items-center justify-between">
+                  <span class="text-[11px] font-medium">Factura CFDI 4.0</span>
+                  <span class="rounded-full bg-[#fbbf24]/20 px-2 py-0.5 font-mono text-[7.5px] text-[#fcd34d]">EN REVISIÓN</span>
+                </div>
+                {[40, 54, 32].map((w) => <div class="mt-2 flex items-center justify-between"><i class="h-1.5 rounded bg-white/35" style={`width:${w}%`}></i><i class="h-1.5 w-8 rounded bg-white/20"></i></div>)}
+                <div class="mt-2.5 flex items-center justify-between border-t border-white/10 pt-2"><i class="h-2 w-12 rounded bg-white/60"></i><i class="h-2.5 w-14 rounded bg-[#cdb8ff]"></i></div>
+              </div>
+              <p class={`${lab} mt-3`}>Flujo de caja</p>
+              <svg viewBox="0 0 220 64" class="mt-1 h-[64px] w-full" aria-hidden="true">
+                <path d="M0 22H220M0 43H220" stroke="#ffffff14" />
+                <path class="mv-draw" pathLength="1" d="M0 52 C30 48 45 30 75 34 S120 14 150 18 S195 6 220 4" fill="none" stroke="#cdb8ff" stroke-width="2" />
+                <path class="mv-draw" style="animation-delay:.3s" pathLength="1" d="M0 56 C40 54 80 48 120 50 S190 42 220 40" fill="none" stroke="#ffffff55" stroke-width="1.4" />
+              </svg>
+            </div>
+          </div>
+
+          <!-- 5 · Dashboard -->
+          <div class={win} data-win="5" style="left:516px;top:204px;width:244px;height:220px">
+            <div class={bar}><span class={lab}>Panel · Datos</span><span set:html={dots} /></div>
+            <div class="grid grid-cols-2 gap-2 p-3">
+              {[['Ventas', [38, 52, 44, 66, 58, 74]], ['Operación', [60, 46, 62, 50, 70, 64]]].map(([l, bars]) => (
+                <div class="rounded-lg bg-white/[0.06] p-2">
+                  <p class="font-mono text-[8px] uppercase tracking-wider text-white/50">{l}</p>
+                  <div class="mt-2 flex h-[44px] items-end gap-[3px]">
+                    {(bars as number[]).map((h, i) => <i class="mv-bar block flex-1 rounded-sm bg-[#a9c4ff]" style={`height:${h}%;animation-delay:${i * 0.22}s;opacity:${0.45 + i * 0.1}`}></i>)}
+                  </div>
+                </div>
+              ))}
+              <div class="col-span-2 flex items-center gap-3 rounded-lg bg-white/[0.06] p-2.5">
+                <svg viewBox="0 0 40 40" class="size-[58px] shrink-0 -rotate-90" aria-hidden="true">
+                  <circle cx="20" cy="20" r="15" fill="none" stroke="#ffffff1f" stroke-width="6" />
+                  <circle class="mv-donut" pathLength="1" cx="20" cy="20" r="15" fill="none" stroke="#7c4dff" stroke-width="6" stroke-linecap="round" />
+                  <circle class="mv-donut2" pathLength="1" cx="20" cy="20" r="15" fill="none" stroke="#ff7fb5" stroke-width="6" stroke-linecap="round" />
+                </svg>
+                <div class="flex-1 space-y-1.5">
+                  <p class="flex items-center gap-1.5 text-[9.5px] text-white/70"><i class="size-1.5 rounded-full bg-[#7c4dff]"></i>Ventas</p>
+                  <p class="flex items-center gap-1.5 text-[9.5px] text-white/70"><i class="size-1.5 rounded-full bg-[#ff7fb5]"></i>Operación</p>
+                  <p class="flex items-center gap-1.5 text-[9.5px] text-white/70"><i class="size-1.5 rounded-full bg-white/30"></i>Finanzas</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 6 · AI agent -->
+          <div class={win} data-win="6" style="left:0;top:438px;width:760px;height:122px">
+            <div class={bar}><span class={`${lab} flex items-center gap-1.5`}><i class="size-1.5 rounded-full bg-[#4ade80]"></i>Agente IA</span><span set:html={dots} /></div>
+            <div class="grid grid-cols-[1.2fr_1fr] gap-6 px-4 py-2.5">
+              <div class="space-y-1.5">
+                <p class="ml-auto w-fit max-w-[88%] rounded-xl rounded-br-sm bg-[#7c4dff] px-3 py-1.5 text-[11px]">Cotiza y factura el pedido de este cliente.</p>
+                <div class="relative h-[34px] w-full">
+                  <p class="mv-dots absolute left-0 top-0 flex gap-1 rounded-xl rounded-bl-sm bg-white/10 px-3 py-2.5"><i class="size-1.5 rounded-full bg-white/70"></i><i class="size-1.5 rounded-full bg-white/70"></i><i class="size-1.5 rounded-full bg-white/70"></i></p>
+                  <p class="mv-reply absolute left-0 top-0 w-fit whitespace-nowrap rounded-xl rounded-bl-sm bg-white/10 px-3 py-1.5 text-[11px] leading-snug">Listo: cotización enviada y factura preparada para revisión.</p>
+                </div>
+              </div>
+              <div class="flex items-center">
+                {['Prospecto', 'Cotización', 'Factura', 'Reporte'].map((c, i) => (
+                  <>
+                    <span class="mv-chip rounded-full border border-white/20 px-2.5 py-1.5 font-mono text-[8.5px] uppercase tracking-wider" style={`animation-delay:${i * 1.3}s`}>{c}</span>
+                    {i < 3 && <i class="h-px flex-1 bg-white/25"></i>}
+                  </>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <!-- Today: loose tools -->
+          <div class={tool} data-tool="0" style="left:30px;top:20px;width:176px;height:116px;--r:-5deg;--ax:150px;--ay:120px">
+            <div class="border-b border-dashed border-white/25 px-2 py-1 font-mono text-[8px] text-white/60">Ventas_final_v3.xlsx</div>
+            <div class="grid grid-cols-5 gap-px bg-white/15 p-px">{Array.from({ length: 25 }, (_, i) => <i class={`h-[15px] ${[2, 7, 8, 13, 19, 21].includes(i) ? 'bg-[#4ade80]/30' : 'bg-[#17122f]'}`}></i>)}</div>
+          </div>
+          <div class={tool} data-tool="1" style="left:290px;top:44px;width:170px;height:104px;--r:3deg;--ax:70px;--ay:140px">
+            <div class="border-b border-dashed border-white/25 px-2 py-1 font-mono text-[8px] text-white/60">Chat · Cliente</div>
+            <div class="space-y-1.5 p-2 text-[8.5px]">
+              <p class="w-fit rounded-lg bg-white/15 px-2 py-1">¿Ya salió mi pedido?</p>
+              <p class="ml-auto w-fit rounded-lg bg-[#4ade80]/25 px-2 py-1">Te confirmo en un rato</p>
+              <p class="w-fit rounded-lg bg-white/15 px-2 py-1">¿Y la factura?</p>
+            </div>
+          </div>
+          <div class={tool} data-tool="2" style="left:540px;top:14px;width:160px;height:122px;--r:-3deg;--ax:-150px;--ay:130px">
+            <div class="border-b border-dashed border-white/25 px-2 py-1 font-mono text-[8px] text-white/60">Factura_0042.pdf</div>
+            <div class="space-y-1.5 p-2.5"><i class="block h-1.5 w-20 rounded bg-white/50"></i><i class="block h-1 w-full rounded bg-white/20"></i><i class="block h-1 w-5/6 rounded bg-white/20"></i><i class="block h-1 w-2/3 rounded bg-white/20"></i><p class="mt-2 w-fit rotate-[-6deg] rounded border border-[#fbbf24] px-1.5 py-0.5 font-mono text-[8px] text-[#fcd34d]">¿PAGADA?</p></div>
+          </div>
+          <div class={tool} data-tool="3" style="left:60px;top:300px;width:178px;height:112px;--r:2deg;--ax:150px;--ay:-60px">
+            <div class="border-b border-dashed border-white/25 px-2 py-1 font-mono text-[8px] text-white/60">Bandeja de entrada</div>
+            {['Re: cotización pendiente', 'Urgente: pago', 'Fwd: pedido nuevo'].map((m, i) => <div class="flex items-center gap-1.5 border-b border-white/10 px-2 py-1.5 text-[8.5px]"><i class={`size-1.5 rounded-full ${i < 2 ? 'bg-[#a9c4ff]' : 'bg-transparent'}`}></i>{m}</div>)}
+          </div>
+          <div class={tool} data-tool="4" style="left:330px;top:326px;width:140px;height:96px;--r:-6deg;--ax:50px;--ay:-90px">
+            <div class="grid h-full grid-cols-2 gap-1.5 bg-[#17122f] p-2 text-[8.5px] font-medium text-[#3b2f00]">
+              <p class="rotate-[-3deg] rounded-sm bg-[#ffe27a] p-1.5 leading-tight">Llamar a Marta</p>
+              <p class="rotate-[2deg] rounded-sm bg-[#ffd0e0] p-1.5 leading-tight">¡Cobrar!!</p>
+              <p class="rotate-[1deg] rounded-sm bg-[#cfe3ff] p-1.5 leading-tight">Subir fotos</p>
+              <p class="rotate-[-2deg] rounded-sm bg-[#ffe27a] p-1.5 leading-tight">Pedido 17</p>
+            </div>
+          </div>
+          <div class={tool} data-tool="5" style="left:560px;top:318px;width:150px;height:104px;--r:4deg;--ax:-150px;--ay:-70px">
+            <div class="border-b border-dashed border-white/25 px-2 py-1 font-mono text-[8px] text-white/60">Redes · borrador</div>
+            <div class="flex gap-2 p-2"><i class="size-10 shrink-0 rounded-md" style="background:linear-gradient(135deg,#ff7fb5,#a9c4ff)"></i><div class="space-y-1"><i class="block h-1.5 w-14 rounded bg-white/45"></i><i class="block h-1 w-16 rounded bg-white/20"></i><i class="block h-1 w-10 rounded bg-white/20"></i></div></div>
+          </div>
+
+          <canvas data-bus class="pointer-events-none absolute inset-0 size-full" aria-hidden="true"></canvas>
+        </div>
       </div>
     </div>
   </div>
@@ -48,49 +235,88 @@ const steps = [
 <script>
   const sec = document.querySelector<HTMLElement>('[data-build]')!;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const q = (s: string) => [...sec.querySelectorAll<HTMLElement | SVGElement>(s)];
-  const floors = q('[data-floor]');
-  const ghosts = q('[data-ghost]');
-  const labels = q('[data-label]');
-  const dashes = q('[data-dash]');
-  const scatter = sec.querySelector<SVGElement>('[data-scatter]')!;
-  const bus = sec.querySelector<SVGElement>('[data-bus]')!;
-  const waves = sec.querySelector<SVGElement>('[data-links]')!;
-  const tower = sec.querySelector<HTMLElement>('[data-tower]')!;
+  const q = <T extends HTMLElement>(s: string) => [...sec.querySelectorAll<T>(s)];
+  const wins = q('[data-win]');
+  const tools = q('[data-tool]');
+  const fitEl = sec.querySelector<HTMLElement>('[data-fit]')!;
+  const wrap = sec.querySelector<HTMLElement>('[data-stagewrap]')!;
+  const canvas = sec.querySelector<HTMLCanvasElement>('[data-bus]')!;
+  const ctx = canvas.getContext('2d')!;
   const steps = q('[data-step]');
   const ticks = q('[data-tick]');
   const clamp = (v: number) => Math.min(1, Math.max(0, v));
-  const set = (el: Element, k: number) => (el as HTMLElement).style.setProperty('--k', k.toFixed(3));
-  let active = -1;
+  const setK = (el: HTMLElement, k: number) => el.style.setProperty('--k', k.toFixed(3));
 
+  // Scale the 760x560 board to the available space
+  const BW = 760, BH = 560;
+  const dpr = Math.min(devicePixelRatio || 1, 2);
+  canvas.width = BW * dpr; canvas.height = BH * dpr;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  const fit = () => {
+    const r = wrap.getBoundingClientRect();
+    const s = Math.min(r.width / BW, r.height / BH);
+    fitEl.style.transform = `translate(-50%, -50%) scale(${s.toFixed(4)})`;
+  };
+  fit();
+  addEventListener('resize', fit);
+
+  // Connection circuit running through the gaps between screens
+  const chans: [number, number, number, number][] = [
+    [251, 0, 251, 190], [0, 197, 760, 197], [251, 204, 251, 424], [509, 204, 509, 424], [0, 431, 760, 431],
+  ];
+  const nodes: [number, number][] = [[251, 197], [251, 431], [509, 431], [509, 197]];
+  let k7 = 0;
+  const draw = (now: number) => {
+    ctx.clearRect(0, 0, BW, BH);
+    if (k7 <= 0.01) return;
+    const t = now / 1000;
+    chans.forEach(([x1, y1, x2, y2], i) => {
+      const p = clamp(k7 * 1.3 - i * 0.08);
+      ctx.strokeStyle = 'rgba(169,196,255,0.6)';
+      ctx.lineWidth = 1.2;
+      ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x1 + (x2 - x1) * p, y1 + (y2 - y1) * p); ctx.stroke();
+      if (p < 1 || reduced) return;
+      for (let n = 0; n < 2; n++) {
+        const u = (t * 0.22 + i * 0.19 + n * 0.5) % 1;
+        const px = x1 + (x2 - x1) * u, py = y1 + (y2 - y1) * u;
+        const tx = x1 + (x2 - x1) * Math.max(0, u - 0.07), ty = y1 + (y2 - y1) * Math.max(0, u - 0.07);
+        const g = ctx.createLinearGradient(tx, ty, px, py);
+        g.addColorStop(0, 'rgba(205,184,255,0)'); g.addColorStop(1, 'rgba(235,225,255,1)');
+        ctx.strokeStyle = g; ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.moveTo(tx, ty); ctx.lineTo(px, py); ctx.stroke();
+        ctx.fillStyle = '#fff'; ctx.fillRect(px - 2, py - 2, 4, 4);
+      }
+    });
+    if (k7 > 0.9) { ctx.fillStyle = '#cdb8ff'; nodes.forEach(([x, y]) => ctx.fillRect(x - 3, y - 3, 6, 6)); }
+  };
+
+  let active = -1;
   const update = () => {
     const r = sec.getBoundingClientRect();
     const p = reduced ? 1 : clamp(-r.top / Math.max(1, r.height - innerHeight));
     const t = reduced ? 8 : p * 7.999;
-    floors.forEach((el, i) => set(el, i === 0 ? 1 : clamp((t - (i - 0.3)) / 0.85)));
-    ghosts.forEach((el, n) => set(el, clamp((t - (n + 1 - 0.3)) / 0.85)));
-    labels.forEach((el, i) => set(el, i === 0 ? 1 : clamp((t - (i - 0.3)) / 0.85)));
-    dashes.forEach((el, n) => set(el, clamp((t - (4.9 + n * 0.25)) / 0.9)));
-    set(scatter, 1 - clamp((t - 0.4) / 1.1));
-    const k7 = clamp((t - 6.9) / 0.9);
-    set(bus, k7);
-    set(waves, k7);
-    tower.style.transform = `translate3d(0, ${(-p * 16).toFixed(1)}px, 0) scale(${(1 + p * 0.035).toFixed(4)})`;
+    wins.forEach((el) => { const i = Number(el.dataset.win); setK(el, clamp((t - (i - 0.3)) / 0.9)); });
+    tools.forEach((el) => setK(el, reduced ? 0 : 1 - clamp((t - 0.55) / 1.25)));
+    k7 = clamp((t - 6.9) / 0.9);
     const idx = reduced ? -1 : Math.min(7, Math.floor(t));
     if (idx !== active) {
       active = idx;
       steps.forEach((el, i) => el.classList.toggle('is-on', i === idx));
       ticks.forEach((el, i) => el.classList.toggle('is-on', i <= idx));
+      wins.forEach((el) => el.classList.toggle('is-new', Number(el.dataset.win) === idx));
     }
   };
 
+  update();
   if (reduced) {
-    update();
+    draw(0);
   } else {
     let queued = false;
     const onScroll = () => { if (!queued) { queued = true; requestAnimationFrame(() => { queued = false; update(); }); } };
     addEventListener('scroll', onScroll, { passive: true });
     addEventListener('resize', onScroll);
-    update();
+    const loop = (now: number) => { draw(now); if (!document.hidden) requestAnimationFrame(loop); };
+    requestAnimationFrame(loop);
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) requestAnimationFrame(loop); });
   }
 </script>
