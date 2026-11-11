@@ -1,50 +1,45 @@
 ---
-const C = { pink: '#ff6fae', coral: '#ff8a5b', yellow: '#ffd23f', sky: '#6fd0ff', mint: '#7fe3b5', ink: '#17140f' };
+const C = { pink: '#34496a', coral: '#a8724a', yellow: '#ffb467', sky: '#8a9bb0', mint: '#c9c4b8', ink: '#17191c' };
 
 const steps = [
-  { t: 'Tu empresa, <em>hoy</em>', d: 'Las ventas viven en una hoja de cálculo, las conversaciones en el chat, las facturas en PDF y los pendientes en notas. Funciona, pero nada se conecta.', tag: 'El punto de partida', c: C.yellow },
-  { t: 'Identidad y <em>diseño</em>', d: 'Empezamos por lo que se ve: marca, paleta y tipografía que dan una sola cara a toda la empresa.', tag: 'Branding y creativo', c: C.pink },
-  { t: 'Presencia <em>digital</em>', d: 'Un sitio web propio, con tu identidad, que informa y vende las 24 horas.', tag: 'Web y tienda en línea', c: C.sky },
-  { t: 'Ventas con <em>seguimiento</em>', d: 'Cada prospecto avanza por un embudo claro. Ningún seguimiento se pierde en un chat.', tag: 'CRM y propuestas', c: C.coral },
-  { t: 'Finanzas en <em>orden</em>', d: 'Facturación CFDI 4.0 y flujo de caja organizados, preparados para la revisión de tus contadores y asesores.', tag: 'Facturación y administración', c: C.mint },
-  { t: 'Operaciones y <em>datos</em>', d: 'Un panel con indicadores de todas las áreas, en lugar de reportes armados a mano.', tag: 'Dashboards', c: C.yellow },
-  { t: 'IA que <em>ayuda</em>', d: 'Un agente que cotiza, da seguimiento y prepara la factura, para reducir el trabajo manual.', tag: 'Agentes y automatización', c: C.pink },
-  { t: 'Un solo <em>ecosistema</em>', d: 'Cada módulo comparte información con los demás bajo un solo estándar: el sistema que construimos contigo, paso a paso.', tag: 'Todo conectado', c: C.sky },
+  { t: 'Tu empresa, hoy', d: 'Las ventas viven en una hoja de cálculo, las conversaciones en el chat, las facturas en PDF y los pendientes en notas. Funciona, pero nada se conecta.', tag: 'El punto de partida', c: '#ffb467' },
+  { t: 'Identidad y diseño', d: 'Empezamos por lo que se ve: marca, paleta y tipografía que dan una sola cara a toda la empresa.', tag: 'Branding y creativo', c: C.pink },
+  { t: 'Presencia digital', d: 'Un sitio web propio, con tu identidad, que informa y vende las 24 horas.', tag: 'Web y tienda en línea', c: '#ffb467' },
+  { t: 'Ventas con seguimiento', d: 'Cada prospecto avanza por un embudo claro. Ningún seguimiento se pierde en un chat.', tag: 'CRM y propuestas', c: '#ffb467' },
+  { t: 'Finanzas en orden', d: 'Facturación CFDI 4.0 y flujo de caja organizados, preparados para la revisión de tus contadores y asesores.', tag: 'Facturación y administración', c: '#ffb467' },
+  { t: 'Operaciones y datos', d: 'Un panel con indicadores de todas las áreas, en lugar de reportes armados a mano.', tag: 'Dashboards', c: '#ffb467' },
+  { t: 'IA que ayuda', d: 'Un agente que cotiza, da seguimiento y prepara la factura, para reducir el trabajo manual.', tag: 'Agentes y automatización', c: C.pink },
+  { t: 'Un solo ecosistema', d: 'Cada módulo comparte información con los demás bajo un solo estándar: el sistema que construimos contigo, paso a paso.', tag: 'Todo conectado', c: '#ffb467' },
 ];
 
-const win = 'win absolute overflow-hidden rounded-[18px] bg-[#fcfbfa] text-[#17140f] shadow-[0_30px_70px_-25px_rgba(0,0,0,0.9)]';
-const bar = 'flex items-center justify-between border-b border-black/[0.07] bg-[#f3f1ee] px-3 py-[7px]';
+const win = 'win absolute overflow-hidden rounded-[10px] bg-[#ecebe7] text-[#17191c] shadow-[0_30px_70px_-25px_rgba(0,0,0,0.9)]';
+const bar = 'flex items-center justify-between border-b border-black/[0.07] bg-[#dedbd5] px-3 py-[7px]';
 const lab = 'text-[10.5px] font-semibold tracking-tight text-black/55';
-const dots = '<span class="flex gap-1"><i class="size-1.5 rounded-full bg-[#ff6b5e]"></i><i class="size-1.5 rounded-full bg-[#ffbd3d]"></i><i class="size-1.5 rounded-full bg-[#3fd06a]"></i></span>';
-const tool = 'tool absolute overflow-hidden rounded-xl bg-[#fcfbfa] text-[#17140f] shadow-[0_18px_40px_-16px_rgba(0,0,0,0.8)]';
-const tbar = 'border-b border-black/[0.07] bg-[#f3f1ee] px-2 py-1 text-[8.5px] font-semibold text-black/50';
+const dots = '<span class="flex gap-1"><i class="size-1.5 rounded-full bg-black/25"></i><i class="size-1.5 rounded-full bg-black/25"></i><i class="size-1.5 rounded-full bg-black/25"></i></span>';
+const tool = 'tool absolute overflow-hidden rounded-lg bg-[#e4e2dd] text-[#17191c] shadow-[0_18px_40px_-16px_rgba(0,0,0,0.8)]';
+const tbar = 'border-b border-black/[0.07] bg-[#d6d3cc] px-2 py-1 text-[8.5px] font-semibold text-black/50';
 const badges = [
-  { x: 251, y: 98, t: 'Misma marca en todo', c: C.pink },
-  { x: 380, y: 197, t: 'Leads directo al CRM', c: C.coral },
-  { x: 251, y: 314, t: 'Cotización → factura', c: C.mint },
-  { x: 509, y: 314, t: 'Datos al panel', c: C.yellow },
-  { x: 380, y: 431, t: 'Un agente en todo', c: C.sky },
+  { x: 251, y: 98, t: 'Misma marca en todo', c: '#ffb467' },
+  { x: 380, y: 197, t: 'Leads directo al CRM', c: '#ffb467' },
+  { x: 251, y: 314, t: 'Cotización → factura', c: '#ffb467' },
+  { x: 509, y: 314, t: 'Datos al panel', c: '#ffb467' },
+  { x: 380, y: 431, t: 'Un agente en todo', c: '#ffb467' },
 ];
 ---
 
-<section id="construccion" data-build data-tone="dark" class="relative z-10 h-[640vh] bg-paper">
+<section id="construccion" data-build data-tone="dark" class="relative z-10 h-[640vh] bg-[#141618] text-[#ecebe7]">
   <div data-build-inner class="sticky top-0 h-svh overflow-hidden">
-    <div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-      <i class="absolute right-[6%] top-[8%] size-[360px] rounded-full bg-[#ff6fae] opacity-[0.22] blur-[110px]"></i>
-      <i class="absolute right-[26%] top-[62%] size-[320px] rounded-full bg-[#ffd23f] opacity-[0.16] blur-[110px]"></i>
-      <i class="absolute -right-[4%] top-[58%] size-[320px] rounded-full bg-[#6fd0ff] opacity-[0.2] blur-[110px]"></i>
-      <i class="absolute right-[38%] top-[2%] size-[260px] rounded-full bg-[#ff8a5b] opacity-[0.16] blur-[100px]"></i>
-    </div>
+    <div class="pointer-events-none absolute inset-0" style="background:radial-gradient(55% 55% at 72% 55%,rgba(255,180,103,.10),transparent 70%),linear-gradient(to bottom,transparent 55%,rgba(52,73,106,.22))" aria-hidden="true"></div>
 
     <div class="relative mx-auto grid h-full max-w-[1280px] grid-rows-[auto_minmax(0,1fr)] gap-2 px-6 pb-4 pt-24 md:grid-cols-12 md:grid-rows-1 md:gap-8 md:px-10 md:py-24">
       <div class="flex flex-col justify-center md:col-span-4">
         <div class="bs-steps relative h-[14rem] md:h-[21rem]">
           {steps.map((s, i) => (
             <div class="bs-step absolute inset-x-0 top-0" data-step={i}>
-              <p class="text-[14px] text-white/50">Paso {i + 1} de 8</p>
-              <h3 class="mt-3 text-[clamp(2rem,3.6vw,3.4rem)] font-medium leading-[1.02] tracking-[-0.035em]" set:html={s.t} />
-              <p class="mt-4 max-w-[26rem] text-[15px] leading-relaxed text-mute md:text-[16.5px]">{s.d}</p>
-              <p class="mt-5 inline-block rounded-full px-4 py-2 text-[13.5px] font-medium text-[#17140f]" style={`background:${s.c}`}>{s.tag}</p>
+              <p class="text-[14px] tabular-nums text-[#ffb467]">{i + 1} / 8</p>
+              <h3 class="mt-3 text-[clamp(2.1rem,3.8vw,3.6rem)] font-light leading-[1.02] tracking-[-0.04em]">{s.t}</h3>
+              <p class="mt-4 max-w-[26rem] text-[15px] leading-relaxed text-[#a4a7ab] md:text-[16.5px]">{s.d}</p>
+              <p class="mt-6 flex items-center gap-3 text-[14px] text-[#ecebe7]"><i class="block h-px w-8 bg-[#ffb467]"></i>{s.tag}</p>
             </div>
           ))}
         </div>
@@ -57,7 +52,7 @@ const badges = [
             <div class={bar}><span class={lab}>Identidad</span><span set:html={dots} /></div>
             <div class="flex gap-3 p-3">
               <div class="flex flex-col items-center gap-2">
-                <span class="relative grid size-[66px] place-items-center rounded-[22px]" style="background:linear-gradient(135deg,#ff6fae,#ff9a5c)">
+                <span class="relative grid size-[66px] place-items-center rounded-[22px]" style="background:linear-gradient(135deg,#34496a,#141618)">
                   <i class="relative block size-8 rounded-full border-[1.5px] border-white"><i class="absolute -top-[5px] left-1/2 size-[7px] -translate-x-1/2 rounded-full bg-white"></i></i>
                 </span>
                 <span class="text-[10px] tracking-wide"><b class="font-light">HUMAN</b> <b>CORP</b></span>
@@ -68,8 +63,8 @@ const badges = [
                   {[C.pink, C.coral, C.yellow, C.sky, C.mint, C.ink].map((c) => <i class="size-[22px] rounded-full" style={`background:${c}`}></i>)}
                 </div>
                 <p class={`${lab} mt-3`}>Tipografía</p>
-                <p class="mt-0.5 text-[40px] font-semibold leading-none tracking-[-0.045em]">A<em class="font-serif font-normal">a</em></p>
-                <p class="mt-0.5 text-[9px] text-black/45">Inter Tight y Instrument Serif</p>
+                <p class="mt-0.5 text-[40px] font-light leading-none tracking-[-0.045em]">Aa</p>
+                <p class="mt-0.5 text-[9px] text-black/45">Inter Tight · Light y Medium</p>
               </div>
             </div>
           </div>
@@ -85,18 +80,18 @@ const badges = [
               <div class="flex items-center gap-3">
                 <span class="text-[9px] tracking-wide"><b class="font-light">HUMAN</b> <b>CORP</b></span>
                 <span class="ml-auto flex gap-3 text-[9px] text-black/55"><i class="not-italic">Servicios</i><i class="not-italic">Nosotros</i><i class="not-italic">Contacto</i></span>
-                <i class="rounded-full bg-[#17140f] px-2.5 py-1 text-[8px] font-medium not-italic text-white">Hablemos</i>
+                <i class="rounded-full bg-[#17191c] px-2.5 py-1 text-[8px] font-medium not-italic text-white">Hablemos</i>
               </div>
               <div class="mt-3 grid grid-cols-[1.15fr_1fr] gap-4">
                 <div>
-                  <p class="text-[24px] font-semibold leading-[1.04] tracking-[-0.04em]">Tu empresa,<br /><em class="font-serif font-normal">en línea.</em></p>
+                  <p class="text-[24px] font-light leading-[1.04] tracking-[-0.04em]">Tu empresa,<br />en línea.</p>
                   <p class="mt-2 text-[9.5px] leading-snug text-black/55">Un sitio claro, rápido y con tu identidad.</p>
-                  <i class="mt-3 inline-block rounded-full px-3 py-1.5 text-[9px] font-medium not-italic text-[#17140f]" style={`background:${C.yellow}`}>Ver servicios →</i>
+                  <i class="mt-3 inline-block rounded-full px-3 py-1.5 text-[9px] font-medium not-italic text-[#17191c]" style={`background:${C.yellow}`}>Ver servicios →</i>
                 </div>
                 <div class="grid grid-cols-3 gap-1.5">
-                  <i class="h-[84px] rounded-xl" style="background:linear-gradient(160deg,#6fd0ff,#7fe3b5)"></i>
-                  <i class="mt-4 h-[84px] rounded-xl" style="background:linear-gradient(160deg,#ff6fae,#ff8a5b)"></i>
-                  <i class="h-[84px] rounded-xl" style="background:linear-gradient(160deg,#ffd23f,#ff8a5b)"></i>
+                  <i class="h-[84px] rounded-xl" style="background:linear-gradient(160deg,#34496a,#8a9bb0)"></i>
+                  <i class="mt-4 h-[84px] rounded-xl" style="background:linear-gradient(160deg,#a8724a,#6d4630)"></i>
+                  <i class="h-[84px] rounded-xl" style="background:linear-gradient(160deg,#ffb467,#c9772a)"></i>
                 </div>
               </div>
             </div>
@@ -112,7 +107,7 @@ const badges = [
                   <div class="space-y-1.5">
                     {(cards as string[]).map((c, i) => (
                       <div class="rounded-lg bg-black/[0.05] p-1.5">
-                        <div class="flex items-center gap-1"><i class="grid size-3.5 place-items-center rounded-full text-[7px] font-semibold not-italic text-[#17140f]" style={`background:${[C.pink, C.sky, C.mint, C.coral, C.yellow][(c.charCodeAt(0) + i) % 5]}`}>{c}</i><i class="h-1.5 w-9 rounded bg-black/30"></i></div>
+                        <div class="flex items-center gap-1"><i class="grid size-3.5 place-items-center rounded-full text-[7px] font-semibold not-italic text-[#17140f]" style={`background:${[C.pink, C.coral, C.sky, C.yellow][(c.charCodeAt(0) + i) % 4]}`}>{c}</i><i class="h-1.5 w-9 rounded bg-black/30"></i></div>
                         <i class="mt-1.5 block h-1 w-11 rounded bg-black/15"></i>
                         <i class="mt-1 block size-1.5 rounded-full" style={`background:${col}`}></i>
                       </div>
@@ -120,8 +115,8 @@ const badges = [
                   </div>
                 </div>
               ))}
-              <div class="mv-card absolute left-[10px] top-[78px] w-[70px] rounded-lg bg-white p-1.5 shadow-[0_10px_24px_-6px_rgba(0,0,0,0.35)] ring-2 ring-[#ff8a5b]">
-                <div class="flex items-center gap-1"><i class="grid size-3.5 place-items-center rounded-full bg-[#ff6fae] text-[7px] font-semibold not-italic text-[#17140f]">C</i><i class="h-1.5 w-9 rounded bg-black/55"></i></div>
+              <div class="mv-card absolute left-[10px] top-[78px] w-[70px] rounded-lg bg-white p-1.5 shadow-[0_10px_24px_-6px_rgba(0,0,0,0.35)] ring-2 ring-[#ffb467]">
+                <div class="flex items-center gap-1"><i class="grid size-3.5 place-items-center rounded-full bg-[#ffb467] text-[7px] font-semibold not-italic text-[#17191c]">C</i><i class="h-1.5 w-9 rounded bg-black/55"></i></div>
                 <i class="mt-1.5 block h-1 w-11 rounded bg-black/20"></i>
               </div>
               <svg class="mv-cursor absolute left-[50px] top-[96px] size-4" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 1l11 6-5 1.3L6 13z" fill="#17140f" stroke="#fff" stroke-width="1"/></svg>
@@ -135,7 +130,7 @@ const badges = [
               <div class="rounded-xl bg-black/[0.05] p-2.5">
                 <div class="flex items-center justify-between">
                   <span class="text-[11px] font-semibold">Factura CFDI 4.0</span>
-                  <span class="rounded-full px-2 py-0.5 text-[8px] font-semibold text-[#17140f]" style={`background:${C.yellow}`}>En revisión</span>
+                  <span class="rounded-full px-2 py-0.5 text-[8px] font-semibold text-[#17191c]" style={`background:${C.yellow}`}>En revisión</span>
                 </div>
                 {[40, 54, 32].map((w) => <div class="mt-2 flex items-center justify-between"><i class="h-1.5 rounded bg-black/30" style={`width:${w}%`}></i><i class="h-1.5 w-8 rounded bg-black/15"></i></div>)}
                 <div class="mt-2.5 flex items-center justify-between border-t border-black/10 pt-2"><i class="h-2 w-12 rounded bg-black/55"></i><i class="h-2.5 w-14 rounded" style={`background:${C.mint}`}></i></div>
@@ -143,7 +138,7 @@ const badges = [
               <p class={`${lab} mt-3`}>Flujo de caja</p>
               <svg viewBox="0 0 220 64" class="mt-1 h-[64px] w-full" aria-hidden="true">
                 <path d="M0 22H220M0 43H220" stroke="#00000010" />
-                <path class="mv-draw" pathLength="1" d="M0 52 C30 48 45 30 75 34 S120 14 150 18 S195 6 220 4" fill="none" stroke="#ff6b4a" stroke-width="2.4" stroke-linecap="round" />
+                <path class="mv-draw" pathLength="1" d="M0 52 C30 48 45 30 75 34 S120 14 150 18 S195 6 220 4" fill="none" stroke="#c9772a" stroke-width="2.4" stroke-linecap="round" />
                 <path class="mv-draw" style="animation-delay:.3s" pathLength="1" d="M0 56 C40 54 80 48 120 50 S190 42 220 40" fill="none" stroke="#00000040" stroke-width="1.6" stroke-linecap="round" />
               </svg>
             </div>
@@ -153,7 +148,7 @@ const badges = [
           <div class={win} data-win="5" style={`--c:${C.yellow};left:516px;top:204px;width:244px;height:220px`}>
             <div class={bar}><span class={lab}>Panel de datos</span><span set:html={dots} /></div>
             <div class="grid grid-cols-2 gap-2 p-3">
-              {[['Ventas', [38, 52, 44, 66, 58, 74], C.coral], ['Operación', [60, 46, 62, 50, 70, 64], C.sky]].map(([l, bars, col]) => (
+              {[['Ventas', [38, 52, 44, 66, 58, 74], C.pink], ['Operación', [60, 46, 62, 50, 70, 64], C.coral]].map(([l, bars, col]) => (
                 <div class="rounded-xl bg-black/[0.05] p-2">
                   <p class="text-[8.5px] font-semibold text-black/50">{l}</p>
                   <div class="mt-2 flex h-[44px] items-end gap-[3px]">
@@ -164,12 +159,12 @@ const badges = [
               <div class="col-span-2 flex items-center gap-3 rounded-xl bg-black/[0.05] p-2.5">
                 <svg viewBox="0 0 40 40" class="size-[58px] shrink-0 -rotate-90" aria-hidden="true">
                   <circle cx="20" cy="20" r="15" fill="none" stroke="#0000001a" stroke-width="6" />
-                  <circle class="mv-donut" pathLength="1" cx="20" cy="20" r="15" fill="none" stroke="#ff8a5b" stroke-width="6" stroke-linecap="round" />
-                  <circle class="mv-donut2" pathLength="1" cx="20" cy="20" r="15" fill="none" stroke="#6fd0ff" stroke-width="6" stroke-linecap="round" />
+                  <circle class="mv-donut" pathLength="1" cx="20" cy="20" r="15" fill="none" stroke="#c9772a" stroke-width="6" stroke-linecap="round" />
+                  <circle class="mv-donut2" pathLength="1" cx="20" cy="20" r="15" fill="none" stroke="#34496a" stroke-width="6" stroke-linecap="round" />
                 </svg>
                 <div class="flex-1 space-y-1.5">
-                  <p class="flex items-center gap-1.5 text-[9.5px] text-black/65"><i class="size-2 rounded-full bg-[#ff8a5b]"></i>Ventas</p>
-                  <p class="flex items-center gap-1.5 text-[9.5px] text-black/65"><i class="size-2 rounded-full bg-[#6fd0ff]"></i>Operación</p>
+                  <p class="flex items-center gap-1.5 text-[9.5px] text-black/65"><i class="size-2 rounded-full bg-[#c9772a]"></i>Ventas</p>
+                  <p class="flex items-center gap-1.5 text-[9.5px] text-black/65"><i class="size-2 rounded-full bg-[#34496a]"></i>Operación</p>
                   <p class="flex items-center gap-1.5 text-[9.5px] text-black/65"><i class="size-2 rounded-full bg-black/20"></i>Finanzas</p>
                 </div>
               </div>
@@ -178,13 +173,13 @@ const badges = [
 
           <!-- 6 · AI agent -->
           <div class={win} data-win="6" style={`--c:${C.pink};left:0;top:438px;width:760px;height:122px`}>
-            <div class={bar}><span class={`${lab} flex items-center gap-1.5`}><i class="size-1.5 rounded-full bg-[#3fd06a]"></i>Asistente</span><span set:html={dots} /></div>
+            <div class={bar}><span class={`${lab} flex items-center gap-1.5`}><i class="size-1.5 rounded-full bg-[#c9772a]"></i>Asistente</span><span set:html={dots} /></div>
             <div class="grid grid-cols-[1.2fr_1fr] gap-6 px-4 py-2.5">
               <div class="space-y-1.5">
-                <p class="ml-auto w-fit max-w-[88%] rounded-2xl rounded-br-md bg-[#17140f] px-3 py-1.5 text-[11px] text-white">Cotiza y factura el pedido de este cliente.</p>
+                <p class="ml-auto w-fit max-w-[88%] rounded-xl rounded-br-sm bg-[#17191c] px-3 py-1.5 text-[11px] text-white">Cotiza y factura el pedido de este cliente.</p>
                 <div class="relative h-[34px] w-full">
-                  <p class="mv-dots absolute left-0 top-0 flex gap-1 rounded-2xl rounded-bl-md bg-black/[0.07] px-3 py-2.5"><i class="size-1.5 rounded-full bg-black/45"></i><i class="size-1.5 rounded-full bg-black/45"></i><i class="size-1.5 rounded-full bg-black/45"></i></p>
-                  <p class="mv-reply absolute left-0 top-0 w-fit whitespace-nowrap rounded-2xl rounded-bl-md bg-black/[0.07] px-3 py-1.5 text-[11px] leading-snug">Listo: cotización enviada y factura preparada para revisión.</p>
+                  <p class="mv-dots absolute left-0 top-0 flex gap-1 rounded-xl rounded-bl-sm bg-black/[0.07] px-3 py-2.5"><i class="size-1.5 rounded-full bg-black/45"></i><i class="size-1.5 rounded-full bg-black/45"></i><i class="size-1.5 rounded-full bg-black/45"></i></p>
+                  <p class="mv-reply absolute left-0 top-0 w-fit whitespace-nowrap rounded-xl rounded-bl-sm bg-black/[0.07] px-3 py-1.5 text-[11px] leading-snug">Listo: cotización enviada y factura preparada para revisión.</p>
                 </div>
               </div>
               <div class="flex items-center">
@@ -201,40 +196,40 @@ const badges = [
           <!-- Today: loose tools -->
           <div class={tool} data-tool="0" style="left:30px;top:20px;width:176px;height:116px;--r:-5deg;--ax:150px;--ay:120px">
             <div class={tbar}>Ventas_final_v3.xlsx</div>
-            <div class="grid grid-cols-5 gap-px bg-black/10 p-px">{Array.from({ length: 25 }, (_, i) => <i class={`h-[15px] ${[2, 7, 8, 13, 19, 21].includes(i) ? 'bg-[#7fe3b5]' : 'bg-white'}`}></i>)}</div>
+            <div class="grid grid-cols-5 gap-px bg-black/10 p-px">{Array.from({ length: 25 }, (_, i) => <i class={`h-[15px] ${[2, 7, 8, 13, 19, 21].includes(i) ? 'bg-[#c9c4b8]' : 'bg-white'}`}></i>)}</div>
           </div>
           <div class={tool} data-tool="1" style="left:290px;top:44px;width:170px;height:104px;--r:3deg;--ax:70px;--ay:140px">
             <div class={tbar}>Chat · Cliente</div>
             <div class="space-y-1.5 p-2 text-[8.5px]">
               <p class="w-fit rounded-lg bg-black/[0.07] px-2 py-1">¿Ya salió mi pedido?</p>
-              <p class="ml-auto w-fit rounded-lg bg-[#7fe3b5] px-2 py-1">Te confirmo en un rato</p>
+              <p class="ml-auto w-fit rounded-lg bg-[#c9c4b8] px-2 py-1">Te confirmo en un rato</p>
               <p class="w-fit rounded-lg bg-black/[0.07] px-2 py-1">¿Y la factura?</p>
             </div>
           </div>
           <div class={tool} data-tool="2" style="left:540px;top:14px;width:160px;height:122px;--r:-3deg;--ax:-150px;--ay:130px">
             <div class={tbar}>Factura_0042.pdf</div>
-            <div class="space-y-1.5 p-2.5"><i class="block h-1.5 w-20 rounded bg-black/50"></i><i class="block h-1 w-full rounded bg-black/15"></i><i class="block h-1 w-5/6 rounded bg-black/15"></i><i class="block h-1 w-2/3 rounded bg-black/15"></i><p class="mt-2 w-fit rotate-[-6deg] rounded border-2 border-[#ff6b4a] px-1.5 py-0.5 text-[9px] font-bold text-[#ff6b4a]">¿PAGADA?</p></div>
+            <div class="space-y-1.5 p-2.5"><i class="block h-1.5 w-20 rounded bg-black/50"></i><i class="block h-1 w-full rounded bg-black/15"></i><i class="block h-1 w-5/6 rounded bg-black/15"></i><i class="block h-1 w-2/3 rounded bg-black/15"></i><p class="mt-2 w-fit rotate-[-6deg] rounded border-2 border-[#c9772a] px-1.5 py-0.5 text-[9px] font-bold text-[#c9772a]">¿PAGADA?</p></div>
           </div>
           <div class={tool} data-tool="3" style="left:60px;top:300px;width:178px;height:112px;--r:2deg;--ax:150px;--ay:-60px">
             <div class={tbar}>Bandeja de entrada</div>
-            {['Re: cotización pendiente', 'Urgente: pago', 'Fwd: pedido nuevo'].map((m, i) => <div class="flex items-center gap-1.5 border-b border-black/[0.07] px-2 py-1.5 text-[8.5px]"><i class={`size-1.5 rounded-full ${i < 2 ? 'bg-[#ff6fae]' : 'bg-transparent'}`}></i>{m}</div>)}
+            {['Re: cotización pendiente', 'Urgente: pago', 'Fwd: pedido nuevo'].map((m, i) => <div class="flex items-center gap-1.5 border-b border-black/[0.07] px-2 py-1.5 text-[8.5px]"><i class={`size-1.5 rounded-full ${i < 2 ? 'bg-[#c9772a]' : 'bg-transparent'}`}></i>{m}</div>)}
           </div>
           <div class={tool} data-tool="4" style="left:330px;top:326px;width:140px;height:96px;--r:-6deg;--ax:50px;--ay:-90px">
-            <div class="grid h-full grid-cols-2 gap-1.5 bg-[#17140f] p-2 text-[8.5px] font-semibold text-[#17140f]">
-              <p class="rotate-[-3deg] rounded-sm bg-[#ffd23f] p-1.5 leading-tight">Llamar a Marta</p>
-              <p class="rotate-[2deg] rounded-sm bg-[#ff6fae] p-1.5 leading-tight">¡Cobrar!!</p>
-              <p class="rotate-[1deg] rounded-sm bg-[#6fd0ff] p-1.5 leading-tight">Subir fotos</p>
-              <p class="rotate-[-2deg] rounded-sm bg-[#7fe3b5] p-1.5 leading-tight">Pedido 17</p>
+            <div class="grid h-full grid-cols-2 gap-1.5 bg-[#17191c] p-2 text-[8.5px] font-semibold text-[#17191c]">
+              <p class="rotate-[-3deg] rounded-sm bg-[#e3cf9e] p-1.5 leading-tight">Llamar a Marta</p>
+              <p class="rotate-[2deg] rounded-sm bg-[#d9b79c] p-1.5 leading-tight">¡Cobrar!!</p>
+              <p class="rotate-[1deg] rounded-sm bg-[#b3bfce] p-1.5 leading-tight">Subir fotos</p>
+              <p class="rotate-[-2deg] rounded-sm bg-[#c5cdb9] p-1.5 leading-tight">Pedido 17</p>
             </div>
           </div>
           <div class={tool} data-tool="5" style="left:560px;top:318px;width:150px;height:104px;--r:4deg;--ax:-150px;--ay:-70px">
             <div class={tbar}>Redes · borrador</div>
-            <div class="flex gap-2 p-2"><i class="size-10 shrink-0 rounded-lg" style="background:linear-gradient(135deg,#ff6fae,#ffd23f)"></i><div class="space-y-1"><i class="block h-1.5 w-14 rounded bg-black/40"></i><i class="block h-1 w-16 rounded bg-black/15"></i><i class="block h-1 w-10 rounded bg-black/15"></i></div></div>
+            <div class="flex gap-2 p-2"><i class="size-10 shrink-0 rounded-lg" style="background:linear-gradient(135deg,#34496a,#ffb467)"></i><div class="space-y-1"><i class="block h-1.5 w-14 rounded bg-black/40"></i><i class="block h-1 w-16 rounded bg-black/15"></i><i class="block h-1 w-10 rounded bg-black/15"></i></div></div>
           </div>
 
           <!-- Connected: what flows between the screens -->
           {badges.map((b) => (
-            <div data-badge class="badge absolute z-10 whitespace-nowrap rounded-full bg-white px-3 py-1.5 text-[11px] font-semibold text-[#17140f] shadow-[0_10px_30px_-8px_rgba(0,0,0,0.7)]" style={`left:${b.x}px;top:${b.y}px;--c:${b.c}`}>
+            <div data-badge class="badge absolute z-10 whitespace-nowrap rounded-full bg-white px-3 py-1.5 text-[11px] font-semibold text-[#17191c] shadow-[0_10px_30px_-8px_rgba(0,0,0,0.7)]" style={`left:${b.x}px;top:${b.y}px;--c:${b.c}`}>
               <i class="mr-1.5 inline-block size-2 rounded-full align-middle" style={`background:${b.c}`}></i>{b.t}
             </div>
           ))}
