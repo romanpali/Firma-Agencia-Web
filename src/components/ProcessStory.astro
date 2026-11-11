@@ -1,131 +1,188 @@
 ---
-const steps = [
-  { t: 'Tu empresa, hoy', d: 'Las ventas viven en una hoja de cálculo, las conversaciones en el chat, las facturas en PDF y los pendientes en notas. Funciona, pero nada se conecta.', items: ['Hojas de cálculo', 'Chats', 'Facturas en PDF', 'Notas', 'Correos', 'Redes'] },
-  { t: 'Identidad y diseño', d: 'Empezamos por lo que se ve: una sola cara para toda la empresa.', items: ['Marca', 'Paleta y tipografía', 'Producción creativa'] },
-  { t: 'Presencia digital', d: 'Un sitio propio, con tu identidad, que informa y vende todo el día.', items: ['Sitio web', 'Tienda en línea', 'Plataformas'] },
-  { t: 'Ventas y CRM', d: 'Cada prospecto avanza por un camino claro. Ningún seguimiento se pierde.', items: ['Embudo de ventas', 'Cotizaciones', 'Seguimiento'] },
-  { t: 'Finanzas y administración', d: 'Facturación y flujo de caja en orden, preparados para la revisión de tus contadores y asesores.', items: ['Facturación CFDI 4.0', 'Flujo de caja', 'Administración'] },
-  { t: 'Operaciones y datos', d: 'Un panel con indicadores de todas las áreas, en lugar de reportes armados a mano.', items: ['Procesos y proyectos', 'Inventarios', 'Dashboards'] },
-  { t: 'IA y automatización', d: 'Asistentes que cotizan, dan seguimiento y preparan la factura, para reducir el trabajo manual.', items: ['Agentes de IA', 'Flujos automáticos', 'Asistentes internos'] },
-  { t: 'Un solo ecosistema', d: 'Cada módulo comparte información con los demás bajo un solo estándar. Es el sistema que construimos contigo, paso a paso.', items: ['Un solo estándar', 'Información compartida', 'Crece contigo'] },
-];
-const mods = [
-  { raw: 'Logos sueltos', to: 'Identidad', gx: 0, gy: 0, w: 160, h: 150, sx: 292, sy: 246, sr: 8, fx: 0.9, ph: 0.4 },
-  { raw: 'Página desactualizada', to: 'Sitio web', gx: 172, gy: 0, w: 368, h: 150, sx: 14, sy: 226, sr: -6, fx: 0.7, ph: 1.9 },
-  { raw: 'Hoja de cálculo', to: 'Ventas', gx: 0, gy: 162, w: 200, h: 238, sx: 352, sy: 8, sr: 7, fx: 1.1, ph: 3.1 },
-  { raw: 'Facturas en PDF', to: 'Finanzas', gx: 212, gy: 162, w: 160, h: 114, sx: 84, sy: 24, sr: -8, fx: 0.8, ph: 5.2 },
-  { raw: 'Reportes a mano', to: 'Datos', gx: 384, gy: 162, w: 156, h: 114, sx: 226, sy: 128, sr: 5, fx: 1.0, ph: 2.6 },
-  { raw: 'Chats', to: 'IA', gx: 212, gy: 288, w: 328, h: 112, sx: 150, sy: 296, sr: -4, fx: 0.6, ph: 4.4 },
+const titles = ['Tu empresa, hoy', 'Identidad y diseño', 'Presencia digital', 'Ventas y CRM', 'Finanzas y administración', 'Operaciones y datos', 'IA y automatización', 'Un solo ecosistema'];
+const labels = ['Identidad', 'Sitio web', 'Ventas', 'Finanzas', 'Datos', 'Asistentes'];
+const FR: Record<string, string> = {
+  sheet: '<svg viewBox="0 0 120 90"><rect width="120" height="90" rx="8" fill="#fff" stroke="#dadce0"/><path d="M0 22H120M0 44H120M0 66H120M40 0V90M80 0V90" stroke="#e3e6ea"/><rect x="42" y="24" width="36" height="18" fill="#e8eaed"/><rect x="4" y="48" width="30" height="5" rx="2.5" fill="#dadce0"/></svg>',
+  pdf: '<svg viewBox="0 0 80 100"><path d="M6 2H52L74 24V98H6Z" fill="#fff" stroke="#dadce0"/><path d="M52 2V24H74" fill="none" stroke="#dadce0"/><rect x="16" y="38" width="48" height="5" rx="2.5" fill="#e3e6ea"/><rect x="16" y="50" width="38" height="5" rx="2.5" fill="#e3e6ea"/><rect x="16" y="62" width="44" height="5" rx="2.5" fill="#e3e6ea"/><text x="16" y="88" font-size="12" fill="#9aa0a6" font-weight="600" font-family="sans-serif">PDF</text></svg>',
+  chat: '<svg viewBox="0 0 120 64"><path d="M14 2H106a12 12 0 0 1 12 12V36a12 12 0 0 1-12 12H40L22 62V48H14A12 12 0 0 1 2 36V14A12 12 0 0 1 14 2Z" fill="#fff" stroke="#dadce0"/><rect x="18" y="16" width="70" height="5" rx="2.5" fill="#e3e6ea"/><rect x="18" y="28" width="48" height="5" rx="2.5" fill="#e3e6ea"/></svg>',
+  chat2: '<svg viewBox="0 0 100 52"><path d="M12 2H88a10 10 0 0 1 10 10V28a10 10 0 0 1-10 10H78V50L62 38H12A10 10 0 0 1 2 28V12A10 10 0 0 1 12 2Z" fill="#e8eaed"/><rect x="14" y="14" width="56" height="5" rx="2.5" fill="#bdc1c6"/></svg>',
+  note: '<svg viewBox="0 0 90 90"><path d="M4 4H86V64L64 86H4Z" fill="#f1f3f4" stroke="#dadce0"/><path d="M64 86V64H86" fill="#e3e6ea"/><rect x="14" y="18" width="54" height="5" rx="2.5" fill="#bdc1c6"/><rect x="14" y="32" width="40" height="5" rx="2.5" fill="#cfd2d6"/><rect x="14" y="46" width="48" height="5" rx="2.5" fill="#cfd2d6"/></svg>',
+  mail: '<svg viewBox="0 0 100 68"><rect x="2" y="2" width="96" height="64" rx="10" fill="#fff" stroke="#dadce0"/><path d="M6 10L50 40L94 10" fill="none" stroke="#bdc1c6" stroke-width="2.5" stroke-linecap="round"/></svg>',
+  photo: '<svg viewBox="0 0 110 80"><rect x="2" y="2" width="106" height="76" rx="10" fill="#e8eaed"/><circle cx="34" cy="28" r="9" fill="#cfd2d6"/><path d="M2 66L38 40L62 58L80 44L108 64V68a10 10 0 0 1-10 10H12A10 10 0 0 1 2 68Z" fill="#cfd2d6"/></svg>',
+  chart: '<svg viewBox="0 0 90 70"><rect x="2" y="2" width="86" height="66" rx="10" fill="#fff" stroke="#dadce0"/><rect x="16" y="38" width="10" height="20" rx="3" fill="#dadce0"/><rect x="34" y="26" width="10" height="32" rx="3" fill="#cfd2d6"/><rect x="52" y="44" width="10" height="14" rx="3" fill="#dadce0"/><rect x="70" y="32" width="10" height="26" rx="3" fill="#cfd2d6"/></svg>',
+  post: '<svg viewBox="0 0 80 96"><rect x="2" y="2" width="76" height="92" rx="12" fill="#fff" stroke="#dadce0"/><circle cx="20" cy="20" r="9" fill="#e3e6ea"/><rect x="34" y="14" width="34" height="5" rx="2.5" fill="#e3e6ea"/><rect x="10" y="38" width="60" height="32" rx="6" fill="#e8eaed"/><path d="M20 82c-6-4-9-7-9-10a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 3-3 6-9 10Z" fill="#cfd2d6"/></svg>',
+  cal: '<svg viewBox="0 0 90 84"><rect x="2" y="2" width="86" height="80" rx="10" fill="#fff" stroke="#dadce0"/><rect x="2" y="2" width="86" height="20" rx="10" fill="#e8eaed"/><g fill="#e3e6ea"><rect x="12" y="32" width="12" height="10" rx="2"/><rect x="30" y="32" width="12" height="10" rx="2"/><rect x="48" y="32" width="12" height="10" rx="2"/><rect x="66" y="32" width="12" height="10" rx="2"/><rect x="12" y="50" width="12" height="10" rx="2"/><rect x="30" y="50" width="12" height="10" rx="2" fill="#cfd2d6"/><rect x="48" y="50" width="12" height="10" rx="2"/></g></svg>',
+};
+const frags = [
+  ['sheet', 12, 24, 150, -8, 120], ['pdf', 27, 66, 84, 10, -80], ['chat', 74, 22, 140, 6, 60], ['note', 88, 62, 90, -12, -220], ['mail', 46, 16, 100, -5, 180],
+  ['photo', 63, 70, 128, 8, 20], ['chart', 8, 70, 100, 12, -160], ['post', 82, 40, 78, -9, 240], ['cal', 36, 44, 96, 7, -40], ['chat2', 20, 44, 112, -6, 140],
+  ['pdf', 55, 38, 74, -14, -300], ['sheet', 70, 50, 104, 5, -120], ['note', 41, 78, 80, 9, 90], ['mail', 90, 14, 84, 11, -60], ['photo', 4, 40, 96, -10, 200], ['post', 52, 60, 66, 7, -180],
 ];
 ---
 
-<section id="construccion" data-tone="light" class="relative z-10 font-goog text-[#202124]">
-  <div data-process class="h-[560vh] bg-white">
-    <div data-process-inner class="sticky top-0 h-svh overflow-hidden">
-      <div class="relative mx-auto grid h-full max-w-[1280px] grid-rows-[auto_minmax(0,1fr)] gap-3 px-6 pb-6 pt-24 md:grid-cols-12 md:grid-rows-1 md:items-center md:gap-14 md:px-10 md:py-24">
-        <div class="md:col-span-5">
-          <p class="text-[15px] text-[#5f6368]">Cómo lo construimos</p>
-          <div class="relative mt-4 md:mt-7">
-            <i class="absolute bottom-1 left-0 top-1 w-px bg-[#e8eaed]" aria-hidden="true"><b data-rail class="absolute inset-0 origin-top scale-y-0 bg-[#1a56db]"></b></i>
-            <div class="space-y-0.5 md:space-y-2">
-              {steps.map((s, i) => (
-                <div class="ps-row" data-row={i}>
-                  <div class="flex items-baseline gap-3">
-                    <span class="ps-num w-5 text-[12px] tabular-nums md:text-[13px]">{String(i + 1).padStart(2, '0')}</span>
-                    <h3 class="ps-title text-[clamp(1.2rem,2.5vw,2.2rem)] font-normal leading-[1.2] tracking-[-0.025em]">{s.t}</h3>
-                  </div>
-                  <div class="ps-body pl-8">
-                    <div>
-                      <p class="max-w-[30rem] pt-2 text-[14px] leading-relaxed text-[#5f6368] md:text-[16.5px]">{s.d}</p>
-                      <ul class="flex max-w-[30rem] flex-wrap gap-1.5 pb-1.5 pt-3">
-                        {s.items.map((l) => <li class="rounded-full border border-[#dadce0] px-3 py-1 text-[12px] text-[#3c4043] md:text-[13.5px]">{l}</li>)}
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+<section id="construccion" data-tone="light" data-titles={JSON.stringify(titles)} class="relative z-10 font-goog text-[#202124]">
+  <div data-process class="h-[720vh] bg-white">
+    <div data-process-inner class="sticky top-0 h-svh overflow-hidden bg-[radial-gradient(ellipse_at_50%_46%,#f4f7ff_0%,#fff_62%)]">
+      <p class="absolute inset-x-0 top-[86px] z-20 text-center text-[15px] text-[#5f6368]">Cómo lo construimos</p>
 
-        <div data-stagewrap class="relative min-h-0 md:col-span-7 md:h-[30rem]">
-          <div data-fit class="absolute left-1/2 top-1/2 h-[420px] w-[560px]" role="img" aria-label="Piezas sueltas de una empresa se ordenan, una por una, en módulos conectados que forman un solo sistema">
-            <div class="absolute inset-[10px]">
-              {mods.map((m, i) => (
-                <div class="pm" data-mod={i} style={`--gx:${m.gx}px;--gy:${m.gy}px;--w:${m.w}px;--h:${m.h}px;--k:${i}`}>
-                  {i === 0 && (<>
-                    <svg class="pop absolute left-4 top-4" width="70" height="46" viewBox="0 0 70 46" aria-hidden="true"><circle cx="23" cy="23" r="19" fill="#202124"/><circle cx="45" cy="23" r="19" fill="#1a56db" fill-opacity=".92"/></svg>
-                    <span class="pop absolute right-4 top-4 text-[38px] font-medium leading-[46px] tracking-[-0.03em]" style="--k:1">Aa</span>
-                    <div class="absolute left-4 top-[74px] flex gap-2">
-                      {['#202124', '#1a56db', '#8ab4f8', '#e8eaed'].map((c, k) => <i class="pop size-[18px] rounded-full" style={`background:${c};--k:${k + 2}`}></i>)}
-                    </div>
-                  </>)}
-                  {i === 1 && (<>
-                    <div class="absolute inset-x-0 top-0 flex h-[30px] items-center gap-1.5 border-b border-[#e8eaed] px-4" aria-hidden="true">
-                      <i class="size-2 rounded-full bg-[#dadce0]"></i><i class="size-2 rounded-full bg-[#dadce0]"></i><i class="size-2 rounded-full bg-[#dadce0]"></i>
-                      <i class="ml-3 h-[14px] flex-1 rounded-full bg-[#f1f3f4]"></i>
-                    </div>
-                    <div class="absolute left-4 top-[44px] w-[190px]" aria-hidden="true">
-                      <i class="pop block h-[11px] w-[170px] rounded-full bg-[#202124]" style="--k:0"></i>
-                      <i class="pop mt-2 block h-[11px] w-[120px] rounded-full bg-[#202124]" style="--k:1"></i>
-                      <i class="pop mt-3 block h-[6px] w-[150px] rounded-full bg-[#dadce0]" style="--k:2"></i>
-                      <i class="pop mt-1.5 block h-[6px] w-[110px] rounded-full bg-[#dadce0]" style="--k:2"></i>
-                      <i class="pop mt-3 block h-[20px] w-[74px] rounded-full bg-[#1a56db]" style="--k:3"></i>
-                    </div>
-                    <i class="pop absolute right-4 top-[44px] h-[64px] w-[132px] rounded-[12px] bg-gradient-to-br from-[#dbe6fd] to-[#8ab4f8]" style="--k:2" aria-hidden="true"></i>
-                  </>)}
-                  {i === 2 && (<>
-                    <div class="absolute inset-x-4 top-4 flex gap-2" aria-hidden="true">
-                      {[3, 2, 1].map((n, c) => (
-                        <div class="flex-1">
-                          <i class="block h-[6px] w-7 rounded-full bg-[#bdc1c6]"></i>
-                          <div class="mt-2.5 space-y-2">
-                            {Array.from({ length: n }).map((_, r) => (
-                              <i class={`pop block h-[40px] rounded-[10px] ${c === 2 ? 'bg-[#1a56db]' : 'bg-[#f1f3f4]'}`} style={`--k:${c * 2 + r}`}>
-                                <b class={`ml-2 mt-2.5 block h-[5px] w-8 rounded-full ${c === 2 ? 'bg-white/80' : 'bg-[#bdc1c6]'}`}></b>
-                                <b class={`ml-2 mt-1.5 block h-[5px] w-5 rounded-full ${c === 2 ? 'bg-white/50' : 'bg-[#dadce0]'}`}></b>
-                              </i>
-                            ))}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                    <div class="absolute inset-x-4 bottom-[46px] space-y-1.5" aria-hidden="true">
-                      {[100, 72, 44].map((w, k) => <i class="pop block h-[7px] rounded-full bg-[#1a56db]" style={`width:${w}%;opacity:${1 - k * 0.28};--k:${k + 6}`}></i>)}
-                    </div>
-                  </>)}
-                  {i === 3 && (
-                    <div class="absolute bottom-[40px] left-4 flex h-[56px] items-end gap-2.5" aria-hidden="true">
-                      {[18, 30, 24, 42, 56].map((h, k) => <i class={`g block w-[18px] rounded-[5px] ${k === 4 ? 'bg-[#1a56db]' : 'bg-[#dbe6fd]'}`} style={`height:${h}px;transition-delay:${k * 0.08}s`}></i>)}
-                    </div>
-                  )}
-                  {i === 4 && (<>
-                    <svg class="absolute left-3 top-3" width="68" height="68" viewBox="0 0 68 68" aria-hidden="true">
-                      <circle cx="34" cy="34" r="25" fill="none" stroke="#e8eaed" stroke-width="9"/>
-                      <circle class="dr" cx="34" cy="34" r="25" fill="none" stroke="#1a56db" stroke-width="9" stroke-linecap="round" pathLength="100" style="--len:100;--end:28" transform="rotate(-90 34 34)"/>
-                    </svg>
-                    <svg class="absolute right-3 top-5" width="56" height="34" viewBox="0 0 56 34" aria-hidden="true">
-                      <path class="dr" d="M2 28 L14 20 L26 23 L40 8 L54 12" fill="none" stroke="#202124" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" pathLength="100" style="--len:100"/>
-                    </svg>
-                  </>)}
-                  {i === 5 && (<>
-                    <div class="absolute left-4 top-4 flex h-[26px] w-[150px] items-center gap-1.5 rounded-full bg-[#f1f3f4] px-3" aria-hidden="true"><i class="pop h-[5px] w-[44px] rounded-full bg-[#bdc1c6]" style="--k:0"></i><i class="pop h-[5px] w-[60px] rounded-full bg-[#dadce0]" style="--k:1"></i></div>
-                    <div class="pop absolute right-4 top-[26px] flex h-[34px] w-[186px] items-center gap-2 rounded-full bg-[#1a56db] px-3.5" style="--k:2" aria-hidden="true">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4z"/></svg>
-                      <i class="h-[5px] w-[96px] rounded-full bg-white/80"></i>
-                    </div>
-                    <div class="dot3 pop absolute right-5 top-[68px] flex gap-1" style="--k:3" aria-hidden="true"><i class="size-1.5 rounded-full bg-[#1a56db]"></i><i class="size-1.5 rounded-full bg-[#1a56db]"></i><i class="size-1.5 rounded-full bg-[#1a56db]"></i></div>
-                  </>)}
-                  <span class="tag"><span class="from">{m.raw}</span><span class="to">{m.to}</span></span>
+      <!-- camera -->
+      <div data-cam class="absolute inset-0" style="perspective:1800px" role="img" aria-label="Piezas sueltas de una empresa se convierten, una por una, en módulos conectados que forman un solo sistema">
+        <div data-world class="absolute left-1/2 top-1/2 size-0" style="transform-style:preserve-3d">
+          {labels.map((l, i) => (
+            <div class="pn" data-pn={i}>
+              <span class="lb">{l}</span>
+              <span class="ok rv" style="--a:.9;--b:.08">Listo</span>
+
+              {i === 0 && (<>
+                <div class="absolute left-6 top-[60px] h-[316px] w-[220px] rounded-[20px] bg-[#f4f7fe]"></div>
+                <svg class="absolute left-6 top-[60px]" width="220" height="316" viewBox="0 0 220 316" aria-hidden="true">
+                  <circle class="dw" style="--a:.04;--b:.26" cx="86" cy="118" r="46" fill="none" stroke="#202124" stroke-width="5" stroke-linecap="round" pathLength="100" transform="rotate(-90 86 118)"/>
+                  <circle class="fl" style="--a:.22;--b:.3" cx="134" cy="118" r="46" fill="#1a56db" fill-opacity=".92"/>
+                  <text class="rv" style="--a:.45;--b:.2" x="110" y="218" text-anchor="middle" font-size="27" font-weight="500" fill="#202124" font-family="Google Sans Flex Variable, sans-serif">Tu marca</text>
+                  <rect class="gx" style="--a:.55;--b:.2" x="62" y="238" width="96" height="6" rx="3" fill="#bdc1c6"/>
+                  <rect class="gx" style="--a:.6;--b:.2" x="76" y="254" width="68" height="6" rx="3" fill="#dadce0"/>
+                </svg>
+                {['#1a56db', '#202124', '#8ab4f8', '#dbe6fd', '#e8eaed'].map((c, k) => <i class="gy absolute top-[60px] h-[150px] w-[52px] rounded-[14px]" style={`left:${268 + k * 62}px;background:${c};--a:${0.22 + k * 0.06};--b:.26`}></i>)}
+                <div class="rv absolute left-[268px] top-[226px] flex h-[150px] w-[120px] items-center justify-center rounded-[18px] bg-[#f4f7fe] text-[84px] font-medium leading-none tracking-[-0.04em]" style="--a:.5;--b:.25">Aa</div>
+                <div class="rv absolute left-[404px] top-[246px] h-[96px] w-[150px] -rotate-[5deg] rounded-[14px] bg-[#202124] p-3.5" style="--a:.62;--b:.25">
+                  <i class="block size-[22px] rounded-full bg-[#1a56db]"></i>
+                  <i class="mt-5 block h-[5px] w-16 rounded-full bg-white/70"></i><i class="mt-2 block h-[5px] w-10 rounded-full bg-white/40"></i>
                 </div>
-              ))}
+                <div class="rv absolute left-[566px] top-[230px] flex size-[50px] items-center justify-center rounded-full bg-[#eaf1fe]" style="--a:.72;--b:.2"><i class="size-[18px] rounded-full bg-[#1a56db]"></i></div>
+              </>)}
+
+              {i === 1 && (<>
+                <div class="rv absolute inset-x-6 top-[56px] h-[322px] overflow-hidden rounded-[16px] border border-[#e3e6ea]" style="--a:.02;--b:.15">
+                  <div class="flex h-[34px] items-center gap-1.5 border-b border-[#e8eaed] px-3.5"><i class="size-2 rounded-full bg-[#dadce0]"></i><i class="size-2 rounded-full bg-[#dadce0]"></i><i class="size-2 rounded-full bg-[#dadce0]"></i>
+                    <i class="gx ml-3 block h-[16px] w-[220px] rounded-full bg-[#f1f3f4]" style="--a:.08;--b:.2"></i></div>
+                  <div class="flex items-center justify-between px-5 pt-3"><i class="rv size-[18px] rounded-full bg-[#1a56db]" style="--a:.15;--b:.1"></i>
+                    <div class="flex gap-3">{[0, 1, 2].map((k) => <i class="rv block h-[6px] w-9 rounded-full bg-[#dadce0]" style={`--a:${0.18 + k * 0.04};--b:.1`}></i>)}</div></div>
+                  <div class="absolute left-5 top-[84px] w-[230px]">
+                    <i class="gx block h-[15px] w-[210px] rounded-full bg-[#202124]" style="--a:.25;--b:.18"></i>
+                    <i class="gx mt-2.5 block h-[15px] w-[150px] rounded-full bg-[#202124]" style="--a:.32;--b:.18"></i>
+                    <i class="gx mt-5 block h-[7px] w-[190px] rounded-full bg-[#dadce0]" style="--a:.4;--b:.15"></i>
+                    <i class="gx mt-2 block h-[7px] w-[140px] rounded-full bg-[#dadce0]" style="--a:.44;--b:.15"></i>
+                    <i class="rv mt-5 block h-[28px] w-[96px] rounded-full bg-[#1a56db]" style="--a:.5;--b:.15"></i>
+                  </div>
+                  <div class="rv absolute right-5 top-[72px] h-[132px] w-[250px] overflow-hidden rounded-[16px] bg-gradient-to-br from-[#dbe6fd] to-[#8ab4f8]" style="--a:.3;--b:.25">
+                    <i class="absolute block size-[70px] rounded-full bg-white/60" style="left:calc(20px + var(--q) * 90px);top:24px"></i>
+                    <i class="absolute block size-[110px] rounded-full bg-[#1a56db]/30" style="right:calc(-30px - var(--q) * 20px);bottom:-40px"></i>
+                  </div>
+                  <div class="absolute inset-x-5 bottom-4 flex gap-3">{[0, 1, 2].map((k) => (
+                    <div class="rv flex h-[58px] flex-1 items-center gap-2.5 rounded-[12px] bg-[#f6f8fc] px-3" style={`--a:${0.55 + k * 0.08};--b:.15`}><i class="size-[26px] rounded-full bg-[#dbe6fd]"></i><div><i class="block h-[5px] w-14 rounded-full bg-[#bdc1c6]"></i><i class="mt-1.5 block h-[5px] w-9 rounded-full bg-[#dadce0]"></i></div></div>
+                  ))}</div>
+                  <svg class="absolute z-10" style="left:calc(430px - clamp(0, calc((var(--q) - .45) * 2.2), 1) * 330px);top:calc(250px - clamp(0, calc((var(--q) - .45) * 2.2), 1) * 130px)" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 2l16 9-7 2-3 7z" fill="#202124" stroke="#fff" stroke-width="1.5"/></svg>
+                </div>
+              </>)}
+
+              {i === 2 && (<>
+                {['Nuevo', 'Contacto', 'Propuesta', 'Cierre'].map((c, k) => (
+                  <div class="absolute top-[58px] h-[318px] w-[136px] rounded-[16px] bg-[#f6f8fc]" style={`left:${24 + k * 148}px`}>
+                    <p class="px-3 pt-2.5 text-[12.5px] font-medium text-[#5f6368]">{c}</p>
+                  </div>
+                ))}
+                {[[0, 3, 0, 'Ana'], [0, 2, 1, 'Luis'], [0, 1, 2, 'Sofía'], [1, 3, 3, 'Marco'], [1, 2, 4, 'Elena']].map(([sc, dc, r, n], k) => (
+                  <div class={`rv absolute h-[48px] w-[116px] rounded-[11px] p-2.5 shadow-[0_2px_6px_rgba(32,33,36,.1)] ${dc === 3 ? 'bg-[#1a56db]' : 'bg-white'}`} style={`left:${34 + Number(sc) * 148}px;top:${92 + Number(r) * 56}px;--a:${0.05 + k * 0.06};--b:.12;translate:calc(var(--m) * ${(Number(dc) - Number(sc)) * 148}px) calc((1 - var(--t)) * 16px);--m:clamp(0, calc((var(--q) - ${0.3 + k * 0.07}) * 2.6), 1)`}>
+                    <i class={`block size-[14px] rounded-full ${dc === 3 ? 'bg-white/90' : 'bg-[#dbe6fd]'}`}></i>
+                    <i class={`absolute left-[30px] top-[12px] block h-[5px] w-12 rounded-full ${dc === 3 ? 'bg-white/80' : 'bg-[#bdc1c6]'}`}></i>
+                    <i class={`absolute left-[30px] top-[24px] block h-[5px] w-8 rounded-full ${dc === 3 ? 'bg-white/50' : 'bg-[#dadce0]'}`}></i>
+                  </div>
+                ))}
+              </>)}
+
+              {i === 3 && (<>
+                <div class="rv absolute left-6 top-[58px] h-[318px] w-[236px] rounded-[16px] border border-[#e3e6ea] p-4" style="--a:.02;--b:.15">
+                  <div class="flex items-center justify-between"><i class="block h-[8px] w-16 rounded-full bg-[#202124]"></i><i class="block h-[6px] w-10 rounded-full bg-[#dadce0]"></i></div>
+                  <div class="mt-5 space-y-3.5">{[0, 1, 2, 3].map((k) => (
+                    <div class="rv flex items-center justify-between" style={`--a:${0.12 + k * 0.1};--b:.12`}><div><i class="block h-[6px] w-[92px] rounded-full bg-[#bdc1c6]"></i><i class="mt-1.5 block h-[5px] w-[58px] rounded-full bg-[#e3e6ea]"></i></div><i class="block h-[7px] w-9 rounded-full bg-[#dadce0]"></i></div>
+                  ))}</div>
+                  <i class="absolute inset-x-4 top-[206px] block h-px bg-[#e3e6ea]"></i>
+                  <div class="rv absolute inset-x-4 top-[222px] flex items-center justify-between" style="--a:.55;--b:.12"><i class="block h-[8px] w-12 rounded-full bg-[#5f6368]"></i><i class="block h-[14px] w-[70px] rounded-full bg-[#202124]"></i></div>
+                  <div class="fl absolute bottom-[14px] right-[14px] rounded-[10px] border-2 border-[#1a56db] px-3 py-1 text-[15px] font-medium tracking-wide text-[#1a56db]" style="--a:.72;--b:.14;rotate:-8deg">PAGADA</div>
+                </div>
+                <div class="rv absolute right-6 top-[58px] h-[318px] w-[340px] rounded-[16px] bg-[#f6f8fc] p-4" style="--a:.1;--b:.15">
+                  <div class="flex items-center justify-between"><i class="block h-[8px] w-[84px] rounded-full bg-[#202124]"></i><i class="block h-[14px] w-[44px] rounded-full bg-[#dbe6fd]"></i></div>
+                  <svg class="mt-3" width="308" height="176" viewBox="0 0 308 176" aria-hidden="true">
+                    <path d="M0 44H308M0 88H308M0 132H308" stroke="#e3e6ea"/>
+                    <path class="gx" style="--a:.3;--b:.4" d="M0 150 C40 140 60 100 100 108 S160 60 200 70 S270 24 308 18 V176 H0Z" fill="#1a56db" fill-opacity=".1"/>
+                    <path class="dw" style="--a:.28;--b:.42" d="M0 150 C40 140 60 100 100 108 S160 60 200 70 S270 24 308 18" fill="none" stroke="#1a56db" stroke-width="3" stroke-linecap="round" pathLength="100"/>
+                    <circle class="fl" style="--a:.68;--b:.08" cx="308" cy="18" r="6" fill="#fff" stroke="#1a56db" stroke-width="3"/>
+                  </svg>
+                  <div class="mt-2 flex h-[54px] items-end gap-2.5">{[22, 34, 26, 40, 30, 48, 36].map((h, k) => <i class="gy block w-[28px] rounded-[6px] bg-[#dbe6fd]" style={`height:${h}px;--a:${0.4 + k * 0.05};--b:.2`}></i>)}</div>
+                </div>
+              </>)}
+
+              {i === 4 && (<>
+                {[0, 1, 2].map((k) => (
+                  <div class="rv absolute top-[58px] h-[78px] w-[192px] rounded-[14px] border border-[#e3e6ea] p-3.5" style={`left:${24 + k * 204}px;--a:${0.02 + k * 0.06};--b:.15`}>
+                    <i class="block h-[6px] w-14 rounded-full bg-[#bdc1c6]"></i>
+                    <i class="gx mt-3 block h-[12px] w-[70px] rounded-full bg-[#202124]" style={`--a:${0.1 + k * 0.06};--b:.2`}></i>
+                    <svg class="absolute bottom-3 right-3.5" width="70" height="30" viewBox="0 0 70 30" aria-hidden="true"><path class="dw" style={`--a:${0.15 + k * 0.06};--b:.3`} d="M2 24 L16 16 L28 20 L44 8 L68 12" fill="none" stroke={k === 1 ? '#202124' : '#1a56db'} stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" pathLength="100"/></svg>
+                  </div>
+                ))}
+                <div class="rv absolute left-6 top-[148px] h-[150px] w-[346px] rounded-[14px] bg-[#f6f8fc] px-4 pb-3 pt-4" style="--a:.2;--b:.15">
+                  <i class="block h-[7px] w-20 rounded-full bg-[#5f6368]"></i>
+                  <div class="absolute inset-x-4 bottom-3 flex h-[96px] items-end justify-between">{[40, 62, 48, 78, 58, 90, 70, 84].map((h, k) => <i class={`gy block w-[28px] rounded-[7px] ${k === 5 ? 'bg-[#1a56db]' : 'bg-[#dbe6fd]'}`} style={`height:${h}px;--a:${0.28 + k * 0.05};--b:.2`}></i>)}</div>
+                </div>
+                <div class="rv absolute right-6 top-[148px] flex h-[150px] w-[246px] items-center gap-4 rounded-[14px] bg-[#f6f8fc] px-4" style="--a:.3;--b:.15">
+                  <svg width="104" height="104" viewBox="0 0 104 104" aria-hidden="true">
+                    <circle cx="52" cy="52" r="38" fill="none" stroke="#e3e6ea" stroke-width="14"/>
+                    <circle class="dw" style="--a:.35;--b:.35" cx="52" cy="52" r="38" fill="none" stroke="#1a56db" stroke-width="14" stroke-linecap="round" pathLength="100" stroke-dasharray="100" transform="rotate(-90 52 52)" />
+                    <circle class="dw" style="--a:.5;--b:.3" cx="52" cy="52" r="38" fill="none" stroke="#8ab4f8" stroke-width="14" stroke-linecap="round" pathLength="100" transform="rotate(95 52 52)"/>
+                  </svg>
+                  <div class="space-y-3">{[0, 1, 2].map((k) => <div class="flex items-center gap-2"><i class={`size-2.5 rounded-full ${['bg-[#1a56db]', 'bg-[#8ab4f8]', 'bg-[#e3e6ea]'][k]}`}></i><i class="block h-[6px] rounded-full bg-[#bdc1c6]" style={`width:${[52, 40, 30][k]}px`}></i></div>)}</div>
+                </div>
+                <div class="absolute inset-x-6 bottom-[22px] space-y-2.5">{[0, 1, 2].map((k) => (
+                  <div class="rv flex items-center gap-3" style={`--a:${0.55 + k * 0.1};--b:.12`}><i class="size-[18px] rounded-full bg-[#dbe6fd]"></i><i class="block h-[6px] w-[120px] rounded-full bg-[#bdc1c6]"></i><i class="ml-auto block h-[6px] w-[150px] rounded-full bg-[#e3e6ea]"></i><i class="block h-[6px] w-10 rounded-full bg-[#dadce0]"></i></div>
+                ))}</div>
+              </>)}
+
+              {i === 5 && (<>
+                <div class="absolute left-6 top-[58px] h-[318px] w-[300px] rounded-[16px] bg-[#f6f8fc] p-4">
+                  <div class="rv flex h-[34px] w-[200px] items-center rounded-full bg-white px-3.5 shadow-[0_1px_3px_rgba(32,33,36,.1)]" style="--a:.03;--b:.12"><i class="block h-[5px] w-[140px] rounded-full bg-[#bdc1c6]"></i></div>
+                  <div class="rv ml-auto mt-3 flex h-[34px] w-[100px] items-center gap-1.5 rounded-full bg-[#1a56db] px-4" style="--a:.15;--b:.1"><span class="dot3 flex gap-1"><i class="size-1.5 rounded-full bg-white"></i><i class="size-1.5 rounded-full bg-white"></i><i class="size-1.5 rounded-full bg-white"></i></span></div>
+                  <div class="rv ml-auto mt-3 flex h-[56px] w-[250px] items-center gap-2.5 rounded-[20px] bg-[#1a56db] px-4" style="--a:.28;--b:.14">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4z"/></svg>
+                    <div><i class="block h-[5px] w-[150px] rounded-full bg-white/85"></i><i class="mt-2 block h-[5px] w-[96px] rounded-full bg-white/55"></i></div>
+                  </div>
+                  <div class="mt-4 space-y-2">{['Cotización', 'Seguimiento', 'Factura'].map((t, k) => (
+                    <div class="rv flex items-center gap-2.5 rounded-[12px] bg-white px-3 py-2 text-[13px] text-[#3c4043]" style={`--a:${0.42 + k * 0.1};--b:.12`}>
+                      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="8" fill="#eaf1fe"/><path class="dw" style={`--a:${0.46 + k * 0.1};--b:.1`} d="M5 9.4l2.6 2.6L13 6.6" fill="none" stroke="#1a56db" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" pathLength="100"/></svg>{t}
+                    </div>
+                  ))}</div>
+                </div>
+                <svg class="absolute right-6 top-[58px]" width="288" height="318" viewBox="0 0 288 318" aria-hidden="true">
+                  <path class="dw" style="--a:.5;--b:.12" d="M144 84V132" stroke="#1a56db" stroke-width="2.5" fill="none" pathLength="100"/>
+                  <path class="dw" style="--a:.6;--b:.12" d="M144 192V240" stroke="#1a56db" stroke-width="2.5" fill="none" pathLength="100"/>
+                  {['Cotización', 'Seguimiento', 'Factura'].map((t, k) => (
+                    <g class="rv" style={`--a:${0.4 + k * 0.1};--b:.14`}>
+                      <rect x="54" y={30 + k * 108} width="180" height="54" rx="16" fill="#fff" stroke="#c6d4f7" stroke-width="1.5"/>
+                      <circle cx="84" cy={57 + k * 108} r="12" fill="#eaf1fe"/><circle cx="84" cy={57 + k * 108} r="4.5" fill="#1a56db"/>
+                      <text x="108" y={62 + k * 108} font-size="15" fill="#202124" font-family="Google Sans Flex Variable, sans-serif" font-weight="500">{t}</text>
+                    </g>
+                  ))}
+                  <circle r="5" fill="#1a56db" class="pulse"><animateMotion dur="2.4s" repeatCount="indefinite" path="M144 84V132 M144 192V240"/></circle>
+                </svg>
+              </>)}
             </div>
-            <svg class="pointer-events-none absolute inset-0 size-full overflow-visible" viewBox="0 0 560 420" aria-hidden="true">
-              <rect class="ps-frame" x="1" y="1" width="558" height="418" rx="30" pathLength="2000" />
-            </svg>
-            <p data-cap class="absolute inset-x-0 top-full mt-4 text-center text-[15px] text-[#5f6368]">Cada herramienta, por su lado.</p>
-          </div>
+          ))}
+          <svg data-bus class="bus absolute overflow-visible" style="left:0;top:0;width:1px;height:1px;transform:translateZ(60px)" aria-hidden="true"></svg>
         </div>
+      </div>
+
+      <!-- loose pieces (step 1) -->
+      <div data-frags class="pointer-events-none absolute inset-0 z-10" style="perspective:1200px" aria-hidden="true">
+        {frags.map(([k, x, y, w, r, z]) => (
+          <div class="fr" data-fr data-x={x} data-y={y} data-r={r} data-z={z} style={`width:${w}px`} set:html={FR[k as string]}></div>
+        ))}
+      </div>
+
+      <div class="pointer-events-none absolute inset-x-0 top-0 z-10 h-[17svh] bg-gradient-to-b from-white via-white/80 to-white/0" aria-hidden="true"></div>
+      <div class="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-[24svh] bg-gradient-to-t from-white via-white/85 to-white/0" aria-hidden="true"></div>
+      <!-- subtitle -->
+      <div class="absolute inset-x-0 bottom-[7svh] z-20 flex flex-col items-center px-6 text-center">
+        <h3 data-title class="ps-title text-[clamp(1.6rem,3.2vw,2.8rem)] font-normal leading-[1.1] tracking-[-0.03em]">{titles[0]}</h3>
+        <i class="mt-5 block h-[3px] w-[min(220px,50vw)] overflow-hidden rounded-full bg-[#e8eaed]" aria-hidden="true"><b data-bar class="block h-full w-full origin-left scale-x-0 bg-[#202124]"></b></i>
       </div>
     </div>
   </div>
@@ -133,64 +190,131 @@ const mods = [
   <div class="pointer-events-none h-[30svh] bg-gradient-to-b from-white to-white/0" aria-hidden="true"></div>
 </section>
 
-<script define:vars={{ mods }}>
-  const sec = document.querySelector('[data-process]');
-  const rows = [...sec.querySelectorAll('[data-row]')];
-  const els = [...sec.querySelectorAll('[data-mod]')];
-  const stage = sec.querySelector('[data-fit]');
-  const wrap = sec.querySelector('[data-stagewrap]');
-  const rail = sec.querySelector('[data-rail]');
-  const cap = sec.querySelector('[data-cap]');
+<script>
+  const root = document.querySelector<HTMLElement>('#construccion')!;
+  const sec = root.querySelector<HTMLElement>('[data-process]')!;
+  const inner = root.querySelector<HTMLElement>('[data-process-inner]')!;
+  const world = root.querySelector<HTMLElement>('[data-world]')!;
+  const pns = [...root.querySelectorAll<HTMLElement>('[data-pn]')];
+  const frs = [...root.querySelectorAll<HTMLElement>('[data-fr]')];
+  const bus = root.querySelector<SVGSVGElement>('[data-bus]')!;
+  const titleEl = root.querySelector<HTMLElement>('[data-title]')!;
+  const bar = root.querySelector<HTMLElement>('[data-bar]')!;
+  const titles: string[] = JSON.parse(root.dataset.titles!);
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
-  const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
-  const BW = 560, BH = 420;
-  const fit = () => {
-    const r = wrap.getBoundingClientRect();
-    const sc = Math.min(r.width / BW, (r.height - 34) / BH, 1.2);
-    stage.style.transform = `translate(-50%, -50%) scale(${sc.toFixed(4)})`;
-  };
-  fit();
-  addEventListener('resize', fit);
+  const clamp = (v: number, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+  const sm = (t: number) => t * t * (3 - 2 * t);
+  const W = 640, H = 400, GAP = 40;
 
-  let target = 0, F = 0, shown = -1, visible = true;
+  // ---- layout: panels on a grid, camera stops, data bus between them
+  let C: { x: number; y: number }[] = [], K: number[] = [], vw = 1, vh = 1;
+  const layout = () => {
+    vw = inner.clientWidth; vh = inner.clientHeight;
+    const portrait = vw / vh < 0.85;
+    const cols = portrait ? 2 : 3, rows = portrait ? 3 : 2;
+    const order = portrait ? [[0, 0], [1, 0], [1, 1], [0, 1], [0, 2], [1, 2]] : [[0, 0], [1, 0], [2, 0], [2, 1], [1, 1], [0, 1]];
+    const px = (c: number) => (c - (cols - 1) / 2) * (W + GAP), py = (r: number) => (r - (rows - 1) / 2) * (H + GAP);
+    const ww = cols * W + (cols - 1) * GAP, wh = rows * H + (rows - 1) * GAP;
+    C = order.map(([c, r]) => ({ x: px(c), y: py(r) }));
+    pns.forEach((el, i) => { el.style.left = `${C[i].x - W / 2}px`; el.style.top = `${C[i].y - H / 2}px`; el.style.translate = `0 0 ${i % 2 ? -26 : 26}px`; });
+    const kP = portrait ? Math.min(vw * 0.9 / W, vh * 0.5 / H) : Math.min(vw * 0.56 / W, vh * 0.58 / H);
+    const kF = Math.min(vw * (portrait ? 0.92 : 0.9) / ww, vh * (portrait ? 0.6 : 0.6) / wh);
+    K = [kP * 0.84, kP, kP, kP, kP, kP, kP, kF];
+    C = [C[0], ...C, { x: 0, y: 0 }];
+    // bus: channels between panels, stubs to every panel, pulses
+    const L: string[] = [], N: string[] = [], P: string[] = [];
+    const seg = (d: string, a: number) => L.push(`<path class="dw" style="--a:${a};--b:.5" d="${d}" fill="none" stroke="#1a56db" stroke-width="2.5" stroke-linecap="round" pathLength="100"/>`);
+    const node = (x: number, y: number, r: number) => N.push(`<circle class="fl" style="--a:.45;--b:.15" cx="${x}" cy="${y}" r="${r}" fill="#fff" stroke="#1a56db" stroke-width="2.5"/>`);
+    const vx = Array.from({ length: cols - 1 }, (_, c) => px(c) + (W + GAP) / 2), hy = Array.from({ length: rows - 1 }, (_, r) => py(r) + (H + GAP) / 2);
+    vx.forEach((x, i) => { seg(`M${x} ${-wh / 2}V${wh / 2}`, 0.05 + i * 0.1); P.push(`M${x} ${-wh / 2}V${wh / 2}`); });
+    hy.forEach((y, i) => { seg(`M${-ww / 2} ${y}H${ww / 2}`, 0.1 + i * 0.1); P.push(`M${ww / 2} ${y}H${-ww / 2}`); });
+    vx.forEach((x) => hy.forEach((y) => node(x, y, 7)));
+    order.forEach(([c, r], i) => {
+      const x = px(c), y = py(r);
+      if (c < cols - 1) { seg(`M${x + W / 2} ${y}H${x + W / 2 + GAP / 2}`, 0.3 + i * 0.05); node(x + W / 2, y, 5); }
+      if (c > 0) { seg(`M${x - W / 2} ${y}H${x - W / 2 - GAP / 2}`, 0.3 + i * 0.05); node(x - W / 2, y, 5); }
+      if (r < rows - 1) { seg(`M${x} ${y + H / 2}V${y + H / 2 + GAP / 2}`, 0.35 + i * 0.05); node(x, y + H / 2, 5); }
+      if (r > 0) { seg(`M${x} ${y - H / 2}V${y - H / 2 - GAP / 2}`, 0.35 + i * 0.05); node(x, y - H / 2, 5); }
+    });
+    const pulses = P.map((d, i) => `<circle r="5" fill="#1a56db" class="pulse"><animateMotion dur="${3 + i * 0.7}s" begin="${i * 0.5}s" repeatCount="indefinite" path="${d}"/></circle>`).join('');
+    bus.innerHTML = L.join('') + N.join('') + pulses;
+  };
+  layout();
+  addEventListener('resize', layout);
+
+  // ---- loose pieces
+  const fx = frs.map((el, i) => ({ el, x: +el.dataset.x! / 100, y: +el.dataset.y! / 100, r: +el.dataset.r!, z: +el.dataset.z!, ph: i * 1.7 }));
+  const mouse = { x: 0, y: 0, sx: 0, sy: 0 };
+  addEventListener('pointermove', (e) => { mouse.x = e.clientX / innerWidth - 0.5; mouse.y = e.clientY / innerHeight - 0.5; }, { passive: true });
+
+  // ---- scroll → timeline u in [0, 7]
+  let target = 0, u = 0, shown = -1, ecoOn = false, visible = true;
   const read = () => {
     const r = sec.getBoundingClientRect();
     const p = clamp(-r.top / Math.max(1, r.height - innerHeight));
-    target = reduced ? 7 : clamp(p * 7.7 - 0.5, 0, 7);
+    target = reduced ? 7 : clamp(p * 7.6 - 0.3, 0, 7);
   };
-  const capText = ['Cada herramienta, por su lado.', 'Cada pieza encuentra su lugar.', 'Un solo sistema, conectado.'];
-  const render = (time) => {
-    F += (target - F) * (reduced ? 1 : 0.14);
-    els.forEach((el, i) => {
-      const m = mods[i];
-      const t = clamp(F - i, 0, 1);
-      const e = reduced ? 1 : ease(t);
-      const c = 1 - e;
-      const dx = (m.sx - m.gx) * c + Math.sin(time * 0.0007 * m.fx + m.ph) * 9 * c;
-      const dy = (m.sy - m.gy) * c + Math.cos(time * 0.0006 * m.fx + m.ph) * 9 * c;
-      el.style.transform = `translate(${dx.toFixed(1)}px, ${dy.toFixed(1)}px) rotate(${(m.sr * c).toFixed(2)}deg) scale(${(1 - 0.3 * c).toFixed(3)})`;
-      el.style.filter = c > 0.01 ? `grayscale(${c.toFixed(2)})` : 'none';
-      el.style.zIndex = String(c > 0.01 ? i : 0);
-      el.classList.toggle('is-in', t > 0.96);
+  const setTitle = (i: number) => {
+    titleEl.classList.add('out');
+    setTimeout(() => { titleEl.textContent = titles[i]; titleEl.classList.remove('out'); }, 220);
+  };
+  const lastQ: number[] = [];
+  const render = (time: number) => {
+    u += (target - u) * (reduced ? 1 : 0.11);
+    if (Math.abs(target - u) < 0.0005) u = target;
+    // camera
+    const a = Math.min(6, Math.floor(u)), f = u - a;
+    const tr = sm(clamp((f - 0.5) / 0.5));
+    const ccx = lerp(C[a].x, C[a + 1].x, tr), ccy = lerp(C[a].y, C[a + 1].y, tr);
+    const push = lerp(1 + 0.05 * clamp(f / 0.5), 1, tr);
+    const k = lerp(K[a], K[a + 1], tr) * (1 - 0.15 * Math.sin(Math.PI * tr)) * push;
+    const sgn = a % 2 ? -1 : 1, sgn2 = (a + 1) % 2 ? -1 : 1;
+    const e7 = clamp((u - 6.35) / 0.65);
+    const rx = lerp(sgn * 2.5, sgn2 * 2.5, tr) * (1 - e7) + Math.sin(time * 0.0004) * 0.5 - mouse.sy * 2;
+    const ry = lerp(sgn * -5, sgn2 * -5, tr) * (1 - e7) + Math.cos(time * 0.0003) * 0.6 + mouse.sx * 3;
+    world.style.transform = `scale(${k.toFixed(4)}) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) translate3d(${(-ccx).toFixed(1)}px, ${(-ccy).toFixed(1)}px, 0)`;
+    // panels: build + focus
+    const vis = clamp((u - 0.3) / 0.5);
+    pns.forEach((el, i) => {
+      const s = i + 1;
+      const q = clamp((u - s + 0.45) / 0.85);
+      if (lastQ[i] !== q) { lastQ[i] = q; el.style.setProperty('--q', q.toFixed(4)); }
+      const focus = 1 - clamp(Math.abs(u - s) / 0.7);
+      const o = vis * lerp(0.28, 1, focus);
+      el.style.opacity = String(lerp(o, vis, e7).toFixed(3));
     });
-    rail.style.transform = `scaleY(${(F / 7).toFixed(3)})`;
-    const idx = clamp(Math.round(F), 0, 7);
-    if (idx !== shown) {
-      shown = idx;
-      rows.forEach((r, i) => { r.classList.toggle('is-on', i === idx); r.classList.toggle('is-done', i < idx); });
-      stage.classList.toggle('ps-eco', idx === 7);
-      cap.textContent = capText[idx === 0 ? 0 : idx === 7 ? 2 : 1];
+    bus.style.setProperty('--eq', e7.toFixed(3));
+    if ((e7 > 0.4) !== ecoOn) { ecoOn = e7 > 0.4; root.querySelector('[data-cam]')!.classList.toggle('ps-eco', ecoOn); }
+    // loose pieces: drift, then gather into the first panel
+    mouse.sx += (mouse.x - mouse.sx) * 0.05; mouse.sy += (mouse.y - mouse.sy) * 0.05;
+    const g = sm(clamp((u - 0.1) / 0.85));
+    const fr = root.querySelector<HTMLElement>('[data-frags]')!;
+    fr.style.display = u > 1.05 ? 'none' : '';
+    if (u <= 1.05) {
+      fx.forEach((o) => {
+        const px = o.x * vw + Math.sin(time * 0.0006 + o.ph) * 14 + mouse.sx * o.z * -0.12;
+        const py = o.y * vh + Math.cos(time * 0.0005 + o.ph) * 12 + mouse.sy * o.z * -0.12;
+        const dx = (vw / 2 - px) * g, dy = (vh / 2 - py) * g;
+        const sc = (1 - 0.92 * g) * (vw < 700 ? 0.62 : 1);
+        o.el.style.transform = `translate3d(${(px + dx).toFixed(1)}px, ${(py + dy).toFixed(1)}px, ${(o.z * (1 - g)).toFixed(0)}px) translate(-50%, -50%) rotate(${(o.r + Math.sin(time * 0.0004 + o.ph) * 3 + g * 60).toFixed(1)}deg) scale(${sc.toFixed(3)})`;
+        o.el.style.opacity = String(clamp(1 - g * 1.15).toFixed(3));
+      });
     }
+    // subtitle
+    const idx = clamp(Math.round(u), 0, 7);
+    if (idx !== shown) { if (shown >= 0) setTitle(idx); else titleEl.textContent = titles[idx]; shown = idx; }
+    bar.style.transform = `scaleX(${(u / 7).toFixed(3)})`;
   };
   read();
   if (reduced) {
+    pns.forEach((el) => el.style.setProperty('--q', '1'));
     render(0);
-    rows.forEach((r) => r.classList.add('is-on'));
+    titleEl.textContent = titles[7];
   } else {
     new IntersectionObserver((en) => { visible = en[0].isIntersecting; }, { rootMargin: '10% 0px' }).observe(sec);
     addEventListener('scroll', read, { passive: true });
-    const loop = (time) => { if (visible) render(time); requestAnimationFrame(loop); };
+    const loop = (time: number) => { if (visible) render(time); requestAnimationFrame(loop); };
     requestAnimationFrame(loop);
   }
 </script>
