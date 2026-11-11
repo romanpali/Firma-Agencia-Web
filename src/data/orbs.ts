@@ -8,10 +8,10 @@ const flower = (bg: string, c1: string, c2: string, core: string, n = 8) => {
 };
 
 export const arts: Record<string, string> = {
-  flowerPink: flower('#c9ecff', '#ff4d98', '#ff9ec7', '#ffd23f'),
-  flowerWarm: flower('#ffe3c2', '#ff7a2f', '#ffc247', '#c2185b', 10),
-  flowerCool: flower('#ffd1e6', '#2ec8ff', '#a8efff', '#ff4d98', 6),
-  blobs: svg(`<rect width="100" height="100" fill="#fff4d6"/><circle cx="36" cy="40" r="26" fill="#ff4d98" fill-opacity=".85"/><circle cx="64" cy="42" r="24" fill="#2ec8ff" fill-opacity=".85" style="mix-blend-mode:multiply"/><circle cx="50" cy="66" r="24" fill="#ffd23f" fill-opacity=".9" style="mix-blend-mode:multiply"/>`),
+  flowerPink: flower('#cfe0ff', '#ff5fa2', '#ffb3d2', '#ffd23f'),
+  flowerWarm: flower('#e3d7ff', '#ff3b4d', '#ff8a8a', '#5b21b6', 10),
+  flowerCool: flower('#ffd9ec', '#ffffff', '#d9c8ff', '#6d28d9', 6),
+  blobs: svg(`<rect width="100" height="100" fill="#e9eeff"/><circle cx="36" cy="40" r="26" fill="#ff4d98" fill-opacity=".85"/><circle cx="64" cy="42" r="24" fill="#2ec8ff" fill-opacity=".85" style="mix-blend-mode:multiply"/><circle cx="50" cy="66" r="24" fill="#ffd23f" fill-opacity=".9" style="mix-blend-mode:multiply"/>`),
   rings: svg(`<rect width="100" height="100" fill="#2b0a3a"/>${[44, 34, 24, 14].map((r, i) => `<circle cx="50" cy="50" r="${r}" fill="none" stroke="${['#ff4d98', '#ff9a3d', '#ffd23f', '#fff'][i]}" stroke-width="6"/>`).join('')}`),
   mark: svg(`<rect width="100" height="100" fill="#ff3d8f"/><circle cx="50" cy="56" r="22" fill="none" stroke="#fff" stroke-width="4"/><circle cx="50" cy="26" r="6" fill="#fff"/>`),
   type: svg(`<defs><linearGradient id="gA" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff4d98"/><stop offset="1" stop-color="#ffb347"/></linearGradient></defs><rect width="100" height="100" fill="url(#gA)"/><text x="50" y="66" text-anchor="middle" font-family="Inter Tight Variable, sans-serif" font-weight="700" font-size="52" letter-spacing="-3" fill="#fff">Aa</text>`),

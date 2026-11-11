@@ -5,16 +5,16 @@
 @theme {
   --font-sans: "Inter Tight Variable", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Geist Mono Variable", ui-monospace, SFMono-Regular, monospace;
-  --color-paper: #1a0516;
-  --color-ink: #fbf1f6;
-  --color-mute: #bda3b8;
-  --color-accent: #ff5ea6;
-  --color-cool: #6ee7ff;
+  --color-paper: #06030f;
+  --color-ink: #f7f3ff;
+  --color-mute: #aaa3c4;
+  --color-accent: #d6c4ff;
+  --color-cool: #a9c4ff;
   --color-line: rgba(255, 255, 255, 0.12);
 }
 
 html {
-  background: #1a0516;
+  background: #06030f;
   -webkit-font-smoothing: antialiased;
   scroll-behavior: smooth;
 }
@@ -43,8 +43,8 @@ html {
   border-radius: 50%;
   overflow: hidden;
   animation: orbDrift var(--dur, 10s) ease-in-out infinite alternate;
-  background: radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.1) 50%);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5), inset 0 -10px 24px rgba(255, 255, 255, 0.28), 0 30px 60px -20px rgba(20, 0, 20, 0.7);
+  background: radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.55), rgba(176, 196, 255, 0.28) 55%, rgba(160, 140, 255, 0.34));
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5), inset 0 -10px 24px rgba(255, 255, 255, 0.28), 0 30px 60px -20px rgba(10, 0, 40, 0.75);
 }
 .orb > svg { transform: scale(1.08); opacity: 0.96; }
 .orb::after {
@@ -69,11 +69,11 @@ html {
 @keyframes kBuild { from { --k: 0; } to { --k: 1; } }
 .iso .fl { opacity: calc(var(--k, 1) * 1.6); transform: translate3d(0, calc((1 - var(--k, 1)) * -64px), 0); }
 .iso .fl .fc { opacity: calc((var(--k, 1) - 0.35) * 1.8); }
-.iso .fl .st { fill: none; stroke: #6ee7ff; stroke-width: 1.1; stroke-opacity: 0.85; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: calc(1 - min(1, var(--k, 1) * 1.7)); }
+.iso .fl .st { fill: none; stroke: #a9c4ff; stroke-width: 1.1; stroke-opacity: 0.85; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: calc(1 - min(1, var(--k, 1) * 1.7)); }
 .iso .fl .st.thin { stroke-width: 0.7; stroke-opacity: 0.45; }
-.iso .fl .wn { fill: rgba(110, 231, 255, 0.2); opacity: calc((var(--k, 1) - 0.5) * 2); }
+.iso .fl .wn { fill: rgba(169, 196, 255, 0.2); opacity: calc((var(--k, 1) - 0.5) * 2); }
 .iso .wn-lit { animation: winPulse 4.4s ease-in-out infinite; }
-@keyframes winPulse { 0%, 100% { fill: rgba(110, 231, 255, 0.12); } 50% { fill: rgba(207, 250, 254, 0.6); } }
+@keyframes winPulse { 0%, 100% { fill: rgba(169, 196, 255, 0.12); } 50% { fill: rgba(224, 232, 255, 0.6); } }
 .iso .ghost { opacity: calc((1 - var(--k, 0)) * 0.7); }
 .iso [data-scatter] { opacity: var(--k, 1); }
 .iso .scatter { transform-box: fill-box; }
@@ -88,7 +88,7 @@ html {
 @keyframes barP { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(0.68); } }
 .iso .donut { stroke-dasharray: 1; stroke-dashoffset: 0.3; transform-box: fill-box; transform-origin: center; transform: rotate(-90deg); animation: donut 4.5s ease-in-out infinite alternate; }
 @keyframes donut { from { stroke-dashoffset: 0.62; } to { stroke-dashoffset: 0.2; } }
-.iso .bus { fill: none; stroke: #6ee7ff; stroke-opacity: 0.55; stroke-dasharray: 1; stroke-dashoffset: calc(1 - var(--k, 0)); }
+.iso .bus { fill: none; stroke: #a9c4ff; stroke-opacity: 0.55; stroke-dasharray: 1; stroke-dashoffset: calc(1 - var(--k, 0)); }
 .iso .bus-dot { opacity: calc((var(--k, 0) - 0.9) * 10); animation: busRun 3.6s ease-in-out infinite; }
 @keyframes busRun { from { transform: translateY(var(--y0)); } to { transform: translateY(var(--y1)); } }
 
@@ -97,12 +97,12 @@ html {
 /* Build story: step texts */
 .bs-step { opacity: 0; transform: translate3d(0, 18px, 0); filter: blur(6px); pointer-events: none; transition: opacity 0.6s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), filter 0.6s ease; }
 .bs-step.is-on { opacity: 1; transform: none; filter: none; pointer-events: auto; }
-.bs-rail li.is-on { background: #6ee7ff; }
+.bs-rail li.is-on { background: #a9c4ff; }
 
 /* Services index: line that draws in on reveal */
 .row::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 1px; background: rgba(255, 255, 255, 0.14); transform: scaleX(0); transform-origin: left; transition: transform 1.1s cubic-bezier(0.22, 1, 0.36, 1); transition-delay: calc(var(--i, 0) * 90ms); }
 .js .row.is-in::before, html:not(.js) .row::before { transform: scaleX(1); }
-.row::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(255, 94, 166, 0.1), transparent 70%); opacity: 0; transition: opacity 0.4s ease; pointer-events: none; }
+.row::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(150, 110, 255, 0.14), transparent 70%); opacity: 0; transition: opacity 0.4s ease; pointer-events: none; }
 .row:hover::after { opacity: 1; }
 
 /* Reveal on scroll (only when JS is on, so content never stays hidden) */
