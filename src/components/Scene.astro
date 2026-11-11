@@ -1,0 +1,125 @@
+---
+// Cinematic generative backdrops. Layers carry data-par so the page can drift them for depth.
+interface Props { kind: string; lite?: boolean }
+const { kind, lite = false } = Astro.props;
+const rng = (seed: number) => { let s = seed; return () => { s = (s * 1664525 + 1013904223) % 4294967296; return s / 4294967296; }; };
+const seeds: Record<string, number> = { diseno: 3, desarrollo: 7, marketing: 11, ventas: 13, ia: 17, finanzas: 19, operaciones: 23, datos: 29, cielo: 31, cielo2: 37, cielo3: 41 };
+const r = rng(seeds[kind] ?? 1);
+const pick = <T,>(a: T[]) => a[Math.floor(r() * a.length)];
+
+const petals = Array.from({ length: 7 }, (_, i) => ({ rot: i * (360 / 7) + 12, w: 22 + r() * 6, h: 46 + r() * 10, b: 4 + r() * 9, o: 0.55 + r() * 0.35 }));
+const windows = Array.from({ length: 28 * 17 }, () => { const v = r(); return v > 0.7 ? 0.9 : v > 0.45 ? 0.35 : v > 0.3 ? 0.14 : 0.04; });
+const bokeh = Array.from({ length: 26 }, () => ({ x: r() * 100, y: 50 + r() * 48, s: 2 + r() * 8, c: pick(['255,217,160', '255,185,138', '156,196,255', '255,255,255', '255,150,120']), a: 0.18 + r() * 0.35, b: r() * 4 }));
+const dots = Array.from({ length: 300 }, (_, i) => { const ang = i * 0.37; const rad = 2 + i * 0.16; return { x: 80 + Math.cos(ang) * rad * 1.5 + (r() - 0.5) * 6, y: 50 + Math.sin(ang) * rad * 0.82 + (r() - 0.5) * 6, r: 0.25 + r() * 0.95, a: 0.25 + r() * 0.7 }; });
+const crowd = Array.from({ length: 40 }, (_, i) => ({ x: i * 2.6 + r() * 1.5, h: 6 + r() * 8 }));
+const clouds = Array.from({ length: 9 }, () => ({ x: r() * 100, y: 8 + r() * 56, w: 30 + r() * 46, h: 8 + r() * 14, o: 0.22 + r() * 0.35 }));
+---
+
+<div class="scene absolute inset-0 overflow-hidden bg-[#0b0c10]" data-scene={kind} aria-hidden="true">
+  {kind === 'diseno' && (
+    <>
+      <div class="absolute inset-0" style="background:radial-gradient(120% 90% at 28% 18%,#f7c0a6 0%,#e0786c 28%,#80384a 58%,#1b0f17 100%)"></div>
+      <div data-par="0.4" class="absolute inset-0">
+        {petals.map((p) => (
+          <i class="absolute left-[64%] top-[50%]" style={`width:${p.w}%;height:${p.h}%;margin:-${p.h}% 0 0 -${p.w / 2}%;transform-origin:50% 100%;transform:rotate(${p.rot}deg);border-radius:50% 50% 46% 46% / 70% 70% 30% 30%;background:linear-gradient(to top,rgba(255,236,226,.9),rgba(255,120,140,.55) 45%,rgba(140,40,90,.35));filter:blur(${lite ? 0 : p.b}px);mix-blend-mode:screen;opacity:${p.o}`}></i>
+        ))}
+      </div>
+      <i class="absolute left-[56%] top-[36%] h-[14%] w-[2%] rotate-[24deg] rounded-full bg-white/70 blur-[6px]"></i>
+      <i class="absolute left-[22%] top-[26%] size-[34%] rounded-full bg-[#ffd2b8]/30 blur-[40px]"></i>
+    </>
+  )}
+
+  {kind === 'desarrollo' && (
+    <>
+      <div class="absolute inset-0" style="background:linear-gradient(#070a12,#0d1220)"></div>
+      <div data-par="0.3" class="absolute grid" style="inset:-14% -10%;grid-template-columns:repeat(28,1fr);grid-auto-rows:1fr;gap:.8%;transform:perspective(1200px) rotateY(-24deg) rotateZ(-1.5deg) scale(1.1);padding:2%">
+        {windows.map((a) => <i style={`background:rgba(255,200,110,${a});box-shadow:${a > 0.8 ? '0 0 24px rgba(255,190,90,.55)' : 'none'};border-radius:1px`}></i>)}
+      </div>
+      <i class="absolute inset-x-0 bottom-0 h-[38%]" style="background:linear-gradient(to top,#05070d,transparent)"></i>
+    </>
+  )}
+
+  {kind === 'marketing' && (
+    <>
+      <div class="absolute inset-x-0 top-0 h-[56%]" style="background:linear-gradient(#141b33,#3a3550 50%,#c4795f 100%)"></div>
+      <div class="absolute inset-x-0 bottom-0 h-[44%]" style="background:linear-gradient(#34303f,#10131c 60%,#080a10)"></div>
+      <i class="absolute left-[62%] top-[44%] h-[24%] w-[30%] -translate-x-1/2 rounded-full bg-[#ffb38a]/60 blur-[40px]"></i>
+      <i class="absolute left-[62%] top-[56%] h-[40%] w-[6%] -translate-x-1/2 bg-gradient-to-b from-[#ffb38a]/50 to-transparent blur-[14px]"></i>
+      <div data-par="0.5" class="absolute inset-0">
+        {bokeh.map((b) => <i class="absolute rounded-full" style={`left:${b.x}%;top:${b.y}%;width:${b.s}%;aspect-ratio:1;background:rgba(${b.c},${b.a});filter:blur(${lite ? 0 : b.b}px)`}></i>)}
+      </div>
+    </>
+  )}
+
+  {kind === 'ventas' && (
+    <>
+      <div class="absolute inset-0" style="background:linear-gradient(#1e4352 0%,#10303b 48%,#06131a 100%)"></div>
+      <i class="absolute -right-[10%] -top-[10%] h-[120%] w-[60%]" style="background:linear-gradient(100deg,rgba(255,255,255,.34),transparent 62%);clip-path:polygon(40% 0,100% 0,100% 100%,0 100%);filter:blur(18px)"></i>
+      <div data-par="0.3" class="absolute inset-0">
+        {[8, 14, 21, 29, 38, 49].map((s, i) => <i class="absolute left-[60%] top-[66%] -translate-x-1/2 -translate-y-1/2 rounded-[50%]" style={`width:${s * 1.6}%;height:${s * 0.5}%;border:1px solid rgba(255,255,255,${0.26 - i * 0.03})`}></i>)}
+        {Array.from({ length: 12 }, (_, i) => <i class="absolute inset-x-0 h-px" style={`top:${46 + i * 4.6}%;background:linear-gradient(90deg,transparent,rgba(255,255,255,${0.05 + (i % 3) * 0.03}),transparent)`}></i>)}
+      </div>
+      <i class="absolute left-[60%] top-[66%] size-[3%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/80 blur-[6px]"></i>
+    </>
+  )}
+
+  {kind === 'ia' && (
+    <>
+      <div class="absolute inset-0" style="background:radial-gradient(70% 70% at 52% 50%,#14204a 0%,#070b1e 60%,#03040c 100%)"></div>
+      <i class="absolute left-[40%] top-[28%] h-[44%] w-[34%] rounded-full bg-[#5b7bff]/25 blur-[70px]"></i>
+      <svg data-par="0.35" viewBox="0 0 160 100" class="absolute inset-0 size-full" preserveAspectRatio="xMidYMid slice">
+        <g class={lite ? '' : 'spin-slow'} style="transform-origin:80px 50px">
+          {dots.map((d) => <circle cx={d.x} cy={d.y} r={d.r} fill={`rgba(176,202,255,${d.a})`} />)}
+        </g>
+      </svg>
+    </>
+  )}
+
+  {kind === 'finanzas' && (
+    <>
+      <div class="absolute inset-0" style="background:linear-gradient(135deg,#0c0e12,#1d2027)"></div>
+      <i class="absolute inset-0" style="clip-path:polygon(0 100%,34% 100%,100% 2%,60% 0);background:linear-gradient(120deg,#2b2f38,#5a606c)"></i>
+      <i data-par="0.3" class="absolute inset-0" style="clip-path:polygon(34% 100%,100% 2%,100% 100%);background:linear-gradient(200deg,#eef2f6,#8e97a6 70%,#454b57)"></i>
+      <i class="absolute -right-[4%] -top-[6%] size-[44%] rounded-full" style="background:radial-gradient(circle,rgba(255,255,255,.95),rgba(255,255,255,.25) 28%,transparent 62%)"></i>
+      <i class="absolute right-0 top-[2%] h-px w-[70%] bg-gradient-to-l from-white/70 to-transparent blur-[1px]"></i>
+    </>
+  )}
+
+  {kind === 'operaciones' && (
+    <>
+      <div class="absolute inset-0" style="background:linear-gradient(#2d1f17,#150e0a 70%,#0a0605)"></div>
+      <i class="absolute -left-[8%] top-0 h-[100%] w-[46%]" style="background:linear-gradient(80deg,rgba(255,190,120,.42),transparent 70%);clip-path:polygon(0 0,70% 0,100% 100%,0 100%);filter:blur(14px)"></i>
+      <div data-par="0.3" class="absolute" style="left:30%;top:14%;width:62%;height:64%;background-image:repeating-linear-gradient(90deg,#8a5a37 0,#8a5a37 .9%,#2a190e .9%,#2a190e 1.4%);box-shadow:inset 0 60px 80px rgba(0,0,0,.7),inset 0 -60px 80px rgba(255,170,90,.35)"></div>
+      <i class="absolute bottom-0 inset-x-0 h-[24%]" style="background:linear-gradient(#1a110c,#080504)"></i>
+      <i class="absolute bottom-[18%] left-[24%] h-[13%] w-[52%] rounded-[14px] bg-[#0a0605]"></i>
+      <i class="absolute bottom-[26%] left-[26%] h-[9%] w-[48%] rounded-[12px] bg-[#120c09]"></i>
+      <i class="absolute left-[80%] top-[8%] size-[10%] rounded-full bg-[#ffcf8a]/50 blur-[30px]"></i>
+    </>
+  )}
+
+  {kind === 'datos' && (
+    <>
+      <div class="absolute inset-0" style="background:linear-gradient(#050a2a 0%,#0b1654 56%,#02051a 100%)"></div>
+      <div data-par="0.35" class="absolute inset-0">
+        {[
+          { x: 20, c: '#3a8cff,#ff5fa2' }, { x: 37, c: '#ffb36b,#ff4f8a' }, { x: 54, c: '#6ad1ff,#3a5bff' }, { x: 71, c: '#ff6a9c,#ffb36b' },
+        ].map((s, i) => <i class="absolute top-[14%] h-[46%] w-[11%] rounded-[3px]" style={`left:${s.x}%;background:linear-gradient(160deg,${s.c});box-shadow:0 0 70px ${s.c.split(',')[0]}88;transform:perspective(900px) rotateY(${(i - 1.5) * 8}deg)`}></i>)}
+      </div>
+      <i class="absolute inset-x-0 bottom-0 h-[34%]" style="background:linear-gradient(to top,#02030a 40%,transparent)"></i>
+      {crowd.map((c) => <i class="absolute bottom-0 w-[4%] rounded-t-full bg-[#02030a]" style={`left:${c.x}%;height:${c.h}%`}></i>)}
+    </>
+  )}
+
+  {kind.startsWith('cielo') && (
+    <>
+      <div class="absolute inset-0" style={kind === 'cielo' ? 'background:linear-gradient(#0a0f1e 0%,#1b2540 40%,#5d5666 70%,#c58f72 92%,#efc09a 100%)' : kind === 'cielo2' ? 'background:linear-gradient(#070b16 0%,#141c33 45%,#3d405a 75%,#a77a6c 100%)' : 'background:linear-gradient(#05070f 0%,#0d1426 40%,#2b324f 72%,#7a6070 100%)'}></div>
+      <div data-par="0.3" class="absolute inset-0">
+        {clouds.map((c) => <i class="absolute rounded-[50%] bg-[#070b14] blur-[46px]" style={`left:${c.x - c.w / 2}%;top:${c.y}%;width:${c.w}%;height:${c.h}%;opacity:${c.o}`}></i>)}
+      </div>
+      <i class="absolute inset-x-[10%] bottom-[-6%] h-[22%] rounded-[50%] bg-[#ffc89a]/30 blur-[60px]"></i>
+    </>
+  )}
+
+  <i class="grain pointer-events-none absolute inset-0"></i>
+  <i class="pointer-events-none absolute inset-0" style="background:radial-gradient(120% 100% at 50% 50%,transparent 55%,rgba(0,0,0,.5))"></i>
+</div>

@@ -4,24 +4,41 @@ const links = [
   { href: '/nosotros', label: 'Nosotros' },
   { href: '/contacto', label: 'Contacto' },
 ];
+const btn = 'rounded-full border border-white/30 bg-white/[0.08] px-4 py-2 text-[13px] text-white backdrop-blur-md transition-[background-color,transform] duration-200 hover:bg-white/20 active:scale-[0.97]';
 ---
 
-<header data-nav class="hf-rise fixed inset-x-0 top-4 z-50 flex justify-center px-4 md:top-6">
-  <div
-    data-header
-    class="group/pill flex h-14 text-white w-full max-w-[680px] items-center justify-between rounded-full border border-white/15 bg-[#0b0b0c]/60 py-2 pl-6 pr-2 shadow-[0_8px_32px_rgba(0,0,0,0.25),inset_0_1px_0_rgba(255,255,255,0.18)] backdrop-blur-2xl backdrop-saturate-150 transition-[background-color,border-color,color,box-shadow] duration-500 data-[tone=light]:border-black/10 data-[tone=light]:bg-white/85 data-[tone=light]:text-ink data-[tone=light]:shadow-[0_8px_32px_rgba(20,22,28,0.10),inset_0_1px_0_rgba(255,255,255,0.8)]"
-  >
-    <a href="/" class="text-[17px] leading-none tracking-tight" aria-label="HumanCorp"><span class="font-light">HUMAN</span> <span class="font-semibold">CORP</span></a>
-    <nav class="hidden items-center gap-8 md:flex" aria-label="Principal">
-      {links.map((l) => (
-        <a href={l.href} class="text-[15px] font-medium tracking-tight text-white/80 transition-colors hover:text-white group-data-[tone=light]/pill:text-ink/70 group-data-[tone=light]/pill:hover:text-ink">{l.label}</a>
-      ))}
-    </nav>
-    <a
-      href="/contacto"
-      class="rounded-full bg-white px-5 py-2.5 text-[15px] font-medium leading-none tracking-tight text-[#0b1a4a] transition-[transform,background-color,color] duration-500 hover:scale-[1.03] group-data-[tone=light]/pill:bg-ink group-data-[tone=light]/pill:text-white"
-    >
-      Hablemos
-    </a>
-  </div>
+<header class="fixed inset-x-0 top-0 z-50 flex items-center justify-between px-5 py-5 text-white md:px-8" data-nav>
+  <a href="/contacto" class={btn}>Hablemos</a>
+  <a href="/" class="absolute left-1/2 -translate-x-1/2 text-[15px] tracking-wide" aria-label="HumanCorp"><span class="font-light">HUMAN</span> <span class="font-semibold">CORP</span></a>
+  <button type="button" class={btn} data-menu-open aria-expanded="false" aria-controls="site-menu">Menú</button>
 </header>
+
+<div id="site-menu" data-menu class="pointer-events-none fixed inset-0 z-[60] flex flex-col justify-between bg-[#07080b]/95 px-6 py-6 text-white opacity-0 backdrop-blur-xl transition-opacity duration-500 md:px-10" aria-hidden="true">
+  <div class="flex items-center justify-between">
+    <span class="text-[15px] tracking-wide"><span class="font-light">HUMAN</span> <span class="font-semibold">CORP</span></span>
+    <button type="button" class={btn} data-menu-close>Cerrar</button>
+  </div>
+  <nav class="flex flex-col gap-2" aria-label="Principal">
+    {links.map((l, i) => (
+      <a href={l.href} data-menu-link class="menu-link text-[clamp(2.6rem,9vw,7rem)] font-light leading-[1.05] tracking-[-0.045em] text-white/90 transition-colors hover:text-white" style={`--i:${i}`}>{l.label}</a>
+    ))}
+  </nav>
+  <p class="text-[13px] text-white/45">Diseño, tecnología y operaciones empresariales.</p>
+</div>
+
+<script>
+  const menu = document.querySelector<HTMLElement>('[data-menu]')!;
+  const open = document.querySelector<HTMLElement>('[data-menu-open]')!;
+  const set = (on: boolean) => {
+    menu.style.opacity = on ? '1' : '0';
+    menu.style.pointerEvents = on ? 'auto' : 'none';
+    menu.setAttribute('aria-hidden', String(!on));
+    open.setAttribute('aria-expanded', String(on));
+    menu.classList.toggle('is-open', on);
+    document.documentElement.style.overflow = on ? 'hidden' : '';
+  };
+  open.addEventListener('click', () => set(true));
+  menu.querySelector('[data-menu-close]')!.addEventListener('click', () => set(false));
+  menu.querySelectorAll('[data-menu-link]').forEach((a) => a.addEventListener('click', () => set(false)));
+  addEventListener('keydown', (e) => { if (e.key === 'Escape') set(false); });
+</script>

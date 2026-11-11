@@ -1,9 +1,9 @@
 ---
 import '../styles/global.css';
 import Hero from '../components/Hero.astro';
-import Intro from '../components/Intro.astro';
 import ProcessStory from '../components/ProcessStory.astro';
-import ServicesDirectory from '../components/ServicesDirectory.astro';
+import AreaSections from '../components/AreaSections.astro';
+import Closing from '../components/Closing.astro';
 import ScrollFx from '../components/ScrollFx.astro';
 import Header from '../components/Header.astro';
 ---
@@ -17,13 +17,13 @@ import Header from '../components/Header.astro';
     <script is:inline>document.documentElement.classList.add('js')</script>
     <title>HumanCorp — Diseño, tecnología y operaciones empresariales</title>
   </head>
-  <body class="bg-paper font-sans text-ink">
+  <body class="bg-[#08090c] font-sans text-white">
     <Header />
     <main>
       <Hero />
-      <Intro />
+      <AreaSections />
       <ProcessStory />
-      <ServicesDirectory />
+      <Closing />
     </main>
     <ScrollFx />
   </body>
