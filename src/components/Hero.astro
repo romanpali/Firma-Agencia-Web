@@ -1,7 +1,7 @@
 ---
 ---
 
-<section data-hero class="relative h-svh min-h-[600px] overflow-hidden bg-[#1f4cb8] text-white">
+<section data-hero class="relative h-svh min-h-[600px] overflow-hidden bg-[#1f4cb8] text-white md:sticky md:top-0">
   <canvas id="hero-canvas" class="absolute inset-0 size-full" aria-hidden="true"></canvas>
   <div class="pointer-events-none absolute inset-0 bg-black/20"></div>
   <div class="pointer-events-none absolute inset-x-0 top-0 h-[12%] bg-gradient-to-b from-black/90 to-transparent"></div>
@@ -55,7 +55,7 @@ void main(){
   gl_FragColor = vec4(col, 1.);
 }`;
   let render: ((t: number) => void) | null = null;
-  const gl = canvas.getContext('webgl', { antialias: false, alpha: false });
+  const gl = canvas.getContext('webgl', { antialias: false, alpha: false, preserveDrawingBuffer: true });
   if (gl) {
     const sh = (type: number, src: string) => { const s = gl.createShader(type)!; gl.shaderSource(s, src); gl.compileShader(s); return s; };
     const prog = gl.createProgram()!;

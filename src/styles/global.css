@@ -32,6 +32,9 @@ html {
 .menu-link { opacity: 0; transform: translate3d(0, 40px, 0); transition: opacity 0.7s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), color 0.3s; transition-delay: calc(0.15s + var(--i) * 0.08s); }
 .is-open .menu-link { opacity: 1; transform: none; }
 
+/* Horizon carousel tiles */
+.hz-tile { position: absolute; left: calc(var(--tw) / -2); top: calc(var(--th) / -2); width: var(--tw); height: var(--th); overflow: hidden; border-radius: 2px; background: #0b0c10; backface-visibility: hidden; box-shadow: 0 30px 60px -24px rgba(40, 20, 10, 0.55); transform: rotateY(calc(var(--i) * 20deg)) translateZ(calc(var(--R) * -1)); }
+
 /* Process: rows open one at a time, modules settle into place */
 .ps-title { color: #4b4d51; transition: color 0.6s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1); }
 .ps-row.is-done .ps-title { color: #9b9da1; }
