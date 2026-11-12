@@ -1,7 +1,14 @@
 ---
-// Placeholder photos (public/horizon/1..5.webp) cycled over the eight tiles until the final ones arrive.
-const photos = [1, 2, 3, 4, 5];
-const tiles = Array.from({ length: 8 }, (_, i) => photos[i % photos.length]);
+import Panel from './Panels.astro';
+// Each card has a photograph on the front and a live module (finance, data, assistants, marketing, identity, website) on the back.
+const cards = [
+  { img: '/horizon/1.webp', panel: 2 },
+  { img: '/horizon/2.webp', panel: 3 },
+  { img: '/horizon/3.webp', panel: 4 },
+  { img: '/horizon/4.webp', panel: 5 },
+  { img: '/horizon/5.webp', panel: 0 },
+  { img: '/process/portale-bg.webp', panel: 1 },
+];
 ---
 
 <section data-horizon class="relative z-10 -mt-[90svh] h-[260svh]">
@@ -12,12 +19,18 @@ const tiles = Array.from({ length: 8 }, (_, i) => photos[i % photos.length]);
       </h2>
     </div>
 
-    <!-- Curved carousel of the eight areas -->
-    <div class="absolute inset-x-0 top-[55%] z-10 h-0" style="perspective:1500px;--tw:clamp(175px,23vw,360px);--th:calc(var(--tw)*0.62);--R:calc(var(--tw)*3.2)">
+    <!-- Curved carousel: cards flip from photograph to module -->
+    <div class="absolute inset-x-0 top-[55%] z-10 h-0" style="perspective:1500px;--tw:clamp(200px,26vw,430px);--th:calc(var(--tw)*0.62);--R:calc(var(--tw)*3.2)">
       <div data-cyl style="transform-style:preserve-3d">
-        {tiles.map((n, i) => (
+        {cards.map((c, i) => (
           <figure class="hz-tile" style={`--i:${i}`}>
-            <img src={`/horizon/${n}.webp`} alt="" width="960" height="600" decoding="async" class="size-full object-cover" />
+            <div class="hz-flip" data-flip>
+              <div class="hz-face hz-front">
+                <img src={c.img} alt="" width="960" height="600" decoding="async" class="size-full object-cover" />
+                <i class="hz-sheen absolute inset-0"></i>
+              </div>
+              <div class="hz-face hz-back"><div class="hz-pn" data-hzpn><Panel i={c.panel} /></div></div>
+            </div>
           </figure>
         ))}
       </div>
@@ -30,21 +43,45 @@ const tiles = Array.from({ length: 8 }, (_, i) => photos[i % photos.length]);
 </section>
 
 <script>
-  import { onFrame, measure, put, clamp, smooth } from '../scripts/frame';
+  import { onFrame, measure, put, clamp, smooth, countsOf, paintCounts } from '../scripts/frame';
   const sec = document.querySelector<HTMLElement>('[data-horizon]')!;
   const cyl = sec.querySelector<HTMLElement>('[data-cyl]')!;
+  const tiles = [...sec.querySelectorAll<HTMLElement>('.hz-tile')].map((el) => {
+    const pn = el.querySelector<HTMLElement>('[data-hzpn]')!;
+    return { flip: el.querySelector<HTMLElement>('[data-flip]')!, sheen: el.querySelector<HTMLElement>('.hz-sheen')!, pn, panel: pn.firstElementChild as HTMLElement, counts: countsOf(pn), q: -1 };
+  });
   const m = measure(sec);
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const STEP = 20; // degrees between tiles
+  const N = tiles.length;
   const ptr = { x: 0 }, tgt = { x: 0 };
   addEventListener('pointermove', (e) => { if (e.pointerType === 'mouse') tgt.x = e.clientX / innerWidth - 0.5; }, { passive: true });
+
+  // the 640x400 module is scaled to the card width
+  const fit = () => tiles.forEach((t) => { const w = t.flip.clientWidth; if (w) put(t.pn, '--sc', (w / 640).toFixed(4)); });
+  fit();
+  addEventListener('resize', fit);
+  new ResizeObserver(fit).observe(tiles[0].flip);
+
+  const paint = (angle: number, t: (typeof tiles)[number], now: number) => {
+    const rad = (angle * Math.PI) / 180;
+    put(t.flip, 'transform', angle < 0.2 ? 'none' : `translateZ(${(Math.sin(rad) * 46).toFixed(1)}px) rotateY(${angle.toFixed(2)}deg)`);
+    // light sweeping over the front face while the card turns
+    put(t.sheen, 'opacity', (Math.sin(rad) * 0.9).toFixed(3));
+    put(t.sheen, 'transform', `translateX(${((angle / 90 - 1) * 70).toFixed(1)}%)`);
+    const q = smooth(clamp((angle - 88) / 92));
+    if (q !== t.q) { t.q = q; t.panel.style.setProperty('--q', q.toFixed(4)); paintCounts(t.counts, q); }
+  };
+  if (reduced) tiles.forEach((t) => paint(0, t, 0));
 
   onFrame((now, y, vh) => {
     if (y + vh < m.top || y > m.top + m.height) return;
     const p = clamp((y - m.top) / Math.max(1, m.height - vh));
     ptr.x += (tgt.x - ptr.x) * 0.05;
-    const idle = reduced ? 0 : Math.sin(now / 2600) * 0.12;
-    const idx = 2 + 3 * smooth(p) + idle - ptr.x * 0.25; // which tile sits in the centre
+    const idle = reduced ? 0 : Math.sin(now / 2600) * 0.1;
+    const idx = 1.2 + 3.2 * smooth(p) + idle - ptr.x * 0.25; // which card sits in the centre
     put(cyl, 'transform', `translateZ(var(--R)) rotateY(${(-idx * STEP).toFixed(2)}deg)`);
+    if (reduced) return;
+    tiles.forEach((t, i) => paint(180 * smooth(clamp((p - (0.1 + (i / (N - 1)) * 0.46)) / 0.3)), t, now));
   });
 </script>

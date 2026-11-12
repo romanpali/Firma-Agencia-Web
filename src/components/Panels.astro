@@ -1,0 +1,231 @@
+---
+interface Props { i: number }
+const { i } = Astro.props;
+const labels = ['Identidad', 'Sitio web', 'Finanzas', 'Datos', 'Asistentes', 'Marketing'];
+const SB = [
+  '<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
+  '<path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h6M9 17h6"/>',
+  '<path d="M5 19L19 5"/><circle cx="7.5" cy="7.5" r="2.5"/><circle cx="16.5" cy="16.5" r="2.5"/>',
+  '<path d="M3 10l9-6 9 6M5 10v8M10 10v8M14 10v8M19 10v8M3 20h18"/>',
+  '<path d="M5 20V10M12 20V4M19 20v-7"/>',
+];
+const ramp = (v: number) => (v < 0.25 ? '#f1effc' : v < 0.5 ? '#d9d0ff' : v < 0.78 ? '#977DFF' : '#0033FF');
+const HM = Array.from({ length: 4 }, (_, r) => Array.from({ length: 24 }, (_, c) => ramp(Math.max(0, Math.min(1, 0.5 + 0.42 * Math.sin((c - 6 - r * 2.2) / 3.4) + 0.2 * Math.sin(c * 1.7 + r * 3.1) - (c < 3 || c > 21 ? 0.35 : 0))))));
+---
+
+<div class={`pn${i === 1 ? ' dk' : ''}`} data-pn={i}>
+  <span class="lb">{labels[i]}</span>
+  <span class="ok rv" style="--a:.9;--b:.08">Listo</span>
+
+              {i === 0 && (<>
+                <div class="absolute left-6 top-[60px] h-[316px] w-[220px] overflow-hidden rounded-[20px]" style="background:linear-gradient(180deg,#7E86B3 0%,#E8C4A6 36%,#F6B370 64%,#D6802D 100%)">
+                  <i class="grain absolute inset-0 opacity-[.12]"></i>
+                  <span class="rv absolute inset-x-0 top-[16px] text-center text-[11.5px] font-bold tracking-[0.2em] text-[#2A1F3D]" style="--a:.08;--b:.14">#7E86B3</span>
+                  <i class="gy absolute left-1/2 top-[40px] block h-[30px] w-px bg-[#2A1F3D]/70" style="--a:.14;--b:.2;transform-origin:50% 0"></i>
+                  <div class="absolute inset-x-0 bottom-[84px] top-[78px] flex items-center justify-center"><span class="rv text-[25px] font-extrabold leading-none tracking-[-0.01em] text-[#2A1F3D]" style="--a:.22;--b:.3;writing-mode:vertical-rl;rotate:180deg">Atardecer <i class="font-light not-italic">· ALBA</i></span></div>
+                  <span class="rv absolute inset-x-0 bottom-[44px] text-center text-[11.5px] font-bold tracking-[0.2em] text-[#2A1F3D]" style="--a:.5;--b:.14">#F6B370</span>
+                  <span class="rv absolute inset-x-0 bottom-[16px] text-center text-[11.5px] font-bold tracking-[0.2em] text-[#2A1F3D]" style="--a:.56;--b:.14">#D6802D</span>
+                </div>
+                {[['#7E86B3', '7E86B3', '#fff'], ['#E8C4A6', 'E8C4A6', '#5a3a28'], ['#F6B370', 'F6B370', '#5a3a12'], ['#D6802D', 'D6802D', '#fff'], ['#5C422F', '5C422F', '#f0e2d6']].map(([c, h, t], k) => (
+                  <i class="gy absolute top-[60px] flex h-[150px] w-[52px] items-end justify-center rounded-[14px] pb-2.5 text-[8.5px] font-bold not-italic tracking-wider" style={`left:${268 + k * 62}px;background:${c};color:${t};--a:${0.22 + k * 0.06};--b:.26`}><span class="rv" style={`--a:${0.5 + k * 0.05};--b:.12`}>{h}</span></i>
+                ))}
+                <div class="rv absolute left-[268px] top-[226px] flex h-[150px] w-[120px] flex-col items-center justify-center rounded-[18px] bg-[#f8efe6]" style="--a:.5;--b:.25"><span class="text-[78px] font-light leading-none tracking-[-0.04em] text-[#2A1F3D]">Aa</span><span class="mt-2 text-[10px] tracking-wide text-[#8a6f5e]">Light · Regular</span></div>
+                <div class="rv absolute left-[404px] top-[246px] h-[96px] w-[150px] -rotate-[5deg] rounded-[14px] p-3.5" style="--a:.62;--b:.25;background:linear-gradient(135deg,#7E86B3,#D6802D)">
+                  <svg width="24" height="24" viewBox="0 0 34 34" aria-hidden="true"><rect x="2" y="2" width="30" height="30" rx="9" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17" cy="14" r="3" fill="#fff"/></svg>
+                  <i class="mt-4 block h-[5px] w-16 rounded-full bg-white/90"></i><i class="mt-2 block h-[5px] w-10 rounded-full bg-white/50"></i>
+                </div>
+                <div class="rv absolute left-[566px] top-[230px] flex size-[50px] items-center justify-center rounded-full bg-[#f8efe6]" style="--a:.72;--b:.2"><i class="size-[18px] rounded-full bg-[#F6B370]"></i></div>
+              </>)}
+
+              {i === 1 && (<>
+                <div class="site absolute inset-0 overflow-hidden">
+                  <div class="zm absolute inset-0">
+                    <img src="/process/portale-bg.webp" alt="" width="2400" height="1495" decoding="async" class="zi absolute inset-0 size-full object-cover" style="--a:0;--b:.18" />
+                    <i class="vg absolute inset-0"></i>
+                    <i class="glow absolute inset-0"></i>
+                    <i class="absolute" style="left:42%;top:49%;width:2.8%;height:17%;backdrop-filter:blur(6px)" aria-hidden="true"></i>
+                    <!-- brand on the glass -->
+                    <svg class="rv absolute" style="--a:.4;--b:.2;left:48.8%;top:26.8%;width:3.6%" viewBox="0 0 38 30" aria-hidden="true"><rect x="1" y="1" width="36" height="28" rx="7" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="1.6"/><path d="M13 1V29M25 1V29M1 10H37M1 20H37" stroke="rgba(255,255,255,.75)" stroke-width="1.3"/></svg>
+                    <span class="rv absolute text-[10px] font-light tracking-[0.32em] text-white" style="--a:.46;--b:.2;left:55.6%;top:52%;writing-mode:vertical-rl;text-shadow:0 1px 8px rgba(40,18,6,.35)">ALBA</span>
+                    <span class="rv absolute text-[10px] font-light tracking-[0.32em] text-white/90" style="--a:.46;--b:.2;left:42.9%;top:26%;writing-mode:vertical-rl">ALBA</span>
+                    <div class="ui absolute inset-0">
+                      <span class="rv absolute left-[18px] top-[13px] text-[15px] font-light tracking-[0.12em] text-white" style="--a:.1;--b:.15">ALBA</span>
+                      <div class="rv absolute inset-x-0 top-[9px] mx-auto flex w-fit gap-4 rounded-full border border-white/30 bg-white/10 px-4 py-[6px] text-[9.5px] text-white/95 backdrop-blur-sm" style="--a:.14;--b:.16"><span>Producto</span><span>Beneficios</span><span>Equipo</span><span>Precios</span><span>Soporte</span></div>
+                      <div class="rv absolute right-4 top-[8px] flex gap-1.5 text-[9.5px]" style="--a:.18;--b:.16"><span class="rounded-full border border-white/35 px-3 py-[6px] text-white/95">Cuenta</span><span class="rounded-full bg-white px-3 py-[6px] font-medium text-[#1a1410]">Acceso demo</span></div>
+                      <p class="rv absolute bottom-[138px] left-[16px] text-[9.5px] text-white" style="--a:.28;--b:.14"><i class="mr-2 inline-block size-[7px] bg-white align-middle"></i>Temporada de apertura 2026</p>
+                      <h4 class="absolute bottom-[56px] left-[16px] text-[37px] font-normal leading-[1.04] tracking-[-0.02em] text-white [text-shadow:0_2px_24px_rgba(30,12,2,.4)]">
+                        <span class="block overflow-hidden"><span class="rl block" style="--a:.26;--b:.2">Un nuevo horizonte,</span></span>
+                        <span class="block overflow-hidden"><span class="rl block" style="--a:.33;--b:.2">cada mañana.</span></span>
+                      </h4>
+                      <div class="absolute bottom-[14px] left-[16px] flex gap-2.5 text-[10.5px]">
+                        <span class="rv rounded-full bg-white px-[18px] py-[8px] font-medium text-[#1a1410]" style="--a:.5;--b:.14">Ver beneficios</span>
+                        <span class="rv rounded-full border border-white/55 px-[16px] py-[8px] text-white" style="--a:.54;--b:.14">▷ Ver demo</span>
+                      </div>
+                      <p class="rv absolute bottom-[16px] right-[16px] w-[200px] text-[9.5px] leading-[1.5] text-white [text-shadow:0_1px_10px_rgba(30,12,2,.55)]" style="--a:.58;--b:.16">Una marca que abre caminos: identidad, sitio y operación pensados juntos desde el primer día.</p>
+                    </div>
+                  </div>
+                  <i class="flare absolute inset-0"></i>
+                </div>
+              </>)}
+
+              {i === 2 && (<>
+                <div class="dash absolute inset-y-0 left-0 w-[58px] border-r border-[#e7e8f4] bg-[#f7f7fd]">
+                  <svg class="rv absolute left-[14px] top-[18px]" style="--a:.02;--b:.12" width="30" height="30" viewBox="0 0 34 34" aria-hidden="true"><rect x="2" y="2" width="30" height="30" rx="9" fill="none" stroke="#0b0e3b" stroke-width="1.8"/><path d="M9 23c3-9.5 13-9.5 16 0" fill="none" stroke="#0b0e3b" stroke-width="1.8" stroke-linecap="round"/><circle cx="17" cy="14" r="2.8" fill="#977DFF"/></svg>
+                  {SB.map((d, k) => (
+                    <span class={`rv absolute left-[11px] flex size-[36px] items-center justify-center rounded-[11px] ${k === 0 ? 'bg-[#0b0e3b] text-white' : 'text-[#8b8fb0]'}`} style={`top:${70 + k * 44}px;--a:${0.04 + k * 0.04};--b:.1`}><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={d} /></span>
+                  ))}
+                  <i class="absolute bottom-[16px] left-[15px] flex size-[28px] items-center justify-center rounded-full bg-[#d9d0ff] text-[11px] font-medium not-italic text-[#0600AB]">A</i>
+                </div>
+                <div class="absolute left-[82px] top-[16px]"><p class="rv text-[15px] font-medium text-[#0b0e3b]" style="--a:.02;--b:.12">Finanzas</p><p class="rv text-[11px] text-[#8b8fb0]" style="--a:.04;--b:.12">Octubre 2026 · MXN</p></div>
+                <div class="absolute left-[82px] right-6 top-[68px] flex">
+                  {[['Ingresos', 1284000, '▲ 8.2 %'], ['Gastos', 512400, '▼ 2.1 %'], ['Utilidad', 771600, '▲ 14.6 %']].map(([l, v, d], k) => (
+                    <div class={`rv flex-1 ${k ? 'border-l border-[#e7e8f4] pl-4' : ''}`} style={`--a:${0.08 + k * 0.08};--b:.14`}>
+                      <p class="text-[11px] text-[#8b8fb0]">{l}</p>
+                      <p class="mt-0.5 text-[21px] font-normal tabular-nums tracking-[-0.02em] text-[#0b0e3b]">$<span data-count={v} data-a={0.1 + k * 0.08} data-b=".35">0</span></p>
+                      <p class="mt-0.5 text-[10.5px] text-[#0033FF]">{d}</p>
+                    </div>
+                  ))}
+                </div>
+                <div class="absolute left-[82px] top-[150px] w-[334px]">
+                  <div class="rv flex items-center justify-between" style="--a:.2;--b:.12"><p class="text-[12.5px] font-medium text-[#0b0e3b]">Ingresos y gastos</p>
+                    <p class="flex items-center gap-3 text-[10.5px] text-[#5b5f86]"><span class="flex items-center gap-1.5"><i class="size-2 rounded-full bg-[#0033FF]"></i>Ingresos</span><span class="flex items-center gap-1.5"><i class="size-2 rounded-full bg-[#d9d0ff]"></i>Gastos</span></p></div>
+                  <svg class="mt-2" width="334" height="186" viewBox="0 0 334 186" aria-hidden="true">
+                    <defs><linearGradient id="bgA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#977DFF"/><stop offset="1" stop-color="#0033FF"/></linearGradient></defs>
+                    {[20, 60, 100, 140].map((y) => <path d={`M0 ${y}H334`} stroke="#eceef8"/>)}
+                    <path d="M0 160H334" stroke="#dcdff0"/>
+                    {['May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct'].map((m, k) => (
+                      <g>
+                        <rect class="gy" style={`--a:${0.26 + k * 0.06};--b:.2`} x={12 + k * 54} y={160 - [86, 96, 78, 110, 104, 124][k]} width="17" height={[86, 96, 78, 110, 104, 124][k]} rx="4" fill="url(#bgA)"/>
+                        <rect class="gy" style={`--a:${0.3 + k * 0.06};--b:.2`} x={31 + k * 54} y={160 - [52, 58, 50, 62, 56, 64][k]} width="17" height={[52, 58, 50, 62, 56, 64][k]} rx="4" fill="#d9d0ff"/>
+                        <text x={30 + k * 54} y="178" font-size="10" fill="#8b8fb0" text-anchor="middle" font-family="Google Sans Flex Variable, sans-serif">{m}</text>
+                      </g>
+                    ))}
+                  </svg>
+                </div>
+                <div class="absolute right-6 top-[150px] w-[176px]">
+                  <p class="rv text-[12.5px] font-medium text-[#0b0e3b]" style="--a:.24;--b:.12">Próximos vencimientos</p>
+                  <div class="mt-2">
+                    {[['15', 'nov', 'Facturación CFDI', 'Emitir y timbrar'], ['17', 'nov', 'IVA mensual', 'Revisa tu contador'], ['28', 'nov', 'Nómina', 'Programada'], ['30', 'nov', 'Proveedores', '3 pagos']].map(([d, m, t, s], k) => (
+                      <div class="rv flex items-center gap-2.5 border-t border-[#eceef8] py-[8px]" style={`--a:${0.3 + k * 0.09};--b:.12`}>
+                        <span class="flex size-[34px] shrink-0 flex-col items-center justify-center rounded-[9px] bg-[#f7f7fd] leading-none"><b class="text-[13px] font-medium text-[#0b0e3b]">{d}</b><i class="mt-0.5 text-[8.5px] not-italic uppercase tracking-wider text-[#8b8fb0]">{m}</i></span>
+                        <span class="min-w-0"><span class="block truncate text-[11.5px] text-[#0b0e3b]">{t}</span><span class="block truncate text-[10px] text-[#8b8fb0]">{s}</span></span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </>)}
+
+              {i === 3 && (<>
+                <div class="dash absolute inset-x-6 top-[16px] flex items-center justify-between pr-[78px]">
+                  <div class="rv flex items-baseline gap-3" style="--a:.02;--b:.12"><p class="text-[15px] font-medium text-[#0b0e3b]">Operaciones</p><span class="text-[11px] text-[#8b8fb0]">Semana 44</span></div>
+                  <div class="rv flex rounded-full bg-[#f1f0fb] p-[3px] text-[11px]" style="--a:.04;--b:.12">{['Día', 'Semana', 'Mes'].map((t, k) => <span class={`rounded-full px-3 py-[3px] ${k === 1 ? 'bg-[#0b0e3b] text-white' : 'text-[#5b5f86]'}`}>{t}</span>)}</div>
+                </div>
+                <div class="absolute left-6 top-[60px] w-[340px]">
+                  <p class="rv text-[11px] text-[#8b8fb0]" style="--a:.06;--b:.12">Pedidos</p>
+                  <p class="rv flex items-baseline gap-3" style="--a:.08;--b:.15"><span class="text-[36px] font-light leading-[1.1] tracking-[-0.03em] text-[#0b0e3b]" data-count="1284" data-a=".1" data-b=".4">0</span><span class="text-[11px] text-[#0033FF]">▲ 6.4 % frente a la semana anterior</span></p>
+                  <svg class="mt-1" width="340" height="132" viewBox="0 0 340 132" aria-hidden="true" style="overflow:visible">
+                    <defs><linearGradient id="dgB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#977DFF" stop-opacity=".32"/><stop offset="1" stop-color="#977DFF" stop-opacity="0"/></linearGradient></defs>
+                    {[30, 70].map((y) => <path d={`M0 ${y}H340`} stroke="#eceef8"/>)}
+                    <path d="M0 110H340" stroke="#dcdff0"/>
+                    <path class="gx" style="--a:.3;--b:.4" d="M8 88 L64 70 L120 78 L176 40 L232 52 L288 26 L332 34 V110 H8Z" fill="url(#dgB)"/>
+                    <path class="dw" style="--a:.28;--b:.44" d="M8 88 L64 70 L120 78 L176 40 L232 52 L288 26 L332 34" fill="none" stroke="#0033FF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" pathLength="100"/>
+                    {[[8, 88], [64, 70], [120, 78], [176, 40], [232, 52], [288, 26], [332, 34]].map(([x, y], k) => <circle class="fl" style={`--a:${0.32 + k * 0.07};--b:.08`} cx={x} cy={y} r={k === 3 ? 5 : 3.2} fill={k === 3 ? '#977DFF' : '#fff'} stroke="#0033FF" stroke-width="2"/>)}
+                    <path class="rv" style="--a:.6;--b:.1" d="M176 46V110" stroke="#977DFF" stroke-dasharray="3 4"/>
+                    {['L', 'M', 'M', 'J', 'V', 'S', 'D'].map((d, k) => <text x={8 + k * 54} y="126" font-size="10" fill="#8b8fb0" text-anchor="middle" font-family="Google Sans Flex Variable, sans-serif">{d}</text>)}
+                  </svg>
+                </div>
+                <div class="absolute right-6 top-[64px] grid w-[232px] grid-cols-2">
+                  {[['Entregas a tiempo', '96', ' %', [5, 6, 5, 7, 8]], ['Ciclo medio', '2.4', ' d', [8, 7, 6, 6, 5]], ['Incidencias', '12', '', [6, 8, 5, 4, 3]], ['Satisfacción', '4.8', ' / 5', [5, 5, 6, 7, 7]]].map(([l, v, u, bars], k) => (
+                    <div class={`rv py-3 ${k % 2 ? 'border-l border-[#e7e8f4] pl-4' : 'pr-4'} ${k > 1 ? 'border-t border-[#e7e8f4]' : ''}`} style={`--a:${0.12 + k * 0.08};--b:.14`}>
+                      <p class="text-[10.5px] text-[#8b8fb0]">{l}</p>
+                      <p class="mt-0.5 text-[22px] font-light leading-none tracking-[-0.02em] text-[#0b0e3b]">{v}<span class="text-[11px] text-[#8b8fb0]">{u}</span></p>
+                      <div class="mt-2 flex h-[14px] items-end gap-[3px]">{bars.map((h, j) => <i class="gy block w-[6px] rounded-[2px] bg-[#977DFF]" style={`height:${h * 1.6}px;--a:${0.3 + k * 0.06 + j * 0.03};--b:.16`}></i>)}</div>
+                    </div>
+                  ))}
+                </div>
+                <div class="absolute inset-x-6 top-[286px]">
+                  <div class="rv flex items-center justify-between" style="--a:.5;--b:.12"><p class="text-[11.5px] font-medium text-[#0b0e3b]">Actividad por hora</p><p class="flex items-center gap-1.5 text-[10px] text-[#8b8fb0]">menos<i class="block h-[7px] w-[54px] rounded-full" style="background:linear-gradient(90deg,#f1effc,#c9bdff,#977DFF,#0033FF)"></i>más</p></div>
+                  <div class="mt-2 space-y-[4px]">
+                    {HM.map((row, r) => (
+                      <div class="flex items-center gap-3"><span class="rv w-[68px] text-[10.5px] text-[#5b5f86]" style={`--a:${0.52 + r * 0.05};--b:.1`}>{['Compras', 'Producción', 'Envíos', 'Entregas'][r]}</span>
+                        <div class="flex flex-1 gap-[3px]">{row.map((c, k) => <i class="fl block h-[16px] flex-1 rounded-[3px]" style={`background:${c};--a:${0.54 + (r + k) * 0.012};--b:.1`}></i>)}</div></div>
+                    ))}
+                  </div>
+                </div>
+              </>)}
+
+              {i === 4 && (<>
+                <div class="absolute left-6 top-[54px] w-[318px]">
+                  <div class="rv flex items-center gap-2" style="--a:.02;--b:.12"><svg width="16" height="16" viewBox="0 0 24 24" fill="#977DFF" aria-hidden="true"><path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4z"/></svg><p class="text-[13.5px] font-medium text-[#0b0e3b]">Asistente comercial</p></div>
+                  <div class="rv mt-4 flex gap-3" style="--a:.06;--b:.12"><i class="flex size-[24px] shrink-0 items-center justify-center rounded-full bg-[#f1f0fb] text-[10.5px] font-medium not-italic text-[#5b5f86]">Tú</i>
+                    <p class="text-[13px] leading-[1.45] text-[#0b0e3b]"><span class="type block overflow-hidden whitespace-nowrap" style="--a:.08;--b:.22">Cotiza el proyecto para Estudio Aurora</span></p></div>
+                  <div class="rv mt-4 flex gap-3" style="--a:.3;--b:.12"><i class="flex size-[24px] shrink-0 items-center justify-center rounded-full bg-[#0b0e3b]"><svg width="12" height="12" viewBox="0 0 24 24" fill="#977DFF" aria-hidden="true"><path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4z"/></svg></i>
+                    <p class="text-[13px] text-[#0b0e3b]">Listo. Preparé esta cotización:</p></div>
+                  <div class="ml-9 mt-2.5 rounded-[12px] border border-[#e7e8f4] px-3.5 py-1 text-[12px]">
+                    {[['Identidad de marca', '$24,000'], ['Sitio web', '$48,000'], ['Automatización', '$18,500']].map(([t, a], k) => (
+                      <div class="rv flex justify-between border-b border-[#eceef8] py-2 text-[#5b5f86]" style={`--a:${0.38 + k * 0.08};--b:.12`}><span>{t}</span><span class="tabular-nums text-[#0b0e3b]">{a}</span></div>
+                    ))}
+                    <div class="rv flex justify-between py-2 font-medium text-[#0b0e3b]" style="--a:.64;--b:.12"><span>Total</span><span class="tabular-nums text-[#0033FF]">$90,500</span></div>
+                  </div>
+                </div>
+                <div class="rv absolute bottom-6 left-6 flex h-[38px] w-[318px] items-center justify-between rounded-full border border-[#dcdff0] pl-4 pr-1.5 text-[12px] text-[#8b8fb0]" style="--a:.7;--b:.12">Escribe una instrucción…<i class="flex size-[28px] items-center justify-center rounded-full bg-[#0b0e3b]"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></div>
+                <div class="absolute right-6 top-[54px] w-[236px]">
+                  <p class="rv text-[13.5px] font-medium text-[#0b0e3b]" style="--a:.1;--b:.12">Flujo automático</p>
+                  <p class="rv mt-0.5 text-[11px] text-[#8b8fb0]" style="--a:.12;--b:.12">5 pasos · 2.4 s</p>
+                  <div class="relative mt-5">
+                    <i class="gy absolute bottom-[26px] left-[9px] top-[10px] block w-px bg-[#d9d0ff]" style="--a:.2;--b:.5;transform-origin:50% 0"></i>
+                    {[['Solicitud recibida', 'Desde el chat interno'], ['Cotización generada', 'Con la plantilla de la firma'], ['Enviada por correo', 'A Estudio Aurora'], ['Seguimiento agendado', 'En 3 días'], ['Revisión de tu equipo', 'Aprobar antes de facturar']].map(([t, d], k) => (
+                      <div class="rv relative flex items-start gap-3 pb-[17px]" style={`--a:${0.22 + k * 0.11};--b:.12`}>
+                        <svg class="relative z-10 shrink-0 bg-white" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true">
+                          {k < 4 ? (<><circle cx="10" cy="10" r="9" fill="#0b0e3b"/><path class="dw" style={`--a:${0.3 + k * 0.11};--b:.1`} d="M6 10.4l2.8 2.8L14 7.6" fill="none" stroke="#977DFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" pathLength="100"/></>) : (<><circle cx="10" cy="10" r="8.6" fill="#fff" stroke="#977DFF" stroke-width="1.4"/><circle cx="10" cy="8" r="2.2" fill="none" stroke="#0033FF" stroke-width="1.3"/><path d="M5.8 14.6c.6-2 2.2-2.8 4.2-2.8s3.6.8 4.2 2.8" fill="none" stroke="#0033FF" stroke-width="1.3" stroke-linecap="round"/></>)}
+                        </svg>
+                        <div><p class="text-[12.5px] text-[#0b0e3b]">{t}</p><p class="text-[11px] text-[#8b8fb0]">{d}</p></div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </>)}
+              {i === 5 && (<>
+                <div class="absolute left-6 top-[56px] w-[258px]">
+                  <p class="rv text-[13px] font-medium" style="--a:.02;--b:.12">Campaña · Temporada de apertura</p>
+                  <div class="rv relative mt-3 h-[168px] overflow-hidden rounded-[16px]" style="--a:.05;--b:.2;background:linear-gradient(160deg,#977DFF 0%,#0033FF 70%,#0600AB 100%)">
+                    <i class="grain absolute inset-0 opacity-[.14]"></i>
+                    <i class="absolute -right-8 -top-10 block size-[130px] rounded-full" style="background:radial-gradient(circle,rgba(255,255,255,.55),transparent 65%)"></i>
+                    <p class="absolute bottom-[46px] left-4 text-[22px] font-medium leading-[1.05] tracking-[-0.02em] text-white">Un nuevo<br />horizonte</p>
+                    <span class="absolute bottom-4 left-4 rounded-full bg-white px-3.5 py-[6px] text-[10.5px] font-medium text-[#0600AB]">Conoce más</span>
+                    <span class="absolute right-3 top-3 rounded-full bg-white/20 px-2.5 py-[3px] text-[9.5px] text-white ring-1 ring-white/40">Anuncio</span>
+                  </div>
+                  <div class="mt-4 flex">
+                    {[['Alcance', 182400, ''], ['Clics', 9860, ''], ['CTR', 54, ' %']].map(([l, v, u], k) => (
+                      <div class={`rv flex-1 ${k ? 'border-l border-[#eceef8] pl-3' : ''}`} style={`--a:${0.3 + k * 0.08};--b:.14`}>
+                        <p class="text-[10.5px] text-[#8b8fb0]">{l}</p>
+                        <p class="mt-0.5 text-[19px] font-normal tabular-nums tracking-[-0.02em]">{k === 2 ? <><span data-count={v} data-a={0.32} data-b=".3" data-d="1">0</span>{u}</> : <span data-count={v} data-a={0.3 + k * 0.08} data-b=".3">0</span>}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div class="absolute right-6 top-[56px] w-[304px]">
+                  <p class="rv text-[13px] font-medium" style="--a:.06;--b:.12">Embudo de conversión</p>
+                  <div class="mt-3 space-y-[9px]">
+                    {[['Impresiones', '428 K', 100], ['Clics', '9.8 K', 78], ['Leads', '1,240', 52], ['Clientes', '312', 30]].map(([t, v, w], k) => (
+                      <div class="rv" style={`--a:${0.12 + k * 0.08};--b:.14`}>
+                        <div class="flex justify-between text-[11px]"><span class="text-[#5b5f86]">{t}</span><span class="tabular-nums">{v}</span></div>
+                        <i class="relative mt-1 block h-[9px] rounded-full bg-[#f1effc]"><b class="gx absolute inset-y-0 left-0 block rounded-full" style={`width:${w}%;background:linear-gradient(90deg,#977DFF,#0033FF);--a:${0.16 + k * 0.08};--b:.22`}></b></i>
+                      </div>
+                    ))}
+                  </div>
+                  <p class="rv mt-5 text-[13px] font-medium" style="--a:.5;--b:.12">Calendario de contenido</p>
+                  <div class="mt-2.5 grid grid-cols-7 gap-1.5">
+                    {['L', 'M', 'M', 'J', 'V', 'S', 'D'].map((d, k) => (
+                      <div class="rv text-center" style={`--a:${0.52 + k * 0.04};--b:.1`}>
+                        <p class="text-[10px] text-[#8b8fb0]">{d}</p>
+                        <i class={`mt-1 flex h-[44px] flex-col items-center justify-center gap-1 rounded-[9px] ${[1, 0, 1, 1, 0, 1, 0][k] ? 'bg-[#f1effc]' : 'bg-[#f7f7fd]'}`}>
+                          {[1, 0, 1, 1, 0, 1, 0][k] ? <><b class="block h-[5px] w-[22px] rounded-full bg-[#977DFF]"></b><b class="block h-[5px] w-[14px] rounded-full bg-[#0033FF]"></b></> : null}
+                        </i>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </>)}
+
+</div>

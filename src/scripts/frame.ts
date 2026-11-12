@@ -49,3 +49,13 @@ export const put = (el: HTMLElement | SVGElement, prop: string, v: string) => {
 export const clamp = (v: number, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 export const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 export const smooth = (t: number) => t * t * (3 - 2 * t);
+
+// Animated numbers inside a panel ([data-count] with data-a / data-b window on the panel's --q, data-d = one decimal).
+export type CountEl = { el: HTMLElement; v: number; a: number; b: number; d: number };
+export const countsOf = (root: Element): CountEl[] =>
+  [...root.querySelectorAll<HTMLElement>('[data-count]')].map((el) => ({ el, v: +el.dataset.count!, a: +el.dataset.a!, b: +el.dataset.b!, d: +(el.dataset.d || 0) }));
+export const paintCounts = (list: CountEl[], q: number) =>
+  list.forEach((c) => {
+    const v = c.v * (1 - Math.pow(1 - clamp((q - c.a) / c.b), 3));
+    c.el.textContent = c.d ? (v / 10).toFixed(1) : Math.round(v).toLocaleString('es-MX');
+  });

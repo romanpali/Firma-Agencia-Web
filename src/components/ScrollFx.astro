@@ -25,11 +25,11 @@
   const header = document.querySelector<HTMLElement>('[data-nav]');
   const sections = [...document.querySelectorAll<HTMLElement>('[data-tone]')]
     .filter((el) => el !== header)
-    .map((el) => ({ tone: el.dataset.tone!, m: measure(el) }))
+    .map((el) => ({ el, m: measure(el) }))
     .reverse(); // later sections overlap earlier (sticky) ones
   onFrame((_t, y) => {
     let tone = 'dark';
-    for (const s of sections) if (y + 40 >= s.m.top && y + 40 < s.m.top + s.m.height) { tone = s.tone; break; }
+    for (const s of sections) if (y + 40 >= s.m.top && y + 40 < s.m.top + s.m.height) { tone = s.el.dataset.tone!; break; }
     if (header && header.dataset.tone !== tone) header.dataset.tone = tone;
   });
 </script>
