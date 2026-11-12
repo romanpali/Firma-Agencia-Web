@@ -21,7 +21,7 @@ const frags = [
 ---
 
 <section id="construccion" data-tone="light" data-titles={JSON.stringify(titles)} class="relative z-10 font-goog text-[#202124]">
-  <div data-process class="h-[620vh] bg-white">
+  <div data-process class="h-[740vh] bg-white">
     <div data-process-inner class="sticky top-0 h-lvh overflow-hidden bg-white" style="--fade:#fff">
       <div data-night class="pointer-events-none absolute inset-0 opacity-0" aria-hidden="true">
         <i class="absolute inset-0" style="background:radial-gradient(110% 85% at 50% 40%,#0b1280 0%,#060b4a 42%,#02031a 100%)"></i>
@@ -136,10 +136,11 @@ const frags = [
   addEventListener('pointermove', (e) => { mouse.x = e.clientX / innerWidth - 0.5; mouse.y = e.clientY / innerHeight - 0.5; }, { passive: true });
 
   // ---- scroll → timeline u in [0, LAST]
-  let target = 0, u = 0, shown = -1, ecoOn = false, visible = true;
+  const EXTRA = 1.2, HOLD = 2; // extra scroll spent on the website module (search result, then the site)
+  let target = 0, rr = 0, u = 0, shown = -1, ecoOn = false, visible = true;
   const read = (y: number, vh: number) => {
     const p = clamp((y - sm0.top) / Math.max(1, sm0.height - vh));
-    target = reduced ? LAST : clamp(p * (LAST + 0.6) - 0.3, 0, LAST);
+    target = reduced ? LAST + EXTRA : clamp(p * (LAST + EXTRA + 0.6) - 0.3, 0, LAST + EXTRA);
   };
   const setTitle = (i: number) => {
     titleEl.classList.add('out');
@@ -148,8 +149,9 @@ const frags = [
   const lastQ: number[] = [];
   const counts = pns.map((el) => countsOf(el));
   const render = (time: number) => {
-    u += (target - u) * (reduced ? 1 : 0.11);
-    if (Math.abs(target - u) < 0.0005) u = target;
+    rr += (target - rr) * (reduced ? 1 : 0.11);
+    if (Math.abs(target - rr) < 0.0005) rr = target;
+    u = rr <= HOLD ? rr : rr <= HOLD + EXTRA ? HOLD : rr - EXTRA;
     // camera
     const a = Math.min(LAST - 1, Math.floor(u)), f = u - a;
     const tr = sm(clamp((f - 0.5) / 0.5));
@@ -161,7 +163,7 @@ const frags = [
     // panels: they appear as the camera approaches, stay fully built behind you, and dim (never wash out) when not in focus
     pns.forEach((el, i) => {
       const s = i + 1;
-      const q = clamp((u - s + 0.45) / 0.85);
+      const q = i === 1 ? clamp((rr - 1.55) / (1.15 + EXTRA)) : clamp((u - s + 0.45) / 0.85);
       if (lastQ[i] !== q) { lastQ[i] = q; el.style.setProperty('--q', q.toFixed(4)); paintCounts(counts[i], q); }
       const appear = clamp((u - (s - 0.75)) / 0.45);
       const focus = 1 - clamp((Math.abs(u - (s + 0.05)) - 0.35) / 0.6);
