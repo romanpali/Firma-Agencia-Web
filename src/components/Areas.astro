@@ -6,8 +6,6 @@ const items = (slug: string) => services.find((s) => s.slug === slug)?.items.map
 ---
 
 <section id="areas" data-areas data-tone="light" class="relative z-10 h-[620svh] bg-white font-goog text-[#202124]">
-  <!-- fog: the sunset dissolves into the white chapter -->
-  <div class="pointer-events-none absolute inset-x-0 -top-[26svh] h-[26svh] bg-gradient-to-b from-white/0 to-white" aria-hidden="true"></div>
   <div class="sticky top-0 h-svh overflow-hidden">
     <div class="mx-auto grid h-full max-w-[1280px] grid-rows-[minmax(0,1fr)_auto] gap-5 px-6 pb-8 pt-24 md:grid-cols-12 md:grid-rows-1 md:items-center md:gap-14 md:px-10 md:py-24">
       <!-- Image -->
@@ -45,6 +43,8 @@ const items = (slug: string) => services.find((s) => s.slug === slug)?.items.map
     </div>
   </div>
 </section>
+<!-- the white chapter dissolves into the night -->
+<div class="pointer-events-none relative z-10 h-[30svh] bg-gradient-to-b from-white to-white/0" aria-hidden="true"></div>
 
 <script>
   const sec = document.querySelector<HTMLElement>('[data-areas]')!;

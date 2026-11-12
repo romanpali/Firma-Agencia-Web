@@ -21,6 +21,8 @@ const frags = [
 ---
 
 <section id="construccion" data-tone="light" data-titles={JSON.stringify(titles)} class="relative z-10 font-goog text-[#202124]">
+  <!-- fog: the sunset dissolves into the white chapter -->
+  <div class="pointer-events-none absolute inset-x-0 -top-[26svh] z-20 h-[26svh] bg-gradient-to-b from-white/0 to-white" aria-hidden="true"></div>
   <div data-process class="h-[720vh] bg-white">
     <div data-process-inner class="sticky top-0 h-svh overflow-hidden bg-[radial-gradient(ellipse_at_50%_46%,#f4f7ff_0%,#fff_62%)]">
       <p class="absolute inset-x-0 top-[86px] z-20 text-center text-[15px] text-[#5f6368]">Cómo lo construimos</p>
@@ -186,8 +188,6 @@ const frags = [
       </div>
     </div>
   </div>
-  <!-- the white chapter dissolves into the night -->
-  <div class="pointer-events-none h-[30svh] bg-gradient-to-b from-white to-white/0" aria-hidden="true"></div>
 </section>
 
 <script>
