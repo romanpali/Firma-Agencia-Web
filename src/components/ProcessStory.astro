@@ -1,6 +1,6 @@
 ---
-const titles = ['Tu empresa, hoy', 'Identidad y diseño', 'Presencia digital', 'Ventas y CRM', 'Finanzas y administración', 'Operaciones y datos', 'IA y automatización', 'Un solo ecosistema'];
-const labels = ['Identidad', 'Sitio web', 'Ventas', 'Finanzas', 'Datos', 'Asistentes'];
+const titles = ['Tu empresa, hoy', 'Identidad y diseño', 'Presencia digital', 'Finanzas y administración', 'Operaciones y datos', 'IA y automatización', 'Un solo ecosistema'];
+const labels = ['Identidad', 'Sitio web', 'Finanzas', 'Datos', 'Asistentes'];
 const FR: Record<string, string> = {
   sheet: '<svg viewBox="0 0 120 90"><rect width="120" height="90" rx="8" fill="#fff" stroke="#dadce0"/><path d="M0 22H120M0 44H120M0 66H120M40 0V90M80 0V90" stroke="#e3e6ea"/><rect x="42" y="24" width="36" height="18" fill="#e8eaed"/><rect x="4" y="48" width="30" height="5" rx="2.5" fill="#dadce0"/></svg>',
   pdf: '<svg viewBox="0 0 80 100"><path d="M6 2H52L74 24V98H6Z" fill="#fff" stroke="#dadce0"/><path d="M52 2V24H74" fill="none" stroke="#dadce0"/><rect x="16" y="38" width="48" height="5" rx="2.5" fill="#e3e6ea"/><rect x="16" y="50" width="38" height="5" rx="2.5" fill="#e3e6ea"/><rect x="16" y="62" width="44" height="5" rx="2.5" fill="#e3e6ea"/><text x="16" y="88" font-size="12" fill="#9aa0a6" font-weight="600" font-family="sans-serif">PDF</text></svg>',
@@ -23,7 +23,7 @@ const frags = [
 <section id="construccion" data-tone="light" data-titles={JSON.stringify(titles)} class="relative z-10 font-goog text-[#202124]">
   <!-- fog: the sunset dissolves into the white chapter -->
   <div class="pointer-events-none absolute inset-x-0 -top-[26svh] z-20 h-[26svh] bg-gradient-to-b from-white/0 to-white" aria-hidden="true"></div>
-  <div data-process class="h-[720vh] bg-white">
+  <div data-process class="h-[620vh] bg-white">
     <div data-process-inner class="sticky top-0 h-svh overflow-hidden bg-[radial-gradient(ellipse_at_50%_46%,#f4f7ff_0%,#fff_62%)]">
       <p class="absolute inset-x-0 top-[86px] z-20 text-center text-[15px] text-[#5f6368]">Cómo lo construimos</p>
 
@@ -36,135 +36,183 @@ const frags = [
               <span class="ok rv" style="--a:.9;--b:.08">Listo</span>
 
               {i === 0 && (<>
-                <div class="absolute left-6 top-[60px] h-[316px] w-[220px] rounded-[20px] bg-[#f4f7fe]"></div>
-                <svg class="absolute left-6 top-[60px]" width="220" height="316" viewBox="0 0 220 316" aria-hidden="true">
-                  <circle class="dw" style="--a:.04;--b:.26" cx="86" cy="118" r="46" fill="none" stroke="#202124" stroke-width="5" stroke-linecap="round" pathLength="100" transform="rotate(-90 86 118)"/>
-                  <circle class="fl" style="--a:.22;--b:.3" cx="134" cy="118" r="46" fill="#1a56db" fill-opacity=".92"/>
-                  <text class="rv" style="--a:.45;--b:.2" x="110" y="218" text-anchor="middle" font-size="27" font-weight="500" fill="#202124" font-family="Google Sans Flex Variable, sans-serif">Tu marca</text>
-                  <rect class="gx" style="--a:.55;--b:.2" x="62" y="238" width="96" height="6" rx="3" fill="#bdc1c6"/>
-                  <rect class="gx" style="--a:.6;--b:.2" x="76" y="254" width="68" height="6" rx="3" fill="#dadce0"/>
-                </svg>
-                {['#1a56db', '#202124', '#8ab4f8', '#dbe6fd', '#e8eaed'].map((c, k) => <i class="gy absolute top-[60px] h-[150px] w-[52px] rounded-[14px]" style={`left:${268 + k * 62}px;background:${c};--a:${0.22 + k * 0.06};--b:.26`}></i>)}
-                <div class="rv absolute left-[268px] top-[226px] flex h-[150px] w-[120px] items-center justify-center rounded-[18px] bg-[#f4f7fe] text-[84px] font-medium leading-none tracking-[-0.04em]" style="--a:.5;--b:.25">Aa</div>
-                <div class="rv absolute left-[404px] top-[246px] h-[96px] w-[150px] -rotate-[5deg] rounded-[14px] bg-[#202124] p-3.5" style="--a:.62;--b:.25">
-                  <i class="block size-[22px] rounded-full bg-[#1a56db]"></i>
-                  <i class="mt-5 block h-[5px] w-16 rounded-full bg-white/70"></i><i class="mt-2 block h-[5px] w-10 rounded-full bg-white/40"></i>
+                <img src="/process/portale-bg.webp" alt="" width="1589" height="990" decoding="async" class="zi absolute inset-0 size-full object-cover" style="--a:0;--b:.22" />
+                <i class="absolute inset-0" style="background:linear-gradient(to bottom,rgba(10,7,6,.5),rgba(10,7,6,0) 34%,rgba(10,7,6,.5))"></i>
+                <div class="absolute left-7 top-[54px]">
+                  <div class="flex items-center gap-3">
+                    <svg width="32" height="32" viewBox="0 0 34 34" aria-hidden="true">
+                      <rect class="dw" style="--a:.04;--b:.24" x="2" y="2" width="30" height="30" rx="9" fill="none" stroke="#f4efe6" stroke-width="1.6" pathLength="100"/>
+                      <path class="dw" style="--a:.16;--b:.2" d="M9 23c3-9.5 13-9.5 16 0" fill="none" stroke="#f4efe6" stroke-width="1.6" stroke-linecap="round" pathLength="100"/>
+                      <circle class="fl" style="--a:.3;--b:.15" cx="17" cy="14" r="2.8" fill="#f4efe6"/>
+                    </svg>
+                    <span class="wm rv text-[28px] font-light leading-none" style="--a:.1;--b:.3">ALBA</span>
+                  </div>
+                  <i class="gx mt-3.5 block h-px w-[170px] bg-white/60" style="--a:.28;--b:.25"></i>
+                  <p class="rv mt-2.5 text-[11.5px] tracking-wide text-[#f4efe6]/80" style="--a:.34;--b:.2">Identidad visual · Sistema de marca</p>
                 </div>
-                <div class="rv absolute left-[566px] top-[230px] flex size-[50px] items-center justify-center rounded-full bg-[#eaf1fe]" style="--a:.72;--b:.2"><i class="size-[18px] rounded-full bg-[#1a56db]"></i></div>
+                <!-- brand guides around the card -->
+                <svg class="absolute inset-0" width="640" height="400" viewBox="0 0 640 400" aria-hidden="true" style="overflow:visible">
+                  <path class="dw" style="--a:.4;--b:.3" d="M258 78V300M386 78V300M232 94H412M232 282H412" stroke="rgba(255,255,255,.55)" stroke-width="1" stroke-dasharray="4 4" fill="none" pathLength="100"/>
+                </svg>
+                <span class="rv absolute left-[392px] top-[84px] rounded-full bg-white/15 px-2.5 py-[3px] text-[10px] text-white ring-1 ring-white/30" style="--a:.55;--b:.12">Tarjeta · 108 × 188</span>
+                <div class="rv absolute left-[268px] top-[94px] h-[188px] w-[108px]" style="--a:.35;--b:.3;filter:drop-shadow(0 18px 24px rgba(40,18,6,.45))">
+                  <svg width="108" height="188" viewBox="0 0 108 188" aria-hidden="true">
+                    <defs><linearGradient id="cdA" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".34"/><stop offset=".4" stop-color="#fff" stop-opacity=".05"/><stop offset="1" stop-color="#fff" stop-opacity=".16"/></linearGradient></defs>
+                    <path d="M1 1L107 9V180L1 187Z" fill="url(#cdA)" stroke="rgba(255,255,255,.7)" stroke-width="1.4" stroke-linejoin="round"/>
+                    <rect x="14" y="16" width="24" height="19" rx="5" fill="rgba(255,255,255,.12)" stroke="rgba(255,255,255,.9)" stroke-width="1.2"/><path d="M14 22H22V29H14M38 22H30V29H38M22 16V35M30 16V35" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="1"/>
+                    <circle cx="86" cy="166" r="7" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="1.2"/>
+                  </svg>
+                  <span class="absolute right-[12px] top-[46px] text-[11px] font-light tracking-[0.3em] text-white" style="writing-mode:vertical-rl">ALBA</span>
+                </div>
+                <div class="rv absolute bottom-[26px] left-7 flex items-end gap-5" style="--a:.4;--b:.25">
+                  <span class="block text-[88px] font-extralight leading-[0.86] tracking-[-0.045em] text-[#fbf5ea]">Aa</span>
+                  <span class="mb-1 block text-[11px] leading-[1.6] tracking-wide text-[#f4efe6]/80">Tipografía<br />Light · Regular · Medium</span>
+                </div>
+                <div class="absolute bottom-[26px] right-7 flex flex-col items-end gap-2">
+                  {[['#f6c36d', 'F6C36D'], ['#e0814f', 'E0814F'], ['#8f4a3a', '8F4A3A'], ['#2b2230', '2B2230']].map(([c, h], k) => (
+                    <div class="fl flex items-center gap-2.5 rounded-full bg-black/25 py-1 pl-1 pr-3 ring-1 ring-white/25" style={`--a:${0.5 + k * 0.07};--b:.12;transform-origin:100% 50%`}><i class="block size-[20px] rounded-full ring-1 ring-white/40" style={`background:${c}`}></i><span class="text-[10.5px] tracking-wider text-white/90">#{h}</span></div>
+                  ))}
+                </div>
               </>)}
 
               {i === 1 && (<>
-                <div class="rv absolute inset-x-6 top-[56px] h-[322px] overflow-hidden rounded-[16px] border border-[#e3e6ea]" style="--a:.02;--b:.15">
-                  <div class="flex h-[34px] items-center gap-1.5 border-b border-[#e8eaed] px-3.5"><i class="size-2 rounded-full bg-[#dadce0]"></i><i class="size-2 rounded-full bg-[#dadce0]"></i><i class="size-2 rounded-full bg-[#dadce0]"></i>
-                    <i class="gx ml-3 block h-[16px] w-[220px] rounded-full bg-[#f1f3f4]" style="--a:.08;--b:.2"></i></div>
-                  <div class="flex items-center justify-between px-5 pt-3"><i class="rv size-[18px] rounded-full bg-[#1a56db]" style="--a:.15;--b:.1"></i>
-                    <div class="flex gap-3">{[0, 1, 2].map((k) => <i class="rv block h-[6px] w-9 rounded-full bg-[#dadce0]" style={`--a:${0.18 + k * 0.04};--b:.1`}></i>)}</div></div>
-                  <div class="absolute left-5 top-[84px] w-[230px]">
-                    <i class="gx block h-[15px] w-[210px] rounded-full bg-[#202124]" style="--a:.25;--b:.18"></i>
-                    <i class="gx mt-2.5 block h-[15px] w-[150px] rounded-full bg-[#202124]" style="--a:.32;--b:.18"></i>
-                    <i class="gx mt-5 block h-[7px] w-[190px] rounded-full bg-[#dadce0]" style="--a:.4;--b:.15"></i>
-                    <i class="gx mt-2 block h-[7px] w-[140px] rounded-full bg-[#dadce0]" style="--a:.44;--b:.15"></i>
-                    <i class="rv mt-5 block h-[28px] w-[96px] rounded-full bg-[#1a56db]" style="--a:.5;--b:.15"></i>
+                <div class="absolute inset-x-0 top-0 z-20 flex h-[26px] items-center gap-1.5 border-b border-white/10 bg-[#0d0e11] px-3.5" aria-hidden="true">
+                  <i class="size-[7px] rounded-full bg-white/25"></i><i class="size-[7px] rounded-full bg-white/25"></i><i class="size-[7px] rounded-full bg-white/25"></i>
+                  <span class="mx-auto rounded-full bg-white/10 px-10 py-[2px] text-[10px] text-white/55">alba.com</span><i class="w-14"></i>
+                </div>
+                <div class="site absolute inset-x-0 bottom-0 top-[26px] overflow-hidden">
+                  <!-- page 1: hero -->
+                  <div class="s1 absolute inset-0">
+                    <img src="/process/portale-bg.webp" alt="" width="1589" height="990" decoding="async" class="zi absolute inset-0 size-full object-cover" style="--a:0;--b:.18" />
+                    <i class="absolute inset-0" style="background:linear-gradient(to top,rgba(10,7,6,.38),rgba(10,7,6,0) 46%),linear-gradient(to bottom,rgba(10,7,6,.3),rgba(10,7,6,0) 22%)"></i>
+                    <span class="rv absolute left-[18px] top-[11px] text-[15px] font-light tracking-[0.12em]" style="--a:.1;--b:.15">ALBA</span>
+                    <div class="rv absolute inset-x-0 top-[8px] mx-auto flex w-fit gap-4 rounded-full border border-white/25 bg-white/10 px-4 py-[6px] text-[9.5px] text-white/95" style="--a:.14;--b:.16">
+                      <span>Producto</span><span>Beneficios</span><span>Equipo</span><span>Precios</span><span>Soporte</span>
+                    </div>
+                    <div class="rv absolute right-4 top-[7px] flex gap-1.5 text-[9.5px]" style="--a:.18;--b:.16"><span class="rounded-full border border-white/30 px-3 py-[6px] text-white/95">Cuenta</span><span class="rounded-full bg-white px-3 py-[6px] font-medium text-[#1a1410]">Acceso demo</span></div>
+                    <div class="rv absolute left-[267px] top-[81px] h-[187px] w-[108px]" style="--a:.4;--b:.28;filter:drop-shadow(0 14px 20px rgba(40,18,6,.4))">
+                      <svg width="108" height="187" viewBox="0 0 108 187" aria-hidden="true">
+                        <defs><linearGradient id="cdB" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".32"/><stop offset=".4" stop-color="#fff" stop-opacity=".04"/><stop offset="1" stop-color="#fff" stop-opacity=".16"/></linearGradient></defs>
+                        <path d="M1 1L107 9V180L1 186Z" fill="url(#cdB)" stroke="rgba(255,255,255,.75)" stroke-width="1.4" stroke-linejoin="round"/>
+                        <rect x="14" y="16" width="24" height="19" rx="5" fill="rgba(255,255,255,.12)" stroke="rgba(255,255,255,.9)" stroke-width="1.2"/><path d="M14 22H22V29H14M38 22H30V29H38M22 16V35M30 16V35" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="1"/>
+                        <circle cx="86" cy="164" r="7" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="1.2"/>
+                      </svg>
+                      <span class="absolute right-[12px] top-[46px] text-[11px] font-light tracking-[0.3em] text-white" style="writing-mode:vertical-rl">ALBA</span>
+                    </div>
+                    <p class="rv absolute bottom-[116px] left-[14px] text-[9.5px] text-white" style="--a:.28;--b:.14"><i class="mr-2 inline-block size-[7px] bg-white align-middle"></i>Temporada de apertura 2026</p>
+                    <h4 class="absolute bottom-[50px] left-[14px] text-[36px] font-normal leading-[1.04] tracking-[-0.02em] text-white [text-shadow:0_2px_20px_rgba(30,12,2,.35)]">
+                      <span class="block overflow-hidden"><span class="rl block" style="--a:.26;--b:.2">Un nuevo horizonte,</span></span>
+                      <span class="block overflow-hidden"><span class="rl block" style="--a:.33;--b:.2">cada mañana.</span></span>
+                    </h4>
+                    <div class="absolute bottom-[12px] left-[14px] flex gap-2.5 text-[10.5px]">
+                      <span class="btn rv rounded-full bg-white px-[18px] py-[8px] font-medium text-[#1a1410]" style="--a:.5;--b:.14">Ver beneficios</span>
+                      <span class="rv rounded-full border border-white/50 px-[16px] py-[8px] text-white" style="--a:.54;--b:.14">▷ Ver demo</span>
+                    </div>
+                    <p class="rv absolute bottom-[14px] right-[14px] w-[200px] text-[9.5px] leading-[1.5] text-white [text-shadow:0_1px_10px_rgba(30,12,2,.5)]" style="--a:.58;--b:.16">Una marca que abre caminos: identidad, sitio y operación pensados juntos desde el primer día.</p>
+                    <i class="ripple absolute block size-[30px] rounded-full border border-white/80" style="left:60px;bottom:10px"></i>
                   </div>
-                  <div class="rv absolute right-5 top-[72px] h-[132px] w-[250px] overflow-hidden rounded-[16px] bg-gradient-to-br from-[#dbe6fd] to-[#8ab4f8]" style="--a:.3;--b:.25">
-                    <i class="absolute block size-[70px] rounded-full bg-white/60" style="left:calc(20px + var(--q) * 90px);top:24px"></i>
-                    <i class="absolute block size-[110px] rounded-full bg-[#1a56db]/30" style="right:calc(-30px - var(--q) * 20px);bottom:-40px"></i>
+                  <!-- page 2: after the click -->
+                  <div class="s2 absolute inset-0 bg-[#0e0c0b] px-7 pt-[34px]">
+                    <p class="rv text-[10px] tracking-[0.2em] text-white/50" style="--a:0;--b:.3">BENEFICIOS</p>
+                    <h4 class="rv mt-2 text-[24px] font-light leading-[1.1] tracking-[-0.02em] text-[#f4efe6]" style="--a:.05;--b:.3">Todo bajo un mismo horizonte</h4>
+                    <div class="mt-6 grid grid-cols-3 gap-6">
+                      {[['01', 'Diseño', 'Una sola cara para tu marca.'], ['02', 'Tecnología', 'Sitios y sistemas que trabajan solos.'], ['03', 'Operación', 'Procesos claros, de punta a punta.']].map(([n, t, d], k) => (
+                        <div class="rv" style={`--a:${0.2 + k * 0.16};--b:.3`}>
+                          <i class="gx mb-3 block h-px w-full bg-white/35" style={`--a:${0.2 + k * 0.16};--b:.4`}></i>
+                          <span class="text-[26px] font-extralight text-[#e8b36a]">{n}</span>
+                          <p class="mt-2 text-[13px] text-[#f4efe6]">{t}</p>
+                          <p class="mt-1 text-[10px] leading-[1.5] text-white/55">{d}</p>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                  <div class="absolute inset-x-5 bottom-4 flex gap-3">{[0, 1, 2].map((k) => (
-                    <div class="rv flex h-[58px] flex-1 items-center gap-2.5 rounded-[12px] bg-[#f6f8fc] px-3" style={`--a:${0.55 + k * 0.08};--b:.15`}><i class="size-[26px] rounded-full bg-[#dbe6fd]"></i><div><i class="block h-[5px] w-14 rounded-full bg-[#bdc1c6]"></i><i class="mt-1.5 block h-[5px] w-9 rounded-full bg-[#dadce0]"></i></div></div>
-                  ))}</div>
-                  <svg class="absolute z-10" style="left:calc(430px - clamp(0, calc((var(--q) - .45) * 2.2), 1) * 330px);top:calc(250px - clamp(0, calc((var(--q) - .45) * 2.2), 1) * 130px)" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 2l16 9-7 2-3 7z" fill="#202124" stroke="#fff" stroke-width="1.5"/></svg>
+                  <!-- cursor -->
+                  <svg class="cur absolute z-20" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 2l16 9-7 2-3 7z" fill="#fff" stroke="#14110f" stroke-width="1.5" stroke-linejoin="round"/></svg>
                 </div>
               </>)}
 
               {i === 2 && (<>
-                {['Nuevo', 'Contacto', 'Propuesta', 'Cierre'].map((c, k) => (
-                  <div class="absolute top-[58px] h-[318px] w-[136px] rounded-[16px] bg-[#f6f8fc]" style={`left:${24 + k * 148}px`}>
-                    <p class="px-3 pt-2.5 text-[12.5px] font-medium text-[#5f6368]">{c}</p>
+                <i class="absolute inset-0" style="background:radial-gradient(80% 70% at 82% 6%,rgba(232,160,88,.34),transparent 62%),linear-gradient(180deg,#171310,#090807)"></i>
+                <div class="rv absolute left-8 top-[66px] h-[160px] w-[256px]" style="--a:.04;--b:.3;perspective:760px">
+                  <div class="absolute inset-0 rounded-[18px] p-[18px]" style="transform:rotateY(calc(-20deg + var(--q) * 8deg)) rotateX(8deg);background:linear-gradient(135deg,#f6d29a 0%,#d98d52 46%,#4e2f22 100%);box-shadow:0 30px 50px -20px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,255,255,.5)">
+                    <i class="absolute inset-0 rounded-[18px]" style="background:linear-gradient(105deg,transparent calc(var(--q) * 90% - 30%),rgba(255,255,255,.45) calc(var(--q) * 90% - 12%),transparent calc(var(--q) * 90% + 8%))"></i>
+                    <svg width="36" height="28" viewBox="0 0 38 30" aria-hidden="true"><rect x="1" y="1" width="36" height="28" rx="7" fill="rgba(255,255,255,.18)" stroke="rgba(40,22,12,.7)" stroke-width="1.4"/><path d="M1 10H13V20H1M37 10H25V20H37M13 1V29M25 1V29" fill="none" stroke="rgba(40,22,12,.6)" stroke-width="1.2"/></svg>
+                    <span class="absolute right-[18px] top-[18px] text-[13px] font-light tracking-[0.28em] text-[#2a150b]">ALBA</span>
+                    <span class="absolute bottom-[34px] left-[18px] text-[14px] tracking-[0.22em] text-[#2a150b]">•••• •••• 4821</span>
+                    <span class="absolute bottom-[14px] left-[18px] text-[9.5px] tracking-wide text-[#2a150b]/75">VÁLIDA 09/29</span>
                   </div>
-                ))}
-                {[[0, 3, 0, 'Ana'], [0, 2, 1, 'Luis'], [0, 1, 2, 'Sofía'], [1, 3, 3, 'Marco'], [1, 2, 4, 'Elena']].map(([sc, dc, r, n], k) => (
-                  <div class={`rv absolute h-[48px] w-[116px] rounded-[11px] p-2.5 shadow-[0_2px_6px_rgba(32,33,36,.1)] ${dc === 3 ? 'bg-[#1a56db]' : 'bg-white'}`} style={`left:${34 + Number(sc) * 148}px;top:${92 + Number(r) * 56}px;--a:${0.05 + k * 0.06};--b:.12;translate:calc(var(--m) * ${(Number(dc) - Number(sc)) * 148}px) calc((1 - var(--t)) * 16px);--m:clamp(0, calc((var(--q) - ${0.3 + k * 0.07}) * 2.6), 1)`}>
-                    <i class={`block size-[14px] rounded-full ${dc === 3 ? 'bg-white/90' : 'bg-[#dbe6fd]'}`}></i>
-                    <i class={`absolute left-[30px] top-[12px] block h-[5px] w-12 rounded-full ${dc === 3 ? 'bg-white/80' : 'bg-[#bdc1c6]'}`}></i>
-                    <i class={`absolute left-[30px] top-[24px] block h-[5px] w-8 rounded-full ${dc === 3 ? 'bg-white/50' : 'bg-[#dadce0]'}`}></i>
+                </div>
+                <div class="absolute left-8 top-[252px]">
+                  <p class="rv text-[11.5px] tracking-wide text-[#f4efe6]/55" style="--a:.15;--b:.2">Saldo disponible</p>
+                  <p class="rv mt-1 text-[46px] font-extralight leading-none tracking-[-0.03em] text-[#fbf5ea]" style="--a:.18;--b:.3">$<span data-count="248300" data-a=".18" data-b=".5">0</span><span class="ml-2 text-[13px] tracking-wide text-[#f4efe6]/50">MXN</span></p>
+                  <p class="rv mt-3 text-[11px] text-[#e8b36a]" style="--a:.5;--b:.2">↗ +12.4 % frente al mes anterior</p>
+                </div>
+                <div class="absolute right-8 top-[62px] w-[290px]">
+                  <p class="rv text-[11.5px] tracking-wide text-[#f4efe6]/55" style="--a:.12;--b:.2">Flujo de caja</p>
+                  <svg class="mt-2" width="290" height="74" viewBox="0 0 290 74" aria-hidden="true" style="overflow:visible">
+                    <defs><linearGradient id="fgA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8b36a" stop-opacity=".35"/><stop offset="1" stop-color="#e8b36a" stop-opacity="0"/></linearGradient></defs>
+                    <path class="gx" style="--a:.3;--b:.4" d="M0 58 C30 54 44 36 76 40 S124 56 156 34 S214 20 250 24 S280 10 290 6 V74 H0Z" fill="url(#fgA)"/>
+                    <path class="dw" style="--a:.28;--b:.42;filter:drop-shadow(0 0 6px rgba(232,179,106,.7))" d="M0 58 C30 54 44 36 76 40 S124 56 156 34 S214 20 250 24 S280 10 290 6" fill="none" stroke="#f0c07a" stroke-width="2.2" stroke-linecap="round" pathLength="100"/>
+                    <circle class="fl" style="--a:.66;--b:.08" cx="290" cy="6" r="4.5" fill="#fff6e4"/>
+                  </svg>
+                  <div class="mt-3">
+                    {[['Cobro · Estudio Aurora', 'Hoy, 10:42', '+$42,500', 1], ['Proveedor · Logística Norte', 'Ayer', '−$18,200', 0], ['Factura emitida #0231', '12 nov', '+$31,800', 1]].map(([n, d, a, pos], k) => (
+                      <div class="rv flex items-center gap-3 border-t border-white/10 py-[11px]" style={`--a:${0.4 + k * 0.12};--b:.16`}>
+                        <i class="flex size-[28px] shrink-0 items-center justify-center rounded-full border border-white/25 text-[12px] text-white/80">{pos ? '↙' : '↗'}</i>
+                        <div class="min-w-0 flex-1"><p class="truncate text-[12.5px] text-[#f4efe6]">{n}</p><p class="text-[10px] text-white/45">{d}</p></div>
+                        <span class={`text-[13px] tabular-nums ${pos ? 'text-[#f0c07a]' : 'text-white/60'}`}>{a}</span>
+                      </div>
+                    ))}
                   </div>
-                ))}
+                </div>
               </>)}
 
               {i === 3 && (<>
-                <div class="rv absolute left-6 top-[58px] h-[318px] w-[236px] rounded-[16px] border border-[#e3e6ea] p-4" style="--a:.02;--b:.15">
-                  <div class="flex items-center justify-between"><i class="block h-[8px] w-16 rounded-full bg-[#202124]"></i><i class="block h-[6px] w-10 rounded-full bg-[#dadce0]"></i></div>
-                  <div class="mt-5 space-y-3.5">{[0, 1, 2, 3].map((k) => (
-                    <div class="rv flex items-center justify-between" style={`--a:${0.12 + k * 0.1};--b:.12`}><div><i class="block h-[6px] w-[92px] rounded-full bg-[#bdc1c6]"></i><i class="mt-1.5 block h-[5px] w-[58px] rounded-full bg-[#e3e6ea]"></i></div><i class="block h-[7px] w-9 rounded-full bg-[#dadce0]"></i></div>
-                  ))}</div>
-                  <i class="absolute inset-x-4 top-[206px] block h-px bg-[#e3e6ea]"></i>
-                  <div class="rv absolute inset-x-4 top-[222px] flex items-center justify-between" style="--a:.55;--b:.12"><i class="block h-[8px] w-12 rounded-full bg-[#5f6368]"></i><i class="block h-[14px] w-[70px] rounded-full bg-[#202124]"></i></div>
-                  <div class="fl absolute bottom-[14px] right-[14px] rounded-[10px] border-2 border-[#1a56db] px-3 py-1 text-[15px] font-medium tracking-wide text-[#1a56db]" style="--a:.72;--b:.14;rotate:-8deg">PAGADA</div>
+                <i class="absolute inset-0" style="background:radial-gradient(70% 60% at 14% 0%,rgba(140,170,200,.26),transparent 62%),linear-gradient(180deg,#0f1216,#08090b)"></i>
+                <div class="absolute inset-x-8 top-[58px] flex justify-between">
+                  {[['Pedidos', 1284, '', ''], ['Entregas a tiempo', 96, '', ' %'], ['Ticket promedio', 2430, '$', '']].map(([t, v, pre, suf], k) => (
+                    <div class="rv w-[170px]" style={`--a:${0.04 + k * 0.08};--b:.2`}>
+                      <p class="text-[11px] tracking-wide text-[#f4efe6]/55">{t}</p>
+                      <p class="mt-1 text-[36px] font-extralight leading-none tracking-[-0.03em] text-[#fbf5ea]">{pre}<span data-count={v} data-a={0.06 + k * 0.08} data-b=".4">0</span>{suf}</p>
+                    </div>
+                  ))}
                 </div>
-                <div class="rv absolute right-6 top-[58px] h-[318px] w-[340px] rounded-[16px] bg-[#f6f8fc] p-4" style="--a:.1;--b:.15">
-                  <div class="flex items-center justify-between"><i class="block h-[8px] w-[84px] rounded-full bg-[#202124]"></i><i class="block h-[14px] w-[44px] rounded-full bg-[#dbe6fd]"></i></div>
-                  <svg class="mt-3" width="308" height="176" viewBox="0 0 308 176" aria-hidden="true">
-                    <path d="M0 44H308M0 88H308M0 132H308" stroke="#e3e6ea"/>
-                    <path class="gx" style="--a:.3;--b:.4" d="M0 150 C40 140 60 100 100 108 S160 60 200 70 S270 24 308 18 V176 H0Z" fill="#1a56db" fill-opacity=".1"/>
-                    <path class="dw" style="--a:.28;--b:.42" d="M0 150 C40 140 60 100 100 108 S160 60 200 70 S270 24 308 18" fill="none" stroke="#1a56db" stroke-width="3" stroke-linecap="round" pathLength="100"/>
-                    <circle class="fl" style="--a:.68;--b:.08" cx="308" cy="18" r="6" fill="#fff" stroke="#1a56db" stroke-width="3"/>
-                  </svg>
-                  <div class="mt-2 flex h-[54px] items-end gap-2.5">{[22, 34, 26, 40, 30, 48, 36].map((h, k) => <i class="gy block w-[28px] rounded-[6px] bg-[#dbe6fd]" style={`height:${h}px;--a:${0.4 + k * 0.05};--b:.2`}></i>)}</div>
+                <svg class="absolute left-8 top-[146px]" width="576" height="150" viewBox="0 0 576 150" aria-hidden="true" style="overflow:visible">
+                  <defs><linearGradient id="dgA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cfe0f0" stop-opacity=".28"/><stop offset="1" stop-color="#cfe0f0" stop-opacity="0"/></linearGradient></defs>
+                  <path d="M0 37H576M0 75H576M0 113H576" stroke="rgba(255,255,255,.07)"/>
+                  <path class="gx" style="--a:.3;--b:.4" d="M0 112 C40 104 70 70 112 78 S176 118 230 86 S300 30 352 52 S430 96 478 56 S548 20 576 28 V150 H0Z" fill="url(#dgA)"/>
+                  <path class="dw" style="--a:.28;--b:.44;filter:drop-shadow(0 0 7px rgba(190,215,240,.75))" d="M0 112 C40 104 70 70 112 78 S176 118 230 86 S300 30 352 52 S430 96 478 56 S548 20 576 28" fill="none" stroke="#dbe9f6" stroke-width="2.4" stroke-linecap="round" pathLength="100"/>
+                </svg>
+                <div class="pt absolute left-8 top-[146px]" style="--a:.5;--b:.3">
+                  <i class="absolute -left-[5px] -top-[5px] block size-[10px] rounded-full bg-[#fff6e4] shadow-[0_0_0_5px_rgba(255,246,228,.22),0_0_18px_rgba(255,236,200,.9)]"></i>
+                  <span class="absolute -top-[40px] right-[-4px] whitespace-nowrap rounded-full border border-white/20 bg-white/10 px-3 py-[5px] text-[10.5px] text-[#f4efe6]">Jue · 312 pedidos</span>
+                </div>
+                <div class="absolute inset-x-8 bottom-[22px] space-y-[9px]">
+                  {[['Compras', 4, 38], ['Producción', 22, 52], ['Entrega', 50, 40]].map(([t, s, w], k) => (
+                    <div class="flex items-center gap-4"><span class="rv w-[82px] text-[11px] text-white/55" style={`--a:${0.5 + k * 0.08};--b:.12`}>{t}</span>
+                      <i class="relative block h-[7px] flex-1 rounded-full bg-white/[0.07]"><b class="gx absolute inset-y-0 block rounded-full" style={`left:${s}%;width:${w}%;background:linear-gradient(90deg,#dbe9f6,#e8b36a);--a:${0.52 + k * 0.1};--b:.2`}></b></i></div>
+                  ))}
                 </div>
               </>)}
 
               {i === 4 && (<>
-                {[0, 1, 2].map((k) => (
-                  <div class="rv absolute top-[58px] h-[78px] w-[192px] rounded-[14px] border border-[#e3e6ea] p-3.5" style={`left:${24 + k * 204}px;--a:${0.02 + k * 0.06};--b:.15`}>
-                    <i class="block h-[6px] w-14 rounded-full bg-[#bdc1c6]"></i>
-                    <i class="gx mt-3 block h-[12px] w-[70px] rounded-full bg-[#202124]" style={`--a:${0.1 + k * 0.06};--b:.2`}></i>
-                    <svg class="absolute bottom-3 right-3.5" width="70" height="30" viewBox="0 0 70 30" aria-hidden="true"><path class="dw" style={`--a:${0.15 + k * 0.06};--b:.3`} d="M2 24 L16 16 L28 20 L44 8 L68 12" fill="none" stroke={k === 1 ? '#202124' : '#1a56db'} stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" pathLength="100"/></svg>
-                  </div>
-                ))}
-                <div class="rv absolute left-6 top-[148px] h-[150px] w-[346px] rounded-[14px] bg-[#f6f8fc] px-4 pb-3 pt-4" style="--a:.2;--b:.15">
-                  <i class="block h-[7px] w-20 rounded-full bg-[#5f6368]"></i>
-                  <div class="absolute inset-x-4 bottom-3 flex h-[96px] items-end justify-between">{[40, 62, 48, 78, 58, 90, 70, 84].map((h, k) => <i class={`gy block w-[28px] rounded-[7px] ${k === 5 ? 'bg-[#1a56db]' : 'bg-[#dbe6fd]'}`} style={`height:${h}px;--a:${0.28 + k * 0.05};--b:.2`}></i>)}</div>
+                <i class="absolute inset-0" style="background:radial-gradient(52% 54% at 50% 28%,rgba(255,186,108,.30),transparent 70%),linear-gradient(180deg,#0e0b0a,#070606)"></i>
+                <div class="absolute left-1/2 top-[56px] -translate-x-1/2" style="width:130px;height:130px">
+                  <i class="ring absolute inset-0 rounded-full border border-[#f4c98a]/40"></i><i class="ring absolute inset-0 rounded-full border border-[#f4c98a]/40" style="animation-delay:1.2s"></i><i class="ring absolute inset-0 rounded-full border border-[#f4c98a]/40" style="animation-delay:2.4s"></i>
+                  <i class="orb rv absolute inset-[14px] block rounded-full" style="--a:.02;--b:.25;background:radial-gradient(circle at 36% 32%,#fffaf0 0%,#f9d79b 22%,#ec9a54 52%,#9c4a2a 78%,#2a120b 100%);box-shadow:0 0 50px rgba(244,163,90,.65),0 0 130px rgba(244,163,90,.32)"></i>
                 </div>
-                <div class="rv absolute right-6 top-[148px] flex h-[150px] w-[246px] items-center gap-4 rounded-[14px] bg-[#f6f8fc] px-4" style="--a:.3;--b:.15">
-                  <svg width="104" height="104" viewBox="0 0 104 104" aria-hidden="true">
-                    <circle cx="52" cy="52" r="38" fill="none" stroke="#e3e6ea" stroke-width="14"/>
-                    <circle class="dw" style="--a:.35;--b:.35" cx="52" cy="52" r="38" fill="none" stroke="#1a56db" stroke-width="14" stroke-linecap="round" pathLength="100" stroke-dasharray="100" transform="rotate(-90 52 52)" />
-                    <circle class="dw" style="--a:.5;--b:.3" cx="52" cy="52" r="38" fill="none" stroke="#8ab4f8" stroke-width="14" stroke-linecap="round" pathLength="100" transform="rotate(95 52 52)"/>
-                  </svg>
-                  <div class="space-y-3">{[0, 1, 2].map((k) => <div class="flex items-center gap-2"><i class={`size-2.5 rounded-full ${['bg-[#1a56db]', 'bg-[#8ab4f8]', 'bg-[#e3e6ea]'][k]}`}></i><i class="block h-[6px] rounded-full bg-[#bdc1c6]" style={`width:${[52, 40, 30][k]}px`}></i></div>)}</div>
+                <i class="gx absolute left-1/2 top-[190px] block h-[22px] w-px origin-top bg-gradient-to-b from-[#f4c98a]/70 to-transparent" style="--a:.2;--b:.15;scale:1 var(--t)"></i>
+                <div class="rv absolute left-1/2 top-[206px] -ml-[192px] w-[384px] rounded-full border border-white/20 bg-white/[0.07] px-5 py-[10px] text-[12.5px] text-[#f4efe6]" style="--a:.16;--b:.2">
+                  <span class="type block overflow-hidden whitespace-nowrap" style="--a:.2;--b:.3">Prepara la cotización para Estudio Aurora y envíala</span>
                 </div>
-                <div class="absolute inset-x-6 bottom-[22px] space-y-2.5">{[0, 1, 2].map((k) => (
-                  <div class="rv flex items-center gap-3" style={`--a:${0.55 + k * 0.1};--b:.12`}><i class="size-[18px] rounded-full bg-[#dbe6fd]"></i><i class="block h-[6px] w-[120px] rounded-full bg-[#bdc1c6]"></i><i class="ml-auto block h-[6px] w-[150px] rounded-full bg-[#e3e6ea]"></i><i class="block h-[6px] w-10 rounded-full bg-[#dadce0]"></i></div>
-                ))}</div>
-              </>)}
-
-              {i === 5 && (<>
-                <div class="absolute left-6 top-[58px] h-[318px] w-[300px] rounded-[16px] bg-[#f6f8fc] p-4">
-                  <div class="rv flex h-[34px] w-[200px] items-center rounded-full bg-white px-3.5 shadow-[0_1px_3px_rgba(32,33,36,.1)]" style="--a:.03;--b:.12"><i class="block h-[5px] w-[140px] rounded-full bg-[#bdc1c6]"></i></div>
-                  <div class="rv ml-auto mt-3 flex h-[34px] w-[100px] items-center gap-1.5 rounded-full bg-[#1a56db] px-4" style="--a:.15;--b:.1"><span class="dot3 flex gap-1"><i class="size-1.5 rounded-full bg-white"></i><i class="size-1.5 rounded-full bg-white"></i><i class="size-1.5 rounded-full bg-white"></i></span></div>
-                  <div class="rv ml-auto mt-3 flex h-[56px] w-[250px] items-center gap-2.5 rounded-[20px] bg-[#1a56db] px-4" style="--a:.28;--b:.14">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4z"/></svg>
-                    <div><i class="block h-[5px] w-[150px] rounded-full bg-white/85"></i><i class="mt-2 block h-[5px] w-[96px] rounded-full bg-white/55"></i></div>
-                  </div>
-                  <div class="mt-4 space-y-2">{['Cotización', 'Seguimiento', 'Factura'].map((t, k) => (
-                    <div class="rv flex items-center gap-2.5 rounded-[12px] bg-white px-3 py-2 text-[13px] text-[#3c4043]" style={`--a:${0.42 + k * 0.1};--b:.12`}>
-                      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="8" fill="#eaf1fe"/><path class="dw" style={`--a:${0.46 + k * 0.1};--b:.1`} d="M5 9.4l2.6 2.6L13 6.6" fill="none" stroke="#1a56db" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" pathLength="100"/></svg>{t}
+                <div class="absolute left-1/2 top-[262px] w-[384px] -translate-x-1/2 space-y-[9px]">
+                  {[['Cotización generada', '0.8 s'], ['Enviada por correo', '1.2 s'], ['Seguimiento agendado', '1.4 s'], ['Factura preparada', '2.0 s']].map(([t, s], k) => (
+                    <div class="rv flex items-center gap-3 px-1" style={`--a:${0.44 + k * 0.1};--b:.12`}>
+                      <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="none" stroke="rgba(244,201,138,.5)" stroke-width="1.2"/><path class="dw" style={`--a:${0.5 + k * 0.1};--b:.1`} d="M6 10.4l2.8 2.8L14 7.6" fill="none" stroke="#f4c98a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" pathLength="100"/></svg>
+                      <span class="flex-1 text-[12.5px] text-[#f4efe6]">{t}</span><span class="text-[10.5px] tabular-nums text-white/40">{s}</span>
                     </div>
-                  ))}</div>
-                </div>
-                <svg class="absolute right-6 top-[58px]" width="288" height="318" viewBox="0 0 288 318" aria-hidden="true">
-                  <path class="dw" style="--a:.5;--b:.12" d="M144 84V132" stroke="#1a56db" stroke-width="2.5" fill="none" pathLength="100"/>
-                  <path class="dw" style="--a:.6;--b:.12" d="M144 192V240" stroke="#1a56db" stroke-width="2.5" fill="none" pathLength="100"/>
-                  {['Cotización', 'Seguimiento', 'Factura'].map((t, k) => (
-                    <g class="rv" style={`--a:${0.4 + k * 0.1};--b:.14`}>
-                      <rect x="54" y={30 + k * 108} width="180" height="54" rx="16" fill="#fff" stroke="#c6d4f7" stroke-width="1.5"/>
-                      <circle cx="84" cy={57 + k * 108} r="12" fill="#eaf1fe"/><circle cx="84" cy={57 + k * 108} r="4.5" fill="#1a56db"/>
-                      <text x="108" y={62 + k * 108} font-size="15" fill="#202124" font-family="Google Sans Flex Variable, sans-serif" font-weight="500">{t}</text>
-                    </g>
                   ))}
-                  <circle r="5" fill="#1a56db" class="pulse"><animateMotion dur="2.4s" repeatCount="indefinite" path="M144 84V132 M144 192V240"/></circle>
-                </svg>
+                </div>
               </>)}
             </div>
           ))}
@@ -180,7 +228,7 @@ const frags = [
       </div>
 
       <div class="pointer-events-none absolute inset-x-0 top-0 z-10 h-[17svh] bg-gradient-to-b from-white via-white/80 to-white/0" aria-hidden="true"></div>
-      <div class="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-[24svh] bg-gradient-to-t from-white via-white/85 to-white/0" aria-hidden="true"></div>
+      <div class="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-[17svh] bg-gradient-to-t from-white via-white/80 to-white/0" aria-hidden="true"></div>
       <!-- subtitle -->
       <div class="absolute inset-x-0 bottom-[7svh] z-20 flex flex-col items-center px-6 text-center">
         <h3 data-title class="ps-title text-[clamp(1.6rem,3.2vw,2.8rem)] font-normal leading-[1.1] tracking-[-0.03em]">{titles[0]}</h3>
@@ -212,35 +260,47 @@ const frags = [
 
   // ---- layout: panels on a grid, camera stops, data bus between them
   let C: { x: number; y: number }[] = [], K: number[] = [], vw = 1, vh = 1;
+  const LAST = 6; // steps 0..6: loose pieces, five modules, the whole ecosystem
   const layout = () => {
     vw = inner.clientWidth; vh = inner.clientHeight;
     const portrait = vw / vh < 0.85;
-    const cols = portrait ? 2 : 3, rows = portrait ? 3 : 2;
-    const order = portrait ? [[0, 0], [1, 0], [1, 1], [0, 1], [0, 2], [1, 2]] : [[0, 0], [1, 0], [2, 0], [2, 1], [1, 1], [0, 1]];
-    const px = (c: number) => (c - (cols - 1) / 2) * (W + GAP), py = (r: number) => (r - (rows - 1) / 2) * (H + GAP);
-    const ww = cols * W + (cols - 1) * GAP, wh = rows * H + (rows - 1) * GAP;
-    C = order.map(([c, r]) => ({ x: px(c), y: py(r) }));
+    const D = W + GAP, E = H + GAP;
+    // panel centres in snake order: identity, website, finance, data, assistants
+    const pos = portrait
+      ? [[-D / 2, -E], [D / 2, -E], [-D / 2, 0], [D / 2, 0], [0, E]]
+      : [[-D, -E / 2], [0, -E / 2], [D, -E / 2], [D / 2, E / 2], [-D / 2, E / 2]];
+    const ww = portrait ? 2 * W + GAP : 3 * W + 2 * GAP, wh = portrait ? 3 * H + 2 * GAP : 2 * H + GAP;
+    C = pos.map(([x, y]) => ({ x, y }));
     pns.forEach((el, i) => { el.style.left = `${C[i].x - W / 2}px`; el.style.top = `${C[i].y - H / 2}px`; el.style.translate = `0 0 ${i % 2 ? -26 : 26}px`; });
     const kP = portrait ? Math.min(vw * 0.9 / W, vh * 0.5 / H) : Math.min(vw * 0.56 / W, vh * 0.58 / H);
-    const kF = Math.min(vw * (portrait ? 0.92 : 0.9) / ww, vh * (portrait ? 0.6 : 0.6) / wh);
-    K = [kP * 0.84, kP, kP, kP, kP, kP, kP, kF];
+    const kF = Math.min(vw * 0.92 / ww, vh * 0.6 / wh);
+    K = [kP * 0.84, kP, kP, kP, kP, kP, kF];
     C = [C[0], ...C, { x: 0, y: 0 }];
-    // bus: channels between panels, stubs to every panel, pulses
+    // data bus through the gaps: channels, stubs into every panel, travelling pulses
+    const ch = portrait
+      ? { v: [[0, -wh / 2, E / 2]], h: [[-E / 2, -ww / 2, ww / 2], [E / 2, -ww / 2, ww / 2]] }
+      : { v: [[-D / 2, -wh / 2, 0], [D / 2, -wh / 2, 0], [0, 0, wh / 2]], h: [[0, -ww / 2, ww / 2]] };
     const L: string[] = [], N: string[] = [], P: string[] = [];
-    const seg = (d: string, a: number) => L.push(`<path class="dw" style="--a:${a};--b:.5" d="${d}" fill="none" stroke="#1a56db" stroke-width="2.5" stroke-linecap="round" pathLength="100"/>`);
-    const node = (x: number, y: number, r: number) => N.push(`<circle class="fl" style="--a:.45;--b:.15" cx="${x}" cy="${y}" r="${r}" fill="#fff" stroke="#1a56db" stroke-width="2.5"/>`);
-    const vx = Array.from({ length: cols - 1 }, (_, c) => px(c) + (W + GAP) / 2), hy = Array.from({ length: rows - 1 }, (_, r) => py(r) + (H + GAP) / 2);
-    vx.forEach((x, i) => { seg(`M${x} ${-wh / 2}V${wh / 2}`, 0.05 + i * 0.1); P.push(`M${x} ${-wh / 2}V${wh / 2}`); });
-    hy.forEach((y, i) => { seg(`M${-ww / 2} ${y}H${ww / 2}`, 0.1 + i * 0.1); P.push(`M${ww / 2} ${y}H${-ww / 2}`); });
-    vx.forEach((x) => hy.forEach((y) => node(x, y, 7)));
-    order.forEach(([c, r], i) => {
-      const x = px(c), y = py(r);
-      if (c < cols - 1) { seg(`M${x + W / 2} ${y}H${x + W / 2 + GAP / 2}`, 0.3 + i * 0.05); node(x + W / 2, y, 5); }
-      if (c > 0) { seg(`M${x - W / 2} ${y}H${x - W / 2 - GAP / 2}`, 0.3 + i * 0.05); node(x - W / 2, y, 5); }
-      if (r < rows - 1) { seg(`M${x} ${y + H / 2}V${y + H / 2 + GAP / 2}`, 0.35 + i * 0.05); node(x, y + H / 2, 5); }
-      if (r > 0) { seg(`M${x} ${y - H / 2}V${y - H / 2 - GAP / 2}`, 0.35 + i * 0.05); node(x, y - H / 2, 5); }
+    const seg = (d: string, a: number) => L.push(`<path class="dw" style="--a:${a};--b:.5" d="${d}" fill="none" stroke="#20242c" stroke-width="2.5" stroke-linecap="round" pathLength="100"/>`);
+    const node = (x: number, y: number, r: number) => N.push(`<circle class="fl" style="--a:.45;--b:.15" cx="${x}" cy="${y}" r="${r}" fill="#fff" stroke="#20242c" stroke-width="2.5"/>`);
+    ch.v.forEach(([x, y1, y2], i) => { seg(`M${x} ${y1}V${y2}`, 0.05 + i * 0.08); P.push(`M${x} ${y1}V${y2}`); });
+    ch.h.forEach(([y, x1, x2], i) => { seg(`M${x1} ${y}H${x2}`, 0.1 + i * 0.08); P.push(`M${x2} ${y}H${x1}`); });
+    ch.v.forEach(([x]) => ch.h.forEach(([y, x1, x2]) => { if (x >= x1 && x <= x2) node(x, y, 7); }));
+    const near = (a: number, b: number) => Math.abs(a - b) < 1;
+    pos.forEach(([x, y], i) => {
+      const l = x - W / 2, r = x + W / 2, t = y - H / 2, bt = y + H / 2;
+      ch.v.forEach(([cx, y1, y2]) => {
+        if (y < y1 || y > y2) return;
+        if (near(cx, r + GAP / 2)) { seg(`M${r} ${y}H${cx}`, 0.3 + i * 0.05); node(r, y, 5); }
+        if (near(cx, l - GAP / 2)) { seg(`M${l} ${y}H${cx}`, 0.3 + i * 0.05); node(l, y, 5); }
+      });
+      ch.h.forEach(([cy, x1, x2]) => {
+        if (x < x1 || x > x2) return;
+        if (near(cy, bt + GAP / 2)) { seg(`M${x} ${bt}V${cy}`, 0.35 + i * 0.05); node(x, bt, 5); }
+        if (near(cy, t - GAP / 2)) { seg(`M${x} ${t}V${cy}`, 0.35 + i * 0.05); node(x, t, 5); }
+      });
     });
-    const pulses = P.map((d, i) => `<circle r="5" fill="#1a56db" class="pulse"><animateMotion dur="${3 + i * 0.7}s" begin="${i * 0.5}s" repeatCount="indefinite" path="${d}"/></circle>`).join('');
+    const pulses = P.map((d, i) => `<circle r="5" fill="#e0a35a" class="pulse"><animateMotion dur="${3 + i * 0.7}s" begin="${i * 0.5}s" repeatCount="indefinite" path="${d}"/></circle>`).join('');
     bus.innerHTML = L.join('') + N.join('') + pulses;
   };
   layout();
@@ -251,28 +311,29 @@ const frags = [
   const mouse = { x: 0, y: 0, sx: 0, sy: 0 };
   addEventListener('pointermove', (e) => { mouse.x = e.clientX / innerWidth - 0.5; mouse.y = e.clientY / innerHeight - 0.5; }, { passive: true });
 
-  // ---- scroll → timeline u in [0, 7]
+  // ---- scroll → timeline u in [0, LAST]
   let target = 0, u = 0, shown = -1, ecoOn = false, visible = true;
   const read = (y: number, vh: number) => {
     const p = clamp((y - sm0.top) / Math.max(1, sm0.height - vh));
-    target = reduced ? 7 : clamp(p * 7.6 - 0.3, 0, 7);
+    target = reduced ? LAST : clamp(p * (LAST + 0.6) - 0.3, 0, LAST);
   };
   const setTitle = (i: number) => {
     titleEl.classList.add('out');
     setTimeout(() => { titleEl.textContent = titles[i]; titleEl.classList.remove('out'); }, 220);
   };
   const lastQ: number[] = [];
+  const counts = pns.map((el) => [...el.querySelectorAll<HTMLElement>('[data-count]')].map((c) => ({ el: c, v: +c.dataset.count!, a: +c.dataset.a!, b: +c.dataset.b! })));
   const render = (time: number) => {
     u += (target - u) * (reduced ? 1 : 0.11);
     if (Math.abs(target - u) < 0.0005) u = target;
     // camera
-    const a = Math.min(6, Math.floor(u)), f = u - a;
+    const a = Math.min(LAST - 1, Math.floor(u)), f = u - a;
     const tr = sm(clamp((f - 0.5) / 0.5));
     const ccx = lerp(C[a].x, C[a + 1].x, tr), ccy = lerp(C[a].y, C[a + 1].y, tr);
     const push = lerp(1 + 0.05 * clamp(f / 0.5), 1, tr);
     const k = lerp(K[a], K[a + 1], tr) * (1 - 0.15 * Math.sin(Math.PI * tr)) * push;
     const sgn = a % 2 ? -1 : 1, sgn2 = (a + 1) % 2 ? -1 : 1;
-    const e7 = clamp((u - 6.35) / 0.65);
+    const e7 = clamp((u - (LAST - 0.65)) / 0.65);
     const rx = lerp(sgn * 2.5, sgn2 * 2.5, tr) * (1 - e7) + Math.sin(time * 0.0004) * 0.5 - mouse.sy * 2;
     const ry = lerp(sgn * -5, sgn2 * -5, tr) * (1 - e7) + Math.cos(time * 0.0003) * 0.6 + mouse.sx * 3;
     put(world, 'transform', `scale(${k.toFixed(4)}) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) translate3d(${(-ccx).toFixed(1)}px, ${(-ccy).toFixed(1)}px, 0)`);
@@ -281,9 +342,9 @@ const frags = [
     pns.forEach((el, i) => {
       const s = i + 1;
       const q = clamp((u - s + 0.45) / 0.85);
-      if (lastQ[i] !== q) { lastQ[i] = q; el.style.setProperty('--q', q.toFixed(4)); }
-      const focus = 1 - clamp(Math.abs(u - s) / 0.7);
-      const o = vis * lerp(0.28, 1, focus);
+      if (lastQ[i] !== q) { lastQ[i] = q; el.style.setProperty('--q', q.toFixed(4)); counts[i].forEach((c) => { const t = clamp((q - c.a) / c.b); c.el.textContent = Math.round(c.v * (1 - Math.pow(1 - t, 3))).toLocaleString('es-MX'); }); }
+      const focus = 1 - clamp((Math.abs(u - (s + 0.05)) - 0.35) / 0.6);
+      const o = vis * lerp(u > s - 0.5 ? 0.5 : 0.2, 1, focus);
       put(el, 'opacity', lerp(o, vis, e7).toFixed(3));
     });
     put(bus as unknown as HTMLElement, '--eq', e7.toFixed(3));
@@ -303,15 +364,15 @@ const frags = [
       });
     }
     // subtitle
-    const idx = clamp(Math.round(u), 0, 7);
+    const idx = clamp(Math.round(u), 0, LAST);
     if (idx !== shown) { if (shown >= 0) setTitle(idx); else titleEl.textContent = titles[idx]; shown = idx; }
-    put(bar, 'transform', `scaleX(${(u / 7).toFixed(3)})`);
+    put(bar, 'transform', `scaleX(${(u / LAST).toFixed(3)})`);
   };
   if (reduced) {
     read(0, innerHeight);
     pns.forEach((el) => el.style.setProperty('--q', '1'));
     render(0);
-    titleEl.textContent = titles[7];
+    titleEl.textContent = titles[LAST];
   } else {
     onFrame((time, y, vh) => {
       read(y, vh);
