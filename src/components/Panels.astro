@@ -1,7 +1,7 @@
 ---
 interface Props { i: number }
 const { i } = Astro.props;
-const labels = ['Identidad', 'Sitio web', 'Finanzas', 'Datos', 'Asistentes', 'Marketing'];
+const labels = ['Identidad', 'Sitio web', 'Finanzas', 'Datos', 'Asistentes', 'Marketing', 'Branding y redes'];
 const SB = [
   '<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
   '<path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h6M9 17h6"/>',
@@ -60,6 +60,31 @@ const HM = Array.from({ length: 4 }, (_, r) => Array.from({ length: 24 }, (_, c)
                     <span class="rv rounded-full border border-white/55 px-[16px] py-[8px] text-white" style="--a:.66;--b:.14">▷ Ver demo</span>
                   </div>
                   <p class="rv absolute bottom-[16px] right-[16px] w-[200px] text-[9.5px] leading-[1.5] text-white [text-shadow:0_1px_10px_rgba(30,12,2,.55)]" style="--a:.7;--b:.16">Una marca que abre caminos: identidad, sitio y operación pensados juntos desde el primer día.</p>
+                </div>
+              </>)}
+
+              {i === 6 && (<>
+                <div class="absolute left-6 top-[54px] w-[300px]">
+                  <div class="rv relative h-[92px] overflow-hidden rounded-[16px]" style="--a:.02;--b:.2;background:linear-gradient(135deg,#977DFF 0%,#0033FF 62%,#0600AB 100%)">
+                    <i class="grain absolute inset-0 opacity-[.16]"></i>
+                    <i class="absolute -right-6 -top-10 block size-[120px] rounded-full" style="background:radial-gradient(circle,rgba(255,255,255,.5),transparent 65%)"></i>
+                    <span class="absolute right-3 top-3 rounded-full bg-white/20 px-2.5 py-[3px] text-[9.5px] text-white ring-1 ring-white/40">Seguir</span>
+                  </div>
+                  <div class="relative -mt-[22px] flex items-end gap-3 px-3">
+                    <i class="fl flex size-[46px] shrink-0 items-center justify-center rounded-full bg-white ring-[3px] ring-white" style="--a:.1;--b:.15"><svg width="28" height="28" viewBox="0 0 34 34" aria-hidden="true"><rect x="2" y="2" width="30" height="30" rx="9" fill="#0033FF"/><path d="M9 23c3-9.5 13-9.5 16 0" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/><circle cx="17" cy="14" r="3" fill="#977DFF"/></svg></i>
+                    <div class="rv pt-[26px]" style="--a:.14;--b:.15"><p class="text-[13px] font-medium leading-none">alba.studio</p><p class="mt-1 text-[9.5px] text-[#8f8aa6]">Branding · Redes sociales</p></div>
+                  </div>
+                  <div class="mt-3 flex">{[['Publicaciones', 128, 0], ['Seguidores', 246, 1], ['Interacción', 54, 1]].map(([l, v, d], k) => (<div class={`rv flex-1 ${k ? 'border-l border-[#eceef8] pl-3' : ''}`} style={`--a:${0.2 + k * 0.07};--b:.14`}><p class="text-[17px] font-normal tabular-nums leading-none tracking-[-0.02em]"><span data-count={v} data-a={0.22 + k * 0.07} data-b=".3" data-d={d ? 1 : 0}>0</span>{k === 1 ? ' K' : k === 2 ? ' %' : ''}</p><p class="mt-1 text-[9px] text-[#8f8aa6]">{l}</p></div>))}</div>
+                  <div class="mt-3 grid grid-cols-3 gap-[7px]">{[['#977DFF,#0033FF', 'Aa'], ['#0033FF,#0600AB', ''], ['#F2E6EE,#977DFF', '★'], ['#0600AB,#00033D', 'Aa'], ['#977DFF,#F2E6EE', ''], ['#0033FF,#977DFF', '▶']].map(([g, t], k) => (<i class="rv relative flex h-[66px] items-center justify-center overflow-hidden rounded-[10px] text-[20px] font-light not-italic text-white" style={`--a:${0.3 + k * 0.06};--b:.16;background:linear-gradient(150deg,${g.split(',')[0]},${g.split(',')[1]})`}><i class="grain absolute inset-0 opacity-[.14]"></i><span class="relative">{t}</span></i>))}</div>
+                </div>
+                <div class="absolute right-6 top-[56px] w-[268px]">
+                  <p class="rv text-[13px] font-medium" style="--a:.06;--b:.12">Paleta · Gradiente 3</p>
+                  <i class="gx mt-2 block h-[40px] rounded-[12px]" style="--a:.1;--b:.25;background:linear-gradient(90deg,#F2E6EE,#977DFF 34%,#0033FF 68%,#0600AB)"></i>
+                  <div class="mt-2 flex justify-between">{[['#F2E6EE', 'F2E6EE'], ['#977DFF', '977DFF'], ['#0033FF', '0033FF'], ['#0600AB', '0600AB'], ['#00033D', '00033D']].map(([c, h], k) => (<span class="rv flex flex-col items-center gap-1 text-[8px] font-medium tracking-wider text-[#5f5a7a]" style={`--a:${0.2 + k * 0.05};--b:.12`}><i class="block size-[22px] rounded-full ring-1 ring-black/10" style={`background:${c}`}></i>{h}</span>))}</div>
+                  <p class="rv mt-4 text-[13px] font-medium" style="--a:.36;--b:.12">Calendario de contenido</p>
+                  <div class="mt-2 grid grid-cols-7 gap-1.5">{['L', 'M', 'M', 'J', 'V', 'S', 'D'].map((d, k) => (<div class="rv text-center" style={`--a:${0.4 + k * 0.04};--b:.1`}><p class="text-[9px] text-[#8f8aa6]">{d}</p><i class="mt-1 flex h-[40px] flex-col items-center justify-center gap-1 rounded-[8px] bg-[#f5efe8]">{[2, 1, 2, 0, 1, 2, 0][k] > 0 && <b class="block h-[5px] w-[20px] rounded-full" style="background:#977DFF"></b>}{[2, 1, 2, 0, 1, 2, 0][k] > 1 && <b class="block h-[5px] w-[14px] rounded-full" style="background:#0033FF"></b>}</i></div>))}</div>
+                  <p class="rv mt-4 text-[13px] font-medium" style="--a:.6;--b:.12">Alcance semanal</p>
+                  <div class="mt-2 flex h-[48px] items-end gap-[6px]">{[0.4, 0.55, 0.5, 0.7, 0.62, 0.85, 1].map((v, k) => <i class="gy block flex-1 rounded-[4px]" style={`height:${v * 48}px;background:linear-gradient(180deg,#977DFF,#0033FF);--a:${0.64 + k * 0.04};--b:.18`}></i>)}</div>
                 </div>
               </>)}
 

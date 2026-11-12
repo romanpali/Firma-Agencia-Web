@@ -1,6 +1,6 @@
 ---
 import Panel from './Panels.astro';
-const titles = ['Tu empresa, hoy', 'Identidad y diseño', 'Presencia digital', 'Finanzas y administración', 'Operaciones y datos', 'IA y automatización', 'Un solo ecosistema'];
+const titles = ['Tu empresa, hoy', 'Identidad y diseño', 'Branding y redes sociales', 'Presencia digital', 'Finanzas y administración', 'Operaciones y datos', 'IA y automatización', 'Un solo ecosistema'];
 const FR: Record<string, string> = {
   sheet: '<svg viewBox="0 0 120 90"><rect width="120" height="90" rx="8" fill="#fff" stroke="#dadce0"/><path d="M0 22H120M0 44H120M0 66H120M40 0V90M80 0V90" stroke="#e3e6ea"/><rect x="42" y="24" width="36" height="18" fill="#e8eaed"/><rect x="4" y="48" width="30" height="5" rx="2.5" fill="#dadce0"/></svg>',
   pdf: '<svg viewBox="0 0 80 100"><path d="M6 2H52L74 24V98H6Z" fill="#fff" stroke="#dadce0"/><path d="M52 2V24H74" fill="none" stroke="#dadce0"/><rect x="16" y="38" width="48" height="5" rx="2.5" fill="#e3e6ea"/><rect x="16" y="50" width="38" height="5" rx="2.5" fill="#e3e6ea"/><rect x="16" y="62" width="44" height="5" rx="2.5" fill="#e3e6ea"/><text x="16" y="88" font-size="12" fill="#9aa0a6" font-weight="600" font-family="sans-serif">PDF</text></svg>',
@@ -22,7 +22,7 @@ const frags = [
 
 <section id="construccion" data-tone="light" data-titles={JSON.stringify(titles)} class="relative z-10 font-goog text-[#202124]">
   <div data-process class="h-[620vh] bg-white">
-    <div data-process-inner class="sticky top-0 h-svh overflow-hidden bg-white" style="--fade:#fff">
+    <div data-process-inner class="sticky top-0 h-lvh overflow-hidden bg-white" style="--fade:#fff">
       <div data-night class="pointer-events-none absolute inset-0 opacity-0" aria-hidden="true">
         <i class="absolute inset-0" style="background:radial-gradient(110% 85% at 50% 40%,#0b1280 0%,#060b4a 42%,#02031a 100%)"></i>
         <i class="nb nb1 absolute"></i><i class="nb nb2 absolute"></i>
@@ -36,7 +36,7 @@ const frags = [
       <!-- camera -->
       <div data-cam class="absolute inset-0" role="img" aria-label="Piezas sueltas de una empresa se convierten, una por una, en módulos conectados que forman un solo sistema">
         <div data-world class="absolute left-1/2 top-1/2 size-0">
-          {[0, 1, 2, 3, 4].map((i) => <Panel i={i} />)}
+          {[0, 6, 1, 2, 3, 4].map((i) => <Panel i={i} />)}
           <svg data-bus class="bus absolute overflow-visible" style="left:0;top:0;width:1px;height:1px;transform:translateZ(60px)" aria-hidden="true"></svg>
         </div>
       </div>
@@ -51,7 +51,7 @@ const frags = [
       <div class="pointer-events-none absolute inset-x-0 top-0 z-10 h-[17svh]" style="background:linear-gradient(to bottom,var(--fade) 0%,color-mix(in srgb,var(--fade) 80%,transparent) 40%,transparent)" aria-hidden="true"></div>
       <div class="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-[17svh]" style="background:linear-gradient(to top,var(--fade) 0%,color-mix(in srgb,var(--fade) 80%,transparent) 40%,transparent)" aria-hidden="true"></div>
       <!-- subtitle -->
-      <div class="absolute inset-x-0 bottom-[7svh] z-20 flex flex-col items-center px-6 text-center">
+      <div class="absolute inset-x-0 bottom-[calc(100lvh-100svh+7svh)] z-20 flex flex-col items-center px-6 text-center">
         <h3 data-title class="ps-title text-[clamp(1.6rem,3.2vw,2.8rem)] font-normal leading-[1.1] tracking-[-0.03em]" style="color:var(--ink)">{titles[0]}</h3>
         <i class="mt-5 block h-[3px] w-[min(220px,50vw)] overflow-hidden rounded-full" style="background:var(--trk)" aria-hidden="true"><b data-bar class="block h-full w-full origin-left scale-x-0" style="background:var(--bar)"></b></i>
       </div>
@@ -84,26 +84,26 @@ const frags = [
 
   // ---- layout: panels on a grid, camera stops, data bus between them
   let C: { x: number; y: number }[] = [], K: number[] = [], vw = 1, vh = 1;
-  const LAST = 6; // steps 0..6: loose pieces, five modules, the whole ecosystem
+  const LAST = 7; // steps 0..7: loose pieces, six modules, the whole ecosystem
   const layout = () => {
     vw = inner.clientWidth; vh = inner.clientHeight;
     const portrait = vw / vh < 0.85;
     const D = W + GAP, E = H + GAP;
     // panel centres in snake order: identity, website, finance, data, assistants
     const pos = portrait
-      ? [[-D / 2, -E], [D / 2, -E], [-D / 2, 0], [D / 2, 0], [0, E]]
-      : [[-D, -E / 2], [0, -E / 2], [D, -E / 2], [D / 2, E / 2], [-D / 2, E / 2]];
+      ? [[-D / 2, -E], [D / 2, -E], [D / 2, 0], [-D / 2, 0], [-D / 2, E], [D / 2, E]]
+      : [[-D, -E / 2], [0, -E / 2], [D, -E / 2], [D, E / 2], [0, E / 2], [-D, E / 2]];
     const ww = portrait ? 2 * W + GAP : 3 * W + 2 * GAP, wh = portrait ? 3 * H + 2 * GAP : 2 * H + GAP;
     C = pos.map(([x, y]) => ({ x, y }));
     pns.forEach((el, i) => { el.style.left = `${C[i].x - W / 2}px`; el.style.top = `${C[i].y - H / 2}px`; });
     const kP = portrait ? Math.min(vw * 0.9 / W, vh * 0.5 / H) : Math.min(vw * 0.56 / W, vh * 0.58 / H);
     const kF = Math.min(vw * 0.92 / ww, vh * 0.6 / wh);
-    K = [kP * 0.84, kP, kP, kP, kP, kP, kF];
+    K = [kP * 0.84, kP, kP, kP, kP, kP, kP, kF];
     C = [C[0], ...C, { x: 0, y: 0 }];
     // data bus through the gaps: channels, stubs into every panel, travelling pulses
     const ch = portrait
-      ? { v: [[0, -wh / 2, E / 2]], h: [[-E / 2, -ww / 2, ww / 2], [E / 2, -ww / 2, ww / 2]] }
-      : { v: [[-D / 2, -wh / 2, 0], [D / 2, -wh / 2, 0], [0, 0, wh / 2]], h: [[0, -ww / 2, ww / 2]] };
+      ? { v: [[0, -wh / 2, wh / 2]], h: [[-E / 2, -ww / 2, ww / 2], [E / 2, -ww / 2, ww / 2]] }
+      : { v: [[-D / 2, -wh / 2, wh / 2], [D / 2, -wh / 2, wh / 2]], h: [[0, -ww / 2, ww / 2]] };
     const L: string[] = [], N: string[] = [], P: string[] = [];
     const seg = (d: string, a: number) => L.push(`<path class="dw" style="--a:${a};--b:.5" d="${d}" fill="none" stroke="#F6B370" stroke-width="2.5" stroke-linecap="round" pathLength="100"/>`);
     const node = (x: number, y: number, r: number) => N.push(`<circle class="fl" style="--a:.45;--b:.15" cx="${x}" cy="${y}" r="${r}" fill="#02031a" stroke="#F6B370" stroke-width="2.5"/>`);
@@ -163,7 +163,7 @@ const frags = [
       const s = i + 1;
       const q = clamp((u - s + 0.45) / 0.85);
       if (lastQ[i] !== q) { lastQ[i] = q; el.style.setProperty('--q', q.toFixed(4)); paintCounts(counts[i], q); }
-      const appear = clamp((u - (s - 1.2)) / 0.55);
+      const appear = clamp((u - (s - 0.75)) / 0.45);
       const focus = 1 - clamp((Math.abs(u - (s + 0.05)) - 0.35) / 0.6);
       put(el, 'opacity', appear.toFixed(3));
       put(el, '--dim', ((1 - focus) * 0.5 * (1 - e7)).toFixed(3));
