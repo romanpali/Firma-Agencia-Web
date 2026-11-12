@@ -140,7 +140,7 @@ html {
   .mq-track, .spin-slow, .hf-rise, .hf-fade, .nb, .dust, .hz-link b, .portal, .portal-sheen, .live, .blink, .focus-ring, .orb, .star { animation: none !important; }
   .js [data-words] .w { opacity: 1; filter: none; transform: none; transition: none; }
   .js [data-reveal] { opacity: 1; transform: none; transition: none; }
-  [data-process], [data-areas] { height: auto !important; }
+  [data-process] { height: auto !important; }
   [data-process-inner] { position: static !important; height: auto !important; }
   .ar-copy { position: static !important; opacity: 1; transform: none; margin-bottom: 1.5rem; }
   [data-process-inner] { height: 100svh !important; }
@@ -192,3 +192,27 @@ html {
 .site .serp-hit { border-color: calc(0px + 0px); background: rgba(246, 179, 112, calc(var(--sc) * 0.12)); box-shadow: 0 0 0 calc(var(--sc) * 1.5px) rgba(0, 51, 255, calc(var(--sc) * 0.55)), 0 10px 26px -14px rgba(0, 51, 255, calc(var(--sc) * 0.5)); }
 .site .serp-cur { left: calc(470px - var(--cx, 0) * 250px); top: calc(330px - var(--cx, 0) * 220px); --cx: clamp(0, calc((var(--q) - 0.3) / 0.08), 1); opacity: var(--cx); scale: calc(1 - 0.3 * var(--sc) * (1 - var(--sc))); filter: drop-shadow(0 3px 5px rgba(20, 23, 63, 0.35)); }
 .site .zi { scale: calc(1.06 - var(--k, var(--q)) * 0.06); }
+
+/* Cómo trabajamos: cinematic horizontal journey */
+.ct-slide { --q: 0; color: #f4efe6; }
+.ct-ghost { color: transparent; -webkit-text-stroke: 1.5px rgba(246, 179, 112, 0.9); will-change: transform; }
+.ct-stars { background-image: radial-gradient(circle, rgba(255, 244, 222, 0.6) 0.8px, transparent 1.4px), radial-gradient(circle, rgba(255, 244, 222, 0.35) 0.8px, transparent 1.4px); background-size: 170px 170px, 260px 260px; background-position: 0 0, 60px 90px; opacity: 0.35; animation: dust 140s linear infinite; }
+.ct-dot { background: rgba(255, 255, 255, 0.22); transition: background 0.4s, box-shadow 0.4s; }
+.ct-dot.on { background: #F6B370; box-shadow: 0 0 12px 2px rgba(246, 179, 112, 0.7); }
+.ct-ping { transform-box: fill-box; transform-origin: center; animation: ctPing 2.6s ease-out infinite; }
+.ct-ping.d2 { animation-delay: 1.3s; }
+@keyframes ctPing { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(2.4); opacity: 0; } }
+.ct-bar { animation: ctBar 1.6s ease-in-out infinite alternate; transform-box: fill-box; transform-origin: 50% 100%; }
+@keyframes ctBar { to { transform: scaleY(0.55); } }
+.ct-sweep { transform-origin: 200px 150px; animation: ctSweep 4s linear infinite; }
+@keyframes ctSweep { to { transform: rotate(360deg); } }
+.ct-orbit { transform-origin: 200px 150px; animation: ctSweep 6s linear infinite; }
+.ct-play { animation: ctPlay 4.5s ease-in-out infinite alternate; }
+@keyframes ctPlay { from { transform: translateX(108px); } to { transform: translateX(372px); } }
+@media (prefers-reduced-motion: reduce) {
+  .ct-stars, .ct-ping, .ct-bar, .ct-sweep, .ct-orbit, .ct-play { animation: none !important; }
+  [data-ct] { height: auto !important; }
+  [data-ct-stage] { position: static !important; height: auto !important; }
+  [data-ct-track] { position: static !important; width: auto !important; flex-direction: column; }
+  .ct-slide { width: 100% !important; min-height: 100svh; }
+}
