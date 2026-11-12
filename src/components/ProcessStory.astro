@@ -191,6 +191,8 @@ const frags = [
 </section>
 
 <script>
+  import { onFrame, measure, put, clamp as _c, lerp as _l, smooth as _s } from '../scripts/frame';
+  const frameMath = { clamp: _c, lerp: _l, smooth: _s };
   const root = document.querySelector<HTMLElement>('#construccion')!;
   const sec = root.querySelector<HTMLElement>('[data-process]')!;
   const inner = root.querySelector<HTMLElement>('[data-process-inner]')!;
@@ -202,9 +204,10 @@ const frags = [
   const bar = root.querySelector<HTMLElement>('[data-bar]')!;
   const titles: string[] = JSON.parse(root.dataset.titles!);
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const clamp = (v: number, a = 0, b = 1) => Math.min(b, Math.max(a, v));
-  const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
-  const sm = (t: number) => t * t * (3 - 2 * t);
+  const { clamp, lerp, smooth: sm } = frameMath;
+  const cam = root.querySelector<HTMLElement>('[data-cam]')!;
+  const fragsEl = root.querySelector<HTMLElement>('[data-frags]')!;
+  const sm0 = measure(sec);
   const W = 640, H = 400, GAP = 40;
 
   // ---- layout: panels on a grid, camera stops, data bus between them
@@ -250,9 +253,8 @@ const frags = [
 
   // ---- scroll → timeline u in [0, 7]
   let target = 0, u = 0, shown = -1, ecoOn = false, visible = true;
-  const read = () => {
-    const r = sec.getBoundingClientRect();
-    const p = clamp(-r.top / Math.max(1, r.height - innerHeight));
+  const read = (y: number, vh: number) => {
+    const p = clamp((y - sm0.top) / Math.max(1, sm0.height - vh));
     target = reduced ? 7 : clamp(p * 7.6 - 0.3, 0, 7);
   };
   const setTitle = (i: number) => {
@@ -273,7 +275,7 @@ const frags = [
     const e7 = clamp((u - 6.35) / 0.65);
     const rx = lerp(sgn * 2.5, sgn2 * 2.5, tr) * (1 - e7) + Math.sin(time * 0.0004) * 0.5 - mouse.sy * 2;
     const ry = lerp(sgn * -5, sgn2 * -5, tr) * (1 - e7) + Math.cos(time * 0.0003) * 0.6 + mouse.sx * 3;
-    world.style.transform = `scale(${k.toFixed(4)}) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) translate3d(${(-ccx).toFixed(1)}px, ${(-ccy).toFixed(1)}px, 0)`;
+    put(world, 'transform', `scale(${k.toFixed(4)}) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) translate3d(${(-ccx).toFixed(1)}px, ${(-ccy).toFixed(1)}px, 0)`);
     // panels: build + focus
     const vis = clamp((u - 0.3) / 0.5);
     pns.forEach((el, i) => {
@@ -282,39 +284,40 @@ const frags = [
       if (lastQ[i] !== q) { lastQ[i] = q; el.style.setProperty('--q', q.toFixed(4)); }
       const focus = 1 - clamp(Math.abs(u - s) / 0.7);
       const o = vis * lerp(0.28, 1, focus);
-      el.style.opacity = String(lerp(o, vis, e7).toFixed(3));
+      put(el, 'opacity', lerp(o, vis, e7).toFixed(3));
     });
-    bus.style.setProperty('--eq', e7.toFixed(3));
-    if ((e7 > 0.4) !== ecoOn) { ecoOn = e7 > 0.4; root.querySelector('[data-cam]')!.classList.toggle('ps-eco', ecoOn); }
+    put(bus as unknown as HTMLElement, '--eq', e7.toFixed(3));
+    if ((e7 > 0.4) !== ecoOn) { ecoOn = e7 > 0.4; cam.classList.toggle('ps-eco', ecoOn); }
     // loose pieces: drift, then gather into the first panel
     mouse.sx += (mouse.x - mouse.sx) * 0.05; mouse.sy += (mouse.y - mouse.sy) * 0.05;
     const g = sm(clamp((u - 0.1) / 0.85));
-    const fr = root.querySelector<HTMLElement>('[data-frags]')!;
-    fr.style.display = u > 1.05 ? 'none' : '';
+    put(fragsEl, 'display', u > 1.05 ? 'none' : '');
     if (u <= 1.05) {
       fx.forEach((o) => {
         const px = o.x * vw + Math.sin(time * 0.0006 + o.ph) * 14 + mouse.sx * o.z * -0.12;
         const py = o.y * vh + Math.cos(time * 0.0005 + o.ph) * 12 + mouse.sy * o.z * -0.12;
         const dx = (vw / 2 - px) * g, dy = (vh / 2 - py) * g;
         const sc = (1 - 0.92 * g) * (vw < 700 ? 0.62 : 1);
-        o.el.style.transform = `translate3d(${(px + dx).toFixed(1)}px, ${(py + dy).toFixed(1)}px, ${(o.z * (1 - g)).toFixed(0)}px) translate(-50%, -50%) rotate(${(o.r + Math.sin(time * 0.0004 + o.ph) * 3 + g * 60).toFixed(1)}deg) scale(${sc.toFixed(3)})`;
-        o.el.style.opacity = String(clamp(1 - g * 1.15).toFixed(3));
+        put(o.el, 'transform', `translate3d(${(px + dx).toFixed(1)}px, ${(py + dy).toFixed(1)}px, ${(o.z * (1 - g)).toFixed(0)}px) translate(-50%, -50%) rotate(${(o.r + Math.sin(time * 0.0004 + o.ph) * 3 + g * 60).toFixed(1)}deg) scale(${sc.toFixed(3)})`);
+        put(o.el, 'opacity', clamp(1 - g * 1.15).toFixed(3));
       });
     }
     // subtitle
     const idx = clamp(Math.round(u), 0, 7);
     if (idx !== shown) { if (shown >= 0) setTitle(idx); else titleEl.textContent = titles[idx]; shown = idx; }
-    bar.style.transform = `scaleX(${(u / 7).toFixed(3)})`;
+    put(bar, 'transform', `scaleX(${(u / 7).toFixed(3)})`);
   };
-  read();
   if (reduced) {
+    read(0, innerHeight);
     pns.forEach((el) => el.style.setProperty('--q', '1'));
     render(0);
     titleEl.textContent = titles[7];
   } else {
-    new IntersectionObserver((en) => { visible = en[0].isIntersecting; }, { rootMargin: '10% 0px' }).observe(sec);
-    addEventListener('scroll', read, { passive: true });
-    const loop = (time: number) => { if (visible) render(time); requestAnimationFrame(loop); };
-    requestAnimationFrame(loop);
+    onFrame((time, y, vh) => {
+      read(y, vh);
+      // only animate while the chapter is on screen (or still settling after leaving)
+      if (y + vh * 1.5 < sm0.top || y - vh * 0.5 > sm0.top + sm0.height) return;
+      render(time);
+    });
   }
 </script>

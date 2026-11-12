@@ -47,25 +47,26 @@ const items = (slug: string) => services.find((s) => s.slug === slug)?.items.map
 <div class="pointer-events-none relative z-10 h-[30svh] bg-gradient-to-b from-white to-white/0" aria-hidden="true"></div>
 
 <script>
+  import { onFrame, measure, put, clamp } from '../scripts/frame';
   const sec = document.querySelector<HTMLElement>('[data-areas]')!;
   const figs = [...sec.querySelectorAll<HTMLElement>('[data-wipe]')];
   const segs = [...sec.querySelectorAll<HTMLElement>('[data-seg]')];
   const copies = [...sec.querySelectorAll<HTMLElement>('[data-copy]')];
   const count = sec.querySelector<HTMLElement>('[data-count]')!;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const clamp = (v: number, a = 0, b = 1) => Math.min(b, Math.max(a, v));
   const ease = (t: number) => 1 - Math.pow(1 - t, 3);
+  const m = measure(sec);
   let active = -1;
-  const update = () => {
-    const r = sec.getBoundingClientRect();
-    const p = clamp(-r.top / Math.max(1, r.height - innerHeight));
+  const update = (y: number, vh: number) => {
+    const p = clamp((y - m.top) / Math.max(1, m.height - vh));
     const f = p * (figs.length - 1);
     figs.forEach((el, i) => {
+      if (Math.abs(f - i) > 1.6) return; // far from the visible pair: nothing to repaint
       const v = i === 0 ? 1 : ease(clamp(f - (i - 1)));
-      el.style.clipPath = v >= 1 ? 'none' : `inset(${((1 - v) * 100).toFixed(2)}% 0 0 0)`;
-      (el.firstElementChild as HTMLElement).style.transform = `translate3d(0, ${(clamp(f - i, -1, 1) * -4).toFixed(2)}%, 0) scale(1.14)`;
+      put(el, 'clipPath', v >= 1 ? 'none' : `inset(${((1 - v) * 100).toFixed(2)}% 0 0 0)`);
+      put(el.firstElementChild as HTMLElement, 'transform', `translate3d(0, ${(clamp(f - i, -1, 1) * -4).toFixed(2)}%, 0) scale(1.14)`);
     });
-    segs.forEach((s, i) => (s.style.transform = `scaleX(${clamp(f - i + 0.5).toFixed(3)})`));
+    segs.forEach((s, i) => put(s, 'transform', `scaleX(${clamp(f - i + 0.5).toFixed(3)})`));
     const idx = Math.round(f);
     if (idx !== active) {
       active = idx;
@@ -73,13 +74,10 @@ const items = (slug: string) => services.find((s) => s.slug === slug)?.items.map
       count.textContent = String(idx + 1).padStart(2, '0');
     }
   };
-  update();
-  if (!reduced) {
-    let q = false;
-    const on = () => { if (!q) { q = true; requestAnimationFrame(() => { q = false; update(); }); } };
-    addEventListener('scroll', on, { passive: true });
-    addEventListener('resize', on);
-  } else {
+  if (reduced) {
     copies.forEach((c) => c.classList.add('is-on'));
+    update(m.top, innerHeight);
+  } else {
+    onFrame((_t, y, vh) => { if (y + vh >= m.top && y <= m.top + m.height) update(y, vh); });
   }
 </script>

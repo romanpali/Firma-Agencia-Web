@@ -5,24 +5,24 @@
 </div>
 
 <script>
+  import { onFrame, measure, put, clamp } from '../scripts/frame';
   const bd = document.querySelector<HTMLElement>('[data-bd-img]')!;
   const night = document.querySelector<HTMLElement>('[data-bd-night]')!;
   const horizon = document.querySelector<HTMLElement>('[data-horizon]');
+  const hz = horizon ? measure(horizon) : { top: 0, height: 0 };
+  const page = measure(document.body);
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const clamp = (v: number) => Math.min(1, Math.max(0, v));
-  const update = () => {
-    const doc = document.documentElement.scrollHeight - innerHeight;
-    const hTop = horizon ? horizon.offsetTop : 0;
-    const hEnd = horizon ? hTop + horizon.offsetHeight - innerHeight : 0;
-    const y = scrollY;
+  onFrame((_t, y, vh) => {
+    const doc = Math.max(1, page.height - vh);
+    const hTop = hz.top, hEnd = hTop + hz.height - vh;
     // sunset while the horizon screen is pinned, then it sinks into night
-    const a = y < hEnd * 0.7 + hTop * 0.3 ? 0 : clamp((y - (hEnd * 0.7 + hTop * 0.3)) / Math.max(1, hEnd * 0.3 - hTop * 0.3 + innerHeight));
+    const k = hEnd * 0.7 + hTop * 0.3;
+    const a = y < k ? 0 : clamp((y - k) / Math.max(1, hEnd * 0.3 - hTop * 0.3 + vh));
     const b = clamp((y - hEnd) / Math.max(1, doc - hEnd));
-    night.style.opacity = String(Math.min(1, a * 0.55 + b * 0.45).toFixed(3));
-    if (!reduced) bd.style.transform = `translate3d(0, ${(-clamp(y / Math.max(1, doc)) * 5).toFixed(2)}%, 0) scale(${(1 + clamp(y / Math.max(1, doc)) * 0.06).toFixed(3)})`;
-  };
-  let queued = false;
-  addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(() => { queued = false; update(); }); } }, { passive: true });
-  addEventListener('resize', update);
-  update();
+    put(night, 'opacity', Math.min(1, a * 0.55 + b * 0.45).toFixed(3));
+    if (!reduced) {
+      const g = clamp(y / doc);
+      put(bd, 'transform', `translate3d(0, ${(-g * 5).toFixed(2)}%, 0) scale(${(1 + g * 0.06).toFixed(3)})`);
+    }
+  });
 </script>

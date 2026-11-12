@@ -28,20 +28,19 @@ const lines = [
 </section>
 
 <script>
-  const lines = [...document.querySelectorAll<HTMLElement>('[data-chain] [data-line]')];
+  import { onFrame, measure, put } from '../scripts/frame';
+  const wrap = document.querySelector<HTMLElement>('[data-chain]')!;
+  const wm = measure(wrap);
+  const lines = [...wrap.querySelectorAll<HTMLElement>('[data-line]')].map((el) => ({ el, m: measure(el) }));
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const update = () => {
-    const c = innerHeight * 0.52;
-    for (const el of lines) {
-      const r = el.getBoundingClientRect();
-      const d = Math.abs(r.top + r.height / 2 - c) / (innerHeight * 0.36);
+  onFrame((_t, y, vh) => {
+    if (y + vh < wm.top || y > wm.top + wm.height) return;
+    const c = vh * 0.52;
+    for (const { el, m } of lines) {
+      const d = Math.abs(m.top + m.height / 2 - y - c) / (vh * 0.36);
       const o = reduced ? 1 : Math.max(0.16, 1 - d);
-      el.style.opacity = o.toFixed(3);
-      el.style.transform = reduced ? '' : `translate3d(${((1 - Math.min(1, o)) * 26).toFixed(1)}px, 0, 0)`;
+      put(el, 'opacity', o.toFixed(3));
+      put(el, 'transform', reduced ? '' : `translate3d(${((1 - Math.min(1, o)) * 26).toFixed(1)}px, 0, 0)`);
     }
-  };
-  let q = false;
-  addEventListener('scroll', () => { if (!q) { q = true; requestAnimationFrame(() => { q = false; update(); }); } }, { passive: true });
-  addEventListener('resize', update);
-  update();
+  });
 </script>

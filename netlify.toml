@@ -4,3 +4,24 @@
 
 [build.environment]
   NODE_VERSION = "22"
+
+# Long-lived caching for hashed assets and static images
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/horizon/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+
+[[headers]]
+  for = "/*.webp"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+
+[[headers]]
+  for = "/grain.png"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
