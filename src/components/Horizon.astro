@@ -1,17 +1,10 @@
 ---
-import Panel from './Panels.astro';
-// Each card has a photograph on the front and a live module (finance, data, assistants, marketing, identity, website) on the back.
-const cards = [
-  { img: '/horizon/1.webp', panel: 2 },
-  { img: '/horizon/2.webp', panel: 3 },
-  { img: '/horizon/3.webp', panel: 4 },
-  { img: '/horizon/4.webp', panel: 5 },
-  { img: '/horizon/5.webp', panel: 0 },
-  { img: '/process/portale-bg.webp', panel: 1 },
-];
+import Kit from './Kit.astro';
+// Five cards, each a photograph on the front and the whole brand kit on the back, with a different module in focus.
+const cards = ['/horizon/1.webp', '/horizon/2.webp', '/horizon/3.webp', '/horizon/4.webp', '/horizon/5.webp'];
 ---
 
-<section data-horizon class="relative z-10 -mt-[90svh] h-[260svh]">
+<section data-horizon class="relative z-10 -mt-[90svh] h-[300svh]">
   <div class="sticky top-0 h-svh overflow-hidden">
     <div class="absolute inset-x-0 top-[15svh] z-10 px-6 text-center">
       <h2 data-words class="mx-auto max-w-[24ch] text-[clamp(1.9rem,4vw,4.4rem)] font-light leading-[1.02] tracking-[-0.04em] text-white [text-shadow:0_2px_30px_rgba(40,30,30,0.25)] text-balance">
@@ -20,18 +13,21 @@ const cards = [
     </div>
 
     <!-- Curved carousel: cards flip from photograph to module -->
-    <div class="absolute inset-x-0 top-[55%] z-10 h-0" style="perspective:1500px;--tw:clamp(200px,26vw,430px);--th:calc(var(--tw)*0.62);--R:calc(var(--tw)*3.2)">
-      <div data-cyl style="transform-style:preserve-3d">
-        {cards.map((c, i) => (
+    <div data-stage class="absolute inset-x-0 top-[55%] z-10 h-0" style="perspective:1500px;--tw:clamp(190px,23vw,420px);--th:calc(var(--tw)*0.62);--R:calc(var(--tw)*3.2)">
+      <div data-cyl class="absolute left-1/2 top-0 size-0" style="transform-style:preserve-3d">
+        {cards.map((img, i) => (
           <figure class="hz-tile" style={`--i:${i}`}>
             <div class="hz-flip" data-flip>
               <div class="hz-face hz-front">
-                <img src={c.img} alt="" width="960" height="600" decoding="async" class="size-full object-cover" />
+                <img src={img} alt="" width="960" height="600" decoding="async" class="size-full object-cover" />
                 <i class="hz-sheen absolute inset-0"></i>
               </div>
-              <div class="hz-face hz-back"><div class="hz-pn" data-hzpn><Panel i={c.panel} /></div></div>
+              <div class="hz-face hz-back"><div class="hz-pn" data-hzpn><Kit focus={i} /></div></div>
             </div>
           </figure>
+        ))}
+        {cards.slice(0, -1).map((_, i) => (
+          <i class="hz-link" style={`--i:${i + 0.5}`} aria-hidden="true"><b></b></i>
         ))}
       </div>
     </div>
@@ -46,42 +42,45 @@ const cards = [
   import { onFrame, measure, put, clamp, smooth, countsOf, paintCounts } from '../scripts/frame';
   const sec = document.querySelector<HTMLElement>('[data-horizon]')!;
   const cyl = sec.querySelector<HTMLElement>('[data-cyl]')!;
+  const stage = sec.querySelector<HTMLElement>('[data-stage]')!;
   const tiles = [...sec.querySelectorAll<HTMLElement>('.hz-tile')].map((el) => {
     const pn = el.querySelector<HTMLElement>('[data-hzpn]')!;
     return { flip: el.querySelector<HTMLElement>('[data-flip]')!, sheen: el.querySelector<HTMLElement>('.hz-sheen')!, pn, panel: pn.firstElementChild as HTMLElement, counts: countsOf(pn), q: -1 };
   });
   const m = measure(sec);
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const STEP = 20; // degrees between tiles
-  const N = tiles.length;
+  const STEP = 20; // degrees between cards
   const ptr = { x: 0 }, tgt = { x: 0 };
   addEventListener('pointermove', (e) => { if (e.pointerType === 'mouse') tgt.x = e.clientX / innerWidth - 0.5; }, { passive: true });
 
-  // the 640x400 module is scaled to the card width
+  // the 640x400 board is scaled to the card width
   const fit = () => tiles.forEach((t) => { const w = t.flip.clientWidth; if (w) put(t.pn, '--sc', (w / 640).toFixed(4)); });
   fit();
   addEventListener('resize', fit);
   new ResizeObserver(fit).observe(tiles[0].flip);
 
-  const paint = (angle: number, t: (typeof tiles)[number], now: number) => {
+  const paint = (angle: number, t: (typeof tiles)[number]) => {
     const rad = (angle * Math.PI) / 180;
     put(t.flip, 'transform', angle < 0.2 ? 'none' : `translateZ(${(Math.sin(rad) * 46).toFixed(1)}px) rotateY(${angle.toFixed(2)}deg)`);
-    // light sweeping over the front face while the card turns
     put(t.sheen, 'opacity', (Math.sin(rad) * 0.9).toFixed(3));
     put(t.sheen, 'transform', `translateX(${((angle / 90 - 1) * 70).toFixed(1)}%)`);
     const q = smooth(clamp((angle - 88) / 92));
     if (q !== t.q) { t.q = q; t.panel.style.setProperty('--q', q.toFixed(4)); paintCounts(t.counts, q); }
   };
-  if (reduced) tiles.forEach((t) => paint(0, t, 0));
+  if (reduced) tiles.forEach((t) => paint(0, t));
 
   onFrame((now, y, vh) => {
     if (y + vh < m.top || y > m.top + m.height) return;
     const p = clamp((y - m.top) / Math.max(1, m.height - vh));
     ptr.x += (tgt.x - ptr.x) * 0.05;
-    const idle = reduced ? 0 : Math.sin(now / 2600) * 0.1;
-    const idx = 1.2 + 3.2 * smooth(p) + idle - ptr.x * 0.25; // which card sits in the centre
+    const idle = reduced ? 0 : Math.sin(now / 2600) * 0.08;
+    // the carousel settles with all five cards in view, then every card turns together on the last scroll
+    const idx = 0.75 + 1.25 * smooth(clamp(p / 0.72)) + idle - ptr.x * 0.2;
     put(cyl, 'transform', `translateZ(var(--R)) rotateY(${(-idx * STEP).toFixed(2)}deg)`);
     if (reduced) return;
-    tiles.forEach((t, i) => paint(180 * smooth(clamp((p - (0.1 + (i / (N - 1)) * 0.46)) / 0.3)), t, now));
+    const f = smooth(clamp((p - 0.78) / 0.22));
+    tiles.forEach((t) => paint(180 * f, t));
+    put(cyl, '--lk', (0.35 + 0.65 * f).toFixed(3));
+    put(stage, 'scale', (1 - 0.2 * smooth(clamp((p - 0.6) / 0.4))).toFixed(4)); // pull back so the whole kit is in view
   });
 </script>

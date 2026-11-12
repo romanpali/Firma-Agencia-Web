@@ -36,8 +36,8 @@ const frags = [
       <p class="ps-label absolute inset-x-0 top-[86px] z-20 text-center text-[15px]">Cómo lo construimos</p>
 
       <!-- camera -->
-      <div data-cam class="absolute inset-0" style="perspective:1800px" role="img" aria-label="Piezas sueltas de una empresa se convierten, una por una, en módulos conectados que forman un solo sistema">
-        <div data-world class="absolute left-1/2 top-1/2 size-0" style="transform-style:preserve-3d">
+      <div data-cam class="absolute inset-0" role="img" aria-label="Piezas sueltas de una empresa se convierten, una por una, en módulos conectados que forman un solo sistema">
+        <div data-world class="absolute left-1/2 top-1/2 size-0">
           {[0, 1, 2, 3, 4].map((i) => <Panel i={i} />)}
           <svg data-bus class="bus absolute overflow-visible" style="left:0;top:0;width:1px;height:1px;transform:translateZ(60px)" aria-hidden="true"></svg>
         </div>
@@ -107,8 +107,8 @@ const frags = [
       ? { v: [[0, -wh / 2, E / 2]], h: [[-E / 2, -ww / 2, ww / 2], [E / 2, -ww / 2, ww / 2]] }
       : { v: [[-D / 2, -wh / 2, 0], [D / 2, -wh / 2, 0], [0, 0, wh / 2]], h: [[0, -ww / 2, ww / 2]] };
     const L: string[] = [], N: string[] = [], P: string[] = [];
-    const seg = (d: string, a: number) => L.push(`<path class="dw" style="--a:${a};--b:.5" d="${d}" fill="none" stroke="#977DFF" stroke-width="2.5" stroke-linecap="round" pathLength="100"/>`);
-    const node = (x: number, y: number, r: number) => N.push(`<circle class="fl" style="--a:.45;--b:.15" cx="${x}" cy="${y}" r="${r}" fill="#02031a" stroke="#977DFF" stroke-width="2.5"/>`);
+    const seg = (d: string, a: number) => L.push(`<path class="dw" style="--a:${a};--b:.5" d="${d}" fill="none" stroke="#F6B370" stroke-width="2.5" stroke-linecap="round" pathLength="100"/>`);
+    const node = (x: number, y: number, r: number) => N.push(`<circle class="fl" style="--a:.45;--b:.15" cx="${x}" cy="${y}" r="${r}" fill="#02031a" stroke="#F6B370" stroke-width="2.5"/>`);
     ch.v.forEach(([x, y1, y2], i) => { seg(`M${x} ${y1}V${y2}`, 0.05 + i * 0.08); P.push(`M${x} ${y1}V${y2}`); });
     ch.h.forEach(([y, x1, x2], i) => { seg(`M${x1} ${y}H${x2}`, 0.1 + i * 0.08); P.push(`M${x2} ${y}H${x1}`); });
     ch.v.forEach(([x]) => ch.h.forEach(([y, x1, x2]) => { if (x >= x1 && x <= x2) node(x, y, 7); }));
@@ -159,19 +159,16 @@ const frags = [
     const push = lerp(1 + 0.05 * clamp(f / 0.5), 1, tr);
     const k = lerp(K[a], K[a + 1], tr) * (1 - 0.15 * Math.sin(Math.PI * tr)) * push;
     const e7 = clamp((u - (LAST - 0.65)) / 0.65);
-    const tilt = Math.sin(Math.PI * tr) * (1 - e7); // lean only while the camera travels, so panels rest perfectly sharp
-    const dir = a % 2 ? -1 : 1;
-    const rot = tilt > 0.002 ? ` rotateX(${(2.2 * tilt).toFixed(2)}deg) rotateY(${(-4.5 * dir * tilt).toFixed(2)}deg)` : '';
-    put(world, 'transform', `scale(${k.toFixed(4)})${rot} translate3d(${(-ccx).toFixed(1)}px, ${(-ccy).toFixed(1)}px, 0)`);
-    // panels: build + focus
-    const vis = clamp((u - 0.3) / 0.5);
+    put(world, 'transform', `scale(${k.toFixed(4)}) translate3d(${(-ccx).toFixed(1)}px, ${(-ccy).toFixed(1)}px, 0)`);
+    // panels: they appear as the camera approaches, stay fully built behind you, and dim (never wash out) when not in focus
     pns.forEach((el, i) => {
       const s = i + 1;
       const q = clamp((u - s + 0.45) / 0.85);
-      if (lastQ[i] !== q) { lastQ[i] = q; el.style.setProperty('--q', q.toFixed(4)); counts[i].forEach((c) => { const t = clamp((q - c.a) / c.b); c.el.textContent = Math.round(c.v * (1 - Math.pow(1 - t, 3))).toLocaleString('es-MX'); }); }
+      if (lastQ[i] !== q) { lastQ[i] = q; el.style.setProperty('--q', q.toFixed(4)); paintCounts(counts[i], q); }
+      const appear = clamp((u - (s - 1.2)) / 0.55);
       const focus = 1 - clamp((Math.abs(u - (s + 0.05)) - 0.35) / 0.6);
-      const o = vis * lerp(u > s - 0.5 ? 0.5 : 0.2, 1, focus);
-      put(el, 'opacity', lerp(o, vis, e7).toFixed(3));
+      put(el, 'opacity', appear.toFixed(3));
+      put(el, '--dim', ((1 - focus) * 0.5 * (1 - e7)).toFixed(3));
     });
     put(bus as unknown as HTMLElement, '--eq', e7.toFixed(3));
     if ((e7 > 0.4) !== ecoOn) { ecoOn = e7 > 0.4; cam.classList.toggle('ps-eco', ecoOn); }
