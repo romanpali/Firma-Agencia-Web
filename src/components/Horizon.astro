@@ -43,7 +43,7 @@ const cards = ['/horizon/1.webp', '/horizon/2.webp', '/horizon/3.webp', '/horizo
 </section>
 
 <script>
-  import { onFrame, measure, put, clamp, smooth, countsOf, paintCounts } from '../scripts/frame';
+  import { onFrame, measure, put, clamp, smooth, countsOf, paintCounts, dissolveOut } from '../scripts/frame';
   const sec = document.querySelector<HTMLElement>('[data-horizon]')!;
   const cyl = sec.querySelector<HTMLElement>('[data-cyl]')!;
   const stage = sec.querySelector<HTMLElement>('[data-stage]')!;
@@ -52,6 +52,7 @@ const cards = ['/horizon/1.webp', '/horizon/2.webp', '/horizon/3.webp', '/horizo
     return { flip: el.querySelector<HTMLElement>('[data-flip]')!, sheen: el.querySelector<HTMLElement>('.hz-sheen')!, pn, panel: pn.firstElementChild as HTMLElement, counts: countsOf(pn), q: -1 };
   });
   const m = measure(sec);
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) dissolveOut(sec.firstElementChild as HTMLElement, document.getElementById('construccion')!);
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const STEP = 20; // degrees between cards
   const ptr = { x: 0 }, tgt = { x: 0 };

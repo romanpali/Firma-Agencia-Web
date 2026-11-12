@@ -59,3 +59,16 @@ export const paintCounts = (list: CountEl[], q: number) =>
     const v = c.v * (1 - Math.pow(1 - clamp((q - c.a) / c.b), 3));
     c.el.textContent = c.d ? (v / 10).toFixed(1) : Math.round(v).toLocaleString('es-MX');
   });
+
+// Same transition as hero → horizon: the pinned outgoing screen stays in place and dissolves (fade + slow zoom)
+// while the next screen rises over it. `next` is measured once; progress follows the scroll.
+export const dissolveOut = (stage: HTMLElement, next: HTMLElement, zoom = 0.06) => {
+  const n = measure(next);
+  onFrame((_t, y, vh) => {
+    const t = clamp((y - (n.top - vh)) / (vh * 0.85));
+    if (t <= 0) { put(stage, 'opacity', '1'); put(stage, 'transform', 'none'); return; }
+    const o = 1 - smooth(clamp((t - 0.3) / 0.7));
+    put(stage, 'opacity', o.toFixed(3));
+    put(stage, 'transform', `scale(${(1 + zoom * t).toFixed(4)})`);
+  });
+};

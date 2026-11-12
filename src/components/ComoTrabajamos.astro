@@ -15,7 +15,7 @@ const G = '#cfc4ff', V = '#5b7bff', W = '#f4f2ff';
 <section id="como-trabajamos" data-tone="dark" class="relative z-10 -mt-[60svh] font-goog text-[#f4efe6]">
   <div data-ct class="h-[900vh]">
     <div data-ct-stage class="sticky top-0 h-lvh overflow-hidden">
-      <div data-ct-bg class="absolute inset-0 opacity-0"><i class="absolute inset-0" style="background:linear-gradient(165deg,#00033D 0%,#0600AB 52%,#2a1fb8 80%,#4a35d8 100%)"></i>
+      <div data-ct-bg class="absolute inset-0 opacity-0" style="mask-image:linear-gradient(to bottom,transparent 0,#000 28svh);-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 28svh)"><i class="absolute inset-0" style="background:linear-gradient(165deg,#00033D 0%,#0600AB 52%,#2a1fb8 80%,#4a35d8 100%)"></i>
       <i class="ct-o ct-o1 absolute"></i><i class="ct-o ct-o2 absolute"></i><i class="ct-o ct-o3 absolute"></i>
       <i class="ct-stars absolute inset-0"></i>
       <i class="grain absolute inset-0 opacity-[.1]"></i></div>
@@ -120,7 +120,7 @@ const G = '#cfc4ff', V = '#5b7bff', W = '#f4f2ff';
 </section>
 
 <script>
-  import { onFrame, measure, put, clamp, smooth } from '../scripts/frame';
+  import { onFrame, measure, put, clamp, smooth, dissolveOut } from '../scripts/frame';
   const root = document.querySelector<HTMLElement>('#como-trabajamos')!;
   const sec = root.querySelector<HTMLElement>('[data-ct]')!;
   const track = root.querySelector<HTMLElement>('[data-ct-track]')!;
@@ -129,6 +129,8 @@ const G = '#cfc4ff', V = '#5b7bff', W = '#f4f2ff';
   const segs = [...root.querySelectorAll<HTMLElement>('[data-seg]')];
   const m = measure(sec);
   const bg = root.querySelector<HTMLElement>('[data-ct-bg]')!;
+  const stageEl = root.querySelector<HTMLElement>('[data-ct-stage]')!;
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) dissolveOut(stageEl, document.getElementById('cierre')!);
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   let pos = 0, tgt = 0;
   if (reduced) slides.forEach((s) => s.el.style.setProperty('--q', '1'));

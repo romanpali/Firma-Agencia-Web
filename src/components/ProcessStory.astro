@@ -23,7 +23,7 @@ const frags = [
 <section id="construccion" data-tone="light" data-titles={JSON.stringify(titles)} class="relative z-10 -mt-[70svh] font-goog text-[#202124]">
   <div data-process class="h-[740vh]">
     <div data-process-inner class="sticky top-0 h-lvh overflow-hidden" style="--fade:#fff">
-      <i data-white class="absolute inset-0 bg-white opacity-0" aria-hidden="true"></i>
+      <i data-white class="absolute inset-0 bg-white opacity-0" style="mask-image:linear-gradient(to bottom,transparent 0,#000 28svh);-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 28svh)" aria-hidden="true"></i>
       <div data-night class="pointer-events-none absolute inset-0 opacity-0" aria-hidden="true">
         <i class="absolute inset-0" style="background:radial-gradient(110% 85% at 50% 40%,#0b1280 0%,#060b4a 42%,#02031a 100%)"></i>
         <i class="nb nb1 absolute"></i><i class="nb nb2 absolute"></i>
@@ -61,7 +61,7 @@ const frags = [
 </section>
 
 <script>
-  import { onFrame, measure, put, clamp as _c, lerp as _l, smooth as _s, countsOf, paintCounts } from '../scripts/frame';
+  import { onFrame, measure, put, clamp as _c, lerp as _l, smooth as _s, countsOf, paintCounts, dissolveOut } from '../scripts/frame';
   const frameMath = { clamp: _c, lerp: _l, smooth: _s };
   const root = document.querySelector<HTMLElement>('#construccion')!;
   const sec = root.querySelector<HTMLElement>('[data-process]')!;
@@ -78,6 +78,7 @@ const frags = [
   const cam = root.querySelector<HTMLElement>('[data-cam]')!;
   const fragsEl = root.querySelector<HTMLElement>('[data-frags]')!;
   const sm0 = measure(sec);
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) dissolveOut(inner, document.getElementById('como-trabajamos')!);
   const night = inner.querySelector<HTMLElement>('[data-night]')!;
   const whiteEl = inner.querySelector<HTMLElement>('[data-white]')!;
   const fogs = [...inner.querySelectorAll<HTMLElement>('[data-fog]')];
@@ -209,7 +210,7 @@ const frags = [
       // the white page dissolves in over the sunset while this chapter rises
       const wo = clamp((y - (sm0.top - vh)) / (vh * 0.85)).toFixed(3);
       put(whiteEl, 'opacity', wo);
-      fogs.forEach((f) => put(f, 'opacity', wo));
+      fogs.forEach((f, k) => put(f, 'opacity', k === 0 ? clamp((+wo - 0.9) / 0.1).toFixed(3) : wo));
       read(y, vh);
       // only animate while the chapter is on screen (or still settling after leaving)
       if (y + vh * 1.5 < sm0.top || y - vh * 0.5 > sm0.top + sm0.height) return;
