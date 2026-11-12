@@ -9,16 +9,21 @@ const steps = [
   { t: 'Entrega y validación', d: 'Se presentan los resultados, se realizan ajustes acordados y se entrega formalmente el proyecto.' },
   { t: 'Seguimiento y continuidad', d: 'Se proporciona soporte, mantenimiento, seguimiento de resultados y posibles nuevos servicios.' },
 ];
-const G = '#F6B370', V = '#7E86B3', W = '#f4efe6';
+const G = '#cfc4ff', V = '#5b7bff', W = '#f4f2ff';
 ---
 
 <section id="como-trabajamos" data-tone="dark" class="relative z-10 font-goog text-[#f4efe6]">
-  <div data-ct class="h-[900vh] bg-[#05060f]">
+  <div data-ct class="h-[900vh] bg-[#00033D]">
     <div data-ct-stage class="sticky top-0 h-lvh overflow-hidden">
-      <!-- horizon glow, stars, grain -->
-      <i class="absolute inset-0" style="background:radial-gradient(90% 55% at 50% 118%,rgba(246,179,112,.55),rgba(214,128,45,.18) 45%,transparent 72%),linear-gradient(180deg,#05060f,#0b0a16 70%,#140d12)"></i>
+      <i class="absolute inset-0" style="background:linear-gradient(165deg,#00033D 0%,#0600AB 52%,#2a1fb8 78%,#6a4dff 100%)"></i>
+      <i class="ct-o ct-o1 absolute"></i><i class="ct-o ct-o2 absolute"></i><i class="ct-o ct-o3 absolute"></i>
       <i class="ct-stars absolute inset-0"></i>
-      <i class="grain absolute inset-0 opacity-[.09]"></i>
+      <i class="grain absolute inset-0 opacity-[.1]"></i>
+      <svg width="0" height="0" class="absolute" aria-hidden="true"><defs>
+        <linearGradient id="ctg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d9d0ff"/><stop offset=".55" stop-color="#977DFF"/><stop offset="1" stop-color="#0033FF"/></linearGradient>
+        <linearGradient id="ctf" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset="1" stop-color="#fff" stop-opacity=".04"/></linearGradient>
+        <linearGradient id="cts" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".75"/><stop offset=".5" stop-color="#fff" stop-opacity=".12"/><stop offset="1" stop-color="#977DFF" stop-opacity=".5"/></linearGradient>
+      </defs></svg>
       <p class="absolute inset-x-0 top-[86px] z-20 text-center text-[15px] text-[#f4efe6]/55">Cómo trabajamos</p>
 
       <div data-ct-track class="absolute inset-0 flex will-change-transform" style="width:800vw">
@@ -27,7 +32,7 @@ const G = '#F6B370', V = '#7E86B3', W = '#f4efe6';
             <span data-ghost class="ct-ghost pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none text-[clamp(14rem,44vw,40rem)] font-extralight leading-none tracking-[-0.06em]">{String(i + 1).padStart(2, '0')}</span>
 
             <div class="relative z-10 order-2 w-full max-w-[34rem] text-center md:order-1 md:w-[40%] md:text-left">
-              <p class="rv text-[13px] tracking-[0.2em] text-[#F6B370]" style="--a:.05;--b:.2">PASO {String(i + 1).padStart(2, '0')} / 08</p>
+              <p class="rv text-[13px] tracking-[0.2em] text-[#cfc4ff]" style="--a:.05;--b:.2">PASO {String(i + 1).padStart(2, '0')} / 08</p>
               <h3 class="mt-3 text-[clamp(1.9rem,4.2vw,3.8rem)] font-light leading-[1.02] tracking-[-0.035em]">
                 <span class="block overflow-hidden"><span class="rl block" style="--a:.05;--b:.3">{s.t}</span></span>
               </h3>
@@ -36,22 +41,22 @@ const G = '#F6B370', V = '#7E86B3', W = '#f4efe6';
 
             <div class="relative z-10 order-1 flex w-full max-w-[460px] items-center justify-center md:order-2 md:w-[48%] md:max-w-[560px]">
               <svg viewBox="0 0 400 320" class="w-full overflow-visible" aria-hidden="true">
-                <ellipse cx="200" cy="300" rx="150" ry="8" fill="rgba(246,179,112,.16)"/>
+                <ellipse cx="200" cy="300" rx="150" ry="8" fill="rgba(151,125,255,.28)"/>
                 {i === 0 && (<>
                   <circle class="ct-ping" cx="96" cy="118" r="26" fill="none" stroke={G} stroke-width="1.4"/>
                   <circle class="ct-ping d2" cx="96" cy="118" r="26" fill="none" stroke={G} stroke-width="1.4"/>
-                  <circle class="fl" style="--a:.05;--b:.2" cx="96" cy="118" r="22" fill={G}/>
-                  <path class="fl" style="--a:.15;--b:.12" d="M88 118l6 6 12-13" fill="none" stroke="#2a1a08" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <g class="rv" style="--a:.2;--b:.2"><rect x="150" y="70" width="190" height="62" rx="18" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.25)"/><rect x="168" y="88" width="120" height="7" rx="3.5" fill={W} opacity=".8"/><rect x="168" y="106" width="84" height="7" rx="3.5" fill={W} opacity=".4"/></g>
-                  <g class="rv" style="--a:.4;--b:.2"><rect x="70" y="160" width="220" height="74" rx="20" fill={G}/><rect x="90" y="180" width="150" height="8" rx="4" fill="#2a1a08" opacity=".85"/><rect x="90" y="198" width="104" height="8" rx="4" fill="#2a1a08" opacity=".5"/></g>
-                  <g class="rv" style="--a:.6;--b:.2"><rect x="150" y="256" width="170" height="30" rx="15" fill="none" stroke={G}/><text x="235" y="276" text-anchor="middle" font-size="12" fill={G}>Atención comercial</text></g>
+                  <circle class="fl" style="--a:.05;--b:.2" cx="96" cy="118" r="22" fill="url(#ctg)"/>
+                  <path class="fl" style="--a:.15;--b:.12" d="M88 118l6 6 12-13" fill="none" stroke="#00033D" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <g class="rv" style="--a:.2;--b:.2"><rect x="150" y="70" width="190" height="62" rx="18" fill="url(#ctf)" stroke="url(#cts)"/><rect x="168" y="88" width="120" height="7" rx="3.5" fill={W} opacity=".8"/><rect x="168" y="106" width="84" height="7" rx="3.5" fill={W} opacity=".4"/></g>
+                  <g class="rv" style="--a:.4;--b:.2"><rect x="70" y="160" width="220" height="74" rx="20" fill="url(#ctg)"/><rect x="90" y="180" width="150" height="8" rx="4" fill="#00033D" opacity=".85"/><rect x="90" y="198" width="104" height="8" rx="4" fill="#00033D" opacity=".5"/></g>
+                  <g class="rv" style="--a:.6;--b:.2"><rect x="150" y="256" width="170" height="30" rx="15" fill="none" stroke={G}/><text x="235" y="276" text-anchor="middle" font-size="12" fill="#ece8ff">Atención comercial</text></g>
                 </>)}
                 {i === 1 && (<>
                   <circle class="ct-ping" cx="130" cy="150" r="44" fill="none" stroke={G} stroke-width="1.4"/>
                   <circle class="ct-ping d2" cx="130" cy="150" r="44" fill="none" stroke={G} stroke-width="1.4"/>
-                  <circle class="fl" style="--a:.05;--b:.2" cx="130" cy="150" r="42" fill="rgba(246,179,112,.15)" stroke={G} stroke-width="1.6"/>
+                  <circle class="fl" style="--a:.05;--b:.2" cx="130" cy="150" r="42" fill="rgba(151,125,255,.22)" stroke={G} stroke-width="1.6"/>
                   <path class="dw" style="--a:.12;--b:.3" d="M112 134c0-6 5-8 9-4l5 6c2 3 1 6-2 8l-3 2c4 8 10 14 18 18l2-3c2-3 5-4 8-2l6 5c4 4 2 9-4 9-20 0-44-24-44-39z" fill="none" stroke={G} stroke-width="2.4" stroke-linejoin="round" pathLength="100"/>
-                  <g class="rv" style="--a:.3;--b:.2"><rect x="210" y="96" width="150" height="92" rx="14" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.22)"/><rect x="210" y="96" width="150" height="26" rx="14" fill={G}/><text x="285" y="114" text-anchor="middle" font-size="12" font-weight="600" fill="#2a1a08">Jueves · 11:00</text><circle cx="240" cy="152" r="4" fill={W} opacity=".6"/><circle cx="262" cy="152" r="4" fill={G}/><circle cx="284" cy="152" r="4" fill={W} opacity=".3"/><rect x="226" y="168" width="108" height="6" rx="3" fill={W} opacity=".35"/></g>
+                  <g class="rv" style="--a:.3;--b:.2"><rect x="210" y="96" width="150" height="92" rx="14" fill="url(#ctf)" stroke="url(#cts)"/><rect x="210" y="96" width="150" height="26" rx="14" fill="url(#ctg)"/><text x="285" y="114" text-anchor="middle" font-size="12" font-weight="600" fill="#00033D">Jueves · 11:00</text><circle cx="240" cy="152" r="4" fill={W} opacity=".6"/><circle cx="262" cy="152" r="4" fill="url(#ctg)"/><circle cx="284" cy="152" r="4" fill={W} opacity=".3"/><rect x="226" y="168" width="108" height="6" rx="3" fill={W} opacity=".35"/></g>
                   {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((k) => <rect class="gy ct-bar" style={`--a:${0.4 + k * 0.025};--b:.2;animation-delay:${-k * 0.18}s`} x={110 + k * 22} y={240 - 8 - ((k * 5) % 7) * 5} width="10" height={16 + ((k * 5) % 7) * 10} rx="5" fill={k % 3 ? V : G}/>)}
                 </>)}
                 {i === 2 && (<>
@@ -59,43 +64,43 @@ const G = '#F6B370', V = '#7E86B3', W = '#f4efe6';
                   <path d="M200 32V268M82 150H318" stroke="rgba(255,255,255,.08)"/>
                   <g class="ct-sweep"><path d="M200 150L200 32A118 118 0 0 1 292 74Z" fill="url(#sw)"/></g>
                   <defs><linearGradient id="sw" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color={G} stop-opacity=".6"/><stop offset="1" stop-color={G} stop-opacity="0"/></linearGradient></defs>
-                  {[[262, 100], [140, 120], [250, 198], [176, 206]].map(([x, y], k) => <g class="fl" style={`--a:${0.2 + k * 0.12};--b:.12`}><circle cx={x} cy={y} r="14" fill="rgba(246,179,112,.18)"/><circle cx={x} cy={y} r="5" fill={G}/></g>)}
-                  {[['Necesidades', 20, 270], ['Objetivos', 150, 286], ['Soluciones', 270, 270]].map(([t, x, y], k) => <g class="rv" style={`--a:${0.5 + k * 0.1};--b:.15`}><rect x={x} y={y - 16} width="110" height="26" rx="13" fill="rgba(255,255,255,.08)" stroke="rgba(246,179,112,.5)"/><text x={Number(x) + 55} y={Number(y) + 1} text-anchor="middle" font-size="11.5" fill={W}>{t}</text></g>)}
+                  {[[262, 100], [140, 120], [250, 198], [176, 206]].map(([x, y], k) => <g class="fl" style={`--a:${0.2 + k * 0.12};--b:.12`}><circle cx={x} cy={y} r="14" fill="rgba(151,125,255,.25)"/><circle cx={x} cy={y} r="5" fill="url(#ctg)"/></g>)}
+                  {[['Necesidades', 20, 270], ['Objetivos', 150, 286], ['Soluciones', 270, 270]].map(([t, x, y], k) => <g class="rv" style={`--a:${0.5 + k * 0.1};--b:.15`}><rect x={x} y={y - 16} width="110" height="26" rx="13" fill="rgba(255,255,255,.08)" stroke="rgba(207,196,255,.6)"/><text x={Number(x) + 55} y={Number(y) + 1} text-anchor="middle" font-size="11.5" fill={W}>{t}</text></g>)}
                 </>)}
                 {i === 3 && (<>
-                  <g class="rv" style="--a:.04;--b:.25"><rect x="86" y="30" width="228" height="258" rx="16" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.22)"/></g>
+                  <g class="rv" style="--a:.04;--b:.25"><rect x="86" y="30" width="228" height="258" rx="16" fill="url(#ctf)" stroke="url(#cts)"/></g>
                   <rect class="gx" style="--a:.1;--b:.2" x="108" y="54" width="110" height="10" rx="5" fill={W} opacity=".9"/><rect class="gx" style="--a:.14;--b:.2" x="108" y="74" width="70" height="7" rx="3.5" fill={W} opacity=".4"/>
-                  {[['Servicios', 4], ['Entregables', 7], ['Tiempos', 6]].map(([t, n], k) => <g class="rv" style={`--a:${0.24 + k * 0.1};--b:.15`}><text x="108" y={116 + k * 38} font-size="12" fill={W} opacity=".7">{t}</text><rect x="230" y={104 + k * 38} width="62" height="20" rx="10" fill="none" stroke={G}/><text x="261" y={118 + k * 38} text-anchor="middle" font-size="11" fill={G}>{k === 2 ? '6 sem.' : n + ' ítems'}</text></g>)}
+                  {[['Servicios', 4], ['Entregables', 7], ['Tiempos', 6]].map(([t, n], k) => <g class="rv" style={`--a:${0.24 + k * 0.1};--b:.15`}><text x="108" y={116 + k * 38} font-size="12" fill={W} opacity=".7">{t}</text><rect x="230" y={104 + k * 38} width="62" height="20" rx="10" fill="none" stroke={G}/><text x="261" y={118 + k * 38} text-anchor="middle" font-size="11" fill="#ece8ff">{k === 2 ? '6 sem.' : n + ' ítems'}</text></g>)}
                   <path d="M108 232H292" stroke="rgba(255,255,255,.2)"/>
-                  <g class="rv" style="--a:.6;--b:.2"><text x="108" y="262" font-size="12" fill={W} opacity=".7">Inversión total</text><text x="292" y="264" text-anchor="end" font-size="20" font-weight="500" fill={G}>$ 90,500</text></g>
+                  <g class="rv" style="--a:.6;--b:.2"><text x="108" y="262" font-size="12" fill={W} opacity=".7">Inversión total</text><text x="292" y="264" text-anchor="end" font-size="20" font-weight="500" fill="#ece8ff">$ 90,500</text></g>
                 </>)}
                 {i === 4 && (<>
-                  <g class="rv" style="--a:.04;--b:.25"><rect x="80" y="30" width="200" height="250" rx="14" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.22)"/></g>
+                  <g class="rv" style="--a:.04;--b:.25"><rect x="80" y="30" width="200" height="250" rx="14" fill="url(#ctf)" stroke="url(#cts)"/></g>
                   {[0, 1, 2, 3].map((k) => <rect class="gx" style={`--a:${0.1 + k * 0.05};--b:.15`} x="104" y={58 + k * 18} width={150 - (k % 2) * 40} height="6" rx="3" fill={W} opacity=".45"/>)}
                   <path class="dw" style="--a:.3;--b:.3" d="M104 210c14-30 20 8 30-14s12 16 24-4 14 12 30-10" fill="none" stroke={G} stroke-width="3" stroke-linecap="round" pathLength="100"/>
                   <path d="M104 232H250" stroke="rgba(255,255,255,.25)"/>
-                  <g class="fl" style="--a:.62;--b:.12"><circle cx="300" cy="96" r="38" fill="rgba(246,179,112,.14)" stroke={G} stroke-width="2"/><circle cx="300" cy="96" r="30" fill="none" stroke={G} stroke-dasharray="3 4"/><text x="300" y="92" text-anchor="middle" font-size="10" letter-spacing="1.5" fill={G}>FIRMADO</text><text x="300" y="108" text-anchor="middle" font-size="9" fill={G} opacity=".8">HumanCorp</text></g>
-                  <g class="rv" style="--a:.75;--b:.12"><rect x="200" y="238" width="170" height="40" rx="20" fill={G}/><path d="M222 258l6 6 11-12" fill="none" stroke="#2a1a08" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><text x="250" y="263" font-size="12" font-weight="600" fill="#2a1a08">Anticipo recibido</text></g>
+                  <g class="fl" style="--a:.62;--b:.12"><circle cx="300" cy="96" r="38" fill="rgba(151,125,255,.2)" stroke={G} stroke-width="2"/><circle cx="300" cy="96" r="30" fill="none" stroke={G} stroke-dasharray="3 4"/><text x="300" y="92" text-anchor="middle" font-size="10" letter-spacing="1.5" fill="#ece8ff">FIRMADO</text><text x="300" y="108" text-anchor="middle" font-size="9" fill={G} opacity=".8">HumanCorp</text></g>
+                  <g class="rv" style="--a:.75;--b:.12"><rect x="200" y="238" width="170" height="40" rx="20" fill="url(#ctg)"/><path d="M222 258l6 6 11-12" fill="none" stroke="#00033D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><text x="250" y="263" font-size="12" font-weight="600" fill="#00033D">Anticipo recibido</text></g>
                 </>)}
                 {i === 5 && (<>
                   {[['Diseño', 0, 46, G], ['Desarrollo', 30, 54, V], ['Marketing', 52, 40, G], ['IA y datos', 20, 56, V]].map(([t, s, w, c], k) => <g><text class="rv" style={`--a:${0.04 + k * 0.05};--b:.12`} x="14" y={86 + k * 52} font-size="12" fill={W} opacity=".7">{t}</text><rect x="104" y={68 + k * 52} width="270" height="26" rx="13" fill="rgba(255,255,255,.06)"/><rect class="gx" style={`--a:${0.12 + k * 0.08};--b:.3`} x={104 + Number(s) * 2.7} y={68 + k * 52} width={Number(w) * 2.7} height="26" rx="13" fill={c as string}/></g>)}
                   <path d="M104 52V270" stroke="rgba(255,255,255,.18)"/>
                   <g class="ct-play"><path d="M0 52V270" stroke={W} stroke-width="1.5" stroke-dasharray="4 4"/><circle cx="0" cy="52" r="6" fill={W}/></g>
-                  <g class="rv" style="--a:.7;--b:.15"><rect x="260" y="276" width="114" height="30" rx="15" fill="none" stroke={G}/><text x="317" y="296" text-anchor="middle" font-size="11.5" fill={G}>En ejecución</text></g>
+                  <g class="rv" style="--a:.7;--b:.15"><rect x="260" y="276" width="114" height="30" rx="15" fill="none" stroke={G}/><text x="317" y="296" text-anchor="middle" font-size="11.5" fill="#ece8ff">En ejecución</text></g>
                 </>)}
                 {i === 6 && (<>
-                  <rect class="fl" style="--a:.05;--b:.2" x="120" y="60" width="160" height="130" rx="16" fill="rgba(246,179,112,.14)" stroke={G} stroke-width="2"/>
+                  <rect class="fl" style="--a:.05;--b:.2" x="120" y="60" width="160" height="130" rx="16" fill="rgba(151,125,255,.2)" stroke={G} stroke-width="2"/>
                   <path class="dw" style="--a:.15;--b:.25" d="M120 100H280M200 60V100" stroke={G} stroke-width="2" fill="none" pathLength="100"/>
-                  <circle class="fl" style="--a:.3;--b:.15" cx="200" cy="150" r="26" fill={G}/>
-                  <path class="dw" style="--a:.4;--b:.2" d="M187 150l9 9 17-19" fill="none" stroke="#2a1a08" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" pathLength="100"/>
-                  {['Resultados presentados', 'Ajustes acordados · 3 de 3', 'Entrega formal'].map((t, k) => <g class="rv" style={`--a:${0.5 + k * 0.1};--b:.12`}><circle cx="96" cy={226 + k * 30} r="9" fill={G}/><path d={`M91 ${226 + k * 30}l3 3 6-7`} fill="none" stroke="#2a1a08" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><text x="116" y={230 + k * 30} font-size="13" fill={W}>{t}</text></g>)}
+                  <circle class="fl" style="--a:.3;--b:.15" cx="200" cy="150" r="26" fill="url(#ctg)"/>
+                  <path class="dw" style="--a:.4;--b:.2" d="M187 150l9 9 17-19" fill="none" stroke="#00033D" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" pathLength="100"/>
+                  {['Resultados presentados', 'Ajustes acordados · 3 de 3', 'Entrega formal'].map((t, k) => <g class="rv" style={`--a:${0.5 + k * 0.1};--b:.12`}><circle cx="96" cy={226 + k * 30} r="9" fill="url(#ctg)"/><path d={`M91 ${226 + k * 30}l3 3 6-7`} fill="none" stroke="#00033D" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><text x="116" y={230 + k * 30} font-size="13" fill={W}>{t}</text></g>)}
                 </>)}
                 {i === 7 && (<>
                   <circle cx="200" cy="150" r="96" fill="none" stroke="rgba(255,255,255,.14)"/>
                   <circle class="dw" style="--a:.05;--b:.5" cx="200" cy="150" r="96" fill="none" stroke={G} stroke-width="2.4" stroke-linecap="round" pathLength="100" transform="rotate(-90 200 150)"/>
                   <g class="ct-orbit"><circle cx="200" cy="54" r="7" fill="#fff"/></g>
-                  <g class="fl" style="--a:.15;--b:.2"><circle cx="200" cy="150" r="40" fill="rgba(246,179,112,.16)" stroke={G}/><text x="200" y="146" text-anchor="middle" font-size="12" fill={W}>Tu</text><text x="200" y="162" text-anchor="middle" font-size="12" fill={W}>empresa</text></g>
-                  {[['Soporte', 200, 54], ['Mantenimiento', 296, 150], ['Resultados', 200, 246], ['Nuevos servicios', 104, 150]].map(([t, x, y], k) => <g class="rv" style={`--a:${0.3 + k * 0.1};--b:.12`}><circle cx={x} cy={y} r="6" fill={G}/><text x={x} y={k === 0 ? Number(y) - 16 : k === 2 ? Number(y) + 24 : Number(y) + (k === 1 ? 0 : 0)} dx={k === 1 ? 14 : k === 3 ? -14 : 0} text-anchor={k === 1 ? 'start' : k === 3 ? 'end' : 'middle'} dy={k === 1 || k === 3 ? 4 : 0} font-size="12" fill={W} opacity=".85">{t}</text></g>)}
+                  <g class="fl" style="--a:.15;--b:.2"><circle cx="200" cy="150" r="40" fill="rgba(151,125,255,.28)" stroke={G}/><text x="200" y="146" text-anchor="middle" font-size="12" fill={W}>Tu</text><text x="200" y="162" text-anchor="middle" font-size="12" fill={W}>empresa</text></g>
+                  {[['Soporte', 200, 54], ['Mantenimiento', 296, 150], ['Resultados', 200, 246], ['Nuevos servicios', 104, 150]].map(([t, x, y], k) => <g class="rv" style={`--a:${0.3 + k * 0.1};--b:.12`}><circle cx={x} cy={y} r="6" fill="url(#ctg)"/><text x={x} y={k === 0 ? Number(y) - 16 : k === 2 ? Number(y) + 24 : Number(y) + (k === 1 ? 0 : 0)} dx={k === 1 ? 14 : k === 3 ? -14 : 0} text-anchor={k === 1 ? 'start' : k === 3 ? 'end' : 'middle'} dy={k === 1 || k === 3 ? 4 : 0} font-size="12" fill={W} opacity=".85">{t}</text></g>)}
                 </>)}
               </svg>
             </div>
@@ -107,12 +112,12 @@ const G = '#F6B370', V = '#7E86B3', W = '#f4efe6';
       <div class="absolute inset-x-0 bottom-[calc(100lvh-100svh+5svh)] z-20 mx-auto flex w-[min(640px,86vw)] items-center gap-0" aria-hidden="true">
         {steps.map((s, i) => (<>
           <i data-dot class="ct-dot block size-[9px] shrink-0 rounded-full"></i>
-          {i < 7 && <i class="relative block h-px flex-1 bg-white/15"><b data-seg class="absolute inset-0 origin-left scale-x-0 bg-[#F6B370]"></b></i>}
+          {i < 7 && <i class="relative block h-px flex-1 bg-white/15"><b data-seg class="absolute inset-0 origin-left scale-x-0" style="background:linear-gradient(90deg,#d9d0ff,#977DFF)"></b></i>}
         </>))}
       </div>
     </div>
   </div>
-  <div class="pointer-events-none h-[26svh]" style="background:linear-gradient(to bottom,#05060f,transparent)" aria-hidden="true"></div>
+  <div class="pointer-events-none h-[26svh]" style="background:linear-gradient(to bottom,#00033D,transparent)" aria-hidden="true"></div>
 </section>
 
 <script>

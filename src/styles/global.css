@@ -195,10 +195,15 @@ html {
 
 /* Cómo trabajamos: cinematic horizontal journey */
 .ct-slide { --q: 0; color: #f4efe6; }
-.ct-ghost { color: transparent; -webkit-text-stroke: 1.5px rgba(246, 179, 112, 0.9); will-change: transform; }
-.ct-stars { background-image: radial-gradient(circle, rgba(255, 244, 222, 0.6) 0.8px, transparent 1.4px), radial-gradient(circle, rgba(255, 244, 222, 0.35) 0.8px, transparent 1.4px); background-size: 170px 170px, 260px 260px; background-position: 0 0, 60px 90px; opacity: 0.35; animation: dust 140s linear infinite; }
-.ct-dot { background: rgba(255, 255, 255, 0.22); transition: background 0.4s, box-shadow 0.4s; }
-.ct-dot.on { background: #F6B370; box-shadow: 0 0 12px 2px rgba(246, 179, 112, 0.7); }
+.ct-ghost { color: rgba(255, 255, 255, 0.04); -webkit-text-stroke: 1.5px rgba(207, 196, 255, 0.85); will-change: transform; }
+.ct-o { border-radius: 50%; filter: blur(70px); will-change: transform; }
+.ct-o1 { left: -18vmax; top: -22vmax; width: 70vmax; height: 70vmax; background: radial-gradient(circle, rgba(151, 125, 255, 0.55), transparent 65%); animation: nbA 24s ease-in-out infinite alternate; }
+.ct-o2 { right: -22vmax; top: 10vmax; width: 60vmax; height: 60vmax; background: radial-gradient(circle, rgba(0, 51, 255, 0.6), transparent 65%); animation: nbB 30s ease-in-out infinite alternate; }
+.ct-o3 { left: 20vmax; bottom: -34vmax; width: 80vmax; height: 70vmax; background: radial-gradient(circle, rgba(255, 190, 240, 0.4), transparent 65%); animation: nbA 36s ease-in-out infinite alternate-reverse; }
+.ct-halo { background: radial-gradient(circle, rgba(151, 125, 255, 0.5), rgba(0, 51, 255, 0.25) 50%, transparent 72%); filter: blur(30px); }
+.ct-stars { background-image: radial-gradient(circle, rgba(220, 215, 255, 0.7) 0.8px, transparent 1.4px), radial-gradient(circle, rgba(220, 215, 255, 0.4) 0.8px, transparent 1.4px); background-size: 170px 170px, 260px 260px; background-position: 0 0, 60px 90px; opacity: 0.35; animation: dust 140s linear infinite; }
+.ct-dot { background: rgba(255, 255, 255, 0.28); transition: background 0.4s, box-shadow 0.4s; }
+.ct-dot.on { background: #d9d0ff; box-shadow: 0 0 14px 3px rgba(151, 125, 255, 0.9); }
 .ct-ping { transform-box: fill-box; transform-origin: center; animation: ctPing 2.6s ease-out infinite; }
 .ct-ping.d2 { animation-delay: 1.3s; }
 @keyframes ctPing { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(2.4); opacity: 0; } }
@@ -210,7 +215,7 @@ html {
 .ct-play { animation: ctPlay 4.5s ease-in-out infinite alternate; }
 @keyframes ctPlay { from { transform: translateX(108px); } to { transform: translateX(372px); } }
 @media (prefers-reduced-motion: reduce) {
-  .ct-stars, .ct-ping, .ct-bar, .ct-sweep, .ct-orbit, .ct-play { animation: none !important; }
+  .ct-stars, .ct-ping, .ct-bar, .ct-sweep, .ct-orbit, .ct-play, .ct-o { animation: none !important; }
   [data-ct] { height: auto !important; }
   [data-ct-stage] { position: static !important; height: auto !important; }
   [data-ct-track] { position: static !important; width: auto !important; flex-direction: column; }
