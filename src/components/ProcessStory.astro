@@ -20,9 +20,10 @@ const frags = [
 ];
 ---
 
-<section id="construccion" data-tone="light" data-titles={JSON.stringify(titles)} class="relative z-10 font-goog text-[#202124]">
-  <div data-process class="h-[740vh] bg-white">
-    <div data-process-inner class="sticky top-0 h-lvh overflow-hidden bg-white" style="--fade:#fff">
+<section id="construccion" data-tone="light" data-titles={JSON.stringify(titles)} class="relative z-10 -mt-[70svh] font-goog text-[#202124]">
+  <div data-process class="h-[740vh]">
+    <div data-process-inner class="sticky top-0 h-lvh overflow-hidden" style="--fade:#fff">
+      <i data-white class="absolute inset-0 bg-white opacity-0" aria-hidden="true"></i>
       <div data-night class="pointer-events-none absolute inset-0 opacity-0" aria-hidden="true">
         <i class="absolute inset-0" style="background:radial-gradient(110% 85% at 50% 40%,#0b1280 0%,#060b4a 42%,#02031a 100%)"></i>
         <i class="nb nb1 absolute"></i><i class="nb nb2 absolute"></i>
@@ -48,8 +49,8 @@ const frags = [
         ))}
       </div>
 
-      <div class="pointer-events-none absolute inset-x-0 top-0 z-10 h-[17svh]" style="background:linear-gradient(to bottom,var(--fade) 0%,color-mix(in srgb,var(--fade) 80%,transparent) 40%,transparent)" aria-hidden="true"></div>
-      <div class="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-[17svh]" style="background:linear-gradient(to top,var(--fade) 0%,color-mix(in srgb,var(--fade) 80%,transparent) 40%,transparent)" aria-hidden="true"></div>
+      <div data-fog class="pointer-events-none absolute inset-x-0 top-0 z-10 h-[17svh]" style="background:linear-gradient(to bottom,var(--fade) 0%,color-mix(in srgb,var(--fade) 80%,transparent) 40%,transparent)" aria-hidden="true"></div>
+      <div data-fog class="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-[17svh]" style="background:linear-gradient(to top,var(--fade) 0%,color-mix(in srgb,var(--fade) 80%,transparent) 40%,transparent)" aria-hidden="true"></div>
       <!-- subtitle -->
       <div class="absolute inset-x-0 bottom-[calc(100lvh-100svh+7svh)] z-20 flex flex-col items-center px-6 text-center">
         <h3 data-title class="ps-title text-[clamp(1.6rem,3.2vw,2.8rem)] font-normal leading-[1.1] tracking-[-0.03em]" style="color:var(--ink)">{titles[0]}</h3>
@@ -57,7 +58,6 @@ const frags = [
       </div>
     </div>
   </div>
-  <div class="pointer-events-none h-[24svh]" style="background:linear-gradient(to bottom,#02031a,#00033D)" aria-hidden="true"></div>
 </section>
 
 <script>
@@ -79,6 +79,8 @@ const frags = [
   const fragsEl = root.querySelector<HTMLElement>('[data-frags]')!;
   const sm0 = measure(sec);
   const night = inner.querySelector<HTMLElement>('[data-night]')!;
+  const whiteEl = inner.querySelector<HTMLElement>('[data-white]')!;
+  const fogs = [...inner.querySelectorAll<HTMLElement>('[data-fog]')];
   let nightOn = false;
   const W = 640, H = 400, GAP = 40;
 
@@ -139,7 +141,7 @@ const frags = [
   const EXTRA = 1.2, HOLD = 2; // extra scroll spent on the website module (search result, then the site)
   let target = 0, rr = 0, u = 0, shown = -1, ecoOn = false, visible = true;
   const read = (y: number, vh: number) => {
-    const p = clamp((y - sm0.top) / Math.max(1, sm0.height - vh));
+    const p = clamp((y - sm0.top) / Math.max(1, sm0.height - vh * 1.65));
     target = reduced ? LAST + EXTRA : clamp(p * (LAST + EXTRA + 0.6) - 0.3, 0, LAST + EXTRA);
   };
   const setTitle = (i: number) => {
@@ -204,6 +206,10 @@ const frags = [
     titleEl.textContent = titles[LAST];
   } else {
     onFrame((time, y, vh) => {
+      // the white page dissolves in over the sunset while this chapter rises
+      const wo = clamp((y - (sm0.top - vh)) / (vh * 0.85)).toFixed(3);
+      put(whiteEl, 'opacity', wo);
+      fogs.forEach((f) => put(f, 'opacity', wo));
       read(y, vh);
       // only animate while the chapter is on screen (or still settling after leaving)
       if (y + vh * 1.5 < sm0.top || y - vh * 0.5 > sm0.top + sm0.height) return;

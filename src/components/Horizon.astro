@@ -8,7 +8,7 @@ import KitFelix from './KitFelix.astro';
 const cards = ['/horizon/1.webp', '/horizon/2.webp', '/horizon/3.webp', '/horizon/4.webp', '/horizon/5.webp'];
 ---
 
-<section data-horizon class="relative z-10 -mt-[90svh] h-[300svh]">
+<section data-horizon class="relative z-10 -mt-[90svh] h-[340svh]">
   <div class="sticky top-0 h-lvh overflow-hidden">
     <div class="absolute inset-x-0 top-[15svh] z-10 px-6 text-center">
       <h2 data-words class="mx-auto max-w-[24ch] text-[clamp(1.9rem,4vw,4.4rem)] font-light leading-[1.02] tracking-[-0.04em] text-white [text-shadow:0_2px_30px_rgba(40,30,30,0.25)] text-balance">
@@ -79,12 +79,12 @@ const cards = ['/horizon/1.webp', '/horizon/2.webp', '/horizon/3.webp', '/horizo
     ptr.x += (tgt.x - ptr.x) * 0.05;
     const idle = reduced ? 0 : Math.sin(now / 2600) * 0.08;
     // the carousel settles with all five cards in view, then every card turns together on the last scroll
-    const idx = 0.75 + 1.25 * smooth(clamp(p / 0.72)) + idle - ptr.x * 0.2;
+    const idx = 0.75 + 1.25 * smooth(clamp(p / 0.5)) + idle - ptr.x * 0.2;
     put(cyl, 'transform', `translateZ(var(--R)) rotateY(${(-idx * STEP).toFixed(2)}deg)`);
     if (reduced) return;
-    const f = smooth(clamp((p - 0.78) / 0.22));
+    const f = smooth(clamp((p - 0.5) / 0.2));
     tiles.forEach((t) => paint(180 * f, t));
     put(cyl, '--lk', (0.35 + 0.65 * f).toFixed(3));
-    put(stage, 'scale', (1 - 0.27 * smooth(clamp((p - 0.6) / 0.4))).toFixed(4)); // pull back so the whole kit is in view
+    put(stage, 'scale', (1 - 0.27 * smooth(clamp((p - 0.38) / 0.3))).toFixed(4)); // pull back so the whole kit is in view
   });
 </script>

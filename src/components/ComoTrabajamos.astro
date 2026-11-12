@@ -12,13 +12,13 @@ const steps = [
 const G = '#cfc4ff', V = '#5b7bff', W = '#f4f2ff';
 ---
 
-<section id="como-trabajamos" data-tone="dark" class="relative z-10 font-goog text-[#f4efe6]">
-  <div data-ct class="h-[900vh] bg-[#00033D]">
+<section id="como-trabajamos" data-tone="dark" class="relative z-10 -mt-[60svh] font-goog text-[#f4efe6]">
+  <div data-ct class="h-[900vh]">
     <div data-ct-stage class="sticky top-0 h-lvh overflow-hidden">
-      <i class="absolute inset-0" style="background:linear-gradient(165deg,#00033D 0%,#0600AB 52%,#2a1fb8 78%,#6a4dff 100%)"></i>
+      <div data-ct-bg class="absolute inset-0 opacity-0"><i class="absolute inset-0" style="background:linear-gradient(165deg,#00033D 0%,#0600AB 52%,#2a1fb8 80%,#4a35d8 100%)"></i>
       <i class="ct-o ct-o1 absolute"></i><i class="ct-o ct-o2 absolute"></i><i class="ct-o ct-o3 absolute"></i>
       <i class="ct-stars absolute inset-0"></i>
-      <i class="grain absolute inset-0 opacity-[.1]"></i>
+      <i class="grain absolute inset-0 opacity-[.1]"></i></div>
       <svg width="0" height="0" class="absolute" aria-hidden="true"><defs>
         <linearGradient id="ctg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d9d0ff"/><stop offset=".55" stop-color="#977DFF"/><stop offset="1" stop-color="#0033FF"/></linearGradient>
         <linearGradient id="ctf" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset="1" stop-color="#fff" stop-opacity=".04"/></linearGradient>
@@ -117,7 +117,6 @@ const G = '#cfc4ff', V = '#5b7bff', W = '#f4f2ff';
       </div>
     </div>
   </div>
-  <div class="pointer-events-none h-[26svh]" style="background:linear-gradient(to bottom,#00033D,transparent)" aria-hidden="true"></div>
 </section>
 
 <script>
@@ -129,13 +128,17 @@ const G = '#cfc4ff', V = '#5b7bff', W = '#f4f2ff';
   const dots = [...root.querySelectorAll<HTMLElement>('[data-dot]')];
   const segs = [...root.querySelectorAll<HTMLElement>('[data-seg]')];
   const m = measure(sec);
+  const bg = root.querySelector<HTMLElement>('[data-ct-bg]')!;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   let pos = 0, tgt = 0;
   if (reduced) slides.forEach((s) => s.el.style.setProperty('--q', '1'));
   onFrame((_t, y, vh) => {
+    const bo = reduced ? 1 : clamp((y - (m.top - vh)) / (vh * 0.85));
+    put(bg, 'opacity', bo.toFixed(3));
+    put(track, 'opacity', Math.max(0, (bo - 0.55) / 0.45).toFixed(3));
     if (reduced) return;
     if (y + vh < m.top || y > m.top + m.height) return;
-    const p = clamp((y - m.top) / Math.max(1, m.height - vh));
+    const p = clamp((y - m.top) / Math.max(1, m.height - vh * 1.5));
     tgt = smooth(clamp((p - 0.02) / 0.96)) * 0 + clamp((p - 0.02) / 0.96) * 7;
     pos += (tgt - pos) * 0.12;
     if (Math.abs(tgt - pos) < 0.0005) pos = tgt;
