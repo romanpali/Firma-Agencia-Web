@@ -42,7 +42,7 @@ html {
 .hz-front .hz-sheen { background: linear-gradient(105deg, transparent 38%, rgba(255, 255, 255, 0.55) 50%, transparent 62%); opacity: 0; pointer-events: none; mix-blend-mode: soft-light; }
 .hz-pn { position: absolute; left: 0; top: 0; width: 640px; height: 400px; transform-origin: 0 0; scale: var(--sc, 0.5); pointer-events: none; }
 .hz-pn .pn { left: 0; top: 0; border-radius: 26px; box-shadow: none; border-color: transparent; }
-.hz-link { position: absolute; left: calc(var(--tw) * -0.12); top: -1px; width: calc(var(--tw) * 0.24); height: 2px; transform: rotateY(calc(var(--i) * 20deg)) translateZ(calc(var(--R) * -1 - 6px)); opacity: var(--lk, 0.35); border-radius: 2px; background: linear-gradient(90deg, rgba(255, 244, 222, 0), rgba(255, 244, 222, 0.95) 22%, rgba(255, 244, 222, 0.95) 78%, rgba(255, 244, 222, 0)); box-shadow: 0 0 14px 2px rgba(255, 214, 150, 0.7); }
+.hz-link { position: absolute; left: calc(var(--tw) * -0.075); top: -1px; width: calc(var(--tw) * 0.15); height: 2px; transform: rotateY(calc(var(--i) * 20deg)) translateZ(calc(var(--R) * -1 - 6px)); opacity: var(--lk, 0.35); border-radius: 2px; background: linear-gradient(90deg, rgba(255, 244, 222, 0), rgba(255, 244, 222, 0.95) 22%, rgba(255, 244, 222, 0.95) 78%, rgba(255, 244, 222, 0)); box-shadow: 0 0 14px 2px rgba(255, 214, 150, 0.7); }
 .hz-link::before, .hz-link::after { content: ""; position: absolute; top: -3px; width: 8px; height: 8px; border-radius: 50%; background: #fff6e4; box-shadow: 0 0 12px 3px rgba(255, 214, 150, 0.85); }
 .hz-link::before { left: 20%; }
 .hz-link::after { right: 20%; }
@@ -135,7 +135,7 @@ html {
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .mq-track, .spin-slow, .hf-rise, .hf-fade, .nb, .dust, .hz-link b, .portal, .portal-sheen { animation: none !important; }
+  .mq-track, .spin-slow, .hf-rise, .hf-fade, .nb, .dust, .hz-link b, .portal, .portal-sheen, .live, .blink, .focus-ring { animation: none !important; }
   .js [data-words] .w { opacity: 1; filter: none; transform: none; transition: none; }
   .js [data-reveal] { opacity: 1; transform: none; transition: none; }
   [data-process], [data-areas] { height: auto !important; }
@@ -160,9 +160,14 @@ html {
 .dust2 { background-size: 230px 230px; opacity: 0.25; animation-duration: 140s; animation-direction: reverse; }
 @keyframes dust { to { background-position: 0 -420px; } }
 
-/* Kit board (back of the horizon cards) */
-.pn.kit { background: #faf7f2; border-radius: 22px; }
-.kit-grid { position: absolute; inset: 14px; display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr); gap: 10px; }
-.kt { position: relative; overflow: hidden; border-radius: 16px; background: #fff; border: 1px solid #ece5da; }
-.kt.kf { border-color: #F6B370; box-shadow: 0 0 0 1px rgba(246, 179, 112, 0.5), 0 14px 30px -16px rgba(214, 128, 45, 0.55); }
-.kh { position: absolute; left: 12px; top: 11px; z-index: 2; display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 500; color: #14173f; }
+/* Kit board (back of the horizon cards): cinematic operations centre */
+.pn.kit { background: #0b0d2c; border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 22px; color: #f4efe6; }
+.kg { position: absolute; border-radius: 14px; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.13); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08); }
+.kg.kf { border-color: rgba(246, 179, 112, 0.65); box-shadow: 0 0 0 1px rgba(246, 179, 112, 0.2), 0 0 40px -10px rgba(246, 179, 112, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.1); }
+.live { animation: livePulse 1.6s ease-in-out infinite; }
+@keyframes livePulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(107, 227, 165, 0.6); } 50% { box-shadow: 0 0 0 5px rgba(107, 227, 165, 0); } }
+.blink { animation: blink 1s steps(2) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.focus-ring { transform-box: fill-box; transform-origin: center; animation: ringBeat 2.4s ease-in-out infinite; }
+@keyframes ringBeat { 50% { transform: scale(1.08); } }
+.flow { filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.9)); }
