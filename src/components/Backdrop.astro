@@ -1,7 +1,6 @@
 <div data-backdrop class="pointer-events-none fixed inset-0 z-0" aria-hidden="true">
-  <div data-bd-img class="absolute inset-[-6%] bg-cover bg-center will-change-transform" style="background-image:url(/horizon.webp)"></div>
+  <div data-bd-img class="absolute inset-[-4%] bg-cover bg-center will-change-transform" style="background-image:url(/horizon.webp)"></div>
   <div data-bd-night class="absolute inset-0 opacity-0" style="background:linear-gradient(to bottom,rgba(9,11,20,.55),rgba(9,11,20,.92))"></div>
-  <i class="grain absolute inset-0 opacity-[0.1]"></i>
 </div>
 
 <script>
@@ -22,7 +21,7 @@
     put(night, 'opacity', Math.min(1, a * 0.55 + b * 0.45).toFixed(3));
     if (!reduced) {
       const g = clamp(y / doc);
-      put(bd, 'transform', `translate3d(0, ${(-g * 5).toFixed(2)}%, 0) scale(${(1 + g * 0.06).toFixed(3)})`);
+      put(bd, 'transform', `translate3d(0, ${(-g * 3).toFixed(2)}%, 0) scale(${(1 + g * 0.03).toFixed(3)})`);
     }
   });
 </script>
