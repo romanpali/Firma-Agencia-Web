@@ -221,3 +221,17 @@ html {
   [data-ct-track] { position: static !important; width: auto !important; flex-direction: column; }
   .ct-slide { width: 100% !important; min-height: 100svh; }
 }
+
+/* Contact: swapping word */
+.swap-a { animation: swapA 6s cubic-bezier(.7, 0, .2, 1) infinite; }
+.swap-b { animation: swapB 6s cubic-bezier(.7, 0, .2, 1) infinite; }
+@keyframes swapA { 0%, 40% { transform: translateY(0); filter: blur(0); opacity: 1; } 50%, 90% { transform: translateY(-105%); filter: blur(8px); opacity: 0; } 100% { transform: translateY(0); filter: blur(0); opacity: 1; } }
+@keyframes swapB { 0%, 40% { transform: translateY(105%); filter: blur(8px); opacity: 0; } 50%, 90% { transform: translateY(0); filter: blur(0); opacity: 1; } 100% { transform: translateY(105%); filter: blur(8px); opacity: 0; } }
+/* FAQ */
+.faq-a { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
+.faq[open] .faq-a { grid-template-rows: 1fr; }
+.faq-a > div { overflow: hidden; }
+.faq-v { transition: transform 0.4s ease, opacity 0.4s ease; }
+.faq[open] .faq-v { transform: translate(-50%, -50%) rotate(90deg); opacity: 0; }
+.faq[open] .faq-i { background: rgba(255, 255, 255, 0.12); }
+@media (prefers-reduced-motion: reduce) { .swap-a, .swap-b { animation: none !important; } .swap-b { display: none; } }
