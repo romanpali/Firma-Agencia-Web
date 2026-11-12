@@ -1,6 +1,7 @@
 ---
-import Scene from './Scene.astro';
-import { areas } from '../data/areas';
+// Placeholder photos (public/horizon/1..5.webp) cycled over the eight tiles until the final ones arrive.
+const photos = [1, 2, 3, 4, 5];
+const tiles = Array.from({ length: 8 }, (_, i) => photos[i % photos.length]);
 ---
 
 <section data-horizon class="relative z-10 h-[260svh]">
@@ -14,9 +15,9 @@ import { areas } from '../data/areas';
     <!-- Curved carousel of the eight areas -->
     <div class="absolute inset-x-0 top-[55%] z-10 h-0" style="perspective:1500px;--tw:clamp(175px,23vw,360px);--th:calc(var(--tw)*0.62);--R:calc(var(--tw)*3.2)">
       <div data-cyl style="transform-style:preserve-3d">
-        {areas.map((a, i) => (
+        {tiles.map((n, i) => (
           <figure class="hz-tile" style={`--i:${i}`}>
-            <Scene kind={a.scene} lite />
+            <img src={`/horizon/${n}.webp`} alt="" width="960" height="600" decoding="async" class="size-full object-cover" />
           </figure>
         ))}
       </div>
