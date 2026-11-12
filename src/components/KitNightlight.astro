@@ -1,0 +1,48 @@
+---
+// Back of the Nightlight card: starry dusk, italic serif, a stack of "books". Focus module: identity.
+const stars = Array.from({ length: 46 }, (_, k) => [(k * 137.5) % 640, (k * 61.8 * 1.7) % 250, 0.8 + ((k * 7) % 5) * 0.5, 0.35 + ((k * 3) % 6) * 0.11]);
+const slabs = [['Marketing', '182 K alcance', 150], ['Asistentes', '24 automatizaciones', 160], ['Operaciones', '96 % a tiempo', 170], ['Finanzas', '$771,600 utilidad', 180]];
+const chapters = ['Lead capturado', 'Cotización #0231', 'Factura timbrada', 'Panel actualizado'];
+---
+
+<div class="pn kit kit-nl" data-pn="1">
+  <i class="absolute inset-0" style="background:linear-gradient(180deg,#0a0e2e 0%,#241a5a 42%,#7d3a78 70%,#d86f5c 90%,#f2a866 100%)"></i>
+  {stars.map(([x, y, r, o], k) => <i class="star absolute block rounded-full bg-white" style={`left:${x}px;top:${y}px;width:${r}px;height:${r}px;opacity:${o};animation-delay:${-(k % 7) * 0.6}s`}></i>)}
+  <i class="grain absolute inset-0 opacity-[.1]"></i>
+
+  <span class="rv absolute left-6 top-[16px] font-serif text-[16px] italic text-white" style="--a:.02;--b:.12">Alba<sup class="text-[9px]">*</sup></span>
+  <div class="rv absolute right-5 top-[13px] flex items-center gap-2 text-[9.5px] italic text-white/80" style="--a:.04;--b:.12"><span>Módulos</span><span>Estado</span><span class="rounded-full bg-white px-3 py-[4px] not-italic text-[#241a5a]">Abrir panel</span></div>
+
+  <div class="absolute left-7 top-[104px] w-[200px]">
+    <h4 class="font-serif text-[31px] font-light italic leading-[1.05] tracking-[-0.01em] text-white">
+      <span class="block overflow-hidden"><span class="rl block" style="--a:.1;--b:.2">Cada capítulo</span></span>
+      <span class="block overflow-hidden"><span class="rl block" style="--a:.16;--b:.2">de tu operación</span></span>
+    </h4>
+    <p class="rv mt-3 font-serif text-[10.5px] italic text-white/65" style="--a:.3;--b:.15">— Sistema ALBA, edición viva</p>
+    <div class="rv mt-5 flex flex-wrap gap-1.5 text-[9px] text-white" style="--a:.4;--b:.15">{['En línea', '99.9 %', '0.8 s', '24 automat.'].map((t) => <span class="rounded-full border border-white/35 px-2.5 py-[3px]">{t}</span>)}</div>
+  </div>
+
+  <!-- the books -->
+  <div class="absolute left-[238px] top-[56px] w-[170px]">
+    <div class="rv relative mx-auto h-[150px] w-[118px] overflow-hidden rounded-[4px]" style="--a:.12;--b:.25;background:linear-gradient(160deg,#a8764e,#5a3c2a 55%,#2d2330);box-shadow:0 18px 30px -12px rgba(0,0,0,.6)">
+      <i class="absolute inset-[5px] block rounded-[2px] border border-[#f2d9a8]/50"></i>
+      <p class="absolute inset-x-0 top-[16px] text-center font-serif text-[8.5px] italic tracking-wide text-[#f2d9a8]">I · Identidad</p>
+      <i class="absolute left-1/2 top-[40px] block size-[44px] -translate-x-1/2 rounded-[10px]" style="background:linear-gradient(180deg,#7E86B3,#E8C4A6 38%,#F6B370 68%,#D6802D)"></i>
+      <p class="absolute inset-x-0 bottom-[34px] text-center font-serif text-[15px] italic leading-none text-white">Alba</p>
+      <div class="absolute inset-x-0 bottom-[14px] flex justify-center gap-1.5">{['#7E86B3', '#E8C4A6', '#F6B370', '#D6802D'].map((c) => <i class="block size-[8px] rounded-full" style={`background:${c}`}></i>)}</div>
+    </div>
+    <div class="mt-[2px] space-y-[3px]">
+      {slabs.map(([n, v, w], k) => (
+        <div class="rv mx-auto flex items-center justify-between rounded-[3px] px-2 py-[3px] font-serif text-[8.5px] italic text-white" style={`width:${w}px;--a:${0.32 + k * 0.08};--b:.14;background:linear-gradient(90deg,rgba(255,255,255,.2),rgba(255,255,255,.07));box-shadow:0 6px 10px -6px rgba(0,0,0,.5)`}><span>{n}</span><span class="not-italic text-white/60">{v}</span></div>
+      ))}
+    </div>
+  </div>
+
+  <div class="absolute left-[444px] top-[78px] w-[170px]">
+    <p class="rv font-serif text-[10px] italic leading-[1.5] text-white/80" style="--a:.3;--b:.15">Sigue el hilo de cada solicitud: del primer contacto a la factura, sin salir del sistema.</p>
+    <div class="mt-4">{chapters.map((t, k) => (
+      <div class="rv flex items-center gap-2 border-t border-white/15 py-[7px] font-serif text-[10px] italic text-white" style={`--a:${0.42 + k * 0.09};--b:.14`}><span class="w-[18px] text-white/50">{['I', 'II', 'III', 'IV'][k]}</span><span class="flex-1">{t}</span><svg width="10" height="10" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.4l4 4L16 6" fill="none" stroke="#f2d9a8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    ))}</div>
+  </div>
+  <p class="rv absolute bottom-4 left-7 font-serif text-[9px] italic text-white/70" style="--a:.8;--b:.12">Sincronizado hace 2 s · todos los módulos en línea</p>
+</div>

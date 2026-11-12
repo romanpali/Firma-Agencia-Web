@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "@fontsource-variable/inter-tight";
 @import "@fontsource-variable/google-sans-flex";
+@import "@fontsource-variable/fraunces/wght-italic.css";
+@import "@fontsource-variable/fraunces/wght.css";
 
 @theme {
   --font-sans: "Inter Tight Variable", ui-sans-serif, system-ui, sans-serif;
@@ -135,7 +137,7 @@ html {
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .mq-track, .spin-slow, .hf-rise, .hf-fade, .nb, .dust, .hz-link b, .portal, .portal-sheen, .live, .blink, .focus-ring { animation: none !important; }
+  .mq-track, .spin-slow, .hf-rise, .hf-fade, .nb, .dust, .hz-link b, .portal, .portal-sheen, .live, .blink, .focus-ring, .orb, .star { animation: none !important; }
   .js [data-words] .w { opacity: 1; filter: none; transform: none; transition: none; }
   .js [data-reveal] { opacity: 1; transform: none; transition: none; }
   [data-process], [data-areas] { height: auto !important; }
@@ -171,3 +173,15 @@ html {
 .focus-ring { transform-box: fill-box; transform-origin: center; animation: ringBeat 2.4s ease-in-out infinite; }
 @keyframes ringBeat { 50% { transform: scale(1.08); } }
 .flow { filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.9)); }
+
+/* Kit themes: each card back takes the identity of its front */
+.pn.kit-sp { background: #000; font-family: var(--font-sans); }
+.pn.kit-nl { background: #0a0e2e; font-family: var(--font-sans); }
+.pn.kit-nl .font-serif, .pn.kit-nl sup { font-family: "Fraunces Variable", Georgia, serif; }
+.pn.kit-nk { background: #fff; color: #111; font-family: var(--font-sans); border-color: #e6e6e6; }
+.pn.kit-fx { background: #0a0a0a; font-family: var(--font-sans); border-color: rgba(255, 255, 255, 0.12); }
+.orb { background: radial-gradient(circle at 30% 24%, rgba(255, 255, 255, 0.6), rgba(190, 160, 255, 0.28) 38%, rgba(70, 50, 190, 0.4) 100%); border: 1px solid rgba(255, 255, 255, 0.38); box-shadow: inset 0 -8px 18px rgba(80, 60, 220, 0.5), 0 0 30px rgba(120, 90, 255, 0.35); animation: orbFloat 5.5s ease-in-out infinite; }
+.orb-f { box-shadow: inset 0 -10px 24px rgba(255, 122, 200, 0.45), 0 0 50px rgba(160, 110, 255, 0.6); border-color: rgba(255, 255, 255, 0.6); }
+@keyframes orbFloat { 0%, 100% { translate: 0 0; } 50% { translate: 0 -6px; } }
+.star { animation: twinkle 4s ease-in-out infinite; }
+@keyframes twinkle { 50% { opacity: 0.15; } }

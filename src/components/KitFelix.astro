@@ -1,0 +1,53 @@
+---
+// Back of the Felix Clarke card: black, scattered tiles, thin type. Focus module: assistants.
+const tiles = [
+  // x, y, w, h, tone, kind
+  [236, 62, 72, 78, '#cfc9bb', 'palette'],
+  [-14, 150, 84, 98, '#2e2c28', 'bars'],
+  [150, 262, 64, 76, '#d9d4c7', 'log'],
+  [556, 56, 58, 58, '#6f6a60', 'kpi'],
+  [340, 44, 46, 36, '#e7e3d9', 'dots'],
+  [592, 318, 62, 64, '#2a2926', 'ring'],
+];
+---
+
+<div class="pn kit kit-fx" data-pn="4">
+  <div class="rv absolute inset-x-0 top-[10px] flex items-center justify-between px-4 text-[9px] text-white" style="--a:.02;--b:.12">
+    <span class="tracking-[0.12em]">ALBA STUDIO</span>
+    <span class="text-white/85">Sistemas, Procesos, Estudio</span>
+    <span class="flex gap-4"><span class="text-white/45">10:42 PM</span><span>CDMX, MX</span><span>Contacto</span></span>
+  </div>
+
+  {tiles.map(([x, y, w, h, bg, kind], k) => (
+    <div class="rv absolute overflow-hidden" style={`left:${x}px;top:${y}px;width:${w}px;height:${h}px;background:${bg};--a:${0.08 + k * 0.06};--b:.2;opacity:calc(var(--t) * ${k === 1 || k === 5 ? 0.9 : 0.85})`}>
+      {kind === 'palette' && <div class="flex size-full flex-col justify-end gap-[3px] p-2"><i class="block h-[26px] rounded-[2px]" style="background:linear-gradient(180deg,#7E86B3,#E8C4A6 40%,#F6B370 70%,#D6802D)"></i><span class="text-[7px] uppercase tracking-wider text-[#2a2926]">Identidad</span></div>}
+      {kind === 'bars' && <div class="flex size-full items-end gap-[5px] px-3 pb-3">{[0.4, 0.55, 0.45, 0.7, 0.62, 0.9].map((v) => <i class="block w-[8px] bg-[#8a8478]" style={`height:${v * 60}px`}></i>)}</div>}
+      {kind === 'log' && <div class="space-y-[5px] p-2">{[0, 1, 2, 3, 4].map((r) => <i class="block h-[3px] bg-[#8a8478]" style={`width:${[90, 70, 85, 55, 76][r]}%`}></i>)}<span class="block pt-1 text-[6.5px] uppercase tracking-wider text-[#2a2926]">Registro</span></div>}
+      {kind === 'kpi' && <div class="flex size-full flex-col items-center justify-center text-white"><b class="text-[17px] font-light leading-none">99.9</b><span class="text-[7px] text-white/70">% disp.</span></div>}
+      {kind === 'dots' && <div class="grid size-full grid-cols-6 place-items-center p-2">{Array.from({ length: 18 }, (_, r) => <i class={`block size-[4px] rounded-full ${r % 5 === 0 ? 'bg-[#2a2926]' : 'bg-[#9d978a]'}`}></i>)}</div>}
+      {kind === 'ring' && <svg viewBox="0 0 40 40" class="size-full p-3" aria-hidden="true"><circle cx="20" cy="20" r="13" fill="none" stroke="#4a4842" stroke-width="3"/><circle cx="20" cy="20" r="13" fill="none" stroke="#e7e3d9" stroke-width="3" stroke-dasharray="64 100" transform="rotate(-90 20 20)"/></svg>}
+    </div>
+  ))}
+
+  <!-- focus: assistants -->
+  <div class="rv absolute flex flex-col justify-between overflow-hidden bg-[#26231f] p-3" style="left:214px;top:116px;width:150px;height:196px;--a:.2;--b:.22">
+    <div class="space-y-[6px]">
+      <span class="block w-fit rounded-full bg-[#3b3731] px-2 py-[3px] text-[7px] text-white/80">Cotiza para Estudio Aurora</span>
+      <span class="ml-auto block w-[108px] rounded-[8px] bg-[#e7e3d9] px-2 py-1.5 text-[7px] leading-[1.35] text-[#14130f]">Listo · cotización <b class="font-medium">$90,500</b></span>
+    </div>
+    <div class="space-y-[5px]">{['Solicitud recibida', 'Cotización generada', 'Enviada por correo'].map((t) => <div class="flex items-center gap-1.5 text-[7.5px] text-white/60"><i class="block size-[7px] rounded-full bg-[#e7e3d9]"></i>{t}</div>)}</div>
+  </div>
+  <!-- tall readable tile: operations -->
+  <div class="rv absolute overflow-hidden bg-[#d9d4c7]" style="left:436px;top:106px;width:132px;height:206px;--a:.3;--b:.22">
+    <p class="px-3 pt-3 text-[7px] uppercase tracking-wider text-[#2a2926]">Operaciones</p>
+    <p class="px-3 text-[26px] font-light leading-none tracking-[-0.03em] text-[#14130f]"><span data-count="96" data-a=".35" data-b=".4">0</span><span class="text-[11px]"> %</span></p>
+    <svg class="mt-2 px-3" width="132" height="54" viewBox="0 0 132 54" aria-hidden="true"><path class="dw" style="--a:.4;--b:.4" d="M12 40 L34 30 L56 34 L78 16 L100 22 L120 8" fill="none" stroke="#14130f" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" pathLength="100"/></svg>
+    <div class="mx-3 mt-2 flex items-end gap-[3px]">{Array.from({ length: 14 }, (_, r) => <i class="gy block flex-1 bg-[#14130f]" style={`height:${8 + ((r * 7) % 5) * 7}px;--a:${0.5 + r * 0.015};--b:.14`}></i>)}</div>
+    <p class="px-3 pt-2 text-[7px] text-[#4a463d]">0.8 s · 24 automatizaciones</p>
+  </div>
+
+  <h4 class="absolute inset-x-0 top-[186px] text-center text-[30px] font-light tracking-[-0.02em] text-white [text-shadow:0_2px_24px_rgba(0,0,0,.5)]">
+    <span class="rv inline-block" style="--a:.1;--b:.2">Todo el sistema <sup class="align-super text-[11px] font-normal text-white/70">(5)</sup></span>
+  </h4>
+  <div class="rv absolute inset-x-0 bottom-[10px] flex items-center justify-center gap-4 text-[8.5px] text-white/60" style="--a:.7;--b:.14"><span class="flex items-center gap-1.5"><i class="live block size-[5px] rounded-full bg-[#6BE3A5]"></i>En línea</span><span>Sincronizado · 2 s</span><span class="text-white">Ver módulos +</span></div>
+</div>

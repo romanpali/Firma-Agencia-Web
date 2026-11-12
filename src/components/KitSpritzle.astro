@@ -1,0 +1,47 @@
+---
+// Back of the Spritzle card: black stage, violet glow, bold sans and glass bubbles. Focus module: marketing.
+interface Props { focus?: number }
+const orbs = [
+  { n: 'Identidad', v: 'ALBA', l: 'Marca', x: 78, y: 322, s: 74, d: 0 },
+  { n: 'Asistentes', v: '24', l: 'automatiz.', x: 196, y: 306, s: 90, d: 1 },
+  { n: 'Marketing', v: '182 K', l: 'Alcance', x: 322, y: 292, s: 128, d: 2, f: true },
+  { n: 'Operaciones', v: '96 %', l: 'a tiempo', x: 452, y: 308, s: 92, d: 3 },
+  { n: 'Finanzas', v: '$771 K', l: 'utilidad', x: 566, y: 324, s: 76, d: 4 },
+];
+const chips = [['Lead capturado', 36, 214], ['Factura CFDI timbrada', 470, 220], ['99.9 % disponibilidad', 252, 206], ['Cotización #0231', 520, 262]];
+---
+
+<div class="pn kit kit-sp" data-pn="0">
+  <i class="absolute inset-0" style="background:radial-gradient(75% 60% at 50% 122%,#7a4dff 0%,#2e35ff 38%,rgba(20,20,90,.0) 72%)"></i>
+  <i class="absolute left-1/2 top-[190px] block size-[640px] -translate-x-1/2 rounded-full" style="border:1px solid rgba(160,140,255,.35);box-shadow:0 0 80px 10px rgba(110,80,255,.35) inset"></i>
+  <i class="grain absolute inset-0 opacity-[.1]"></i>
+
+  <div class="rv absolute inset-x-0 top-[14px] flex items-center justify-center gap-6 text-[10px] text-white/80" style="--a:.02;--b:.12">
+    <span class="flex items-center gap-1.5 text-[12px] font-semibold text-white"><i class="flex size-[15px] items-center justify-center rounded-[5px] bg-white"><i class="block size-[7px] rounded-full bg-black"></i></i>ALBA</span>
+    <span>Sistema</span><span>Módulos</span><span>Estado</span>
+    <span class="rounded-full border border-white/30 px-3 py-[4px] text-white">Ver panel</span>
+  </div>
+  <div class="rv absolute inset-x-0 top-[56px] mx-auto flex w-fit items-center gap-2 text-[9.5px] text-white/80" style="--a:.06;--b:.12">
+    <span class="flex -space-x-1.5">{['#7a4dff', '#ff7ac8', '#ffb86b'].map((c) => <i class="block size-[14px] rounded-full ring-1 ring-black" style={`background:${c}`}></i>)}</span>
+    <span><b class="font-medium text-white">24</b> automatizaciones corriendo ahora</span>
+  </div>
+  <h4 class="absolute inset-x-0 top-[82px] text-center text-[40px] font-semibold leading-[0.98] tracking-[-0.04em]">
+    <span class="block overflow-hidden"><span class="rl block" style="--a:.1;--b:.2">Tu empresa, <span class="text-white/35">en una</span></span></span>
+    <span class="block overflow-hidden"><span class="rl block" style="--a:.18;--b:.2"><span class="text-white/35">sola</span> operación.</span></span>
+  </h4>
+
+  {chips.map(([t, x, y], k) => (
+    <span class="rv absolute flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-2.5 py-[4px] text-[9px] text-white/90 backdrop-blur-sm" style={`left:${x}px;top:${y}px;--a:${0.5 + k * 0.07};--b:.12`}><i class="live block size-[5px] rounded-full bg-[#6BE3A5]"></i>{t}</span>
+  ))}
+
+  {orbs.map((o) => (
+    <div class="absolute" style={`left:${o.x - o.s / 2}px;top:${o.y - o.s / 2}px;width:${o.s}px;height:${o.s}px`}>
+      <div class={`orb fl absolute inset-0 flex flex-col items-center justify-center rounded-full text-center ${o.f ? 'orb-f' : ''}`} style={`--a:${0.2 + o.d * 0.08};--b:.2;animation-delay:${-o.d * 0.9}s`}>
+        <span class="text-[8.5px] tracking-wide text-white/70">{o.n}</span>
+        <span class={`font-semibold leading-none tracking-[-0.03em] text-white ${o.f ? 'text-[28px]' : o.s > 80 ? 'text-[19px]' : 'text-[15px]'}`}>{o.v}</span>
+        <span class="mt-0.5 text-[8.5px] text-white/65">{o.l}</span>
+      </div>
+    </div>
+  ))}
+  <span class="rv absolute left-1/2 top-[364px] -translate-x-1/2 rounded-full bg-white px-3 py-[4px] text-[9px] font-medium text-black" style="--a:.8;--b:.12">Campaña activa · +12 %</span>
+</div>
