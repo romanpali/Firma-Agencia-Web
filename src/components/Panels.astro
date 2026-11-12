@@ -64,27 +64,49 @@ const HM = Array.from({ length: 4 }, (_, r) => Array.from({ length: 24 }, (_, c)
               </>)}
 
               {i === 6 && (<>
-                <div class="absolute left-6 top-[54px] w-[300px]">
-                  <div class="rv relative h-[92px] overflow-hidden rounded-[16px]" style="--a:.02;--b:.2;background:linear-gradient(135deg,#977DFF 0%,#0033FF 62%,#0600AB 100%)">
-                    <i class="grain absolute inset-0 opacity-[.16]"></i>
-                    <i class="absolute -right-6 -top-10 block size-[120px] rounded-full" style="background:radial-gradient(circle,rgba(255,255,255,.5),transparent 65%)"></i>
-                    <span class="absolute right-3 top-3 rounded-full bg-white/20 px-2.5 py-[3px] text-[9.5px] text-white ring-1 ring-white/40">Seguir</span>
+                <div class="absolute left-6 top-[50px] h-[336px] w-[236px] overflow-hidden rounded-[18px] border border-[#eceef8] bg-white">
+                  <div class="rv flex items-center justify-between px-3.5 pt-3" style="--a:.02;--b:.12">
+                    <span class="flex items-center gap-1 text-[12.5px] font-semibold">alba.studio<svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l2.5 1.9 3.1-.2 1 2.9 2.6 1.7-.9 3 .9 3-2.6 1.7-1 2.9-3.1-.2L12 22.5l-2.5-1.9-3.1.2-1-2.9-2.6-1.7.9-3-.9-3 2.6-1.7 1-2.9 3.1.2z" fill="#0033FF"/><path d="M7.8 12.2l3 3 5.4-6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                    <span class="flex gap-2.5 text-[#14173f]"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M12 8v8M8 12h8"/></svg><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></span>
                   </div>
-                  <div class="relative -mt-[22px] flex items-end gap-3 px-3">
-                    <i class="fl flex size-[46px] shrink-0 items-center justify-center rounded-full bg-white ring-[3px] ring-white" style="--a:.1;--b:.15"><svg width="28" height="28" viewBox="0 0 34 34" aria-hidden="true"><rect x="2" y="2" width="30" height="30" rx="9" fill="#0033FF"/><path d="M9 23c3-9.5 13-9.5 16 0" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/><circle cx="17" cy="14" r="3" fill="#977DFF"/></svg></i>
-                    <div class="rv pt-[26px]" style="--a:.14;--b:.15"><p class="text-[13px] font-medium leading-none">alba.studio</p><p class="mt-1 text-[9.5px] text-[#8f8aa6]">Branding · Redes sociales</p></div>
+                  <div class="mt-2.5 flex items-center gap-3 px-3.5">
+                    <i class="fl flex size-[58px] shrink-0 items-center justify-center rounded-full p-[2.5px]" style="--a:.06;--b:.15;background:linear-gradient(135deg,#977DFF,#0033FF 60%,#0600AB)"><i class="flex size-full items-center justify-center rounded-full bg-white ring-2 ring-white"><svg width="30" height="30" viewBox="0 0 34 34" aria-hidden="true"><rect x="2" y="2" width="30" height="30" rx="9" fill="#0033FF"/><path d="M9 23c3-9.5 13-9.5 16 0" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/><circle cx="17" cy="14" r="3" fill="#977DFF"/></svg></i></i>
+                    <div class="grid flex-1 grid-cols-3 text-center">{[['Publicaciones', 128, 0], ['Seguidores', 246, 1], ['Seguidos', 41, 0]].map(([l, v, d], k) => (<div class="rv" style={`--a:${0.1 + k * 0.05};--b:.14`}><p class="text-[13px] font-semibold leading-none tabular-nums"><span data-count={v} data-a={0.12 + k * 0.05} data-b=".3">0</span>{k === 1 ? ' K' : ''}</p><p class="mt-1 text-[7.5px] text-[#8f8aa6]">{l}</p></div>))}</div>
                   </div>
-                  <div class="mt-3 flex">{[['Publicaciones', 128, 0], ['Seguidores', 246, 1], ['Interacción', 54, 1]].map(([l, v, d], k) => (<div class={`rv flex-1 ${k ? 'border-l border-[#eceef8] pl-3' : ''}`} style={`--a:${0.2 + k * 0.07};--b:.14`}><p class="text-[17px] font-normal tabular-nums leading-none tracking-[-0.02em]"><span data-count={v} data-a={0.22 + k * 0.07} data-b=".3" data-d={d ? 1 : 0}>0</span>{k === 1 ? ' K' : k === 2 ? ' %' : ''}</p><p class="mt-1 text-[9px] text-[#8f8aa6]">{l}</p></div>))}</div>
-                  <div class="mt-3 grid grid-cols-3 gap-[7px]">{[['#977DFF,#0033FF', 'Aa'], ['#0033FF,#0600AB', ''], ['#F2E6EE,#977DFF', '★'], ['#0600AB,#00033D', 'Aa'], ['#977DFF,#F2E6EE', ''], ['#0033FF,#977DFF', '▶']].map(([g, t], k) => (<i class="rv relative flex h-[66px] items-center justify-center overflow-hidden rounded-[10px] text-[20px] font-light not-italic text-white" style={`--a:${0.3 + k * 0.06};--b:.16;background:linear-gradient(150deg,${g.split(',')[0]},${g.split(',')[1]})`}><i class="grain absolute inset-0 opacity-[.14]"></i><span class="relative">{t}</span></i>))}</div>
+                  <div class="rv px-3.5 pt-2" style="--a:.2;--b:.14"><p class="text-[10px] font-semibold">ALBA · Branding y redes</p><p class="text-[9px] leading-[1.35] text-[#5b5f86]">Estrategia, diseño y contenido que se ve en todos lados. ✦<br /><span class="text-[#0033FF]">alba.com/estudio</span></p></div>
+                  <div class="rv flex gap-1.5 px-3.5 pt-2" style="--a:.28;--b:.14"><span class="flex-1 rounded-[7px] bg-[#0033FF] py-[5px] text-center text-[9px] font-medium text-white">Seguir</span><span class="flex-1 rounded-[7px] bg-[#eceef8] py-[5px] text-center text-[9px] font-medium">Mensaje</span><span class="rounded-[7px] bg-[#eceef8] px-2 py-[5px] text-[9px]">⌄</span></div>
+                  <div class="flex gap-2.5 px-3.5 pt-2.5">{[['Marca', '#977DFF,#0033FF'], ['Reels', '#0033FF,#0600AB'], ['Casos', '#F2E6EE,#977DFF'], ['Equipo', '#0600AB,#00033D']].map(([t, g], k) => (<div class="rv flex flex-col items-center gap-1" style={`--a:${0.32 + k * 0.05};--b:.12`}><i class="block size-[34px] rounded-full ring-2 ring-[#eceef8]" style={`background:linear-gradient(150deg,${g.split(',')[0]},${g.split(',')[1]})`}></i><span class="text-[7.5px] text-[#5b5f86]">{t}</span></div>))}</div>
+                  <div class="absolute inset-x-0 bottom-0 flex items-center justify-around border-t border-[#eceef8] bg-white py-2 text-[#14173f]">{['M3 11l9-7 9 7v9H3z', 'M11 11a6 6 0 1 0 0.01 0M16 16l4 4', 'M5 5h14v14H5zM12 9v6M9 12h6', 'M5 5h14v14H5zM10 9l5 3-5 3z', 'M12 12a4 4 0 1 0 0.01 0M5 20c1-4 13-4 14 0'].map((d) => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={d} /></svg>)}</div>
                 </div>
-                <div class="absolute right-6 top-[56px] w-[268px]">
-                  <p class="rv text-[13px] font-medium" style="--a:.06;--b:.12">Paleta · Gradiente 3</p>
-                  <i class="gx mt-2 block h-[40px] rounded-[12px]" style="--a:.1;--b:.25;background:linear-gradient(90deg,#F2E6EE,#977DFF 34%,#0033FF 68%,#0600AB)"></i>
-                  <div class="mt-2 flex justify-between">{[['#F2E6EE', 'F2E6EE'], ['#977DFF', '977DFF'], ['#0033FF', '0033FF'], ['#0600AB', '0600AB'], ['#00033D', '00033D']].map(([c, h], k) => (<span class="rv flex flex-col items-center gap-1 text-[8px] font-medium tracking-wider text-[#5f5a7a]" style={`--a:${0.2 + k * 0.05};--b:.12`}><i class="block size-[22px] rounded-full ring-1 ring-black/10" style={`background:${c}`}></i>{h}</span>))}</div>
-                  <p class="rv mt-4 text-[13px] font-medium" style="--a:.36;--b:.12">Calendario de contenido</p>
-                  <div class="mt-2 grid grid-cols-7 gap-1.5">{['L', 'M', 'M', 'J', 'V', 'S', 'D'].map((d, k) => (<div class="rv text-center" style={`--a:${0.4 + k * 0.04};--b:.1`}><p class="text-[9px] text-[#8f8aa6]">{d}</p><i class="mt-1 flex h-[40px] flex-col items-center justify-center gap-1 rounded-[8px] bg-[#f5efe8]">{[2, 1, 2, 0, 1, 2, 0][k] > 0 && <b class="block h-[5px] w-[20px] rounded-full" style="background:#977DFF"></b>}{[2, 1, 2, 0, 1, 2, 0][k] > 1 && <b class="block h-[5px] w-[14px] rounded-full" style="background:#0033FF"></b>}</i></div>))}</div>
-                  <p class="rv mt-4 text-[13px] font-medium" style="--a:.6;--b:.12">Alcance semanal</p>
-                  <div class="mt-2 flex h-[48px] items-end gap-[6px]">{[0.4, 0.55, 0.5, 0.7, 0.62, 0.85, 1].map((v, k) => <i class="gy block flex-1 rounded-[4px]" style={`height:${v * 48}px;background:linear-gradient(180deg,#977DFF,#0033FF);--a:${0.64 + k * 0.04};--b:.18`}></i>)}</div>
+
+                <div class="absolute left-[274px] top-[50px] flex gap-2">
+                  {[
+                    ['3 errores que frenan tu empresa', '#977DFF,#0033FF', '1.2 M', 'Ep. 1', 0],
+                    ['POV: todo tu negocio en 1 panel', '#0033FF,#0600AB,#00033D', '846 K', 'Nuevo', 1],
+                    ['Antes vs. después de ordenar tu marca', '#F2E6EE,#977DFF', '2.4 M', 'Trending', 2],
+                  ].map(([hook, g, views, tag, k]) => (
+                    <div class="rv relative h-[188px] w-[104px] overflow-hidden rounded-[12px]" style={`--a:${0.24 + k * 0.1};--b:.2;background:linear-gradient(${150 + k * 12}deg,${g.split(',').join(',')})`}>
+                      <i class="grain absolute inset-0 opacity-[.18]"></i>
+                      <i class="absolute -right-5 -top-6 block size-[80px] rounded-full" style="background:radial-gradient(circle,rgba(255,255,255,.55),transparent 65%)"></i>
+                      <span class="absolute left-2 top-2 rounded-[4px] bg-black/45 px-1.5 py-[2px] text-[7px] font-semibold tracking-wide text-white">{tag}</span>
+                      <svg class="absolute right-2 top-2" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="M10 8.5l5 3.5-5 3.5z" fill="#fff"/></svg>
+                      <p class="absolute inset-x-2 top-[44px] text-[15px] font-extrabold uppercase leading-[0.98] tracking-[-0.02em] text-white [text-shadow:0_2px_0_rgba(0,3,61,.55)]"><span class={k === 2 ? 'text-[#00033D]' : ''}>{hook}</span></p>
+                      <i class="absolute left-2 top-[128px] block h-[3px] w-[38px] rounded-full bg-white/90"></i>
+                      <span class="absolute bottom-2 left-2 flex items-center gap-1 text-[8.5px] font-semibold text-white"><svg width="9" height="9" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5l12 7-12 7z"/></svg>{views}</span>
+                      <i class="absolute inset-x-0 bottom-0 block h-[3px] bg-white/30"><b class="gx block h-full bg-white" style={`--a:${0.5 + k * 0.1};--b:.3;width:${[62, 38, 80][k]}%`}></b></i>
+                    </div>
+                  ))}
+                </div>
+                <div class="absolute left-[274px] top-[250px] w-[330px]">
+                  <p class="rv text-[11px] font-medium" style="--a:.5;--b:.12">Presencia en todas las apps</p>
+                  <div class="mt-2 grid grid-cols-5 gap-1.5">
+                    {[['Instagram', '246 K', '#977DFF,#0033FF', 'M4 4h16v16H4zM12 8.5a3.5 3.5 0 1 0 0.01 0'], ['TikTok', '1.1 M', '#00033D,#0600AB', 'M14 4v10a3 3 0 1 1-3-3M14 4c0 3 2 4 5 4'], ['YouTube', '88 K', '#0033FF,#0600AB', 'M3 7h18v10H3zM10 9.5l5 2.5-5 2.5z'], ['LinkedIn', '32 K', '#977DFF,#0600AB', 'M5 9v10M5 5v1M10 19V9M10 13c0-5 9-5 9 0v6'], ['Facebook', '54 K', '#F2E6EE,#977DFF', 'M14 8h3M14 8c-2 0-3 1-3 3v9M8 12h6']].map(([n, f, g, d], k) => (
+                      <div class="rv flex flex-col items-center gap-1 rounded-[12px] bg-[#f7f7fd] py-2" style={`--a:${0.54 + k * 0.06};--b:.14`}>
+                        <i class="flex size-[28px] items-center justify-center rounded-[9px]" style={`background:linear-gradient(150deg,${g.split(',')[0]},${g.split(',')[1]})`}><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={k === 4 ? '#0600AB' : '#fff'} stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={d} /></svg></i>
+                        <span class="text-[8px] font-medium">{n}</span><span class="flex items-center gap-0.5 text-[7.5px] text-[#8f8aa6]">{f}<svg width="8" height="8" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#0033FF"/><path d="M7.5 12.2l3 3 6-6.4" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </>)}
 

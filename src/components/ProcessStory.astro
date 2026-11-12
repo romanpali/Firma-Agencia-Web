@@ -1,6 +1,6 @@
 ---
 import Panel from './Panels.astro';
-const titles = ['Tu empresa, hoy', 'Identidad y diseño', 'Branding y redes sociales', 'Presencia digital', 'Finanzas y administración', 'Operaciones y datos', 'IA y automatización', 'Un solo ecosistema'];
+const titles = ['Tu empresa, hoy', 'Presencia digital', 'Finanzas y administración', 'Branding y redes sociales', 'Identidad y diseño', 'Operaciones y datos', 'IA y automatización', 'Un solo ecosistema'];
 const FR: Record<string, string> = {
   sheet: '<svg viewBox="0 0 120 90"><rect width="120" height="90" rx="8" fill="#fff" stroke="#dadce0"/><path d="M0 22H120M0 44H120M0 66H120M40 0V90M80 0V90" stroke="#e3e6ea"/><rect x="42" y="24" width="36" height="18" fill="#e8eaed"/><rect x="4" y="48" width="30" height="5" rx="2.5" fill="#dadce0"/></svg>',
   pdf: '<svg viewBox="0 0 80 100"><path d="M6 2H52L74 24V98H6Z" fill="#fff" stroke="#dadce0"/><path d="M52 2V24H74" fill="none" stroke="#dadce0"/><rect x="16" y="38" width="48" height="5" rx="2.5" fill="#e3e6ea"/><rect x="16" y="50" width="38" height="5" rx="2.5" fill="#e3e6ea"/><rect x="16" y="62" width="44" height="5" rx="2.5" fill="#e3e6ea"/><text x="16" y="88" font-size="12" fill="#9aa0a6" font-weight="600" font-family="sans-serif">PDF</text></svg>',
@@ -36,7 +36,7 @@ const frags = [
       <!-- camera -->
       <div data-cam class="absolute inset-0" role="img" aria-label="Piezas sueltas de una empresa se convierten, una por una, en módulos conectados que forman un solo sistema">
         <div data-world class="absolute left-1/2 top-1/2 size-0">
-          {[0, 6, 1, 2, 3, 4].map((i) => <Panel i={i} />)}
+          {[1, 2, 6, 0, 3, 4].map((i) => <Panel i={i} />)}
           <svg data-bus class="bus absolute overflow-visible" style="left:0;top:0;width:1px;height:1px;transform:translateZ(60px)" aria-hidden="true"></svg>
         </div>
       </div>
