@@ -70,16 +70,17 @@ export const divisions: Division[] = [
     ],
   },
   {
-    n: '06', title: 'Finanzas, administración y cumplimiento', short: 'Finanzas y administración',
-    intro: 'Digitalizamos, organizamos y automatizamos procesos administrativos y financieros para dar mayor visibilidad de ingresos, egresos, obligaciones y facturación.',
-    goal: 'Herramientas para administrar mejor los recursos y organizar los procesos financieros y administrativos.',
-    note: 'HumanCorp aporta infraestructura tecnológica y automatización. La contabilidad profesional, la interpretación fiscal, las declaraciones y la asesoría tributaria las realizan profesionales habilitados o aliados especializados; no sustituimos a un contador o asesor fiscal.',
+    n: '06', title: 'Finanzas, administración y cumplimiento', short: 'Finanzas y contabilidad',
+    intro: 'Organizamos y automatizamos tus procesos administrativos y financieros, y te asesoramos en lo contable y fiscal.',
+    goal: 'Procesos ordenados y asesoría contable y fiscal de nuestro equipo.',
+    note: 'La asesoría contable y fiscal está a cargo de nuestro contador, Director de Administración y Finanzas.',
     areas: [
       ['Estructura financiera automatizada', 'Control de ingresos|Registro de egresos|Cuentas por cobrar|Cuentas por pagar|Gestión de flujo de caja|Seguimiento de pagos|Control de movimientos|Clasificación de gastos|Control presupuestario|Proyecciones financieras|Reportes de liquidez'],
       ['Facturación electrónica y CFDI 4.0', 'Sistemas de facturación|Automatización de generación de CFDI|Datos de clientes|Organización de comprobantes|Clasificación de facturas|Gestión documental|Seguimiento de facturas emitidas|Control de pagos relacionados|Integración con sistemas administrativos|Organización de información fiscal'],
       ['Gestión administrativa', 'Automatización de procesos administrativos|Digitalización de documentos|Control de gastos|Gestión de proveedores|Órdenes de compra|Organización de expedientes|Control de pagos|Sistemas de autorización|Reportes administrativos'],
       ['CFO tecnológico', 'Dashboards financieros|Indicadores de liquidez|Análisis de ingresos y egresos|Seguimiento de márgenes|Reportes de rentabilidad|Proyecciones|Alertas financieras|Control de presupuestos|Visualización de obligaciones y compromisos'],
       ['Cumplimiento y organización fiscal', 'Organización de documentación fiscal|Seguimiento de obligaciones|Recordatorios de fechas|Clasificación de comprobantes|Integración con sistemas contables|Reportes administrativos|Preparación de documentación para revisión profesional'],
+      ['Asesoría contable y fiscal', 'Asesoría contable|Asesoría fiscal en general|Orientación sobre obligaciones fiscales|Revisión de la información contable|Acompañamiento con tu información financiera|Coordinación con tu equipo y tus sistemas|Todo lo relacionado con lo contable'],
     ],
   },
   {

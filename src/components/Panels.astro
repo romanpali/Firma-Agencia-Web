@@ -182,7 +182,7 @@ const HM = Array.from({ length: 4 }, (_, r) => Array.from({ length: 24 }, (_, c)
                 <div class="absolute right-6 top-[150px] w-[176px]">
                   <p class="rv text-[12.5px] font-medium text-[#14173f]" style="--a:.24;--b:.12">Próximos vencimientos</p>
                   <div class="mt-2">
-                    {[['15', 'nov', 'Facturación CFDI', 'Emitir y timbrar'], ['17', 'nov', 'IVA mensual', 'Revisa tu contador'], ['28', 'nov', 'Nómina', 'Programada'], ['30', 'nov', 'Proveedores', '3 pagos']].map(([d, m, t, s], k) => (
+                    {[['15', 'nov', 'Facturación CFDI', 'Emitir y timbrar'], ['17', 'nov', 'IVA mensual', 'Revisión contable'], ['28', 'nov', 'Nómina', 'Programada'], ['30', 'nov', 'Proveedores', '3 pagos']].map(([d, m, t, s], k) => (
                       <div class="rv flex items-center gap-2.5 border-t border-[#efe9e1] py-[8px]" style={`--a:${0.3 + k * 0.09};--b:.12`}>
                         <span class="flex size-[34px] shrink-0 flex-col items-center justify-center rounded-[9px] bg-[#faf7f2] leading-none"><b class="text-[13px] font-medium text-[#14173f]">{d}</b><i class="mt-0.5 text-[8.5px] not-italic uppercase tracking-wider text-[#8f8aa6]">{m}</i></span>
                         <span class="min-w-0"><span class="block truncate text-[11.5px] text-[#14173f]">{t}</span><span class="block truncate text-[10px] text-[#8f8aa6]">{s}</span></span>

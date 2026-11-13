@@ -1,0 +1,115 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import ScrollFx from '../components/ScrollFx.astro';
+import { divisions } from '../data/servicios';
+
+const info = [
+  ['Correo', 'info@humancorp.co', 'mailto:info@humancorp.co', 'M3 5h18v14H3zM3 7l9 6 9-6'],
+  ['Oficina', 'Mérida, Yucatán, México', '', 'M12 21s7-6.2 7-11.2A7 7 0 0 0 5 9.8C5 14.8 12 21 12 21zM12 7.8a2.2 2.2 0 1 0 .01 0'],
+  ['Teléfono', '+52 999 123 4567', 'tel:+529991234567', 'M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z'],
+];
+const field = 'mt-2 w-full rounded-xl border border-white/15 bg-white/10 px-4 py-3.5 text-[15px] text-white outline-none transition-[border-color,background-color] placeholder:text-white/40 focus:border-white/60 focus:bg-white/[.14]';
+const label = 'block text-[12.5px] font-medium text-white/75';
+---
+
+<!doctype html>
+<html lang="es-MX">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Escríbenos para platicar sobre tu empresa: diseño, tecnología, administración y asesoría contable y fiscal." />
+    <script is:inline>document.documentElement.classList.add('js')</script>
+    <title>Contacto — HumanCorp</title>
+  </head>
+  <body class="bg-[#00033D] font-sans text-white">
+    <div class="fixed inset-0 z-0" aria-hidden="true">
+      <canvas data-silk class="absolute inset-0 size-full"></canvas>
+      <i class="absolute inset-0 bg-[#00033D]/45"></i>
+      <i class="absolute inset-0" style="background:linear-gradient(to bottom,rgba(0,3,61,.55),transparent 35%,rgba(2,8,36,.55))"></i>
+    </div>
+    <Header />
+    <main class="relative z-10 overflow-x-clip">
+      <section data-tone="dark" class="px-6 pb-[10svh] pt-[19svh] md:px-10 md:pt-[22svh]">
+        <div class="mx-auto grid min-h-[60svh] max-w-[1180px] gap-14 md:grid-cols-12 md:gap-10">
+          <div class="flex flex-col md:col-span-5">
+            <p data-reveal class="text-[13px] font-medium uppercase tracking-[0.14em] text-white/65">Contacto</p>
+            <h1 data-words class="mt-5 font-goog text-[clamp(2.8rem,6vw,5.6rem)] font-light leading-[1] tracking-[-0.05em]">Hablemos de tu empresa</h1>
+            <p data-reveal style="--i:1" class="mt-6 max-w-[27rem] text-[16px] leading-relaxed text-white/75">Cuéntanos qué necesitas: diseño, tecnología, administración o asesoría contable y fiscal. Te respondemos para agendar una llamada de descubrimiento.</p>
+            <ul class="mt-auto space-y-3 pt-14">
+              {info.map(([t, v, href, d], k) => (
+                <li data-reveal style={`--i:${k}`}>
+                  {href ? (
+                    <a href={href} class="group flex items-center gap-4"><i class="grid size-11 shrink-0 place-items-center rounded-full border border-white/30 bg-white/10 transition-colors group-hover:bg-white group-hover:text-[#1f4cb8]"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={d} /></svg></i><span><span class="block text-[11.5px] text-white/55">{t}</span><span class="text-[15.5px]">{v}</span></span></a>
+                  ) : (
+                    <div class="flex items-center gap-4"><i class="grid size-11 shrink-0 place-items-center rounded-full border border-white/30 bg-white/10"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={d} /></svg></i><span><span class="block text-[11.5px] text-white/55">{t}</span><span class="text-[15.5px]">{v}</span></span></div>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div data-reveal style="--i:1" class="md:col-span-7 md:col-start-6 lg:col-span-6 lg:col-start-7">
+            <form name="contacto" method="POST" action="/contacto" data-netlify="true" netlify-honeypot="bot-field" data-form class="rounded-[28px] border border-white/20 bg-white/[.09] p-6 shadow-[0_40px_90px_-40px_rgba(0,0,40,.8)] backdrop-blur-xl md:p-8">
+              <input type="hidden" name="form-name" value="contacto" />
+              <p class="hidden"><label>No llenar: <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
+              <div class="grid gap-5 md:grid-cols-2">
+                <label class={label}>Nombre completo<input class={field} name="nombre" autocomplete="name" required placeholder="Tu nombre" /></label>
+                <label class={label}>Empresa <span class="text-white/45">(opcional)</span><input class={field} name="empresa" autocomplete="organization" placeholder="Nombre de tu empresa" /></label>
+                <label class={label}>Correo electrónico<input class={field} type="email" name="correo" autocomplete="email" required placeholder="tu@correo.com" /></label>
+                <label class={label}>Teléfono<input class={field} type="tel" name="telefono" autocomplete="tel" placeholder="+52 999 000 0000" /></label>
+              </div>
+              <label class={`${label} mt-5`}>¿Qué te interesa?
+                <select class={`${field} appearance-none [color-scheme:dark]`} name="interes">
+                  <option value="">Elige una opción</option>
+                  {divisions.map((d) => <option value={d.short}>{d.n} · {d.short}</option>)}
+                  <option value="Asesoría contable y fiscal">Asesoría contable y fiscal</option>
+                  <option value="No estoy seguro">Aún no estoy seguro</option>
+                </select>
+              </label>
+              <label class={`${label} mt-5`}>Mensaje<textarea class={`${field} min-h-[130px] resize-y`} name="mensaje" rows="5" required placeholder="Cuéntanos sobre tu empresa y qué necesitas"></textarea></label>
+              <div class="mt-6 flex flex-wrap items-center gap-4">
+                <button type="submit" class="inline-flex items-center gap-3 rounded-full bg-white px-7 py-3.5 text-[15px] font-medium text-[#0b0c0f] transition-transform hover:scale-[1.03] active:scale-[0.98] disabled:opacity-60" data-send>Enviar mensaje <span aria-hidden="true">→</span></button>
+                <p class="text-[12.5px] text-white/55" data-status role="status" aria-live="polite">Responderemos a tu correo.</p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <footer class="relative px-6 pb-8 md:px-10">
+        <p class="mx-auto flex max-w-[1180px] flex-wrap items-center justify-between gap-3 border-t border-white/15 pt-6 text-[13px] text-white/65"><span>© 2026 Todos los derechos reservados. HumanCorp</span><a href="/privacidad" class="hover:text-white">Privacidad y cookies</a></p>
+      </footer>
+    </main>
+    <ScrollFx />
+
+    <script>
+      import { onFrame } from '../scripts/frame';
+      import { mountSilk } from '../scripts/silk';
+      const cv = document.querySelector<HTMLCanvasElement>('[data-silk]')!;
+      const draw = mountSilk(cv, () => !document.hidden, matchMedia('(prefers-reduced-motion: reduce)').matches);
+      if (draw) onFrame((t) => draw(t));
+
+      // Envío con Netlify Forms, sin recargar la página.
+      const form = document.querySelector<HTMLFormElement>('[data-form]')!;
+      const btn = form.querySelector<HTMLButtonElement>('[data-send]')!;
+      const status = form.querySelector<HTMLElement>('[data-status]')!;
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        btn.disabled = true;
+        status.textContent = 'Enviando…';
+        try {
+          const body = new URLSearchParams(new FormData(form) as unknown as Record<string, string>).toString();
+          const r = await fetch('/contacto', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body });
+          if (!r.ok) throw new Error(String(r.status));
+          form.reset();
+          status.textContent = 'Gracias. Recibimos tu mensaje y te responderemos pronto.';
+        } catch {
+          status.innerHTML = 'No pudimos enviarlo. Escríbenos a <a class="underline" href="mailto:info@humancorp.co">info@humancorp.co</a>.';
+        } finally {
+          btn.disabled = false;
+        }
+      });
+    </script>
+  </body>
+</html>
