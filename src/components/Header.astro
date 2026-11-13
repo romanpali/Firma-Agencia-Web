@@ -1,5 +1,6 @@
 ---
 import { divisions } from '../data/servicios';
+import Cursor from './Cursor.astro';
 const links = [
   { href: '/paquetes', label: 'Paquetes' },
   { href: '/asesoria-contable-y-fiscal', label: 'Contable y fiscal' },
@@ -55,6 +56,8 @@ const pill = 'hdr-pill rounded-full border border-white/20 bg-white/10 px-5 py-3
   <a href="/arma-tu-proyecto" class={`${pill} hidden lg:inline-flex`}>Arma tu proyecto</a>
   <button type="button" class={`${pill} lg:hidden`} data-menu-open aria-expanded="false" aria-controls="site-menu">Menú</button>
 </header>
+
+<Cursor />
 
 <div id="site-menu" data-menu class="pointer-events-none fixed inset-0 z-[60] flex flex-col overflow-y-auto bg-[#07080b]/95 px-6 py-6 text-white opacity-0 backdrop-blur-xl transition-opacity duration-500" aria-hidden="true">
   <div class="flex items-center justify-between">

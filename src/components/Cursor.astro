@@ -1,0 +1,31 @@
+<div data-cursor-ring class="cursor-ring" aria-hidden="true"></div>
+<div data-cursor-dot class="cursor-dot" aria-hidden="true"></div>
+
+<script>
+  // Cursor circular minimalista: solo con ratón (no en pantallas táctiles).
+  if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    const ring = document.querySelector<HTMLElement>('[data-cursor-ring]')!;
+    const dot = document.querySelector<HTMLElement>('[data-cursor-dot]')!;
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let x = -100, y = -100, rx = x, ry = y, shown = false, raf = 0;
+    const HOVER = 'a,button,summary,label,select,[role="button"],input[type="color"],input[type="range"]';
+    const loop = () => {
+      rx += (x - rx) * (reduced ? 1 : 0.2); ry += (y - ry) * (reduced ? 1 : 0.2);
+      ring.style.transform = `translate3d(${rx.toFixed(1)}px,${ry.toFixed(1)}px,0)`;
+      dot.style.transform = `translate3d(${x}px,${y}px,0)`;
+      raf = Math.abs(x - rx) + Math.abs(y - ry) > 0.1 ? requestAnimationFrame(loop) : 0;
+    };
+    addEventListener('pointermove', (e) => {
+      if (e.pointerType !== 'mouse') return;
+      x = e.clientX; y = e.clientY;
+      if (!shown) { shown = true; rx = x; ry = y; document.documentElement.classList.add('has-cursor'); ring.style.opacity = dot.style.opacity = '1'; }
+      const t = e.target as Element | null;
+      ring.classList.toggle('is-hover', !!t?.closest?.(HOVER));
+      ring.classList.toggle('is-text', !!t?.closest?.('input:not([type="color"]):not([type="checkbox"]),textarea'));
+      if (!raf) raf = requestAnimationFrame(loop);
+    }, { passive: true });
+    addEventListener('pointerdown', () => ring.classList.add('is-down'));
+    addEventListener('pointerup', () => ring.classList.remove('is-down'));
+    document.addEventListener('mouseleave', () => { ring.style.opacity = dot.style.opacity = '0'; shown = false; });
+  }
+</script>

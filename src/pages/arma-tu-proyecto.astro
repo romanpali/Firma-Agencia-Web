@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import Cursor from '../components/Cursor.astro';
 
 const types: [string, string, string][] = [
   ['pequena', 'Pequeña empresa', 'Presencia profesional para atraer clientes.'],
@@ -10,8 +11,8 @@ const types: [string, string, string][] = [
   ['ecommerce', 'Comercio electrónico', 'Tienda, pagos y envíos.'],
 ];
 const designs: [string, string, string][] = [
-  ['a', 'Horizonte', 'Fotografía a pantalla completa y una tarjeta de cristal.'],
-  ['b', 'Burbujas', 'Fondo oscuro, titular grande y burbujas flotantes.'],
+  ['a', 'Aurora', 'Fondo animado con tus colores, tarjeta de cristal y titular grande.'],
+  ['b', 'Orbes', 'Fondo oscuro, titular enorme y esferas de cristal con íconos.'],
 ];
 const palettes: [string, string, string, string][] = [
   ['atardecer', 'Atardecer', '#F6B370', '#2F3A9E'], ['oceano', 'Océano', '#0033FF', '#977DFF'],
@@ -77,44 +78,41 @@ const idleImgs = ['/process/reel-1.webp', '/horizon/2.webp', '/process/reel-2.we
 
         <!-- Sitio generado -->
         <div data-site data-theme="claro" data-anim="suave" class="site cfg gen-hidden @container absolute inset-0 overflow-y-auto overflow-x-hidden [scrollbar-width:thin]" style="--a:#F6B370;--b:#2F3A9E;--ink:#14173f;--bg:#fdf6ee;--on:#14173f;--rad:6px;--hw:300;--sfont:'Inter Tight Variable',system-ui,sans-serif;--mx:0;--my:0;--spd:1;--par:1">
-          <svg width="0" height="0" class="absolute" aria-hidden="true"><defs><radialGradient id="petal" cx="50%" cy="85%" r="85%"><stop offset="0" style="stop-color:#fff"/><stop offset=".5" style="stop-color:color-mix(in srgb,var(--a) 55%,#fff)"/><stop offset="1" style="stop-color:var(--b)"/></radialGradient></defs></svg>
-          <!-- Diseño A: Horizonte -->
-          <section data-d="a" class="relative h-full min-h-[460px] overflow-hidden bg-black text-white">
-            <div class="absolute -inset-[6%]" data-cover-photo style="translate:calc(var(--mx)*-16px*var(--par)) calc(var(--my)*-10px*var(--par))"><div class="kb size-full" data-scene="a"></div></div>
-            <div data-cover-grad class="absolute inset-0" hidden style="background:radial-gradient(60% 70% at 80% 20%,color-mix(in srgb,var(--b) 80%,#fff),transparent 70%),linear-gradient(135deg,var(--a),var(--b) 80%)"></div>
-            <i class="absolute inset-0 opacity-[.5] mix-blend-soft-light" style="background:linear-gradient(120deg,var(--a),var(--b))"></i>
-            <i data-tint class="absolute inset-0 opacity-[.55] mix-blend-color" style="background:linear-gradient(160deg,var(--b),var(--a))"></i>
-            <i class="absolute inset-0" style="background:linear-gradient(to top,rgba(0,0,0,.62),rgba(0,0,0,.04) 55%,rgba(0,0,0,.3))"></i>
-            <i class="grain pointer-events-none absolute inset-0 opacity-[.1]"></i>
+          <!-- Plantilla A: Aurora -->
+          <section data-d="a" class="relative h-full min-h-[520px] overflow-hidden bg-[#05060b] text-white">
+            <canvas data-aurora class="absolute inset-0 size-full"></canvas>
+            <i class="absolute inset-0" style="background:linear-gradient(to bottom,rgba(0,0,0,.42),transparent 26%,transparent 52%,rgba(0,0,0,.65))"></i>
+            <i class="grain pointer-events-none absolute inset-0 opacity-[.12]"></i>
 
             <nav class="rise absolute inset-x-0 top-0 flex items-center justify-between pl-[72px] pr-[clamp(16px,2.6cqw,40px)] pt-[22px] @4xl:pl-[clamp(80px,9cqw,120px)]" style="--d:.1s">
-              <span class="flex items-center gap-3"><i data-markbox class="mark grid size-8 place-items-center bg-white/90 text-[14px] font-semibold not-italic text-[#14161a]">T</i><span data-name class="text-[clamp(16px,1.9cqw,25px)] uppercase tracking-[0.06em]" style="font-weight:calc(var(--hw) - 120)">Tu empresa</span></span>
-              <div class="hidden items-center gap-0.5 rounded-full border border-white/30 bg-white/12 px-1.5 py-1.5 backdrop-blur-md @3xl:flex" data-nav></div>
-              <div class="flex items-center gap-2"><span class="hidden items-center gap-2 rounded-full border border-white/40 bg-white/10 py-1.5 pl-1.5 pr-4 text-[12.5px] backdrop-blur-md @xl:flex"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10.5"/><circle cx="12" cy="10" r="3.2"/><path d="M5.5 19c1.4-3 3.8-4.2 6.5-4.2s5.1 1.2 6.5 4.2"/></svg>Cuenta</span><span data-navcta class="rounded-full bg-white px-4 py-2.5 text-[12.5px] font-medium text-[#14161a]">Contacto</span></div>
+              <span class="flex items-center gap-3"><i data-markbox class="mark grid size-8 place-items-center bg-white/90 text-[14px] font-semibold not-italic text-[#14161a]">T</i><span data-name class="text-[clamp(16px,1.9cqw,25px)] uppercase tracking-[0.12em]" style="font-weight:calc(var(--hw) - 80)">Tu empresa</span></span>
+              <div class="hidden items-center gap-0.5 rounded-full border border-white/25 bg-white/10 px-1.5 py-1.5 backdrop-blur-xl @3xl:flex" data-nav></div>
+              <span data-navcta class="rounded-full bg-white px-5 py-2.5 text-[12.5px] font-medium text-[#14161a]">Contacto</span>
             </nav>
 
-            <div class="rise absolute left-[41%] top-[17%] hidden @3xl:block" style="--d:.55s;translate:calc(var(--mx)*20px*var(--par)) calc(var(--my)*14px*var(--par))">
-              <div class="glass-card relative h-[clamp(190px,31cqw,440px)] w-[clamp(110px,17.5cqw,250px)] overflow-hidden border border-white/60 bg-white/[.12] shadow-[0_50px_90px_-30px_rgba(0,0,0,.6),inset_0_0_30px_rgba(255,255,255,.18)] backdrop-blur-[2px]" style="border-radius:calc(var(--rad) + 14px)">
-                <i data-card-photo class="absolute inset-0 opacity-[.7]" style="scale:1.5;translate:-6% -2%;filter:saturate(1.15)"><span data-scene="b" class="block size-full"></span></i>
-                <i class="absolute inset-0" style="background:linear-gradient(115deg,rgba(255,255,255,.35),transparent 30%,transparent 70%,rgba(255,255,255,.18))"></i>
-                <svg class="absolute left-[19%] top-[9%] w-[36%] text-white/90" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="5" width="38" height="38" rx="10"/><path d="M5 18h38M5 30h38M19 5v38M29 5v38"/></svg>
-                <span data-name2 class="absolute left-[9%] top-[7%] origin-top-left rotate-90 whitespace-nowrap text-[clamp(9px,1.15cqw,14px)] uppercase tracking-[0.3em] text-white/85">Tu empresa</span>
-                <svg class="absolute bottom-[27%] right-[13%] w-[15%] text-white/90" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></svg>
-                <span data-name2 class="absolute bottom-[8%] right-[11%] origin-bottom-right -rotate-90 whitespace-nowrap text-[clamp(10px,1.5cqw,18px)] uppercase tracking-[0.26em] text-white/95">| Tu empresa</span>
-                <i class="absolute bottom-[7%] left-[16%] size-[11%] rounded-full border border-white/55 bg-white/25"></i>
+            <div class="rise absolute right-[5%] top-[17%] hidden @3xl:block" style="--d:.5s;translate:calc(var(--mx)*22px*var(--par)) calc(var(--my)*16px*var(--par))">
+              <div class="a-card relative aspect-[1.6] w-[clamp(250px,34cqw,500px)] overflow-hidden p-[clamp(16px,2.2cqw,32px)]" style="border-radius:calc(var(--rad) + 24px)">
+                <i class="absolute inset-0" style="background:linear-gradient(135deg,rgba(255,255,255,.3),rgba(255,255,255,.04) 55%,rgba(255,255,255,.16))"></i>
                 <i class="glint absolute inset-y-0 w-[40%] -skew-x-12 bg-white/25"></i>
+                <div class="relative flex h-full flex-col justify-between">
+                  <div class="flex items-start justify-between"><i data-av class="grid size-[clamp(30px,4cqw,52px)] place-items-center rounded-full border border-white/50 bg-white/20 text-[clamp(13px,1.7cqw,22px)] not-italic">T</i><span class="flex gap-1.5"><i class="size-2 rounded-full bg-white/80"></i><i class="size-2 rounded-full bg-white/50"></i><i class="size-2 rounded-full bg-white/30"></i></span></div>
+                  <div><span class="mb-3 block h-[clamp(14px,1.8cqw,24px)] w-[clamp(22px,2.8cqw,38px)] rounded-[5px] border border-white/60 bg-white/20"></span><p data-name2 class="text-[clamp(14px,2cqw,28px)] uppercase tracking-[0.2em]">Tu empresa</p><p data-city3 class="mt-1 text-[clamp(10px,1.1cqw,14px)] tracking-[0.1em] text-white/70">Mérida, Yucatán</p></div>
+                </div>
               </div>
             </div>
+            <div class="chip-f rise absolute left-[52%] top-[40%] hidden items-center gap-2 px-4 py-2.5 text-[12.5px] @3xl:flex" style="--d:.85s;translate:calc(var(--mx)*-34px*var(--par)) calc(var(--my)*-22px*var(--par))"><span class="text-[#ffd479]">★★★★★</span>4.9 · Reseñas</div>
+            <div class="chip-f rise absolute right-[6%] top-[62%] hidden items-center gap-2 px-4 py-2.5 text-[12.5px] @3xl:flex" style="--d:1s;translate:calc(var(--mx)*30px*var(--par)) calc(var(--my)*20px*var(--par))"><i class="live size-2 rounded-full bg-[#3ddc97]"></i>Abierto hoy</div>
+            <div class="chip-f rise absolute right-[38%] top-[70%] hidden items-center gap-2 px-4 py-2.5 text-[12.5px] @3xl:flex" style="--d:1.15s;translate:calc(var(--mx)*-18px*var(--par)) calc(var(--my)*26px*var(--par))"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6 7-11a7 7 0 0 0-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><span data-city3>Mérida, Yucatán</span></div>
 
             <div class="absolute inset-x-0 bottom-0 px-[clamp(20px,2.6cqw,40px)] pb-[clamp(26px,3.2cqw,44px)]">
-              <p class="rise flex items-center gap-2.5 text-[clamp(11px,1.2cqw,14px)] text-white/90" style="--d:.25s"><i class="block size-3 bg-white"></i><span data-eyebrow>Presencia profesional</span></p>
-              <h1 data-h class="rise mt-4 max-w-[15ch] text-[clamp(2.1rem,6.5cqw,6.2rem)] leading-[1.02] tracking-[-0.035em]" style="--d:.35s;font-weight:calc(var(--hw) + 60)">Lo que haces bien, a la vista de todos.</h1>
-              <div class="rise mt-7 flex flex-wrap items-center gap-3" style="--d:.55s"><span data-cta class="btn !bg-white px-7 py-3.5 text-[14.5px] font-medium !text-[#14161a]">Contáctanos</span><span class="btn-o flex items-center gap-2 border border-white/55 px-6 py-3.5 text-[14.5px]"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M7 5v14l12-7z"/></svg><span data-cta3>Ver servicios</span></span></div>
-              <p data-sub class="rise absolute bottom-[clamp(26px,3.2cqw,44px)] right-[clamp(20px,2.6cqw,40px)] hidden max-w-[22rem] text-[clamp(12px,1.25cqw,15.5px)] leading-snug text-white/90 @3xl:block" style="--d:.7s">Presencia profesional para atraer clientes.</p>
+              <p class="rise flex items-center gap-2.5 text-[clamp(11px,1.2cqw,14px)] text-white/85" style="--d:.25s"><i class="block size-2.5 rounded-full bg-white"></i><span data-eyebrow>Presencia profesional</span></p>
+              <h1 data-ha class="mt-4 max-w-[13ch] text-[clamp(2.2rem,7.4cqw,6.8rem)] leading-[1] tracking-[-0.045em]" style="font-weight:calc(var(--hw) + 60)">Lo que haces bien, a la vista de todos.</h1>
+              <div class="rise mt-7 flex flex-wrap items-center gap-3" style="--d:.9s"><span data-cta class="btn !bg-white px-7 py-3.5 text-[14.5px] font-medium !text-[#14161a]">Contáctanos</span><span class="btn-o flex items-center gap-2 border border-white/50 px-6 py-3.5 text-[14.5px]"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M7 5v14l12-7z"/></svg><span data-cta3>Ver servicios</span></span></div>
+              <p data-sub class="rise absolute bottom-[clamp(26px,3.2cqw,44px)] right-[clamp(20px,2.6cqw,40px)] hidden max-w-[22rem] text-[clamp(12px,1.25cqw,15.5px)] leading-snug text-white/80 @3xl:block" style="--d:1.1s">Presencia profesional para atraer clientes.</p>
             </div>
           </section>
 
-          <!-- Diseño B: Burbujas -->
+          <!-- Plantilla B: Orbes -->
           <section data-d="b" hidden class="b-hero relative h-full min-h-[540px] overflow-hidden text-white">
             <i class="absolute inset-0" style="background:radial-gradient(78% 74% at 50% 24%,#000 52%,color-mix(in srgb,var(--b) 28%,#000) 66%,color-mix(in srgb,var(--b) 80%,#000) 80%,var(--b) 90%,color-mix(in srgb,var(--a) 55%,#fff) 100%)"></i>
             <i class="grain pointer-events-none absolute inset-0 opacity-[.08]"></i>
@@ -125,12 +123,14 @@ const idleImgs = ['/process/reel-1.webp', '/horizon/2.webp', '/process/reel-2.we
               <span data-navcta class="flex items-center gap-2 rounded-full border border-white/55 bg-black/40 px-5 py-2.5 backdrop-blur-md"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg><span data-navcta-t>Contacto</span></span>
             </nav>
             <div class="absolute inset-x-0 top-[clamp(80px,22%,190px)] flex flex-col items-center px-6 text-center">
-              <p class="rise flex items-center gap-3 text-[clamp(12px,1.25cqw,15px)] text-white/85" style="--d:.2s"><span class="flex -space-x-2"><i class="size-7 overflow-hidden rounded-full border-2 border-black"><img src="/process/reel-3.webp" alt="" class="size-full object-cover object-top" /></i><i class="size-7 overflow-hidden rounded-full border-2 border-black"><img src="/process/reel-1.webp" alt="" class="size-full max-w-none object-cover" style="object-position:20% 0" /></i><i data-av class="grid size-7 place-items-center rounded-full border-2 border-black text-[11px] not-italic" style="background:var(--a);color:var(--on)">T</i></span><span data-eyebrow2>Atendemos hoy en Mérida, Yucatán</span></p>
+              <p class="rise flex items-center gap-3 text-[clamp(12px,1.25cqw,15px)] text-white/85" style="--d:.2s"><span class="flex -space-x-2"><i class="grid size-7 place-items-center rounded-full border-2 border-black text-[11px] not-italic" style="background:var(--a);color:var(--on)" data-av>T</i><i class="size-7 rounded-full border-2 border-black" style="background:linear-gradient(135deg,var(--a),var(--b))"></i><i class="size-7 rounded-full border-2 border-black bg-white/80"></i></span><span data-eyebrow2>Atendemos hoy en Mérida, Yucatán</span></p>
               <h1 data-hb class="mt-5 max-w-[15ch] text-[clamp(2.4rem,9.4cqw,8rem)] leading-[1] tracking-[-0.055em]" style="font-weight:min(calc(var(--hw) + 300),800);text-shadow:0 4px 40px rgba(255,255,255,.12)"></h1>
               <p data-sub2 class="rise mt-6 max-w-[30rem] text-[clamp(12.5px,1.4cqw,15.5px)] text-white/65" style="--d:1s">Presencia profesional para atraer clientes.</p>
               <span data-cta2 class="rise btn mt-6 inline-block px-8 py-3.5 text-[14px] font-medium" style="--d:1.15s">Contáctanos</span>
             </div>
           </section>
+
+          <div data-sec="servicios" class="sec marq overflow-hidden border-y py-5" style="border-color:color-mix(in srgb,currentColor 14%,transparent)"><div data-marquee class="marquee flex w-max items-center gap-10 whitespace-nowrap"></div></div>
 
           <!-- Secciones comunes -->
           <section data-sec="servicios" class="sec px-[clamp(20px,5cqw,72px)] py-[clamp(52px,8cqw,110px)]">
@@ -185,7 +185,7 @@ const idleImgs = ['/process/reel-1.webp', '/horizon/2.webp', '/process/reel-2.we
           <div class="mt-4 space-y-3">{types.map(([id, l, d], i) => <button type="button" data-type={id} aria-pressed={i === 0} class={row}><span class="cfg-t block text-[14.5px] text-black/65">{l}</span><span class="mt-1 block text-[11.5px] leading-snug text-black/40">{d}</span></button>)}</div>
 
           <h2 class={h}>Diseño</h2>
-          <div class="mt-4 grid grid-cols-2 gap-3">{designs.map(([id, l, d], i) => <button type="button" data-design={id} aria-pressed={i === 0} class={`${row} !p-3`}><span class="relative block h-[84px] overflow-hidden rounded-[12px]" style={id === 'a' ? 'background:linear-gradient(to top,#2a1a3a,#e0894a 60%,#f6b370)' : 'background:radial-gradient(120% 100% at 50% 130%,#977dff,#0a0612 60%)'}>{id === 'a' ? <i class="absolute left-1/2 top-[14%] h-[52%] w-[22%] -translate-x-1/2 rounded-[5px] border border-white/60 bg-white/20"></i> : <><i class="absolute bottom-[8%] left-[14%] size-5 rounded-full border border-white/50 bg-white/20"></i><i class="absolute bottom-[14%] right-[18%] size-7 rounded-full border border-white/50 bg-white/20"></i><i class="absolute left-[22%] right-[22%] top-[22%] h-2 rounded bg-white/70"></i></>}</span><span class="cfg-t mt-2.5 block text-[14px] text-black/65">{l}</span><span class="mt-0.5 block text-[11px] leading-snug text-black/40">{d}</span></button>)}</div>
+          <div class="mt-4 grid grid-cols-2 gap-3">{designs.map(([id, l, d], i) => <button type="button" data-design={id} aria-pressed={i === 0} class={`${row} !p-3`}><span class="relative block h-[84px] overflow-hidden rounded-[12px]" style={id === 'a' ? 'background:radial-gradient(70% 90% at 25% 20%,#977dff,transparent 70%),radial-gradient(60% 80% at 85% 90%,#0033ff,transparent 70%),#05060b' : 'background:radial-gradient(120% 100% at 50% 130%,#977dff,#0a0612 60%)'}>{id === 'a' ? <i class="absolute left-[38%] top-[18%] h-[50%] w-[40%] rounded-[8px] border border-white/50 bg-white/15"></i> : <><i class="absolute bottom-[8%] left-[14%] size-5 rounded-full border border-white/50 bg-white/20"></i><i class="absolute bottom-[14%] right-[18%] size-7 rounded-full border border-white/50 bg-white/20"></i><i class="absolute left-[22%] right-[22%] top-[22%] h-2 rounded bg-white/70"></i></>}</span><span class="cfg-t mt-2.5 block text-[14px] text-black/65">{l}</span><span class="mt-0.5 block text-[11px] leading-snug text-black/40">{d}</span></button>)}</div>
 
           <h2 class={h}>Colores</h2>
           <div class="mt-4 flex flex-wrap gap-5">{palettes.map(([id, l, a, b], i) => <button type="button" data-pal={id} aria-pressed={i === 0} class="group text-left"><span class="relative block size-11 rounded-full ring-1 ring-black/10 transition-shadow group-aria-pressed:ring-2 group-aria-pressed:ring-[#0033FF] group-aria-pressed:ring-offset-2" style={`background:linear-gradient(135deg,${a} 50%,${b} 50%)`}></span><span class="mt-2 block text-[11.5px] text-black/55 group-aria-pressed:text-black">{l}</span></button>)}</div>
@@ -202,10 +202,6 @@ const idleImgs = ['/process/reel-1.webp', '/horizon/2.webp', '/process/reel-2.we
           <h2 class={h}>Fondo</h2>
           <p class="mt-3 text-[12.5px] text-black/55">Tema de las secciones</p>
           <div class="mt-2 flex flex-wrap gap-2">{themes.map(([id, l], i) => <button type="button" data-theme={id} aria-pressed={i === 0} class={chip}>{l}</button>)}</div>
-          <div data-coverbox>
-            <p class="mt-5 text-[12.5px] text-black/55">Portada (diseño Horizonte)</p>
-            <div class="mt-2 flex flex-wrap gap-2">{covers.map(([id, l], i) => <button type="button" data-cover={id} aria-pressed={i === 0} class={chip}>{l}</button>)}</div>
-          </div>
 
           <h2 class={h}>Textos</h2>
           <label class="mt-4 block text-[12.5px] text-black/60">Titular <span class="text-black/35">(opcional)</span><input data-in-h maxlength="60" placeholder="Lo escribimos por ti" class={inp} /></label>
@@ -226,6 +222,7 @@ const idleImgs = ['/process/reel-1.webp', '/horizon/2.webp', '/process/reel-2.we
       </aside>
     </div>
 
+    <Cursor />
     <script define:vars={{ types, designs, palettes, fonts, styles, marks, themes, covers, anims }}>
       const $ = (s) => document.querySelector(s);
       const $$ = (s) => [...document.querySelectorAll(s)];
@@ -267,10 +264,9 @@ const idleImgs = ['/process/reel-1.webp', '/horizon/2.webp', '/process/reel-2.we
 
       const renderPanel = () => {
         const mp = (attr, key) => $$(`[data-${attr}]`).forEach((x) => x.setAttribute('aria-pressed', String(x.dataset[key] === S[attr])));
-        mp('type', 'type'); mp('design', 'design'); mp('pal', 'pal'); mp('font', 'font'); mp('sty', 'sty'); mp('mark', 'mark'); mp('theme', 'theme'); mp('cover', 'cover');
+        mp('type', 'type'); mp('design', 'design'); mp('pal', 'pal'); mp('font', 'font'); mp('sty', 'sty'); mp('mark', 'mark'); mp('theme', 'theme');
         $$('[data-anim-t]').forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.animT === S.anim)));
         $$('[data-sec-t]').forEach((x) => x.setAttribute('aria-pressed', String(S.secs.has(x.dataset.secT))));
-        $('[data-coverbox]').hidden = S.design !== 'a';
         const nm = S.name.trim() || 'Tu empresa';
         const [a, b] = [S.ca || PAL[S.pal][0], S.cb || PAL[S.pal][1]];
         const text = `Hola, personalicé mi sitio en el configurador de HumanCorp:\n- Empresa: ${nm} (${S.city})\n- Tipo de negocio: ${label(types, S.type)}\n- Diseño: ${label(designs, S.design)}\n- Colores: ${S.ca || S.cb ? 'personalizados ' + a + ' / ' + b : label(palettes, S.pal)}\n- Tipografía: ${label(fonts, S.font)} · Estilo: ${label(styles, S.sty)}\n- Tema: ${label(themes, S.theme)} · Animaciones: ${label(anims, S.anim)}\n- Secciones: ${[...S.secs].join(', ') || 'ninguna'}\n${S.h ? '- Titular: ' + S.h + '\n' : ''}Me gustaría recibir una propuesta.`;
@@ -283,31 +279,66 @@ const idleImgs = ['/process/reel-1.webp', '/horizon/2.webp', '/process/reel-2.we
       };
 
       /* ---------- Burbujas ---------- */
-      const scene = (k) => `<svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" class="size-full" aria-hidden="true"><defs>
-        <linearGradient id="sk${k}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6f7fb6"/><stop offset=".34" stop-color="#bf9eb0"/><stop offset=".6" stop-color="#f5a85b"/><stop offset="1" stop-color="#f8cb86"/></linearGradient>
-        <radialGradient id="sn${k}" cx="74%" cy="60%" r="46%"><stop offset="0" stop-color="#fff0c4" stop-opacity=".95"/><stop offset=".4" stop-color="#ffbf68" stop-opacity=".55"/><stop offset="1" stop-color="#ffb35c" stop-opacity="0"/></radialGradient>
-        <linearGradient id="m1${k}" x1="0" y1=".35" x2="1" y2=".65"><stop offset="0" stop-color="#26160d"/><stop offset=".5" stop-color="#6a3d1d"/><stop offset=".85" stop-color="#d98d38"/><stop offset="1" stop-color="#f3b45a"/></linearGradient>
-        <linearGradient id="m2${k}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c47c3c"/><stop offset="1" stop-color="#5b3720"/></linearGradient>
-        <linearGradient id="fl${k}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ebA24c"/><stop offset=".45" stop-color="#a9652b"/><stop offset="1" stop-color="#2a180c"/></linearGradient>
-        <linearGradient id="sh${k}" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffe2a8" stop-opacity="0"/><stop offset=".5" stop-color="#ffe2a8" stop-opacity=".5"/><stop offset="1" stop-color="#ffe2a8" stop-opacity="0"/></linearGradient>
-        <filter id="cl${k}" x="-20%" y="-30%" width="140%" height="160%"><feTurbulence type="fractalNoise" baseFrequency=".008" numOctaves="4" seed="7"/><feDisplacementMap in="SourceGraphic" scale="64"/><feGaussianBlur stdDeviation="6"/></filter>
-        <filter id="mf${k}" x="-5%" y="-10%" width="110%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".018 .045" numOctaves="3" seed="3"/><feDisplacementMap in="SourceGraphic" scale="34"/></filter>
-        <filter id="gr${k}"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2"/><feColorMatrix values="0 0 0 0 .25  0 0 0 0 .14  0 0 0 0 .05  0 0 0 .5 0"/></filter></defs>
-        <rect width="1600" height="900" fill="url(#sk${k})"/>
-        <g filter="url(#cl${k})"><ellipse cx="260" cy="190" rx="340" ry="110" fill="#ffd5aa" opacity=".95"/><ellipse cx="540" cy="120" rx="300" ry="90" fill="#f4b890" opacity=".9"/><ellipse cx="900" cy="150" rx="420" ry="120" fill="#ffe0b8" opacity=".95"/><ellipse cx="1260" cy="230" rx="360" ry="120" fill="#ffc690" opacity=".95"/><ellipse cx="1500" cy="130" rx="260" ry="100" fill="#f1ad86" opacity=".85"/><ellipse cx="700" cy="330" rx="260" ry="70" fill="#ffc78f" opacity=".7"/><ellipse cx="120" cy="380" rx="240" ry="70" fill="#f3a977" opacity=".7"/></g>
-        <rect width="1600" height="900" fill="url(#sn${k})"/>
-        <g filter="url(#mf${k})"><path d="M760 600 L900 520 L1010 540 L1120 480 L1250 520 L1370 500 L1480 540 L1600 500 V680 H760Z" fill="#b9783f" opacity=".8"/><path d="M0 500 L110 420 L250 330 L360 370 L470 330 L600 440 L720 520 L860 640 L0 700Z" fill="url(#m1${k})"/><path d="M820 700 L960 600 L1090 570 L1240 630 L1400 650 L1600 600 V760 H820Z" fill="url(#m2${k})"/></g>
-        <path d="M0 690 C300 640 700 690 1000 650 S1450 640 1600 670 V900 H0Z" fill="url(#fl${k})"/>
-        <polygon points="880,640 1200,640 1500,900 700,900" fill="url(#sh${k})"/><polygon points="1180,650 1420,650 1600,900 1250,900" fill="url(#sh${k})" opacity=".7"/>
-        <rect width="1600" height="900" filter="url(#gr${k})" opacity=".6"/></svg>`;
-      const flower = () => '<svg viewBox="0 0 100 100" class="size-[84%]" aria-hidden="true"><g transform="translate(50 50)">' + [0, 1, 2, 3, 4, 5].map((i) => `<ellipse cx="0" cy="-21" rx="17" ry="27" transform="rotate(${i * 60})" fill="url(#petal)" stroke="rgba(255,255,255,.55)" stroke-width=".6"/>`).join('') + '<circle r="11" style="fill:var(--ink)"/>' + [0, 1, 2, 3, 4, 5, 6, 7].map((i) => `<circle cx="0" cy="-14" r="1.6" transform="rotate(${i * 45})" fill="#fff" opacity=".7"/>`).join('') + '</g></svg>';
-      const swirl = () => '<i class="block size-full" style="background:radial-gradient(circle at 30% 30%,var(--a) 0 18%,transparent 19%),radial-gradient(circle at 72% 40%,var(--b) 0 20%,transparent 21%),radial-gradient(circle at 45% 76%,#fff 0 16%,transparent 17%),conic-gradient(from 20deg,var(--a),var(--b),#fff,var(--a),var(--b),var(--a))"></i>';
-      const initial = (n) => `<span class="text-[2.6cqw] font-semibold" style="color:var(--on)">${esc(n[0].toUpperCase())}</span>`;
-      const photo = (k) => `<i class="absolute inset-0" style="background:linear-gradient(160deg,color-mix(in srgb,var(--a) 70%,#fff),var(--b))"></i><img src="/process/reel-3.webp" alt="" class="absolute max-w-none mix-blend-multiply" style="${k === 'p1' ? 'width:235%;left:-68%;top:-20%' : 'width:300%;left:-100%;top:-34%'};filter:contrast(1.05) saturate(.9)" />`;
-      // x, y (% del lienzo), tamaño (cqw), profundidad, tipo. Forman un arco inferior como en la referencia.
-      const BUB = [[1, 46, 9, 0.9, 'f'], [8, 64, 11, 0.8, 'w'], [3, 80, 12, 1, 'p1'], [17, 78, 13, 1.1, 'f'], [26, 62, 4, 0.4, 'f'], [30, 88, 8, 0.6, 'f'], [38, 82, 17, 1.3, 'p2'], [47, 74, 5, 0.5, 'f'], [53, 90, 6, 0.5, 'f'], [55, 64, 11, 0.8, 'w'], [61, 76, 14, 1.2, 'f'], [75, 80, 8, 0.7, 'f'], [80, 62, 10, 0.9, 'f'], [84, 86, 12, 1.2, 'f'], [92, 66, 12, 1.1, 'f'], [96, 40, 6, 0.5, 'f'], [90, 90, 8, 0.8, 'i']];
-      const drawBubbles = (nm) => {
-        $('[data-bubbles]').innerHTML = BUB.map(([x, y, s, d, k], i) => `<div class="bub" style="--x:${x}%;--y:${y}%;--s:${s};--d:${d};--k:${i}"><i style="--t:${5 + (i % 5)}s;--dl:-${(i * 0.7).toFixed(1)}s">${k === 'f' ? flower() : k === 'w' ? swirl() : k === 'i' ? initial(nm) : photo(k)}</i></div>`).join('');
+      const IC = { store: 'M4 9l1.5-5h13L20 9M4 9v11h16V9M4 9h16M9 20v-6h6v6', heart: 'M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.6-7 10-7 10z', star: 'M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z', pin: 'M12 21s7-6 7-11a7 7 0 0 0-14 0c0 5 7 11 7 11zM12 12a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z', chart: 'M4 20V9M10 20V4M16 20v-8M22 20H2', arrow: 'M5 19L19 5M9 5h10v10', layers: 'M12 3l9 5-9 5-9-5 9-5zM3 13l9 5 9-5M3 17l9 5 9-5', building: 'M4 21V5l8-2v18M12 8l8 2v11M8 9h1M8 13h1M8 17h1M16 14h1M16 18h1', shield: 'M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3zM9 12l2 2 4-4', globe: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18', db: 'M12 8c4.4 0 8-1.3 8-3s-3.6-3-8-3-8 1.3-8 3 3.6 3 8 3zM4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3', bag: 'M6 8h12l1 12H5L6 8zM9 8V6a3 3 0 0 1 6 0v2', tag: 'M3 12V4h8l10 10-8 8L3 12zM7.5 8.5h.01', truck: 'M2 6h11v10H2zM13 9h5l3 3v4h-8M6 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM17 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4z', briefcase: 'M3 8h18v12H3zM9 8V5h6v3M3 13h18', doc: 'M6 3h9l4 4v14H6zM14 3v5h5M9 13h6M9 17h6', chat: 'M4 5h16v11H9l-5 4V5z', check: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM8 12l3 3 5-6', cart: 'M3 4h2l2.5 11h10l2-8H7M10 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2zM17 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2z', card: 'M3 6h18v12H3zM3 10h18M7 15h4', box: 'M3 7l9-4 9 4v10l-9 4-9-4V7zM3 7l9 4 9-4M12 11v10' };
+      const SETS = { pequena: ['store', 'heart', 'star', 'pin'], crecimiento: ['chart', 'layers', 'arrow', 'check'], consolidada: ['building', 'shield', 'globe', 'db'], comercio: ['bag', 'tag', 'truck', 'store'], profesional: ['briefcase', 'doc', 'chat', 'check'], ecommerce: ['cart', 'card', 'box', 'truck'] };
+      const icon = (n, cls = '') => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="${cls}" aria-hidden="true"><path d="${IC[n]}"/></svg>`;
+      // x, y (% del lienzo), tamaño (cqw), profundidad, tipo (s = sólida con ícono, g = cristal, r = anillo)
+      const BUB = [[1, 46, 9, 0.9, 's', 0], [8, 64, 11, 0.8, 'g', 1], [3, 80, 12, 1, 's', 1], [17, 78, 13, 1.1, 'g', 2], [26, 60, 4.5, 0.4, 's', 3], [30, 88, 8, 0.6, 'r', 0], [38, 80, 17, 1.3, 's', 2], [48, 74, 5, 0.5, 'g', 0], [53, 90, 6, 0.5, 'r', 0], [57, 62, 11, 0.8, 's', 3], [62, 76, 14, 1.2, 'g', 1], [76, 80, 8, 0.7, 's', 0], [80, 62, 10, 0.9, 'r', 0], [84, 86, 12, 1.2, 's', 1], [92, 66, 12, 1.1, 'g', 3], [96, 40, 6, 0.5, 's', 2], [10, 90, 7, 0.7, 'g', 0]];
+      const drawBubbles = (nm, type) => {
+        const set = SETS[type];
+        $('[data-bubbles]').innerHTML = BUB.map(([x, y, s, d, k, ic], i) => `<div class="bub" style="--x:${x}%;--y:${y}%;--s:${s};--d:${d};--k:${i}"><i class="orb orb-${k}" style="--t:${5 + (i % 5)}s;--dl:-${(i * 0.7).toFixed(1)}s">${k === 'r' ? '' : icon(set[ic % 4], 'orb-ic')}</i></div>`).join('');
+      };
+      // ---------- Aurora (WebGL): fondo animado con los colores del usuario ----------
+      const hex3 = (h) => { const n = parseInt(h.slice(1), 16); return [(n >> 16) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255]; };
+      const AU = { gl: null, u: {}, cols: [[0.6, 0.4, 0.9], [0.1, 0.2, 1]], on: false, mx: 0.5, my: 0.5 };
+      const auroraInit = () => {
+        const cv = $('[data-aurora]');
+        try {
+          const gl = cv.getContext('webgl', { antialias: false, alpha: false });
+          if (!gl) return;
+          const vs = 'attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
+          const fs = `precision mediump float;uniform vec2 res;uniform float t;uniform vec3 ca;uniform vec3 cb;uniform vec2 m;
+float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}
+float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<5;i++){v+=a*n(p);p=p*2.02+vec2(3.1,1.7);a*=.5;}return v;}
+void main(){vec2 uv=gl_FragCoord.xy/res;vec2 p=(gl_FragCoord.xy-.5*res)/res.y;float tt=t*.05;
+vec2 q=vec2(fbm(p*1.3+tt),fbm(p*1.3+vec2(5.2,1.3)-tt));
+vec2 r=vec2(fbm(p*1.5+3.*q+vec2(1.7,9.2)+tt*1.2),fbm(p*1.5+3.*q+vec2(8.3,2.8)-tt));
+float f=fbm(p*1.2+3.*r);
+vec3 col=vec3(.012,.014,.03);
+col=mix(col,cb*.95,smoothstep(.25,.85,f));
+col=mix(col,ca,smoothstep(.35,1.,length(q))*.75);
+col+=vec3(1.,.93,.85)*.10*smoothstep(.62,1.,r.x);
+col*=mix(.5,1.,smoothstep(1.25,.15,length(uv-vec2(.5,.45))*1.25));
+col+=ca*.2*exp(-7.*length(uv-m));
+gl_FragColor=vec4(col,1.);}`;
+          const sh = (t, src) => { const o = gl.createShader(t); gl.shaderSource(o, src); gl.compileShader(o); return o; };
+          const pr = gl.createProgram(); gl.attachShader(pr, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(pr, sh(gl.FRAGMENT_SHADER, fs)); gl.linkProgram(pr);
+          if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) return;
+          gl.useProgram(pr);
+          const b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+          const loc = gl.getAttribLocation(pr, 'p'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+          AU.gl = gl; AU.u = { res: gl.getUniformLocation(pr, 'res'), t: gl.getUniformLocation(pr, 't'), ca: gl.getUniformLocation(pr, 'ca'), cb: gl.getUniformLocation(pr, 'cb'), m: gl.getUniformLocation(pr, 'm') };
+        } catch { AU.gl = null; }
+      };
+      auroraInit();
+      const auroraFrame = (now) => {
+        requestAnimationFrame(auroraFrame);
+        if (!AU.on || !AU.gl || document.hidden) return;
+        const cv = $('[data-aurora]');
+        if (site.scrollTop > site.clientHeight) return;
+        const w = Math.max(2, Math.round(cv.clientWidth * 0.5)), h = Math.max(2, Math.round(cv.clientHeight * 0.5));
+        if (cv.width !== w || cv.height !== h) { cv.width = w; cv.height = h; AU.gl.viewport(0, 0, w, h); }
+        const gl = AU.gl;
+        gl.uniform2f(AU.u.res, w, h); gl.uniform1f(AU.u.t, reduced || G?.anim === 'sin' ? 12 : now / 1000);
+        gl.uniform3fv(AU.u.ca, AU.cols[0]); gl.uniform3fv(AU.u.cb, AU.cols[1]);
+        const mx = parseFloat(site.style.getPropertyValue('--mx')) || 0, my = parseFloat(site.style.getPropertyValue('--my')) || 0;
+        gl.uniform2f(AU.u.m, 0.5 + mx, 0.5 - my);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      };
+      requestAnimationFrame(auroraFrame);
+      const drawHeadlineA = (text) => {
+        $('[data-ha]').innerHTML = text.split(/\s+/).map((w, i) => `<span class="ww"><span class="wi" style="--i:${i}">${esc(w)}</span></span>`).join(' ');
       };
       const drawHeadline = (text) => {
         const words = text.split(/\s+/); const n = words.length; const lo = Math.floor(n * 0.3), hi = Math.ceil(n * 0.6);
@@ -336,17 +367,18 @@ const idleImgs = ['/process/reel-1.webp', '/horizon/2.webp', '/process/reel-2.we
         set('[data-city],[data-city2]', city); set('[data-mail]', `hola@${slug}.mx`);
         $('[data-nav]').innerHTML = c.nav.map((n, i) => `<span class="rounded-full px-[clamp(10px,1.4cqw,20px)] py-2 text-[clamp(11px,1.15cqw,14px)] ${i === 0 ? 'bg-white/20 text-white' : 'text-white/90'}">${n}</span>`).join('');
         $('[data-nav2]').innerHTML = c.nav.slice(0, 3).map((n) => `<span>${n}</span>`).join('');
-        $('[data-services]').innerHTML = c.sv.map(([t, d], i) => `<div class="sr card p-6" style="--sd:${i * 0.12}s;border-radius:calc(var(--rad) + 14px)"><i class="block size-10" style="border-radius:calc(var(--rad) + 4px);background:linear-gradient(140deg,var(--a),var(--b))"></i><h3 class="mt-6 text-[1.2rem] tracking-[-0.02em]" style="font-weight:var(--hw)">${t}</h3><p class="mt-2 text-[14.5px] leading-relaxed opacity-65">${d}</p><p class="mt-5 text-[13px] font-medium" style="color:var(--a)">Conocer más →</p></div>`).join('');
+        $('[data-services]').innerHTML = c.sv.map(([t, d], i) => `<div class="sr card svc relative overflow-hidden p-7" style="--sd:${i * 0.12}s;border-radius:calc(var(--rad) + 18px)"><span class="svc-n absolute right-6 top-5 text-[13px] opacity-35">0${i + 1}</span><i class="svc-ic grid size-12 place-items-center text-white" style="border-radius:calc(var(--rad) + 6px);background:linear-gradient(140deg,var(--a),var(--b))">${icon(SETS[G.type][i], 'size-6')}</i><h3 class="mt-8 text-[1.3rem] tracking-[-0.025em]" style="font-weight:var(--hw)">${t}</h3><p class="mt-2 text-[14.5px] leading-relaxed opacity-65">${d}</p><p class="svc-link mt-6 flex items-center gap-2 text-[13px] font-medium" style="color:var(--a)">Conocer más <span aria-hidden="true">→</span></p></div>`).join('');
         $('[data-faq]').innerHTML = c.faq.map(([q, an], i) => `<details class="sr faq border-t py-4" ${i === 0 ? 'open' : ''} style="--sd:${i * 0.1}s"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-[1.05rem] tracking-[-0.015em]">${q}<i class="faq-i grid size-7 shrink-0 place-items-center rounded-full border border-current/30 text-[15px] leading-none not-italic">+</i></summary><p class="mt-3 max-w-[40rem] text-[14.5px] leading-relaxed opacity-65">${an.replace('{city}', esc(city))}</p></details>`).join('');
         // marca
         $$('[data-markbox]').forEach((m) => { m.hidden = G.mark === 'ninguno'; m.textContent = nm[0].toUpperCase(); m.style.borderRadius = G.mark === 'circulo' ? '999px' : 'calc(var(--rad) + 2px)'; });
         set('[data-av]', nm[0].toUpperCase());
         // diseño, portada, secciones
         $('[data-d="a"]').hidden = G.design !== 'a'; $('[data-d="b"]').hidden = G.design !== 'b';
-        $('[data-card-photo]').hidden = G.cover !== 'foto'; $('[data-cover-photo]').hidden = G.cover !== 'foto'; $('[data-tint]').hidden = G.cover !== 'foto'; $('[data-tint]').style.opacity = (G.pal === 'atardecer' && !custom) ? '0' : '.55'; $('[data-cover-grad]').hidden = G.cover === 'foto';
         $$('[data-sec]').forEach((s) => (s.hidden = !G.secs.has(s.dataset.sec)));
-        if (G.design === 'b') { drawBubbles(nm); drawHeadline(head); }
-        $$('[data-scene]').forEach((el) => { if (!el.dataset.done) { el.innerHTML = scene(el.dataset.scene); el.dataset.done = '1'; } });
+        set('[data-city3]', city);
+        AU.cols = [hex3(a), hex3(b)]; AU.on = G.design === 'a';
+        if (G.design === 'a') drawHeadlineA(head); else { drawBubbles(nm, G.type); drawHeadline(head); }
+        $('[data-marquee]').innerHTML = [...c.sv.map((x) => x[0]), ...c.nav.slice(1)].concat([...c.sv.map((x) => x[0]), ...c.nav.slice(1)]).map((t) => `<span class="text-[clamp(1.1rem,2.6cqw,2.2rem)] tracking-[-0.03em]" style="font-weight:var(--hw)">${t}</span><i class="size-2 rounded-full" style="background:var(--a)"></i>`).join('');
         site.scrollTop = 0;
         $$('.sr').forEach((el) => el.classList.remove('in'));
         io.disconnect(); $$('.sr').forEach((el) => io.observe(el));
@@ -400,7 +432,6 @@ const idleImgs = ['/process/reel-1.webp', '/horizon/2.webp', '/process/reel-2.we
         else if (d.sty) S.sty = d.sty;
         else if (d.mark) { S.mark = d.mark; markTouched = true; }
         else if (d.theme) { S.theme = d.theme; themeTouched = true; }
-        else if (d.cover) S.cover = d.cover;
         else if (d.animT) S.anim = d.animT;
         else if (d.secT) { S.secs.has(d.secT) ? S.secs.delete(d.secT) : S.secs.add(d.secT); }
         else return;
