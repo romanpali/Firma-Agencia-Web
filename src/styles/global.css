@@ -333,3 +333,7 @@ body { overflow-x: clip; }
 .words.swap > span { animation: wIn 0.5s both; animation-delay: calc(var(--i, 0) * 12ms); }
 @keyframes wIn { from { opacity: 0; filter: blur(4px); translate: 0 6px; } }
 @media (prefers-reduced-motion: reduce) { .stage-orb, .words.swap > span, .area.is-on .area-bar { animation: none !important; } .area.is-on .area-bar { transform: scaleX(1); } }
+
+/* /nosotros: retratos sobrios (blanco y negro; color al pasar el cursor) */
+.portrait img { filter: grayscale(1) contrast(1.04); transition: filter 0.6s ease, transform 1.2s cubic-bezier(.2, .7, .2, 1); }
+@media (hover: hover) { .portrait:hover img { filter: none; transform: scale(1.02); } }

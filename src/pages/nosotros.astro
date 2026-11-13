@@ -32,7 +32,7 @@ const people = [
 
 // Quién lidera cada división. «03» (marketing) se trabaja en conjunto.
 const owner: Record<string, string[]> = { '01': ['paolo'], '02': ['paolo'], '03': ['paolo', 'mauricio'], '04': ['mauricio'], '05': ['paolo'], '06': ['mauricio'], '07': ['mauricio'], '08': ['paolo'] };
-const color: Record<string, string> = { paolo: '#977DFF', mauricio: '#7ad3f0' };
+const label: Record<string, string> = { paolo: 'Paolo', mauricio: 'Mauricio' };
 const short = (n: string) => divisions.find((d) => d.n === n)!;
 
 const principles = [
@@ -51,49 +51,47 @@ const principles = [
     <script is:inline>document.documentElement.classList.add('js')</script>
     <title>Nosotros — HumanCorp</title>
   </head>
-  <body class="bg-[#00033D] font-sans text-white">
-    <div class="sv-bg" aria-hidden="true"></div>
+  <body class="bg-white font-sans text-[#0b0b0c]">
     <Header />
     <main class="relative z-10 overflow-x-clip">
       <!-- Apertura -->
-      <section data-tone="dark" class="relative flex min-h-[86svh] flex-col justify-end px-6 pb-[9svh] pt-[22svh] md:px-10">
-        <div class="mx-auto w-full max-w-[1280px]">
-          <p data-reveal class="text-[14px] text-white/60">Nosotros</p>
-          <h1 data-words class="mt-5 max-w-[17ch] font-goog text-[clamp(2.6rem,7.2vw,7rem)] font-light leading-[1] tracking-[-0.05em]">Diseño y tecnología, administración y finanzas: un solo equipo.</h1>
-          <p data-reveal style="--i:1" class="mt-7 max-w-[36rem] text-[clamp(1rem,1.4vw,1.2rem)] leading-relaxed text-white/65">HumanCorp la dirigen dos áreas que se complementan: la creativa y técnica, y la empresarial y administrativa. Por eso podemos acompañarte desde tu identidad hasta tu operación.</p>
+      <section data-tone="light" class="px-6 pb-[8svh] pt-[24svh] md:px-10">
+        <div class="mx-auto max-w-[1280px]">
+          <p data-reveal class="text-[13px] font-medium uppercase tracking-[0.14em] text-[#6b6e75]">Nosotros</p>
+          <h1 data-words class="mt-6 max-w-[18ch] font-goog text-[clamp(2.5rem,6.6vw,6.4rem)] font-light leading-[1.02] tracking-[-0.05em]">Diseño y tecnología, administración y finanzas: un solo equipo.</h1>
+          <div class="mt-[9svh] grid gap-6 border-t border-[#e6e4df] pt-8 md:grid-cols-12">
+            <p data-reveal class="text-[13px] font-medium uppercase tracking-[0.14em] text-[#6b6e75] md:col-span-4">Quiénes somos</p>
+            <p data-reveal style="--i:1" class="max-w-[38rem] text-[clamp(1.05rem,1.5vw,1.3rem)] leading-relaxed text-[#3a3d42] md:col-span-8">HumanCorp la dirigen dos áreas que se complementan: la creativa y técnica, y la empresarial y administrativa. Por eso podemos acompañarte desde tu identidad hasta tu operación.</p>
+          </div>
         </div>
       </section>
 
       <!-- Quiénes dirigen -->
       {people.map((p, i) => (
-        <section id={p.id} data-tone="dark" class="relative px-6 py-[9svh] md:px-10">
-          <div class="mx-auto grid max-w-[1280px] items-start gap-10 md:grid-cols-12 md:gap-14">
+        <section id={p.id} data-tone="light" class="px-6 py-[8svh] md:px-10">
+          <div class="mx-auto grid max-w-[1280px] items-start gap-10 border-t border-[#e6e4df] pt-10 md:grid-cols-12 md:gap-14 md:pt-14">
             <div data-reveal class={`md:col-span-5 ${i % 2 ? 'md:order-2 md:col-start-8' : ''}`}>
               <div class="md:sticky md:top-28">
-                <div class="relative mx-auto aspect-[4/5] w-full max-w-[420px] overflow-hidden rounded-[30px] border border-white/15 shadow-[0_40px_80px_-40px_rgba(0,0,40,.8)] md:max-w-none">
+                <div class="portrait relative mx-auto aspect-[4/5] w-full max-w-[420px] overflow-hidden rounded-[6px] bg-[#ececea] md:max-w-none">
                   <img src={p.img} alt={p.alt} width="640" height="800" loading={i ? 'lazy' : 'eager'} decoding="async" class="absolute inset-0 size-full object-cover object-top" />
-                  <i class="absolute inset-0" style={`background:linear-gradient(160deg,${p.accent}33,transparent 45%),linear-gradient(to top,rgba(0,3,61,.85),transparent 45%)`} aria-hidden="true"></i>
-                  <div class="absolute inset-x-0 bottom-0 p-5">
-                    <p class="font-goog text-[1.15rem] leading-tight tracking-[-0.02em]">{p.name}</p>
-                    <p class="mt-1 text-[12.5px] text-white/70">{p.role}</p>
-                  </div>
                 </div>
+                <p class="mt-4 flex items-baseline justify-between gap-4 text-[13px] text-[#6b6e75]"><span>{p.name}</span><span>{String(i + 1).padStart(2, '0')} / 02</span></p>
               </div>
             </div>
 
             <div class={`md:col-span-6 ${i % 2 ? 'md:order-1 md:col-start-1' : 'md:col-start-7'}`}>
-              <p data-reveal class="flex items-center gap-2 text-[13px] text-white/60"><i class="block size-2 rounded-full" style={`background:${p.accent}`}></i>{p.role}</p>
-              <h2 data-words class="mt-4 font-goog text-[clamp(2.2rem,4.6vw,4.4rem)] font-light leading-[1.02] tracking-[-0.045em]">{p.name}</h2>
-              <p data-reveal class="mt-6 max-w-[34rem] text-[16px] leading-relaxed text-white/70">{p.bio}</p>
-              <div data-reveal class="mt-6 flex flex-wrap gap-2">{p.tags.map((t) => <span class="sv-chip">{t}</span>)}</div>
+              <p data-reveal class="text-[13px] font-medium uppercase tracking-[0.14em] text-[#6b6e75]">{p.role}</p>
+              <h2 data-words class="mt-5 font-goog text-[clamp(2.2rem,4.4vw,4.2rem)] font-light leading-[1.03] tracking-[-0.045em]">{p.name}</h2>
+              <p data-reveal class="mt-7 max-w-[34rem] text-[16.5px] leading-relaxed text-[#3a3d42]">{p.bio}</p>
+              <p data-reveal class="mt-6 text-[14px] text-[#6b6e75]">{p.tags.join(' · ')}</p>
 
-              <p data-reveal class="mt-10 text-[12px] font-medium uppercase tracking-[0.14em] text-white/45">Dirige estas divisiones</p>
-              <ul class="mt-4 grid gap-2.5 sm:grid-cols-2">
+              <p data-reveal class="mt-12 text-[12px] font-medium uppercase tracking-[0.14em] text-[#6b6e75]">Dirige estas divisiones</p>
+              <ul class="mt-3 border-t border-[#e6e4df]">
                 {p.leads.map((n, k) => (
-                  <li data-reveal style={`--i:${k % 2}`}>
-                    <a href={`/servicios#div-${n}`} class="gl group flex items-center gap-4 p-4 transition-[transform,border-color] duration-300 hover:-translate-y-0.5 hover:border-white/35">
-                      <span class="font-goog text-[15px] font-medium" style={`color:${p.accent}`}>{n}</span>
-                      <span class="text-[14px] leading-snug text-white/85">{short(n).short}</span>
+                  <li data-reveal style={`--i:${k % 2}`} class="border-b border-[#e6e4df]">
+                    <a href={`/servicios#div-${n}`} class="group flex items-center justify-between gap-4 py-4 transition-[padding] duration-300 hover:pl-2">
+                      <span class="flex items-baseline gap-5"><span class="w-6 font-goog text-[14px] text-[#6b6e75]">{n}</span><span class="font-goog text-[1.1rem] tracking-[-0.02em]">{short(n).title}</span></span>
+                      <span class="text-[#6b6e75] transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
                     </a>
                   </li>
                 ))}
@@ -104,44 +102,42 @@ const principles = [
       ))}
 
       <!-- Reparto -->
-      <section data-tone="dark" class="relative px-6 py-[12svh] md:px-10">
-        <div class="mx-auto max-w-[1280px]">
-          <p data-reveal class="text-[14px] text-white/55">Cómo nos repartimos</p>
-          <h2 data-words class="mt-4 max-w-[16ch] font-goog text-[clamp(2.2rem,5vw,4.8rem)] font-light leading-[1.03] tracking-[-0.05em]">Ocho divisiones, dos direcciones</h2>
-          <div data-reveal class="mt-6 flex flex-wrap gap-5 text-[13px] text-white/70">
-            <span class="flex items-center gap-2"><i class="block size-2.5 rounded-full" style={`background:${color.paolo}`}></i>Paolo · Diseño y Tecnología</span>
-            <span class="flex items-center gap-2"><i class="block size-2.5 rounded-full" style={`background:${color.mauricio}`}></i>Mauricio · Administración y Finanzas</span>
+      <section data-tone="light" class="px-6 py-[10svh] md:px-10">
+        <div class="mx-auto max-w-[1280px] border-t border-[#e6e4df] pt-10 md:pt-14">
+          <div class="grid gap-6 md:grid-cols-12">
+            <p data-reveal class="text-[13px] font-medium uppercase tracking-[0.14em] text-[#6b6e75] md:col-span-4">Cómo nos repartimos</p>
+            <h2 data-words class="font-goog text-[clamp(2rem,4.4vw,4.2rem)] font-light leading-[1.03] tracking-[-0.045em] md:col-span-8">Ocho divisiones, dos direcciones</h2>
           </div>
-          <ul class="mt-[6svh] grid gap-3 md:grid-cols-2">
+          <ul class="mt-[7svh] border-t border-[#e6e4df]">
             {divisions.map((d, k) => (
-              <li data-reveal style={`--i:${k % 2}`}>
-                <a href={`/servicios#div-${d.n}`} class="gl flex items-center justify-between gap-4 p-5 transition-[transform,border-color] duration-300 hover:-translate-y-0.5 hover:border-white/35">
-                  <span class="flex items-baseline gap-4"><span class="sv-num font-goog text-[15px] font-medium">{d.n}</span><span class="font-goog text-[1.05rem] tracking-[-0.02em]">{d.short}</span></span>
-                  <span class="flex shrink-0 -space-x-1">{owner[d.n].map((o) => <i class="block size-3.5 rounded-full ring-2 ring-[#00033D]" style={`background:${color[o]}`} title={o === 'paolo' ? 'Paolo' : 'Mauricio'}></i>)}</span>
+              <li data-reveal style={`--i:${k % 2}`} class="border-b border-[#e6e4df]">
+                <a href={`/servicios#div-${d.n}`} class="group grid grid-cols-[2.5rem_1fr_auto] items-baseline gap-3 py-5 transition-[padding] duration-300 hover:pl-2 md:grid-cols-[4rem_1fr_16rem] md:gap-6">
+                  <span class="font-goog text-[14px] text-[#6b6e75]">{d.n}</span>
+                  <span class="font-goog text-[clamp(1.05rem,1.8vw,1.5rem)] tracking-[-0.025em]">{d.short}</span>
+                  <span class="text-right text-[13.5px] text-[#6b6e75] md:text-left">{owner[d.n].length > 1 ? 'En conjunto' : label[owner[d.n][0]]}</span>
                 </a>
               </li>
             ))}
           </ul>
-          <p data-reveal class="mt-5 text-[13px] text-white/45">Marketing, publicidad y crecimiento comercial lo trabajamos en conjunto.</p>
         </div>
       </section>
 
       <!-- Principios -->
-      <section data-tone="dark" class="relative px-6 py-[10svh] md:px-10">
+      <section data-tone="light" class="px-6 pb-[12svh] pt-[4svh] md:px-10">
         <div class="mx-auto max-w-[1280px]">
-          <p data-reveal class="text-[14px] text-white/55">Cómo trabajamos juntos</p>
-          <div class="mt-8 grid gap-4 md:grid-cols-3">
+          <p data-reveal class="text-[13px] font-medium uppercase tracking-[0.14em] text-[#6b6e75]">Cómo trabajamos juntos</p>
+          <div class="mt-8 grid gap-10 md:grid-cols-3 md:gap-0 md:divide-x md:divide-[#e6e4df]">
             {principles.map(([t, p], k) => (
-              <article data-reveal style={`--i:${k}`} class="gl p-6 md:p-8">
-                <span class="sv-num font-goog text-[14px] font-medium">{String(k + 1).padStart(2, '0')}</span>
-                <h3 class="mt-8 font-goog text-[1.4rem] font-normal tracking-[-0.03em]">{t}</h3>
-                <p class="mt-3 text-[14.5px] leading-relaxed text-white/60">{p}</p>
+              <article data-reveal style={`--i:${k}`} class="md:px-8 md:first:pl-0 md:last:pr-0">
+                <span class="font-goog text-[14px] text-[#6b6e75]">{String(k + 1).padStart(2, '0')}</span>
+                <h3 class="mt-6 font-goog text-[1.45rem] font-normal tracking-[-0.03em]">{t}</h3>
+                <p class="mt-3 text-[15px] leading-relaxed text-[#50535a]">{p}</p>
               </article>
             ))}
           </div>
-          <div data-reveal class="mt-[9svh] flex flex-wrap items-center gap-4">
-            <a href="mailto:info@humancorp.co?subject=Agendar%20llamada" class="rounded-full bg-white px-8 py-4 text-[16px] font-medium text-[#0b0c0f] transition-transform hover:scale-[1.04] active:scale-[0.98]">Agendar una llamada</a>
-            <a href="/servicios" class="rounded-full border border-white/25 px-8 py-4 text-[16px] transition-colors hover:bg-white/10">Ver servicios</a>
+          <div data-reveal class="mt-[9svh] flex flex-wrap items-center gap-3">
+            <a href="mailto:info@humancorp.co?subject=Agendar%20llamada" class="rounded-full bg-[#0b0b0c] px-8 py-4 text-[15px] font-medium text-white transition-transform hover:scale-[1.03] active:scale-[0.98]">Agendar una llamada</a>
+            <a href="/servicios" class="rounded-full border border-[#0b0b0c]/20 px-8 py-4 text-[15px] transition-colors hover:bg-[#0b0b0c]/5">Ver servicios</a>
           </div>
         </div>
       </section>
