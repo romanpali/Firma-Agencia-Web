@@ -1,36 +1,49 @@
 ---
-// Escritorio y objetos del libro 3D, dibujados desde arriba y apoyados sobre la mesa.
+// Escena del libro 3D: mesa negra mate, luz y dos objetos de pie (taza y planta) vistos en tres cuartos.
+import '../styles/book.css';
+// Cada hoja se dibuja en dos mitades (una más clara, otra más oscura) para un acabado limpio y sobrio.
+const half = (x0: number, x1: number, y1: number, w: number, k: number, s: number) => {
+  const ym = (190 + y1) / 2, xm = (x0 + x1) / 2 + k;
+  return `M${x0 + s * w} 192 Q${xm + s * w * 1.15} ${ym} ${x1} ${y1} Q${xm} ${ym} ${x0} 192Z`;
+};
+const leaves: [number, number, number, number, number][] = [
+  [64, 40, 96, 12, -4], [136, 160, 90, 12, 4], [76, 56, 62, 14, -3], [124, 146, 56, 14, 3], [88, 80, 38, 15, -2], [112, 122, 34, 15, 2], [100, 100, 20, 17, 0],
+];
 ---
 <i class="bw-desk"></i><i class="bw-lamp"></i>
-<svg class="bw-prop bw-cup" viewBox="0 0 200 200" aria-hidden="true">
+<svg class="bw-prop bw-cup" viewBox="0 0 240 220" aria-hidden="true">
   <defs>
-    <radialGradient id="bwS" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="#fbf8f1"/><stop offset=".7" stop-color="#e7e0d2"/><stop offset="1" stop-color="#b9b1a1"/></radialGradient>
-    <radialGradient id="bwC" cx=".38" cy=".32" r=".85"><stop offset="0" stop-color="#8a5a37"/><stop offset=".6" stop-color="#4a2c19"/><stop offset="1" stop-color="#241209"/></radialGradient>
-    <radialGradient id="bwD" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#000" stop-opacity=".55"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+    <radialGradient id="cSh" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#000" stop-opacity=".75"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+    <linearGradient id="cSa" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#34353b"/><stop offset="1" stop-color="#15161a"/></linearGradient>
+    <linearGradient id="cBd" x1="0" x2="1"><stop offset="0" stop-color="#2c2d33"/><stop offset=".3" stop-color="#3a3b42"/><stop offset=".65" stop-color="#191a1e"/><stop offset="1" stop-color="#0b0b0d"/></linearGradient>
+    <radialGradient id="cCf" cx=".4" cy=".3" r=".9"><stop offset="0" stop-color="#4a3022"/><stop offset="1" stop-color="#150a05"/></radialGradient>
   </defs>
-  <ellipse cx="112" cy="112" rx="92" ry="92" fill="url(#bwD)"/>
-  <circle cx="100" cy="100" r="86" fill="url(#bwS)"/>
-  <circle cx="100" cy="100" r="62" fill="#d8d0c0"/>
-  <rect x="138" y="86" width="52" height="14" rx="7" transform="rotate(-18 150 94)" fill="#cfc7b6"/>
-  <circle cx="98" cy="98" r="54" fill="#f6f2e9"/>
-  <path d="M152 96 q26 -2 24 22 q-2 18 -28 14" fill="none" stroke="#efe9dc" stroke-width="11" stroke-linecap="round"/>
-  <circle cx="98" cy="98" r="44" fill="url(#bwC)"/>
-  <path d="M98 118 c-17 -12 -25 -21 -17 -28 c6 -5 13 -1 17 6 c4 -7 11 -11 17 -6 c8 7 0 16 -17 28z" fill="#ecd9bd" opacity=".9"/>
-  <ellipse cx="80" cy="84" rx="16" ry="5" fill="rgba(255,255,255,.18)" transform="rotate(-28 80 84)"/>
+  <ellipse cx="132" cy="194" rx="104" ry="20" fill="url(#cSh)"/>
+  <ellipse cx="120" cy="177" rx="92" ry="28" fill="#09090b"/>
+  <ellipse cx="120" cy="172" rx="92" ry="28" fill="url(#cSa)"/>
+  <ellipse cx="120" cy="172" rx="92" ry="28" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="1.2"/>
+  <path d="M172 112 C208 106 210 148 168 146" fill="none" stroke="#0b0b0d" stroke-width="11" stroke-linecap="round"/>
+  <path d="M172 110 C204 105 206 144 168 144" fill="none" stroke="#33343a" stroke-width="8" stroke-linecap="round"/>
+  <path d="M66 98 C66 128 78 152 86 158 A34 11 0 0 0 154 158 C162 152 174 128 174 98Z" fill="url(#cBd)"/>
+  <ellipse cx="120" cy="98" rx="54" ry="19" fill="#3d3e45"/>
+  <ellipse cx="120" cy="99" rx="49" ry="16.2" fill="#101114"/>
+  <ellipse cx="120" cy="101.5" rx="44" ry="13.4" fill="url(#cCf)"/>
+  <path d="M68 101 C68 124 79 146 87 153" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.6" stroke-linecap="round"/>
 </svg>
-<svg class="bw-prop bw-plant" viewBox="0 0 200 200" aria-hidden="true">
+<svg class="bw-prop bw-plant" viewBox="0 0 200 280" aria-hidden="true">
   <defs>
-    <radialGradient id="bwP" cx=".38" cy=".32" r=".85"><stop offset="0" stop-color="#6a6a66"/><stop offset=".6" stop-color="#3f3f3c"/><stop offset="1" stop-color="#1e1e1c"/></radialGradient>
-    <radialGradient id="bwD2" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#000" stop-opacity=".6"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+    <radialGradient id="pSh" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#000" stop-opacity=".75"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+    <linearGradient id="pPt" x1="0" x2="1"><stop offset="0" stop-color="#34353b"/><stop offset=".35" stop-color="#1f2024"/><stop offset=".75" stop-color="#111215"/><stop offset="1" stop-color="#08080a"/></linearGradient>
   </defs>
-  <circle cx="108" cy="108" r="92" fill="url(#bwD2)"/>
-  <circle cx="100" cy="100" r="84" fill="url(#bwP)"/>
-  <circle cx="100" cy="100" r="70" fill="#1a1a18"/>
-  <g transform="translate(100 100)">
-    {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => <ellipse cx="0" cy="-42" rx="14" ry="30" transform={`rotate(${i * 36})`} fill={i % 2 ? '#58845a' : '#6a9a68'} stroke="#3d6240" stroke-width="1.4" />)}
-    {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => <ellipse cx="0" cy="-26" rx="11" ry="22" transform={`rotate(${i * 45 + 18})`} fill={i % 2 ? '#7aae78' : '#8cbb86'} stroke="#4c7a4e" stroke-width="1.2" />)}
-    {[0, 1, 2, 3, 4, 5].map((i) => <ellipse cx="0" cy="-13" rx="8" ry="15" transform={`rotate(${i * 60})`} fill="#a4cf9c" />)}
-    <circle r="6" fill="#c3e4b9" />
-  </g>
+  <ellipse cx="112" cy="262" rx="82" ry="15" fill="url(#pSh)"/>
+  {leaves.map(([x0, x1, y1, w, k]) => (
+    <g>
+      <path d={half(x0, x1, y1, w, k, -1)} fill="#3f6450"/>
+      <path d={half(x0, x1, y1, w, k, 1)} fill="#233d30"/>
+    </g>
+  ))}
+  <path d="M50 192 H150 L138 254 Q100 266 62 254Z" fill="url(#pPt)"/>
+  <ellipse cx="100" cy="192" rx="50" ry="11" fill="#303137"/>
+  <ellipse cx="100" cy="193" rx="42" ry="8" fill="#08080a"/>
+  <path d="M62 254 Q100 266 138 254" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="1.5"/>
 </svg>
-<i class="bw-prop bw-pencil"></i>
