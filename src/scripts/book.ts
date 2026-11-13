@@ -117,9 +117,9 @@ export function mountBook(o: Mount) {
     book.style.setProperty('--lb', cl(t * 1.5).toFixed(3));
     book.style.setProperty('--tr', `${(1 - t / N).toFixed(3)}`);
     book.style.setProperty('--tl', `${(t / N).toFixed(3)}`);
-    world.style.setProperty('--rx', (50 + 9 * e).toFixed(2));
-    world.style.setProperty('--rz', (-5 * (1 - e)).toFixed(2));
-    world.style.setProperty('--bs', (0.86 + 0.14 * e).toFixed(3));
+    world.style.setProperty('--rx', (44 - 15 * e).toFixed(2));
+    world.style.setProperty('--rz', (-6 * (1 - e)).toFixed(2));
+    world.style.setProperty('--bs', (0.9 + 0.1 * e).toFixed(3));
     sec.style.setProperty('--bp', p.toFixed(3));
     if (fs) {
       const x = pw * Math.cos((shadowA * Math.PI) / 180);
