@@ -7,7 +7,7 @@
 @keyframes bwEnter { from { opacity: 0; transform: translateY(24px); } }
 
 .bw-world { --pw: min(42cqw, calc(var(--sh, 700px) * 1.05)); --ph: calc(var(--pw) / 1.5); position: absolute; left: 50%; top: 56%; width: 0; height: 0; transform-style: preserve-3d; transform: rotateX(44deg) rotateZ(-6deg) scale(0.9); will-change: transform; }
-.bw-desk { position: absolute; width: max(150cqw, calc(var(--sh, 700px) * 1.9)); height: max(105cqw, calc(var(--sh, 700px) * 1.7)); left: calc(max(150cqw, calc(var(--sh, 700px) * 1.9)) / -2); top: calc(max(105cqw, calc(var(--sh, 700px) * 1.7)) / -2); transform: translateZ(-34px);
+.bw-desk { position: absolute; width: max(190cqw, calc(var(--sh, 700px) * 2.4)); height: max(150cqw, calc(var(--sh, 700px) * 3.2)); left: calc(max(190cqw, calc(var(--sh, 700px) * 2.4)) / -2); top: calc(max(150cqw, calc(var(--sh, 700px) * 3.2)) / -2 + 8cqw); transform: translateZ(-34px);
   background: radial-gradient(38% 32% at 30% 28%, rgba(255, 255, 255, 0.085), transparent 72%), url('/configurador/mesa.webp') 0 0 / 128px 128px, linear-gradient(#111216, #0a0a0c); }
 .bw-lamp { position: absolute; width: 70cqw; height: 70cqw; left: -62cqw; top: -52cqw; transform: translateZ(-33px); pointer-events: none; background: radial-gradient(closest-side, rgba(255, 255, 255, 0.07), transparent); }
 
@@ -129,21 +129,24 @@
 .bw-ui b { display: block; height: 100%; background: #fff; transform-origin: left; transform: scaleX(0); }
 
 /* Hero de /obra */
-.ob-hero { max-width: min(34rem, 46cqw); top: clamp(92px, 15svh, 150px); }
+.ob-hero { max-width: min(36rem, 46cqw); top: 50%; translate: 0 -50%; margin-top: 18px; }
 .ob-pill { display: inline-flex; align-items: center; gap: 10px; padding: 8px 15px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.2); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255, 255, 255, 0.8); animation: obFade 1s 0.15s both; }
 .ob-pill i { width: 6px; height: 6px; border-radius: 50%; background: #fff; }
-.ob-title { margin-top: 20px; font-size: clamp(2.4rem, 5.1cqw, 5.4rem); line-height: 0.97; letter-spacing: -0.045em; font-weight: 500; color: #fff; }
+.bw-intro .ob-title { margin-top: 22px; font-size: clamp(2.6rem, 5.4cqw, 6rem); line-height: 0.97; letter-spacing: -0.045em; font-weight: 500; color: #fff; }
 .ob-l { display: block; overflow: hidden; padding-bottom: 0.12em; margin-bottom: -0.12em; }
 .ob-l > span { display: block; animation: obUp 1.1s cubic-bezier(.2, .8, .2, 1) both; }
 .ob-l:nth-child(1) > span { animation-delay: 0.3s; } .ob-l:nth-child(2) > span { animation-delay: 0.42s; }
 .ob-title em { font-style: normal; font-weight: 500; color: rgba(255, 255, 255, 0.45); }
-.ob-sub { margin-top: 20px; max-width: 26rem; font-size: clamp(13px, 1.15cqw, 16px); line-height: 1.55; color: rgba(255, 255, 255, 0.62); animation: obFade 1s 0.75s both; }
+.ob-sub { margin-top: 28px; max-width: 26rem; font-size: clamp(13px, 1.15cqw, 16px); line-height: 1.55; color: rgba(255, 255, 255, 0.62); animation: obFade 1s 0.75s both; }
 .ob-cta { margin-top: 26px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px; animation: obFade 1s 0.9s both; }
 .ob-cta > * { pointer-events: auto; }
 .ob-b1 { display: inline-flex; align-items: center; gap: 12px; padding: 14px 24px; border-radius: 999px; background: #fff; color: #0b0c0f; font: inherit; font-size: 14px; font-weight: 500; cursor: pointer; transition: transform 0.3s, gap 0.3s; }
 .ob-b1:hover { transform: translateY(-2px); gap: 18px; }
 .ob-b2 { padding: 14px 22px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.28); color: #fff; font-size: 14px; transition: background 0.3s; }
 .ob-b2:hover { background: rgba(255, 255, 255, 0.1); }
+.ob-idx { margin-top: 44px; display: grid; grid-template-columns: repeat(5, auto); justify-content: start; gap: 0 26px; padding-top: 18px; border-top: 1px solid rgba(255, 255, 255, 0.16); animation: obFade 1s 1.05s both; }
+.ob-idx li { display: grid; gap: 4px; font-size: 12px; line-height: 1.3; color: rgba(255, 255, 255, 0.7); }
+.ob-idx em { font-style: normal; font-size: 11px; letter-spacing: 0.14em; color: rgba(255, 255, 255, 0.4); }
 .ob-cue, .ob-note { top: auto; position: absolute; bottom: 22px; z-index: 8; pointer-events: none; }
 .ob-cue { left: clamp(20px, 4cqw, 64px); max-width: none; display: flex; align-items: center; gap: 12px; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255, 255, 255, 0.6); animation: obFade 1s 1.2s both; }
 .ob-cue > span { display: inline; margin: 0; font-size: inherit; opacity: 1; line-height: inherit; }
@@ -152,7 +155,7 @@
 @keyframes obUp { from { transform: translateY(112%); } }
 @keyframes obFade { from { opacity: 0; transform: translateY(12px); } }
 @keyframes obLine { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); } 100% { transform: scaleY(1); opacity: 0; } }
-@container (max-width: 700px) { .ob-cue, .ob-note, .ob-sub, .bw-prop { display: none; } .ob-hero { max-width: 100%; right: 20px; } .ob-title { font-size: clamp(2.1rem, 9.5cqw, 3rem); } .bw-world { --pw: 42cqw; top: 62%; } }
+@container (max-width: 700px) { .ob-cue, .ob-note, .ob-sub, .ob-idx, .bw-prop { display: none; } .ob-hero { max-width: 100%; right: 20px; top: clamp(84px, 13svh, 140px); translate: none; margin-top: 0; } .ob-title { font-size: clamp(2.1rem, 9.5cqw, 3rem); } .bw-world { --pw: 42cqw; top: 62%; } }
 
 /* Modo ligero: se activa solo si el equipo no mantiene los fotogramas */
 .bw-lite .bw-prop, .bw-lite .bw-lamp, .bw-lite .bw-gutter, .bw-lite .bw-ribbon, .bw-lite .bw-sh, .bw-lite .bw-stick::after { display: none; }
