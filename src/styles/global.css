@@ -308,3 +308,8 @@ body { overflow-x: clip; }
 .a-steam { animation: aSteam 3s ease-in-out infinite; }
 .art-off .art * { animation-play-state: paused; }
 @media (prefers-reduced-motion: reduce) { .art * { animation: none !important; } .a-draw { stroke-dashoffset: 0; } }
+
+/* /servicios: hojas apiladas */
+.sheet { --dim: 0; transform-origin: 50% 0; background: color-mix(in srgb, #dedaf6 calc(var(--dim) * 100%), #fff); box-shadow: 0 40px 80px -40px rgba(0, 0, 40, 0.65); will-change: transform; }
+.sheet-scroll { scrollbar-width: thin; scrollbar-color: rgba(0, 0, 0, 0.18) transparent; }
+@media (prefers-reduced-motion: reduce) { .a-tw, .a-bob, .a-glow, .a-float, .a-type, .a-rise, .a-draw { animation: none !important; } .a-draw { stroke-dashoffset: 0 !important; } .a-type, .a-rise { scale: 1 1 !important; } }
