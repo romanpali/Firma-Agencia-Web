@@ -72,10 +72,10 @@ const principles = [
           <div class="mx-auto grid max-w-[1280px] items-start gap-10 border-t border-[#e6e4df] pt-10 md:grid-cols-12 md:gap-14 md:pt-14">
             <div data-reveal class={`md:col-span-5 ${i % 2 ? 'md:order-2 md:col-start-8' : ''}`}>
               <div class="md:sticky md:top-28">
-                <div class="portrait relative mx-auto aspect-[4/5] w-full max-w-[420px] overflow-hidden rounded-[6px] bg-[#ececea] md:max-w-none">
+                <div class={`portrait relative mx-auto aspect-[4/5] w-full max-w-[360px] overflow-hidden rounded-[6px] bg-[#ececea] md:mx-0 md:max-w-[400px] ${i % 2 ? 'md:ml-auto' : ''}`}>
                   <img src={p.img} alt={p.alt} width="640" height="800" loading={i ? 'lazy' : 'eager'} decoding="async" class="absolute inset-0 size-full object-cover object-top" />
                 </div>
-                <p class="mt-4 flex items-baseline justify-between gap-4 text-[13px] text-[#6b6e75]"><span>{p.name}</span><span>{String(i + 1).padStart(2, '0')} / 02</span></p>
+                <p class={`mt-4 flex items-baseline justify-between gap-4 text-[13px] text-[#6b6e75] md:max-w-[400px] ${i % 2 ? 'md:ml-auto' : ''}`}><span>{p.name}</span><span>{String(i + 1).padStart(2, '0')} / 02</span></p>
               </div>
             </div>
 
