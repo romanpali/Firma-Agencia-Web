@@ -10,7 +10,7 @@ const people = [
     id: 'paolo',
     name: 'Paolo Pali Maldonado',
     role: 'Director de Diseño y Tecnología',
-    img: '/team/paolo.webp',
+    img: '/team/paolo.jpg',
     alt: 'Retrato de Paolo Pali Maldonado',
     accent: '#977DFF',
     bio: 'Dirige el diseño y la parte técnica de HumanCorp: desde la identidad visual y la experiencia digital hasta los sistemas, las automatizaciones y la infraestructura que las sostienen.',
@@ -21,7 +21,7 @@ const people = [
     id: 'mauricio',
     name: 'Mauricio Alberto Pali Maldonado',
     role: 'Director de Administración y Finanzas',
-    img: '/team/mauricio.webp',
+    img: '/team/mauricio.jpg',
     alt: 'Retrato de Mauricio Alberto Pali Maldonado',
     accent: '#7ad3f0',
     bio: 'Dirige el lado empresarial y administrativo: finanzas, administración, operaciones y cumplimiento. Es contador y lleva el área fiscal de la firma, para que la tecnología que construimos hable el mismo idioma que tu empresa.',
@@ -73,7 +73,7 @@ const principles = [
             <div data-reveal class={`md:col-span-5 ${i % 2 ? 'md:order-2 md:col-start-8' : ''}`}>
               <div class="md:sticky md:top-28">
                 <div class={`portrait relative mx-auto aspect-[4/5] w-full max-w-[360px] overflow-hidden rounded-[6px] bg-[#ececea] md:mx-0 md:max-w-[400px] ${i % 2 ? 'md:ml-auto' : ''}`}>
-                  <img src={p.img} alt={p.alt} width="640" height="800" loading={i ? 'lazy' : 'eager'} decoding="async" class="absolute inset-0 size-full object-cover object-top" />
+                  <img src={p.img} alt={p.alt} width="640" height="640" loading={i ? 'lazy' : 'eager'} decoding="async" class="absolute inset-0 size-full object-cover object-top" />
                 </div>
                 <p class={`mt-4 flex items-baseline justify-between gap-4 text-[13px] text-[#6b6e75] md:max-w-[400px] ${i % 2 ? 'md:ml-auto' : ''}`}><span>{p.name}</span><span>{String(i + 1).padStart(2, '0')} / 02</span></p>
               </div>
