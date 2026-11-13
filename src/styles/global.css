@@ -435,7 +435,6 @@ body { overflow-x: clip; }
 .cursor-dot { width: 6px; height: 6px; margin: -3px 0 0 -3px; background: #fff; box-shadow: 0 0 0 1px rgba(10, 12, 30, 0.3); transition: opacity 0.25s; }
 .cursor-ring.is-hover { width: 66px; height: 66px; margin: -33px 0 0 -33px; background: rgba(255, 255, 255, 0.28); backdrop-filter: blur(10px) saturate(1.6); -webkit-backdrop-filter: blur(10px) saturate(1.6); border-color: rgba(255, 255, 255, 0.85); }
 .cursor-ring.is-text { width: 22px; height: 22px; margin: -11px 0 0 -11px; opacity: 0.6 !important; }
-.cursor-ring.is-down { scale: 0.82; }
 @media (hover: hover) and (pointer: fine) { html.has-cursor, html.has-cursor *:not(input):not(textarea):not(select) { cursor: none !important; } }
 
 /* ── Barra de scroll minimalista ── */
@@ -475,3 +474,22 @@ html { scrollbar-width: thin; scrollbar-color: rgba(125, 125, 140, 0.45) transpa
 .site .orb-r { background: conic-gradient(from 30deg, var(--a), var(--b), #fff, var(--a), var(--b), var(--a)); box-shadow: 0 24px 50px -24px var(--b); }
 .site .orb-r::before { content: ""; position: absolute; inset: 22%; border-radius: 50%; background: radial-gradient(circle at 40% 35%, rgba(255, 255, 255, 0.5), color-mix(in srgb, var(--b) 60%, #000)); box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.4); }
 .site .orb-ic { width: 42%; height: 42%; filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.35)); }
+
+/* Titular con palabra rotatoria y estrella */
+.site .rotw { display: inline-block; }
+.site .rotw.rot-out { animation: rotOut 0.36s cubic-bezier(.5, 0, .9, .4) forwards; }
+.site .rotw.rot-in { animation: rotIn 0.52s cubic-bezier(.2, .8, .2, 1) both; }
+@keyframes rotOut { to { opacity: 0; translate: 0 -40%; filter: blur(6px); } }
+@keyframes rotIn { from { opacity: 0; translate: 0 45%; filter: blur(6px); } }
+.site .rot-star { display: inline-block; width: 0.62em; height: 0.62em; margin-left: 0.12em; vertical-align: 0.04em; animation: starSpin calc(9s * var(--spd, 1)) linear infinite; }
+@keyframes starSpin { to { rotate: 360deg; } }
+/* degradado animado de la plantilla Orbes */
+.site .mesh { background: linear-gradient(160deg, color-mix(in srgb, var(--b) 78%, #000), var(--b)); overflow: hidden; }
+.site .mb { position: absolute; border-radius: 50%; filter: blur(70px); opacity: 0.9; will-change: transform; }
+.site .mb1 { left: -12%; top: -20%; width: 60%; aspect-ratio: 1; background: color-mix(in srgb, var(--a) 70%, #fff); animation: mbA calc(18s * var(--spd, 1)) ease-in-out infinite alternate; }
+.site .mb2 { right: -14%; top: 10%; width: 55%; aspect-ratio: 1; background: var(--a); opacity: 0.75; animation: mbB calc(22s * var(--spd, 1)) ease-in-out infinite alternate; }
+.site .mb3 { left: 18%; bottom: -34%; width: 70%; aspect-ratio: 1; background: color-mix(in srgb, var(--b) 40%, #fff); opacity: 0.65; animation: mbC calc(26s * var(--spd, 1)) ease-in-out infinite alternate; }
+.site .mb4 { left: 40%; top: 20%; width: 34%; aspect-ratio: 1; background: #fff; opacity: 0.2; animation: mbA calc(14s * var(--spd, 1)) ease-in-out infinite alternate-reverse; }
+@keyframes mbA { to { transform: translate(18%, 16%) scale(1.15); } }
+@keyframes mbB { to { transform: translate(-20%, 22%) scale(0.9); } }
+@keyframes mbC { to { transform: translate(14%, -20%) scale(1.2); } }

@@ -42,25 +42,25 @@ const idleImgs = ['/process/reel-1.webp', '/horizon/2.webp', '/process/reel-2.we
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Personaliza un sitio web para tu negocio con HumanCorp: elige diseño, colores, tipografía y textos, y míralo generarse." />
     <script is:inline>document.documentElement.classList.add('js')</script>
-    <title>Personaliza tu sitio — HumanCorp</title>
+    <title>Personaliza tu sitio (beta) — HumanCorp</title>
   </head>
-  <body class="overflow-hidden bg-[#07080d] font-sans text-[#14161a]">
+  <body class="overflow-hidden bg-white font-sans text-[#14161a]">
     <div class="grid h-svh grid-rows-[44svh_minmax(0,1fr)] lg:grid-cols-[minmax(0,1fr)_470px] lg:grid-rows-1">
       <!-- Escenario -->
-      <section data-stage class="relative overflow-hidden bg-[#07080d]" aria-label="Vista previa de tu sitio">
+      <section data-stage class="relative overflow-hidden bg-white" aria-label="Vista previa de tu sitio">
         <a href="/" aria-label="Volver al inicio" class="absolute left-4 top-4 z-30 grid size-11 place-items-center rounded-full bg-white/80 text-[#14161a] shadow-[0_8px_24px_-12px_rgba(0,0,0,.5)] backdrop-blur-md transition-transform hover:scale-105 lg:left-7 lg:top-7"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a>
 
         <!-- En espera: abanico de tarjetas -->
-        <div data-idle class="@container absolute inset-0 overflow-hidden text-white transition-[opacity,filter] duration-700" style="background:radial-gradient(70% 60% at 50% 40%,#12151f,#07080d 70%)">
-          <i class="pointer-events-none absolute left-1/2 top-[18%] h-[60%] w-[70%] -translate-x-1/2 rounded-full opacity-40 blur-[90px]" style="background:radial-gradient(circle,#2f3a9e,transparent 70%)" aria-hidden="true"></i>
+        <div data-idle class="@container absolute inset-0 overflow-hidden text-[#14161a] transition-[opacity,filter] duration-700" style="background:radial-gradient(75% 65% at 50% 40%,#ffffff,#eef0f6 80%)">
+          <i class="pointer-events-none absolute left-1/2 top-[18%] h-[60%] w-[70%] -translate-x-1/2 rounded-full opacity-[.22] blur-[90px]" style="background:radial-gradient(circle,#977dff,transparent 70%)" aria-hidden="true"></i>
           <div class="absolute inset-0 flex flex-col items-center justify-center px-6">
-            <span class="grid size-12 place-items-center rounded-full border border-white/35 text-[15px] font-semibold tracking-wider">H</span>
+            <span class="grid size-12 place-items-center rounded-full border border-black/20 text-[15px] font-semibold tracking-wider">H</span>
             <div class="idle-fan relative mt-[clamp(18px,3cqw,40px)] h-[clamp(150px,30cqw,290px)] w-full" data-fan>
-              {idleImgs.map((src, i) => <div data-card={i} class="idle-card absolute left-1/2 top-0 aspect-[4/5] w-[clamp(110px,17cqw,210px)] overflow-hidden rounded-[22px] border border-white/20 shadow-[0_30px_60px_-30px_rgba(0,0,0,.9)]"><img src={src} alt="" width="360" height="640" loading="eager" decoding="async" class="size-full object-cover" /></div>)}
+              {idleImgs.map((src, i) => <div data-card={i} class="idle-card absolute left-1/2 top-0 aspect-[4/5] w-[clamp(110px,17cqw,210px)] overflow-hidden rounded-[22px] border border-black/10 shadow-[0_30px_60px_-30px_rgba(10,12,40,.45)]"><img src={src} alt="" width="360" height="640" loading="eager" decoding="async" class="size-full object-cover" /></div>)}
             </div>
-            <h2 class="mt-[clamp(20px,4cqw,44px)] text-center font-goog text-[clamp(1.6rem,4cqw,3rem)] font-light tracking-[-0.03em]">Tu sitio, a tu medida</h2>
-            <p class="mt-2 max-w-[28rem] text-center text-[clamp(12px,1.3cqw,14.5px)] text-white/55">Elige a la derecha cómo lo quieres y míralo generarse aquí.</p>
-            <button type="button" data-focus-name class="mt-6 flex items-center gap-3 rounded-full bg-white py-2 pl-6 pr-2 text-[14px] font-medium text-[#14161a] transition-transform hover:scale-[1.03]">Configura el tuyo<span class="grid size-9 place-items-center rounded-full bg-[#14161a] text-white"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+            <h2 class="mt-[clamp(20px,4cqw,44px)] flex items-center justify-center gap-3 text-center font-goog text-[clamp(1.6rem,4cqw,3rem)] font-light tracking-[-0.03em]">Tu sitio, a tu medida<span class="rounded-full bg-[#14161a] px-3 py-1 text-[11px] font-medium uppercase tracking-[0.14em] text-white">Beta</span></h2>
+            <p class="mt-2 max-w-[28rem] text-center text-[clamp(12px,1.3cqw,14.5px)] text-black/50">Elige a la derecha cómo lo quieres y míralo generarse aquí.</p>
+            <button type="button" data-focus-name class="mt-6 flex items-center gap-3 rounded-full bg-[#14161a] py-2 pl-6 pr-2 text-[14px] font-medium text-white transition-transform hover:scale-[1.03]">Configura el tuyo<span class="grid size-9 place-items-center rounded-full bg-white text-[#14161a]"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
           </div>
         </div>
 
@@ -78,55 +78,51 @@ const idleImgs = ['/process/reel-1.webp', '/horizon/2.webp', '/process/reel-2.we
 
         <!-- Sitio generado -->
         <div data-site data-theme="claro" data-anim="suave" class="site cfg gen-hidden @container absolute inset-0 overflow-y-auto overflow-x-hidden [scrollbar-width:thin]" style="--a:#F6B370;--b:#2F3A9E;--ink:#14173f;--bg:#fdf6ee;--on:#14173f;--rad:6px;--hw:300;--sfont:'Inter Tight Variable',system-ui,sans-serif;--mx:0;--my:0;--spd:1;--par:1">
-          <!-- Plantilla A: Aurora -->
-          <section data-d="a" class="relative h-full min-h-[520px] overflow-hidden bg-[#05060b] text-white">
+          <!-- Plantilla A: Degradado -->
+          <section data-d="a" class="relative h-full min-h-[520px] overflow-hidden bg-[#0b1030] text-white">
             <canvas data-aurora class="absolute inset-0 size-full"></canvas>
-            <i class="absolute inset-0" style="background:linear-gradient(to bottom,rgba(0,0,0,.42),transparent 26%,transparent 52%,rgba(0,0,0,.65))"></i>
-            <i class="grain pointer-events-none absolute inset-0 opacity-[.12]"></i>
+            <i class="pointer-events-none absolute inset-0" style="background:radial-gradient(120% 90% at 50% 40%,transparent 55%,rgba(0,0,20,.32))"></i>
+            <i class="grain pointer-events-none absolute inset-0 opacity-[.16]"></i>
 
             <nav class="rise absolute inset-x-0 top-0 flex items-center justify-between pl-[72px] pr-[clamp(16px,2.6cqw,40px)] pt-[22px] @4xl:pl-[clamp(80px,9cqw,120px)]" style="--d:.1s">
-              <span class="flex items-center gap-3"><i data-markbox class="mark grid size-8 place-items-center bg-white/90 text-[14px] font-semibold not-italic text-[#14161a]">T</i><span data-name class="text-[clamp(16px,1.9cqw,25px)] uppercase tracking-[0.12em]" style="font-weight:calc(var(--hw) - 80)">Tu empresa</span></span>
-              <div class="hidden items-center gap-0.5 rounded-full border border-white/25 bg-white/10 px-1.5 py-1.5 backdrop-blur-xl @3xl:flex" data-nav></div>
-              <span data-navcta class="rounded-full bg-white px-5 py-2.5 text-[12.5px] font-medium text-[#14161a]">Contacto</span>
+              <span class="flex items-center gap-3"><i data-markbox class="mark grid size-8 place-items-center bg-white/90 text-[14px] font-semibold not-italic text-[#14161a]">T</i><span data-name class="text-[clamp(14px,1.5cqw,19px)] font-extrabold uppercase tracking-[0.02em]">Tu empresa</span></span>
+              <div class="flex items-center gap-[clamp(14px,2.6cqw,34px)]"><span class="hidden items-center gap-[clamp(14px,2.6cqw,34px)] text-[clamp(11px,1.15cqw,14px)] @3xl:flex" data-nav></span><span data-navcta class="rounded-full bg-white px-5 py-2.5 text-[12.5px] font-medium text-[#14161a]">Contacto</span></div>
             </nav>
 
-            <div class="rise absolute right-[5%] top-[17%] hidden @3xl:block" style="--d:.5s;translate:calc(var(--mx)*22px*var(--par)) calc(var(--my)*16px*var(--par))">
-              <div class="a-card relative aspect-[1.6] w-[clamp(250px,34cqw,500px)] overflow-hidden p-[clamp(16px,2.2cqw,32px)]" style="border-radius:calc(var(--rad) + 24px)">
-                <i class="absolute inset-0" style="background:linear-gradient(135deg,rgba(255,255,255,.3),rgba(255,255,255,.04) 55%,rgba(255,255,255,.16))"></i>
+            <div class="rise absolute left-1/2 top-[15%] hidden -translate-x-1/2 @3xl:block" style="--d:.5s;translate:calc(var(--mx)*22px*var(--par)) calc(var(--my)*16px*var(--par))">
+              <div class="a-card relative aspect-[.62] w-[clamp(120px,17cqw,250px)] overflow-hidden p-[clamp(12px,1.5cqw,22px)]" style="border-radius:calc(var(--rad) + 22px)">
+                <i class="absolute inset-0" style="background:linear-gradient(150deg,rgba(255,255,255,.34),rgba(255,255,255,.04) 55%,rgba(255,255,255,.18))"></i>
                 <i class="glint absolute inset-y-0 w-[40%] -skew-x-12 bg-white/25"></i>
                 <div class="relative flex h-full flex-col justify-between">
-                  <div class="flex items-start justify-between"><i data-av class="grid size-[clamp(30px,4cqw,52px)] place-items-center rounded-full border border-white/50 bg-white/20 text-[clamp(13px,1.7cqw,22px)] not-italic">T</i><span class="flex gap-1.5"><i class="size-2 rounded-full bg-white/80"></i><i class="size-2 rounded-full bg-white/50"></i><i class="size-2 rounded-full bg-white/30"></i></span></div>
-                  <div><span class="mb-3 block h-[clamp(14px,1.8cqw,24px)] w-[clamp(22px,2.8cqw,38px)] rounded-[5px] border border-white/60 bg-white/20"></span><p data-name2 class="text-[clamp(14px,2cqw,28px)] uppercase tracking-[0.2em]">Tu empresa</p><p data-city3 class="mt-1 text-[clamp(10px,1.1cqw,14px)] tracking-[0.1em] text-white/70">Mérida, Yucatán</p></div>
+                  <i data-av class="grid size-[clamp(28px,3.4cqw,46px)] place-items-center rounded-full border border-white/55 bg-white/20 text-[clamp(12px,1.5cqw,20px)] not-italic">T</i>
+                  <p data-name2 class="origin-bottom-left -rotate-90 translate-x-[110%] whitespace-nowrap text-[clamp(12px,1.7cqw,24px)] font-semibold uppercase tracking-[0.22em]" style="transform-origin:0 100%">Tu empresa</p>
                 </div>
               </div>
             </div>
-            <div class="chip-f rise absolute left-[52%] top-[40%] hidden items-center gap-2 px-4 py-2.5 text-[12.5px] @3xl:flex" style="--d:.85s;translate:calc(var(--mx)*-34px*var(--par)) calc(var(--my)*-22px*var(--par))"><span class="text-[#ffd479]">★★★★★</span>4.9 · Reseñas</div>
-            <div class="chip-f rise absolute right-[6%] top-[62%] hidden items-center gap-2 px-4 py-2.5 text-[12.5px] @3xl:flex" style="--d:1s;translate:calc(var(--mx)*30px*var(--par)) calc(var(--my)*20px*var(--par))"><i class="live size-2 rounded-full bg-[#3ddc97]"></i>Abierto hoy</div>
-            <div class="chip-f rise absolute right-[38%] top-[70%] hidden items-center gap-2 px-4 py-2.5 text-[12.5px] @3xl:flex" style="--d:1.15s;translate:calc(var(--mx)*-18px*var(--par)) calc(var(--my)*26px*var(--par))"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6 7-11a7 7 0 0 0-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><span data-city3>Mérida, Yucatán</span></div>
 
             <div class="absolute inset-x-0 bottom-0 px-[clamp(20px,2.6cqw,40px)] pb-[clamp(26px,3.2cqw,44px)]">
-              <p class="rise flex items-center gap-2.5 text-[clamp(11px,1.2cqw,14px)] text-white/85" style="--d:.25s"><i class="block size-2.5 rounded-full bg-white"></i><span data-eyebrow>Presencia profesional</span></p>
-              <h1 data-ha class="mt-4 max-w-[13ch] text-[clamp(2.2rem,7.4cqw,6.8rem)] leading-[1] tracking-[-0.045em]" style="font-weight:calc(var(--hw) + 60)">Lo que haces bien, a la vista de todos.</h1>
+              <h1 data-ha class="max-w-[14ch] text-[clamp(2.1rem,6.3cqw,6.2rem)] font-extrabold uppercase leading-[.98] tracking-[-0.025em]" style="font-weight:min(calc(var(--hw) + 420),800)">Tu negocio, cercano</h1>
               <div class="rise mt-7 flex flex-wrap items-center gap-3" style="--d:.9s"><span data-cta class="btn !bg-white px-7 py-3.5 text-[14.5px] font-medium !text-[#14161a]">Contáctanos</span><span class="btn-o flex items-center gap-2 border border-white/50 px-6 py-3.5 text-[14.5px]"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M7 5v14l12-7z"/></svg><span data-cta3>Ver servicios</span></span></div>
-              <p data-sub class="rise absolute bottom-[clamp(26px,3.2cqw,44px)] right-[clamp(20px,2.6cqw,40px)] hidden max-w-[22rem] text-[clamp(12px,1.25cqw,15.5px)] leading-snug text-white/80 @3xl:block" style="--d:1.1s">Presencia profesional para atraer clientes.</p>
+              <p data-sub class="rise absolute bottom-[clamp(26px,3.2cqw,44px)] right-[clamp(20px,2.6cqw,40px)] hidden max-w-[21rem] text-[clamp(12px,1.25cqw,15.5px)] leading-snug text-white/90 @3xl:block" style="--d:1.1s">Presencia profesional para atraer clientes.</p>
             </div>
           </section>
 
           <!-- Plantilla B: Orbes -->
           <section data-d="b" hidden class="b-hero relative h-full min-h-[540px] overflow-hidden text-white">
-            <i class="absolute inset-0" style="background:radial-gradient(78% 74% at 50% 24%,#000 52%,color-mix(in srgb,var(--b) 28%,#000) 66%,color-mix(in srgb,var(--b) 80%,#000) 80%,var(--b) 90%,color-mix(in srgb,var(--a) 55%,#fff) 100%)"></i>
-            <i class="grain pointer-events-none absolute inset-0 opacity-[.08]"></i>
+            <div class="mesh absolute inset-0" aria-hidden="true"><i class="mb mb1"></i><i class="mb mb2"></i><i class="mb mb3"></i><i class="mb mb4"></i></div>
+            <i class="pointer-events-none absolute inset-0" style="background:radial-gradient(120% 90% at 50% 40%,transparent 55%,rgba(0,0,20,.3))"></i>
+            <i class="grain pointer-events-none absolute inset-0 opacity-[.16]"></i>
             <div data-bubbles class="absolute inset-0"></div>
             <nav class="rise absolute inset-x-0 top-0 flex items-center justify-center gap-[clamp(16px,3.4cqw,48px)] pl-[64px] pr-4 pt-[22px] text-[clamp(12px,1.2cqw,14.5px)]" style="--d:.1s">
-              <span class="flex items-center gap-2.5"><i data-markbox class="mark grid size-9 place-items-center bg-white text-[15px] font-semibold not-italic text-[#14161a]">T</i><span data-name class="text-[clamp(16px,1.7cqw,21px)] tracking-[-0.02em]" style="font-weight:calc(var(--hw) + 160)">Tu empresa</span></span>
+              <span class="flex items-center gap-2.5"><i data-markbox class="mark grid size-9 place-items-center bg-white text-[15px] font-semibold not-italic text-[#14161a]">T</i><span data-name class="text-[clamp(16px,1.7cqw,21px)] font-extrabold tracking-[-0.02em]">Tu empresa</span></span>
               <span class="hidden items-center gap-[clamp(14px,3cqw,40px)] text-white/90 @2xl:flex" data-nav2></span>
-              <span data-navcta class="flex items-center gap-2 rounded-full border border-white/55 bg-black/40 px-5 py-2.5 backdrop-blur-md"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg><span data-navcta-t>Contacto</span></span>
+              <span data-navcta class="flex items-center gap-2 rounded-full border border-white/55 bg-white/10 px-5 py-2.5 backdrop-blur-md"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg><span data-navcta-t>Contacto</span></span>
             </nav>
-            <div class="absolute inset-x-0 top-[clamp(80px,22%,190px)] flex flex-col items-center px-6 text-center">
-              <p class="rise flex items-center gap-3 text-[clamp(12px,1.25cqw,15px)] text-white/85" style="--d:.2s"><span class="flex -space-x-2"><i class="grid size-7 place-items-center rounded-full border-2 border-black text-[11px] not-italic" style="background:var(--a);color:var(--on)" data-av>T</i><i class="size-7 rounded-full border-2 border-black" style="background:linear-gradient(135deg,var(--a),var(--b))"></i><i class="size-7 rounded-full border-2 border-black bg-white/80"></i></span><span data-eyebrow2>Atendemos hoy en Mérida, Yucatán</span></p>
-              <h1 data-hb class="mt-5 max-w-[15ch] text-[clamp(2.4rem,9.4cqw,8rem)] leading-[1] tracking-[-0.055em]" style="font-weight:min(calc(var(--hw) + 300),800);text-shadow:0 4px 40px rgba(255,255,255,.12)"></h1>
-              <p data-sub2 class="rise mt-6 max-w-[30rem] text-[clamp(12.5px,1.4cqw,15.5px)] text-white/65" style="--d:1s">Presencia profesional para atraer clientes.</p>
-              <span data-cta2 class="rise btn mt-6 inline-block px-8 py-3.5 text-[14px] font-medium" style="--d:1.15s">Contáctanos</span>
+            <div class="absolute inset-x-0 top-[clamp(80px,21%,180px)] flex flex-col items-center px-6 text-center">
+              <p class="rise flex items-center gap-3 text-[clamp(12px,1.25cqw,15px)] text-white/90" style="--d:.2s"><span class="flex -space-x-2"><i class="grid size-7 place-items-center rounded-full border-2 border-white/80 text-[11px] not-italic" style="background:var(--a);color:var(--on)" data-av>T</i><i class="size-7 rounded-full border-2 border-white/80" style="background:linear-gradient(135deg,var(--a),var(--b))"></i><i class="size-7 rounded-full border-2 border-white/80 bg-white/80"></i></span><span data-eyebrow2>Presencia profesional</span></p>
+              <h1 data-hb class="mt-5 max-w-[15ch] text-[clamp(2.4rem,8.6cqw,7.4rem)] font-extrabold uppercase leading-[.98] tracking-[-0.035em]" style="font-weight:min(calc(var(--hw) + 420),800)"></h1>
+              <p data-sub2 class="rise mt-6 max-w-[30rem] text-[clamp(12.5px,1.4cqw,15.5px)] text-white/80" style="--d:1s">Presencia profesional para atraer clientes.</p>
+              <span data-cta2 class="rise btn mt-6 inline-block !bg-white px-8 py-3.5 text-[14px] font-medium !text-[#14161a]" style="--d:1.15s">Contáctanos</span>
             </div>
           </section>
 
@@ -176,8 +172,8 @@ const idleImgs = ['/process/reel-1.webp', '/horizon/2.webp', '/process/reel-2.we
       <aside class="flex min-h-0 flex-col overflow-hidden border-t border-white/10 bg-white lg:border-l lg:border-t-0">
         <div data-scroller class="min-h-0 flex-1 overflow-y-auto px-6 pb-8 pt-6 lg:px-10 lg:pt-7">
           <div class="flex items-center justify-between text-[12px] text-black/45"><a href="/" class="tracking-wide"><span class="font-light">HUMAN</span> <span class="font-semibold">CORP</span></a><a href="/contacto" class="hover:text-black">Contacto</a></div>
-          <h1 class="mt-8 font-goog text-[1.9rem] font-light uppercase tracking-[0.16em]">Tu sitio</h1>
-          <p class="mt-2 max-w-[24rem] text-[13px] leading-relaxed text-black/55">Todo está listo: elige el diseño y personalízalo. Al terminar, generamos tu sitio como propuesta visual inicial, que afinamos juntos.</p>
+          <h1 class="mt-8 flex items-center gap-3 font-goog text-[1.9rem] font-light uppercase tracking-[0.16em]">Tu sitio<span class="rounded-full bg-[#0033FF] px-3 py-1 font-sans text-[11px] font-medium tracking-[0.14em] text-white">Beta</span></h1>
+          <p class="mt-2 max-w-[24rem] text-[13px] leading-relaxed text-black/55">Es una versión beta: estamos probándola. Todo está listo: elige el diseño y personalízalo. Al terminar, generamos tu sitio como propuesta visual inicial, que afinamos juntos.</p>
 
           <h2 class={h}>Tu negocio</h2>
           <label class="mt-4 block text-[12.5px] text-black/60">Nombre<input data-in-name maxlength="28" placeholder="Tu empresa" class={inp} /></label>
@@ -247,12 +243,12 @@ const idleImgs = ['/process/reel-1.webp', '/horizon/2.webp', '/process/reel-2.we
 
       /* ---------- Datos ---------- */
       const COPY = {
-        pequena: { eyebrow: 'Presencia profesional', h: 'Lo que haces bien, a la vista de todos.', sub: 'Un negocio local con la imagen que merece.', c1: 'Contáctanos', c2: 'Ver servicios', nav: ['Inicio', 'Servicios', 'Nosotros', 'Ubicación'], h2: 'Hecho con cuidado, pensado para ti.', sv: [['Atención cercana', 'Te escuchamos y resolvemos con calma.'], ['Calidad constante', 'Cuidamos cada detalle de lo que hacemos.'], ['Siempre disponibles', 'Te respondemos rápido y con claridad.']], faq: [['¿Dónde están?', 'Estamos en {city}. Escríbenos y te damos la ubicación exacta.'], ['¿Cómo puedo contactarlos?', 'Por el formulario de esta página, por correo o por teléfono.'], ['¿Cuánto tardan en responder?', 'Normalmente en el mismo día hábil.']] },
-        crecimiento: { eyebrow: 'Crecimiento ordenado', h: 'Crece con orden, cada día.', sub: 'Sistemas conectados para escalar sin caos.', c1: 'Agenda una demo', c2: 'Ver soluciones', nav: ['Inicio', 'Soluciones', 'Casos', 'Equipo'], h2: 'Menos fricción, más resultados.', sv: [['Procesos claros', 'Cada área sabe qué sigue y quién lo hace.'], ['Herramientas conectadas', 'Tu información fluye entre sistemas.'], ['Seguimiento continuo', 'Medimos y mejoramos contigo.']], faq: [['¿Cómo empezamos?', 'Con una llamada para conocer tu operación actual.'], ['¿Se integran con lo que ya uso?', 'Sí, conectamos las herramientas que ya tienes.'], ['¿Atienden en {city}?', 'Sí, y también de forma remota.']] },
-        consolidada: { eyebrow: 'Operación integrada', h: 'Una operación, un solo estándar.', sub: 'Departamentos, datos y procesos en armonía.', c1: 'Conoce más', c2: 'Ver áreas', nav: ['Inicio', 'Áreas', 'Plataforma', 'Seguridad'], h2: 'Capacidad para sostener tu escala.', sv: [['Integración de áreas', 'Un mismo lenguaje entre departamentos.'], ['Información confiable', 'Datos centralizados para decidir mejor.'], ['Infraestructura sólida', 'Respaldos, accesos y continuidad.']], faq: [['¿Trabajan con equipos grandes?', 'Sí, adaptamos el acompañamiento a cada área.'], ['¿Cómo cuidan la información?', 'Con permisos, respaldos y registros de actividad.'], ['¿Dónde está su oficina?', 'En {city}.']] },
-        comercio: { eyebrow: 'Tienda y sucursales', h: 'Tu tienda, abierta cuando la necesitan.', sub: 'Catálogo, pedidos y facturación al día.', c1: 'Ver catálogo', c2: 'Sucursales', nav: ['Inicio', 'Productos', 'Promos', 'Sucursales'], h2: 'Todo lo que buscas, en un solo lugar.', sv: [['Catálogo claro', 'Encuentra lo que buscas en segundos.'], ['Pedidos sin fricción', 'Pide en línea o pasa por tu compra.'], ['Promociones', 'Ofertas de temporada para ti.']], faq: [['¿Dónde está la tienda?', 'Estamos en {city}.'], ['¿Hacen envíos?', 'Sí, consulta cobertura y tiempos al pedir.'], ['¿Puedo pedir factura?', 'Sí, solicítala al hacer tu pedido.']] },
-        profesional: { eyebrow: 'Servicios profesionales', h: 'Confianza que se nota desde el primer contacto.', sub: 'Servicios claros y cotizaciones rápidas.', c1: 'Solicitar cotización', c2: 'Ver servicios', nav: ['Inicio', 'Servicios', 'Equipo', 'Clientes'], h2: 'Experiencia al servicio de tu empresa.', sv: [['Asesoría a tu medida', 'Entendemos tu caso antes de proponer.'], ['Cotización clara', 'Alcance, tiempos e inversión por escrito.'], ['Acompañamiento', 'Seguimos contigo después de la entrega.']], faq: [['¿Cómo solicito una cotización?', 'Desde el formulario; te respondemos con una propuesta.'], ['¿Atienden presencial?', 'Sí, en {city}, y también a distancia.'], ['¿Qué incluye el servicio?', 'Se define por escrito antes de empezar.']] },
-        ecommerce: { eyebrow: 'Tienda en línea', h: 'Compra fácil, recibe a tiempo.', sub: 'Compras, pagos y envíos sin fricción.', c1: 'Comprar ahora', c2: 'Ver novedades', nav: ['Inicio', 'Novedades', 'Ofertas', 'Mi cuenta'], h2: 'Una experiencia de compra sin vueltas.', sv: [['Pago sencillo', 'Elige cómo pagar, de forma clara.'], ['Envíos con seguimiento', 'Sabes dónde está tu pedido.'], ['Atención posventa', 'Te ayudamos con cambios y dudas.']], faq: [['¿Cuánto tarda mi pedido?', 'Depende de tu zona; lo ves antes de pagar.'], ['¿Puedo cambiar un producto?', 'Sí, dentro del plazo indicado.'], ['¿Dónde operan?', 'Desde {city}, con envíos a todo el país.']] },
+        pequena: { eyebrow: 'Presencia profesional', pre: 'Tu negocio,', words: ['cercano', 'profesional', 'confiable'], h: 'Lo que haces bien, a la vista de todos.', sub: 'Un negocio local con la imagen que merece.', c1: 'Contáctanos', c2: 'Ver servicios', nav: ['Inicio', 'Servicios', 'Nosotros', 'Ubicación'], h2: 'Hecho con cuidado, pensado para ti.', sv: [['Atención cercana', 'Te escuchamos y resolvemos con calma.'], ['Calidad constante', 'Cuidamos cada detalle de lo que hacemos.'], ['Siempre disponibles', 'Te respondemos rápido y con claridad.']], faq: [['¿Dónde están?', 'Estamos en {city}. Escríbenos y te damos la ubicación exacta.'], ['¿Cómo puedo contactarlos?', 'Por el formulario de esta página, por correo o por teléfono.'], ['¿Cuánto tardan en responder?', 'Normalmente en el mismo día hábil.']] },
+        crecimiento: { eyebrow: 'Crecimiento ordenado', pre: 'Crece con', words: ['branding', 'marketing', 'orden'], h: 'Crece con orden, cada día.', sub: 'Sistemas conectados para escalar sin caos.', c1: 'Agenda una demo', c2: 'Ver soluciones', nav: ['Inicio', 'Soluciones', 'Casos', 'Equipo'], h2: 'Menos fricción, más resultados.', sv: [['Procesos claros', 'Cada área sabe qué sigue y quién lo hace.'], ['Herramientas conectadas', 'Tu información fluye entre sistemas.'], ['Seguimiento continuo', 'Medimos y mejoramos contigo.']], faq: [['¿Cómo empezamos?', 'Con una llamada para conocer tu operación actual.'], ['¿Se integran con lo que ya uso?', 'Sí, conectamos las herramientas que ya tienes.'], ['¿Atienden en {city}?', 'Sí, y también de forma remota.']] },
+        consolidada: { eyebrow: 'Operación integrada', pre: 'Una operación', words: ['integrada', 'segura', 'medible'], h: 'Una operación, un solo estándar.', sub: 'Departamentos, datos y procesos en armonía.', c1: 'Conoce más', c2: 'Ver áreas', nav: ['Inicio', 'Áreas', 'Plataforma', 'Seguridad'], h2: 'Capacidad para sostener tu escala.', sv: [['Integración de áreas', 'Un mismo lenguaje entre departamentos.'], ['Información confiable', 'Datos centralizados para decidir mejor.'], ['Infraestructura sólida', 'Respaldos, accesos y continuidad.']], faq: [['¿Trabajan con equipos grandes?', 'Sí, adaptamos el acompañamiento a cada área.'], ['¿Cómo cuidan la información?', 'Con permisos, respaldos y registros de actividad.'], ['¿Dónde está su oficina?', 'En {city}.']] },
+        comercio: { eyebrow: 'Tienda y sucursales', pre: 'Tu tienda,', words: ['abierta', 'cercana', 'visible'], h: 'Tu tienda, abierta cuando la necesitan.', sub: 'Catálogo, pedidos y facturación al día.', c1: 'Ver catálogo', c2: 'Sucursales', nav: ['Inicio', 'Productos', 'Promos', 'Sucursales'], h2: 'Todo lo que buscas, en un solo lugar.', sv: [['Catálogo claro', 'Encuentra lo que buscas en segundos.'], ['Pedidos sin fricción', 'Pide en línea o pasa por tu compra.'], ['Promociones', 'Ofertas de temporada para ti.']], faq: [['¿Dónde está la tienda?', 'Estamos en {city}.'], ['¿Hacen envíos?', 'Sí, consulta cobertura y tiempos al pedir.'], ['¿Puedo pedir factura?', 'Sí, solicítala al hacer tu pedido.']] },
+        profesional: { eyebrow: 'Servicios profesionales', pre: 'Servicios con', words: ['confianza', 'branding', 'marketing'], h: 'Confianza que se nota desde el primer contacto.', sub: 'Servicios claros y cotizaciones rápidas.', c1: 'Solicitar cotización', c2: 'Ver servicios', nav: ['Inicio', 'Servicios', 'Equipo', 'Clientes'], h2: 'Experiencia al servicio de tu empresa.', sv: [['Asesoría a tu medida', 'Entendemos tu caso antes de proponer.'], ['Cotización clara', 'Alcance, tiempos e inversión por escrito.'], ['Acompañamiento', 'Seguimos contigo después de la entrega.']], faq: [['¿Cómo solicito una cotización?', 'Desde el formulario; te respondemos con una propuesta.'], ['¿Atienden presencial?', 'Sí, en {city}, y también a distancia.'], ['¿Qué incluye el servicio?', 'Se define por escrito antes de empezar.']] },
+        ecommerce: { eyebrow: 'Tienda en línea', pre: 'Tu tienda en línea,', words: ['ventas', 'marketing', 'branding'], h: 'Compra fácil, recibe a tiempo.', sub: 'Compras, pagos y envíos sin fricción.', c1: 'Comprar ahora', c2: 'Ver novedades', nav: ['Inicio', 'Novedades', 'Ofertas', 'Mi cuenta'], h2: 'Una experiencia de compra sin vueltas.', sv: [['Pago sencillo', 'Elige cómo pagar, de forma clara.'], ['Envíos con seguimiento', 'Sabes dónde está tu pedido.'], ['Atención posventa', 'Te ayudamos con cambios y dudas.']], faq: [['¿Cuánto tarda mi pedido?', 'Depende de tu zona; lo ves antes de pagar.'], ['¿Puedo cambiar un producto?', 'Sí, dentro del plazo indicado.'], ['¿Dónde operan?', 'Desde {city}, con envíos a todo el país.']] },
       };
       const PAL = { atardecer: ['#F6B370', '#2F3A9E'], oceano: ['#0033FF', '#977DFF'], bosque: ['#10b981', '#064e5a'], grafito: ['#14173f', '#8f8aa6'] };
       const STY = { minimal: ['6px', '340'], calido: ['16px', '480'], audaz: ['0px', '700'] };
@@ -298,19 +294,17 @@ const idleImgs = ['/process/reel-1.webp', '/horizon/2.webp', '/process/reel-2.we
           if (!gl) return;
           const vs = 'attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
           const fs = `precision mediump float;uniform vec2 res;uniform float t;uniform vec3 ca;uniform vec3 cb;uniform vec2 m;
-float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
-float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}
-float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<5;i++){v+=a*n(p);p=p*2.02+vec2(3.1,1.7);a*=.5;}return v;}
-void main(){vec2 uv=gl_FragCoord.xy/res;vec2 p=(gl_FragCoord.xy-.5*res)/res.y;float tt=t*.05;
-vec2 q=vec2(fbm(p*1.3+tt),fbm(p*1.3+vec2(5.2,1.3)-tt));
-vec2 r=vec2(fbm(p*1.5+3.*q+vec2(1.7,9.2)+tt*1.2),fbm(p*1.5+3.*q+vec2(8.3,2.8)-tt));
-float f=fbm(p*1.2+3.*r);
-vec3 col=vec3(.012,.014,.03);
-col=mix(col,cb*.95,smoothstep(.25,.85,f));
-col=mix(col,ca,smoothstep(.35,1.,length(q))*.75);
-col+=vec3(1.,.93,.85)*.10*smoothstep(.62,1.,r.x);
-col*=mix(.5,1.,smoothstep(1.25,.15,length(uv-vec2(.5,.45))*1.25));
-col+=ca*.2*exp(-7.*length(uv-m));
+void main(){vec2 uv=gl_FragCoord.xy/res;float asp=res.x/res.y;vec2 p=vec2(uv.x*asp,uv.y);float tt=t*.12;
+vec3 col=mix(cb*.34,cb*.82,smoothstep(0.,1.,uv.y*.7+.22+.14*sin(uv.x*2.6+tt*1.4)));
+vec2 c1=vec2(asp*(.22+.14*sin(tt)),.78+.1*cos(tt*1.3));
+vec2 c2=vec2(asp*(.82+.1*cos(tt*.8)),.22+.12*sin(tt*1.1));
+vec2 c3=vec2(asp*(.5+.25*sin(tt*.6)),.5+.2*cos(tt*.7));
+vec2 c4=vec2(asp*m.x,m.y);
+col+=ca*.55*exp(-3.2*dot(p-c1,p-c1));
+col+=ca*.5*exp(-4.5*dot(p-c2,p-c2));
+col+=mix(cb,vec3(1.),.3)*.2*exp(-5.*dot(p-c3,p-c3));
+col+=vec3(1.)*.14*exp(-12.*dot(p-c4,p-c4));
+col=mix(col,vec3(dot(col,vec3(.33))),.08);
 gl_FragColor=vec4(col,1.);}`;
           const sh = (t, src) => { const o = gl.createShader(t); gl.shaderSource(o, src); gl.compileShader(o); return o; };
           const pr = gl.createProgram(); gl.attachShader(pr, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(pr, sh(gl.FRAGMENT_SHADER, fs)); gl.linkProgram(pr);
@@ -337,13 +331,27 @@ gl_FragColor=vec4(col,1.);}`;
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       };
       requestAnimationFrame(auroraFrame);
-      const drawHeadlineA = (text) => {
-        $('[data-ha]').innerHTML = text.split(/\s+/).map((w, i) => `<span class="ww"><span class="wi" style="--i:${i}">${esc(w)}</span></span>`).join(' ');
+      const STAR = '<svg viewBox="0 0 40 40" class="rot-star" aria-hidden="true"><g fill="var(--a)">' + [0, 1, 2, 3, 4, 5, 6, 7].map((i) => `<rect x="17.2" y="1" width="5.6" height="15" rx="2.8" transform="rotate(${i * 45} 20 20)"/>`).join('') + '</g></svg>';
+      let rotTimer = 0;
+      const stopRot = () => { clearInterval(rotTimer); rotTimer = 0; };
+      const startRot = (el, words) => {
+        stopRot(); let i = 0; el.textContent = words[0];
+        if (reduced || G?.anim === 'sin' || words.length < 2) return;
+        rotTimer = setInterval(() => {
+          el.classList.add('rot-out');
+          setTimeout(() => { i = (i + 1) % words.length; el.textContent = words[i]; el.classList.remove('rot-out'); el.classList.add('rot-in'); setTimeout(() => el.classList.remove('rot-in'), 520); }, 360);
+        }, 2600);
       };
-      const drawHeadline = (text) => {
-        const words = text.split(/\s+/); const n = words.length; const lo = Math.floor(n * 0.3), hi = Math.ceil(n * 0.6);
-        $('[data-hb]').innerHTML = words.map((w, i) => `<span class="bw" style="--i:${i};--o:${i >= lo && i < hi ? 0.32 : 1}">${esc(w)}</span>`).join(' ');
+      const drawHeading = (sel, pre, words, custom, dim) => {
+        const el = $(sel);
+        const preWords = (custom || pre).split(/\s+/);
+        const n = preWords.length;
+        const head = preWords.map((w, i) => `<span class="ww"><span class="wi" style="--i:${i}">${esc(w)}</span></span>`).join(' ');
+        if (custom) { el.innerHTML = head; stopRot(); return; }
+        el.innerHTML = `${head}<br /><span class="ww"><span class="wi" style="--i:${n}"><span class="rotw" data-rot></span>${dim ? '' : ' ' + STAR}</span></span>`;
+        startRot(el.querySelector('[data-rot]'), words);
       };
+
 
       const drawSite = () => {
         const nm = G.name.trim() || 'Tu empresa';
@@ -361,11 +369,11 @@ gl_FragColor=vec4(col,1.);}`;
         const city = G.city.trim() || 'Mérida, Yucatán';
         const head = G.h.trim() || c.h, cta = G.cta.trim() || c.c1;
         set('[data-name],[data-name3]', nm); $$('[data-name2]').forEach((el, i) => (el.textContent = (i ? '| ' : '') + nm));
-        set('[data-eyebrow]', c.eyebrow); set('[data-eyebrow2]', `Atendemos hoy en ${city}`); set('[data-h]', head); set('[data-sub2]', c.sub); set('[data-sub]', `${c.sub} ${nm} te acompaña desde ${city}: simple, claro y listo para crecer contigo.`);
+        set('[data-eyebrow]', c.eyebrow); set('[data-eyebrow2]', c.eyebrow); set('[data-h]', head); set('[data-sub2]', c.sub); set('[data-sub]', `${c.sub} ${nm} te acompaña: simple, claro y listo para crecer contigo.`);
         set('[data-cta],[data-cta2],[data-cta4]', cta); set('[data-cta3]', c.c2); set('[data-navcta-t]', c.nav[3]); $$('[data-navcta]:not([data-navcta-t])').forEach((el) => { if (!el.querySelector('[data-navcta-t]')) el.textContent = 'Contacto'; });
         set('[data-h2]', c.h2); set('[data-h3]', `Hablemos de ${nm}.`);
         set('[data-city],[data-city2]', city); set('[data-mail]', `hola@${slug}.mx`);
-        $('[data-nav]').innerHTML = c.nav.map((n, i) => `<span class="rounded-full px-[clamp(10px,1.4cqw,20px)] py-2 text-[clamp(11px,1.15cqw,14px)] ${i === 0 ? 'bg-white/20 text-white' : 'text-white/90'}">${n}</span>`).join('');
+        $('[data-nav]').innerHTML = c.nav.map((n, i) => `<span class="${i === 0 ? 'text-white' : 'text-white/85'}">${n}<sup class="ml-1 text-[.62em] opacity-60">0${i + 1}</sup></span>`).join('');
         $('[data-nav2]').innerHTML = c.nav.slice(0, 3).map((n) => `<span>${n}</span>`).join('');
         $('[data-services]').innerHTML = c.sv.map(([t, d], i) => `<div class="sr card svc relative overflow-hidden p-7" style="--sd:${i * 0.12}s;border-radius:calc(var(--rad) + 18px)"><span class="svc-n absolute right-6 top-5 text-[13px] opacity-35">0${i + 1}</span><i class="svc-ic grid size-12 place-items-center text-white" style="border-radius:calc(var(--rad) + 6px);background:linear-gradient(140deg,var(--a),var(--b))">${icon(SETS[G.type][i], 'size-6')}</i><h3 class="mt-8 text-[1.3rem] tracking-[-0.025em]" style="font-weight:var(--hw)">${t}</h3><p class="mt-2 text-[14.5px] leading-relaxed opacity-65">${d}</p><p class="svc-link mt-6 flex items-center gap-2 text-[13px] font-medium" style="color:var(--a)">Conocer más <span aria-hidden="true">→</span></p></div>`).join('');
         $('[data-faq]').innerHTML = c.faq.map(([q, an], i) => `<details class="sr faq border-t py-4" ${i === 0 ? 'open' : ''} style="--sd:${i * 0.1}s"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-[1.05rem] tracking-[-0.015em]">${q}<i class="faq-i grid size-7 shrink-0 place-items-center rounded-full border border-current/30 text-[15px] leading-none not-italic">+</i></summary><p class="mt-3 max-w-[40rem] text-[14.5px] leading-relaxed opacity-65">${an.replace('{city}', esc(city))}</p></details>`).join('');
@@ -375,9 +383,9 @@ gl_FragColor=vec4(col,1.);}`;
         // diseño, portada, secciones
         $('[data-d="a"]').hidden = G.design !== 'a'; $('[data-d="b"]').hidden = G.design !== 'b';
         $$('[data-sec]').forEach((s) => (s.hidden = !G.secs.has(s.dataset.sec)));
-        set('[data-city3]', city);
         AU.cols = [hex3(a), hex3(b)]; AU.on = G.design === 'a';
-        if (G.design === 'a') drawHeadlineA(head); else { drawBubbles(nm, G.type); drawHeadline(head); }
+        const customH = G.h.trim();
+        if (G.design === 'a') drawHeading('[data-ha]', c.pre, c.words, customH, false); else { drawBubbles(nm, G.type); drawHeading('[data-hb]', c.pre, c.words, customH, false); }
         $('[data-marquee]').innerHTML = [...c.sv.map((x) => x[0]), ...c.nav.slice(1)].concat([...c.sv.map((x) => x[0]), ...c.nav.slice(1)]).map((t) => `<span class="text-[clamp(1.1rem,2.6cqw,2.2rem)] tracking-[-0.03em]" style="font-weight:var(--hw)">${t}</span><i class="size-2 rounded-full" style="background:var(--a)"></i>`).join('');
         site.scrollTop = 0;
         $$('.sr').forEach((el) => el.classList.remove('in'));
@@ -394,7 +402,7 @@ gl_FragColor=vec4(col,1.);}`;
         if (phase === 'loading') return;
         const my = ++token;
         G = { ...S, secs: new Set(S.secs) }; dirty = false;
-        clearInterval(fanTimer);
+        clearInterval(fanTimer); stopRot();
         const gen = $('[data-gen]'); gen.style.setProperty('--a', G.ca || PAL[G.pal][0]); gen.style.setProperty('--b', G.cb || PAL[G.pal][1]);
         phase = 'loading'; renderPanel();
         $('[data-scroller]').scrollTo({ top: 0, behavior: 'smooth' });

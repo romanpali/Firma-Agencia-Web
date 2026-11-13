@@ -9,7 +9,7 @@ const links = [
   { href: '/contacto', label: 'Contacto' },
 ];
 const tools = [
-  { href: '/arma-tu-proyecto', t: 'Arma tu proyecto', d: 'Configura tu solución y mira cómo se arma.' },
+  { href: '/arma-tu-proyecto', t: 'Arma tu proyecto (beta)', d: 'Personaliza un sitio y mira cómo se genera.' },
   { href: '/diagnostico', t: 'Diagnóstico gratis', d: '¿Qué tan conectada está tu empresa?' },
   { href: '/paquetes', t: 'Paquetes', d: 'Soluciones completas por necesidad.' },
 ];
@@ -53,7 +53,7 @@ const pill = 'hdr-pill rounded-full border border-white/20 bg-white/10 px-5 py-3
       {links.map((l) => <a href={l.href} class="text-[14px] font-semibold tracking-tight transition-opacity hover:opacity-70">{l.label}</a>)}
     </nav>
   </div>
-  <a href="/arma-tu-proyecto" class={`${pill} hidden lg:inline-flex`}>Arma tu proyecto</a>
+  <a href="/arma-tu-proyecto" class={`${pill} hidden items-center gap-2 lg:inline-flex`}>Arma tu proyecto<span class="rounded-full bg-white/25 px-2 py-0.5 text-[10px] uppercase tracking-wider">Beta</span></a>
   <button type="button" class={`${pill} lg:hidden`} data-menu-open aria-expanded="false" aria-controls="site-menu">Menú</button>
 </header>
 
