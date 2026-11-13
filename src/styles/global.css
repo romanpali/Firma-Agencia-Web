@@ -269,3 +269,42 @@ body { overflow-x: clip; }
 @media (hover: hover) { .au:hover { transform: translateY(-6px); box-shadow: 0 40px 70px -30px rgba(0, 0, 40, 0.8); } }
 .au-row { scrollbar-width: none; }
 .au-row::-webkit-scrollbar { display: none; }
+
+/* Ilustraciones animadas de "Para quién trabajamos" */
+.art * { transform-box: fill-box; }
+@keyframes aTw { 0%, 100% { opacity: 0.2; } 50% { opacity: 1; } }
+@keyframes aBob { 50% { translate: 0 -4px; } }
+@keyframes aGlow { 50% { opacity: 0.55; } }
+@keyframes aSway { 50% { rotate: 10deg; } }
+@keyframes aRise { 0% { scale: 1 0.3; } 55%, 85% { scale: 1 1; } 100% { scale: 1 0.3; } }
+@keyframes aDraw { 0% { stroke-dashoffset: 100; } 55%, 85% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 100; } }
+@keyframes aBlink { 0%, 55%, 100% { opacity: 1; } 60%, 70% { opacity: 0.2; } 65% { opacity: 1; } }
+@keyframes aDrive { from { translate: -50px 0; } to { translate: 240px 0; } }
+@keyframes aSpin { to { rotate: 360deg; } }
+@keyframes aFlow { to { stroke-dashoffset: -18; } }
+@keyframes aPop { 0%, 15% { scale: 0; } 30% { scale: 1.2; } 40%, 85% { scale: 1; } 100% { scale: 0; } }
+@keyframes aType { 0% { scale: 0 1; } 40%, 85% { scale: 1 1; } 100% { scale: 0 1; } }
+@keyframes aDrop { 0%, 100% { translate: 0 0; } 50% { translate: 0 -8px; } 60% { translate: 0 0; } 70% { translate: 0 -3px; } 80% { translate: 0 0; } }
+@keyframes aFloat { 50% { translate: 0 -6px; rotate: 4deg; } }
+@keyframes aPulse { from { scale: 1; opacity: 0.7; } to { scale: 2.6; opacity: 0; } }
+@keyframes aFlick { 0%, 40%, 100% { opacity: 0; } 50%, 90% { opacity: 1; } }
+@keyframes aSteam { 0% { translate: 0 4px; opacity: 0; } 50% { opacity: 0.7; } 100% { translate: 0 -8px; opacity: 0; } }
+.a-tw { animation: aTw 3s ease-in-out infinite; animation-delay: calc(var(--d, 0) * 1s); }
+.a-bob { animation: aBob 4s ease-in-out infinite; }
+.a-glow { animation: aGlow 3.6s ease-in-out infinite; }
+.a-sway { animation: aSway 3s ease-in-out infinite; }
+.a-rise { transform-origin: 50% 100%; animation: aRise 6s cubic-bezier(.3, .7, .2, 1) infinite; animation-delay: calc(var(--d, 0) * 0.35s); }
+.a-draw { animation: aDraw 6s ease-in-out infinite; }
+.a-blink { animation: aBlink 3.4s steps(1) infinite; }
+.a-drive { animation: aDrive 7s linear infinite; }
+.a-spin { transform-origin: 50% 50%; animation: aSpin 16s linear infinite; }
+.a-flow { animation: aFlow 1.6s linear infinite; }
+.a-pop { animation: aPop 5s ease-in-out infinite; }
+.a-type { transform-origin: 0 50%; animation: aType 5s ease-in-out infinite; animation-delay: calc(var(--d, 0) * 0.35s); }
+.a-drop { animation: aDrop 4s ease-in-out infinite; }
+.a-float { animation: aFloat 5s ease-in-out infinite; }
+.a-pulse { transform-origin: 50% 50%; animation: aPulse 2s ease-out infinite; }
+.a-flick { animation: aFlick 5s steps(1) infinite; }
+.a-steam { animation: aSteam 3s ease-in-out infinite; }
+.art-off .art * { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) { .art * { animation: none !important; } .a-draw { stroke-dashoffset: 0; } }

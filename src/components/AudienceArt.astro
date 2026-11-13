@@ -1,0 +1,120 @@
+---
+// Escenas nocturnas planas y animadas, una por categoría (i = 0..6). Viewbox 200x240.
+const { i } = Astro.props as { i: number };
+const skies = [
+  ['#1a1464', '#6a3fd1', '#f08bb4'],
+  ['#0a2a6e', '#2f6fe0', '#7ad3f0'],
+  ['#1b0f5a', '#5b3fd0', '#c58bf5'],
+  ['#2a0f5a', '#8a3fc9', '#ff8aa8'],
+  ['#0b1f5c', '#3a56d4', '#9bb6ff'],
+  ['#0a2a4e', '#12807f', '#7de0c8'],
+  ['#14104f', '#4b32c9', '#977dff'],
+];
+const [c1, c2, c3] = skies[i];
+const stars = [[22, 30], [60, 18], [96, 42], [128, 24], [172, 62], [34, 78], [186, 22], [76, 66], [150, 90], [12, 120]];
+---
+
+<svg class="art absolute inset-0 size-full" viewBox="0 0 200 240" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <defs>
+    <linearGradient id={`sky${i}`} x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color={c1}></stop><stop offset=".6" stop-color={c2}></stop><stop offset="1" stop-color={c3}></stop>
+    </linearGradient>
+    <radialGradient id={`glow${i}`}><stop offset="0" stop-color="#fff" stop-opacity=".9"></stop><stop offset="1" stop-color="#fff" stop-opacity="0"></stop></radialGradient>
+    <pattern id={`w${i}`} width="10" height="12" patternUnits="userSpaceOnUse"><rect x="2" y="3" width="5" height="6" rx="1" fill="#ffe9a8" opacity=".9"></rect></pattern>
+    <pattern id={`v${i}`} width="10" height="12" patternUnits="userSpaceOnUse" patternTransform="translate(5 6)"><rect x="2" y="3" width="5" height="6" rx="1" fill="#ffe9a8"></rect></pattern>
+  </defs>
+  <rect width="200" height="240" fill={`url(#sky${i})`}></rect>
+  {stars.map(([x, y], k) => <circle class="a-tw" cx={x} cy={y} r={k % 3 === 0 ? 1.4 : 0.9} fill="#fff" style={`--d:${(k * 0.37) % 3}`}></circle>)}
+  <path d="M0 176 C40 150 80 170 120 158 S180 150 200 164 V240 H0Z" fill="#fff" opacity=".12"></path>
+  <path d="M0 190 C50 176 90 192 140 182 S190 180 200 186 V240 H0Z" fill="#1a0f4a" opacity=".85"></path>
+  <rect y="192" width="200" height="48" fill="#120a3a"></rect>
+
+  {i === 0 && (<>
+    <circle class="a-glow" cx="150" cy="48" r="30" fill={`url(#glow${i})`} opacity=".45"></circle>
+    <circle cx="150" cy="48" r="14" fill="#fff6e0"></circle>
+    <g class="a-bob">
+      <rect x="72" y="142" width="56" height="50" fill="#f4efff"></rect>
+      <path d="M62 144 L138 144 L128 118 L72 118Z" fill="#ff7aa8"></path>
+      <path d="M72 118 L84 118 L82 144 L72 144Z M96 118 L108 118 L107 144 L93 144Z M120 118 L128 118 L138 144 L121 144Z" fill="#fff" opacity=".9"></path>
+      <rect x="82" y="152" width="36" height="26" rx="3" fill="#ffe9a8" class="a-glow"></rect>
+      <rect x="82" y="178" width="36" height="5" fill="#d8cdf5"></rect>
+    </g>
+    <g class="a-sway" style="transform-origin:100px 100px"><line x1="100" y1="100" x2="100" y2="116" stroke="#fff" stroke-width="1"></line><rect x="94" y="110" width="12" height="9" rx="3" fill="#ffd47a"></rect></g>
+    <ellipse cx="52" cy="190" rx="14" ry="9" fill="#2fbf8a"></ellipse><ellipse cx="150" cy="191" rx="12" ry="7" fill="#2fbf8a"></ellipse>
+    <path class="a-steam" d="M110 146 q-4-6 0-10 q4-4 0-10" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round" opacity=".6"></path>
+  </>)}
+
+  {i === 1 && (<>
+    <circle cx="40" cy="48" r="12" fill="#fff6e0"></circle>
+    <path class="a-draw" pathLength="100" d="M36 176 L82 140 L112 118 L166 66" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="100" stroke-dashoffset="100"></path>
+    <rect class="a-rise" style="--d:0" x="52" y="140" width="28" height="52" rx="2" fill="#eaf3ff"></rect>
+    <rect class="a-rise" style="--d:1" x="88" y="112" width="28" height="80" rx="2" fill="#eaf3ff"></rect>
+    <rect class="a-rise" style="--d:2" x="124" y="80" width="30" height="112" rx="2" fill="#eaf3ff"></rect>
+    <rect class="a-rise" style="--d:0" x="52" y="140" width="28" height="52" fill={`url(#w${i})`}></rect>
+    <rect class="a-rise" style="--d:1" x="88" y="112" width="28" height="80" fill={`url(#w${i})`}></rect>
+    <rect class="a-rise" style="--d:2" x="124" y="80" width="30" height="112" fill={`url(#w${i})`}></rect>
+    <g class="a-bob"><path d="M160 64 l8 -10 l8 10 M168 54 v22" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></g>
+  </>)}
+
+  {i === 2 && (<>
+    <circle class="a-glow" cx="46" cy="44" r="28" fill={`url(#glow${i})`} opacity=".4"></circle>
+    <circle cx="46" cy="44" r="13" fill="#fff6e0"></circle>
+    <rect x="50" y="122" width="30" height="70" rx="2" fill="#e6defc"></rect><rect x="50" y="122" width="30" height="70" fill={`url(#w${i})`}></rect>
+    <rect x="122" y="104" width="32" height="88" rx="2" fill="#e6defc"></rect><rect x="122" y="104" width="32" height="88" fill={`url(#w${i})`}></rect>
+    <rect x="82" y="62" width="38" height="130" rx="2" fill="#f1ecff"></rect>
+    <rect x="82" y="62" width="38" height="130" fill={`url(#w${i})`}></rect>
+    <rect class="a-flick" x="82" y="62" width="38" height="130" fill={`url(#v${i})`}></rect>
+    <rect x="92" y="44" width="18" height="18" rx="2" fill="#f1ecff"></rect>
+    <line x1="101" y1="44" x2="101" y2="26" stroke="#fff" stroke-width="1.5"></line>
+    <circle class="a-pulse" cx="101" cy="24" r="4" fill="#ff7aa8"></circle><circle cx="101" cy="24" r="2.4" fill="#ff7aa8"></circle>
+    <ellipse cx="36" cy="190" rx="14" ry="8" fill="#2fbf8a"></ellipse><ellipse cx="168" cy="190" rx="14" ry="8" fill="#2fbf8a"></ellipse>
+  </>)}
+
+  {i === 3 && (<>
+    <circle cx="156" cy="46" r="13" fill="#fff6e0"></circle>
+    <rect x="62" y="132" width="76" height="60" fill="#f6f0ff"></rect>
+    <g><rect x="56" y="112" width="22" height="22" fill="#ff7aa8"></rect><rect x="78" y="112" width="22" height="22" fill="#fff"></rect><rect x="100" y="112" width="22" height="22" fill="#ff7aa8"></rect><rect x="122" y="112" width="22" height="22" fill="#fff"></rect></g>
+    <rect class="a-blink" x="76" y="88" width="48" height="16" rx="8" fill="none" stroke="#ff7aa8" stroke-width="2"></rect>
+    <rect x="90" y="150" width="20" height="42" rx="2" fill="#ffd47a" class="a-glow"></rect>
+    <rect x="68" y="144" width="16" height="22" rx="2" fill="#ffe9a8" class="a-glow"></rect><rect x="116" y="144" width="16" height="22" rx="2" fill="#ffe9a8" class="a-glow"></rect>
+    <g class="a-drive"><circle cx="8" cy="190" r="5" fill="#0d0838" stroke="#fff" stroke-width="1.5"></circle><circle cx="30" cy="190" r="5" fill="#0d0838" stroke="#fff" stroke-width="1.5"></circle><path d="M8 190 L16 176 H26 L30 190Z" fill="#fff"></path><rect x="14" y="166" width="12" height="10" rx="2" fill="#ff7aa8"></rect></g>
+    <ellipse cx="168" cy="191" rx="12" ry="7" fill="#2fbf8a"></ellipse>
+  </>)}
+
+  {i === 4 && (<>
+    <circle cx="44" cy="46" r="12" fill="#fff6e0"></circle>
+    <polygon class="a-glow" points="38,128 22,184 62,184" fill="#fff3c4" opacity=".16"></polygon>
+    <rect x="30" y="182" width="140" height="8" rx="2" fill="#0d0838" opacity=".8"></rect>
+    <path d="M36 182 L46 150 L58 140" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"></path><path d="M52 136 l12 8 l-6 8 l-12 -8z" fill="#ffd47a"></path>
+    <path d="M70 180 H130 L124 172 H76Z" fill="#dfe6ff"></path>
+    <rect x="76" y="122" width="48" height="50" rx="4" fill="#0d1b4d" stroke="#dfe6ff" stroke-width="2"></rect>
+    <rect class="a-type" style="--d:0" x="84" y="134" width="30" height="4" rx="2" fill="#977dff"></rect>
+    <rect class="a-type" style="--d:1" x="84" y="144" width="22" height="4" rx="2" fill="#7ad3f0"></rect>
+    <rect class="a-type" style="--d:2" x="84" y="154" width="28" height="4" rx="2" fill="#977dff"></rect>
+    <g class="a-pop" style="transform-origin:118px 124px"><circle cx="118" cy="124" r="9" fill="#2fbf8a"></circle><path d="M113.5 124 l3 3 l6 -6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></g>
+    <g class="a-float"><rect x="142" y="84" width="24" height="30" rx="3" fill="#f6f0ff" transform="rotate(8 154 99)"></rect><line x1="147" y1="94" x2="161" y2="94" stroke="#977dff" stroke-width="2"></line><line x1="147" y1="101" x2="158" y2="101" stroke="#c9bcff" stroke-width="2"></line></g>
+    <g class="a-float" style="animation-delay:-2s"><rect x="40" y="96" width="22" height="28" rx="3" fill="#f6f0ff" transform="rotate(-8 51 110)"></rect><line x1="45" y1="106" x2="57" y2="106" stroke="#977dff" stroke-width="2"></line></g>
+  </>)}
+
+  {i === 5 && (<>
+    <circle cx="156" cy="40" r="12" fill="#fff6e0"></circle>
+    <rect x="44" y="74" width="112" height="82" rx="8" fill="#f6f9ff"></rect>
+    <path d="M44 82 a8 8 0 0 1 8 -8 h96 a8 8 0 0 1 8 8 v6 H44Z" fill="#cfe0ff"></path>
+    <circle cx="54" cy="81" r="2" fill="#ff7aa8"></circle><circle cx="61" cy="81" r="2" fill="#ffd47a"></circle><circle cx="68" cy="81" r="2" fill="#2fbf8a"></circle>
+    <rect x="54" y="96" width="42" height="26" rx="4" fill="#977dff" opacity=".85"></rect><rect x="104" y="96" width="42" height="26" rx="4" fill="#7ad3f0" opacity=".9"></rect>
+    <rect x="54" y="128" width="42" height="18" rx="4" fill="#ff9ab8" opacity=".85"></rect><rect x="104" y="128" width="30" height="6" rx="3" fill="#cfd8ff"></rect><rect x="104" y="138" width="22" height="6" rx="3" fill="#cfd8ff"></rect>
+    <g class="a-pop" style="transform-origin:150px 74px"><circle cx="150" cy="74" r="12" fill="#ff7aa8"></circle><path d="M144 70 h3 l2 8 h8 l2 -6 h-12" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></g>
+    <g class="a-drop"><rect x="84" y="166" width="32" height="26" rx="2" fill="#e9b98a"></rect><rect x="97" y="166" width="6" height="26" fill="#fff" opacity=".7"></rect></g>
+    <rect x="130" y="176" width="20" height="16" rx="2" fill="#d9a674"></rect><rect x="138" y="176" width="4" height="16" fill="#fff" opacity=".7"></rect>
+  </>)}
+
+  {i === 6 && (<>
+    <circle class="a-glow" cx="100" cy="112" r="50" fill={`url(#glow${i})`} opacity=".25"></circle>
+    <g stroke="#fff" stroke-width="1.5" fill="none" stroke-dasharray="3 6" class="a-flow" opacity=".85"><line x1="52" y1="70" x2="100" y2="112"></line><line x1="148" y1="70" x2="100" y2="112"></line><line x1="52" y1="160" x2="100" y2="112"></line><line x1="148" y1="160" x2="100" y2="112"></line></g>
+    <g class="a-spin"><circle cx="100" cy="112" r="20" fill="none" stroke="#f1ecff" stroke-width="9" stroke-dasharray="6.28 6.28"></circle><circle cx="100" cy="112" r="17" fill="#f1ecff"></circle><circle cx="100" cy="112" r="6" fill="#4b32c9"></circle></g>
+    <g class="a-bob"><rect x="38" y="52" width="28" height="36" rx="4" fill="#f6f0ff"></rect><line x1="44" y1="62" x2="60" y2="62" stroke="#977dff" stroke-width="2"></line><line x1="44" y1="70" x2="56" y2="70" stroke="#c9bcff" stroke-width="2"></line><line x1="44" y1="78" x2="58" y2="78" stroke="#c9bcff" stroke-width="2"></line></g>
+    <g class="a-bob" style="animation-delay:-1s"><rect x="134" y="52" width="28" height="36" rx="4" fill="#f6f0ff"></rect><circle cx="148" cy="66" r="5" fill="#7ad3f0"></circle><line x1="140" y1="78" x2="156" y2="78" stroke="#c9bcff" stroke-width="2"></line></g>
+    <g class="a-bob" style="animation-delay:-2s"><rect x="38" y="142" width="28" height="36" rx="4" fill="#f6f0ff"></rect><rect x="44" y="164" width="4" height="8" fill="#977dff"></rect><rect x="51" y="158" width="4" height="14" fill="#7ad3f0"></rect><rect x="58" y="150" width="4" height="22" fill="#ff7aa8"></rect></g>
+    <g class="a-bob" style="animation-delay:-3s"><rect x="134" y="142" width="28" height="36" rx="4" fill="#f6f0ff"></rect><path d="M142 160 l5 5 l9 -10" stroke="#2fbf8a" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></g>
+  </>)}
+</svg>
