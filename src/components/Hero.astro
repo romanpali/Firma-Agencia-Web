@@ -1,4 +1,13 @@
 ---
+// Piezas de lo que HumanCorp conecta; se reparten a los lados del título (solo en pantallas amplias).
+const chips: [string, string, string, string][] = [
+  ['Identidad de marca', '#d9ceff', 'left-[6%] top-[24%]', '.7s'],
+  ['Sitio web y SEO', '#9fd4ff', 'left-[3%] top-[47%]', '.85s'],
+  ['Ventas y CRM', '#ffd6a0', 'left-[9%] top-[69%]', '1s'],
+  ['Asistentes con IA', '#c9b6ff', 'right-[6%] top-[27%]', '.78s'],
+  ['Facturación CFDI', '#b8f0cf', 'right-[3%] top-[50%]', '.92s'],
+  ['Asesoría contable y fiscal', '#ffc9d6', 'right-[8%] top-[70%]', '1.06s'],
+];
 ---
 
 <div data-hero-wrap class="relative z-10 h-[190svh]">
@@ -18,12 +27,15 @@
         <span class="font-light">HUMAN</span> <span class="font-semibold">CORP</span>
       </h1>
       <p class="hf-rise mt-6 max-w-[21rem] text-[clamp(1.05rem,1.35vw,1.4rem)] font-medium leading-[1.5] tracking-tight text-white/90 text-balance md:max-w-[32rem]" style="--d:.45s">
-        Todo lo que hace funcionar a una empresa, conectado bajo un solo estándar.
+        Todo lo que hace funcionar a una empresa, conectado bajo un solo <em class="hf-em">estándar</em>.
       </p>
       <div class="hf-rise mt-9 flex flex-wrap justify-center gap-3" style="--d:.62s">
         <a href="/servicios" class="rounded-full bg-white px-7 py-3.5 text-[15px] font-medium text-[#0b0c0f] transition-transform hover:scale-[1.03]">Conocer servicios</a>
         <a href="/arma-tu-proyecto" class="rounded-full border border-white/45 px-7 py-3.5 text-[15px] transition-colors hover:bg-white/10">Arma tu proyecto</a>
       </div>
+      {chips.map(([t, c, pos, d]) => (
+        <span class={`hf-rise absolute hidden items-center gap-2.5 rounded-full border border-white/25 bg-white/[0.12] px-4 py-2.5 text-[13px] font-medium text-white/95 shadow-[0_10px_30px_-12px_rgba(0,0,20,.5)] xl:flex ${pos}`} style={`--d:${d}`}><i class="size-2 rounded-full" style={`background:${c}`}></i>{t}</span>
+      ))}
       <div class="hf-rise absolute inset-x-0 bottom-[5%] flex flex-col items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-white/70" style="--d:1s" aria-hidden="true">
         <span>Desliza</span>
         <i class="block h-9 w-px origin-top bg-white/70" style="animation:scrollLine 2s ease-in-out 1.4s 3 both"></i>
