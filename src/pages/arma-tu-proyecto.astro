@@ -9,18 +9,29 @@ const types: [string, string, string][] = [
   ['profesional', 'Servicios profesionales', 'Confianza, cotizaciones y clientes.'],
   ['ecommerce', 'Comercio electrónico', 'Tienda, pagos y envíos.'],
 ];
+const designs: [string, string, string][] = [
+  ['a', 'Horizonte', 'Fotografía a pantalla completa y una tarjeta de cristal.'],
+  ['b', 'Burbujas', 'Fondo oscuro, titular grande y burbujas flotantes.'],
+];
 const palettes: [string, string, string, string][] = [
   ['atardecer', 'Atardecer', '#F6B370', '#2F3A9E'], ['oceano', 'Océano', '#0033FF', '#977DFF'],
   ['bosque', 'Bosque', '#10b981', '#064e5a'], ['grafito', 'Grafito', '#14173f', '#8f8aa6'],
 ];
+const fonts: [string, string][] = [['moderna', 'Moderna'], ['geometrica', 'Geométrica'], ['editorial', 'Editorial']];
 const styles: [string, string, string][] = [
   ['minimal', 'Minimalista', 'Aire, líneas finas y tipografía ligera.'], ['calido', 'Cálido', 'Formas suaves y cercanas.'], ['audaz', 'Audaz', 'Contraste fuerte y títulos contundentes.'],
 ];
-const covers: [string, string, string][] = [
-  ['foto', 'Fotografía', 'Un paisaje de portada, teñido con tus colores.'], ['gradiente', 'Degradado', 'Un fondo limpio con tus colores.'],
-];
+const marks: [string, string][] = [['circulo', 'Círculo'], ['cuadrado', 'Cuadrado'], ['ninguno', 'Solo nombre']];
+const themes: [string, string][] = [['claro', 'Claro'], ['oscuro', 'Oscuro']];
+const covers: [string, string][] = [['foto', 'Fotografía'], ['gradiente', 'Degradado']];
+const anims: [string, string][] = [['suave', 'Suaves'], ['dinamica', 'Dinámicas'], ['sin', 'Sin animación']];
+const secs: [string, string][] = [['servicios', 'Servicios'], ['proceso', 'Cómo trabajamos'], ['faq', 'Preguntas'], ['contacto', 'Contacto y ubicación']];
+
 const row = 'cfg-row block w-full rounded-[18px] bg-[#f5f5f7] px-5 py-4 text-left transition-[background-color,box-shadow] duration-200 hover:bg-[#ededf0] aria-pressed:bg-white aria-pressed:shadow-[0_0_0_2px_#0033FF,0_12px_30px_-18px_rgba(0,51,255,.55)]';
+const chip = 'rounded-full bg-[#f5f5f7] px-4 py-2.5 text-[13px] text-black/65 transition-colors hover:bg-[#ededf0] aria-pressed:bg-[#14161a] aria-pressed:text-white';
 const h = 'mt-9 font-goog text-[1.3rem] font-semibold tracking-[-0.02em]';
+const inp = 'mt-2 w-full rounded-2xl bg-[#f5f5f7] px-5 py-4 text-[15px] outline-none transition-shadow placeholder:text-black/35 focus:bg-white focus:shadow-[0_0_0_2px_#0033FF]';
+const idleImgs = ['/process/reel-1.webp', '/horizon/2.webp', '/process/reel-2.webp', '/horizon/4.webp', '/process/reel-3.webp'];
 ---
 
 <!doctype html>
@@ -28,19 +39,33 @@ const h = 'mt-9 font-goog text-[1.3rem] font-semibold tracking-[-0.02em]';
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Personaliza un sitio web para tu negocio con HumanCorp: elige tu nombre, tus colores y tu estilo, y míralo generarse." />
+    <meta name="description" content="Personaliza un sitio web para tu negocio con HumanCorp: elige diseño, colores, tipografía y textos, y míralo generarse." />
     <script is:inline>document.documentElement.classList.add('js')</script>
     <title>Personaliza tu sitio — HumanCorp</title>
   </head>
-  <body class="overflow-hidden bg-[#f5f5f7] font-sans text-[#14161a]">
-    <div class="grid h-svh grid-rows-[44svh_minmax(0,1fr)] lg:grid-cols-[minmax(0,1fr)_460px] lg:grid-rows-1">
-      <!-- Escenario: vacío hasta generar -->
-      <section data-stage class="relative overflow-hidden bg-[radial-gradient(90%_75%_at_50%_35%,#fbfbfb,#ececee)]" aria-label="Vista previa de tu sitio">
-        <a href="/" aria-label="Volver al inicio" class="absolute left-4 top-4 z-30 grid size-11 place-items-center rounded-full bg-white/75 text-[#14161a] shadow-[0_8px_24px_-12px_rgba(0,0,0,.4)] backdrop-blur-md transition-transform hover:scale-105 lg:left-7 lg:top-7"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a>
+  <body class="overflow-hidden bg-[#07080d] font-sans text-[#14161a]">
+    <div class="grid h-svh grid-rows-[44svh_minmax(0,1fr)] lg:grid-cols-[minmax(0,1fr)_470px] lg:grid-rows-1">
+      <!-- Escenario -->
+      <section data-stage class="relative overflow-hidden bg-[#07080d]" aria-label="Vista previa de tu sitio">
+        <a href="/" aria-label="Volver al inicio" class="absolute left-4 top-4 z-30 grid size-11 place-items-center rounded-full bg-white/80 text-[#14161a] shadow-[0_8px_24px_-12px_rgba(0,0,0,.5)] backdrop-blur-md transition-transform hover:scale-105 lg:left-7 lg:top-7"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a>
+
+        <!-- En espera: abanico de tarjetas -->
+        <div data-idle class="@container absolute inset-0 overflow-hidden text-white transition-[opacity,filter] duration-700" style="background:radial-gradient(70% 60% at 50% 40%,#12151f,#07080d 70%)">
+          <i class="pointer-events-none absolute left-1/2 top-[18%] h-[60%] w-[70%] -translate-x-1/2 rounded-full opacity-40 blur-[90px]" style="background:radial-gradient(circle,#2f3a9e,transparent 70%)" aria-hidden="true"></i>
+          <div class="absolute inset-0 flex flex-col items-center justify-center px-6">
+            <span class="grid size-12 place-items-center rounded-full border border-white/35 text-[15px] font-semibold tracking-wider">H</span>
+            <div class="idle-fan relative mt-[clamp(18px,3cqw,40px)] h-[clamp(150px,30cqw,290px)] w-full" data-fan>
+              {idleImgs.map((src, i) => <div data-card={i} class="idle-card absolute left-1/2 top-0 aspect-[4/5] w-[clamp(110px,17cqw,210px)] overflow-hidden rounded-[22px] border border-white/20 shadow-[0_30px_60px_-30px_rgba(0,0,0,.9)]"><img src={src} alt="" width="360" height="640" loading="eager" decoding="async" class="size-full object-cover" /></div>)}
+            </div>
+            <h2 class="mt-[clamp(20px,4cqw,44px)] text-center font-goog text-[clamp(1.6rem,4cqw,3rem)] font-light tracking-[-0.03em]">Tu sitio, a tu medida</h2>
+            <p class="mt-2 max-w-[28rem] text-center text-[clamp(12px,1.3cqw,14.5px)] text-white/55">Elige a la derecha cómo lo quieres y míralo generarse aquí.</p>
+            <button type="button" data-focus-name class="mt-6 flex items-center gap-3 rounded-full bg-white py-2 pl-6 pr-2 text-[14px] font-medium text-[#14161a] transition-transform hover:scale-[1.03]">Configura el tuyo<span class="grid size-9 place-items-center rounded-full bg-[#14161a] text-white"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+          </div>
+        </div>
 
         <!-- Generando -->
         <div data-gen class="pointer-events-none absolute inset-0 z-10 grid place-items-center opacity-0 transition-opacity duration-500" style="--a:#F6B370;--b:#2F3A9E">
-          <div class="gen-card relative aspect-[16/11] w-[min(72%,680px)] overflow-hidden rounded-[36px] bg-white shadow-[0_40px_90px_-40px_rgba(0,0,0,.45)]">
+          <div class="gen-card relative aspect-[16/11] w-[min(72%,680px)] overflow-hidden rounded-[36px] bg-white shadow-[0_40px_90px_-40px_rgba(0,0,0,.6)]">
             <i class="gen-blob gen-b1 absolute"></i><i class="gen-blob gen-b2 absolute"></i><i class="gen-blob gen-b3 absolute"></i>
             <i class="gen-shine absolute inset-0"></i><i class="grain absolute inset-0 opacity-[.18]"></i>
             <div class="absolute inset-x-0 bottom-0 p-6 text-center">
@@ -50,77 +75,143 @@ const h = 'mt-9 font-goog text-[1.3rem] font-semibold tracking-[-0.02em]';
           </div>
         </div>
 
-        <!-- Sitio generado (Alba, personalizado) -->
-        <div data-site class="cfg gen-hidden @container absolute inset-0 overflow-y-auto overflow-x-hidden bg-white [scrollbar-width:thin]" style="--a:#F6B370;--b:#2F3A9E;--ink:#14173f;--bg:#fdf6ee;--on:#14173f;--rad:6px;--hw:300">
-          <!-- Portada -->
-          <section class="relative h-full min-h-[440px] overflow-hidden text-white">
-            <div data-cover-photo class="absolute inset-0 bg-cover bg-center" style="background-image:url(/horizon.webp)"></div>
+        <!-- Sitio generado -->
+        <div data-site data-theme="claro" data-anim="suave" class="site cfg gen-hidden @container absolute inset-0 overflow-y-auto overflow-x-hidden [scrollbar-width:thin]" style="--a:#F6B370;--b:#2F3A9E;--ink:#14173f;--bg:#fdf6ee;--on:#14173f;--rad:6px;--hw:300;--sfont:'Inter Tight Variable',system-ui,sans-serif;--mx:0;--my:0;--spd:1;--par:1">
+          <!-- Diseño A: Horizonte -->
+          <section data-d="a" class="relative h-full min-h-[460px] overflow-hidden bg-black text-white">
+            <div class="absolute -inset-[6%]" data-cover-photo style="translate:calc(var(--mx)*-16px*var(--par)) calc(var(--my)*-10px*var(--par))"><div class="kb size-full bg-cover bg-center" style="background-image:url(/horizon.webp)"></div></div>
             <div data-cover-grad class="absolute inset-0" hidden style="background:radial-gradient(60% 70% at 80% 20%,color-mix(in srgb,var(--b) 80%,#fff),transparent 70%),linear-gradient(135deg,var(--a),var(--b) 80%)"></div>
             <i class="absolute inset-0 opacity-[.5] mix-blend-soft-light" style="background:linear-gradient(120deg,var(--a),var(--b))"></i>
             <i data-tint class="absolute inset-0 opacity-[.55] mix-blend-color" style="background:linear-gradient(160deg,var(--b),var(--a))"></i>
-            <i class="absolute inset-0" style="background:linear-gradient(to top,rgba(0,0,0,.6),rgba(0,0,0,.04) 55%,rgba(0,0,0,.28))"></i>
+            <i class="absolute inset-0" style="background:linear-gradient(to top,rgba(0,0,0,.62),rgba(0,0,0,.04) 55%,rgba(0,0,0,.3))"></i>
             <i class="grain pointer-events-none absolute inset-0 opacity-[.1]"></i>
 
             <nav class="rise absolute inset-x-0 top-0 flex items-center justify-between pl-[72px] pr-[clamp(16px,3cqw,40px)] pt-[22px] @4xl:pl-[clamp(80px,9cqw,120px)]" style="--d:.1s">
-              <span data-name class="text-[clamp(14px,1.5cqw,18px)] uppercase tracking-[0.34em]" style="font-weight:var(--hw)">Tu empresa</span>
+              <span class="flex items-center gap-3"><i data-markbox class="mark grid size-8 place-items-center bg-white/90 text-[14px] font-semibold not-italic text-[#14161a]">T</i><span data-name class="text-[clamp(14px,1.5cqw,18px)] uppercase tracking-[0.3em]" style="font-weight:var(--hw)">Tu empresa</span></span>
               <div class="hidden items-center gap-1 rounded-full border border-white/30 bg-white/15 px-2 py-1.5 backdrop-blur-md @3xl:flex" data-nav></div>
-              <div class="flex items-center gap-2"><span class="hidden rounded-full border border-white/35 bg-white/10 px-4 py-2 text-[12px] backdrop-blur-md @xl:inline">Cuenta</span><span class="rounded-full bg-white px-4 py-2 text-[12px] font-medium text-[#14161a]">Contacto</span></div>
+              <div class="flex items-center gap-2"><span class="hidden items-center gap-2 rounded-full border border-white/35 bg-white/10 py-1.5 pl-1.5 pr-4 text-[12px] backdrop-blur-md @xl:flex"><i class="size-6 rounded-full bg-white/30"></i>Cuenta</span><span data-navcta class="rounded-full bg-white px-4 py-2 text-[12px] font-medium text-[#14161a]">Contacto</span></div>
             </nav>
 
-            <div class="rise absolute right-[12cqw] top-[24%] hidden h-[clamp(160px,26cqw,360px)] w-[clamp(90px,12cqw,170px)] overflow-hidden border border-white/45 bg-white/15 backdrop-blur-md @3xl:block" style="--d:.5s;border-radius:calc(var(--rad) + 12px);transform:rotate(-3deg)"><span data-name2 class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-90 whitespace-nowrap text-[clamp(11px,1.3cqw,16px)] uppercase tracking-[0.4em] text-white/85">Tu empresa</span></div>
+            <div class="rise absolute left-1/2 top-[18%] hidden @3xl:block" style="--d:.55s;translate:calc(var(--mx)*18px*var(--par)) calc(var(--my)*12px*var(--par))">
+              <div class="glass-card relative h-[clamp(170px,28cqw,380px)] w-[clamp(100px,16cqw,220px)] overflow-hidden border border-white/55 bg-white/[.14] shadow-[0_40px_80px_-30px_rgba(0,0,0,.55)] backdrop-blur-[3px]" style="border-radius:calc(var(--rad) + 14px)">
+                <svg class="absolute left-[18%] top-[10%] w-[34%] text-white/85" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="5" width="38" height="38" rx="9"/><path d="M5 18h38M5 30h38M19 5v38M29 5v38"/></svg>
+                <span data-name2 class="absolute left-[12%] top-[8%] origin-top-left rotate-90 whitespace-nowrap text-[clamp(9px,1.1cqw,13px)] uppercase tracking-[0.35em] text-white/80">Tu empresa</span>
+                <span data-name2 class="absolute bottom-[10%] right-[16%] origin-bottom-right -rotate-90 whitespace-nowrap text-[clamp(10px,1.4cqw,17px)] uppercase tracking-[0.3em] text-white/90">| Tu empresa</span>
+                <i class="absolute bottom-[8%] left-[16%] size-[11%] rounded-full border border-white/50 bg-white/20"></i>
+                <i class="glint absolute inset-y-0 w-[40%] -skew-x-12 bg-white/25"></i>
+              </div>
+            </div>
 
             <div class="absolute inset-x-0 bottom-0 px-[clamp(20px,5cqw,72px)] pb-[clamp(28px,5cqw,64px)]">
-              <p class="rise flex items-center gap-2 text-[12px] text-white/85" style="--d:.25s"><i class="block size-2 bg-white" style="border-radius:2px"></i><span data-eyebrow>Presencia profesional</span></p>
+              <p class="rise flex items-center gap-2 text-[12px] text-white/90" style="--d:.25s"><i class="block size-2 bg-white" style="border-radius:2px"></i><span data-eyebrow>Presencia profesional</span></p>
               <h1 data-h class="rise mt-3 max-w-[14ch] text-[clamp(2rem,7.4cqw,6rem)] leading-[1.02] tracking-[-0.045em]" style="--d:.35s;font-weight:var(--hw)">Lo que haces bien, a la vista de todos.</h1>
-              <div class="rise mt-6 flex flex-wrap items-center gap-3" style="--d:.55s"><span data-cta class="px-6 py-3.5 text-[14px] font-medium" style="border-radius:calc(var(--rad) + 20px);background:var(--a);color:var(--on)">Contáctanos</span><span data-cta3 class="border border-white/45 bg-white/10 px-6 py-3.5 text-[14px] backdrop-blur-md" style="border-radius:calc(var(--rad) + 20px)">Ver servicios</span></div>
-              <p data-sub class="rise absolute bottom-[clamp(28px,5cqw,64px)] right-[clamp(20px,5cqw,72px)] hidden max-w-[16rem] text-[13px] leading-snug text-white/80 @3xl:block" style="--d:.7s">Presencia profesional para atraer clientes.</p>
+              <div class="rise mt-6 flex flex-wrap items-center gap-3" style="--d:.55s"><span data-cta class="btn px-6 py-3.5 text-[14px] font-medium">Contáctanos</span><span class="btn-o flex items-center gap-2 border border-white/50 px-6 py-3.5 text-[14px]"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M7 5v14l12-7z"/></svg><span data-cta3>Ver servicios</span></span></div>
+              <p data-sub class="rise absolute bottom-[clamp(28px,5cqw,64px)] right-[clamp(20px,5cqw,72px)] hidden max-w-[20rem] text-[13.5px] leading-snug text-white/85 @3xl:block" style="--d:.7s">Presencia profesional para atraer clientes.</p>
             </div>
           </section>
 
-          <!-- Servicios -->
-          <section class="bg-[var(--bg)] px-[clamp(20px,5cqw,72px)] py-[clamp(48px,8cqw,110px)] text-[var(--ink)]">
-            <p class="text-[12px] uppercase tracking-[0.2em] opacity-55">Lo que hacemos</p>
-            <h2 data-h2 class="mt-3 max-w-[18ch] text-[clamp(1.6rem,4.2cqw,3.4rem)] leading-[1.05] tracking-[-0.04em]" style="font-weight:var(--hw)">Hecho con cuidado, pensado para ti.</h2>
+          <!-- Diseño B: Burbujas -->
+          <section data-d="b" hidden class="b-hero relative h-full min-h-[520px] overflow-hidden text-white">
+            <i class="absolute inset-0" style="background:radial-gradient(120% 90% at 50% 125%,color-mix(in srgb,var(--b) 92%,#fff) 0%,color-mix(in srgb,var(--a) 55%,var(--b)) 22%,transparent 58%)"></i>
+            <i class="grain pointer-events-none absolute inset-0 opacity-[.1]"></i>
+            <div data-bubbles class="absolute inset-0"></div>
+            <nav class="rise absolute inset-x-0 top-0 flex items-center justify-center gap-[clamp(14px,3cqw,40px)] pl-[64px] pr-4 pt-[20px] text-[13px]" style="--d:.1s">
+              <span class="flex items-center gap-2"><i data-markbox class="mark grid size-8 place-items-center bg-white text-[14px] font-semibold not-italic text-[#14161a]">T</i><span data-name class="text-[17px] tracking-[-0.02em]" style="font-weight:var(--hw)">Tu empresa</span></span>
+              <span class="hidden items-center gap-[clamp(12px,2.4cqw,30px)] text-white/85 @2xl:flex" data-nav2></span>
+              <span data-navcta class="flex items-center gap-2 rounded-full border border-white/45 bg-black/30 px-4 py-2 backdrop-blur-md"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg><span data-navcta-t>Contacto</span></span>
+            </nav>
+            <div class="absolute inset-x-0 top-[clamp(70px,20%,170px)] flex flex-col items-center px-6 text-center">
+              <p class="rise flex items-center gap-2.5 text-[12.5px] text-white/80" style="--d:.2s"><span class="flex -space-x-2"><i data-av class="grid size-6 place-items-center rounded-full border-2 border-black/60 text-[10px] not-italic" style="background:var(--a);color:var(--on)">T</i><i class="size-6 rounded-full border-2 border-black/60" style="background:var(--b)"></i><i class="size-6 rounded-full border-2 border-black/60 bg-white/70"></i></span><span data-eyebrow2>Atendemos hoy en Mérida, Yucatán</span></p>
+              <h1 data-hb class="mt-4 max-w-[16ch] text-[clamp(2.2rem,8.4cqw,7rem)] leading-[1.02] tracking-[-0.05em]" style="font-weight:var(--hw)"></h1>
+              <p data-sub2 class="rise mt-5 max-w-[30rem] text-[clamp(12.5px,1.4cqw,15px)] text-white/70" style="--d:1s">Presencia profesional para atraer clientes.</p>
+              <span data-cta2 class="rise btn mt-6 inline-block px-7 py-3.5 text-[14px] font-medium" style="--d:1.15s">Contáctanos</span>
+            </div>
+          </section>
+
+          <!-- Secciones comunes -->
+          <section data-sec="servicios" class="sec px-[clamp(20px,5cqw,72px)] py-[clamp(52px,8cqw,110px)]">
+            <p class="sr text-[12px] uppercase tracking-[0.2em] opacity-55">Lo que hacemos</p>
+            <h2 data-h2 class="sr mt-3 max-w-[18ch] text-[clamp(1.6rem,4.2cqw,3.4rem)] leading-[1.05] tracking-[-0.04em]" style="font-weight:var(--hw)">Hecho con cuidado, pensado para ti.</h2>
             <div class="mt-10 grid gap-4 @2xl:grid-cols-3" data-services></div>
           </section>
 
-          <!-- Proceso -->
-          <section class="bg-white px-[clamp(20px,5cqw,72px)] py-[clamp(48px,8cqw,110px)] text-[var(--ink)]">
-            <div class="grid gap-8 @2xl:grid-cols-3">
-              {[['01', 'Escuchamos', 'Conocemos lo que necesitas y cómo trabajas.'], ['02', 'Diseñamos', 'Armamos una propuesta clara, a tu medida.'], ['03', 'Entregamos', 'Lo ponemos en marcha y te acompañamos.']].map(([n, t, d]) => <div class="border-t pt-5" style="border-color:color-mix(in srgb,var(--ink) 18%,transparent)"><span class="text-[13px] opacity-50">{n}</span><h3 class="mt-4 text-[1.35rem] tracking-[-0.03em]" style="font-weight:var(--hw)">{t}</h3><p class="mt-2 text-[14.5px] leading-relaxed opacity-65">{d}</p></div>)}
+          <section data-sec="proceso" class="sec sec2 px-[clamp(20px,5cqw,72px)] py-[clamp(52px,8cqw,110px)]">
+            <p class="sr text-[12px] uppercase tracking-[0.2em] opacity-55">Cómo trabajamos</p>
+            <div class="mt-8 grid gap-8 @2xl:grid-cols-3">
+              {[['01', 'Escuchamos', 'Conocemos lo que necesitas y cómo trabajas.'], ['02', 'Diseñamos', 'Armamos una propuesta clara, a tu medida.'], ['03', 'Entregamos', 'Lo ponemos en marcha y te acompañamos.']].map(([n, t, d], i) => <div class="sr border-t pt-5" style={`border-color:color-mix(in srgb,currentColor 18%,transparent);--sd:${i * 0.12}s`}><span class="text-[13px] opacity-50">{n}</span><h3 class="mt-4 text-[1.35rem] tracking-[-0.03em]" style="font-weight:var(--hw)">{t}</h3><p class="mt-2 text-[14.5px] leading-relaxed opacity-65">{d}</p></div>)}
             </div>
           </section>
 
-          <!-- Llamado -->
-          <section class="bg-[var(--ink)] px-[clamp(20px,5cqw,72px)] py-[clamp(48px,8cqw,100px)] text-white">
-            <h2 data-h3 class="max-w-[16ch] text-[clamp(1.8rem,5cqw,4rem)] leading-[1.04] tracking-[-0.045em]" style="font-weight:var(--hw)">Hablemos de tu proyecto.</h2>
-            <span data-cta4 class="mt-7 inline-block px-7 py-4 text-[14px] font-medium" style="border-radius:calc(var(--rad) + 20px);background:var(--a);color:var(--on)">Contáctanos</span>
+          <section data-sec="faq" class="sec px-[clamp(20px,5cqw,72px)] py-[clamp(52px,8cqw,110px)]">
+            <p class="sr text-[12px] uppercase tracking-[0.2em] opacity-55">Preguntas frecuentes</p>
+            <div class="mt-6 max-w-[52rem]" data-faq></div>
           </section>
 
-          <footer class="flex flex-wrap items-center justify-between gap-3 bg-[var(--bg)] px-[clamp(20px,5cqw,72px)] py-7 text-[12.5px] text-[var(--ink)]"><span data-name3 class="uppercase tracking-[0.3em]" style="font-weight:var(--hw)">Tu empresa</span><span class="opacity-55">Propuesta visual ilustrativa · HumanCorp</span></footer>
+          <section data-sec="contacto" class="sec sec2 px-[clamp(20px,5cqw,72px)] py-[clamp(52px,8cqw,110px)]">
+            <div class="grid items-stretch gap-6 @3xl:grid-cols-2">
+              <div class="sr">
+                <p class="text-[12px] uppercase tracking-[0.2em] opacity-55">Contacto</p>
+                <h2 data-h3 class="mt-3 max-w-[14ch] text-[clamp(1.8rem,5cqw,4rem)] leading-[1.04] tracking-[-0.045em]" style="font-weight:var(--hw)">Hablemos.</h2>
+                <p class="mt-5 text-[14.5px] leading-relaxed opacity-70"><span data-city>Mérida, Yucatán</span><br />Lunes a viernes · 9:00 a 18:00<br /><span data-mail>hola@tuempresa.mx</span></p>
+                <span data-cta4 class="btn mt-7 inline-block px-7 py-4 text-[14px] font-medium">Contáctanos</span>
+              </div>
+              <div class="sr map relative min-h-[230px] overflow-hidden" style="--sd:.15s;border-radius:calc(var(--rad) + 18px)">
+                <i class="absolute inset-0" style="background:radial-gradient(60% 70% at 70% 30%,color-mix(in srgb,var(--b) 55%,transparent),transparent 70%),linear-gradient(135deg,color-mix(in srgb,var(--a) 70%,#fff),color-mix(in srgb,var(--b) 60%,#fff))"></i>
+                <svg class="absolute inset-0 size-full opacity-40" viewBox="0 0 200 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0 40 C40 20 70 70 110 50 S170 30 200 55M0 90 C50 70 90 110 140 85 S185 80 200 95M60 0 C70 40 50 80 75 120M130 0 C120 50 150 70 140 120" fill="none" stroke="#fff" stroke-width="1.4"/></svg>
+                <span class="pin absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"><i class="block size-5 rounded-full border-4 border-white" style="background:var(--ink)"></i></span>
+                <span data-city2 class="absolute bottom-4 left-4 rounded-full bg-white/90 px-4 py-2 text-[12px] text-[#14161a]">Mérida, Yucatán</span>
+              </div>
+            </div>
+          </section>
+
+          <footer class="sec flex flex-wrap items-center justify-between gap-3 px-[clamp(20px,5cqw,72px)] py-7 text-[12.5px]"><span data-name3 class="uppercase tracking-[0.3em]" style="font-weight:var(--hw)">Tu empresa</span><span class="opacity-55">Propuesta visual ilustrativa · HumanCorp</span></footer>
         </div>
       </section>
 
       <!-- Panel de personalización -->
-      <aside class="flex min-h-0 flex-col overflow-hidden border-t border-black/10 bg-white lg:border-l lg:border-t-0">
+      <aside class="flex min-h-0 flex-col overflow-hidden border-t border-white/10 bg-white lg:border-l lg:border-t-0">
         <div data-scroller class="min-h-0 flex-1 overflow-y-auto px-6 pb-8 pt-6 lg:px-10 lg:pt-7">
           <div class="flex items-center justify-between text-[12px] text-black/45"><a href="/" class="tracking-wide"><span class="font-light">HUMAN</span> <span class="font-semibold">CORP</span></a><a href="/contacto" class="hover:text-black">Contacto</a></div>
           <h1 class="mt-8 font-goog text-[1.9rem] font-light uppercase tracking-[0.16em]">Tu sitio</h1>
-          <p class="mt-2 max-w-[24rem] text-[13px] leading-relaxed text-black/55">Todo está listo: solo elige tu nombre, tus colores y tu estilo, y generamos tu sitio. Es una propuesta visual inicial que afinamos juntos.</p>
+          <p class="mt-2 max-w-[24rem] text-[13px] leading-relaxed text-black/55">Todo está listo: elige el diseño y personalízalo. Al terminar, generamos tu sitio como propuesta visual inicial, que afinamos juntos.</p>
 
-          <label class="mt-8 block text-[12.5px] text-black/60">Nombre de tu empresa<input data-in-name maxlength="28" placeholder="Tu empresa" class="mt-2 w-full rounded-2xl bg-[#f5f5f7] px-5 py-4 text-[15px] outline-none transition-shadow placeholder:text-black/35 focus:bg-white focus:shadow-[0_0_0_2px_#0033FF]" /></label>
-
-          <h2 class={h}>Negocio</h2>
+          <h2 class={h}>Tu negocio</h2>
+          <label class="mt-4 block text-[12.5px] text-black/60">Nombre<input data-in-name maxlength="28" placeholder="Tu empresa" class={inp} /></label>
+          <label class="mt-4 block text-[12.5px] text-black/60">Ciudad<input data-in-city maxlength="40" value="Mérida, Yucatán" placeholder="Mérida, Yucatán" class={inp} /></label>
           <div class="mt-4 space-y-3">{types.map(([id, l, d], i) => <button type="button" data-type={id} aria-pressed={i === 0} class={row}><span class="cfg-t block text-[14.5px] text-black/65">{l}</span><span class="mt-1 block text-[11.5px] leading-snug text-black/40">{d}</span></button>)}</div>
+
+          <h2 class={h}>Diseño</h2>
+          <div class="mt-4 grid grid-cols-2 gap-3">{designs.map(([id, l, d], i) => <button type="button" data-design={id} aria-pressed={i === 0} class={`${row} !p-3`}><span class="relative block h-[84px] overflow-hidden rounded-[12px]" style={id === 'a' ? 'background:linear-gradient(to top,#2a1a3a,#e0894a 60%,#f6b370)' : 'background:radial-gradient(120% 100% at 50% 130%,#977dff,#0a0612 60%)'}>{id === 'a' ? <i class="absolute left-1/2 top-[14%] h-[52%] w-[22%] -translate-x-1/2 rounded-[5px] border border-white/60 bg-white/20"></i> : <><i class="absolute bottom-[8%] left-[14%] size-5 rounded-full border border-white/50 bg-white/20"></i><i class="absolute bottom-[14%] right-[18%] size-7 rounded-full border border-white/50 bg-white/20"></i><i class="absolute left-[22%] right-[22%] top-[22%] h-2 rounded bg-white/70"></i></>}</span><span class="cfg-t mt-2.5 block text-[14px] text-black/65">{l}</span><span class="mt-0.5 block text-[11px] leading-snug text-black/40">{d}</span></button>)}</div>
 
           <h2 class={h}>Colores</h2>
           <div class="mt-4 flex flex-wrap gap-5">{palettes.map(([id, l, a, b], i) => <button type="button" data-pal={id} aria-pressed={i === 0} class="group text-left"><span class="relative block size-11 rounded-full ring-1 ring-black/10 transition-shadow group-aria-pressed:ring-2 group-aria-pressed:ring-[#0033FF] group-aria-pressed:ring-offset-2" style={`background:linear-gradient(135deg,${a} 50%,${b} 50%)`}></span><span class="mt-2 block text-[11.5px] text-black/55 group-aria-pressed:text-black">{l}</span></button>)}</div>
+          <div class="mt-5 flex items-center gap-4 text-[12.5px] text-black/60"><label class="flex items-center gap-2.5">Principal<input data-ca type="color" value="#F6B370" class="size-9 cursor-pointer rounded-full border-0 bg-transparent p-0" /></label><label class="flex items-center gap-2.5">Secundario<input data-cb type="color" value="#2F3A9E" class="size-9 cursor-pointer rounded-full border-0 bg-transparent p-0" /></label></div>
+
+          <h2 class={h}>Tipografía</h2>
+          <div class="mt-4 flex flex-wrap gap-2">{fonts.map(([id, l], i) => <button type="button" data-font={id} aria-pressed={i === 0} class={chip}>{l}</button>)}</div>
 
           <h2 class={h}>Estilo</h2>
           <div class="mt-4 space-y-3">{styles.map(([id, l, d], i) => <button type="button" data-sty={id} aria-pressed={i === 0} class={row}><span class="cfg-t block text-[14.5px] text-black/65">{l}</span><span class="mt-1 block text-[11.5px] leading-snug text-black/40">{d}</span></button>)}</div>
+          <p class="mt-5 text-[12.5px] text-black/55">Logotipo</p>
+          <div class="mt-2 flex flex-wrap gap-2">{marks.map(([id, l], i) => <button type="button" data-mark={id} aria-pressed={i === 0} class={chip}>{l}</button>)}</div>
 
-          <h2 class={h}>Portada</h2>
-          <div class="mt-4 space-y-3">{covers.map(([id, l, d], i) => <button type="button" data-cover={id} aria-pressed={i === 0} class={row}><span class="cfg-t block text-[14.5px] text-black/65">{l}</span><span class="mt-1 block text-[11.5px] leading-snug text-black/40">{d}</span></button>)}</div>
+          <h2 class={h}>Fondo</h2>
+          <p class="mt-3 text-[12.5px] text-black/55">Tema de las secciones</p>
+          <div class="mt-2 flex flex-wrap gap-2">{themes.map(([id, l], i) => <button type="button" data-theme={id} aria-pressed={i === 0} class={chip}>{l}</button>)}</div>
+          <div data-coverbox>
+            <p class="mt-5 text-[12.5px] text-black/55">Portada (diseño Horizonte)</p>
+            <div class="mt-2 flex flex-wrap gap-2">{covers.map(([id, l], i) => <button type="button" data-cover={id} aria-pressed={i === 0} class={chip}>{l}</button>)}</div>
+          </div>
+
+          <h2 class={h}>Textos</h2>
+          <label class="mt-4 block text-[12.5px] text-black/60">Titular <span class="text-black/35">(opcional)</span><input data-in-h maxlength="60" placeholder="Lo escribimos por ti" class={inp} /></label>
+          <label class="mt-4 block text-[12.5px] text-black/60">Texto del botón <span class="text-black/35">(opcional)</span><input data-in-cta maxlength="24" placeholder="Contáctanos" class={inp} /></label>
+
+          <h2 class={h}>Secciones</h2>
+          <div class="mt-4 flex flex-wrap gap-2">{secs.map(([id, l]) => <button type="button" data-sec-t={id} aria-pressed="true" class={chip}>{l}</button>)}</div>
+
+          <h2 class={h}>Animaciones</h2>
+          <div class="mt-4 flex flex-wrap gap-2">{anims.map(([id, l], i) => <button type="button" data-anim-t={id} aria-pressed={i === 0} class={chip}>{l}</button>)}</div>
           <p class="mt-8 text-[11.5px] leading-relaxed text-black/40">No incluye precios. Con tu elección preparamos una propuesta por escrito, con alcance, entregables, tiempos e inversión.</p>
         </div>
 
@@ -131,34 +222,54 @@ const h = 'mt-9 font-goog text-[1.3rem] font-semibold tracking-[-0.02em]';
       </aside>
     </div>
 
-    <script define:vars={{ types, palettes, styles, covers }}>
+    <script define:vars={{ types, designs, palettes, fonts, styles, marks, themes, covers, anims }}>
       const $ = (s) => document.querySelector(s);
       const $$ = (s) => [...document.querySelectorAll(s)];
       const site = $('[data-site]');
       const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
       const label = (list, id) => (list.find((x) => x[0] === id) || [])[1];
       const set = (sel, t) => $$(sel).forEach((el) => (el.textContent = t));
+      const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
+      /* ---------- Abanico en espera ---------- */
+      const cards = $$('[data-card]');
+      let pos0 = 0;
+      const layoutFan = () => cards.forEach((c, i) => {
+        let p = ((i - pos0) % cards.length + cards.length) % cards.length; if (p > cards.length / 2) p -= cards.length;
+        const ap = Math.abs(p);
+        c.style.setProperty('--p', p); c.style.setProperty('--ap', ap);
+        c.style.zIndex = String(10 - ap); c.style.opacity = ap > 2 ? '0' : String(1 - ap * 0.16);
+      });
+      layoutFan();
+      const fanTimer = reduced ? 0 : setInterval(() => { pos0 = (pos0 + 1) % cards.length; layoutFan(); }, 2600);
+      $('[data-focus-name]').addEventListener('click', () => { $('[data-in-name]').focus(); });
+
+      /* ---------- Datos ---------- */
       const COPY = {
-        pequena: { eyebrow: 'Presencia profesional', h: 'Lo que haces bien, a la vista de todos.', sub: 'Un negocio local con la imagen que merece.', c1: 'Contáctanos', c2: 'Ver servicios', nav: ['Inicio', 'Servicios', 'Nosotros', 'Ubicación'], h2: 'Hecho con cuidado, pensado para ti.', sv: [['Atención cercana', 'Te escuchamos y resolvemos con calma.'], ['Calidad constante', 'Cuidamos cada detalle de lo que hacemos.'], ['Siempre disponibles', 'Te respondemos rápido y con claridad.']] },
-        crecimiento: { eyebrow: 'Crecimiento ordenado', h: 'Crece con orden, cada día.', sub: 'Sistemas conectados para escalar sin caos.', c1: 'Agenda una demo', c2: 'Ver soluciones', nav: ['Inicio', 'Soluciones', 'Casos', 'Equipo'], h2: 'Menos fricción, más resultados.', sv: [['Procesos claros', 'Cada área sabe qué sigue y quién lo hace.'], ['Herramientas conectadas', 'Tu información fluye entre sistemas.'], ['Seguimiento continuo', 'Medimos y mejoramos contigo.']] },
-        consolidada: { eyebrow: 'Operación integrada', h: 'Una operación, un solo estándar.', sub: 'Departamentos, datos y procesos en armonía.', c1: 'Conoce más', c2: 'Ver áreas', nav: ['Inicio', 'Áreas', 'Plataforma', 'Seguridad'], h2: 'Capacidad para sostener tu escala.', sv: [['Integración de áreas', 'Un mismo lenguaje entre departamentos.'], ['Información confiable', 'Datos centralizados para decidir mejor.'], ['Infraestructura sólida', 'Respaldos, accesos y continuidad.']] },
-        comercio: { eyebrow: 'Tienda y sucursales', h: 'Tu tienda, abierta cuando la necesitan.', sub: 'Catálogo, pedidos y facturación al día.', c1: 'Ver catálogo', c2: 'Sucursales', nav: ['Inicio', 'Productos', 'Promos', 'Sucursales'], h2: 'Todo lo que buscas, en un solo lugar.', sv: [['Catálogo claro', 'Encuentra lo que buscas en segundos.'], ['Pedidos sin fricción', 'Pide en línea o pasa por tu compra.'], ['Promociones', 'Ofertas de temporada para ti.']] },
-        profesional: { eyebrow: 'Servicios profesionales', h: 'Confianza que se nota desde el primer contacto.', sub: 'Servicios claros y cotizaciones rápidas.', c1: 'Solicitar cotización', c2: 'Ver servicios', nav: ['Inicio', 'Servicios', 'Equipo', 'Clientes'], h2: 'Experiencia al servicio de tu empresa.', sv: [['Asesoría a tu medida', 'Entendemos tu caso antes de proponer.'], ['Cotización clara', 'Alcance, tiempos e inversión por escrito.'], ['Acompañamiento', 'Seguimos contigo después de la entrega.']] },
-        ecommerce: { eyebrow: 'Tienda en línea', h: 'Compra fácil, recibe a tiempo.', sub: 'Compras, pagos y envíos sin fricción.', c1: 'Comprar ahora', c2: 'Ver novedades', nav: ['Inicio', 'Novedades', 'Ofertas', 'Mi cuenta'], h2: 'Una experiencia de compra sin vueltas.', sv: [['Pago sencillo', 'Elige cómo pagar, de forma clara.'], ['Envíos con seguimiento', 'Sabes dónde está tu pedido.'], ['Atención posventa', 'Te ayudamos con cambios y dudas.']] },
+        pequena: { eyebrow: 'Presencia profesional', h: 'Lo que haces bien, a la vista de todos.', sub: 'Un negocio local con la imagen que merece.', c1: 'Contáctanos', c2: 'Ver servicios', nav: ['Inicio', 'Servicios', 'Nosotros', 'Ubicación'], h2: 'Hecho con cuidado, pensado para ti.', sv: [['Atención cercana', 'Te escuchamos y resolvemos con calma.'], ['Calidad constante', 'Cuidamos cada detalle de lo que hacemos.'], ['Siempre disponibles', 'Te respondemos rápido y con claridad.']], faq: [['¿Dónde están?', 'Estamos en {city}. Escríbenos y te damos la ubicación exacta.'], ['¿Cómo puedo contactarlos?', 'Por el formulario de esta página, por correo o por teléfono.'], ['¿Cuánto tardan en responder?', 'Normalmente en el mismo día hábil.']] },
+        crecimiento: { eyebrow: 'Crecimiento ordenado', h: 'Crece con orden, cada día.', sub: 'Sistemas conectados para escalar sin caos.', c1: 'Agenda una demo', c2: 'Ver soluciones', nav: ['Inicio', 'Soluciones', 'Casos', 'Equipo'], h2: 'Menos fricción, más resultados.', sv: [['Procesos claros', 'Cada área sabe qué sigue y quién lo hace.'], ['Herramientas conectadas', 'Tu información fluye entre sistemas.'], ['Seguimiento continuo', 'Medimos y mejoramos contigo.']], faq: [['¿Cómo empezamos?', 'Con una llamada para conocer tu operación actual.'], ['¿Se integran con lo que ya uso?', 'Sí, conectamos las herramientas que ya tienes.'], ['¿Atienden en {city}?', 'Sí, y también de forma remota.']] },
+        consolidada: { eyebrow: 'Operación integrada', h: 'Una operación, un solo estándar.', sub: 'Departamentos, datos y procesos en armonía.', c1: 'Conoce más', c2: 'Ver áreas', nav: ['Inicio', 'Áreas', 'Plataforma', 'Seguridad'], h2: 'Capacidad para sostener tu escala.', sv: [['Integración de áreas', 'Un mismo lenguaje entre departamentos.'], ['Información confiable', 'Datos centralizados para decidir mejor.'], ['Infraestructura sólida', 'Respaldos, accesos y continuidad.']], faq: [['¿Trabajan con equipos grandes?', 'Sí, adaptamos el acompañamiento a cada área.'], ['¿Cómo cuidan la información?', 'Con permisos, respaldos y registros de actividad.'], ['¿Dónde está su oficina?', 'En {city}.']] },
+        comercio: { eyebrow: 'Tienda y sucursales', h: 'Tu tienda, abierta cuando la necesitan.', sub: 'Catálogo, pedidos y facturación al día.', c1: 'Ver catálogo', c2: 'Sucursales', nav: ['Inicio', 'Productos', 'Promos', 'Sucursales'], h2: 'Todo lo que buscas, en un solo lugar.', sv: [['Catálogo claro', 'Encuentra lo que buscas en segundos.'], ['Pedidos sin fricción', 'Pide en línea o pasa por tu compra.'], ['Promociones', 'Ofertas de temporada para ti.']], faq: [['¿Dónde está la tienda?', 'Estamos en {city}.'], ['¿Hacen envíos?', 'Sí, consulta cobertura y tiempos al pedir.'], ['¿Puedo pedir factura?', 'Sí, solicítala al hacer tu pedido.']] },
+        profesional: { eyebrow: 'Servicios profesionales', h: 'Confianza que se nota desde el primer contacto.', sub: 'Servicios claros y cotizaciones rápidas.', c1: 'Solicitar cotización', c2: 'Ver servicios', nav: ['Inicio', 'Servicios', 'Equipo', 'Clientes'], h2: 'Experiencia al servicio de tu empresa.', sv: [['Asesoría a tu medida', 'Entendemos tu caso antes de proponer.'], ['Cotización clara', 'Alcance, tiempos e inversión por escrito.'], ['Acompañamiento', 'Seguimos contigo después de la entrega.']], faq: [['¿Cómo solicito una cotización?', 'Desde el formulario; te respondemos con una propuesta.'], ['¿Atienden presencial?', 'Sí, en {city}, y también a distancia.'], ['¿Qué incluye el servicio?', 'Se define por escrito antes de empezar.']] },
+        ecommerce: { eyebrow: 'Tienda en línea', h: 'Compra fácil, recibe a tiempo.', sub: 'Compras, pagos y envíos sin fricción.', c1: 'Comprar ahora', c2: 'Ver novedades', nav: ['Inicio', 'Novedades', 'Ofertas', 'Mi cuenta'], h2: 'Una experiencia de compra sin vueltas.', sv: [['Pago sencillo', 'Elige cómo pagar, de forma clara.'], ['Envíos con seguimiento', 'Sabes dónde está tu pedido.'], ['Atención posventa', 'Te ayudamos con cambios y dudas.']], faq: [['¿Cuánto tarda mi pedido?', 'Depende de tu zona; lo ves antes de pagar.'], ['¿Puedo cambiar un producto?', 'Sí, dentro del plazo indicado.'], ['¿Dónde operan?', 'Desde {city}, con envíos a todo el país.']] },
       };
-      const PAL = { atardecer: ['#F6B370', '#2F3A9E', '#14173f', '#fdf6ee', '#14173f'], oceano: ['#0033FF', '#977DFF', '#0b0c2b', '#f3f5ff', '#ffffff'], bosque: ['#10b981', '#064e5a', '#06251f', '#f1faf6', '#06251f'], grafito: ['#14173f', '#8f8aa6', '#0b0b0c', '#f6f5f2', '#ffffff'] };
+      const PAL = { atardecer: ['#F6B370', '#2F3A9E'], oceano: ['#0033FF', '#977DFF'], bosque: ['#10b981', '#064e5a'], grafito: ['#14173f', '#8f8aa6'] };
       const STY = { minimal: ['6px', '300'], calido: ['16px', '500'], audaz: ['0px', '700'] };
-      const S = { name: '', type: 'pequena', pal: 'atardecer', sty: 'minimal', cover: 'foto' };
-      let G = null, phase = 'idle', dirty = false, token = 0;
+      const FONT = { moderna: "'Inter Tight Variable',system-ui,sans-serif", geometrica: "'Google Sans Flex Variable','Google Sans',system-ui,sans-serif", editorial: "'Fraunces Variable',Georgia,serif" };
+      const lum = (hex) => { const n = parseInt(hex.slice(1), 16); const [r, g, b] = [n >> 16, (n >> 8) & 255, n & 255].map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }); return 0.2126 * r + 0.7152 * g + 0.0722 * b; };
+
+      const S = { name: '', city: 'Mérida, Yucatán', type: 'pequena', design: 'a', pal: 'atardecer', ca: null, cb: null, font: 'moderna', sty: 'minimal', mark: 'circulo', theme: 'claro', cover: 'foto', h: '', cta: '', secs: new Set(['servicios', 'proceso', 'faq', 'contacto']), anim: 'suave' };
+      let G = null, phase = 'idle', dirty = false, token = 0, themeTouched = false;
 
       const renderPanel = () => {
-        $$('[data-type]').forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.type === S.type)));
-        $$('[data-pal]').forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.pal === S.pal)));
-        $$('[data-sty]').forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.sty === S.sty)));
-        $$('[data-cover]').forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.cover === S.cover)));
+        const mp = (attr, key) => $$(`[data-${attr}]`).forEach((x) => x.setAttribute('aria-pressed', String(x.dataset[key] === S[attr])));
+        mp('type', 'type'); mp('design', 'design'); mp('pal', 'pal'); mp('font', 'font'); mp('sty', 'sty'); mp('mark', 'mark'); mp('theme', 'theme'); mp('cover', 'cover');
+        $$('[data-anim-t]').forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.animT === S.anim)));
+        $$('[data-sec-t]').forEach((x) => x.setAttribute('aria-pressed', String(S.secs.has(x.dataset.secT))));
+        $('[data-coverbox]').hidden = S.design !== 'a';
         const nm = S.name.trim() || 'Tu empresa';
-        const text = `Hola, personalicé mi sitio en el configurador de HumanCorp:\n- Empresa: ${nm}\n- Tipo de negocio: ${label(types, S.type)}\n- Colores: ${label(palettes, S.pal)}\n- Estilo: ${label(styles, S.sty)}\n- Portada: ${label(covers, S.cover)}\nMe gustaría recibir una propuesta.`;
+        const [a, b] = [S.ca || PAL[S.pal][0], S.cb || PAL[S.pal][1]];
+        const text = `Hola, personalicé mi sitio en el configurador de HumanCorp:\n- Empresa: ${nm} (${S.city})\n- Tipo de negocio: ${label(types, S.type)}\n- Diseño: ${label(designs, S.design)}\n- Colores: ${S.ca || S.cb ? 'personalizados ' + a + ' / ' + b : label(palettes, S.pal)}\n- Tipografía: ${label(fonts, S.font)} · Estilo: ${label(styles, S.sty)}\n- Tema: ${label(themes, S.theme)} · Animaciones: ${label(anims, S.anim)}\n- Secciones: ${[...S.secs].join(', ') || 'ninguna'}\n${S.h ? '- Titular: ' + S.h + '\n' : ''}Me gustaría recibir una propuesta.`;
         $('[data-send]').href = `/contacto?interes=${encodeURIComponent('Sitio web')}&mensaje=${encodeURIComponent(text)}`;
         const gen = $('[data-generate]'), send = $('[data-send]');
         const done = phase === 'done';
@@ -167,30 +278,71 @@ const h = 'mt-9 font-goog text-[1.3rem] font-semibold tracking-[-0.02em]';
         gen.disabled = phase === 'loading';
       };
 
-      const drawSite = () => {
-        const nm = G.name.trim() || 'Tu empresa';
-        const [a, b, ink, bg, on] = PAL[G.pal];
-        const [rad, hw] = STY[G.sty];
-        site.style.cssText += `;--a:${a};--b:${b};--ink:${ink};--bg:${bg};--on:${on};--rad:${rad};--hw:${hw}`;
-        const c = COPY[G.type];
-        set('[data-name],[data-name2],[data-name3]', nm);
-        set('[data-eyebrow]', c.eyebrow); set('[data-h]', c.h); set('[data-sub]', c.sub);
-        set('[data-cta],[data-cta4]', c.c1); set('[data-cta3]', c.c2); set('[data-h2]', c.h2); set('[data-h3]', `Hablemos de ${nm}.`);
-        $('[data-nav]').innerHTML = c.nav.map((n, i) => `<span class="rounded-full px-4 py-1.5 text-[12px] ${i === 0 ? 'bg-white/90 text-[#14161a]' : 'text-white/90'}">${n}</span>`).join('');
-        $('[data-services]').innerHTML = c.sv.map(([t, d]) => `<div class="bg-white p-6 shadow-[0_20px_40px_-30px_rgba(0,0,0,.35)]" style="border-radius:calc(var(--rad) + 14px)"><i class="block size-10" style="border-radius:calc(var(--rad) + 4px);background:linear-gradient(140deg,var(--a),var(--b))"></i><h3 class="mt-6 text-[1.2rem] tracking-[-0.02em]" style="font-weight:var(--hw)">${t}</h3><p class="mt-2 text-[14.5px] leading-relaxed opacity-65">${d}</p><p class="mt-5 text-[13px] font-medium" style="color:var(--b)">Conocer más →</p></div>`).join('');
-        $('[data-tint]').hidden = G.cover !== 'foto'; $('[data-cover-photo]').hidden = G.cover !== 'foto'; $('[data-cover-grad]').hidden = G.cover === 'foto';
-        site.scrollTop = 0;
+      /* ---------- Burbujas ---------- */
+      const flower = () => '<svg viewBox="0 0 100 100" class="size-[78%]" aria-hidden="true"><g transform="translate(50 50)">' + [0, 1, 2, 3, 4, 5].map((i) => `<ellipse cx="0" cy="-22" rx="13" ry="25" transform="rotate(${i * 60})" style="fill:var(${i % 2 ? '--b' : '--a'});opacity:.9"/>`).join('') + '<circle r="10" style="fill:var(--ink)"/><circle r="4" fill="#fff" opacity=".6"/></g></svg>';
+      const swirl = () => '<i class="block size-full" style="background:conic-gradient(from 20deg,var(--a),var(--b),#fff,var(--a),var(--b),var(--a))"></i>';
+      const initial = (n) => `<span class="text-[2.2cqw] font-semibold" style="color:var(--on)">${esc(n[0].toUpperCase())}</span>`;
+      const BUB = [[3, 44, 12, 0.9, 'f'], [2, 74, 9, 0.5, 'd'], [18, 60, 15, 1.1, 'w'], [30, 82, 13, 0.8, 'f'], [13, 86, 8, 0.4, 'i'], [40, 68, 6, 0.4, 'f'], [47, 88, 17, 1.2, 'i'], [58, 78, 11, 0.8, 'w'], [63, 66, 15, 1.1, 'f'], [76, 58, 10, 0.6, 'f'], [80, 80, 14, 0.9, 'w'], [90, 62, 12, 1, 'f'], [93, 84, 15, 1.3, 'd'], [86, 40, 8, 0.5, 'f'], [8, 66, 6, 0.3, 'd']];
+      const drawBubbles = (nm) => {
+        $('[data-bubbles]').innerHTML = BUB.map(([x, y, s, d, k], i) => `<div class="bub" style="--x:${x}%;--y:${y}%;--s:${s};--d:${d};--k:${i}"><i style="--t:${5 + (i % 5)}s;--dl:-${(i * 0.7).toFixed(1)}s">${k === 'f' ? flower() : k === 'w' ? swirl() : k === 'i' ? initial(nm) : ''}</i></div>`).join('');
+      };
+      const drawHeadline = (text) => {
+        const words = text.split(/\s+/); const n = words.length; const lo = Math.floor(n * 0.3), hi = Math.ceil(n * 0.6);
+        $('[data-hb]').innerHTML = words.map((w, i) => `<span class="bw" style="--i:${i};--o:${i >= lo && i < hi ? 0.32 : 1}">${esc(w)}</span>`).join(' ');
       };
 
+      const drawSite = () => {
+        const nm = G.name.trim() || 'Tu empresa';
+        const slug = nm.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '') || 'tuempresa';
+        const a = G.ca || PAL[G.pal][0], b = G.cb || PAL[G.pal][1];
+        const custom = !!(G.ca || G.cb);
+        const ink = custom ? '#0d0f1c' : { atardecer: '#14173f', oceano: '#0b0c2b', bosque: '#06251f', grafito: '#0b0b0c' }[G.pal];
+        const bg = custom ? '#f6f6f8' : { atardecer: '#fdf6ee', oceano: '#f3f5ff', bosque: '#f1faf6', grafito: '#f6f5f2' }[G.pal];
+        const on = lum(a) > 0.45 ? '#14161a' : '#ffffff';
+        const [rad, hw] = STY[G.sty];
+        const spd = { suave: 1, dinamica: 0.55, sin: 1 }[G.anim], par = { suave: 1, dinamica: 1.7, sin: 0 }[G.anim];
+        site.style.cssText += `;--a:${a};--b:${b};--ink:${ink};--bg:${bg};--on:${on};--rad:${rad};--hw:${hw};--sfont:${FONT[G.font]};--spd:${spd};--par:${par}`;
+        site.dataset.theme = G.theme; site.dataset.anim = G.anim;
+        const c = COPY[G.type];
+        const city = G.city.trim() || 'Mérida, Yucatán';
+        const head = G.h.trim() || c.h, cta = G.cta.trim() || c.c1;
+        set('[data-name],[data-name3]', nm); $$('[data-name2]').forEach((el, i) => (el.textContent = (i ? '| ' : '') + nm));
+        set('[data-eyebrow]', c.eyebrow); set('[data-eyebrow2]', `Atendemos hoy en ${city}`); set('[data-h]', head); set('[data-sub],[data-sub2]', c.sub);
+        set('[data-cta],[data-cta2],[data-cta4]', cta); set('[data-cta3]', c.c2); set('[data-navcta-t]', c.nav[3]); $$('[data-navcta]:not([data-navcta-t])').forEach((el) => { if (!el.querySelector('[data-navcta-t]')) el.textContent = 'Contacto'; });
+        set('[data-h2]', c.h2); set('[data-h3]', `Hablemos de ${nm}.`);
+        set('[data-city],[data-city2]', city); set('[data-mail]', `hola@${slug}.mx`);
+        $('[data-nav]').innerHTML = c.nav.map((n, i) => `<span class="rounded-full px-4 py-1.5 text-[12px] ${i === 0 ? 'bg-white/90 text-[#14161a]' : 'text-white/90'}">${n}</span>`).join('');
+        $('[data-nav2]').innerHTML = c.nav.slice(0, 3).map((n) => `<span>${n}</span>`).join('');
+        $('[data-services]').innerHTML = c.sv.map(([t, d], i) => `<div class="sr card p-6" style="--sd:${i * 0.12}s;border-radius:calc(var(--rad) + 14px)"><i class="block size-10" style="border-radius:calc(var(--rad) + 4px);background:linear-gradient(140deg,var(--a),var(--b))"></i><h3 class="mt-6 text-[1.2rem] tracking-[-0.02em]" style="font-weight:var(--hw)">${t}</h3><p class="mt-2 text-[14.5px] leading-relaxed opacity-65">${d}</p><p class="mt-5 text-[13px] font-medium" style="color:var(--a)">Conocer más →</p></div>`).join('');
+        $('[data-faq]').innerHTML = c.faq.map(([q, an], i) => `<details class="sr faq border-t py-4" ${i === 0 ? 'open' : ''} style="--sd:${i * 0.1}s"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-[1.05rem] tracking-[-0.015em]">${q}<i class="faq-i grid size-7 shrink-0 place-items-center rounded-full border border-current/30 text-[15px] leading-none not-italic">+</i></summary><p class="mt-3 max-w-[40rem] text-[14.5px] leading-relaxed opacity-65">${an.replace('{city}', esc(city))}</p></details>`).join('');
+        // marca
+        $$('[data-markbox]').forEach((m) => { m.hidden = G.mark === 'ninguno'; m.textContent = nm[0].toUpperCase(); m.style.borderRadius = G.mark === 'circulo' ? '999px' : 'calc(var(--rad) + 2px)'; });
+        set('[data-av]', nm[0].toUpperCase());
+        // diseño, portada, secciones
+        $('[data-d="a"]').hidden = G.design !== 'a'; $('[data-d="b"]').hidden = G.design !== 'b';
+        $('[data-cover-photo]').hidden = G.cover !== 'foto'; $('[data-tint]').hidden = G.cover !== 'foto'; $('[data-cover-grad]').hidden = G.cover === 'foto';
+        $$('[data-sec]').forEach((s) => (s.hidden = !G.secs.has(s.dataset.sec)));
+        if (G.design === 'b') { drawBubbles(nm); drawHeadline(head); }
+        site.scrollTop = 0;
+        $$('.sr').forEach((el) => el.classList.remove('in'));
+        io.disconnect(); $$('.sr').forEach((el) => io.observe(el));
+      };
+
+      /* Revelado al hacer scroll dentro del sitio y paralaje con el cursor */
+      const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { root: site, threshold: 0.12 });
+      site.addEventListener('pointermove', (e) => { const r = site.getBoundingClientRect(); site.style.setProperty('--mx', ((e.clientX - r.left) / r.width - 0.5).toFixed(3)); site.style.setProperty('--my', ((e.clientY - r.top) / r.height - 0.5).toFixed(3)); }, { passive: true });
+
+      /* ---------- Generación ---------- */
       const STEPS = ['Entendiendo tu negocio…', 'Diseñando tu identidad…', 'Armando tu sitio…', 'Aplicando tus colores…', 'Últimos detalles…'];
       const generate = () => {
         if (phase === 'loading') return;
         const my = ++token;
-        G = { ...S }; dirty = false;
-        const [a, b] = PAL[G.pal];
-        const gen = $('[data-gen]'); gen.style.setProperty('--a', a); gen.style.setProperty('--b', b);
+        G = { ...S, secs: new Set(S.secs) }; dirty = false;
+        clearInterval(fanTimer);
+        const gen = $('[data-gen]'); gen.style.setProperty('--a', G.ca || PAL[G.pal][0]); gen.style.setProperty('--b', G.cb || PAL[G.pal][1]);
         phase = 'loading'; renderPanel();
         $('[data-scroller]').scrollTo({ top: 0, behavior: 'smooth' });
+        const idle = $('[data-idle]'); idle.style.opacity = '0'; idle.style.filter = 'blur(14px)'; idle.style.pointerEvents = 'none';
         site.classList.add('gen-hidden'); site.classList.remove('gen-in');
         gen.style.opacity = '1';
         const total = reduced ? 400 : 4600;
@@ -216,15 +368,25 @@ const h = 'mt-9 font-goog text-[1.3rem] font-semibold tracking-[-0.02em]';
       document.addEventListener('click', (e) => {
         const t = e.target.closest('button'); if (!t) return;
         if (t.hasAttribute('data-generate')) { generate(); return; }
-        if (t.dataset.type) S.type = t.dataset.type;
-        else if (t.dataset.pal) S.pal = t.dataset.pal;
-        else if (t.dataset.sty) S.sty = t.dataset.sty;
-        else if (t.dataset.cover) S.cover = t.dataset.cover;
+        const d = t.dataset;
+        if (d.type) S.type = d.type;
+        else if (d.design) { S.design = d.design; if (!themeTouched) S.theme = d.design === 'b' ? 'oscuro' : 'claro'; }
+        else if (d.pal) { S.pal = d.pal; S.ca = S.cb = null; $('[data-ca]').value = PAL[d.pal][0]; $('[data-cb]').value = PAL[d.pal][1]; }
+        else if (d.font) S.font = d.font;
+        else if (d.sty) S.sty = d.sty;
+        else if (d.mark) S.mark = d.mark;
+        else if (d.theme) { S.theme = d.theme; themeTouched = true; }
+        else if (d.cover) S.cover = d.cover;
+        else if (d.animT) S.anim = d.animT;
+        else if (d.secT) { S.secs.has(d.secT) ? S.secs.delete(d.secT) : S.secs.add(d.secT); }
         else return;
         if (phase === 'done') dirty = true;
         renderPanel();
       });
-      $('[data-in-name]').addEventListener('input', (e) => { S.name = e.target.value; if (phase === 'done') dirty = true; renderPanel(); });
+      const bind = (sel, key) => $(sel).addEventListener('input', (e) => { S[key] = e.target.value; if (phase === 'done') dirty = true; renderPanel(); });
+      bind('[data-in-name]', 'name'); bind('[data-in-city]', 'city'); bind('[data-in-h]', 'h'); bind('[data-in-cta]', 'cta');
+      $('[data-ca]').addEventListener('input', (e) => { S.ca = e.target.value; if (phase === 'done') dirty = true; renderPanel(); });
+      $('[data-cb]').addEventListener('input', (e) => { S.cb = e.target.value; if (phase === 'done') dirty = true; renderPanel(); });
       renderPanel();
     </script>
   </body>
