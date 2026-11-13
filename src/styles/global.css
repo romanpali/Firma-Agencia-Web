@@ -19,7 +19,9 @@ html {
   background: #08090c;
   -webkit-font-smoothing: antialiased;
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
+body { overflow-x: clip; }
 
 /* Entrances */
 @keyframes hfFade { from { opacity: 0; } }
