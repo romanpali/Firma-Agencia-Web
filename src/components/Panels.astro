@@ -153,7 +153,7 @@ const HM = Array.from({ length: 4 }, (_, r) => Array.from({ length: 24 }, (_, c)
                   ))}
                   <i class="absolute bottom-[16px] left-[15px] flex size-[28px] items-center justify-center rounded-full bg-[#eccfa6] text-[11px] font-medium not-italic text-[#1C2160]">A</i>
                 </div>
-                <div class="absolute left-[82px] top-[16px]"><p class="rv text-[15px] font-medium text-[#14173f]" style="--a:.02;--b:.12">Finanzas</p><p class="rv text-[11px] text-[#8f8aa6]" style="--a:.04;--b:.12">Octubre 2026 · MXN</p></div>
+                <div class="absolute left-[82px] top-[16px]"><p class="rv text-[15px] font-medium text-[#14173f]" style="--a:.02;--b:.12">Finanzas, asesoría contable y fiscal</p><p class="rv text-[11px] text-[#8f8aa6]" style="--a:.04;--b:.12">Octubre 2026 · MXN</p></div>
                 <div class="absolute left-[82px] right-6 top-[68px] flex">
                   {[['Ingresos', 1284000, '▲ 8.2 %'], ['Gastos', 512400, '▼ 2.1 %'], ['Utilidad', 771600, '▲ 14.6 %']].map(([l, v, d], k) => (
                     <div class={`rv flex-1 ${k ? 'border-l border-[#e9e2d8] pl-4' : ''}`} style={`--a:${0.08 + k * 0.08};--b:.14`}>
@@ -182,7 +182,7 @@ const HM = Array.from({ length: 4 }, (_, r) => Array.from({ length: 24 }, (_, c)
                 <div class="absolute right-6 top-[150px] w-[176px]">
                   <p class="rv text-[12.5px] font-medium text-[#14173f]" style="--a:.24;--b:.12">Próximos vencimientos</p>
                   <div class="mt-2">
-                    {[['15', 'nov', 'Facturación CFDI', 'Emitir y timbrar'], ['17', 'nov', 'IVA mensual', 'Revisión contable'], ['28', 'nov', 'Nómina', 'Programada'], ['30', 'nov', 'Proveedores', '3 pagos']].map(([d, m, t, s], k) => (
+                    {[['15', 'nov', 'Facturación CFDI', 'Emitir y timbrar'], ['17', 'nov', 'IVA mensual', 'Revisión contable y fiscal'], ['28', 'nov', 'Nómina', 'Programada'], ['30', 'nov', 'Proveedores', '3 pagos']].map(([d, m, t, s], k) => (
                       <div class="rv flex items-center gap-2.5 border-t border-[#efe9e1] py-[8px]" style={`--a:${0.3 + k * 0.09};--b:.12`}>
                         <span class="flex size-[34px] shrink-0 flex-col items-center justify-center rounded-[9px] bg-[#faf7f2] leading-none"><b class="text-[13px] font-medium text-[#14173f]">{d}</b><i class="mt-0.5 text-[8.5px] not-italic uppercase tracking-wider text-[#8f8aa6]">{m}</i></span>
                         <span class="min-w-0"><span class="block truncate text-[11.5px] text-[#14173f]">{t}</span><span class="block truncate text-[10px] text-[#8f8aa6]">{s}</span></span>

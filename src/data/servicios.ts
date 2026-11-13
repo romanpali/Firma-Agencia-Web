@@ -70,7 +70,7 @@ export const divisions: Division[] = [
     ],
   },
   {
-    n: '06', title: 'Finanzas, administración y cumplimiento', short: 'Finanzas y contabilidad',
+    n: '06', title: 'Finanzas, administración y cumplimiento', short: 'Finanzas, contable y fiscal',
     intro: 'Organizamos y automatizamos tus procesos administrativos y financieros, y te asesoramos en lo contable y fiscal.',
     goal: 'Procesos ordenados y asesoría contable y fiscal de nuestro equipo.',
     note: 'La asesoría contable y fiscal está a cargo de nuestro contador, Director de Administración y Finanzas.',
