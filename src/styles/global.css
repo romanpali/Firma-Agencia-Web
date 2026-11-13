@@ -374,3 +374,9 @@ body { overflow-x: clip; }
 .gen-shine { background: linear-gradient(110deg, transparent 32%, rgba(255, 255, 255, 0.6) 50%, transparent 68%); transform: translateX(-100%); animation: genShine 1.9s ease-in-out infinite; }
 @keyframes genShine { to { transform: translateX(100%); } }
 @media (prefers-reduced-motion: reduce) { .gen-card, .gen-blob, .gen-shine { animation: none; } .cfg { transition: none; } }
+
+/* Configurador: sitio generado (entrada escalonada) */
+.rise { opacity: 1; }
+.gen-in .rise { animation: siteRise 1s cubic-bezier(.2, .8, .2, 1) both; animation-delay: calc(0.5s + var(--d, 0s)); }
+@keyframes siteRise { from { opacity: 0; translate: 0 22px; filter: blur(6px); } }
+@media (prefers-reduced-motion: reduce) { .gen-in .rise { animation: none; } }

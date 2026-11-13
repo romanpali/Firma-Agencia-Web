@@ -2,12 +2,12 @@
 import '../styles/global.css';
 
 const types: [string, string, string][] = [
-  ['pequena', 'Pequeña empresa', 'Presencia profesional para atraer clientes y organizar la operación.'],
-  ['crecimiento', 'Empresa en crecimiento', 'Sistemas conectados para escalar sin perder el control.'],
-  ['consolidada', 'Empresa consolidada', 'Integrar áreas, datos y procesos bajo un solo estándar.'],
-  ['comercio', 'Comercio o establecimiento', 'Sitio, catálogo, pedidos, inventario y facturación.'],
-  ['profesional', 'Servicios profesionales', 'Identidad, confianza, cotizaciones y gestión de clientes.'],
-  ['ecommerce', 'Comercio electrónico', 'Tienda, marketing, pedidos y análisis de ventas.'],
+  ['pequena', 'Pequeña empresa', 'Presencia profesional para atraer clientes.'],
+  ['crecimiento', 'Empresa en crecimiento', 'Orden y sistemas para escalar.'],
+  ['consolidada', 'Empresa consolidada', 'Áreas, datos y procesos bajo un estándar.'],
+  ['comercio', 'Comercio o establecimiento', 'Catálogo, pedidos y sucursales.'],
+  ['profesional', 'Servicios profesionales', 'Confianza, cotizaciones y clientes.'],
+  ['ecommerce', 'Comercio electrónico', 'Tienda, pagos y envíos.'],
 ];
 const palettes: [string, string, string, string][] = [
   ['atardecer', 'Atardecer', '#F6B370', '#2F3A9E'], ['oceano', 'Océano', '#0033FF', '#977DFF'],
@@ -16,21 +16,8 @@ const palettes: [string, string, string, string][] = [
 const styles: [string, string, string][] = [
   ['minimal', 'Minimalista', 'Aire, líneas finas y tipografía ligera.'], ['calido', 'Cálido', 'Formas suaves y cercanas.'], ['audaz', 'Audaz', 'Contraste fuerte y títulos contundentes.'],
 ];
-const modules: [string, string, string][] = [
-  ['d1', 'Diseño e identidad', 'Marca, logotipo, material gráfico y producción creativa.'],
-  ['d2', 'Desarrollo digital', 'Sitio web, tienda en línea, aplicaciones y SEO.'],
-  ['d3', 'Marketing y crecimiento', 'Estrategia, publicidad digital y redes sociales.'],
-  ['d4', 'Ventas y CRM', 'Seguimiento de prospectos, cotizaciones y clientes.'],
-  ['d5', 'IA y automatización', 'Agentes, flujos automáticos y asistentes internos.'],
-  ['d6', 'Finanzas y administración', 'Facturación, flujo de caja y control administrativo.'],
-  ['dc', 'Asesoría contable y fiscal', 'Orientación de nuestro contador y tu información en orden.'],
-  ['d7', 'Operaciones y personas', 'Procesos, proyectos, inventarios y equipo.'],
-  ['d8', 'Datos e infraestructura', 'Dashboards, integración de datos y seguridad.'],
-];
-const modes: [string, string, string][] = [
-  ['proyecto', 'Proyecto único', 'Un alcance definido con entregables y fechas.'],
-  ['mensual', 'Plan mensual', 'Acompañamiento continuo: soporte, contenido y mejora.'],
-  ['consultoria', 'Consultoría primero', 'Un diagnóstico y un plan antes de construir.'],
+const covers: [string, string, string][] = [
+  ['foto', 'Fotografía', 'Un paisaje de portada, teñido con tus colores.'], ['gradiente', 'Degradado', 'Un fondo limpio con tus colores.'],
 ];
 const row = 'cfg-row block w-full rounded-[18px] bg-[#f5f5f7] px-5 py-4 text-left transition-[background-color,box-shadow] duration-200 hover:bg-[#ededf0] aria-pressed:bg-white aria-pressed:shadow-[0_0_0_2px_#0033FF,0_12px_30px_-18px_rgba(0,51,255,.55)]';
 const h = 'mt-9 font-goog text-[1.3rem] font-semibold tracking-[-0.02em]';
@@ -41,19 +28,15 @@ const h = 'mt-9 font-goog text-[1.3rem] font-semibold tracking-[-0.02em]';
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Configura tu solución con HumanCorp: elige tu tipo de negocio, tu identidad y los módulos que necesitas, y mira cómo se arma tu proyecto." />
+    <meta name="description" content="Personaliza un sitio web para tu negocio con HumanCorp: elige tu nombre, tus colores y tu estilo, y míralo generarse." />
     <script is:inline>document.documentElement.classList.add('js')</script>
-    <title>Arma tu proyecto — HumanCorp</title>
+    <title>Personaliza tu sitio — HumanCorp</title>
   </head>
   <body class="overflow-hidden bg-[#f5f5f7] font-sans text-[#14161a]">
-    <div class="grid h-svh grid-rows-[42svh_minmax(0,1fr)] lg:grid-cols-[minmax(0,1fr)_460px] lg:grid-rows-1">
-      <!-- Escenario -->
-      <section data-stage class="relative overflow-hidden bg-[radial-gradient(90%_75%_at_50%_35%,#fbfbfb,#ececee)]" aria-label="Vista previa de tu proyecto">
-        <div class="absolute inset-x-0 top-0 z-20 flex items-center gap-4 px-5 py-4 lg:px-9 lg:py-6">
-          <a href="/" aria-label="Volver al inicio" class="grid size-9 place-items-center rounded-full transition-colors hover:bg-black/5"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a>
-          <span class="font-goog text-[15px] uppercase tracking-[0.2em]">Arma tu proyecto</span>
-          <span data-viewname class="ml-auto rounded-full bg-black/[.05] px-3.5 py-1.5 text-[12px] text-black/55" hidden>Sitio web</span>
-        </div>
+    <div class="grid h-svh grid-rows-[44svh_minmax(0,1fr)] lg:grid-cols-[minmax(0,1fr)_460px] lg:grid-rows-1">
+      <!-- Escenario: vacío hasta generar -->
+      <section data-stage class="relative overflow-hidden bg-[radial-gradient(90%_75%_at_50%_35%,#fbfbfb,#ececee)]" aria-label="Vista previa de tu sitio">
+        <a href="/" aria-label="Volver al inicio" class="absolute left-4 top-4 z-30 grid size-11 place-items-center rounded-full bg-white/75 text-[#14161a] shadow-[0_8px_24px_-12px_rgba(0,0,0,.4)] backdrop-blur-md transition-transform hover:scale-105 lg:left-7 lg:top-7"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a>
 
         <!-- Generando -->
         <div data-gen class="pointer-events-none absolute inset-0 z-10 grid place-items-center opacity-0 transition-opacity duration-500" style="--a:#F6B370;--b:#2F3A9E">
@@ -67,189 +50,151 @@ const h = 'mt-9 font-goog text-[1.3rem] font-semibold tracking-[-0.02em]';
           </div>
         </div>
 
-        <div data-canvas class="cfg gen-hidden absolute left-1/2 top-1/2 h-[520px] w-[640px]" style="--a:#F6B370;--b:#2F3A9E;--ink:#14173f;--bg:#fdf6ee;--on:#14173f;--rad:6px;--hw:300">
-          <!-- Vista 1: sitio + módulos -->
-          <div data-view="0" class="cfg-view absolute inset-0">
-            <div class="cfg-browser absolute left-[142px] top-[78px] h-[330px] w-[380px] overflow-hidden bg-[var(--bg)] text-[var(--ink)]" style="border-radius:calc(var(--rad) + 6px);box-shadow:0 40px 80px -30px rgba(0,0,40,.55)">
-              <div class="flex h-[26px] items-center gap-1.5 border-b border-black/10 bg-white/70 px-3"><i class="size-[7px] rounded-full bg-[#ff7a5c]"></i><i class="size-[7px] rounded-full bg-[#ffd47a]"></i><i class="size-[7px] rounded-full bg-[#2fbf8a]"></i><span data-url class="ml-3 flex-1 rounded-full bg-black/[.06] px-3 py-[2px] text-[9px] text-black/50">tuempresa.mx</span></div>
-              <div class="flex items-center justify-between px-5 pt-4">
-                <div class="flex items-center gap-2"><i data-mark class="grid size-[22px] place-items-center bg-[var(--a)] text-[11px] font-semibold not-italic text-[var(--on)]" style="border-radius:var(--rad)">T</i><span data-name class="text-[13px] tracking-[-0.02em]" style="font-weight:var(--hw)">Tu empresa</span></div>
-                <div class="flex items-center gap-3"><i class="block h-[4px] w-8 rounded bg-black/20"></i><i class="block h-[4px] w-8 rounded bg-black/20"></i><i class="block h-[4px] w-8 rounded bg-black/20"></i><span class="bg-[var(--ink)] px-3 py-[5px] text-[8.5px] text-white" style="border-radius:var(--rad)">Contacto</span></div>
-              </div>
-              <div class="grid grid-cols-[1.1fr_1fr] gap-5 px-5 pt-6">
-                <div>
-                  <p data-h class="text-[24px] leading-[1.02] tracking-[-0.04em]" style="font-weight:var(--hw)">Tu negocio, a la vista de todos</p>
-                  <p data-sub class="mt-3 text-[10.5px] leading-snug text-black/55">Presencia profesional para atraer clientes.</p>
-                  <span data-cta class="mt-4 inline-block bg-[var(--a)] px-4 py-[8px] text-[10px] font-medium text-[var(--on)]" style="border-radius:var(--rad)">Contáctanos</span>
-                </div>
-                <div class="h-[140px]" style="border-radius:calc(var(--rad) + 4px);background:linear-gradient(150deg,var(--a),var(--b))"></div>
-              </div>
-              <div class="mt-5 grid grid-cols-3 gap-3 px-5">{[0, 1, 2].map((i) => <div class="bg-black/[.045] p-3" style="border-radius:var(--rad)"><i class="block size-[18px] bg-[var(--a)]" style="border-radius:var(--rad)"></i><p data-card={i} class="mt-2 text-[9.5px]">Servicios</p></div>)}</div>
-              <span data-w="d2" class="cfg-w absolute right-3 top-[34px] rounded-full bg-[#14173f] px-3 py-1 text-[9px] text-white">SEO ✓ · Responsive ✓</span>
+        <!-- Sitio generado (Alba, personalizado) -->
+        <div data-site class="cfg gen-hidden @container absolute inset-0 overflow-y-auto overflow-x-hidden bg-white [scrollbar-width:thin]" style="--a:#F6B370;--b:#2F3A9E;--ink:#14173f;--bg:#fdf6ee;--on:#14173f;--rad:6px;--hw:300">
+          <!-- Portada -->
+          <section class="relative h-full min-h-[440px] overflow-hidden text-white">
+            <div data-cover-photo class="absolute inset-0 bg-cover bg-center" style="background-image:url(/horizon.webp)"></div>
+            <div data-cover-grad class="absolute inset-0" hidden style="background:radial-gradient(60% 70% at 80% 20%,color-mix(in srgb,var(--b) 80%,#fff),transparent 70%),linear-gradient(135deg,var(--a),var(--b) 80%)"></div>
+            <i class="absolute inset-0 opacity-[.5] mix-blend-soft-light" style="background:linear-gradient(120deg,var(--a),var(--b))"></i>
+            <i data-tint class="absolute inset-0 opacity-[.55] mix-blend-color" style="background:linear-gradient(160deg,var(--b),var(--a))"></i>
+            <i class="absolute inset-0" style="background:linear-gradient(to top,rgba(0,0,0,.6),rgba(0,0,0,.04) 55%,rgba(0,0,0,.28))"></i>
+            <i class="grain pointer-events-none absolute inset-0 opacity-[.1]"></i>
+
+            <nav class="rise absolute inset-x-0 top-0 flex items-center justify-between pl-[72px] pr-[clamp(16px,3cqw,40px)] pt-[22px] @4xl:pl-[clamp(80px,9cqw,120px)]" style="--d:.1s">
+              <span data-name class="text-[clamp(14px,1.5cqw,18px)] uppercase tracking-[0.34em]" style="font-weight:var(--hw)">Tu empresa</span>
+              <div class="hidden items-center gap-1 rounded-full border border-white/30 bg-white/15 px-2 py-1.5 backdrop-blur-md @3xl:flex" data-nav></div>
+              <div class="flex items-center gap-2"><span class="hidden rounded-full border border-white/35 bg-white/10 px-4 py-2 text-[12px] backdrop-blur-md @xl:inline">Cuenta</span><span class="rounded-full bg-white px-4 py-2 text-[12px] font-medium text-[#14161a]">Contacto</span></div>
+            </nav>
+
+            <div class="rise absolute right-[12cqw] top-[24%] hidden h-[clamp(160px,26cqw,360px)] w-[clamp(90px,12cqw,170px)] overflow-hidden border border-white/45 bg-white/15 backdrop-blur-md @3xl:block" style="--d:.5s;border-radius:calc(var(--rad) + 12px);transform:rotate(-3deg)"><span data-name2 class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-90 whitespace-nowrap text-[clamp(11px,1.3cqw,16px)] uppercase tracking-[0.4em] text-white/85">Tu empresa</span></div>
+
+            <div class="absolute inset-x-0 bottom-0 px-[clamp(20px,5cqw,72px)] pb-[clamp(28px,5cqw,64px)]">
+              <p class="rise flex items-center gap-2 text-[12px] text-white/85" style="--d:.25s"><i class="block size-2 bg-white" style="border-radius:2px"></i><span data-eyebrow>Presencia profesional</span></p>
+              <h1 data-h class="rise mt-3 max-w-[14ch] text-[clamp(2rem,7.4cqw,6rem)] leading-[1.02] tracking-[-0.045em]" style="--d:.35s;font-weight:var(--hw)">Lo que haces bien, a la vista de todos.</h1>
+              <div class="rise mt-6 flex flex-wrap items-center gap-3" style="--d:.55s"><span data-cta class="px-6 py-3.5 text-[14px] font-medium" style="border-radius:calc(var(--rad) + 20px);background:var(--a);color:var(--on)">Contáctanos</span><span data-cta3 class="border border-white/45 bg-white/10 px-6 py-3.5 text-[14px] backdrop-blur-md" style="border-radius:calc(var(--rad) + 20px)">Ver servicios</span></div>
+              <p data-sub class="rise absolute bottom-[clamp(28px,5cqw,64px)] right-[clamp(20px,5cqw,72px)] hidden max-w-[16rem] text-[13px] leading-snug text-white/80 @3xl:block" style="--d:.7s">Presencia profesional para atraer clientes.</p>
             </div>
+          </section>
 
-            <div data-w="d1" class="cfg-w absolute left-[4px] top-[60px] w-[132px] rounded-[16px] bg-white p-3 text-[#14173f] shadow-[0_24px_50px_-24px_rgba(0,0,40,.6)]"><p class="text-[9px] text-[#8f8aa6]">Identidad</p><div class="mt-1.5 flex items-center gap-2"><i class="block size-8 rounded-full" style="background:linear-gradient(150deg,var(--a),var(--b))"></i><span class="text-[20px] font-light">Aa</span></div><div class="mt-2 flex gap-1.5"><i class="block size-3.5 rounded-full bg-[var(--a)]"></i><i class="block size-3.5 rounded-full bg-[var(--b)]"></i><i class="block size-3.5 rounded-full bg-[var(--ink)]"></i></div></div>
-            <div data-w="d4" class="cfg-w absolute left-[0px] top-[196px] w-[128px] rounded-[16px] bg-white p-3 text-[#14173f] shadow-[0_24px_50px_-24px_rgba(0,0,40,.6)]"><p class="text-[9px] text-[#8f8aa6]">Ventas y CRM</p><div class="mt-2 grid grid-cols-3 gap-1.5">{[2, 3, 1].map((n) => <div class="rounded-md bg-[#f5efe8] p-1">{Array.from({ length: n }).map(() => <i class="mb-1 block h-2 rounded-sm bg-[var(--a)]"></i>)}</div>)}</div><p class="mt-2 text-[9px] text-[#2F3A9E]">Seguimiento automático</p></div>
-            <div data-w="d6" class="cfg-w absolute left-[4px] top-[322px] w-[132px] rounded-[16px] bg-white p-3 text-[#14173f] shadow-[0_24px_50px_-24px_rgba(0,0,40,.6)]"><p class="text-[9px] text-[#8f8aa6]">Facturación y flujo de caja</p><p class="mt-1 text-[15px] font-medium">+ $182,400</p><svg viewBox="0 0 100 22" class="mt-1 w-full" fill="none" aria-hidden="true"><path d="M0 18 L20 12 L40 15 L60 7 L80 9 L100 2" stroke="var(--b)" stroke-width="2" stroke-linecap="round"/></svg></div>
-            <div data-w="d3" class="cfg-w absolute left-[490px] top-[44px] w-[146px] overflow-hidden rounded-[16px] bg-white text-[#14173f] shadow-[0_24px_50px_-24px_rgba(0,0,40,.6)]"><div class="flex items-center gap-1.5 px-2.5 py-2"><i class="block size-5 rounded-full" style="background:linear-gradient(45deg,var(--a),var(--b))"></i><span data-ig class="text-[9.5px] font-semibold">tuempresa</span></div><i class="block h-[62px]" style="background:linear-gradient(160deg,var(--b),var(--a))"></i><p class="px-2.5 py-1.5 text-[9px] text-[#8f8aa6]">♥ 2.4 mil · Meta Ads</p></div>
-            <div data-w="d5" class="cfg-w absolute left-[498px] top-[190px] w-[140px] space-y-1.5 rounded-[16px] bg-white p-3 text-[9.5px] text-[#14173f] shadow-[0_24px_50px_-24px_rgba(0,0,40,.6)]"><p class="ml-auto w-fit rounded-xl bg-[#f5efe8] px-2.5 py-1.5">¿Tienen horario?</p><p class="w-fit rounded-xl bg-[var(--ink)] px-2.5 py-1.5 text-white">Sí, abrimos a las 9.</p><p class="flex gap-1 pt-0.5"><i class="size-1.5 rounded-full bg-[var(--a)]"></i><i class="size-1.5 rounded-full bg-[var(--a)]"></i><i class="size-1.5 rounded-full bg-[var(--a)]"></i></p></div>
-            <div data-w="dc" class="cfg-w absolute left-[18px] top-[434px] flex w-[190px] items-center gap-2.5 rounded-[16px] bg-white p-3 text-[#14173f] shadow-[0_24px_50px_-24px_rgba(0,0,40,.6)]"><i class="grid size-8 shrink-0 place-items-center rounded-full bg-[#14173f] text-[11px] text-white">✓</i><div><p class="text-[10px] font-medium leading-tight">Asesoría contable y fiscal</p><p class="text-[8.5px] text-[#8f8aa6]">Con nuestro contador</p></div></div>
-            <div data-w="d7" class="cfg-w absolute left-[226px] top-[434px] w-[190px] rounded-[16px] bg-white p-3 text-[#14173f] shadow-[0_24px_50px_-24px_rgba(0,0,40,.6)]"><p class="text-[9px] text-[#8f8aa6]">Operaciones</p>{[70, 45].map((w) => <div class="mt-1.5 h-2 rounded-full bg-[#f5efe8]"><i class="block h-full rounded-full bg-[var(--a)]" style={`width:${w}%`}></i></div>)}<p class="mt-1.5 text-[9px]">Proyectos · Inventario · Equipo</p></div>
-            <div data-w="d8" class="cfg-w absolute left-[434px] top-[434px] w-[190px] rounded-[16px] bg-white p-3 text-[#14173f] shadow-[0_24px_50px_-24px_rgba(0,0,40,.6)]"><p class="text-[9px] text-[#8f8aa6]">Dashboard</p><div class="mt-1.5 flex h-[30px] items-end gap-1">{[40, 60, 48, 76, 90].map((h2) => <i class="block flex-1 rounded-t-sm bg-[var(--b)]" style={`height:${h2}%`}></i>)}</div></div>
-          </div>
+          <!-- Servicios -->
+          <section class="bg-[var(--bg)] px-[clamp(20px,5cqw,72px)] py-[clamp(48px,8cqw,110px)] text-[var(--ink)]">
+            <p class="text-[12px] uppercase tracking-[0.2em] opacity-55">Lo que hacemos</p>
+            <h2 data-h2 class="mt-3 max-w-[18ch] text-[clamp(1.6rem,4.2cqw,3.4rem)] leading-[1.05] tracking-[-0.04em]" style="font-weight:var(--hw)">Hecho con cuidado, pensado para ti.</h2>
+            <div class="mt-10 grid gap-4 @2xl:grid-cols-3" data-services></div>
+          </section>
 
-          <!-- Vista 2: lámina de identidad -->
-          <div data-view="1" class="cfg-view absolute inset-0 text-[var(--ink)]">
-            <div class="absolute left-[40px] top-[50px] grid h-[200px] w-[200px] place-items-center text-white shadow-[0_30px_60px_-30px_rgba(0,0,40,.6)]" style="border-radius:calc(var(--rad) * 3 + 8px);background:linear-gradient(150deg,var(--a),var(--b))"><span data-mark2 class="text-[96px] leading-none" style="font-weight:var(--hw);color:var(--on)">T</span></div>
-            <div class="absolute left-[270px] top-[58px]"><p data-name2 class="text-[40px] leading-none tracking-[-0.04em]" style="font-weight:var(--hw)">Tu empresa</p><p data-tag2 class="mt-3 text-[13px] text-black/55">Presencia profesional para atraer clientes.</p></div>
-            <div class="absolute left-[270px] top-[150px] flex gap-2.5">{['a', 'b', 'ink', 'bg'].map((k) => <div class="w-[78px]"><i class="block h-[78px] border border-black/10" style={`background:var(--${k});border-radius:calc(var(--rad) + 4px)`}></i><p data-hex={k} class="mt-1.5 text-[9.5px] text-black/55">#000000</p></div>)}</div>
-            <div class="absolute left-[40px] top-[290px]"><p class="text-[10px] uppercase tracking-[0.14em] text-black/45">Tipografía</p><p class="mt-1 text-[66px] leading-none tracking-[-0.04em]" style="font-weight:var(--hw)">Aa</p><p data-styl class="mt-1 text-[11px] text-black/55">Minimalista</p></div>
-            <div class="absolute left-[200px] top-[312px] h-[116px] w-[200px] bg-white p-4 shadow-[0_24px_50px_-26px_rgba(0,0,40,.55)]" style="border-radius:calc(var(--rad) + 4px)"><i class="block h-1.5 w-8" style="background:var(--a)"></i><p data-name3 class="mt-3 text-[13px]" style="font-weight:var(--hw)">Tu empresa</p><p class="text-[9px] text-black/50">Dirección general</p><p data-url2 class="mt-5 text-[9px] text-black/60">tuempresa.mx · Mérida, Yucatán</p></div>
-            <div class="absolute left-[430px] top-[290px] h-[170px] w-[170px] p-4 text-white shadow-[0_24px_50px_-26px_rgba(0,0,40,.55)]" style="border-radius:calc(var(--rad) + 8px);background:linear-gradient(160deg,var(--b),var(--a))"><p data-ig2 class="text-[10px] opacity-80">@tuempresa</p><p data-post class="absolute bottom-4 left-4 right-4 text-[19px] leading-[1.05]" style="font-weight:var(--hw)">Tu negocio, a la vista de todos</p></div>
-            <div class="absolute left-[40px] top-[462px] flex gap-3"><span class="px-5 py-2.5 text-[11px] font-medium" style="border-radius:var(--rad);background:var(--a);color:var(--on)">Botón principal</span><span class="border px-5 py-2.5 text-[11px]" style="border-radius:var(--rad);border-color:var(--ink)">Secundario</span></div>
-          </div>
-        </div>
+          <!-- Proceso -->
+          <section class="bg-white px-[clamp(20px,5cqw,72px)] py-[clamp(48px,8cqw,110px)] text-[var(--ink)]">
+            <div class="grid gap-8 @2xl:grid-cols-3">
+              {[['01', 'Escuchamos', 'Conocemos lo que necesitas y cómo trabajas.'], ['02', 'Diseñamos', 'Armamos una propuesta clara, a tu medida.'], ['03', 'Entregamos', 'Lo ponemos en marcha y te acompañamos.']].map(([n, t, d]) => <div class="border-t pt-5" style="border-color:color-mix(in srgb,var(--ink) 18%,transparent)"><span class="text-[13px] opacity-50">{n}</span><h3 class="mt-4 text-[1.35rem] tracking-[-0.03em]" style="font-weight:var(--hw)">{t}</h3><p class="mt-2 text-[14.5px] leading-relaxed opacity-65">{d}</p></div>)}
+            </div>
+          </section>
 
-        <button type="button" data-prev-view hidden aria-label="Vista anterior" class="absolute left-5 top-1/2 z-20 grid size-10 -translate-y-1/2 place-items-center rounded-full bg-black/[.07] text-black/60 transition-colors hover:bg-black/15 hover:text-black lg:left-7"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
-        <button type="button" data-next-view hidden aria-label="Vista siguiente" class="absolute right-5 top-1/2 z-20 grid size-10 -translate-y-1/2 place-items-center rounded-full bg-black/[.07] text-black/60 transition-colors hover:bg-black/15 hover:text-black lg:right-7"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+          <!-- Llamado -->
+          <section class="bg-[var(--ink)] px-[clamp(20px,5cqw,72px)] py-[clamp(48px,8cqw,100px)] text-white">
+            <h2 data-h3 class="max-w-[16ch] text-[clamp(1.8rem,5cqw,4rem)] leading-[1.04] tracking-[-0.045em]" style="font-weight:var(--hw)">Hablemos de tu proyecto.</h2>
+            <span data-cta4 class="mt-7 inline-block px-7 py-4 text-[14px] font-medium" style="border-radius:calc(var(--rad) + 20px);background:var(--a);color:var(--on)">Contáctanos</span>
+          </section>
 
-        <div data-statscard hidden class="absolute inset-x-0 bottom-3 z-20 flex justify-center px-4 lg:bottom-7">
-          <div class="flex items-center gap-6 rounded-2xl bg-white px-6 py-3.5 shadow-[0_20px_50px_-28px_rgba(0,0,0,.4)] sm:gap-10 sm:px-9 sm:py-4">
-            <div class="text-center"><p class="font-goog text-[1.35rem] leading-none tracking-[-0.02em]"><span data-st-mods>0</span></p><p class="mt-1.5 text-[10.5px] text-black/50">Módulos</p></div>
-            <div class="text-center"><p class="font-goog text-[1.35rem] leading-none tracking-[-0.02em]"><span data-st-areas>0</span><span class="text-[0.7em] text-black/45"> / 8</span></p><p class="mt-1.5 text-[10.5px] text-black/50">Divisiones</p></div>
-            <div class="text-center"><p data-st-mode class="font-goog text-[1.35rem] leading-none tracking-[-0.02em]">Proyecto</p><p class="mt-1.5 text-[10.5px] text-black/50">Modalidad</p></div>
-          </div>
+          <footer class="flex flex-wrap items-center justify-between gap-3 bg-[var(--bg)] px-[clamp(20px,5cqw,72px)] py-7 text-[12.5px] text-[var(--ink)]"><span data-name3 class="uppercase tracking-[0.3em]" style="font-weight:var(--hw)">Tu empresa</span><span class="opacity-55">Propuesta visual ilustrativa · HumanCorp</span></footer>
         </div>
       </section>
 
-      <!-- Panel de opciones -->
+      <!-- Panel de personalización -->
       <aside class="flex min-h-0 flex-col overflow-hidden border-t border-black/10 bg-white lg:border-l lg:border-t-0">
         <div data-scroller class="min-h-0 flex-1 overflow-y-auto px-6 pb-8 pt-6 lg:px-10 lg:pt-7">
           <div class="flex items-center justify-between text-[12px] text-black/45"><a href="/" class="tracking-wide"><span class="font-light">HUMAN</span> <span class="font-semibold">CORP</span></a><a href="/contacto" class="hover:text-black">Contacto</a></div>
-          <h1 class="mt-8 font-goog text-[1.9rem] font-light uppercase tracking-[0.16em]">Tu proyecto</h1>
-          <p class="mt-2 max-w-[22rem] text-[13px] leading-relaxed text-black/55">Elige cómo es tu negocio y lo que necesitas. La vista se arma contigo. Al terminar, generamos una propuesta visual inicial que afinamos juntos.</p>
+          <h1 class="mt-8 font-goog text-[1.9rem] font-light uppercase tracking-[0.16em]">Tu sitio</h1>
+          <p class="mt-2 max-w-[24rem] text-[13px] leading-relaxed text-black/55">Todo está listo: solo elige tu nombre, tus colores y tu estilo, y generamos tu sitio. Es una propuesta visual inicial que afinamos juntos.</p>
 
           <label class="mt-8 block text-[12.5px] text-black/60">Nombre de tu empresa<input data-in-name maxlength="28" placeholder="Tu empresa" class="mt-2 w-full rounded-2xl bg-[#f5f5f7] px-5 py-4 text-[15px] outline-none transition-shadow placeholder:text-black/35 focus:bg-white focus:shadow-[0_0_0_2px_#0033FF]" /></label>
 
           <h2 class={h}>Negocio</h2>
           <div class="mt-4 space-y-3">{types.map(([id, l, d], i) => <button type="button" data-type={id} aria-pressed={i === 0} class={row}><span class="cfg-t block text-[14.5px] text-black/65">{l}</span><span class="mt-1 block text-[11.5px] leading-snug text-black/40">{d}</span></button>)}</div>
 
-          <h2 class={h}>Identidad</h2>
+          <h2 class={h}>Colores</h2>
           <div class="mt-4 flex flex-wrap gap-5">{palettes.map(([id, l, a, b], i) => <button type="button" data-pal={id} aria-pressed={i === 0} class="group text-left"><span class="relative block size-11 rounded-full ring-1 ring-black/10 transition-shadow group-aria-pressed:ring-2 group-aria-pressed:ring-[#0033FF] group-aria-pressed:ring-offset-2" style={`background:linear-gradient(135deg,${a} 50%,${b} 50%)`}></span><span class="mt-2 block text-[11.5px] text-black/55 group-aria-pressed:text-black">{l}</span></button>)}</div>
-          <div class="mt-5 space-y-3">{styles.map(([id, l, d], i) => <button type="button" data-sty={id} aria-pressed={i === 0} class={row}><span class="cfg-t block text-[14.5px] text-black/65">{l}</span><span class="mt-1 block text-[11.5px] leading-snug text-black/40">{d}</span></button>)}</div>
 
-          <h2 class={h}>Módulos</h2>
-          <p class="mt-1 text-[12px] text-black/45">Elige los que necesites. Se suman a la vista.</p>
-          <div class="mt-4 space-y-3">{modules.map(([id, l, d]) => <button type="button" data-mod={id} aria-pressed="false" class={`${row} flex items-start justify-between gap-4`}><span><span class="cfg-t block text-[14.5px] text-black/65">{l}</span><span class="mt-1 block text-[11.5px] leading-snug text-black/40">{d}</span></span><span class="cfg-add mt-0.5 shrink-0 text-[11.5px] text-black/40">Sumar</span></button>)}</div>
+          <h2 class={h}>Estilo</h2>
+          <div class="mt-4 space-y-3">{styles.map(([id, l, d], i) => <button type="button" data-sty={id} aria-pressed={i === 0} class={row}><span class="cfg-t block text-[14.5px] text-black/65">{l}</span><span class="mt-1 block text-[11.5px] leading-snug text-black/40">{d}</span></button>)}</div>
 
-          <h2 class={h}>Modalidad</h2>
-          <div class="mt-4 space-y-3">{modes.map(([id, l, d], i) => <button type="button" data-mode={id} aria-pressed={i === 0} class={row}><span class="cfg-t block text-[14.5px] text-black/65">{l}</span><span class="mt-1 block text-[11.5px] leading-snug text-black/40">{d}</span></button>)}</div>
-          <p class="mt-8 text-[11.5px] leading-relaxed text-black/40">No incluye precios. Con tu configuración preparamos una propuesta por escrito, con alcance, entregables, tiempos e inversión.</p>
+          <h2 class={h}>Portada</h2>
+          <div class="mt-4 space-y-3">{covers.map(([id, l, d], i) => <button type="button" data-cover={id} aria-pressed={i === 0} class={row}><span class="cfg-t block text-[14.5px] text-black/65">{l}</span><span class="mt-1 block text-[11.5px] leading-snug text-black/40">{d}</span></button>)}</div>
+          <p class="mt-8 text-[11.5px] leading-relaxed text-black/40">No incluye precios. Con tu elección preparamos una propuesta por escrito, con alcance, entregables, tiempos e inversión.</p>
         </div>
 
-        <div class="relative bg-white shadow-[0_-12px_30px_-26px_rgba(0,0,0,.35)]">
-          <div data-drawer hidden class="absolute inset-x-3 bottom-full mb-2 max-h-[46svh] overflow-y-auto rounded-3xl bg-white px-6 py-5 shadow-[0_20px_60px_-20px_rgba(0,0,0,.35)] lg:inset-x-5 lg:px-8">
-            <ul data-summary class="space-y-2.5 text-[13.5px]"></ul>
-            <button type="button" data-copy class="mt-4 text-[12.5px] text-black/55 underline underline-offset-4 hover:text-black">Copiar resumen</button>
-          </div>
-          <div class="flex items-center justify-between gap-4 px-6 py-4 lg:px-10 lg:py-5">
-            <button type="button" data-toggle aria-expanded="false" class="flex items-center gap-2 text-left font-goog text-[1.05rem] tracking-[-0.01em]"><span data-bar-sum>0 módulos</span><svg data-chev width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg></button>
-            <button type="button" data-generate class="rounded-full bg-[#0033FF] px-7 py-3.5 text-[14px] font-medium text-white shadow-[0_12px_30px_-14px_rgba(0,51,255,.7)] transition-transform hover:scale-[1.03] active:scale-[0.98] disabled:opacity-60">Generar mi proyecto</button>
-            <a data-send hidden href="/contacto" class="rounded-full bg-[#14161a] px-7 py-3.5 text-[14px] font-medium text-white transition-transform hover:scale-[1.03]">Enviar mi configuración</a>
-          </div>
+        <div class="bg-white px-6 py-4 shadow-[0_-12px_30px_-26px_rgba(0,0,0,.35)] lg:px-10 lg:py-5">
+          <button type="button" data-generate class="w-full rounded-full bg-[#0033FF] px-7 py-4 text-[15px] font-medium text-white shadow-[0_12px_30px_-14px_rgba(0,51,255,.7)] transition-transform hover:scale-[1.01] active:scale-[0.98] disabled:opacity-60">Generar mi sitio</button>
+          <a data-send hidden href="/contacto" class="block w-full rounded-full bg-[#14161a] px-7 py-4 text-center text-[15px] font-medium text-white transition-transform hover:scale-[1.01]">Enviar mi configuración</a>
         </div>
       </aside>
     </div>
 
-    <script define:vars={{ types, palettes, styles, modules, modes }}>
+    <script define:vars={{ types, palettes, styles, covers }}>
       const $ = (s) => document.querySelector(s);
       const $$ = (s) => [...document.querySelectorAll(s)];
-      const stage = $('[data-stage]'), cv = $('[data-canvas]');
-      const fit = () => { const k = Math.min(stage.clientWidth / 700, (stage.clientHeight - 100) / 540) ; cv.style.transform = `translate(-50%,-52%) scale(${Math.min(k, 1.7).toFixed(4)})`; };
-      new ResizeObserver(fit).observe(stage); fit();
-
-      const COPY = {
-        pequena: ['Tu negocio, a la vista de todos', 'Presencia profesional para atraer clientes.', 'Contáctanos', ['Servicios', 'Nosotros', 'Ubicación']],
-        crecimiento: ['Crece con orden', 'Sistemas conectados para escalar sin caos.', 'Agenda una demo', ['Soluciones', 'Casos', 'Equipo']],
-        consolidada: ['Una operación integrada', 'Departamentos, datos y procesos en un solo estándar.', 'Conoce más', ['Áreas', 'Plataforma', 'Seguridad']],
-        comercio: ['Visítanos o pide en línea', 'Catálogo, pedidos y facturación al día.', 'Ver catálogo', ['Productos', 'Promos', 'Sucursales']],
-        profesional: ['Confianza que se nota', 'Servicios claros, cotizaciones rápidas.', 'Solicitar cotización', ['Servicios', 'Equipo', 'Clientes']],
-        ecommerce: ['Tu tienda, siempre abierta', 'Compras, pagos y envíos sin fricción.', 'Comprar ahora', ['Novedades', 'Ofertas', 'Mi cuenta']],
-      };
-      const PAL = { atardecer: ['#F6B370', '#2F3A9E', '#14173f', '#fdf6ee', '#14173f'], oceano: ['#0033FF', '#977DFF', '#0b0c2b', '#f3f5ff', '#ffffff'], bosque: ['#10b981', '#064e5a', '#06251f', '#f1faf6', '#06251f'], grafito: ['#14173f', '#8f8aa6', '#0b0b0c', '#f6f5f2', '#ffffff'] };
-      const STY = { minimal: ['6px', '300'], calido: ['16px', '500'], audaz: ['0px', '700'] };
-      const VIEWS = ['Sitio web', 'Identidad'];
-      const AREAS = { d1: '1', d2: '2', d3: '3', d4: '4', d5: '5', d6: '6', dc: '6', d7: '7', d8: '8' };
+      const site = $('[data-site]');
       const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
       const label = (list, id) => (list.find((x) => x[0] === id) || [])[1];
       const set = (sel, t) => $$(sel).forEach((el) => (el.textContent = t));
-      // S = lo que el usuario va eligiendo; G = lo que se generó (la vista solo cambia al generar).
-      const S = { name: '', type: 'pequena', pal: 'atardecer', sty: 'minimal', mods: new Set(), mode: 'proyecto' };
-      let G = null, phase = 'idle', view = 0, dirty = false, token = 0;
 
-      // Panel de opciones y cifras (en vivo)
+      const COPY = {
+        pequena: { eyebrow: 'Presencia profesional', h: 'Lo que haces bien, a la vista de todos.', sub: 'Un negocio local con la imagen que merece.', c1: 'Contáctanos', c2: 'Ver servicios', nav: ['Inicio', 'Servicios', 'Nosotros', 'Ubicación'], h2: 'Hecho con cuidado, pensado para ti.', sv: [['Atención cercana', 'Te escuchamos y resolvemos con calma.'], ['Calidad constante', 'Cuidamos cada detalle de lo que hacemos.'], ['Siempre disponibles', 'Te respondemos rápido y con claridad.']] },
+        crecimiento: { eyebrow: 'Crecimiento ordenado', h: 'Crece con orden, cada día.', sub: 'Sistemas conectados para escalar sin caos.', c1: 'Agenda una demo', c2: 'Ver soluciones', nav: ['Inicio', 'Soluciones', 'Casos', 'Equipo'], h2: 'Menos fricción, más resultados.', sv: [['Procesos claros', 'Cada área sabe qué sigue y quién lo hace.'], ['Herramientas conectadas', 'Tu información fluye entre sistemas.'], ['Seguimiento continuo', 'Medimos y mejoramos contigo.']] },
+        consolidada: { eyebrow: 'Operación integrada', h: 'Una operación, un solo estándar.', sub: 'Departamentos, datos y procesos en armonía.', c1: 'Conoce más', c2: 'Ver áreas', nav: ['Inicio', 'Áreas', 'Plataforma', 'Seguridad'], h2: 'Capacidad para sostener tu escala.', sv: [['Integración de áreas', 'Un mismo lenguaje entre departamentos.'], ['Información confiable', 'Datos centralizados para decidir mejor.'], ['Infraestructura sólida', 'Respaldos, accesos y continuidad.']] },
+        comercio: { eyebrow: 'Tienda y sucursales', h: 'Tu tienda, abierta cuando la necesitan.', sub: 'Catálogo, pedidos y facturación al día.', c1: 'Ver catálogo', c2: 'Sucursales', nav: ['Inicio', 'Productos', 'Promos', 'Sucursales'], h2: 'Todo lo que buscas, en un solo lugar.', sv: [['Catálogo claro', 'Encuentra lo que buscas en segundos.'], ['Pedidos sin fricción', 'Pide en línea o pasa por tu compra.'], ['Promociones', 'Ofertas de temporada para ti.']] },
+        profesional: { eyebrow: 'Servicios profesionales', h: 'Confianza que se nota desde el primer contacto.', sub: 'Servicios claros y cotizaciones rápidas.', c1: 'Solicitar cotización', c2: 'Ver servicios', nav: ['Inicio', 'Servicios', 'Equipo', 'Clientes'], h2: 'Experiencia al servicio de tu empresa.', sv: [['Asesoría a tu medida', 'Entendemos tu caso antes de proponer.'], ['Cotización clara', 'Alcance, tiempos e inversión por escrito.'], ['Acompañamiento', 'Seguimos contigo después de la entrega.']] },
+        ecommerce: { eyebrow: 'Tienda en línea', h: 'Compra fácil, recibe a tiempo.', sub: 'Compras, pagos y envíos sin fricción.', c1: 'Comprar ahora', c2: 'Ver novedades', nav: ['Inicio', 'Novedades', 'Ofertas', 'Mi cuenta'], h2: 'Una experiencia de compra sin vueltas.', sv: [['Pago sencillo', 'Elige cómo pagar, de forma clara.'], ['Envíos con seguimiento', 'Sabes dónde está tu pedido.'], ['Atención posventa', 'Te ayudamos con cambios y dudas.']] },
+      };
+      const PAL = { atardecer: ['#F6B370', '#2F3A9E', '#14173f', '#fdf6ee', '#14173f'], oceano: ['#0033FF', '#977DFF', '#0b0c2b', '#f3f5ff', '#ffffff'], bosque: ['#10b981', '#064e5a', '#06251f', '#f1faf6', '#06251f'], grafito: ['#14173f', '#8f8aa6', '#0b0b0c', '#f6f5f2', '#ffffff'] };
+      const STY = { minimal: ['6px', '300'], calido: ['16px', '500'], audaz: ['0px', '700'] };
+      const S = { name: '', type: 'pequena', pal: 'atardecer', sty: 'minimal', cover: 'foto' };
+      let G = null, phase = 'idle', dirty = false, token = 0;
+
       const renderPanel = () => {
         $$('[data-type]').forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.type === S.type)));
         $$('[data-pal]').forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.pal === S.pal)));
         $$('[data-sty]').forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.sty === S.sty)));
-        $$('[data-mode]').forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.mode === S.mode)));
-        $$('[data-mod]').forEach((x) => { const on = S.mods.has(x.dataset.mod); x.setAttribute('aria-pressed', String(on)); x.querySelector('.cfg-add').textContent = on ? 'Incluido ✓' : 'Sumar'; });
-        const mods = modules.filter((m) => S.mods.has(m[0])).map((m) => m[1]);
-        const areas = new Set([...S.mods].map((m) => AREAS[m])).size;
-        set('[data-st-mods]', String(S.mods.size)); set('[data-st-areas]', String(areas)); set('[data-st-mode]', label(modes, S.mode).split(' ')[0]);
-        set('[data-bar-sum]', `${S.mods.size} ${S.mods.size === 1 ? 'módulo' : 'módulos'}`);
+        $$('[data-cover]').forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.cover === S.cover)));
         const nm = S.name.trim() || 'Tu empresa';
-        const rows = [['Empresa', nm], ['Negocio', label(types, S.type)], ['Identidad', `${label(palettes, S.pal)} · ${label(styles, S.sty)}`], ['Módulos', mods.length ? mods.join(', ') : 'Aún sin elegir'], ['Modalidad', label(modes, S.mode)]];
-        $('[data-summary]').innerHTML = rows.map(([k, v]) => `<li class="flex flex-col gap-0.5 border-b border-black/10 pb-2.5 sm:flex-row sm:gap-4"><span class="w-24 shrink-0 text-[12px] text-black/45">${k}</span><span>${v.replace(/</g, '&lt;')}</span></li>`).join('');
-        const text = `Hola, armé mi proyecto en el configurador de HumanCorp:\n- Empresa: ${nm}\n- Tipo de negocio: ${label(types, S.type)}\n- Identidad: ${label(palettes, S.pal)} · ${label(styles, S.sty)}\n- Módulos: ${mods.length ? mods.join(', ') : 'aún sin elegir'}\n- Modalidad: ${label(modes, S.mode)}\nMe gustaría recibir una propuesta.`;
-        $('[data-send]').href = `/contacto?interes=${encodeURIComponent('Proyecto a la medida')}&mensaje=${encodeURIComponent(text)}`;
-        S.text = text;
-        // botones principales
+        const text = `Hola, personalicé mi sitio en el configurador de HumanCorp:\n- Empresa: ${nm}\n- Tipo de negocio: ${label(types, S.type)}\n- Colores: ${label(palettes, S.pal)}\n- Estilo: ${label(styles, S.sty)}\n- Portada: ${label(covers, S.cover)}\nMe gustaría recibir una propuesta.`;
+        $('[data-send]').href = `/contacto?interes=${encodeURIComponent('Sitio web')}&mensaje=${encodeURIComponent(text)}`;
         const gen = $('[data-generate]'), send = $('[data-send]');
         const done = phase === 'done';
         gen.hidden = done && !dirty; send.hidden = !(done && !dirty);
-        gen.textContent = done ? 'Volver a generar' : 'Generar mi proyecto';
+        gen.textContent = done ? 'Volver a generar' : 'Generar mi sitio';
         gen.disabled = phase === 'loading';
       };
 
-      // Lienzo generado (solo cambia al generar)
-      const drawCanvas = () => {
+      const drawSite = () => {
         const nm = G.name.trim() || 'Tu empresa';
-        const slug = nm.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '') || 'tuempresa';
         const [a, b, ink, bg, on] = PAL[G.pal];
         const [rad, hw] = STY[G.sty];
-        cv.style.cssText += `;--a:${a};--b:${b};--ink:${ink};--bg:${bg};--on:${on};--rad:${rad};--hw:${hw}`;
+        site.style.cssText += `;--a:${a};--b:${b};--ink:${ink};--bg:${bg};--on:${on};--rad:${rad};--hw:${hw}`;
         const c = COPY[G.type];
-        set('[data-name],[data-name2],[data-name3]', nm); set('[data-mark],[data-mark2]', nm[0].toUpperCase());
-        set('[data-url]', `${slug}.mx`); set('[data-url2]', `${slug}.mx · Mérida, Yucatán`); set('[data-ig]', slug); set('[data-ig2]', '@' + slug);
-        set('[data-h],[data-post]', c[0]); set('[data-sub],[data-tag2]', c[1]); set('[data-cta]', c[2]); set('[data-styl]', label(styles, G.sty));
-        $$('[data-card]').forEach((el, i) => (el.textContent = c[3][i]));
-        ['a', 'b', 'ink', 'bg'].forEach((k, i) => set(`[data-hex="${k}"]`, [a, b, ink, bg][i].toUpperCase()));
+        set('[data-name],[data-name2],[data-name3]', nm);
+        set('[data-eyebrow]', c.eyebrow); set('[data-h]', c.h); set('[data-sub]', c.sub);
+        set('[data-cta],[data-cta4]', c.c1); set('[data-cta3]', c.c2); set('[data-h2]', c.h2); set('[data-h3]', `Hablemos de ${nm}.`);
+        $('[data-nav]').innerHTML = c.nav.map((n, i) => `<span class="rounded-full px-4 py-1.5 text-[12px] ${i === 0 ? 'bg-white/90 text-[#14161a]' : 'text-white/90'}">${n}</span>`).join('');
+        $('[data-services]').innerHTML = c.sv.map(([t, d]) => `<div class="bg-white p-6 shadow-[0_20px_40px_-30px_rgba(0,0,0,.35)]" style="border-radius:calc(var(--rad) + 14px)"><i class="block size-10" style="border-radius:calc(var(--rad) + 4px);background:linear-gradient(140deg,var(--a),var(--b))"></i><h3 class="mt-6 text-[1.2rem] tracking-[-0.02em]" style="font-weight:var(--hw)">${t}</h3><p class="mt-2 text-[14.5px] leading-relaxed opacity-65">${d}</p><p class="mt-5 text-[13px] font-medium" style="color:var(--b)">Conocer más →</p></div>`).join('');
+        $('[data-tint]').hidden = G.cover !== 'foto'; $('[data-cover-photo]').hidden = G.cover !== 'foto'; $('[data-cover-grad]').hidden = G.cover === 'foto';
+        site.scrollTop = 0;
       };
-      const setView = () => {
-        $$('[data-view]').forEach((el) => { const i = +el.dataset.view; el.style.opacity = i === view ? '1' : '0'; el.style.pointerEvents = i === view ? 'auto' : 'none'; el.style.transform = `translateX(${(i - view) * 40}px)`; });
-        if (phase === 'done') set('[data-viewname]', VIEWS[view]);
-      };
-      const widgets = () => $$('[data-w]');
-      const showWidgets = (on) => widgets().forEach((el, i) => { el.style.transitionDelay = on ? `${0.15 + i * 0.1}s` : '0s'; el.classList.toggle('on', on && G.mods.has(el.dataset.w)); });
 
-      const STEPS = ['Entendiendo tu negocio…', 'Diseñando tu identidad…', 'Armando tu sitio…', 'Conectando tus módulos…', 'Últimos detalles…'];
+      const STEPS = ['Entendiendo tu negocio…', 'Diseñando tu identidad…', 'Armando tu sitio…', 'Aplicando tus colores…', 'Últimos detalles…'];
       const generate = () => {
         if (phase === 'loading') return;
         const my = ++token;
-        G = { ...S, mods: new Set(S.mods) };
-        dirty = false;
+        G = { ...S }; dirty = false;
         const [a, b] = PAL[G.pal];
         const gen = $('[data-gen]'); gen.style.setProperty('--a', a); gen.style.setProperty('--b', b);
         phase = 'loading'; renderPanel();
-        $('[data-viewname]').hidden = false; set('[data-viewname]', 'Generando…');
         $('[data-scroller]').scrollTo({ top: 0, behavior: 'smooth' });
-        // 1) sale el ejemplo / el lienzo anterior y entra el generador
-        cv.classList.add('gen-hidden'); cv.classList.remove('gen-in'); showWidgets(false);
-        $('[data-prev-view]').hidden = true; $('[data-next-view]').hidden = true;
+        site.classList.add('gen-hidden'); site.classList.remove('gen-in');
         gen.style.opacity = '1';
         const total = reduced ? 400 : 4600;
-        const bar = $('[data-gen-bar]'); const txt = $('[data-gen-text]');
+        const bar = $('[data-gen-bar]'), txt = $('[data-gen-text]');
         const start = performance.now();
         const tick = (now) => {
           if (my !== token) return;
@@ -262,31 +207,21 @@ const h = 'mt-9 font-goog text-[1.3rem] font-semibold tracking-[-0.02em]';
       };
       const reveal = (my) => {
         if (my !== token) return;
-        drawCanvas(); view = 0; setView();
-        const gen = $('[data-gen]');
-        gen.style.opacity = '0';
-        cv.classList.remove('gen-hidden'); void cv.offsetWidth; cv.classList.add('gen-in');
-        phase = 'done'; renderPanel(); set('[data-viewname]', VIEWS[0]);
-        setTimeout(() => { if (my === token) showWidgets(true); }, reduced ? 0 : 700);
-        $('[data-prev-view]').hidden = false; $('[data-next-view]').hidden = false; $('[data-statscard]').hidden = false;
+        drawSite();
+        $('[data-gen]').style.opacity = '0';
+        site.classList.remove('gen-hidden'); void site.offsetWidth; site.classList.add('gen-in');
+        phase = 'done'; renderPanel();
       };
 
       document.addEventListener('click', (e) => {
         const t = e.target.closest('button'); if (!t) return;
-        let changed = true;
+        if (t.hasAttribute('data-generate')) { generate(); return; }
         if (t.dataset.type) S.type = t.dataset.type;
         else if (t.dataset.pal) S.pal = t.dataset.pal;
         else if (t.dataset.sty) S.sty = t.dataset.sty;
-        else if (t.dataset.mode) S.mode = t.dataset.mode;
-        else if (t.dataset.mod) { S.mods.has(t.dataset.mod) ? S.mods.delete(t.dataset.mod) : S.mods.add(t.dataset.mod); }
-        else { changed = false;
-          if (t.hasAttribute('data-generate')) { generate(); return; }
-          if (t.hasAttribute('data-next-view')) { view = (view + 1) % VIEWS.length; setView(); return; }
-          if (t.hasAttribute('data-prev-view')) { view = (view + VIEWS.length - 1) % VIEWS.length; setView(); return; }
-          if (t.hasAttribute('data-toggle')) { const d = $('[data-drawer]'); d.hidden = !d.hidden; t.setAttribute('aria-expanded', String(!d.hidden)); $('[data-chev]').style.transform = d.hidden ? '' : 'rotate(180deg)'; return; }
-          if (t.hasAttribute('data-copy')) { navigator.clipboard?.writeText(S.text).then(() => { t.textContent = 'Copiado ✓'; setTimeout(() => (t.textContent = 'Copiar resumen'), 1800); }); return; }
-          return; }
-        if (changed && phase === 'done') dirty = true;
+        else if (t.dataset.cover) S.cover = t.dataset.cover;
+        else return;
+        if (phase === 'done') dirty = true;
         renderPanel();
       });
       $('[data-in-name]').addEventListener('input', (e) => { S.name = e.target.value; if (phase === 'done') dirty = true; renderPanel(); });
