@@ -141,9 +141,20 @@ const idleImgs = ['/process/reel-1.webp', '/horizon/2.webp', '/process/reel-2.we
               </div>
             </section>
 
-            <section class="gal-sec">
-              <div class="gal-head sr"><p>Obra selecta</p><h2 data-gal-h2>Proyectos recientes</h2></div>
-              <div class="gal-grid" data-gal-grid></div>
+            <section class="gal-book" data-book>
+              <div class="bk-stick">
+                <i class="bk-wood"></i><i class="bk-lamp"></i>
+                <svg class="bk-cup" viewBox="0 0 140 140" aria-hidden="true"><circle cx="66" cy="72" r="58" fill="#cfc4b0"/><circle cx="66" cy="72" r="50" fill="#e9e1d2"/><rect x="108" y="58" width="30" height="26" rx="13" fill="#f4efe4"/><rect x="116" y="64" width="14" height="14" rx="7" fill="#cfc4b0"/><circle cx="66" cy="72" r="38" fill="#f7f3ea"/><circle cx="66" cy="72" r="31" fill="#3a2418"/><ellipse cx="56" cy="62" rx="14" ry="8" fill="rgba(255,235,210,.28)" transform="rotate(-24 56 62)"/></svg>
+                <svg class="bk-plant" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="52" r="40" fill="#2b2a28"/><circle cx="50" cy="52" r="33" fill="#1b1a19"/><g fill="#5f8a55">{[0, 1, 2, 3, 4, 5, 6, 7].map((i) => <ellipse cx="50" cy="34" rx="7.5" ry="17" transform={`rotate(${i * 45} 50 52)`} />)}</g><g fill="#7ba46c">{[0, 1, 2, 3, 4, 5].map((i) => <ellipse cx="50" cy="40" rx="5" ry="11" transform={`rotate(${i * 60 + 20} 50 52)`} />)}</g></svg>
+                <i class="bk-pencil"></i>
+                <div class="bk-intro"><p>Obra selecta</p><h2>Proyectos que puedes explorar</h2><span>Desliza para pasar las páginas o haz clic en una.</span></div>
+                <div class="bk-scene"><div class="bk-book" data-bk>
+                  <i class="bk-base"></i><i class="bk-base l"></i>
+                  <div class="bk-end" data-bk-end></div>
+                  <div data-bk-leaves style="display:contents"></div>
+                </div></div>
+                <div class="bk-ui"><span data-bk-count>Cubierta</span><i><b data-bk-bar></b></i></div>
+              </div>
             </section>
 
             <section class="gal-sec gal-svc">
@@ -474,6 +485,76 @@ const idleImgs = ['/process/reel-1.webp', '/horizon/2.webp', '/process/reel-2.we
       /* ---------- Plantilla Galería: proyectos generados ---------- */
       const PNAMES = ['Aurora', 'Nodo', 'Brisa', 'Cántaro', 'Latitud', 'Mosaico', 'Ámbar', 'Trazo'];
       const artCard = (i, name, cat, year, wide) => `<figure class="gcard art${i % 8}${wide ? ' wide' : ''}"><i class="s1"></i><i class="s2"></i><i class="s3"></i><figcaption><b>${esc(name)}</b><span>${esc(cat)} · ${year}</span></figcaption></figure>`;
+      /* ---------- Libro 3D de proyectos ---------- */
+      const BK_DESC = ['Identidad, tono y sistema visual pensados para durar.', 'Una experiencia digital clara, rápida y fácil de recorrer.', 'Una campaña con una idea central y piezas que se complementan.', 'Operación conectada, de la primera visita al seguimiento.', 'Contenido y dirección de arte con una mirada propia.'];
+      const bkSec = $('[data-book]'), bkBook = $('[data-bk]');
+      let bkLeaves = [], bkN = 0, bkRange = 1, bkSecTop = 0;
+      const cl = (x) => Math.max(0, Math.min(1, x));
+      const sm = (x) => x * x * (3 - 2 * x);
+      const buildBook = (nm, slug, projs, c) => {
+        const five = projs.slice(0, 5);
+        const tags = c.sv.map((x) => x[0]);
+        const pn = (n) => `<span class="bk-pn">${String(n).padStart(2, '0')}</span>`;
+        const contents = `<div class="bk-paper"><p class="bk-k">Contenido</p><h3>${esc(nm)}</h3><ul>${five.map(([n, ct], i) => `<li><button type="button" data-bk-go="${i + 1}"><span>0${i + 1}</span><b>${esc(n)}</b><i></i><em>${esc(ct)}</em></button></li>`).join('')}</ul>${pn(2)}</div>`;
+        const cover = `<div class="bk-cover"><p>Obra selecta</p><b>${esc(nm)}</b><i></i><span>${new Date().getFullYear()}</span></div>`;
+        const bkN0 = 6;
+        const leaves = [{ f: cover, b: contents }];
+        const txtPage = (i) => { const [n, ct, y] = five[i]; return `<div class="bk-paper"><p class="bk-k">Proyecto 0${i + 1}</p><h3>${esc(n)}</h3><p class="bk-cat">${esc(ct)} · ${y}</p><p class="bk-d">${BK_DESC[i % 5]}</p><ul class="bk-tags">${tags.map((t) => `<li>${esc(t)}</li>`).join('')}</ul><span class="bk-more">Ver proyecto →</span>${pn(4 + i * 2)}</div>`; };
+        const closing = `<div class="bk-paper"><p class="bk-k">Gracias por recorrer la obra</p><h3>¿Hablamos de tu proyecto?</h3><p class="bk-d">Cuéntanos qué necesitas y lo armamos juntos, paso a paso.</p><span class="bk-more">hola@${slug}.mx →</span>${pn(bkN0 * 2)}</div>`;
+        five.forEach(([n, ct, y], i) => {
+          const vis = `<div class="gcard bk-vis art${i % 8}"><i class="s1"></i><i class="s2"></i><i class="s3"></i><div class="bk-vt"><span>0${i + 1}</span><b>${esc(n)}</b><em>${esc(ct)} · ${y}</em></div>${pn(3 + i * 2)}</div>`;
+          leaves.push({ f: vis, b: i < 4 ? txtPage(i + 1) : closing });
+        });
+        bkN = leaves.length;
+        $('[data-bk-leaves]').innerHTML = leaves.map((l, k) => `<div class="bk-leaf" data-k="${k}"><div class="bk-face f">${l.f}</div><div class="bk-face b">${l.b}</div></div>`).join('');
+        $('[data-bk-end]').innerHTML = `<div class="bk-faceend"><p>¿Hablamos?</p><b>${esc(nm)}</b><span>hola@${slug}.mx</span>${pn(bkN * 2 + 2)}</div>`;
+        bkLeaves = [...bkBook.querySelectorAll('.bk-leaf')];
+        bkMeasure(); bookUpdate();
+      };
+      const bkMeasure = () => {
+        if (!bkSec.offsetHeight) return;
+        const sr = site.getBoundingClientRect(), br = bkSec.getBoundingClientRect();
+        bkSecTop = br.top - sr.top + site.scrollTop; bkRange = Math.max(1, bkSec.offsetHeight - site.clientHeight);
+      };
+      const bookUpdate = () => {
+        if (!bkLeaves.length) return;
+        const p = cl((site.scrollTop - bkSecTop) / bkRange);
+        const t = cl((p - 0.05) / 0.88) * bkN;
+        bkLeaves.forEach((el, k) => {
+          const a = sm(cl(t - k)) * 180;
+          el.style.setProperty('--ang', a.toFixed(2));
+          el.style.setProperty('--z', `${(a > 90 ? k : bkN - k) * 6}px`);
+          el.style.visibility = k >= Math.floor(Math.min(t, bkN - 0.001)) - 1 && k <= Math.floor(Math.min(t, bkN - 0.001)) + 1 ? 'visible' : 'hidden';
+          el.style.setProperty('--shade', (Math.sin((a * Math.PI) / 180) * 0.5).toFixed(3));
+        });
+        const e = sm(cl(p / 0.28));
+        bkBook.style.setProperty('--o', sm(cl(t)).toFixed(3));
+        bkBook.style.setProperty('--lb', cl(t * 1.5).toFixed(3));
+        bkBook.style.setProperty('--rx', (62 - 42 * e).toFixed(2));
+        bkBook.style.setProperty('--rz', (-9 * (1 - e)).toFixed(2));
+        bkBook.style.setProperty('--bs', (0.8 + 0.22 * e).toFixed(3));
+        bkSec.style.setProperty('--bp', p.toFixed(3));
+        const pg = Math.round(t);
+        $('[data-bk-count]').textContent = pg < 1 ? 'Cubierta' : pg > bkN - 1 ? `Proyecto ${bkN - 1} de ${bkN - 1}` : `Proyecto ${pg} de ${bkN - 1}`;
+        $('[data-bk-bar]').style.transform = `scaleX(${(t / bkN).toFixed(3)})`;
+      };
+      const bkGo = (t) => {
+        bkMeasure();
+        const top = bkSecTop + (0.05 + (t / bkN) * 0.88) * bkRange + (t > 0 && t < bkN ? 2 : 0);
+        site.scrollTo({ top, behavior: reduced ? 'auto' : 'smooth' });
+      };
+      site.addEventListener('scroll', () => requestAnimationFrame(bookUpdate), { passive: true });
+      new ResizeObserver(() => { bkMeasure(); bookUpdate(); }).observe(site);
+      bkBook.addEventListener('click', (e) => {
+        const g = e.target.closest('[data-bk-go]');
+        if (g) { bkGo(+g.dataset.bkGo); return; }
+        const leaf = e.target.closest('.bk-leaf');
+        if (!leaf) return;
+        const k = +leaf.dataset.k, a = parseFloat(leaf.style.getPropertyValue('--ang')) || 0;
+        bkGo(a > 90 ? k : k + 1);
+      });
+      site.addEventListener('click', (e) => { if (e.target.closest('[data-gal-cta]')) { bkMeasure(); site.scrollTo({ top: bkSecTop, behavior: reduced ? 'auto' : 'smooth' }); } });
+
       const drawGallery = (nm, slug) => {
         const c = COPY[G.type];
         const cats = c.sv.map((x) => x[0]);
@@ -485,7 +566,7 @@ const idleImgs = ['/process/reel-1.webp', '/horizon/2.webp', '/process/reel-2.we
         drawHeading('[data-gal-title]', 'Proyectos que', ['se notan', 'cuentan historias', 'dejan huella', 'inspiran'], '', false);
         set('[data-gal-desc]', S.desc.trim() ? `${nm}: ${S.desc.trim()}.` : `${nm} diseña y desarrolla proyectos con intención, de la idea a la entrega.`);
         $('[data-gal-nav]').innerHTML = ['Obra', 'Servicios', 'Contacto'].map((n, i) => `<span class="${i === 0 ? 'on' : ''}">${n}<sup>0${i + 1}</sup></span>`).join('');
-        $('[data-gal-grid]').innerHTML = projs.slice(0, 6).map(([n, ct, y], i) => `<article class="gitem sr" style="--sd:${(i % 2) * 0.12}s">${artCard(i, n, ct, y, false).replace(/<figcaption>.*<\/figcaption>/, '')}<div class="gmeta"><span>0${i + 1}</span><h3>${esc(n)}</h3><em>${esc(ct)} · ${y}</em><b aria-hidden="true">↗</b></div></article>`).join('');
+        buildBook(nm, slug, projs, c);
         $('[data-gal-svc]').innerHTML = c.sv.concat([['Dirección de arte', 'Una mirada clara y coherente en todo lo que ves.']]).map(([t, d], i) => `<div class="grow sr" style="--sd:${i * 0.08}s"><span>0${i + 1}</span><h3>${esc(t)}</h3><p>${esc(d)}</p><b aria-hidden="true">→</b></div>`).join('');
         set('[data-gal-end]', `Hablemos de tu proyecto.`);
       };
