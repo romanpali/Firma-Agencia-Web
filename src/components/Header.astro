@@ -1,31 +1,69 @@
 ---
+import { divisions } from '../data/servicios';
 const links = [
-  { href: '/servicios', label: 'Servicios' },
+  { href: '/paquetes', label: 'Paquetes' },
+  { href: '/asesoria-contable-y-fiscal', label: 'Contable y fiscal' },
   { href: '/nosotros', label: 'Nosotros' },
+  { href: '/recursos', label: 'Recursos' },
+  { href: '/contacto', label: 'Contacto' },
+];
+const tools = [
+  { href: '/arma-tu-proyecto', t: 'Arma tu proyecto', d: 'Configura tu solución y mira cómo se arma.' },
+  { href: '/diagnostico', t: 'Diagnóstico gratis', d: '¿Qué tan conectada está tu empresa?' },
+  { href: '/paquetes', t: 'Paquetes', d: 'Soluciones completas por necesidad.' },
+];
+const menuLinks = [
+  { href: '/servicios', label: 'Servicios' },
+  { href: '/paquetes', label: 'Paquetes' },
+  { href: '/arma-tu-proyecto', label: 'Arma tu proyecto' },
+  { href: '/asesoria-contable-y-fiscal', label: 'Contable y fiscal' },
+  { href: '/diagnostico', label: 'Diagnóstico' },
+  { href: '/nosotros', label: 'Nosotros' },
+  { href: '/recursos', label: 'Recursos' },
   { href: '/contacto', label: 'Contacto' },
 ];
 const pill = 'hdr-pill rounded-full border border-white/20 bg-white/10 px-5 py-3 text-[15px] font-medium text-white backdrop-blur-md transition-[background-color,transform] duration-200 hover:bg-white/20 active:scale-[0.97]';
 ---
 
 <header class="hf-fade fixed inset-x-0 top-0 z-50 flex items-center justify-between px-5 py-4 text-white md:px-9 md:py-5" data-nav style="--d:.1s">
-  <div class="flex items-center gap-12 lg:gap-[88px]">
+  <div class="flex items-center gap-10 xl:gap-14">
     <a href="/" class="text-[15px] tracking-wide" aria-label="HumanCorp"><span class="font-light">HUMAN</span> <span class="font-semibold">CORP</span></a>
-    <nav class="hidden items-center gap-12 md:flex" aria-label="Principal">
+    <nav class="hidden items-center gap-7 lg:flex xl:gap-9" aria-label="Principal">
+      <div class="mega-wrap relative">
+        <a href="/servicios" class="flex items-center gap-1.5 text-[14px] font-semibold tracking-tight transition-opacity hover:opacity-70" aria-haspopup="true">Servicios<svg width="9" height="9" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M2 3.5l3 3 3-3"/></svg></a>
+        <div class="mega pointer-events-none absolute left-[-24px] top-full w-[min(760px,88vw)] pt-5 opacity-0 transition-[opacity,transform] duration-300">
+          <div class="grid grid-cols-[1.25fr_1fr] gap-6 rounded-[22px] border border-black/[.06] bg-white p-6 text-[#0b0b0c] shadow-[0_40px_80px_-30px_rgba(0,0,40,.45)]">
+            <div>
+              <p class="px-3 pb-2 text-[11px] font-medium uppercase tracking-[0.14em] text-black/45">Las 8 divisiones</p>
+              <ul class="grid grid-cols-2 gap-x-2">
+                {divisions.map((d) => <li><a href={`/servicios#div-${d.n}`} class="flex items-baseline gap-3 rounded-lg px-3 py-2 text-[13.5px] leading-snug transition-colors hover:bg-black/[.05]"><span class="w-5 text-[12px] text-black/40">{d.n}</span>{d.short}</a></li>)}
+              </ul>
+              <a href="/servicios" class="mt-2 inline-block px-3 py-2 text-[13px] underline decoration-black/25 underline-offset-4 hover:decoration-black">Ver todos los servicios →</a>
+            </div>
+            <div class="border-l border-black/[.07] pl-6">
+              <p class="pb-2 text-[11px] font-medium uppercase tracking-[0.14em] text-black/45">Herramientas</p>
+              <ul class="space-y-1">
+                {tools.map((t) => <li><a href={t.href} class="block rounded-lg px-3 py-2.5 transition-colors hover:bg-black/[.05]"><span class="block text-[14px] font-medium">{t.t}</span><span class="block text-[12px] text-black/55">{t.d}</span></a></li>)}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
       {links.map((l) => <a href={l.href} class="text-[14px] font-semibold tracking-tight transition-opacity hover:opacity-70">{l.label}</a>)}
     </nav>
   </div>
-  <a href="/contacto" class={`${pill} hidden md:inline-flex`}>Hablemos</a>
-  <button type="button" class={`${pill} md:hidden`} data-menu-open aria-expanded="false" aria-controls="site-menu">Menú</button>
+  <a href="/arma-tu-proyecto" class={`${pill} hidden lg:inline-flex`}>Arma tu proyecto</a>
+  <button type="button" class={`${pill} lg:hidden`} data-menu-open aria-expanded="false" aria-controls="site-menu">Menú</button>
 </header>
 
-<div id="site-menu" data-menu class="pointer-events-none fixed inset-0 z-[60] flex flex-col justify-between bg-[#07080b]/95 px-6 py-6 text-white opacity-0 backdrop-blur-xl transition-opacity duration-500" aria-hidden="true">
+<div id="site-menu" data-menu class="pointer-events-none fixed inset-0 z-[60] flex flex-col overflow-y-auto bg-[#07080b]/95 px-6 py-6 text-white opacity-0 backdrop-blur-xl transition-opacity duration-500" aria-hidden="true">
   <div class="flex items-center justify-between">
     <span class="text-[15px] tracking-wide"><span class="font-light">HUMAN</span> <span class="font-semibold">CORP</span></span>
     <button type="button" class={pill} data-menu-close>Cerrar</button>
   </div>
-  <nav class="flex flex-col gap-2" aria-label="Menú">
-    {links.concat([{ href: '/contacto', label: 'Hablemos' }]).map((l, i) => (
-      <a href={l.href} data-menu-link class="menu-link text-[clamp(2.6rem,11vw,5rem)] font-light leading-[1.05] tracking-[-0.045em] text-white/90 transition-colors hover:text-white" style={`--i:${i}`}>{l.label}</a>
+  <nav class="my-auto flex flex-col gap-1 py-8" aria-label="Menú">
+    {menuLinks.map((l, i) => (
+      <a href={l.href} data-menu-link class="menu-link text-[clamp(1.9rem,8.5vw,3.4rem)] font-light leading-[1.12] tracking-[-0.04em] text-white/90 transition-colors hover:text-white" style={`--i:${i}`}>{l.label}</a>
     ))}
   </nav>
   <p class="text-[13px] text-white/45">Diseño, tecnología y operaciones empresariales.</p>

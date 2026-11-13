@@ -1,0 +1,82 @@
+---
+import Light from '../layouts/Light.astro';
+import { packages, divisions } from '../data/servicios';
+
+// Para quién es cada paquete y qué divisiones toca.
+const meta: [string, string[]][] = [
+  ['Para marcas que nacen o necesitan renovarse y verse profesionales en todos lados.', ['01']],
+  ['Para quien necesita producir imágenes, video y contenido de forma constante.', ['01']],
+  ['Para negocios que quieren un sitio que se vea bien, se encuentre y reciba contactos.', ['02']],
+  ['Para quien quiere atraer clientes de forma ordenada y medir lo que funciona.', ['03', '04']],
+  ['Para equipos que quieren dar seguimiento a cada prospecto y cotizar sin perder tiempo.', ['04']],
+  ['Para empresas con tareas repetitivas que quieren automatizar con supervisión.', ['05']],
+  ['Para negocios que necesitan orden en facturación, flujo de caja y su información contable y fiscal.', ['06']],
+  ['Para organizaciones que quieren procesos, proyectos, inventarios y equipos más claros.', ['07']],
+];
+const recurring = ['Mantenimiento web', 'Administración de infraestructura', 'Gestión de campañas', 'Producción periódica de contenido', 'Administración de redes sociales', 'Monitoreo de automatizaciones', 'Soporte técnico', 'Actualización de sistemas', 'Administración de CRM', 'Reportes ejecutivos', 'Optimización continua'];
+const steps = [['Evaluación de la situación actual', 'Conocemos tu empresa y cómo trabaja hoy.'], ['Problemas y oportunidades', 'Identificamos qué conviene resolver primero.'], ['Diseño de la solución', 'Definimos cómo se conectan las piezas.'], ['Plan de implementación', 'Calendario, responsables y entregables.'], ['Desarrollo e integración', 'Construimos y conectamos todo.'], ['Capacitación', 'Tu equipo aprende a usarlo.'], ['Seguimiento y optimización', 'Medimos y mejoramos de forma continua.']];
+const name = (n: string) => divisions.find((d) => d.n === n)!.short;
+const quote = (t: string) => `/contacto?interes=${encodeURIComponent('Paquete: ' + t)}&mensaje=${encodeURIComponent('Hola, me interesa el paquete «' + t + '». Me gustaría recibir una propuesta a mi medida.')}`;
+---
+
+<Light title="Paquetes" description="Soluciones completas de HumanCorp por necesidad: identidad, presencia digital, crecimiento, ventas, IA, finanzas y operaciones.">
+  <section data-tone="light" class="px-6 pb-[8svh] pt-[24svh] md:px-10">
+    <div class="mx-auto max-w-[1280px]">
+      <p data-reveal class="text-[13px] font-medium uppercase tracking-[0.14em] text-[#6b6e75]">Paquetes</p>
+      <h1 data-words class="mt-6 max-w-[17ch] font-goog text-[clamp(2.5rem,6.6vw,6.4rem)] font-light leading-[1.02] tracking-[-0.05em]">Soluciones completas, a la medida de tu empresa.</h1>
+      <p data-reveal style="--i:1" class="mt-7 max-w-[38rem] text-[clamp(1.05rem,1.5vw,1.3rem)] leading-relaxed text-[#3a3d42]">Cada paquete reúne varias capacidades que trabajan juntas. Todos se cotizan según el alcance de tu empresa, por eso no mostramos precios fijos: te enviamos una propuesta por escrito.</p>
+      <div data-reveal style="--i:2" class="mt-9 flex flex-wrap gap-3">
+        <a href="/arma-tu-proyecto" class="rounded-full bg-[#0b0b0c] px-7 py-3.5 text-[15px] font-medium text-white transition-transform hover:scale-[1.03]">Arma tu proyecto</a>
+        <a href="/diagnostico" class="rounded-full border border-[#0b0b0c]/20 px-7 py-3.5 text-[15px] transition-colors hover:bg-[#0b0b0c]/5">Hacer el diagnóstico</a>
+      </div>
+    </div>
+  </section>
+
+  <section data-tone="light" class="px-6 py-[6svh] md:px-10">
+    <div class="mx-auto max-w-[1280px] border-t border-[#e6e4df] pt-10">
+      <p data-reveal class="text-[13px] font-medium uppercase tracking-[0.14em] text-[#6b6e75]">Soluciones integrales</p>
+      <ul class="mt-8 grid gap-5 md:grid-cols-2">
+        {packages.map(([t, items], i) => (
+          <li data-reveal style={`--i:${i % 2}`}>
+            <article class="flex h-full flex-col rounded-[20px] border border-[#e6e4df] p-7 transition-[border-color,transform,box-shadow] duration-300 hover:-translate-y-1 hover:border-[#0b0b0c]/30 hover:shadow-[0_30px_60px_-40px_rgba(0,0,0,.35)]">
+              <div class="flex items-baseline justify-between"><span class="font-goog text-[14px] text-[#6b6e75]">{String(i + 1).padStart(2, '0')}</span><span class="text-[12px] text-[#6b6e75]">{meta[i][1].map(name).join(' · ')}</span></div>
+              <h2 class="mt-6 font-goog text-[1.8rem] font-normal leading-[1.05] tracking-[-0.04em]">{t}</h2>
+              <p class="mt-3 text-[14.5px] leading-relaxed text-[#50535a]">{meta[i][0]}</p>
+              <p class="mt-6 text-[11.5px] font-medium uppercase tracking-[0.14em] text-[#6b6e75]">Incluye</p>
+              <ul class="mt-3 grid gap-x-4 gap-y-2 text-[14px] sm:grid-cols-2">{items.split('|').map((s) => <li class="flex gap-2.5"><span class="mt-[0.55em] block size-1 shrink-0 rounded-full bg-[#0b0b0c]"></span>{s}</li>)}</ul>
+              <a href={quote(t)} class="mt-8 inline-flex items-center gap-2 self-start text-[14.5px] font-medium underline decoration-[#0b0b0c]/25 underline-offset-[6px] transition-[text-decoration-color] hover:decoration-[#0b0b0c]">Cotizar este paquete <span aria-hidden="true">→</span></a>
+            </article>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section data-tone="light" class="px-6 py-[9svh] md:px-10">
+    <div class="mx-auto grid max-w-[1280px] gap-10 border-t border-[#e6e4df] pt-10 md:grid-cols-12 md:gap-14">
+      <div class="md:col-span-5">
+        <p data-reveal class="text-[13px] font-medium uppercase tracking-[0.14em] text-[#6b6e75]">Servicios recurrentes</p>
+        <h2 data-words class="mt-5 font-goog text-[clamp(2rem,3.6vw,3.4rem)] font-light leading-[1.04] tracking-[-0.045em]">Una relación de largo plazo</h2>
+        <p data-reveal class="mt-5 max-w-[26rem] text-[15.5px] leading-relaxed text-[#50535a]">Además de los proyectos, puedes contratar planes mensuales para que tu empresa siga creciendo y funcionando sin interrupciones.</p>
+        <a data-reveal href="/contacto?interes=Plan%20mensual" class="mt-6 inline-block text-[14.5px] font-medium underline decoration-[#0b0b0c]/25 underline-offset-[6px] hover:decoration-[#0b0b0c]">Cotizar un plan mensual →</a>
+      </div>
+      <ul class="grid content-start gap-x-8 md:col-span-7 md:grid-cols-2">
+        {recurring.map((r, i) => <li data-reveal style={`--i:${i % 2}`} class="flex items-center gap-4 border-b border-[#e6e4df] py-4 text-[15px]"><span class="w-6 font-goog text-[13px] text-[#6b6e75]">{String(i + 1).padStart(2, '0')}</span>{r}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section data-tone="light" class="px-6 pb-[12svh] pt-[4svh] md:px-10">
+    <div class="mx-auto max-w-[1280px] border-t border-[#e6e4df] pt-10">
+      <p data-reveal class="text-[13px] font-medium uppercase tracking-[0.14em] text-[#6b6e75]">Consultoría e implementación</p>
+      <h2 data-words class="mt-5 max-w-[18ch] font-goog text-[clamp(2rem,3.6vw,3.4rem)] font-light leading-[1.04] tracking-[-0.045em]">Si primero necesitas un plan</h2>
+      <ol class="mt-10 grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
+        {steps.map(([t, d], i) => <li data-reveal style={`--i:${i % 4}`}><span class="font-goog text-[14px] text-[#6b6e75]">{String(i + 1).padStart(2, '0')}</span><h3 class="mt-3 font-goog text-[1.15rem] tracking-[-0.025em]">{t}</h3><p class="mt-1.5 text-[14px] leading-relaxed text-[#50535a]">{d}</p></li>)}
+      </ol>
+      <div data-reveal class="mt-14 flex flex-wrap gap-3">
+        <a href="/contacto?interes=Consultor%C3%ADa" class="rounded-full bg-[#0b0b0c] px-7 py-3.5 text-[15px] font-medium text-white transition-transform hover:scale-[1.03]">Agendar una llamada</a>
+        <a href="/servicios" class="rounded-full border border-[#0b0b0c]/20 px-7 py-3.5 text-[15px] transition-colors hover:bg-[#0b0b0c]/5">Ver todos los servicios</a>
+      </div>
+    </div>
+  </section>
+</Light>

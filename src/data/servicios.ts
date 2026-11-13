@@ -134,6 +134,6 @@ export const packages: [string, string][] = [
   ['Sistema de crecimiento', 'Estrategia de marketing|Meta Ads|Google Ads|Embudos comerciales|Captación de prospectos|CRM|Analítica de campañas'],
   ['Sistema de ventas', 'CRM|Automatización comercial|Cotizaciones|Seguimiento|Gestión de oportunidades|Reportes de ventas'],
   ['IA y automatización', 'Agentes de IA|Automatización|Integraciones|Asistentes empresariales|Procesamiento documental'],
-  ['Operaciones financieras', 'Facturación|Flujo de caja|Control administrativo|Reportes|Automatización financiera|Organización documental'],
+  ['Operaciones financieras', 'Facturación|Flujo de caja|Control administrativo|Reportes|Automatización financiera|Organización documental|Asesoría contable y fiscal'],
   ['Operaciones empresariales', 'Gestión de proyectos|Procesos internos|Inventarios|Proveedores|Capital humano|Indicadores operativos'],
 ];

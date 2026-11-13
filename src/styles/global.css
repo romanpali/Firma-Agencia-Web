@@ -337,3 +337,14 @@ body { overflow-x: clip; }
 /* /nosotros: retratos sobrios (blanco y negro; color al pasar el cursor) */
 .portrait img { filter: grayscale(1) contrast(1.04); transition: filter 0.6s ease, transform 1.2s cubic-bezier(.2, .7, .2, 1); }
 @media (hover: hover) { .portrait:hover img { filter: none; transform: scale(1.02); } }
+
+/* Navbar: menú de servicios */
+.mega-wrap:hover .mega, .mega-wrap:focus-within .mega { opacity: 1; pointer-events: auto; }
+.mega { transform: translate3d(0, 8px, 0); }
+.mega-wrap:hover .mega, .mega-wrap:focus-within .mega { transform: none; }
+
+/* Casillas simples (asesoría, recursos) */
+.chk > input:checked + i { background: #0b0b0c; border-color: #0b0b0c; }
+.chk > input:checked + i svg { opacity: 1; }
+.chk > input:checked ~ span { color: #0b0b0c; }
+.chk > input:focus-visible + i { outline: 2px solid #977dff; outline-offset: 2px; }

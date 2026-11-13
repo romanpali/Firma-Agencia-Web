@@ -1,0 +1,30 @@
+---
+// Página clara y sobria (como /nosotros): encabezado, contenido y pie.
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import ScrollFx from '../components/ScrollFx.astro';
+interface Props { title: string; description: string }
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es-MX">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <script is:inline>document.documentElement.classList.add('js')</script>
+    <title>{title} — HumanCorp</title>
+  </head>
+  <body class="bg-white font-sans text-[#0b0b0c]">
+    <Header />
+    <main class="relative z-10 overflow-x-clip"><slot /></main>
+    <footer data-tone="light" class="px-6 pb-10 pt-10 md:px-10">
+      <div class="mx-auto flex max-w-[1280px] flex-wrap items-center justify-between gap-4 border-t border-[#e6e4df] pt-6 text-[13px] text-[#6b6e75]">
+        <span>© 2026 Todos los derechos reservados. HumanCorp</span>
+        <nav class="flex flex-wrap gap-x-6 gap-y-2" aria-label="Pie"><a href="/" class="hover:text-[#0b0b0c]">Inicio</a><a href="/servicios" class="hover:text-[#0b0b0c]">Servicios</a><a href="/paquetes" class="hover:text-[#0b0b0c]">Paquetes</a><a href="/nosotros" class="hover:text-[#0b0b0c]">Nosotros</a><a href="/contacto" class="hover:text-[#0b0b0c]">Contacto</a><a href="/terminos" class="hover:text-[#0b0b0c]">Términos de uso</a><a href="/privacidad" class="hover:text-[#0b0b0c]">Privacidad</a></nav>
+      </div>
+    </footer>
+    <ScrollFx />
+  </body>
+</html>

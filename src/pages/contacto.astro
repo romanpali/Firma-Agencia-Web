@@ -94,6 +94,17 @@ const label = 'block text-[12.5px] font-medium text-white/75';
       const form = document.querySelector<HTMLFormElement>('[data-form]')!;
       const btn = form.querySelector<HTMLButtonElement>('[data-send]')!;
       const status = form.querySelector<HTMLElement>('[data-status]')!;
+
+      // Precarga desde el configurador, el diagnóstico y los paquetes (?interes=…&mensaje=…).
+      const qs = new URLSearchParams(location.search);
+      const want = qs.get('interes');
+      const sel = form.querySelector<HTMLSelectElement>('select[name="interes"]')!;
+      if (want) {
+        if (![...sel.options].some((o) => o.value === want)) sel.add(new Option(want, want));
+        sel.value = want;
+      }
+      const msg = qs.get('mensaje');
+      if (msg) form.querySelector<HTMLTextAreaElement>('textarea[name="mensaje"]')!.value = msg;
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
         btn.disabled = true;
