@@ -1,27 +1,29 @@
-<section class="relative z-10 overflow-hidden py-[12svh]">
+---
+// Cada categoría es un recuadro de gradiente propio; la descripción queda para lectores de pantalla.
+const tiles = [
+  ['Pequeñas empresas', 'Necesitan construir una presencia profesional, captar clientes y organizar sus operaciones.', 'linear-gradient(135deg,#977DFF,#0033FF 55%,#0600AB)', 'col-span-2'],
+  ['Empresas en crecimiento', 'Necesitan conectar sistemas, profesionalizar procesos, implementar CRM y automatizar actividades.', 'linear-gradient(135deg,#2dd4bf,#0e7490 55%,#0a2a5e)', ''],
+  ['Empresas consolidadas', 'Necesitan integrar departamentos, mejorar la gestión de información y modernizar infraestructura.', 'linear-gradient(135deg,#f0abfc,#a855f7 50%,#3b0a8c)', ''],
+  ['Comercios y establecimientos', 'Necesitan sitios web, catálogos, publicidad, sistemas de pedidos, inventarios y facturación.', 'linear-gradient(135deg,#fdba74,#f43f5e 55%,#7c1d6f)', ''],
+  ['Servicios profesionales', 'Necesitan identidad corporativa, presencia digital, gestión de clientes y cotizaciones.', 'linear-gradient(135deg,#7dd3fc,#4f46e5 55%,#1e1b6e)', ''],
+  ['Comercio electrónico', 'Necesitan tiendas digitales, marketing, gestión de pedidos y análisis de ventas.', 'linear-gradient(135deg,#a3e635,#10b981 50%,#064e5a)', 'col-span-2'],
+  ['Procesos administrativos complejos', 'Necesitan centralizar información, documentación, control operativo y seguimiento.', 'linear-gradient(135deg,#c4b5fd,#6d28d9 50%,#00033D)', 'col-span-2 md:col-span-4'],
+];
+---
+
+<section class="relative z-10 py-[12svh]">
   <div class="mx-auto max-w-[1280px] px-6 md:px-10">
     <p data-reveal class="text-[14px] text-white/55">Para quién trabajamos</p>
-    <h2 data-words class="mt-4 max-w-[18ch] text-[clamp(2.2rem,4.6vw,4.6rem)] font-light leading-[1.03] tracking-[-0.045em]">Empresas de todos los tamaños</h2>
-  </div>
+    <h2 data-words class="mt-4 max-w-[18ch] font-goog text-[clamp(2.2rem,4.6vw,4.6rem)] font-light leading-[1.03] tracking-[-0.045em]">Empresas de todos los tamaños</h2>
 
-  <div class="mt-16 space-y-4 md:mt-24 md:space-y-8" aria-hidden="true">
-    <div class="mq"><div class="mq-track text-[clamp(2.6rem,7vw,7rem)] font-light leading-none tracking-[-0.05em]">
-      <div class="mq-set"><span>Pequeñas empresas</span> <i class="mx-8 inline-block size-2 rounded-full bg-white/40 align-middle md:mx-14"></i> <span>Empresas en crecimiento</span> <i class="mx-8 inline-block size-2 rounded-full bg-white/40 align-middle md:mx-14"></i> <span>Empresas consolidadas</span> <i class="mx-8 inline-block size-2 rounded-full bg-white/40 align-middle md:mx-14"></i> <span>Comercios y establecimientos</span></div><div class="mq-set"><span>Pequeñas empresas</span> <i class="mx-8 inline-block size-2 rounded-full bg-white/40 align-middle md:mx-14"></i> <span>Empresas en crecimiento</span> <i class="mx-8 inline-block size-2 rounded-full bg-white/40 align-middle md:mx-14"></i> <span>Empresas consolidadas</span> <i class="mx-8 inline-block size-2 rounded-full bg-white/40 align-middle md:mx-14"></i> <span>Comercios y establecimientos</span></div>
-    </div></div>
-    <div class="mq"><div class="mq-track mq-rev text-[clamp(2.6rem,7vw,7rem)] font-light leading-none tracking-[-0.05em] text-white/45">
-      <div class="mq-set"><span>Servicios profesionales</span> <i class="mx-8 inline-block size-2 rounded-full bg-white/40 align-middle md:mx-14"></i> <span>Comercio electrónico</span> <i class="mx-8 inline-block size-2 rounded-full bg-white/40 align-middle md:mx-14"></i> <span>Procesos administrativos complejos</span></div><div class="mq-set"><span>Servicios profesionales</span> <i class="mx-8 inline-block size-2 rounded-full bg-white/40 align-middle md:mx-14"></i> <span>Comercio electrónico</span> <i class="mx-8 inline-block size-2 rounded-full bg-white/40 align-middle md:mx-14"></i> <span>Procesos administrativos complejos</span></div>
-    </div></div>
-  </div>
-
-  <div class="mx-auto mt-20 max-w-[1280px] px-6 md:px-10">
-    <ul class="grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
-        <li data-reveal style="--i:0" class="border-t border-white/20 pt-4"><h3 class="text-[1.05rem] font-normal tracking-[-0.01em]">Pequeñas empresas</h3><p class="mt-2 text-[13.5px] leading-relaxed text-white/60">Necesitan construir una presencia profesional, captar clientes y organizar sus operaciones.</p></li>
-        <li data-reveal style="--i:1" class="border-t border-white/20 pt-4"><h3 class="text-[1.05rem] font-normal tracking-[-0.01em]">Empresas en crecimiento</h3><p class="mt-2 text-[13.5px] leading-relaxed text-white/60">Necesitan conectar sistemas, profesionalizar procesos, implementar CRM y automatizar actividades.</p></li>
-        <li data-reveal style="--i:2" class="border-t border-white/20 pt-4"><h3 class="text-[1.05rem] font-normal tracking-[-0.01em]">Empresas consolidadas</h3><p class="mt-2 text-[13.5px] leading-relaxed text-white/60">Necesitan integrar departamentos, mejorar la gestión de información y modernizar infraestructura.</p></li>
-        <li data-reveal style="--i:0" class="border-t border-white/20 pt-4"><h3 class="text-[1.05rem] font-normal tracking-[-0.01em]">Comercios y establecimientos</h3><p class="mt-2 text-[13.5px] leading-relaxed text-white/60">Necesitan sitios web, catálogos, publicidad, sistemas de pedidos, inventarios y facturación.</p></li>
-        <li data-reveal style="--i:1" class="border-t border-white/20 pt-4"><h3 class="text-[1.05rem] font-normal tracking-[-0.01em]">Servicios profesionales</h3><p class="mt-2 text-[13.5px] leading-relaxed text-white/60">Necesitan identidad corporativa, presencia digital, gestión de clientes y cotizaciones.</p></li>
-        <li data-reveal style="--i:2" class="border-t border-white/20 pt-4"><h3 class="text-[1.05rem] font-normal tracking-[-0.01em]">Comercio electrónico</h3><p class="mt-2 text-[13.5px] leading-relaxed text-white/60">Necesitan tiendas digitales, marketing, gestión de pedidos y análisis de ventas.</p></li>
-        <li data-reveal style="--i:0" class="border-t border-white/20 pt-4"><h3 class="text-[1.05rem] font-normal tracking-[-0.01em]">Procesos administrativos complejos</h3><p class="mt-2 text-[13.5px] leading-relaxed text-white/60">Necesitan centralizar información, documentación, control operativo y seguimiento.</p></li>
+    <ul class="mt-12 grid grid-cols-2 gap-3 md:mt-20 md:grid-cols-4 md:gap-4">
+      {tiles.map(([t, d, g, c], i) => (
+        <li data-reveal style={`--i:${i % 3};--g:${g}`} class={`au relative flex min-h-[150px] flex-col justify-between overflow-hidden rounded-[26px] p-4 md:min-h-[230px] md:rounded-[32px] md:p-7 ${c}`}>
+          <span class="font-goog text-[13px] font-medium text-white/80">{String(i + 1).padStart(2, '0')}</span>
+          <h3 class="font-goog text-[clamp(1.15rem,2.3vw,2.2rem)] font-normal leading-[1.08] tracking-[-0.035em] text-white">{t}</h3>
+          <p class="sr-only">{d}</p>
+        </li>
+      ))}
     </ul>
   </div>
 </section>

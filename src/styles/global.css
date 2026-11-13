@@ -263,3 +263,9 @@ body { overflow-x: clip; }
   .chain-ln::after { background: linear-gradient(to right, transparent, #977dff, #fff, transparent); translate: -100% 0; animation-name: chainH; }
 }
 @media (prefers-reduced-motion: reduce) { .chain-ln::after { animation: none; } .sv-bg { transition: none; } }
+
+/* Para quién trabajamos: recuadros de gradiente */
+.au { background: var(--g); background-size: 170% 170%; background-position: 0% 0%; transition: background-position 0.9s cubic-bezier(.2, .7, .2, 1), transform 0.5s cubic-bezier(.2, .7, .2, 1); }
+.au::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(120% 90% at 85% 0%, rgba(255, 255, 255, 0.28), transparent 55%), linear-gradient(to top, rgba(0, 0, 20, 0.28), transparent 55%); }
+.au > * { position: relative; z-index: 1; }
+@media (hover: hover) { .au:hover { background-position: 100% 100%; transform: translateY(-4px); } }
