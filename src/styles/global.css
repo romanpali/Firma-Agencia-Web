@@ -326,7 +326,7 @@ body { overflow-x: clip; }
 .area.is-on .area-l { background: #0b0c0f; color: #fff; }
 .area.is-on .area-t { color: #0b0c0f; font-weight: 500; }
 .area-bar { background: #977dff; transform: scaleX(0); }
-.area.is-on .area-bar { animation: arProg 4.8s linear forwards; animation-play-state: var(--run, paused); }
+.area.is-on .area-bar { transform: scaleX(var(--p, 0)); }
 @keyframes arProg { to { transform: scaleX(1); } }
 .words > span { display: inline; }
 .words > span:not(:last-child)::after { content: ' · '; color: rgba(255, 255, 255, 0.35); white-space: pre; }
