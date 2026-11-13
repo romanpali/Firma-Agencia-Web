@@ -1,7 +1,7 @@
 ---
 interface Props { i: number; label?: string }
 const { i, label } = Astro.props;
-const labels = ['Branding', 'Sitio web', 'Finanzas', 'Datos', 'Asistentes', 'Marketing', 'Branding y redes', 'Datos'];
+const labels = ['Branding', 'Sitio web', 'Finanzas', 'Datos', 'Asistentes', 'Marketing', 'Branding y redes', 'Datos', 'Ventas y CRM'];
 const SB = [
   '<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
   '<path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h6M9 17h6"/>',
@@ -334,6 +334,32 @@ const HM = Array.from({ length: 4 }, (_, r) => Array.from({ length: 24 }, (_, c)
                   <div class="mt-3 flex flex-wrap gap-2">
                     {['CRM', 'Facturación', 'Tienda en línea', 'Campañas', 'Inventario', 'Proyectos'].map((t, k) => <span class="rv rounded-full border border-[#e4dcd0] px-3.5 py-[6px] text-[11.5px] text-[#14173f]" style={`--a:${0.54 + k * 0.05};--b:.1`}>{t}</span>)}
                   </div>
+                </div>
+              </>)}
+
+              {i === 8 && (<>
+                <div class="dash absolute inset-x-6 top-[16px] flex items-center justify-between pr-[78px]">
+                  <div class="rv flex items-baseline gap-3" style="--a:.02;--b:.12"><p class="text-[15px] font-medium text-[#14173f]">Ventas y CRM</p><span class="text-[11px] text-[#8f8aa6]">Octubre</span></div>
+                  <div class="rv flex gap-1.5 text-[10.5px]" style="--a:.04;--b:.12">{['Pipeline', 'Prospectos', 'Reportes'].map((t, k) => <span class={`rounded-full px-3 py-[3px] ${k === 0 ? 'bg-[#14173f] text-white' : 'bg-[#f5efe8] text-[#5f5a7a]'}`}>{t}</span>)}</div>
+                </div>
+                <div class="absolute inset-x-6 top-[58px] grid grid-cols-4 gap-2.5">
+                  {[['Nuevo', '$42 mil', 3], ['Contacto', '$88 mil', 3], ['Propuesta', '$134 mil', 2], ['Cierre', '$96 mil', 1]].map(([t, v, n], c) => (
+                    <div class="rv h-[212px] rounded-[12px] bg-[#faf7f2] p-2.5" style={`--a:${0.06 + c * 0.07};--b:.14`}>
+                      <p class="flex justify-between text-[11px] font-medium text-[#14173f]"><span>{t}</span><span class="font-normal text-[#8f8aa6]">{v}</span></p>
+                      {Array.from({ length: n as number }).map((_, k) => (
+                        <div class={`fl mt-2 rounded-[9px] bg-white p-2 shadow-[0_1px_2px_rgba(20,23,63,.08)] ${c === 2 && k === 0 ? 'ring-2 ring-[#2F3A9E]' : ''}`} style={`--a:${0.2 + c * 0.08 + k * 0.05};--b:.1`}>
+                          <div class="flex items-center gap-1.5"><i class="block size-[18px] rounded-full" style={`background:${['#F6B370', '#2F3A9E', '#977DFF', '#eccfa6'][(c + k) % 4]}`}></i><i class="block h-1.5 w-12 rounded bg-[#14173f]/60"></i></div>
+                          <i class="mt-1.5 block h-1.5 w-16 rounded bg-[#14173f]/15"></i>
+                          {c === 3 && <span class="mt-1.5 inline-block rounded-full bg-[#2fbf8a] px-2 py-[2px] text-[8.5px] text-white">Cliente</span>}
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+                <div class="absolute inset-x-6 top-[284px] grid grid-cols-3 gap-3">
+                  {[['Oportunidades abiertas', 38, ''], ['Cotizaciones enviadas', 14, ''], ['Seguimientos automáticos hoy', 27, '']].map(([l, v], k) => (
+                    <div class="rv rounded-[12px] border border-[#e9e2d8] p-3.5" style={`--a:${0.5 + k * 0.08};--b:.14`}><p class="text-[10.5px] text-[#8f8aa6]">{l}</p><p class="mt-1 text-[26px] font-light leading-none text-[#14173f]" data-count={v} data-a={0.54 + k * 0.08} data-b=".25">0</p></div>
+                  ))}
                 </div>
               </>)}
 
