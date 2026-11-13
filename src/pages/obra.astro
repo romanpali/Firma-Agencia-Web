@@ -43,7 +43,14 @@ const leavesHtml = leavesMarkup(leaves);
               </div>
             </div>
           </div>
-          <div class="bw-intro"><h1>Proyectos que puedes explorar</h1><span>Haz clic en las páginas o desliza para recorrer la obra. Son ejemplos ilustrativos de lo que construimos.</span></div>
+          <div class="bw-intro ob-hero">
+            <p class="ob-pill"><i></i>Obra selecta · 2026</p>
+            <h1 class="ob-title"><span class="ob-l"><span>Proyectos que</span></span><span class="ob-l"><span>puedes <em>explorar</em></span></span></h1>
+            <p class="ob-sub">Cinco proyectos ilustrativos de lo que construimos: identidad, sitios web, ventas, inteligencia artificial y finanzas. Hojea el libro para recorrerlos.</p>
+            <div class="ob-cta"><button type="button" class="ob-b1" data-ob-start>Empezar a hojear <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button><a class="ob-b2" href="/contacto">Hablemos</a></div>
+          </div>
+          <div class="bw-intro ob-cue"><i></i><span>Desliza o haz clic en las páginas</span></div>
+          <p class="bw-intro ob-note">Ejemplos ilustrativos, no son clientes reales.</p>
           <div class="bw-ui"><span data-bk-count>Cubierta</span><i><b data-bk-bar></b></i></div>
         </div>
       </section>
@@ -77,6 +84,7 @@ const leavesHtml = leavesMarkup(leaves);
       const lamp = sec.querySelector<HTMLElement>('.bw-lamp')!;
       let lr = 0;
       addEventListener('pointermove', (e) => { if (lr) return; lr = requestAnimationFrame(() => { lr = 0; lamp.style.translate = `${((e.clientX / innerWidth - 0.5) * 50).toFixed(0)}px ${((e.clientY / innerHeight - 0.5) * 36).toFixed(0)}px`; }); }, { passive: true });
+      document.querySelector('[data-ob-start]')?.addEventListener('click', () => b.go(1));
       b.update();
     </script>
   </body>

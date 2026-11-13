@@ -1,7 +1,7 @@
 // Libro 3D de proyectos: páginas apaisadas con curvatura, escritorio en perspectiva y fotos que se «pixelan» al abrirse.
 // Se usa en /obra y en la plantilla Galería del configurador. Funciona del lado del servidor (HTML) y del cliente (animación).
 
-export const SEG = 5;
+export const SEG = 10;
 export type Proj = { n: string; cat: string; y: number; d: string; tags: string[]; hl: string; href?: string; img?: string; art: number; dark?: boolean; layout?: number };
 export type PageOpts = { brand: string; mail: string; mailHref?: string; year: number; endTitle: string; contentsTitle: string };
 
@@ -36,7 +36,7 @@ export function pagesFor(projs: Proj[], o: PageOpts) {
 }
 
 export function leavesMarkup(leaves: { f: string; b: string; img?: string }[]) {
-  return leaves.map((l, k) => `<div class="bw-leaf" data-k="${k}"${l.img ? ` data-img="${l.img}"` : ''}>${leafHTML(l.f, l.b)}</div>`).join('');
+  return leaves.map((l, k) => `<div class="bw-leaf" data-k="${k}"${l.img ? ` data-img="${l.img}"` : ''}><div class="lf">${leafHTML(l.f, l.b, 1)}</div></div>`).join('');
 }
 
 // ---------------------------------------------------------------- cliente
@@ -66,7 +66,7 @@ const prepare = (url: string) => {
 };
 
 const cache = new WeakMap<Element, Record<string, string>>();
-const put = (el: HTMLElement, prop: 'transform' | 'opacity' | 'height' | 'width' | 'left' | 'display', v: string) => {
+const put = (el: HTMLElement, prop: 'transform' | 'opacity' | 'height' | 'width' | 'left' | 'display' | 'visibility', v: string) => {
   let c = cache.get(el); if (!c) cache.set(el, (c = {}));
   if (c[prop] === v) return;
   c[prop] = v; el.style[prop as 'opacity'] = v;
@@ -77,14 +77,15 @@ export function mountBook(o: Mount) {
   const book = sec.querySelector<HTMLElement>('[data-bk]')!;
   const world = sec.querySelector<HTMLElement>('[data-bw]')!;
   const fs = sec.querySelector<HTMLElement>('.bw-fs');
-  const intro = sec.querySelector<HTMLElement>('.bw-intro');
+  const intros = [...sec.querySelectorAll<HTMLElement>('.bw-intro')];
   const baseL = sec.querySelector<HTMLElement>('.bw-base.l');
   const shL = sec.querySelector<HTMLElement>('.bw-sh.l');
   const edgeR = sec.querySelector<HTMLElement>('.bw-edge.r');
   const edgeL = sec.querySelector<HTMLElement>('.bw-edge.l');
+  let gutter: HTMLElement | null = null;
   const count = sec.querySelector<HTMLElement>('[data-bk-count]');
   const barEl = sec.querySelector<HTMLElement>('[data-bk-bar]');
-  type L = { el: HTMLElement; segs: HTMLElement[]; shds: HTMLElement[]; vis: boolean };
+  type L = { el: HTMLElement; flat: HTMLElement; curved: HTMLElement | null; segs: HTMLElement[]; shds: HTMLElement[]; flatShds: HTMLElement[]; vis: boolean; mode: 'flat' | 'curved' };
   let L: L[] = [];
   let N = 0, active = -1, pw = 1, ph = 1, lastKey = '';
   const timers = new Map<HTMLElement, number>();
@@ -104,10 +105,32 @@ export function mountBook(o: Mount) {
     });
   };
   const measure = () => { pw = book.offsetWidth / 2 || 1; ph = book.offsetHeight || 1; lastKey = ''; };
+  // La versión curva (franjas) se construye a partir de la plana, solo cuando hace falta.
+  const ensureCurved = (l: L) => {
+    if (l.curved) return;
+    const fh = l.flat.querySelector('.sf .sc')!.innerHTML, bh = l.flat.querySelector('.sb .sc')!.innerHTML;
+    const d = document.createElement('div');
+    d.className = 'lc'; d.style.display = 'none';
+    d.innerHTML = leafHTML(fh, bh, SEG);
+    l.el.appendChild(d);
+    l.curved = d;
+    l.segs = [...d.querySelectorAll<HTMLElement>('.sg')].slice(1);
+    l.shds = [...d.querySelectorAll<HTMLElement>('.shd')];
+  };
+  const queue: number[] = [];
+  let busy = false;
+  const pump = () => {
+    if (busy) return; busy = true;
+    const run = () => { const k = queue.shift(); if (k != null && L[k]) ensureCurved(L[k]); if (queue.length) (window.requestIdleCallback || ((f: () => void) => setTimeout(f, 60)))(run); else busy = false; };
+    (window.requestIdleCallback || ((f: () => void) => setTimeout(f, 60)))(run);
+  };
   const refresh = () => {
-    L = [...sec.querySelectorAll<HTMLElement>('.bw-leaf')].map((el) => ({ el, segs: [...el.querySelectorAll<HTMLElement>('.sg')].slice(1), shds: [...el.querySelectorAll<HTMLElement>('.shd')], vis: true }));
+    L = [...sec.querySelectorAll<HTMLElement>('.bw-leaf')].map((el) => ({ el, flat: el.querySelector<HTMLElement>('.lf')!, curved: null, segs: [], shds: [], flatShds: [...el.querySelectorAll<HTMLElement>('.lf .shd')], vis: true, mode: 'flat' as const }));
     N = L.length; active = -1; lastKey = '';
     L.forEach(({ el }) => { if (el.dataset.img) prepare(el.dataset.img); });
+    queue.length = 0; for (let k = 0; k < N; k++) queue.push(k); pump();
+    if (!book.querySelector('.bw-ribbon')) book.insertAdjacentHTML('beforeend', '<i class="bw-ribbon"></i><i class="bw-gutter"></i>');
+    gutter = book.querySelector<HTMLElement>('.bw-gutter');
     measure();
   };
   const update = () => {
@@ -125,22 +148,30 @@ export function mountBook(o: Mount) {
       if (show !== l.vis) { l.vis = show; put(l.el, 'display', show ? '' : 'none'); }
       if (!show) return;
       const f = cl(t - k), a = sm(f) * 180;
+      const turning = f > 0.002 && f < 0.998;
+      if (turning) ensureCurved(l);
+      const want = turning && l.curved ? 'curved' : 'flat';
+      if (want !== l.mode) { l.mode = want; put(l.flat, 'display', want === 'flat' ? '' : 'none'); if (l.curved) put(l.curved, 'display', want === 'curved' ? '' : 'none'); }
       put(l.el, 'transform', `translateZ(${((a > 90 ? k : N - k) * 1.4).toFixed(1)}px) rotateY(${(-a).toFixed(1)}deg)`);
-      const bend = ((Math.sin(Math.PI * f) * 62) / (SEG - 1)).toFixed(1);
-      for (const sg of l.segs) put(sg, 'transform', `rotateY(${bend}deg)`);
-      const sh = (Math.sin((a * Math.PI) / 180) * 0.45).toFixed(2);
-      for (const d of l.shds) put(d, 'opacity', sh);
+      if (l.mode === 'curved') {
+        const bend = (Math.min(0.95 * a, 1.1 * a * (1 - f)) / (SEG - 1)).toFixed(2);
+        for (const sg of l.segs) put(sg, 'transform', `rotateY(${bend}deg)`);
+      }
+      const sh = (Math.sin((a * Math.PI) / 180) * 0.42).toFixed(2);
+      for (const d of l.mode === 'curved' ? l.shds : l.flatShds) put(d, 'opacity', sh);
       if (f > 0 && f < 1) { shadowA = a; shadowF = f; }
     });
     const e = sm(cl(p / 0.28)), tt = sm(cl(t));
     put(world, 'transform', `rotateX(${(44 - 15 * e).toFixed(1)}deg) rotateZ(${(-6 * (1 - e)).toFixed(1)}deg) scale(${(0.9 + 0.1 * e).toFixed(3)})`);
-    put(book, 'transform', `translateX(${(-pw * 0.5 * (1 - tt)).toFixed(1)}px)`);
+    const wide = sec.clientWidth > 760;
+    put(book, 'transform', `translateX(${((wide ? -0.05 : -0.5) * pw * (1 - tt)).toFixed(1)}px)`);
+    if (gutter) put(gutter, 'opacity', (tt * 0.9).toFixed(2));
     const lb = cl(t * 1.5).toFixed(2);
     if (baseL) put(baseL, 'opacity', lb);
     if (shL) put(shL, 'opacity', (+lb * 0.7).toFixed(2));
     if (edgeR) put(edgeR, 'height', `${(ph * 0.052 * (1 - t / N)).toFixed(1)}px`);
     if (edgeL) put(edgeL, 'height', `${(ph * 0.052 * (t / N)).toFixed(1)}px`);
-    if (intro) put(intro, 'opacity', cl(1 - p * 14).toFixed(2));
+    { const op = cl(1 - p * 12); for (const it of intros) { put(it, 'opacity', op.toFixed(2)); put(it, 'display', op < 0.04 ? 'none' : ''); } }
     if (fs) {
       const x = pw * Math.cos((shadowA * Math.PI) / 180);
       put(fs, 'left', `calc(50% + ${Math.min(0, x).toFixed(0)}px)`);
