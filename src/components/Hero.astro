@@ -1,12 +1,10 @@
 ---
-// Piezas de lo que HumanCorp conecta; se reparten a los lados del título (solo en pantallas amplias).
-const chips: [string, string, string, string][] = [
-  ['Identidad de marca', '#d9ceff', 'left-[6%] top-[24%]', '.7s'],
-  ['Sitio web y SEO', '#9fd4ff', 'left-[3%] top-[47%]', '.85s'],
-  ['Ventas y CRM', '#ffd6a0', 'left-[9%] top-[69%]', '1s'],
-  ['Asistentes con IA', '#c9b6ff', 'right-[6%] top-[27%]', '.78s'],
-  ['Facturación CFDI', '#b8f0cf', 'right-[3%] top-[50%]', '.92s'],
-  ['Asesoría contable y fiscal', '#ffc9d6', 'right-[8%] top-[70%]', '1.06s'],
+// Sitios de /obra que flotan junto al título (solo en pantallas amplias).
+const sites: { n: string; c: string; img?: string; bg: string; pos: string; d: string }[] = [
+  { n: 'Alba', c: 'Branding e identidad', img: '/obra/f1.webp', bg: '', pos: 'left-[5%] top-[20%] -rotate-3', d: '.7s' },
+  { n: 'Casa Lumbre', c: 'Sitio web y SEO', img: '/obra/f2.webp', bg: '', pos: 'left-[9%] top-[56%] rotate-2', d: '.9s' },
+  { n: 'Grupo Ceiba', c: 'Ventas y CRM', img: '/obra/f3.webp', bg: '', pos: 'right-[5%] top-[22%] rotate-3', d: '.8s' },
+  { n: 'Estudio Aurora', c: 'Asistentes y automatización', bg: 'linear-gradient(135deg,#977DFF,#0033FF)', pos: 'right-[9%] top-[58%] -rotate-2', d: '1s' },
 ];
 ---
 
@@ -22,8 +20,7 @@ const chips: [string, string, string, string][] = [
     <div data-hero-glow class="pointer-events-none absolute inset-x-0 bottom-0 h-[80%] origin-bottom opacity-0 will-change-[opacity,transform]" style="background:linear-gradient(to top,rgba(246,196,138,.95),rgba(216,142,118,.55) 38%,rgba(126,104,172,.2) 70%,transparent)"></div>
 
     <div data-hero-text class="absolute inset-0 flex flex-col items-center justify-center px-6 text-center will-change-[opacity,transform]">
-      <p class="hf-rise rounded-full border border-white/30 bg-white/10 px-4 py-2 text-[10.5px] font-medium uppercase tracking-[0.16em] text-white/90 md:text-[12px] md:tracking-[0.18em]" style="--d:.1s"><span class="md:hidden">Diseño · Tecnología · Operaciones</span><span class="hidden md:inline">Diseño, tecnología y operaciones empresariales</span></p>
-      <h1 class="hf-rise mt-7 text-[clamp(2.9rem,6.4vw,6.2rem)] leading-[0.95] tracking-[-0.03em]" style="--d:.25s" aria-label="HumanCorp">
+      <h1 class="hf-rise text-[clamp(2.9rem,6.4vw,6.2rem)] leading-[0.95] tracking-[-0.03em]" style="--d:.25s" aria-label="HumanCorp">
         <span class="font-light">HUMAN</span> <span class="font-semibold">CORP</span>
       </h1>
       <p class="hf-rise mt-6 max-w-[21rem] text-[clamp(1.05rem,1.35vw,1.4rem)] font-medium leading-[1.5] tracking-tight text-white/90 text-balance md:max-w-[32rem]" style="--d:.45s">
@@ -33,8 +30,11 @@ const chips: [string, string, string, string][] = [
         <a href="/servicios" class="rounded-full bg-white px-7 py-3.5 text-[15px] font-medium text-[#0b0c0f] transition-transform hover:scale-[1.03]">Conocer servicios</a>
         <a href="/arma-tu-proyecto" class="rounded-full border border-white/45 px-7 py-3.5 text-[15px] transition-colors hover:bg-white/10">Arma tu proyecto</a>
       </div>
-      {chips.map(([t, c, pos, d]) => (
-        <span class={`hf-rise absolute hidden items-center gap-2.5 rounded-full border border-white/25 bg-white/[0.12] px-4 py-2.5 text-[13px] font-medium text-white/95 shadow-[0_10px_30px_-12px_rgba(0,0,20,.5)] xl:flex ${pos}`} style={`--d:${d}`}><i class="size-2 rounded-full" style={`background:${c}`}></i>{t}</span>
+      {sites.map((s) => (
+        <a href="/obra" tabindex="-1" aria-label={`${s.n}, ${s.c}`} class={`hf-rise absolute hidden w-[13.5rem] overflow-hidden rounded-2xl border border-white/30 bg-[#0b0d2c] text-left shadow-[0_24px_50px_-20px_rgba(0,0,30,.7)] transition-transform duration-300 hover:scale-[1.04] xl:block ${s.pos}`} style={`--d:${s.d}`}>
+          <span class="block h-[7.2rem] bg-cover bg-center" style={s.img ? `background-image:url(${s.img})` : `background:${s.bg}`}></span>
+          <span class="block px-3.5 py-3"><b class="block text-[14px] font-semibold">{s.n}</b><span class="block text-[11.5px] text-white/65">{s.c}</span></span>
+        </a>
       ))}
       <div class="hf-rise absolute inset-x-0 bottom-[5%] flex flex-col items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-white/70" style="--d:1s" aria-hidden="true">
         <span>Desliza</span>

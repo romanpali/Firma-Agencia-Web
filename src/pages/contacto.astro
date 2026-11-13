@@ -60,10 +60,10 @@ const label = 'block text-[12.5px] font-medium text-white/75';
                 <label class={label}>Teléfono<input class={field} type="tel" name="telefono" autocomplete="tel" placeholder="+52 999 000 0000" /></label>
               </div>
               <fieldset class="mt-6">
-                <legend class="text-[12.5px] font-medium text-white/75">¿Qué te interesa?</legend>
+                <legend class="text-[12.5px] font-medium text-white/75">¿Qué te interesa? <span class="font-normal text-white/50">Puedes elegir varias.</span></legend>
                 <div data-chips class="mt-3 flex flex-wrap gap-2">
                   {[...divisions.map((d) => d.short), 'Asesoría contable y fiscal', 'Aún no estoy seguro'].map((v) => (
-                    <label class="chip-opt cursor-pointer"><input type="radio" name="interes" value={v} class="sr-only" /><span class="block rounded-full border border-white/20 bg-white/[.07] px-4 py-2.5 text-[13.5px] text-white/80 transition-[background-color,color,border-color,transform] duration-200 hover:bg-white/15 hover:text-white">{v}</span></label>
+                    <label class="chip-opt cursor-pointer"><input type="checkbox" name="interes" value={v} class="sr-only" /><span class="block rounded-full border border-white/20 bg-white/[.07] px-4 py-2.5 text-[13.5px] text-white/80 transition-[background-color,color,border-color,transform] duration-200 hover:bg-white/15 hover:text-white">{v}</span></label>
                   ))}
                 </div>
               </fieldset>
@@ -108,6 +108,15 @@ const label = 'block text-[12.5px] font-medium text-white/75';
         }
         r.checked = true;
       }
+      // «Aún no estoy seguro» excluye a las demás opciones.
+      chips.addEventListener('change', (e) => {
+        const t = e.target as HTMLInputElement;
+        if (!t.checked) return;
+        const all = [...chips.querySelectorAll<HTMLInputElement>('input')];
+        const none = all[all.length - 1];
+        if (t === none) all.forEach((i) => { if (i !== none) i.checked = false; });
+        else none.checked = false;
+      });
       const msg = qs.get('mensaje');
       if (msg) form.querySelector<HTMLTextAreaElement>('textarea[name="mensaje"]')!.value = msg;
       form.addEventListener('submit', async (e) => {
