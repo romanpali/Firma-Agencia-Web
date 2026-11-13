@@ -1,0 +1,63 @@
+---
+import Light from '../layouts/Light.astro';
+
+const lists = [
+  { id: 'marca', t: 'Checklist de identidad de marca', d: 'Para que tu marca se vea profesional y consistente en todos lados.', link: ['/servicios#div-01', 'Diseño e identidad'], items: ['Tengo un logotipo en formato vectorial, listo para usar en cualquier tamaño.', 'Definí dos o tres colores principales y los uso siempre.', 'Tengo una tipografía principal y una secundaria.', 'Mi marca se ve igual en redes, sitio web y papelería.', 'Puedo explicar en una frase qué hago y para quién.', 'Tengo fotografías propias de buena calidad.', 'Tengo plantilla de presentación y firma de correo con mi marca.', 'Tengo un manual breve que explica cómo usar mi marca.'] },
+  { id: 'digital', t: 'Checklist de presencia digital', d: 'Lo básico para que te encuentren y te contacten por internet.', link: ['/servicios#div-02', 'Desarrollo digital'], items: ['Mi sitio carga rápido y se ve bien en el celular.', 'Cada página tiene un título y una descripción claros para buscadores.', 'Mi negocio aparece en Google Maps con datos correctos.', 'Tengo un botón o formulario de contacto visible.', 'Sé de dónde llegan mis visitas y mis clientes nuevos.', 'Mis redes tienen la misma imagen y datos de contacto que mi sitio.', 'Respondo los mensajes en menos de un día.', 'Muestro opiniones o casos reales de clientes.'] },
+  { id: 'orden', t: 'Checklist de orden administrativo y contable', d: 'Para llegar a la revisión con tu contador con todo en orden.', link: ['/asesoria-contable-y-fiscal', 'Asesoría contable y fiscal'], items: ['Guardo mis facturas y comprobantes organizados por mes.', 'Separo los gastos personales de los del negocio.', 'Sé cuánto tengo por cobrar y cuánto por pagar.', 'Registro mis ingresos y egresos cada semana.', 'Tengo respaldo digital de mis documentos importantes.', 'Conozco las fechas de mis obligaciones.', 'Reviso mi información con un contador de forma periódica.', 'Mis contratos con clientes y proveedores están archivados.'] },
+];
+---
+
+<Light title="Recursos" description="Checklists prácticos de HumanCorp para revisar tu identidad de marca, tu presencia digital y el orden administrativo y contable de tu negocio.">
+  <section data-tone="light" class="px-6 pb-[8svh] pt-[24svh] md:px-10">
+    <div class="mx-auto max-w-[1280px]">
+      <p data-reveal class="text-[13px] font-medium uppercase tracking-[0.14em] text-[#6b6e75]">Recursos</p>
+      <h1 data-words class="mt-6 max-w-[17ch] font-goog text-[clamp(2.5rem,6.6vw,6.4rem)] font-light leading-[1.02] tracking-[-0.05em]">Revisa tu negocio en cinco minutos.</h1>
+      <p data-reveal style="--i:1" class="mt-7 max-w-[36rem] text-[clamp(1.05rem,1.5vw,1.3rem)] leading-relaxed text-[#3a3d42]">Tres listas prácticas para ver qué tienes resuelto y qué te falta. Márcalas, imprímelas o compártelas con tu equipo.</p>
+    </div>
+  </section>
+
+  {lists.map((l, k) => (
+    <section id={l.id} data-tone="light" data-list={l.id} class="px-6 py-[5svh] md:px-10">
+      <div class="mx-auto grid max-w-[1280px] gap-8 border-t border-[#e6e4df] pt-10 md:grid-cols-12 md:gap-14">
+        <div class="md:col-span-5">
+          <div class="md:sticky md:top-28">
+            <span class="font-goog text-[14px] text-[#6b6e75]">{String(k + 1).padStart(2, '0')} / 03</span>
+            <h2 data-words class="mt-4 font-goog text-[clamp(1.8rem,3.2vw,3rem)] font-light leading-[1.05] tracking-[-0.045em]">{l.t}</h2>
+            <p data-reveal class="mt-4 max-w-[26rem] text-[15px] leading-relaxed text-[#50535a]">{l.d}</p>
+            <p data-reveal class="mt-8 font-goog text-[2.6rem] font-light leading-none tracking-[-0.04em]"><span data-n>0</span><span class="text-[1.1rem] text-[#6b6e75]"> / {l.items.length}</span></p>
+            <i class="relative mt-3 block h-[3px] max-w-[18rem] overflow-hidden rounded-full bg-[#e6e4df]"><b data-p class="absolute inset-y-0 left-0 block w-full origin-left bg-[#0b0b0c] transition-transform duration-500" style="transform:scaleX(0)"></b></i>
+            <div class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3 text-[14px]">
+              <a href={l.link[0]} class="underline decoration-[#0b0b0c]/25 underline-offset-[5px] hover:decoration-[#0b0b0c]">Lo resolvemos: {l.link[1]} →</a>
+              <button type="button" data-print class="text-[#6b6e75] underline decoration-[#0b0b0c]/15 underline-offset-[5px] hover:text-[#0b0b0c]">Imprimir</button>
+            </div>
+          </div>
+        </div>
+        <ul class="border-t border-[#e6e4df] md:col-span-7">
+          {l.items.map((it) => <li class="border-b border-[#e6e4df]"><label class="chk flex cursor-pointer items-center gap-4 py-4 text-[15.5px]"><input type="checkbox" class="sr-only" /><i class="grid size-6 shrink-0 place-items-center rounded-md border border-[#0b0b0c]/25 transition-colors"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" class="opacity-0 transition-opacity" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></i><span class="leading-snug text-[#3a3d42] transition-colors">{it}</span></label></li>)}
+        </ul>
+      </div>
+    </section>
+  ))}
+
+  <section data-tone="light" class="px-6 pb-[12svh] pt-[6svh] md:px-10">
+    <div data-reveal class="mx-auto flex max-w-[1280px] flex-wrap items-center justify-between gap-6 border-t border-[#e6e4df] pt-10">
+      <p class="max-w-[28rem] font-goog text-[1.5rem] leading-snug tracking-[-0.03em]">¿Quieres que lo revisemos contigo?</p>
+      <div class="flex flex-wrap gap-3"><a href="/diagnostico" class="rounded-full bg-[#0b0b0c] px-7 py-3.5 text-[15px] font-medium text-white transition-transform hover:scale-[1.03]">Hacer el diagnóstico</a><a href="/contacto" class="rounded-full border border-[#0b0b0c]/20 px-7 py-3.5 text-[15px] transition-colors hover:bg-[#0b0b0c]/5">Hablemos</a></div>
+    </div>
+  </section>
+
+  <script>
+    document.querySelectorAll<HTMLElement>('[data-list]').forEach((sec) => {
+      const id = 'hc-list-' + sec.dataset.list;
+      const boxes = [...sec.querySelectorAll<HTMLInputElement>('input[type=checkbox]')];
+      const n = sec.querySelector<HTMLElement>('[data-n]')!;
+      const p = sec.querySelector<HTMLElement>('[data-p]')!;
+      const paint = () => { const c = boxes.filter((b) => b.checked).length; n.textContent = String(c); p.style.transform = `scaleX(${c / boxes.length})`; };
+      try { const saved: boolean[] = JSON.parse(localStorage.getItem(id) || '[]'); boxes.forEach((b, i) => (b.checked = !!saved[i])); } catch { /* sin almacenamiento */ }
+      paint();
+      sec.addEventListener('change', () => { paint(); try { localStorage.setItem(id, JSON.stringify(boxes.map((b) => b.checked))); } catch { /* sin almacenamiento */ } });
+      sec.querySelector('[data-print]')!.addEventListener('click', () => print());
+    });
+  </script>
+</Light>

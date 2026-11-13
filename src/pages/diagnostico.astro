@@ -1,0 +1,100 @@
+---
+import Light from '../layouts/Light.astro';
+import { divisions } from '../data/servicios';
+
+const qs: [string, string][] = [
+  ['01', 'Tu marca tiene logotipo, colores y estilo definidos, y los usas de forma consistente.'],
+  ['02', 'Tu sitio web está al día, se ve bien en celular y te llegan contactos.'],
+  ['03', 'Sabes de dónde llegan tus clientes nuevos y tienes un plan para atraerlos.'],
+  ['04', 'Das seguimiento a cada prospecto en un solo lugar, no en notas sueltas.'],
+  ['05', 'Las tareas repetitivas (respuestas, recordatorios, reportes) ya están automatizadas.'],
+  ['06', 'Sabes cuánto entra y sale cada mes, y tu información contable y fiscal está en orden.'],
+  ['06', 'Tus facturas y comprobantes están organizados y los emites sin retrasos.'],
+  ['07', 'Tus procesos y responsabilidades están documentados y cualquiera puede darles seguimiento.'],
+  ['08', 'Tienes indicadores claros y tu información está respaldada y protegida.'],
+  ['*', 'Tus herramientas (sitio, CRM, facturación, etc.) están conectadas entre sí.'],
+];
+const pack: Record<string, string> = { '01': 'Identidad de marca', '02': 'Presencia digital', '03': 'Sistema de crecimiento', '04': 'Sistema de ventas', '05': 'IA y automatización', '06': 'Operaciones financieras', '07': 'Operaciones empresariales', '08': '' };
+const divs = divisions.map((d) => ({ n: d.n, short: d.short }));
+---
+
+<Light title="Diagnóstico gratis" description="Responde 10 preguntas y descubre qué tan conectada está tu empresa en diseño, web, marketing, ventas, IA, finanzas, operaciones y datos.">
+  <section data-tone="light" class="min-h-svh px-6 pb-[10svh] pt-[22svh] md:px-10">
+    <div class="mx-auto max-w-[1280px]">
+      <p data-reveal class="text-[13px] font-medium uppercase tracking-[0.14em] text-[#6b6e75]">Diagnóstico gratis</p>
+      <h1 data-words class="mt-6 max-w-[17ch] font-goog text-[clamp(2.4rem,6vw,5.6rem)] font-light leading-[1.02] tracking-[-0.05em]">¿Qué tan conectada está tu empresa?</h1>
+      <p data-reveal style="--i:1" class="mt-6 max-w-[36rem] text-[clamp(1.02rem,1.4vw,1.2rem)] leading-relaxed text-[#3a3d42]">Responde 10 afirmaciones en dos minutos. Verás en qué áreas vas bien y por dónde conviene empezar.</p>
+
+      <div class="mt-[7svh] border-t border-[#e6e4df] pt-10">
+        <!-- Pregunta -->
+        <div data-quiz>
+          <div class="flex items-center justify-between text-[13px] text-[#6b6e75]"><span data-qno>Pregunta 1 de 10</span><button type="button" data-back class="underline decoration-[#0b0b0c]/25 underline-offset-4 hover:decoration-[#0b0b0c] disabled:opacity-0" disabled>← Atrás</button></div>
+          <i class="relative mt-3 block h-[3px] overflow-hidden rounded-full bg-[#e6e4df]"><b data-bar class="absolute inset-y-0 left-0 block w-full origin-left bg-[#0b0b0c] transition-transform duration-500" style="transform:scaleX(.1)"></b></i>
+          <p data-q class="mt-10 min-h-[6.5rem] max-w-[34ch] font-goog text-[clamp(1.6rem,3.2vw,2.9rem)] font-light leading-[1.12] tracking-[-0.04em]"></p>
+          <div class="mt-8 grid max-w-[720px] gap-3 sm:grid-cols-3">
+            {[['2', 'Sí'], ['1', 'En parte'], ['0', 'No']].map(([v, l]) => <button type="button" data-ans={v} class="rounded-2xl border border-[#0b0b0c]/15 px-6 py-5 text-left font-goog text-[1.15rem] tracking-[-0.02em] transition-[background-color,border-color,color,transform] duration-200 hover:border-[#0b0b0c] hover:bg-[#0b0b0c] hover:text-white active:scale-[0.98]">{l}</button>)}
+          </div>
+        </div>
+
+        <!-- Resultado -->
+        <div data-result hidden>
+          <div class="grid gap-10 md:grid-cols-12 md:gap-14">
+            <div class="md:col-span-5">
+              <p class="text-[13px] font-medium uppercase tracking-[0.14em] text-[#6b6e75]">Tu resultado</p>
+              <p class="mt-4 font-goog text-[clamp(4rem,9vw,8rem)] font-light leading-[0.9] tracking-[-0.06em]"><span data-total>0</span><span class="text-[0.4em] text-[#6b6e75]">%</span></p>
+              <p data-level class="mt-4 font-goog text-[1.5rem] tracking-[-0.03em]"></p>
+              <p data-integ class="mt-2 max-w-[24rem] text-[14.5px] leading-relaxed text-[#50535a]"></p>
+              <div class="mt-8 flex flex-wrap gap-3">
+                <a data-send href="/contacto" class="rounded-full bg-[#0b0b0c] px-7 py-3.5 text-[15px] font-medium text-white transition-transform hover:scale-[1.03]">Platicar mi resultado</a>
+                <button type="button" data-redo class="rounded-full border border-[#0b0b0c]/20 px-6 py-3.5 text-[15px] transition-colors hover:bg-[#0b0b0c]/5">Repetir</button>
+              </div>
+            </div>
+            <div class="md:col-span-7">
+              <p class="text-[13px] font-medium uppercase tracking-[0.14em] text-[#6b6e75]">Por división</p>
+              <ul data-bars class="mt-4 border-t border-[#e6e4df]"></ul>
+              <p class="mt-10 text-[13px] font-medium uppercase tracking-[0.14em] text-[#6b6e75]">Por dónde empezar</p>
+              <ul data-reco class="mt-4 border-t border-[#e6e4df]"></ul>
+              <p class="mt-8 text-[12.5px] leading-relaxed text-[#6b6e75]">Es una autoevaluación orientativa, no una auditoría. Para un diagnóstico a fondo, agenda una llamada de descubrimiento.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script define:vars={{ qs, pack, divs }}>
+    const $ = (s) => document.querySelector(s);
+    const ans = [];
+    const show = () => {
+      const i = ans.length;
+      $('[data-qno]').textContent = `Pregunta ${i + 1} de ${qs.length}`;
+      $('[data-q]').textContent = qs[i][1];
+      $('[data-bar]').style.transform = `scaleX(${(i + 1) / qs.length})`;
+      $('[data-back]').disabled = i === 0;
+    };
+    const level = (p) => (p < 40 ? 'Por reforzar' : p < 75 ? 'En camino' : 'Sólido');
+    const finish = () => {
+      const by = {}; let tot = 0, integ = 0;
+      qs.forEach(([d], i) => { if (d === '*') { integ = ans[i]; } else { (by[d] ||= []).push(ans[i]); } tot += ans[i]; });
+      const pct = Math.round((tot / (qs.length * 2)) * 100);
+      const rows = divs.map((d) => { const a = by[d.n] || [0]; return { ...d, p: Math.round((a.reduce((x, y) => x + y, 0) / (a.length * 2)) * 100) }; });
+      $('[data-quiz]').hidden = true; $('[data-result]').hidden = false;
+      $('[data-level]').textContent = level(pct);
+      $('[data-integ]').textContent = integ === 2 ? 'Tus herramientas ya se hablan entre sí. Buen punto de partida.' : integ === 1 ? 'Tus herramientas se conectan en parte: ahí hay oportunidad de ahorrar tiempo.' : 'Tus herramientas trabajan por separado: conectarlas suele ser el mayor ahorro de tiempo.';
+      let n = 0; const tick = () => { n = Math.min(pct, n + Math.max(1, Math.round(pct / 30))); $('[data-total]').textContent = n; if (n < pct) requestAnimationFrame(tick); }; tick();
+      $('[data-bars]').innerHTML = rows.map((r) => `<li class="border-b border-[#e6e4df] py-3.5"><div class="flex items-baseline justify-between gap-4"><span class="flex items-baseline gap-4"><span class="w-5 font-goog text-[13px] text-[#6b6e75]">${r.n}</span><span class="font-goog text-[1.05rem] tracking-[-0.02em]">${r.short}</span></span><span class="text-[12.5px] text-[#6b6e75]">${level(r.p)}</span></div><i class="mt-2.5 block h-[3px] rounded-full bg-[#efeeea]"><b class="block h-full w-0 rounded-full bg-[#0b0b0c] transition-[width] duration-1000" data-w="${r.p}"></b></i></li>`).join('');
+      requestAnimationFrame(() => document.querySelectorAll('[data-w]').forEach((b) => (b.style.width = b.dataset.w + '%')));
+      const low = [...rows].sort((a, b) => a.p - b.p).slice(0, 3);
+      $('[data-reco]').innerHTML = low.map((r) => `<li class="border-b border-[#e6e4df] py-4"><a href="/servicios#div-${r.n}" class="group flex items-baseline justify-between gap-4"><span><span class="block font-goog text-[1.15rem] tracking-[-0.025em]">${r.short}</span><span class="block text-[13px] text-[#6b6e75]">${pack[r.n] ? 'Paquete sugerido: ' + pack[r.n] : 'Ver cómo lo resolvemos'}</span></span><span class="text-[#6b6e75] transition-transform group-hover:translate-x-1">→</span></a></li>`).join('');
+      const msg = `Hola, hice el diagnóstico de HumanCorp y obtuve ${pct}% (${level(pct)}).\n${rows.map((r) => `- ${r.short}: ${r.p}% (${level(r.p)})`).join('\n')}\nMe gustaría platicar por dónde empezar.`;
+      $('[data-send]').href = `/contacto?interes=${encodeURIComponent('Diagnóstico')}&mensaje=${encodeURIComponent(msg)}`;
+    };
+    document.addEventListener('click', (e) => {
+      const b = e.target.closest('button'); if (!b) return;
+      if (b.dataset.ans !== undefined) { ans.push(+b.dataset.ans); ans.length === qs.length ? finish() : show(); }
+      else if (b.hasAttribute('data-back') && ans.length) { ans.pop(); show(); }
+      else if (b.hasAttribute('data-redo')) { ans.length = 0; $('[data-result]').hidden = true; $('[data-quiz]').hidden = false; show(); }
+    });
+    show();
+  </script>
+</Light>
