@@ -16,14 +16,21 @@ const tiles = [
     <p data-reveal class="text-[14px] text-white/55">Para quién trabajamos</p>
     <h2 data-words class="mt-4 max-w-[18ch] font-goog text-[clamp(2.2rem,4.6vw,4.6rem)] font-light leading-[1.03] tracking-[-0.045em]">Empresas de todos los tamaños</h2>
 
-    <ul class="mt-12 grid grid-cols-2 gap-3 md:mt-20 md:grid-cols-4 md:gap-4">
-      {tiles.map(([t, d, g, c], i) => (
-        <li data-reveal style={`--i:${i % 3};--g:${g}`} class={`au relative flex min-h-[150px] flex-col justify-between overflow-hidden rounded-[26px] p-4 md:min-h-[230px] md:rounded-[32px] md:p-7 ${c}`}>
-          <span class="font-goog text-[13px] font-medium text-white/80">{String(i + 1).padStart(2, '0')}</span>
-          <h3 class="font-goog text-[clamp(1.15rem,2.3vw,2.2rem)] font-normal leading-[1.08] tracking-[-0.035em] text-white">{t}</h3>
+    <ul class="au-row scroll-px-6 -mx-6 mt-12 flex snap-x snap-mandatory gap-3 overflow-x-auto px-6 pb-4 md:mx-0 md:mt-20 md:grid md:grid-cols-4 md:gap-4 md:overflow-visible md:px-0 md:pb-0">
+      {tiles.map(([t, d, g], i) => (
+        <li data-reveal style={`--i:${i % 4}`} class="au relative flex aspect-[3/4] w-[68vw] max-w-[300px] shrink-0 snap-start flex-col justify-between rounded-[28px] bg-white p-6 text-[#0b0c0f] md:w-auto md:max-w-none md:p-7">
+          <div class="flex items-center justify-between">
+            <span class="font-goog text-[13px] font-medium text-[#0b0c0f]/45">{String(i + 1).padStart(2, '0')}</span>
+            <i class="block size-3 rounded-full" style={`background:${g}`} aria-hidden="true"></i>
+          </div>
+          <h3 class="font-goog text-[clamp(1.4rem,2.1vw,2rem)] font-normal leading-[1.08] tracking-[-0.04em]">{t}</h3>
           <p class="sr-only">{d}</p>
         </li>
       ))}
+      <li data-reveal style="--i:3" class="au relative hidden aspect-[3/4] flex-col justify-between rounded-[28px] border border-white/20 p-7 md:flex">
+        <span class="font-goog text-[13px] font-medium text-white/50">→</span>
+        <a href="/servicios" class="font-goog text-[clamp(1.4rem,2.1vw,2rem)] font-normal leading-[1.08] tracking-[-0.04em] text-white after:absolute after:inset-0">Ver nuestros servicios</a>
+      </li>
     </ul>
   </div>
 </section>
