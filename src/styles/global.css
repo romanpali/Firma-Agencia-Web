@@ -360,3 +360,17 @@ body { overflow-x: clip; }
 .cfg-row[aria-pressed="true"] .cfg-t { color: #0b0b0c; font-weight: 500; }
 .cfg-row[aria-pressed="true"] .cfg-add { color: #0033ff; }
 @media (prefers-reduced-motion: reduce) { .cfg-view { transition: none; } }
+
+/* Configurador: generación tipo imagen de IA */
+.cfg { transition: opacity 1.2s ease, filter 1.3s ease, scale 1.3s cubic-bezier(.2, .8, .2, 1); }
+.cfg.gen-hidden { opacity: 0; filter: blur(34px) saturate(1.5); scale: 0.93; }
+.gen-card { animation: genIn 0.7s cubic-bezier(.2, .8, .2, 1) both; }
+@keyframes genIn { from { opacity: 0; scale: 0.94; filter: blur(12px); } }
+.gen-blob { width: 74%; height: 74%; border-radius: 50%; filter: blur(34px); opacity: 0.9; animation: genFloat 5s ease-in-out infinite alternate; }
+.gen-b1 { left: -14%; top: -18%; background: var(--a); }
+.gen-b2 { right: -16%; top: 10%; background: var(--b); animation-delay: -1.6s; animation-duration: 6s; }
+.gen-b3 { left: 20%; bottom: -34%; background: color-mix(in srgb, var(--a) 50%, var(--b)); animation-delay: -3s; }
+@keyframes genFloat { to { translate: 9% 12%; scale: 1.18; } }
+.gen-shine { background: linear-gradient(110deg, transparent 32%, rgba(255, 255, 255, 0.6) 50%, transparent 68%); transform: translateX(-100%); animation: genShine 1.9s ease-in-out infinite; }
+@keyframes genShine { to { transform: translateX(100%); } }
+@media (prefers-reduced-motion: reduce) { .gen-card, .gen-blob, .gen-shine { animation: none; } .cfg { transition: none; } }

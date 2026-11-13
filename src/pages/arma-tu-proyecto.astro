@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import Panel from '../components/Panels.astro';
 
 const types: [string, string, string][] = [
   ['pequena', 'Pequeña empresa', 'Presencia profesional para atraer clientes y organizar la operación.'],
@@ -32,8 +33,8 @@ const modes: [string, string, string][] = [
   ['mensual', 'Plan mensual', 'Acompañamiento continuo: soporte, contenido y mejora.'],
   ['consultoria', 'Consultoría primero', 'Un diagnóstico y un plan antes de construir.'],
 ];
-const row = 'cfg-row block w-full border border-black/20 bg-white px-4 py-3.5 text-left transition-[border-color,background-color] hover:border-black/50 aria-pressed:border-[#0033FF] aria-pressed:shadow-[inset_0_0_0_1px_#0033FF]';
-const h = 'mt-9 font-goog text-[1.35rem] tracking-[-0.01em]';
+const row = 'cfg-row block w-full rounded-[18px] bg-[#f5f5f7] px-5 py-4 text-left transition-[background-color,box-shadow] duration-200 hover:bg-[#ededf0] aria-pressed:bg-white aria-pressed:shadow-[0_0_0_2px_#0033FF,0_12px_30px_-18px_rgba(0,51,255,.55)]';
+const h = 'mt-9 font-goog text-[1.3rem] font-semibold tracking-[-0.02em]';
 ---
 
 <!doctype html>
@@ -45,17 +46,35 @@ const h = 'mt-9 font-goog text-[1.35rem] tracking-[-0.01em]';
     <script is:inline>document.documentElement.classList.add('js')</script>
     <title>Arma tu proyecto — HumanCorp</title>
   </head>
-  <body class="overflow-hidden bg-[#f4f4f3] font-sans text-[#14161a]">
-    <div class="grid h-svh grid-rows-[42svh_minmax(0,1fr)] lg:grid-cols-[minmax(0,1fr)_440px] lg:grid-rows-1">
+  <body class="overflow-hidden bg-[#f5f5f7] font-sans text-[#14161a]">
+    <div class="grid h-svh grid-rows-[42svh_minmax(0,1fr)] gap-3 p-3 lg:grid-cols-[minmax(0,1fr)_440px] lg:grid-rows-1 lg:gap-4 lg:p-4">
       <!-- Escenario -->
-      <section data-stage class="relative overflow-hidden bg-[radial-gradient(90%_70%_at_50%_30%,#fbfbfa,#ececea)]" aria-label="Vista previa de tu proyecto">
+      <section data-stage class="relative overflow-hidden rounded-[28px] bg-[radial-gradient(90%_70%_at_50%_30%,#ffffff,#e9e9ee)] shadow-[0_1px_2px_rgba(0,0,0,.04),0_24px_60px_-34px_rgba(0,0,0,.3)] lg:rounded-[36px]" aria-label="Vista previa de tu proyecto">
         <div class="absolute inset-x-0 top-0 z-20 flex items-center gap-4 px-5 py-4 lg:px-9 lg:py-6">
           <a href="/" aria-label="Volver al inicio" class="grid size-9 place-items-center rounded-full transition-colors hover:bg-black/5"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a>
           <span class="font-goog text-[15px] uppercase tracking-[0.2em]">Arma tu proyecto</span>
-          <span data-viewname class="ml-auto hidden text-[12.5px] text-black/45 sm:inline">Sitio web</span>
+          <span data-viewname class="ml-auto hidden rounded-full bg-black/[.05] px-3.5 py-1.5 text-[12px] text-black/55 sm:inline">Ejemplo · Alba</span>
         </div>
 
-        <div data-canvas class="cfg absolute left-1/2 top-1/2 h-[520px] w-[640px]" style="--a:#F6B370;--b:#2F3A9E;--ink:#14173f;--bg:#fdf6ee;--on:#14173f;--rad:6px;--hw:300">
+        <!-- Ejemplo mientras configuras -->
+        <div data-alba class="absolute inset-0 transition-[opacity,transform,filter] duration-700">
+          <div data-alba-fit class="stage-panel absolute left-1/2 top-1/2 h-[400px] w-[640px]"><Panel i={1} label="Sitio web" /></div>
+          <p class="absolute inset-x-0 bottom-[104px] z-10 hidden text-center text-[12.5px] text-black/45 lg:block">Así se ve un proyecto de HumanCorp. Configura el tuyo y lo generamos aquí.</p>
+        </div>
+
+        <!-- Generando -->
+        <div data-gen class="pointer-events-none absolute inset-0 z-10 grid place-items-center opacity-0 transition-opacity duration-500" style="--a:#F6B370;--b:#2F3A9E">
+          <div class="gen-card relative aspect-[16/11] w-[min(78%,540px)] overflow-hidden rounded-[32px] bg-white shadow-[0_40px_90px_-40px_rgba(0,0,0,.45)]">
+            <i class="gen-blob gen-b1 absolute"></i><i class="gen-blob gen-b2 absolute"></i><i class="gen-blob gen-b3 absolute"></i>
+            <i class="gen-shine absolute inset-0"></i><i class="grain absolute inset-0 opacity-[.18]"></i>
+            <div class="absolute inset-x-0 bottom-0 p-6 text-center">
+              <p data-gen-text class="font-goog text-[1.05rem] tracking-[-0.01em] text-[#14161a]/80">Entendiendo tu negocio…</p>
+              <i class="relative mx-auto mt-4 block h-[3px] w-[60%] overflow-hidden rounded-full bg-black/10"><b data-gen-bar class="absolute inset-y-0 left-0 block w-full origin-left rounded-full bg-[#14161a]" style="transform:scaleX(0)"></b></i>
+            </div>
+          </div>
+        </div>
+
+        <div data-canvas class="cfg gen-hidden absolute left-1/2 top-1/2 h-[520px] w-[640px]" style="--a:#F6B370;--b:#2F3A9E;--ink:#14173f;--bg:#fdf6ee;--on:#14173f;--rad:6px;--hw:300">
           <!-- Vista 1: sitio + módulos -->
           <div data-view="0" class="cfg-view absolute inset-0">
             <div class="cfg-browser absolute left-[142px] top-[78px] h-[330px] w-[380px] overflow-hidden bg-[var(--bg)] text-[var(--ink)]" style="border-radius:calc(var(--rad) + 6px);box-shadow:0 40px 80px -30px rgba(0,0,40,.55)">
@@ -98,8 +117,8 @@ const h = 'mt-9 font-goog text-[1.35rem] tracking-[-0.01em]';
           </div>
         </div>
 
-        <button type="button" data-prev-view aria-label="Vista anterior" class="absolute left-5 top-1/2 z-20 grid size-10 -translate-y-1/2 place-items-center rounded-full bg-black/[.07] text-black/60 transition-colors hover:bg-black/15 hover:text-black lg:left-7"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
-        <button type="button" data-next-view aria-label="Vista siguiente" class="absolute right-5 top-1/2 z-20 grid size-10 -translate-y-1/2 place-items-center rounded-full bg-black/[.07] text-black/60 transition-colors hover:bg-black/15 hover:text-black lg:right-7"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+        <button type="button" data-prev-view hidden aria-label="Vista anterior" class="absolute left-5 top-1/2 z-20 grid size-10 -translate-y-1/2 place-items-center rounded-full bg-black/[.07] text-black/60 transition-colors hover:bg-black/15 hover:text-black lg:left-7"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <button type="button" data-next-view hidden aria-label="Vista siguiente" class="absolute right-5 top-1/2 z-20 grid size-10 -translate-y-1/2 place-items-center rounded-full bg-black/[.07] text-black/60 transition-colors hover:bg-black/15 hover:text-black lg:right-7"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
 
         <div class="absolute inset-x-0 bottom-3 z-20 flex justify-center px-4 lg:bottom-7">
           <div class="flex items-center gap-6 rounded-2xl bg-white px-6 py-3.5 shadow-[0_20px_50px_-28px_rgba(0,0,0,.4)] sm:gap-10 sm:px-9 sm:py-4">
@@ -111,13 +130,13 @@ const h = 'mt-9 font-goog text-[1.35rem] tracking-[-0.01em]';
       </section>
 
       <!-- Panel de opciones -->
-      <aside class="flex min-h-0 flex-col border-l border-black/10 bg-white">
+      <aside class="flex min-h-0 flex-col overflow-hidden rounded-[28px] bg-white shadow-[0_1px_2px_rgba(0,0,0,.04),0_24px_60px_-34px_rgba(0,0,0,.3)] lg:rounded-[36px]">
         <div data-scroller class="min-h-0 flex-1 overflow-y-auto px-6 pb-8 pt-6 lg:px-10 lg:pt-7">
           <div class="flex items-center justify-between text-[12px] text-black/45"><a href="/" class="tracking-wide"><span class="font-light">HUMAN</span> <span class="font-semibold">CORP</span></a><a href="/contacto" class="hover:text-black">Contacto</a></div>
           <h1 class="mt-8 font-goog text-[1.9rem] font-light uppercase tracking-[0.16em]">Tu proyecto</h1>
-          <p class="mt-2 max-w-[22rem] text-[13px] leading-relaxed text-black/55">Elige cómo es tu negocio y lo que necesitas. La vista se arma contigo. Es una propuesta visual inicial: la afinamos juntos.</p>
+          <p class="mt-2 max-w-[22rem] text-[13px] leading-relaxed text-black/55">Elige cómo es tu negocio y lo que necesitas. La vista se arma contigo. Al terminar, generamos una propuesta visual inicial que afinamos juntos.</p>
 
-          <label class="mt-8 block text-[12.5px] text-black/60">Nombre de tu empresa<input data-in-name maxlength="28" placeholder="Tu empresa" class="mt-2 w-full border border-black/20 px-4 py-3.5 text-[15px] outline-none transition-[border-color] placeholder:text-black/35 focus:border-[#0033FF]" /></label>
+          <label class="mt-8 block text-[12.5px] text-black/60">Nombre de tu empresa<input data-in-name maxlength="28" placeholder="Tu empresa" class="mt-2 w-full rounded-2xl bg-[#f5f5f7] px-5 py-4 text-[15px] outline-none transition-shadow placeholder:text-black/35 focus:bg-white focus:shadow-[0_0_0_2px_#0033FF]" /></label>
 
           <h2 class={h}>Negocio</h2>
           <div class="mt-4 space-y-3">{types.map(([id, l, d], i) => <button type="button" data-type={id} aria-pressed={i === 0} class={row}><span class="cfg-t block text-[14.5px] text-black/65">{l}</span><span class="mt-1 block text-[11.5px] leading-snug text-black/40">{d}</span></button>)}</div>
@@ -135,14 +154,15 @@ const h = 'mt-9 font-goog text-[1.35rem] tracking-[-0.01em]';
           <p class="mt-8 text-[11.5px] leading-relaxed text-black/40">No incluye precios. Con tu configuración preparamos una propuesta por escrito, con alcance, entregables, tiempos e inversión.</p>
         </div>
 
-        <div class="relative border-t border-black/10 bg-white">
-          <div data-drawer hidden class="absolute inset-x-0 bottom-full max-h-[46svh] overflow-y-auto border-t border-black/10 bg-white px-6 py-5 shadow-[0_-20px_40px_-30px_rgba(0,0,0,.4)] lg:px-10">
+        <div class="relative bg-white shadow-[0_-12px_30px_-26px_rgba(0,0,0,.35)]">
+          <div data-drawer hidden class="absolute inset-x-3 bottom-full mb-2 max-h-[46svh] overflow-y-auto rounded-3xl bg-white px-6 py-5 shadow-[0_20px_60px_-20px_rgba(0,0,0,.35)] lg:inset-x-5 lg:px-8">
             <ul data-summary class="space-y-2.5 text-[13.5px]"></ul>
             <button type="button" data-copy class="mt-4 text-[12.5px] text-black/55 underline underline-offset-4 hover:text-black">Copiar resumen</button>
           </div>
           <div class="flex items-center justify-between gap-4 px-6 py-4 lg:px-10 lg:py-5">
             <button type="button" data-toggle aria-expanded="false" class="flex items-center gap-2 text-left font-goog text-[1.05rem] tracking-[-0.01em]"><span data-bar-sum>0 módulos</span><svg data-chev width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg></button>
-            <a data-send href="/contacto" class="bg-[#14161a] px-6 py-3.5 text-[13.5px] text-white transition-colors hover:bg-black">Enviar mi configuración</a>
+            <button type="button" data-generate class="rounded-full bg-[#0033FF] px-7 py-3.5 text-[14px] font-medium text-white shadow-[0_12px_30px_-14px_rgba(0,51,255,.7)] transition-transform hover:scale-[1.03] active:scale-[0.98] disabled:opacity-60">Generar mi proyecto</button>
+            <a data-send hidden href="/contacto" class="rounded-full bg-[#14161a] px-7 py-3.5 text-[14px] font-medium text-white transition-transform hover:scale-[1.03]">Enviar mi configuración</a>
           </div>
         </div>
       </aside>
@@ -166,61 +186,131 @@ const h = 'mt-9 font-goog text-[1.35rem] tracking-[-0.01em]';
       const PAL = { atardecer: ['#F6B370', '#2F3A9E', '#14173f', '#fdf6ee', '#14173f'], oceano: ['#0033FF', '#977DFF', '#0b0c2b', '#f3f5ff', '#ffffff'], bosque: ['#10b981', '#064e5a', '#06251f', '#f1faf6', '#06251f'], grafito: ['#14173f', '#8f8aa6', '#0b0b0c', '#f6f5f2', '#ffffff'] };
       const STY = { minimal: ['6px', '300'], calido: ['16px', '500'], audaz: ['0px', '700'] };
       const VIEWS = ['Sitio web', 'Identidad'];
-      const S = { name: '', type: 'pequena', pal: 'atardecer', sty: 'minimal', mods: new Set(), mode: 'proyecto', view: 0 };
-      const label = (list, id) => (list.find((x) => x[0] === id) || [])[1];
       const AREAS = { d1: '1', d2: '2', d3: '3', d4: '4', d5: '5', d6: '6', dc: '6', d7: '7', d8: '8' };
+      const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const label = (list, id) => (list.find((x) => x[0] === id) || [])[1];
+      const set = (sel, t) => $$(sel).forEach((el) => (el.textContent = t));
+      // S = lo que el usuario va eligiendo; G = lo que se generó (la vista solo cambia al generar).
+      const S = { name: '', type: 'pequena', pal: 'atardecer', sty: 'minimal', mods: new Set(), mode: 'proyecto' };
+      let G = null, phase = 'idle', view = 0, dirty = false, token = 0;
 
-      const render = () => {
-        const nm = S.name.trim() || 'Tu empresa';
-        const slug = nm.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '') || 'tuempresa';
-        const [a, b, ink, bg, on] = PAL[S.pal];
-        const [rad, hw] = STY[S.sty];
-        cv.style.cssText += `;--a:${a};--b:${b};--ink:${ink};--bg:${bg};--on:${on};--rad:${rad};--hw:${hw}`;
-        const c = COPY[S.type];
-        const set = (sel, t) => $$(sel).forEach((el) => (el.textContent = t));
-        set('[data-name],[data-name2],[data-name3]', nm); set('[data-mark],[data-mark2]', nm[0].toUpperCase());
-        set('[data-url]', `${slug}.mx`); set('[data-url2]', `${slug}.mx · Mérida, Yucatán`); set('[data-ig]', slug); set('[data-ig2]', '@' + slug);
-        set('[data-h],[data-post]', c[0]); set('[data-sub],[data-tag2]', c[1]); set('[data-cta]', c[2]); set('[data-styl]', label(styles, S.sty));
-        $$('[data-card]').forEach((el, i) => (el.textContent = c[3][i]));
-        ['a', 'b', 'ink', 'bg'].forEach((k, i) => set(`[data-hex="${k}"]`, [a, b, ink, bg][i].toUpperCase()));
-        $$('[data-w]').forEach((el) => el.classList.toggle('on', S.mods.has(el.dataset.w)));
-        $$('[data-view]').forEach((el) => { const i = +el.dataset.view; el.style.opacity = i === S.view ? '1' : '0'; el.style.pointerEvents = i === S.view ? 'auto' : 'none'; el.style.transform = `translateX(${(i - S.view) * 40}px)`; });
-        set('[data-viewname]', VIEWS[S.view]);
-        // botones del panel
+      // Ejemplo de Alba: el sitio se arma en bucle mientras configuras.
+      const alba = $('[data-alba]'), albaFit = $('[data-alba-fit]'), albaPn = alba.querySelector('[data-pn]');
+      const fitAlba = () => { const k = Math.min(stage.clientWidth * 0.82 / 640, (stage.clientHeight - 150) / 400); albaFit.style.transform = `translate(-50%,-54%) scale(${Math.min(k, 1.6).toFixed(4)})`; };
+      new ResizeObserver(fitAlba).observe(stage); fitAlba();
+      let t0 = performance.now();
+      const loop = (t) => {
+        if (phase === 'idle') { const c = ((t - t0) % 17000) / 17000; albaPn.style.setProperty('--q', reduced ? '1' : String(Math.min(1, c / 0.72))); }
+        requestAnimationFrame(loop);
+      };
+      requestAnimationFrame(loop);
+
+      // Panel de opciones y cifras (en vivo)
+      const renderPanel = () => {
         $$('[data-type]').forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.type === S.type)));
         $$('[data-pal]').forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.pal === S.pal)));
         $$('[data-sty]').forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.sty === S.sty)));
         $$('[data-mode]').forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.mode === S.mode)));
         $$('[data-mod]').forEach((x) => { const on = S.mods.has(x.dataset.mod); x.setAttribute('aria-pressed', String(on)); x.querySelector('.cfg-add').textContent = on ? 'Incluido ✓' : 'Sumar'; });
-        // cifras y resumen
         const mods = modules.filter((m) => S.mods.has(m[0])).map((m) => m[1]);
         const areas = new Set([...S.mods].map((m) => AREAS[m])).size;
-        set('[data-st-mods]', String(S.mods.size)); set('[data-st-areas]', String(areas)); set('[data-st-mode]', label(modes, S.mode).split(' ')[0] === 'Proyecto' ? 'Proyecto' : label(modes, S.mode).split(' ')[0]);
+        set('[data-st-mods]', String(S.mods.size)); set('[data-st-areas]', String(areas)); set('[data-st-mode]', label(modes, S.mode).split(' ')[0]);
         set('[data-bar-sum]', `${S.mods.size} ${S.mods.size === 1 ? 'módulo' : 'módulos'}`);
+        const nm = S.name.trim() || 'Tu empresa';
         const rows = [['Empresa', nm], ['Negocio', label(types, S.type)], ['Identidad', `${label(palettes, S.pal)} · ${label(styles, S.sty)}`], ['Módulos', mods.length ? mods.join(', ') : 'Aún sin elegir'], ['Modalidad', label(modes, S.mode)]];
         $('[data-summary]').innerHTML = rows.map(([k, v]) => `<li class="flex flex-col gap-0.5 border-b border-black/10 pb-2.5 sm:flex-row sm:gap-4"><span class="w-24 shrink-0 text-[12px] text-black/45">${k}</span><span>${v.replace(/</g, '&lt;')}</span></li>`).join('');
         const text = `Hola, armé mi proyecto en el configurador de HumanCorp:\n- Empresa: ${nm}\n- Tipo de negocio: ${label(types, S.type)}\n- Identidad: ${label(palettes, S.pal)} · ${label(styles, S.sty)}\n- Módulos: ${mods.length ? mods.join(', ') : 'aún sin elegir'}\n- Modalidad: ${label(modes, S.mode)}\nMe gustaría recibir una propuesta.`;
         $('[data-send]').href = `/contacto?interes=${encodeURIComponent('Proyecto a la medida')}&mensaje=${encodeURIComponent(text)}`;
         S.text = text;
+        // botones principales
+        const gen = $('[data-generate]'), send = $('[data-send]');
+        const done = phase === 'done';
+        gen.hidden = done && !dirty; send.hidden = !(done && !dirty);
+        gen.textContent = done ? 'Volver a generar' : 'Generar mi proyecto';
+        gen.disabled = phase === 'loading';
+      };
+
+      // Lienzo generado (solo cambia al generar)
+      const drawCanvas = () => {
+        const nm = G.name.trim() || 'Tu empresa';
+        const slug = nm.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '') || 'tuempresa';
+        const [a, b, ink, bg, on] = PAL[G.pal];
+        const [rad, hw] = STY[G.sty];
+        cv.style.cssText += `;--a:${a};--b:${b};--ink:${ink};--bg:${bg};--on:${on};--rad:${rad};--hw:${hw}`;
+        const c = COPY[G.type];
+        set('[data-name],[data-name2],[data-name3]', nm); set('[data-mark],[data-mark2]', nm[0].toUpperCase());
+        set('[data-url]', `${slug}.mx`); set('[data-url2]', `${slug}.mx · Mérida, Yucatán`); set('[data-ig]', slug); set('[data-ig2]', '@' + slug);
+        set('[data-h],[data-post]', c[0]); set('[data-sub],[data-tag2]', c[1]); set('[data-cta]', c[2]); set('[data-styl]', label(styles, G.sty));
+        $$('[data-card]').forEach((el, i) => (el.textContent = c[3][i]));
+        ['a', 'b', 'ink', 'bg'].forEach((k, i) => set(`[data-hex="${k}"]`, [a, b, ink, bg][i].toUpperCase()));
+      };
+      const setView = () => {
+        $$('[data-view]').forEach((el) => { const i = +el.dataset.view; el.style.opacity = i === view ? '1' : '0'; el.style.pointerEvents = i === view ? 'auto' : 'none'; el.style.transform = `translateX(${(i - view) * 40}px)`; });
+        if (phase === 'done') set('[data-viewname]', VIEWS[view]);
+      };
+      const widgets = () => $$('[data-w]');
+      const showWidgets = (on) => widgets().forEach((el, i) => { el.style.transitionDelay = on ? `${0.15 + i * 0.1}s` : '0s'; el.classList.toggle('on', on && G.mods.has(el.dataset.w)); });
+
+      const STEPS = ['Entendiendo tu negocio…', 'Diseñando tu identidad…', 'Armando tu sitio…', 'Conectando tus módulos…', 'Últimos detalles…'];
+      const generate = () => {
+        if (phase === 'loading') return;
+        const my = ++token;
+        G = { ...S, mods: new Set(S.mods) };
+        dirty = false;
+        const [a, b] = PAL[G.pal];
+        const gen = $('[data-gen]'); gen.style.setProperty('--a', a); gen.style.setProperty('--b', b);
+        const wasIdle = phase === 'idle';
+        phase = 'loading'; renderPanel();
+        set('[data-viewname]', 'Generando…');
+        $('[data-scroller]').scrollTo({ top: 0, behavior: 'smooth' });
+        // 1) sale el ejemplo / el lienzo anterior y entra el generador
+        alba.style.opacity = '0'; alba.style.filter = 'blur(14px)'; alba.style.transform = 'scale(.97)'; alba.style.pointerEvents = 'none';
+        cv.classList.add('gen-hidden'); cv.classList.remove('gen-in'); showWidgets(false);
+        $('[data-prev-view]').hidden = true; $('[data-next-view]').hidden = true;
+        gen.style.opacity = '1';
+        const total = reduced ? 400 : 4600;
+        const bar = $('[data-gen-bar]'); const txt = $('[data-gen-text]');
+        const start = performance.now();
+        const tick = (now) => {
+          if (my !== token) return;
+          const p = Math.min(1, (now - start) / total);
+          bar.style.transform = `scaleX(${(1 - Math.pow(1 - p, 2)).toFixed(3)})`;
+          txt.textContent = STEPS[Math.min(STEPS.length - 1, Math.floor(p * STEPS.length))];
+          if (p < 1) requestAnimationFrame(tick); else reveal(my);
+        };
+        requestAnimationFrame(tick);
+      };
+      const reveal = (my) => {
+        if (my !== token) return;
+        drawCanvas(); view = 0; setView();
+        const gen = $('[data-gen]');
+        gen.style.opacity = '0';
+        cv.classList.remove('gen-hidden'); void cv.offsetWidth; cv.classList.add('gen-in');
+        phase = 'done'; renderPanel(); set('[data-viewname]', VIEWS[0]);
+        setTimeout(() => { if (my === token) showWidgets(true); }, reduced ? 0 : 700);
+        $('[data-prev-view]').hidden = false; $('[data-next-view]').hidden = false;
       };
 
       document.addEventListener('click', (e) => {
         const t = e.target.closest('button'); if (!t) return;
+        let changed = true;
         if (t.dataset.type) S.type = t.dataset.type;
         else if (t.dataset.pal) S.pal = t.dataset.pal;
         else if (t.dataset.sty) S.sty = t.dataset.sty;
         else if (t.dataset.mode) S.mode = t.dataset.mode;
-        else if (t.dataset.mod) { S.mods.has(t.dataset.mod) ? S.mods.delete(t.dataset.mod) : S.mods.add(t.dataset.mod); S.view = 0; }
-        else if (t.hasAttribute('data-next-view')) S.view = (S.view + 1) % VIEWS.length;
-        else if (t.hasAttribute('data-prev-view')) S.view = (S.view + VIEWS.length - 1) % VIEWS.length;
-        else if (t.hasAttribute('data-toggle')) { const d = $('[data-drawer]'); d.hidden = !d.hidden; t.setAttribute('aria-expanded', String(!d.hidden)); $('[data-chev]').style.transform = d.hidden ? '' : 'rotate(180deg)'; return; }
-        else if (t.hasAttribute('data-copy')) { navigator.clipboard?.writeText(S.text).then(() => { t.textContent = 'Copiado ✓'; setTimeout(() => (t.textContent = 'Copiar resumen'), 1800); }); return; }
-        else return;
-        if (t.dataset.pal || t.dataset.sty) S.view = S.view; // la identidad se ve en ambas vistas
-        render();
+        else if (t.dataset.mod) { S.mods.has(t.dataset.mod) ? S.mods.delete(t.dataset.mod) : S.mods.add(t.dataset.mod); }
+        else { changed = false;
+          if (t.hasAttribute('data-generate')) { generate(); return; }
+          if (t.hasAttribute('data-next-view')) { view = (view + 1) % VIEWS.length; setView(); return; }
+          if (t.hasAttribute('data-prev-view')) { view = (view + VIEWS.length - 1) % VIEWS.length; setView(); return; }
+          if (t.hasAttribute('data-toggle')) { const d = $('[data-drawer]'); d.hidden = !d.hidden; t.setAttribute('aria-expanded', String(!d.hidden)); $('[data-chev]').style.transform = d.hidden ? '' : 'rotate(180deg)'; return; }
+          if (t.hasAttribute('data-copy')) { navigator.clipboard?.writeText(S.text).then(() => { t.textContent = 'Copiado ✓'; setTimeout(() => (t.textContent = 'Copiar resumen'), 1800); }); return; }
+          return; }
+        if (changed && phase === 'done') dirty = true;
+        renderPanel();
       });
-      $('[data-in-name]').addEventListener('input', (e) => { S.name = e.target.value; render(); });
-      render();
+      $('[data-in-name]').addEventListener('input', (e) => { S.name = e.target.value; if (phase === 'done') dirty = true; renderPanel(); });
+      renderPanel();
     </script>
   </body>
 </html>
