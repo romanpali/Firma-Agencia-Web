@@ -1,0 +1,63 @@
+---
+import LegalLayout from '../components/LegalLayout.astro';
+
+const sections = [
+  {
+    h: 'Quién es el responsable de tus datos',
+    p: ['HumanCorp (en adelante, «HumanCorp», «nosotros») es responsable del tratamiento de los datos personales que recabamos a través de este sitio web y de nuestros canales de contacto. Nuestro domicilio es en Mérida, Yucatán, México.', 'Para cualquier asunto relacionado con tus datos personales puedes escribirnos a info@humancorp.co.'],
+  },
+  {
+    h: 'Qué datos personales recabamos',
+    p: ['Recabamos los datos que tú nos proporcionas al usar el formulario de contacto o al escribirnos o llamarnos:'],
+    ul: ['Nombre completo.', 'Correo electrónico y teléfono.', 'Nombre de tu empresa, si decides indicarlo.', 'Servicio en el que tienes interés y el contenido de tu mensaje.'],
+    after: ['También se registran datos técnicos básicos de la visita (como la dirección IP, el navegador y las páginas consultadas) por parte del proveedor que aloja el sitio.', 'No te pedimos datos personales sensibles. Te pedimos no incluirlos en tus mensajes.'],
+  },
+  {
+    h: 'Para qué usamos tus datos',
+    p: ['Usamos tus datos para las siguientes finalidades necesarias:'],
+    ul: ['Responder tu mensaje y atender tu solicitud de información.', 'Agendar una llamada de descubrimiento y dar seguimiento a tu consulta.', 'Preparar propuestas y cotizaciones de los servicios que nos pidas.', 'Mantener un registro de la comunicación contigo.'],
+    after: ['De manera adicional, si no te opones, podemos usarlos para enviarte información sobre nuestros servicios y para mejorar el sitio. Puedes oponerte a estas finalidades en cualquier momento escribiéndonos, sin que afecte la atención de tu solicitud.'],
+  },
+  {
+    h: 'Con quién compartimos tus datos',
+    p: ['No vendemos tus datos personales. Podemos compartirlos únicamente con proveedores que nos ayudan a operar el sitio y la comunicación (por ejemplo, el servicio de alojamiento y de recepción de formularios, y el servicio de correo electrónico), quienes los tratan por nuestra cuenta y con obligaciones de confidencialidad.', 'También podremos compartirlos cuando una autoridad competente lo requiera conforme a la ley, o con tu consentimiento cuando sea necesario.'],
+  },
+  {
+    h: 'Tus derechos: acceso, rectificación, cancelación y oposición',
+    p: ['Tienes derecho a conocer qué datos tenemos de ti y para qué los usamos (acceso), a corregirlos si son inexactos o están incompletos (rectificación), a solicitar que los eliminemos (cancelación) y a oponerte a su uso para ciertas finalidades (oposición). También puedes revocar el consentimiento que nos hayas dado.', 'Para ejercer estos derechos, envía un correo a info@humancorp.co con tu nombre, los datos de contacto para responderte, una descripción clara de lo que solicitas y un documento que acredite tu identidad. Te responderemos dentro de los plazos que establece la legislación aplicable.'],
+  },
+  {
+    h: 'Cookies y tecnologías similares',
+    p: ['A la fecha de esta actualización, el sitio no utiliza cookies publicitarias ni herramientas de analítica de terceros para dar seguimiento a tu navegación. El proveedor de alojamiento puede registrar los accesos con fines técnicos y de seguridad.', 'Si en el futuro incorporamos herramientas de medición u otras cookies, actualizaremos este aviso y, cuando corresponda, te pediremos tu consentimiento.'],
+  },
+  {
+    h: 'Cuánto tiempo conservamos tus datos',
+    p: ['Conservamos tus datos durante el tiempo necesario para cumplir las finalidades descritas y las obligaciones legales aplicables. Cuando dejan de ser necesarios, los eliminamos o los bloqueamos de forma segura.'],
+  },
+  {
+    h: 'Cómo protegemos tus datos',
+    p: ['Aplicamos medidas de seguridad administrativas, técnicas y físicas razonables para proteger tus datos contra daño, pérdida, alteración, destrucción o uso no autorizado. Ningún sistema es completamente infalible, por lo que no podemos garantizar una seguridad absoluta.'],
+  },
+  {
+    h: 'Menores de edad',
+    p: ['Este sitio está dirigido a empresas, organizaciones y personas mayores de edad. No recabamos de forma intencional datos de menores. Si crees que un menor nos envió información, escríbenos para eliminarla.'],
+  },
+  {
+    h: 'Cambios a este aviso',
+    p: ['Podemos actualizar este aviso de privacidad para reflejar cambios en nuestras prácticas o en la ley. Publicaremos la versión vigente en esta página, con la fecha de la última actualización.'],
+  },
+  {
+    h: 'Contacto',
+    p: ['Si tienes dudas sobre este aviso o sobre el tratamiento de tus datos, escríbenos a info@humancorp.co.'],
+  },
+];
+---
+
+<LegalLayout
+  title="Aviso de privacidad"
+  description="Cómo HumanCorp recaba, usa y protege tus datos personales, y cómo puedes ejercer tus derechos."
+  intro="Este aviso explica qué datos personales recabamos cuando nos contactas, para qué los usamos, con quién los compartimos y cómo puedes ejercer tus derechos."
+  updated="13 de noviembre de 2026"
+  sections={sections}
+  other={{ href: '/terminos', label: 'Ver términos de uso' }}
+/>

@@ -1,0 +1,64 @@
+---
+import LegalLayout from '../components/LegalLayout.astro';
+
+const sections = [
+  {
+    h: 'Aceptación de los términos',
+    p: ['Al acceder y usar este sitio web aceptas estos términos de uso. Si no estás de acuerdo con ellos, te pedimos que no uses el sitio.'],
+  },
+  {
+    h: 'Qué es este sitio',
+    p: ['Este sitio presenta a HumanCorp, una firma de diseño, tecnología y soluciones empresariales, y describe sus servicios. Su contenido es informativo y no constituye una oferta vinculante ni un compromiso de prestar un servicio determinado.'],
+  },
+  {
+    h: 'Cómo se contratan nuestros servicios',
+    p: ['Los servicios se contratan mediante una propuesta o contrato por escrito, que define el alcance, los entregables, los tiempos, la inversión y las condiciones. Lo que aparezca en este sitio no sustituye ese documento.'],
+  },
+  {
+    h: 'Asesoría contable y fiscal',
+    p: ['La asesoría contable y fiscal la brinda la Dirección de Administración y Finanzas de HumanCorp, a cargo de un contador, conforme al alcance acordado por escrito con cada cliente.', 'La información general publicada en este sitio es orientativa y no sustituye una asesoría para tu caso específico. No prometemos resultados comerciales garantizados, cumplimiento fiscal automático ni seguridad absoluta.'],
+  },
+  {
+    h: 'Uso permitido del sitio',
+    p: ['Te comprometes a usar el sitio de forma lícita y de buena fe. No está permitido:'],
+    ul: ['Intentar acceder sin autorización a sistemas o información del sitio.', 'Interferir con su funcionamiento o enviar contenido malicioso.', 'Usar el formulario de contacto para enviar spam o información falsa.', 'Copiar o reutilizar el contenido del sitio con fines comerciales sin nuestra autorización.'],
+  },
+  {
+    h: 'Propiedad intelectual',
+    p: ['La marca HumanCorp, el diseño del sitio, los textos, las ilustraciones, las animaciones y el resto de los contenidos son de HumanCorp o se usan con autorización, y están protegidos por la legislación aplicable. No se otorga ninguna licencia sobre ellos más allá de la consulta personal del sitio.', 'Los ejemplos, nombres de empresas, perfiles, métricas y cifras que aparecen en las ilustraciones y demostraciones son ilustrativos, y no representan clientes ni resultados reales.'],
+  },
+  {
+    h: 'Enlaces y servicios de terceros',
+    p: ['El sitio puede enlazar a páginas o servicios de terceros, como redes sociales. No controlamos esos sitios y no somos responsables de su contenido ni de sus políticas de privacidad.'],
+  },
+  {
+    h: 'Limitación de responsabilidad',
+    p: ['Hacemos nuestro mejor esfuerzo para que la información del sitio sea clara y esté actualizada, pero no garantizamos que esté libre de errores o que el sitio esté siempre disponible. En la medida permitida por la ley, HumanCorp no será responsable por daños derivados del uso del sitio o de la imposibilidad de usarlo.'],
+  },
+  {
+    h: 'Privacidad',
+    p: ['El tratamiento de tus datos personales se rige por nuestro aviso de privacidad, disponible en /privacidad.'],
+  },
+  {
+    h: 'Cambios a estos términos',
+    p: ['Podemos modificar estos términos en cualquier momento. La versión vigente estará publicada en esta página, con la fecha de su última actualización. El uso del sitio después de un cambio implica que lo aceptas.'],
+  },
+  {
+    h: 'Ley aplicable y jurisdicción',
+    p: ['Estos términos se rigen por las leyes de los Estados Unidos Mexicanos. Para cualquier controversia, las partes se someten a los tribunales competentes de la ciudad de Mérida, Yucatán, renunciando a cualquier otro fuero que pudiera corresponderles.'],
+  },
+  {
+    h: 'Contacto',
+    p: ['Para cualquier duda sobre estos términos, escríbenos a info@humancorp.co.'],
+  },
+];
+---
+
+<LegalLayout
+  title="Términos de uso"
+  description="Condiciones para usar el sitio web de HumanCorp, alcance de la información publicada y cómo se contratan nuestros servicios."
+  intro="Estas son las condiciones para usar este sitio y lo que puedes esperar de la información que publicamos."
+  updated="13 de noviembre de 2026"
+  sections={sections}
+  other={{ href: '/privacidad', label: 'Ver aviso de privacidad' }}
+/>
