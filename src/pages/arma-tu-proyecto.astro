@@ -10,23 +10,12 @@ const types: [string, string, string][] = [
   ['profesional', 'Servicios profesionales', 'Confianza, cotizaciones y clientes.'],
   ['ecommerce', 'Comercio electrónico', 'Tienda, pagos y envíos.'],
 ];
-const designs: [string, string, string][] = [
-  ['a', 'Paisaje', 'Fotografía de un valle con tus colores y titular centrado.'],
-  ['b', 'Retrato', 'Fotografía editorial, titular grande y esferas de cristal.'],
+const sites: [string, string, string][] = [
+  ['landing', 'Landing', 'Una página enfocada en que te contacten.'],
+  ['corporativo', 'Sitio corporativo', 'Servicios, proceso, preguntas y contacto.'],
+  ['ecommerce', 'Ecommerce', 'Una tienda en línea con catálogo y cesta.'],
 ];
-const palettes: [string, string, string, string][] = [
-  ['atardecer', 'Atardecer', '#F6B370', '#2F3A9E'], ['oceano', 'Océano', '#0033FF', '#977DFF'],
-  ['bosque', 'Bosque', '#10b981', '#064e5a'], ['grafito', 'Grafito', '#14173f', '#8f8aa6'],
-];
-const fonts: [string, string][] = [['moderna', 'Moderna'], ['geometrica', 'Geométrica'], ['editorial', 'Editorial']];
-const styles: [string, string, string][] = [
-  ['minimal', 'Minimalista', 'Aire, líneas finas y tipografía ligera.'], ['calido', 'Cálido', 'Formas suaves y cercanas.'], ['audaz', 'Audaz', 'Contraste fuerte y títulos contundentes.'],
-];
-const marks: [string, string][] = [['circulo', 'Círculo'], ['cuadrado', 'Cuadrado'], ['ninguno', 'Solo nombre']];
-const themes: [string, string][] = [['claro', 'Claro'], ['oscuro', 'Oscuro']];
-const covers: [string, string][] = [['foto', 'Fotografía'], ['gradiente', 'Degradado']];
-const anims: [string, string][] = [['suave', 'Suaves'], ['dinamica', 'Dinámicas'], ['sin', 'Sin animación']];
-const secs: [string, string][] = [['servicios', 'Servicios'], ['proceso', 'Cómo trabajamos'], ['faq', 'Preguntas'], ['contacto', 'Contacto y ubicación']];
+const giros: [string, string][] = [['moda', 'Moda'], ['hogar', 'Hogar'], ['belleza', 'Belleza'], ['alimentos', 'Alimentos'], ['tecnologia', 'Tecnología']];
 
 const row = 'cfg-row block w-full rounded-[18px] bg-[#f5f5f7] px-5 py-4 text-left transition-[background-color,box-shadow] duration-200 hover:bg-[#ededf0] aria-pressed:bg-white aria-pressed:shadow-[0_0_0_2px_#0033FF,0_12px_30px_-18px_rgba(0,51,255,.55)]';
 const chip = 'rounded-full bg-[#f5f5f7] px-4 py-2.5 text-[13px] text-black/65 transition-colors hover:bg-[#ededf0] aria-pressed:bg-[#14161a] aria-pressed:text-white';
@@ -40,7 +29,7 @@ const idleImgs = ['/process/reel-1.webp', '/horizon/2.webp', '/process/reel-2.we
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Personaliza un sitio web para tu negocio con HumanCorp: elige diseño, colores, tipografía y textos, y míralo generarse." />
+    <meta name="description" content="Genera una propuesta de sitio web para tu negocio con HumanCorp: solo cuéntanos lo básico y mírala generarse." />
     <script is:inline>document.documentElement.classList.add('js')</script>
     <title>Personaliza tu sitio (beta) — HumanCorp</title>
   </head>
@@ -49,6 +38,8 @@ const idleImgs = ['/process/reel-1.webp', '/horizon/2.webp', '/process/reel-2.we
       <!-- Escenario -->
       <section data-stage class="relative overflow-hidden bg-white" aria-label="Vista previa de tu sitio">
         <a href="/" aria-label="Volver al inicio" class="absolute left-4 top-4 z-30 grid size-11 place-items-center rounded-full bg-white/80 text-[#14161a] shadow-[0_8px_24px_-12px_rgba(0,0,0,.5)] backdrop-blur-md transition-transform hover:scale-105 lg:left-7 lg:top-7"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a>
+
+        <span data-pill hidden class="absolute right-4 top-[78px] z-30 rounded-full bg-white/85 px-4 py-2 text-[12px] text-[#14161a] shadow-[0_8px_24px_-12px_rgba(0,0,0,.4)] backdrop-blur-md lg:right-7 lg:top-[84px]"></span>
 
         <!-- En espera: abanico de tarjetas -->
         <div data-idle class="@container absolute inset-0 overflow-hidden text-[#14161a] transition-[opacity,filter] duration-700" style="background:radial-gradient(75% 65% at 50% 40%,#ffffff,#eef0f6 80%)">
@@ -79,23 +70,32 @@ const idleImgs = ['/process/reel-1.webp', '/horizon/2.webp', '/process/reel-2.we
         <!-- Sitio generado -->
         <div data-site data-theme="claro" data-anim="suave" class="site cfg gen-hidden @container absolute inset-0 overflow-y-auto overflow-x-hidden [scrollbar-width:thin]" style="--a:#F6B370;--b:#2F3A9E;--ink:#14173f;--bg:#fdf6ee;--on:#14173f;--rad:6px;--hw:300;--sfont:'Inter Tight Variable',system-ui,sans-serif;--mx:0;--my:0;--spd:1;--par:1">
           <!-- Plantilla A: Paisaje -->
-          <section data-d="a" class="relative h-full min-h-[520px] overflow-hidden bg-[#0b1018] text-white">
+          <section data-d="a" class="relative h-full min-h-[560px] overflow-hidden bg-[#0b1018] text-white">
             <div class="absolute -inset-[5%]" style="translate:calc(var(--mx)*-14px*var(--par)) calc(var(--my)*-9px*var(--par))"><img src="/configurador/valle.webp" alt="" width="1200" height="675" decoding="async" class="kb size-full object-cover" /></div>
-            <i class="absolute inset-0 mix-blend-soft-light" style="opacity:.55;background:linear-gradient(160deg,var(--a),var(--b))"></i>
-            <i class="absolute inset-0 mix-blend-color" style="opacity:.22;background:linear-gradient(160deg,var(--b),var(--a))"></i>
-            <i class="pointer-events-none absolute inset-0" style="background:linear-gradient(to bottom,rgba(4,8,18,.6),rgba(4,8,18,.08) 42%,rgba(4,8,18,.18) 62%,rgba(4,8,18,.7))"></i>
+            <i class="absolute inset-0 mix-blend-soft-light" style="opacity:.5;background:linear-gradient(160deg,var(--a),var(--b))"></i>
+            <i class="absolute inset-0 mix-blend-color" style="opacity:.18;background:linear-gradient(160deg,var(--b),var(--a))"></i>
+            <i class="fog fog1"></i><i class="fog fog2"></i>
+            <i class="beam pointer-events-none absolute inset-0"></i>
+            <i class="pointer-events-none absolute inset-0" style="background:linear-gradient(to bottom,rgba(4,8,18,.62),rgba(4,8,18,.06) 40%,rgba(4,8,18,.14) 60%,rgba(4,8,18,.78))"></i>
+            <div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true"><i class="ff" style="left:3%;top:52%;--dl:-0.0s;--t:6s;--s:3px"></i><i class="ff" style="left:40%;top:75%;--dl:-0.9s;--t:7s;--s:4px"></i><i class="ff" style="left:77%;top:58%;--dl:-1.8s;--t:8s;--s:5px"></i><i class="ff" style="left:22%;top:81%;--dl:-2.7s;--t:9s;--s:3px"></i><i class="ff" style="left:59%;top:64%;--dl:-3.6s;--t:10s;--s:4px"></i><i class="ff" style="left:4%;top:87%;--dl:-4.5s;--t:6s;--s:5px"></i><i class="ff" style="left:41%;top:70%;--dl:-5.4s;--t:7s;--s:3px"></i><i class="ff" style="left:78%;top:53%;--dl:-6.3s;--t:8s;--s:4px"></i><i class="ff" style="left:23%;top:76%;--dl:-0.2s;--t:9s;--s:5px"></i><i class="ff" style="left:60%;top:59%;--dl:-1.1s;--t:10s;--s:3px"></i><i class="ff" style="left:5%;top:82%;--dl:-2.0s;--t:6s;--s:4px"></i><i class="ff" style="left:42%;top:65%;--dl:-2.9s;--t:7s;--s:5px"></i><i class="ff" style="left:79%;top:88%;--dl:-3.8s;--t:8s;--s:3px"></i><i class="ff" style="left:24%;top:71%;--dl:-4.7s;--t:9s;--s:4px"></i><i class="ff" style="left:61%;top:54%;--dl:-5.6s;--t:10s;--s:5px"></i><i class="ff" style="left:6%;top:77%;--dl:-6.5s;--t:6s;--s:3px"></i></div>
             <i class="grain pointer-events-none absolute inset-0 opacity-[.12]"></i>
 
             <nav class="rise absolute inset-x-0 top-0 flex items-center justify-between pl-[72px] pr-[clamp(16px,2.6cqw,40px)] pt-[22px] @4xl:pl-[clamp(80px,9cqw,120px)]" style="--d:.1s">
               <span class="flex items-center gap-3"><i data-markbox class="mark grid size-8 place-items-center bg-white/90 text-[14px] font-semibold not-italic text-[#14161a]">T</i><span data-name class="text-[clamp(14px,1.5cqw,19px)] font-extrabold uppercase tracking-[0.02em]">Tu empresa</span></span>
-              <div class="flex items-center gap-[clamp(14px,2.6cqw,34px)]"><span class="hidden items-center gap-[clamp(14px,2.6cqw,34px)] text-[clamp(11px,1.15cqw,14px)] @3xl:flex" data-nav></span><span data-navcta class="rounded-full bg-white px-5 py-2.5 text-[12.5px] font-medium text-[#14161a]">Contacto</span></div>
+              <div class="hidden items-center gap-1 rounded-full border border-white/25 bg-white/10 px-2 py-1.5 backdrop-blur-xl @3xl:flex" data-nav></div>
+              <span data-navcta class="rounded-full bg-white px-5 py-2.5 text-[12.5px] font-medium text-[#14161a]">Contacto</span>
             </nav>
 
-            <div class="absolute inset-x-0 top-[17%] flex flex-col items-center px-6 text-center">
+            <div class="absolute inset-x-0 top-[15%] flex flex-col items-center px-6 text-center">
+              <p class="rise mb-5 flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-[clamp(11px,1.15cqw,13.5px)] backdrop-blur-md" style="--d:.2s"><i class="size-1.5 rounded-full" style="background:var(--a)"></i><span data-eyebrow>Presencia profesional</span></p>
               <h1 data-ha class="max-w-[14ch] text-[clamp(2.1rem,7cqw,6.6rem)] font-extrabold uppercase leading-[.98] tracking-[-0.025em]" style="font-weight:min(calc(var(--hw) + 420),800)">Tu negocio, cercano</h1>
               <div class="rise mt-7 flex flex-wrap items-center justify-center gap-3" style="--d:.9s"><span data-cta class="btn !bg-white px-7 py-3.5 text-[14.5px] font-medium !text-[#14161a]">Contáctanos</span><span class="btn-o flex items-center gap-2 border border-white/50 px-6 py-3.5 text-[14.5px]"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M7 5v14l12-7z"/></svg><span data-cta3>Ver servicios</span></span></div>
             </div>
-            <p data-sub class="rise absolute inset-x-0 bottom-[clamp(22px,3cqw,40px)] mx-auto max-w-[34rem] px-6 text-center text-[clamp(12px,1.25cqw,15.5px)] leading-snug text-white/85" style="--d:1.1s">Presencia profesional para atraer clientes.</p>
+
+            <div class="rise absolute inset-x-0 bottom-[clamp(18px,2.6cqw,36px)] px-[clamp(16px,2.6cqw,40px)]" style="--d:1.2s">
+              <p data-sub class="mx-auto mb-4 max-w-[34rem] text-center text-[clamp(12px,1.2cqw,15px)] leading-snug text-white/85">Presencia profesional para atraer clientes.</p>
+              <div data-strip class="mx-auto grid max-w-[60rem] gap-px overflow-hidden rounded-[22px] border border-white/25 bg-white/20 backdrop-blur-xl @2xl:grid-cols-3"></div>
+            </div>
           </section>
 
           <!-- Plantilla B: Retrato -->
@@ -117,6 +117,66 @@ const idleImgs = ['/process/reel-1.webp', '/horizon/2.webp', '/process/reel-2.we
               <p data-sub2 class="rise absolute bottom-[clamp(26px,3.2cqw,44px)] right-[clamp(20px,2.6cqw,40px)] hidden max-w-[21rem] text-[clamp(12px,1.25cqw,15.5px)] leading-snug text-white/90 @3xl:block" style="--d:1.1s">Presencia profesional para atraer clientes.</p>
             </div>
           </section>
+
+          <!-- Plantilla C: Boutique (ecommerce) -->
+          <div data-d="c" hidden class="shop">
+            <div class="shop-bar"><div data-shop-marq class="shop-marq"></div></div>
+            <header class="shop-head">
+              <div class="shop-head-in">
+                <span class="shop-nav"><button type="button" data-shop-menu>Menú</button></span>
+                <span data-name class="shop-logo">Tu empresa</span>
+                <span class="shop-nav shop-r"><span>Buscar</span><span class="hidden @xl:inline">Cuenta</span><span>Cesta (<b data-cart>0</b>)</span></span>
+              </div>
+            </header>
+
+            <section data-hero="0" class="shop-hero0">
+              <div class="shop-pane" data-pane>
+                <p class="shop-eyebrow rise" style="--d:.2s" data-sh-eyebrow>Nueva colección</p>
+                <h1 class="shop-title" data-sh-title></h1>
+                <p class="shop-desc rise" style="--d:1s" data-sh-desc></p>
+                <a class="shop-cta rise" style="--d:1.1s" data-sh-cta>Ver colección <i aria-hidden="true">→</i></a>
+                <div class="shop-float" data-sh-float></div>
+              </div>
+              <div class="shop-photo"><img data-sh-img alt="" width="1200" height="800" decoding="async" /><i class="shop-tint"></i></div>
+            </section>
+
+            <section data-hero="1" hidden class="shop-hero1">
+              <div class="shop-photo full"><img data-sh-img alt="" width="1200" height="800" decoding="async" /><i class="shop-tint"></i></div>
+              <div class="shop-over">
+                <p class="shop-eyebrow rise" style="--d:.2s" data-sh-eyebrow>Nueva colección</p>
+                <h1 class="shop-title big" data-sh-title></h1>
+                <a class="shop-cta rise" style="--d:1.1s" data-sh-cta>Ver colección <i aria-hidden="true">→</i></a>
+              </div>
+            </section>
+
+            <section class="shop-sec">
+              <div class="shop-filters" data-filters></div>
+              <div class="shop-grid" data-grid></div>
+            </section>
+
+            <section class="shop-banner sr"><p data-sh-banner>Nuevo</p><div data-sh-banner-marq class="shop-marq big"></div></section>
+
+            <section class="shop-feat">
+              {[['Envíos a todo el país', 'Seguimiento de tu pedido en cada paso.'], ['Cambios y devoluciones', 'Tienes tiempo para decidir con calma.'], ['Pago seguro', 'Tarjeta, transferencia o a tu manera.']].map(([t, d], i) => <div class="sr" style={`--sd:${i * 0.12}s`}><span>0{i + 1}</span><h3>{t}</h3><p>{d}</p></div>)}
+            </section>
+
+            <section class="shop-news sr">
+              <h2 data-sh-news>Suscríbete</h2>
+              <p>Novedades y lanzamientos, sin spam.</p>
+              <div class="shop-input"><span>Tu correo electrónico</span><b>Suscribirme →</b></div>
+            </section>
+
+            <footer class="shop-foot">
+              <div class="shop-cols">
+                <div><h4>Ayuda</h4><span>Envíos</span><span>Devoluciones</span><span>Contacto</span></div>
+                <div><h4>Empresa</h4><span>Nosotros</span><span>Sucursales</span><span data-city>Mérida, Yucatán</span></div>
+                <div><h4>Síguenos</h4><span>Instagram</span><span>TikTok</span><span>WhatsApp</span></div>
+              </div>
+              <p class="shop-mega" data-name3>Tu empresa</p>
+              <p class="shop-note">Propuesta visual ilustrativa · HumanCorp</p>
+            </footer>
+            <i class="shop-toast" data-toast aria-live="polite">Añadido a la cesta</i>
+          </div>
 
           <div data-sec="servicios" class="sec marq overflow-hidden border-y py-5" style="border-color:color-mix(in srgb,currentColor 14%,transparent)"><div data-marquee class="marquee flex w-max items-center gap-10 whitespace-nowrap"></div></div>
 
@@ -156,7 +216,7 @@ const idleImgs = ['/process/reel-1.webp', '/horizon/2.webp', '/process/reel-2.we
             </div>
           </section>
 
-          <footer class="sec flex flex-wrap items-center justify-between gap-3 px-[clamp(20px,5cqw,72px)] py-7 text-[12.5px]"><span data-name3 class="uppercase tracking-[0.3em]" style="font-weight:var(--hw)">Tu empresa</span><span class="opacity-55">Propuesta visual ilustrativa · HumanCorp</span></footer>
+          <footer data-common class="sec flex flex-wrap items-center justify-between gap-3 px-[clamp(20px,5cqw,72px)] py-7 text-[12.5px]"><span data-name3 class="uppercase tracking-[0.3em]" style="font-weight:var(--hw)">Tu empresa</span><span class="opacity-55">Propuesta visual ilustrativa · HumanCorp</span></footer>
         </div>
       </section>
 
@@ -165,53 +225,40 @@ const idleImgs = ['/process/reel-1.webp', '/horizon/2.webp', '/process/reel-2.we
         <div data-scroller class="min-h-0 flex-1 overflow-y-auto px-6 pb-8 pt-6 lg:px-10 lg:pt-7">
           <div class="flex items-center justify-between text-[12px] text-black/45"><a href="/" class="tracking-wide"><span class="font-light">HUMAN</span> <span class="font-semibold">CORP</span></a><a href="/contacto" class="hover:text-black">Contacto</a></div>
           <h1 class="mt-8 flex items-center gap-3 font-goog text-[1.9rem] font-light uppercase tracking-[0.16em]">Tu sitio<span class="rounded-full bg-[#0033FF] px-3 py-1 font-sans text-[11px] font-medium tracking-[0.14em] text-white">Beta</span></h1>
-          <p class="mt-2 max-w-[24rem] text-[13px] leading-relaxed text-black/55">Es una versión beta: estamos probándola. Todo está listo: elige el diseño y personalízalo. Al terminar, generamos tu sitio como propuesta visual inicial, que afinamos juntos.</p>
+          <p class="mt-2 max-w-[24rem] text-[13px] leading-relaxed text-black/55">Es una versión beta: estamos probándola. Cuéntanos lo básico de tu negocio y generamos una propuesta visual inicial de tu sitio, que afinamos juntos.</p>
 
           <h2 class={h}>Tu negocio</h2>
           <label class="mt-4 block text-[12.5px] text-black/60">Nombre<input data-in-name maxlength="28" placeholder="Tu empresa" class={inp} /></label>
           <label class="mt-4 block text-[12.5px] text-black/60">Ciudad<input data-in-city maxlength="40" value="Mérida, Yucatán" placeholder="Mérida, Yucatán" class={inp} /></label>
-          <div class="mt-4 space-y-3">{types.map(([id, l, d], i) => <button type="button" data-type={id} aria-pressed={i === 0} class={row}><span class="cfg-t block text-[14.5px] text-black/65">{l}</span><span class="mt-1 block text-[11.5px] leading-snug text-black/40">{d}</span></button>)}</div>
+          <label class="mt-4 block text-[12.5px] text-black/60">¿Qué haces o vendes? <span class="text-black/35">(opcional)</span><input data-in-desc maxlength="70" placeholder="Ej. Cafetería de especialidad" class={inp} /></label>
 
-          <h2 class={h}>Diseño</h2>
-          <div class="mt-4 grid grid-cols-2 gap-3">{designs.map(([id, l, d], i) => <button type="button" data-design={id} aria-pressed={i === 0} class={`${row} !p-3`}><span class="relative block h-[84px] overflow-hidden rounded-[12px]" style={`background:url(/configurador/${id === 'a' ? 'valle' : 'retrato'}.webp) center/cover`}></span><span class="cfg-t mt-2.5 block text-[14px] text-black/65">{l}</span><span class="mt-0.5 block text-[11px] leading-snug text-black/40">{d}</span></button>)}</div>
+          <h2 class={h}>Tipo de negocio</h2>
+          <div class="mt-4 grid grid-cols-2 gap-2.5">{types.map(([id, l], i) => <button type="button" data-type={id} aria-pressed={i === 0} class={`${row} !px-4 !py-3.5`}><span class="cfg-t block text-[13.5px] leading-snug text-black/65">{l}</span></button>)}</div>
 
-          <h2 class={h}>Colores</h2>
-          <div class="mt-4 flex flex-wrap gap-5">{palettes.map(([id, l, a, b], i) => <button type="button" data-pal={id} aria-pressed={i === 0} class="group text-left"><span class="relative block size-11 rounded-full ring-1 ring-black/10 transition-shadow group-aria-pressed:ring-2 group-aria-pressed:ring-[#0033FF] group-aria-pressed:ring-offset-2" style={`background:linear-gradient(135deg,${a} 50%,${b} 50%)`}></span><span class="mt-2 block text-[11.5px] text-black/55 group-aria-pressed:text-black">{l}</span></button>)}</div>
-          <div class="mt-5 flex items-center gap-4 text-[12.5px] text-black/60"><label class="flex items-center gap-2.5">Principal<input data-ca type="color" value="#F6B370" class="size-9 cursor-pointer rounded-full border-0 bg-transparent p-0" /></label><label class="flex items-center gap-2.5">Secundario<input data-cb type="color" value="#2F3A9E" class="size-9 cursor-pointer rounded-full border-0 bg-transparent p-0" /></label></div>
+          <h2 class={h}>Tipo de sitio</h2>
+          <div class="mt-4 space-y-3">{sites.map(([id, l, d], i) => <button type="button" data-site-t={id} aria-pressed={i === 0} class={row}><span class="cfg-t block text-[14.5px] text-black/65">{l}</span><span class="mt-1 block text-[11.5px] leading-snug text-black/40">{d}</span></button>)}</div>
 
-          <h2 class={h}>Tipografía</h2>
-          <div class="mt-4 flex flex-wrap gap-2">{fonts.map(([id, l], i) => <button type="button" data-font={id} aria-pressed={i === 0} class={chip}>{l}</button>)}</div>
+          <div data-girobox hidden>
+            <h2 class={h}>¿Qué vendes?</h2>
+            <div class="mt-4 flex flex-wrap gap-2">{giros.map(([id, l], i) => <button type="button" data-giro={id} aria-pressed={i === 0} class={chip}>{l}</button>)}</div>
+          </div>
 
-          <h2 class={h}>Estilo</h2>
-          <div class="mt-4 space-y-3">{styles.map(([id, l, d], i) => <button type="button" data-sty={id} aria-pressed={i === 0} class={row}><span class="cfg-t block text-[14.5px] text-black/65">{l}</span><span class="mt-1 block text-[11.5px] leading-snug text-black/40">{d}</span></button>)}</div>
-          <p class="mt-5 text-[12.5px] text-black/55">Logotipo</p>
-          <div class="mt-2 flex flex-wrap gap-2">{marks.map(([id, l], i) => <button type="button" data-mark={id} aria-pressed={i === 0} class={chip}>{l}</button>)}</div>
-
-          <h2 class={h}>Fondo</h2>
-          <p class="mt-3 text-[12.5px] text-black/55">Tema de las secciones</p>
-          <div class="mt-2 flex flex-wrap gap-2">{themes.map(([id, l], i) => <button type="button" data-theme={id} aria-pressed={i === 0} class={chip}>{l}</button>)}</div>
-
-          <h2 class={h}>Textos</h2>
-          <label class="mt-4 block text-[12.5px] text-black/60">Titular <span class="text-black/35">(opcional)</span><input data-in-h maxlength="60" placeholder="Lo escribimos por ti" class={inp} /></label>
-          <label class="mt-4 block text-[12.5px] text-black/60">Texto del botón <span class="text-black/35">(opcional)</span><input data-in-cta maxlength="24" placeholder="Contáctanos" class={inp} /></label>
-
-          <h2 class={h}>Secciones</h2>
-          <div class="mt-4 flex flex-wrap gap-2">{secs.map(([id, l]) => <button type="button" data-sec-t={id} aria-pressed="true" class={chip}>{l}</button>)}</div>
-
-          <h2 class={h}>Animaciones</h2>
-          <div class="mt-4 flex flex-wrap gap-2">{anims.map(([id, l], i) => <button type="button" data-anim-t={id} aria-pressed={i === 0} class={chip}>{l}</button>)}</div>
-          <p class="mt-8 text-[11.5px] leading-relaxed text-black/40">No incluye precios. Con tu elección preparamos una propuesta por escrito, con alcance, entregables, tiempos e inversión.</p>
+          <p class="mt-9 rounded-2xl bg-[#f5f5f7] px-5 py-4 text-[12px] leading-relaxed text-black/55">Con estos datos armamos una propuesta distinta cada vez: el diseño, los colores y la tipografía se eligen solos. Si no te convence, pide otra.</p>
+          <p class="mt-6 text-[11.5px] leading-relaxed text-black/40">No incluye precios. Con tu propuesta preparamos una cotización por escrito, con alcance, entregables, tiempos e inversión.</p>
         </div>
 
         <div class="bg-white px-6 py-4 shadow-[0_-12px_30px_-26px_rgba(0,0,0,.35)] lg:px-10 lg:py-5">
           <button type="button" data-generate class="gen-btn w-full rounded-full px-7 py-4 text-[15px] font-medium text-white transition-transform hover:scale-[1.01] active:scale-[0.98] disabled:opacity-60">Generar mi sitio</button>
-          <a data-send hidden href="/contacto" class="block w-full rounded-full bg-[#14161a] px-7 py-4 text-center text-[15px] font-medium text-white transition-transform hover:scale-[1.01]">Enviar mi configuración</a>
+          <div data-after hidden class="flex gap-3">
+            <button type="button" data-reroll class="flex items-center justify-center gap-2 rounded-full bg-[#f5f5f7] px-6 py-4 text-[14.5px] font-medium text-[#14161a] transition-colors hover:bg-[#ebebef]"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h4l10 8h4M3 16h4l3-2.4M14 9.6L17 8h4M18 5l3 3-3 3M18 13l3 3-3 3"/></svg>Otra propuesta</button>
+            <a data-send href="/contacto" class="flex-1 rounded-full bg-[#14161a] px-6 py-4 text-center text-[14.5px] font-medium text-white transition-transform hover:scale-[1.01]">Enviar mi configuración</a>
+          </div>
         </div>
       </aside>
     </div>
 
     <Cursor />
-    <script define:vars={{ types, designs, palettes, fonts, styles, marks, themes, covers, anims }}>
+    <script define:vars={{ types, sites, giros }}>
       const $ = (s) => document.querySelector(s);
       const $$ = (s) => [...document.querySelectorAll(s)];
       const site = $('[data-site]');
@@ -219,6 +266,8 @@ const idleImgs = ['/process/reel-1.webp', '/horizon/2.webp', '/process/reel-2.we
       const label = (list, id) => (list.find((x) => x[0] === id) || [])[1];
       const set = (sel, t) => $$(sel).forEach((el) => (el.textContent = t));
       const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+      /* ---------- Abanico en espera ---------- */
 
       /* ---------- Abanico en espera ---------- */
       const cards = $$('[data-card]');
@@ -233,6 +282,7 @@ const idleImgs = ['/process/reel-1.webp', '/horizon/2.webp', '/process/reel-2.we
       const fanTimer = reduced ? 0 : setInterval(() => { pos0 = (pos0 + 1) % cards.length; layoutFan(); }, 2600);
       $('[data-focus-name]').addEventListener('click', () => { $('[data-in-name]').focus(); });
 
+
       /* ---------- Datos ---------- */
       const COPY = {
         pequena: { eyebrow: 'Presencia profesional', pre: 'Tu negocio,', words: ['cercano', 'profesional', 'confiable'], h: 'Lo que haces bien, a la vista de todos.', sub: 'Un negocio local con la imagen que merece.', c1: 'Contáctanos', c2: 'Ver servicios', nav: ['Inicio', 'Servicios', 'Nosotros', 'Ubicación'], h2: 'Hecho con cuidado, pensado para ti.', sv: [['Atención cercana', 'Te escuchamos y resolvemos con calma.'], ['Calidad constante', 'Cuidamos cada detalle de lo que hacemos.'], ['Siempre disponibles', 'Te respondemos rápido y con claridad.']], faq: [['¿Dónde están?', 'Estamos en {city}. Escríbenos y te damos la ubicación exacta.'], ['¿Cómo puedo contactarlos?', 'Por el formulario de esta página, por correo o por teléfono.'], ['¿Cuánto tardan en responder?', 'Normalmente en el mismo día hábil.']] },
@@ -242,31 +292,21 @@ const idleImgs = ['/process/reel-1.webp', '/horizon/2.webp', '/process/reel-2.we
         profesional: { eyebrow: 'Servicios profesionales', pre: 'Servicios con', words: ['confianza', 'branding', 'marketing'], h: 'Confianza que se nota desde el primer contacto.', sub: 'Servicios claros y cotizaciones rápidas.', c1: 'Solicitar cotización', c2: 'Ver servicios', nav: ['Inicio', 'Servicios', 'Equipo', 'Clientes'], h2: 'Experiencia al servicio de tu empresa.', sv: [['Asesoría a tu medida', 'Entendemos tu caso antes de proponer.'], ['Cotización clara', 'Alcance, tiempos e inversión por escrito.'], ['Acompañamiento', 'Seguimos contigo después de la entrega.']], faq: [['¿Cómo solicito una cotización?', 'Desde el formulario; te respondemos con una propuesta.'], ['¿Atienden presencial?', 'Sí, en {city}, y también a distancia.'], ['¿Qué incluye el servicio?', 'Se define por escrito antes de empezar.']] },
         ecommerce: { eyebrow: 'Tienda en línea', pre: 'Tu tienda en línea,', words: ['ventas', 'marketing', 'branding'], h: 'Compra fácil, recibe a tiempo.', sub: 'Compras, pagos y envíos sin fricción.', c1: 'Comprar ahora', c2: 'Ver novedades', nav: ['Inicio', 'Novedades', 'Ofertas', 'Mi cuenta'], h2: 'Una experiencia de compra sin vueltas.', sv: [['Pago sencillo', 'Elige cómo pagar, de forma clara.'], ['Envíos con seguimiento', 'Sabes dónde está tu pedido.'], ['Atención posventa', 'Te ayudamos con cambios y dudas.']], faq: [['¿Cuánto tarda mi pedido?', 'Depende de tu zona; lo ves antes de pagar.'], ['¿Puedo cambiar un producto?', 'Sí, dentro del plazo indicado.'], ['¿Dónde operan?', 'Desde {city}, con envíos a todo el país.']] },
       };
-      const PAL = { atardecer: ['#F6B370', '#2F3A9E'], oceano: ['#0033FF', '#977DFF'], bosque: ['#10b981', '#064e5a'], grafito: ['#14173f', '#8f8aa6'] };
+      const PALS = {
+        atardecer: { a: '#F6B370', b: '#2F3A9E', ink: '#14173f', bg: '#fdf6ee' },
+        oceano: { a: '#0033FF', b: '#977DFF', ink: '#0b0c2b', bg: '#f3f5ff' },
+        bosque: { a: '#10b981', b: '#064e5a', ink: '#06251f', bg: '#f1faf6' },
+        grafito: { a: '#14173f', b: '#8f8aa6', ink: '#0b0b0c', bg: '#f6f5f2' },
+        terracota: { a: '#e4572e', b: '#5b2333', ink: '#2a1018', bg: '#fbf3ee' },
+        arena: { a: '#c8a97e', b: '#3d3a35', ink: '#1d1b18', bg: '#f7f3ec' },
+      };
       const STY = { minimal: ['6px', '340'], calido: ['16px', '480'], audaz: ['0px', '700'] };
       const FONT = { moderna: "'Inter Tight Variable',system-ui,sans-serif", geometrica: "'Google Sans Flex Variable','Google Sans',system-ui,sans-serif", editorial: "'Fraunces Variable',Georgia,serif" };
       const lum = (hex) => { const n = parseInt(hex.slice(1), 16); const [r, g, b] = [n >> 16, (n >> 8) & 255, n & 255].map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }); return 0.2126 * r + 0.7152 * g + 0.0722 * b; };
 
-      const S = { name: '', city: 'Mérida, Yucatán', type: 'pequena', design: 'a', pal: 'atardecer', ca: null, cb: null, font: 'moderna', sty: 'minimal', mark: 'ninguno', theme: 'claro', cover: 'foto', h: '', cta: '', secs: new Set(['servicios', 'proceso', 'faq', 'contacto']), anim: 'suave' };
-      let G = null, phase = 'idle', dirty = false, token = 0, themeTouched = false, markTouched = false;
-
-      const renderPanel = () => {
-        const mp = (attr, key) => $$(`[data-${attr}]`).forEach((x) => x.setAttribute('aria-pressed', String(x.dataset[key] === S[attr])));
-        mp('type', 'type'); mp('design', 'design'); mp('pal', 'pal'); mp('font', 'font'); mp('sty', 'sty'); mp('mark', 'mark'); mp('theme', 'theme');
-        $$('[data-anim-t]').forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.animT === S.anim)));
-        $$('[data-sec-t]').forEach((x) => x.setAttribute('aria-pressed', String(S.secs.has(x.dataset.secT))));
-        const nm = S.name.trim() || 'Tu empresa';
-        const [a, b] = [S.ca || PAL[S.pal][0], S.cb || PAL[S.pal][1]];
-        const text = `Hola, personalicé mi sitio en el configurador de HumanCorp:\n- Empresa: ${nm} (${S.city})\n- Tipo de negocio: ${label(types, S.type)}\n- Diseño: ${label(designs, S.design)}\n- Colores: ${S.ca || S.cb ? 'personalizados ' + a + ' / ' + b : label(palettes, S.pal)}\n- Tipografía: ${label(fonts, S.font)} · Estilo: ${label(styles, S.sty)}\n- Tema: ${label(themes, S.theme)} · Animaciones: ${label(anims, S.anim)}\n- Secciones: ${[...S.secs].join(', ') || 'ninguna'}\n${S.h ? '- Titular: ' + S.h + '\n' : ''}Me gustaría recibir una propuesta.`;
-        $('[data-send]').href = `/contacto?interes=${encodeURIComponent('Sitio web')}&mensaje=${encodeURIComponent(text)}`;
-        const gen = $('[data-generate]'), send = $('[data-send]');
-        const done = phase === 'done';
-        gen.hidden = done && !dirty; send.hidden = !(done && !dirty);
-        gen.textContent = done ? 'Volver a generar' : 'Generar mi sitio';
-        gen.disabled = phase === 'loading';
-      };
-
-      /* ---------- Burbujas ---------- */
+      const PAL_NAME = { atardecer: 'Atardecer', oceano: 'Océano', bosque: 'Bosque', grafito: 'Grafito', terracota: 'Terracota', arena: 'Arena' };
+      const TPL_NAME = { a: 'Paisaje', b: 'Retrato', c: 'Boutique' };
+      const SITE_NAME = { landing: 'Landing', corporativo: 'Sitio corporativo', ecommerce: 'Ecommerce' };
       const IC = { store: 'M4 9l1.5-5h13L20 9M4 9v11h16V9M4 9h16M9 20v-6h6v6', heart: 'M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.6-7 10-7 10z', star: 'M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z', pin: 'M12 21s7-6 7-11a7 7 0 0 0-14 0c0 5 7 11 7 11zM12 12a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z', chart: 'M4 20V9M10 20V4M16 20v-8M22 20H2', arrow: 'M5 19L19 5M9 5h10v10', layers: 'M12 3l9 5-9 5-9-5 9-5zM3 13l9 5 9-5M3 17l9 5 9-5', building: 'M4 21V5l8-2v18M12 8l8 2v11M8 9h1M8 13h1M8 17h1M16 14h1M16 18h1', shield: 'M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3zM9 12l2 2 4-4', globe: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18', db: 'M12 8c4.4 0 8-1.3 8-3s-3.6-3-8-3-8 1.3-8 3 3.6 3 8 3zM4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3', bag: 'M6 8h12l1 12H5L6 8zM9 8V6a3 3 0 0 1 6 0v2', tag: 'M3 12V4h8l10 10-8 8L3 12zM7.5 8.5h.01', truck: 'M2 6h11v10H2zM13 9h5l3 3v4h-8M6 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM17 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4z', briefcase: 'M3 8h18v12H3zM9 8V5h6v3M3 13h18', doc: 'M6 3h9l4 4v14H6zM14 3v5h5M9 13h6M9 17h6', chat: 'M4 5h16v11H9l-5 4V5z', check: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM8 12l3 3 5-6', cart: 'M3 4h2l2.5 11h10l2-8H7M10 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2zM17 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2z', card: 'M3 6h18v12H3zM3 10h18M7 15h4', box: 'M3 7l9-4 9 4v10l-9 4-9-4V7zM3 7l9 4 9-4M12 11v10' };
       const SETS = { pequena: ['store', 'heart', 'star', 'pin'], crecimiento: ['chart', 'layers', 'arrow', 'check'], consolidada: ['building', 'shield', 'globe', 'db'], comercio: ['bag', 'tag', 'truck', 'store'], profesional: ['briefcase', 'doc', 'chat', 'check'], ecommerce: ['cart', 'card', 'box', 'truck'] };
       const icon = (n, cls = '') => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="${cls}" aria-hidden="true"><path d="${IC[n]}"/></svg>`;
@@ -277,54 +317,6 @@ const idleImgs = ['/process/reel-1.webp', '/horizon/2.webp', '/process/reel-2.we
         $('[data-bubbles]').innerHTML = BUB.filter((b) => b[0] >= 70 && b[1] >= 40 && b[1] <= 70).map(([x, y, s, d, k, ic], i) => `<div class="bub" style="--x:${x}%;--y:${y}%;--s:${s};--d:${d};--k:${i}"><i class="orb orb-${k}" style="--t:${5 + (i % 5)}s;--dl:-${(i * 0.7).toFixed(1)}s">${k === 'r' ? '' : icon(set[ic % 4], 'orb-ic')}</i></div>`).join('');
       };
       // ---------- Aurora (WebGL): fondo animado con los colores del usuario ----------
-      const hex3 = (h) => { const n = parseInt(h.slice(1), 16); return [(n >> 16) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255]; };
-      const AU = { gl: null, u: {}, cols: [[0.6, 0.4, 0.9], [0.1, 0.2, 1]], on: false, mx: 0.5, my: 0.5 };
-      const auroraInit = () => {
-        const cv = $('[data-aurora]');
-        if (!cv) return;
-        try {
-          const gl = cv.getContext('webgl', { antialias: false, alpha: false });
-          if (!gl) return;
-          const vs = 'attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
-          const fs = `precision mediump float;uniform vec2 res;uniform float t;uniform vec3 ca;uniform vec3 cb;uniform vec2 m;
-void main(){vec2 uv=gl_FragCoord.xy/res;float asp=res.x/res.y;vec2 p=vec2(uv.x*asp,uv.y);float tt=t*.12;
-vec3 col=mix(cb*.34,cb*.82,smoothstep(0.,1.,uv.y*.7+.22+.14*sin(uv.x*2.6+tt*1.4)));
-vec2 c1=vec2(asp*(.22+.14*sin(tt)),.78+.1*cos(tt*1.3));
-vec2 c2=vec2(asp*(.82+.1*cos(tt*.8)),.22+.12*sin(tt*1.1));
-vec2 c3=vec2(asp*(.5+.25*sin(tt*.6)),.5+.2*cos(tt*.7));
-vec2 c4=vec2(asp*m.x,m.y);
-col+=ca*.55*exp(-3.2*dot(p-c1,p-c1));
-col+=ca*.5*exp(-4.5*dot(p-c2,p-c2));
-col+=mix(cb,vec3(1.),.3)*.2*exp(-5.*dot(p-c3,p-c3));
-col+=vec3(1.)*.14*exp(-12.*dot(p-c4,p-c4));
-col=mix(col,vec3(dot(col,vec3(.33))),.08);
-gl_FragColor=vec4(col,1.);}`;
-          const sh = (t, src) => { const o = gl.createShader(t); gl.shaderSource(o, src); gl.compileShader(o); return o; };
-          const pr = gl.createProgram(); gl.attachShader(pr, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(pr, sh(gl.FRAGMENT_SHADER, fs)); gl.linkProgram(pr);
-          if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) return;
-          gl.useProgram(pr);
-          const b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
-          const loc = gl.getAttribLocation(pr, 'p'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-          AU.gl = gl; AU.u = { res: gl.getUniformLocation(pr, 'res'), t: gl.getUniformLocation(pr, 't'), ca: gl.getUniformLocation(pr, 'ca'), cb: gl.getUniformLocation(pr, 'cb'), m: gl.getUniformLocation(pr, 'm') };
-        } catch { AU.gl = null; }
-      };
-      auroraInit();
-      const auroraFrame = (now) => {
-        requestAnimationFrame(auroraFrame);
-        if (!AU.on || !AU.gl || document.hidden) return;
-        const cv = $('[data-aurora]');
-        if (!cv) return;
-        if (site.scrollTop > site.clientHeight) return;
-        const w = Math.max(2, Math.round(cv.clientWidth * 0.5)), h = Math.max(2, Math.round(cv.clientHeight * 0.5));
-        if (cv.width !== w || cv.height !== h) { cv.width = w; cv.height = h; AU.gl.viewport(0, 0, w, h); }
-        const gl = AU.gl;
-        gl.uniform2f(AU.u.res, w, h); gl.uniform1f(AU.u.t, reduced || G?.anim === 'sin' ? 12 : now / 1000);
-        gl.uniform3fv(AU.u.ca, AU.cols[0]); gl.uniform3fv(AU.u.cb, AU.cols[1]);
-        const mx = parseFloat(site.style.getPropertyValue('--mx')) || 0, my = parseFloat(site.style.getPropertyValue('--my')) || 0;
-        gl.uniform2f(AU.u.m, 0.5 + mx, 0.5 - my);
-        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-      };
-      requestAnimationFrame(auroraFrame);
       const STAR = '<svg viewBox="0 0 40 40" class="rot-star" aria-hidden="true"><g fill="var(--a)">' + [0, 1, 2, 3, 4, 5, 6, 7].map((i) => `<rect x="17.2" y="1" width="5.6" height="15" rx="2.8" transform="rotate(${i * 45} 20 20)"/>`).join('') + '</g></svg>';
       let rotTimer = 0;
       const stopRot = () => { clearInterval(rotTimer); rotTimer = 0; };
@@ -347,42 +339,147 @@ gl_FragColor=vec4(col,1.);}`;
       };
 
 
+      /* ---------- Aleatoriedad a partir de los datos ---------- */
+      const hash = (str) => { let h = 2166136261; for (const ch of str) { h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619); } return h >>> 0; };
+      const rng = (seed) => () => { seed = (seed + 0x6D2B79F5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+      const pick = (r, arr) => arr[Math.floor(r() * arr.length)];
+
+      const S = { name: '', city: 'Mérida, Yucatán', desc: '', type: 'pequena', site: 'landing', giro: 'moda' };
+      let G = null, phase = 'idle', dirty = false, token = 0, roll = 0, last = null;
+
+      const compose = () => {
+        const r = rng(hash([S.name, S.city, S.desc, S.type, S.site, S.giro, roll].join('|')));
+        const keys = Object.keys(PALS);
+        let pal = pick(r, keys);
+        if (last && pal === last.pal) pal = keys[(keys.indexOf(pal) + 1 + Math.floor(r() * 4)) % keys.length];
+        const o = { pal, font: pick(r, ['moderna', 'geometrica', 'editorial']), sty: pick(r, ['minimal', 'calido', 'audaz']), mark: pick(r, ['circulo', 'cuadrado', 'ninguno']), anim: 'suave' };
+        if (S.site === 'ecommerce') {
+          o.tpl = 'c'; o.hero = last && last.tpl === 'c' && r() < 0.8 ? 1 - last.hero : pick(r, [0, 1]);
+          o.theme = r() < 0.3 ? 'oscuro' : 'claro'; o.font = pick(r, ['moderna', 'geometrica']); o.sty = pick(r, ['minimal', 'minimal', 'calido']);
+        } else {
+          o.tpl = pick(r, ['a', 'b']);
+          if (last && last.tpl === o.tpl && r() < 0.75) o.tpl = o.tpl === 'a' ? 'b' : 'a';
+          o.theme = o.tpl === 'b' ? 'oscuro' : 'claro';
+        }
+        o.secs = S.site === 'landing' ? ['servicios', 'contacto'] : ['servicios', 'proceso', 'faq', 'contacto'];
+        return o;
+      };
+
+      /* ---------- Plantilla Boutique: productos ilustrados ---------- */
+      const SH = {
+        tee: (c) => `<path d="M62 46 L88 34 Q100 52 112 34 L138 46 L172 82 L150 104 L140 94 V212 H60 V94 L50 104 L28 82Z" fill="${c}"/><path d="M88 34 Q100 52 112 34" fill="none" stroke="rgba(0,0,0,.18)" stroke-width="3"/>`,
+        coat: (c) => `<path d="M60 40 L90 30 L100 56 L110 30 L140 40 L176 90 L156 220 H44 L24 90Z" fill="${c}"/><path d="M100 56 V220M84 30 L100 56 L116 30" stroke="rgba(0,0,0,.2)" stroke-width="2.5" fill="none"/><circle cx="108" cy="110" r="3" fill="rgba(0,0,0,.3)"/><circle cx="108" cy="140" r="3" fill="rgba(0,0,0,.3)"/>`,
+        bag: (c) => `<path d="M72 92 V74 a28 28 0 0 1 56 0 V92" fill="none" stroke="${c}" stroke-width="7" stroke-linecap="round"/><path d="M48 92 H152 L162 220 H38Z" fill="${c}"/><path d="M48 92 H152 L154 112 H46Z" fill="rgba(0,0,0,.1)"/>`,
+        cap: (c) => `<path d="M44 150 Q44 78 100 78 Q156 78 156 150Z" fill="${c}"/><path d="M118 150 H188 Q188 168 118 166Z" fill="rgba(0,0,0,.22)"/><path d="M44 150 H156" stroke="rgba(0,0,0,.15)" stroke-width="3"/><circle cx="100" cy="78" r="4" fill="rgba(0,0,0,.25)"/>`,
+        shoe: (c) => `<path d="M22 168 Q22 118 62 108 L88 134 L120 122 Q176 120 186 168 V188 H22Z" fill="${c}"/><path d="M22 176 H186 V190 Q186 196 180 196 H28 Q22 196 22 190Z" fill="rgba(255,255,255,.88)"/><path d="M92 134 L104 148 M104 128 L116 142" stroke="rgba(0,0,0,.2)" stroke-width="3" stroke-linecap="round"/>`,
+        bottle: (c) => `<rect x="86" y="26" width="28" height="24" rx="5" fill="rgba(0,0,0,.35)"/><path d="M88 50 H112 V70 Q138 86 138 116 V204 Q138 218 124 218 H76 Q62 218 62 204 V116 Q62 86 88 70Z" fill="${c}"/><rect x="76" y="124" width="48" height="52" rx="4" fill="rgba(255,255,255,.78)"/>`,
+        jar: (c) => `<rect x="64" y="52" width="72" height="26" rx="6" fill="rgba(0,0,0,.35)"/><rect x="56" y="78" width="88" height="130" rx="14" fill="${c}"/><rect x="70" y="112" width="60" height="50" rx="4" fill="rgba(255,255,255,.78)"/>`,
+        box: (c) => `<path d="M100 40 L172 76 V160 L100 196 L28 160 V76Z" fill="${c}"/><path d="M100 40 L172 76 L100 112 L28 76Z" fill="rgba(255,255,255,.28)"/><path d="M100 112 V196 L28 160 V76Z" fill="rgba(0,0,0,.12)"/>`,
+        mug: (c) => `<path d="M56 80 H138 V176 Q138 204 110 204 H84 Q56 204 56 176Z" fill="${c}"/><path d="M138 100 H152 Q172 100 172 126 Q172 152 152 152 H138" fill="none" stroke="${c}" stroke-width="12"/><ellipse cx="97" cy="80" rx="41" ry="7" fill="rgba(0,0,0,.25)"/>`,
+        lamp: (c) => `<path d="M64 58 H136 L156 116 H44Z" fill="${c}"/><rect x="96" y="116" width="8" height="82" fill="rgba(0,0,0,.4)"/><ellipse cx="100" cy="204" rx="38" ry="8" fill="rgba(0,0,0,.4)"/><path d="M64 58 H136 L140 70 H60Z" fill="rgba(255,255,255,.3)"/>`,
+        vase: (c) => `<path d="M84 40 H116 V70 Q150 100 150 140 Q150 206 124 212 H76 Q50 206 50 140 Q50 100 84 70Z" fill="${c}"/><path d="M84 40 H116" stroke="rgba(0,0,0,.2)" stroke-width="4"/>`,
+        watch: (c) => `<rect x="78" y="22" width="44" height="60" rx="8" fill="rgba(0,0,0,.35)"/><rect x="78" y="158" width="44" height="60" rx="8" fill="rgba(0,0,0,.35)"/><circle cx="100" cy="120" r="46" fill="${c}"/><circle cx="100" cy="120" r="36" fill="rgba(255,255,255,.92)"/><path d="M100 120 V96 M100 120 L118 130" stroke="rgba(0,0,0,.7)" stroke-width="4" stroke-linecap="round"/>`,
+        phones: (c) => `<path d="M48 140 V116 a52 52 0 0 1 104 0 V140" fill="none" stroke="${c}" stroke-width="10" stroke-linecap="round"/><rect x="36" y="130" width="30" height="62" rx="14" fill="${c}"/><rect x="134" y="130" width="30" height="62" rx="14" fill="${c}"/><rect x="36" y="130" width="12" height="62" rx="6" fill="rgba(255,255,255,.25)"/>`,
+      };
+      const prod = (shape, color, cls = '') => `<svg viewBox="0 0 200 240" class="${cls}" style="color:${color}" aria-hidden="true"><ellipse cx="100" cy="226" rx="62" ry="7" fill="rgba(0,0,0,.1)"/>${SH[shape]('currentColor')}</svg>`;
+      const SHOP = {
+        moda: { eyebrow: 'Nueva colección', t: ['Esenciales', 'de temporada'], banner: 'Nuevo', cats: ['Camisetas', 'Accesorios', 'Calzado'], items: [['Camiseta básica', 'tee', 0, 590], ['Abrigo estructurado', 'coat', 0, 2490], ['Bolso tote', 'bag', 1, 1290], ['Gorra clásica', 'cap', 1, 450], ['Tenis urbano', 'shoe', 2, 1890], ['Camiseta oversize', 'tee', 0, 690], ['Bolso mini', 'bag', 1, 990], ['Tenis blanco', 'shoe', 2, 1690]] },
+        hogar: { eyebrow: 'Colección hogar', t: ['Objetos', 'para vivir'], banner: 'Hogar', cats: ['Decoración', 'Iluminación', 'Mesa'], items: [['Jarrón escultórico', 'vase', 0, 890], ['Lámpara de mesa', 'lamp', 1, 1590], ['Taza artesanal', 'mug', 2, 290], ['Caja organizadora', 'box', 0, 490], ['Vela aromática', 'jar', 0, 390], ['Jarrón alto', 'vase', 0, 1190], ['Lámpara de pie', 'lamp', 1, 2390], ['Set de tazas', 'mug', 2, 790]] },
+        belleza: { eyebrow: 'Cuidado diario', t: ['Rutinas', 'simples'], banner: 'Belleza', cats: ['Rostro', 'Cuerpo', 'Regalos'], items: [['Sérum hidratante', 'bottle', 0, 690], ['Crema nutritiva', 'jar', 0, 590], ['Eau de parfum', 'bottle', 2, 1290], ['Bálsamo corporal', 'jar', 1, 390], ['Limpiador suave', 'bottle', 0, 420], ['Mascarilla', 'jar', 0, 480], ['Aceite corporal', 'bottle', 1, 540], ['Kit de regalo', 'box', 2, 1490]] },
+        alimentos: { eyebrow: 'De temporada', t: ['Sabores', 'con origen'], banner: 'Temporada', cats: ['Despensa', 'Bebidas', 'Regalos'], items: [['Mermelada artesanal', 'jar', 0, 120], ['Aceite de oliva', 'bottle', 0, 290], ['Caja de regalo', 'box', 2, 690], ['Café de altura', 'bag', 1, 240], ['Miel de la región', 'jar', 0, 160], ['Vinagre balsámico', 'bottle', 0, 210], ['Taza de barro', 'mug', 1, 180], ['Caja degustación', 'box', 2, 890]] },
+        tecnologia: { eyebrow: 'Lo nuevo', t: ['Tecnología', 'a tu ritmo'], banner: 'Nuevo', cats: ['Audio', 'Wearables', 'Accesorios'], items: [['Audífonos inalámbricos', 'phones', 0, 1990], ['Reloj inteligente', 'watch', 1, 2990], ['Bocina portátil', 'box', 0, 990], ['Termo inteligente', 'bottle', 2, 690], ['Audífonos pro', 'phones', 0, 3490], ['Reloj deportivo', 'watch', 1, 1890], ['Mochila urbana', 'bag', 2, 1290], ['Cargador rápido', 'box', 2, 490]] },
+      };
+      const money = (n) => '$' + n.toLocaleString('es-MX');
+      let cartN = 0, toastT = 0;
+      const drawShop = (nm) => {
+        const D = SHOP[G.giro];
+        const photo = G.giro === 'moda' || G.giro === 'belleza' ? ['/configurador/retrato.webp', '55% 22%'] : ['/configurador/valle.webp', '50% 60%'];
+        $$('[data-sh-img]').forEach((im) => { im.src = photo[0]; im.style.objectPosition = photo[1]; });
+        $$('[data-hero]').forEach((h) => (h.hidden = +h.dataset.hero !== G.hero));
+        set('[data-sh-eyebrow]', S.desc.trim() || D.eyebrow);
+        $$('[data-sh-title]').forEach((el) => { el.innerHTML = D.t.map((w, i) => `<span class="ww"><span class="wi" style="--i:${i}">${esc(w)}</span></span>`).join('<br />'); });
+        set('[data-sh-desc]', `${nm}: piezas pensadas para durar, con envío a todo el país.`);
+        $('[data-sh-float]').innerHTML = prod(D.items[0][1], 'var(--a)');
+        const mq = [`Envío gratis desde ${money(999)}`, 'Cambios y devoluciones', 'Pago seguro', D.eyebrow];
+        $('[data-shop-marq]').innerHTML = mq.concat(mq).concat(mq).map((t) => `<span>${esc(t)}</span><i></i>`).join('');
+        $('[data-sh-banner]').textContent = D.banner;
+        $('[data-sh-banner-marq]').innerHTML = [...D.cats, ...D.t].concat([...D.cats, ...D.t]).map((t) => `<span>${esc(t)}</span><i></i>`).join('');
+        set('[data-sh-news]', `Entra al mundo de ${nm}`);
+        $('[data-filters]').innerHTML = ['Todo', ...D.cats].map((c, i) => `<button type="button" data-filter="${i - 1}" aria-pressed="${i === 0}">${esc(c)}</button>`).join('');
+        const iv = G.theme === 'oscuro' ? '#ebe8e1' : 'var(--ink)';
+        const cols = [iv, 'var(--a)', 'var(--b)', '#cfc8ba', '#f4f3ef', '#8a8f98', 'var(--a)', iv];
+        const alt = ['var(--a)', iv, iv, 'var(--b)', 'var(--b)', 'var(--a)', 'var(--b)', '#cfc8ba'];
+        $('[data-grid]').innerHTML = D.items.map(([n, sh, cat, pr], i) => `<article class="prod sr" data-cat="${cat}" style="--sd:${(i % 4) * 0.08}s"><div class="pimg t${i % 4}"><div class="pv pv1">${prod(sh, cols[i % 8])}</div><div class="pv pv2">${prod(sh, alt[i % 8])}</div>${i === 1 || i === 5 ? '<span class="ptag">Nuevo</span>' : ''}<button type="button" class="pfav" aria-label="Favorito">♡</button><button type="button" class="padd" data-add>Añadir +</button></div><div class="pmeta"><span>${esc(n)}</span><b>${money(pr)}</b></div></article>`).join('');
+      };
+      $('[data-site]').addEventListener('click', (e) => {
+        const f = e.target.closest?.('[data-filter]');
+        if (f) {
+          $$('[data-filter]').forEach((x) => x.setAttribute('aria-pressed', String(x === f)));
+          const c = f.dataset.filter;
+          $$('.prod').forEach((el, i) => { const ok = c === '-1' || el.dataset.cat === c; el.hidden = !ok; if (ok) { el.classList.remove('prod-in'); void el.offsetWidth; el.style.setProperty('--pd', `${(i % 4) * 0.06}s`); el.classList.add('prod-in'); } });
+          return;
+        }
+        if (e.target.closest?.('[data-add]')) {
+          cartN++; set('[data-cart]', String(cartN));
+          const cb = $('[data-cart]'); cb.classList.remove('bump'); void cb.offsetWidth; cb.classList.add('bump');
+          const t = $('[data-toast]'); t.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('on'), 1600);
+        }
+      });
+      site.addEventListener('scroll', () => site.classList.toggle('scrolled', site.scrollTop > 60), { passive: true });
+
+      /* ---------- Panel ---------- */
+      const renderPanel = () => {
+        const mp = (attr, key, val) => $$(`[data-${attr}]`).forEach((x) => x.setAttribute('aria-pressed', String(x.dataset[key] === val)));
+        mp('type', 'type', S.type); mp('site-t', 'siteT', S.site); mp('giro', 'giro', S.giro);
+        $('[data-girobox]').hidden = S.site !== 'ecommerce';
+        const nm = S.name.trim() || 'Tu empresa';
+        const text = `Hola, generé una propuesta en el configurador de HumanCorp (beta):\n- Negocio: ${nm} (${S.city})\n${S.desc.trim() ? '- Qué hace: ' + S.desc.trim() + '\n' : ''}- Tipo de negocio: ${label(types, S.type)}\n- Tipo de sitio: ${SITE_NAME[S.site]}${S.site === 'ecommerce' ? ' · ' + label(giros, S.giro) : ''}\n${G ? '- Propuesta: plantilla ' + TPL_NAME[G.tpl] + ', paleta ' + PAL_NAME[G.pal] + '\n' : ''}Me gustaría recibir una cotización.`;
+        $('[data-send]').href = `/contacto?interes=${encodeURIComponent('Sitio web')}&mensaje=${encodeURIComponent(text)}`;
+        const gen = $('[data-generate]'), after = $('[data-after]');
+        const done = phase === 'done';
+        gen.hidden = done && !dirty; after.hidden = !(done && !dirty);
+        gen.textContent = done ? 'Volver a generar' : 'Generar mi sitio';
+        gen.disabled = phase === 'loading';
+        const rr = $('[data-reroll]'); if (rr) rr.disabled = phase === 'loading';
+      };
+
+      /* ---------- Dibujar el sitio generado ---------- */
       const drawSite = () => {
         const nm = G.name.trim() || 'Tu empresa';
-        const slug = nm.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '') || 'tuempresa';
-        const a = G.ca || PAL[G.pal][0], b = G.cb || PAL[G.pal][1];
-        const custom = !!(G.ca || G.cb);
-        const ink = custom ? '#0d0f1c' : { atardecer: '#14173f', oceano: '#0b0c2b', bosque: '#06251f', grafito: '#0b0b0c' }[G.pal];
-        const bg = custom ? '#f6f6f8' : { atardecer: '#fdf6ee', oceano: '#f3f5ff', bosque: '#f1faf6', grafito: '#f6f5f2' }[G.pal];
-        const on = lum(a) > 0.45 ? '#14161a' : '#ffffff';
+        const slug = nm.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '') || 'tuempresa';
+        const P = PALS[G.pal];
+        const on = lum(P.a) > 0.45 ? '#14161a' : '#ffffff';
         const [rad, hw] = STY[G.sty];
-        const spd = { suave: 1, dinamica: 0.55, sin: 1 }[G.anim], par = { suave: 1, dinamica: 1.7, sin: 0 }[G.anim];
-        site.style.cssText += `;--a:${a};--b:${b};--ink:${ink};--bg:${bg};--on:${on};--rad:${rad};--hw:${hw};--sfont:${FONT[G.font]};--spd:${spd};--par:${par}`;
-        site.dataset.theme = G.theme; site.dataset.anim = G.anim;
+        site.style.cssText += `;--a:${P.a};--b:${P.b};--ink:${P.ink};--bg:${P.bg};--on:${on};--rad:${rad};--hw:${hw};--sfont:${FONT[G.font]};--spd:1;--par:1`;
+        site.dataset.theme = G.theme; site.dataset.anim = 'suave';
+        $$('[data-d]').forEach((el) => (el.hidden = el.dataset.d !== G.tpl));
+        const shop = G.tpl === 'c';
+        $$('[data-sec]').forEach((x) => (x.hidden = shop || !G.secs.includes(x.dataset.sec)));
+        $$('[data-common]').forEach((x) => (x.hidden = shop));
         const c = COPY[G.type];
         const city = G.city.trim() || 'Mérida, Yucatán';
-        const head = G.h.trim() || c.h, cta = G.cta.trim() || c.c1;
+        const desc = G.desc.trim();
         set('[data-name],[data-name3]', nm); $$('[data-name2]').forEach((el, i) => (el.textContent = (i ? '| ' : '') + nm));
-        set('[data-eyebrow]', c.eyebrow); set('[data-eyebrow2]', c.eyebrow); set('[data-h]', head); set('[data-sub2]', c.sub); set('[data-sub]', `${c.sub} ${nm} te acompaña: simple, claro y listo para crecer contigo.`);
-        set('[data-cta],[data-cta2],[data-cta4]', cta); set('[data-cta3]', c.c2); set('[data-navcta-t]', c.nav[3]); $$('[data-navcta]:not([data-navcta-t])').forEach((el) => { if (!el.querySelector('[data-navcta-t]')) el.textContent = 'Contacto'; });
-        set('[data-h2]', c.h2); set('[data-h3]', `Hablemos de ${nm}.`);
         set('[data-city],[data-city2]', city); set('[data-mail]', `hola@${slug}.mx`);
-        $('[data-nav]').innerHTML = c.nav.map((n, i) => `<span class="${i === 0 ? 'text-white' : 'text-white/85'}">${n}<sup class="ml-1 text-[.62em] opacity-60">0${i + 1}</sup></span>`).join('');
-        $('[data-nav2]').innerHTML = c.nav.map((n, i) => `<span class="${i === 0 ? 'text-white' : 'text-white/85'}">${n}<sup class="ml-1 text-[.62em] opacity-60">0${i + 1}</sup></span>`).join('');
-        $('[data-services]').innerHTML = c.sv.map(([t, d], i) => `<div class="sr card svc relative overflow-hidden p-7" style="--sd:${i * 0.12}s;border-radius:calc(var(--rad) + 18px)"><span class="svc-n absolute right-6 top-5 text-[13px] opacity-35">0${i + 1}</span><i class="svc-ic grid size-12 place-items-center text-white" style="border-radius:calc(var(--rad) + 6px);background:linear-gradient(140deg,var(--a),var(--b))">${icon(SETS[G.type][i], 'size-6')}</i><h3 class="mt-8 text-[1.3rem] tracking-[-0.025em]" style="font-weight:var(--hw)">${t}</h3><p class="mt-2 text-[14.5px] leading-relaxed opacity-65">${d}</p><p class="svc-link mt-6 flex items-center gap-2 text-[13px] font-medium" style="color:var(--a)">Conocer más <span aria-hidden="true">→</span></p></div>`).join('');
-        $('[data-faq]').innerHTML = c.faq.map(([q, an], i) => `<details class="sr faq border-t py-4" ${i === 0 ? 'open' : ''} style="--sd:${i * 0.1}s"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-[1.05rem] tracking-[-0.015em]">${q}<i class="faq-i grid size-7 shrink-0 place-items-center rounded-full border border-current/30 text-[15px] leading-none not-italic">+</i></summary><p class="mt-3 max-w-[40rem] text-[14.5px] leading-relaxed opacity-65">${an.replace('{city}', esc(city))}</p></details>`).join('');
-        // marca
         $$('[data-markbox]').forEach((m) => { m.hidden = G.mark === 'ninguno'; m.textContent = nm[0].toUpperCase(); m.style.borderRadius = G.mark === 'circulo' ? '999px' : 'calc(var(--rad) + 2px)'; });
         set('[data-av]', nm[0].toUpperCase());
-        // diseño, portada, secciones
-        $('[data-d="a"]').hidden = G.design !== 'a'; $('[data-d="b"]').hidden = G.design !== 'b';
-        $$('[data-sec]').forEach((s) => (s.hidden = !G.secs.has(s.dataset.sec)));
-        AU.cols = [hex3(a), hex3(b)]; AU.on = false;
-        const customH = G.h.trim();
-        if (G.design === 'a') drawHeading('[data-ha]', c.pre, c.words, customH, false); else { drawBubbles(nm, G.type); drawHeading('[data-hb]', c.pre, c.words, customH, false); }
-        $('[data-marquee]').innerHTML = [...c.sv.map((x) => x[0]), ...c.nav.slice(1)].concat([...c.sv.map((x) => x[0]), ...c.nav.slice(1)]).map((t) => `<span class="text-[clamp(1.1rem,2.6cqw,2.2rem)] tracking-[-0.03em]" style="font-weight:var(--hw)">${t}</span><i class="size-2 rounded-full" style="background:var(--a)"></i>`).join('');
-        site.scrollTop = 0;
         $$('.sr').forEach((el) => el.classList.remove('in'));
+        if (shop) { drawShop(nm); stopRot(); }
+        else {
+          set('[data-eyebrow]', desc || c.eyebrow); set('[data-eyebrow2]', desc || c.eyebrow);
+          set('[data-sub],[data-sub2]', desc ? `${nm}: ${desc}.` : `${c.sub} ${nm} te acompaña: simple, claro y listo para crecer contigo.`);
+          set('[data-cta],[data-cta2],[data-cta4]', c.c1); set('[data-cta3]', c.c2); set('[data-navcta-t]', c.nav[3]);
+          set('[data-h2]', c.h2); set('[data-h3]', `Hablemos de ${nm}.`);
+          $('[data-nav]').innerHTML = c.nav.map((n, i) => `<span class="rounded-full px-[clamp(10px,1.4cqw,20px)] py-2 text-[clamp(11px,1.15cqw,14px)] ${i === 0 ? 'bg-white/20 text-white' : 'text-white/90'}">${n}</span>`).join('');
+          $('[data-nav2]').innerHTML = c.nav.map((n, i) => `<span class="${i === 0 ? 'text-white' : 'text-white/85'}">${n}<sup class="ml-1 text-[.62em] opacity-60">0${i + 1}</sup></span>`).join('');
+          $('[data-strip]').innerHTML = c.sv.map(([t, d], i) => `<div class="flex items-center gap-3 bg-black/20 px-5 py-4 text-left"><i class="grid size-10 shrink-0 place-items-center rounded-full text-white" style="background:linear-gradient(140deg,var(--a),var(--b))">${icon(SETS[G.type][i], 'size-5')}</i><span><b class="block text-[13.5px] font-medium">${t}</b><span class="block text-[11.5px] leading-snug text-white/70">${d}</span></span></div>`).join('');
+          $('[data-services]').innerHTML = c.sv.map(([t, d], i) => `<div class="sr card svc relative overflow-hidden p-7" style="--sd:${i * 0.12}s;border-radius:calc(var(--rad) + 18px)"><span class="svc-n absolute right-6 top-5 text-[13px] opacity-35">0${i + 1}</span><i class="svc-ic grid size-12 place-items-center text-white" style="border-radius:calc(var(--rad) + 6px);background:linear-gradient(140deg,var(--a),var(--b))">${icon(SETS[G.type][i], 'size-6')}</i><h3 class="mt-8 text-[1.3rem] tracking-[-0.025em]" style="font-weight:var(--hw)">${t}</h3><p class="mt-2 text-[14.5px] leading-relaxed opacity-65">${d}</p><p class="svc-link mt-6 flex items-center gap-2 text-[13px] font-medium" style="color:var(--a)">Conocer más <span aria-hidden="true">→</span></p></div>`).join('');
+          $('[data-faq]').innerHTML = c.faq.map(([q, an], i) => `<details class="sr faq border-t py-4" ${i === 0 ? 'open' : ''} style="--sd:${i * 0.1}s"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-[1.05rem] tracking-[-0.015em]">${q}<i class="faq-i grid size-7 shrink-0 place-items-center rounded-full border border-current/30 text-[15px] leading-none not-italic">+</i></summary><p class="mt-3 max-w-[40rem] text-[14.5px] leading-relaxed opacity-65">${an.replace('{city}', esc(city))}</p></details>`).join('');
+          const mq = [...c.sv.map((x) => x[0]), ...c.nav.slice(1)];
+          $('[data-marquee]').innerHTML = mq.concat(mq).map((t) => `<span class="text-[clamp(1.1rem,2.6cqw,2.2rem)] tracking-[-0.03em]" style="font-weight:var(--hw)">${t}</span><i class="size-2 rounded-full" style="background:var(--a)"></i>`).join('');
+          if (G.tpl === 'a') drawHeading('[data-ha]', c.pre, c.words, '', false); else { drawBubbles(nm, G.type); drawHeading('[data-hb]', c.pre, c.words, '', false); }
+        }
+        site.scrollTop = 0; site.classList.remove('scrolled');
         io.disconnect(); $$('.sr').forEach((el) => io.observe(el));
       };
 
@@ -391,19 +488,23 @@ gl_FragColor=vec4(col,1.);}`;
       site.addEventListener('pointermove', (e) => { const r = site.getBoundingClientRect(); site.style.setProperty('--mx', ((e.clientX - r.left) / r.width - 0.5).toFixed(3)); site.style.setProperty('--my', ((e.clientY - r.top) / r.height - 0.5).toFixed(3)); }, { passive: true });
 
       /* ---------- Generación ---------- */
-      const STEPS = ['Entendiendo tu negocio…', 'Diseñando tu identidad…', 'Armando tu sitio…', 'Aplicando tus colores…', 'Últimos detalles…'];
-      const generate = () => {
+      const STEPS = ['Entendiendo tu negocio…', 'Eligiendo un diseño…', 'Armando tu sitio…', 'Aplicando colores…', 'Últimos detalles…'];
+      const generate = (again) => {
         if (phase === 'loading') return;
         const my = ++token;
-        G = { ...S, secs: new Set(S.secs) }; dirty = false;
+        roll = again ? roll + 1 : 0;
+        const next = { ...S, ...compose() };
+        G = next; last = next; dirty = false;
         clearInterval(fanTimer); stopRot();
-        const gen = $('[data-gen]'); gen.style.setProperty('--a', G.ca || PAL[G.pal][0]); gen.style.setProperty('--b', G.cb || PAL[G.pal][1]);
+        const P = PALS[G.pal];
+        const gen = $('[data-gen]'); gen.style.setProperty('--a', P.a); gen.style.setProperty('--b', P.b);
         phase = 'loading'; renderPanel();
+        $('[data-pill]').hidden = true;
         $('[data-scroller]').scrollTo({ top: 0, behavior: 'smooth' });
         const idle = $('[data-idle]'); idle.style.opacity = '0'; idle.style.filter = 'blur(14px)'; idle.style.pointerEvents = 'none';
         site.classList.add('gen-hidden'); site.classList.remove('gen-in');
         gen.style.opacity = '1';
-        const total = reduced ? 400 : 4600;
+        const total = reduced ? 400 : 4200;
         const bar = $('[data-gen-bar]'), txt = $('[data-gen-text]');
         const start = performance.now();
         const tick = (now) => {
@@ -421,29 +522,23 @@ gl_FragColor=vec4(col,1.);}`;
         $('[data-gen]').style.opacity = '0';
         site.classList.remove('gen-hidden'); void site.offsetWidth; site.classList.add('gen-in');
         phase = 'done'; renderPanel();
+        const pill = $('[data-pill]'); pill.textContent = `Propuesta ${roll + 1} · ${TPL_NAME[G.tpl]}`; pill.hidden = false;
       };
 
       document.addEventListener('click', (e) => {
-        const t = e.target.closest('button'); if (!t) return;
-        if (t.hasAttribute('data-generate')) { generate(); return; }
+        const t = e.target.closest('button'); if (!t || t.closest('[data-site]')) return;
+        if (t.hasAttribute('data-generate')) { generate(false); return; }
+        if (t.hasAttribute('data-reroll')) { generate(true); return; }
         const d = t.dataset;
         if (d.type) S.type = d.type;
-        else if (d.design) { S.design = d.design; if (!themeTouched) S.theme = d.design === 'b' ? 'oscuro' : 'claro'; if (!markTouched) S.mark = d.design === 'b' ? 'cuadrado' : 'ninguno'; }
-        else if (d.pal) { S.pal = d.pal; S.ca = S.cb = null; $('[data-ca]').value = PAL[d.pal][0]; $('[data-cb]').value = PAL[d.pal][1]; }
-        else if (d.font) S.font = d.font;
-        else if (d.sty) S.sty = d.sty;
-        else if (d.mark) { S.mark = d.mark; markTouched = true; }
-        else if (d.theme) { S.theme = d.theme; themeTouched = true; }
-        else if (d.animT) S.anim = d.animT;
-        else if (d.secT) { S.secs.has(d.secT) ? S.secs.delete(d.secT) : S.secs.add(d.secT); }
+        else if (d.siteT) S.site = d.siteT;
+        else if (d.giro) S.giro = d.giro;
         else return;
         if (phase === 'done') dirty = true;
         renderPanel();
       });
       const bind = (sel, key) => $(sel).addEventListener('input', (e) => { S[key] = e.target.value; if (phase === 'done') dirty = true; renderPanel(); });
-      bind('[data-in-name]', 'name'); bind('[data-in-city]', 'city'); bind('[data-in-h]', 'h'); bind('[data-in-cta]', 'cta');
-      $('[data-ca]').addEventListener('input', (e) => { S.ca = e.target.value; if (phase === 'done') dirty = true; renderPanel(); });
-      $('[data-cb]').addEventListener('input', (e) => { S.cb = e.target.value; if (phase === 'done') dirty = true; renderPanel(); });
+      bind('[data-in-name]', 'name'); bind('[data-in-city]', 'city'); bind('[data-in-desc]', 'desc');
       renderPanel();
     </script>
   </body>
