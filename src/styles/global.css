@@ -426,14 +426,14 @@ body { overflow-x: clip; }
 @media (prefers-reduced-motion: reduce) { .site *, .site *::before { animation: none !important; } .site .sr { opacity: 1; translate: none; filter: none; } .idle-card { transition: none; } }
 
 /* Botón principal del configurador: intersección de los degradados 3 y 4 */
-.gen-btn { background: linear-gradient(160deg, #0033ff 0%, #0600ab 100%); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28), 0 14px 34px -14px rgba(6, 0, 171, 0.85); }
-.gen-btn:hover { background: linear-gradient(160deg, #1646ff 0%, #0a05c4 100%); }
+.gen-btn { background: linear-gradient(180deg, #0033ff 0%, #0600ab 52%, #00033d 100%); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 14px 34px -14px rgba(0, 3, 61, 0.9); }
+.gen-btn:hover { background: linear-gradient(180deg, #1a48ff 0%, #0a05c0 52%, #02094f 100%); }
 
-/* ── Cursor circular minimalista ── */
-.cursor-ring, .cursor-dot { position: fixed; left: 0; top: 0; pointer-events: none; z-index: 2147483000; opacity: 0; mix-blend-mode: difference; border-radius: 50%; }
-.cursor-ring { width: 38px; height: 38px; margin: -19px 0 0 -19px; border: 1.5px solid #fff; transition: width 0.35s cubic-bezier(.2, .8, .2, 1), height 0.35s cubic-bezier(.2, .8, .2, 1), margin 0.35s cubic-bezier(.2, .8, .2, 1), background-color 0.3s, opacity 0.3s, scale 0.2s; }
-.cursor-dot { width: 6px; height: 6px; margin: -3px 0 0 -3px; background: #fff; transition: opacity 0.3s; }
-.cursor-ring.is-hover { width: 68px; height: 68px; margin: -34px 0 0 -34px; background: #fff; }
+/* ── Cursor circular minimalista (blanco cristal) ── */
+.cursor-ring, .cursor-dot { position: fixed; left: 0; top: 0; pointer-events: none; z-index: 2147483000; opacity: 0; border-radius: 50%; }
+.cursor-ring { width: 38px; height: 38px; margin: -19px 0 0 -19px; border: 1.5px solid rgba(255, 255, 255, 0.95); background: rgba(255, 255, 255, 0.06); box-shadow: 0 0 0 1px rgba(10, 12, 30, 0.22), 0 8px 24px -8px rgba(10, 12, 30, 0.35), inset 0 0 0 1px rgba(10, 12, 30, 0.08); backdrop-filter: blur(1.5px); transition: width 0.35s cubic-bezier(.2, .8, .2, 1), height 0.35s cubic-bezier(.2, .8, .2, 1), margin 0.35s cubic-bezier(.2, .8, .2, 1), background-color 0.3s, backdrop-filter 0.3s, opacity 0.25s, scale 0.2s; }
+.cursor-dot { width: 6px; height: 6px; margin: -3px 0 0 -3px; background: #fff; box-shadow: 0 0 0 1px rgba(10, 12, 30, 0.3); transition: opacity 0.25s; }
+.cursor-ring.is-hover { width: 66px; height: 66px; margin: -33px 0 0 -33px; background: rgba(255, 255, 255, 0.28); backdrop-filter: blur(10px) saturate(1.6); -webkit-backdrop-filter: blur(10px) saturate(1.6); border-color: rgba(255, 255, 255, 0.85); }
 .cursor-ring.is-text { width: 22px; height: 22px; margin: -11px 0 0 -11px; opacity: 0.6 !important; }
 .cursor-ring.is-down { scale: 0.82; }
 @media (hover: hover) and (pointer: fine) { html.has-cursor, html.has-cursor *:not(input):not(textarea):not(select) { cursor: none !important; } }
