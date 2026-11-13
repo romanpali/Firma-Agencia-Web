@@ -1,11 +1,13 @@
 ---
 import '../styles/global.css';
-import Header from '../components/Header.astro';
-import ScrollFx from '../components/ScrollFx.astro';
 
-const types: [string, string][] = [
-  ['pequena', 'Pequeña empresa'], ['crecimiento', 'Empresa en crecimiento'], ['consolidada', 'Empresa consolidada'],
-  ['comercio', 'Comercio o establecimiento'], ['profesional', 'Servicios profesionales'], ['ecommerce', 'Comercio electrónico'],
+const types: [string, string, string][] = [
+  ['pequena', 'Pequeña empresa', 'Presencia profesional para atraer clientes y organizar la operación.'],
+  ['crecimiento', 'Empresa en crecimiento', 'Sistemas conectados para escalar sin perder el control.'],
+  ['consolidada', 'Empresa consolidada', 'Integrar áreas, datos y procesos bajo un solo estándar.'],
+  ['comercio', 'Comercio o establecimiento', 'Sitio, catálogo, pedidos, inventario y facturación.'],
+  ['profesional', 'Servicios profesionales', 'Identidad, confianza, cotizaciones y gestión de clientes.'],
+  ['ecommerce', 'Comercio electrónico', 'Tienda, marketing, pedidos y análisis de ventas.'],
 ];
 const palettes: [string, string, string, string][] = [
   ['atardecer', 'Atardecer', '#F6B370', '#2F3A9E'], ['oceano', 'Océano', '#0033FF', '#977DFF'],
@@ -30,8 +32,8 @@ const modes: [string, string, string][] = [
   ['mensual', 'Plan mensual', 'Acompañamiento continuo: soporte, contenido y mejora.'],
   ['consultoria', 'Consultoría primero', 'Un diagnóstico y un plan antes de construir.'],
 ];
-const stepNames = ['Tu negocio', 'Tu identidad', 'Lo que necesitas', 'Cómo trabajamos', 'Tu configuración'];
-const chip = 'cfg-opt rounded-xl border border-white/15 bg-white/[.06] px-4 py-3 text-left text-[14px] transition-[background-color,border-color] hover:bg-white/[.11] aria-pressed:border-white aria-pressed:bg-white aria-pressed:text-[#0b0c0f]';
+const row = 'cfg-row block w-full border border-black/20 bg-white px-4 py-3.5 text-left transition-[border-color,background-color] hover:border-black/50 aria-pressed:border-[#0033FF] aria-pressed:shadow-[inset_0_0_0_1px_#0033FF]';
+const h = 'mt-9 font-goog text-[1.35rem] tracking-[-0.01em]';
 ---
 
 <!doctype html>
@@ -43,109 +45,114 @@ const chip = 'cfg-opt rounded-xl border border-white/15 bg-white/[.06] px-4 py-3
     <script is:inline>document.documentElement.classList.add('js')</script>
     <title>Arma tu proyecto — HumanCorp</title>
   </head>
-  <body class="bg-[#00033D] font-sans text-white">
-    <div class="sv-bg" aria-hidden="true"></div>
-    <Header />
-    <main class="relative z-10 overflow-x-clip">
-      <section data-tone="dark" class="px-4 pb-[8svh] pt-[16svh] md:px-8 lg:pt-[15svh]">
-        <div class="mx-auto max-w-[1360px]">
-          <div class="mb-6 lg:mb-8">
-            <p class="text-[13px] font-medium uppercase tracking-[0.14em] text-white/60">Arma tu proyecto</p>
-            <h1 class="mt-3 max-w-[22ch] font-goog text-[clamp(1.9rem,4.2vw,3.6rem)] font-light leading-[1.04] tracking-[-0.045em]">Configura tu solución y mírala cobrar forma.</h1>
+  <body class="overflow-hidden bg-[#f4f4f3] font-sans text-[#14161a]">
+    <div class="grid h-svh grid-rows-[42svh_minmax(0,1fr)] lg:grid-cols-[minmax(0,1fr)_440px] lg:grid-rows-1">
+      <!-- Escenario -->
+      <section data-stage class="relative overflow-hidden bg-[radial-gradient(90%_70%_at_50%_30%,#fbfbfa,#ececea)]" aria-label="Vista previa de tu proyecto">
+        <div class="absolute inset-x-0 top-0 z-20 flex items-center gap-4 px-5 py-4 lg:px-9 lg:py-6">
+          <a href="/" aria-label="Volver al inicio" class="grid size-9 place-items-center rounded-full transition-colors hover:bg-black/5"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a>
+          <span class="font-goog text-[15px] uppercase tracking-[0.2em]">Arma tu proyecto</span>
+          <span data-viewname class="ml-auto hidden text-[12.5px] text-black/45 sm:inline">Sitio web</span>
+        </div>
+
+        <div data-canvas class="cfg absolute left-1/2 top-1/2 h-[520px] w-[640px]" style="--a:#F6B370;--b:#2F3A9E;--ink:#14173f;--bg:#fdf6ee;--on:#14173f;--rad:6px;--hw:300">
+          <!-- Vista 1: sitio + módulos -->
+          <div data-view="0" class="cfg-view absolute inset-0">
+            <div class="cfg-browser absolute left-[142px] top-[78px] h-[330px] w-[380px] overflow-hidden bg-[var(--bg)] text-[var(--ink)]" style="border-radius:calc(var(--rad) + 6px);box-shadow:0 40px 80px -30px rgba(0,0,40,.55)">
+              <div class="flex h-[26px] items-center gap-1.5 border-b border-black/10 bg-white/70 px-3"><i class="size-[7px] rounded-full bg-[#ff7a5c]"></i><i class="size-[7px] rounded-full bg-[#ffd47a]"></i><i class="size-[7px] rounded-full bg-[#2fbf8a]"></i><span data-url class="ml-3 flex-1 rounded-full bg-black/[.06] px-3 py-[2px] text-[9px] text-black/50">tuempresa.mx</span></div>
+              <div class="flex items-center justify-between px-5 pt-4">
+                <div class="flex items-center gap-2"><i data-mark class="grid size-[22px] place-items-center bg-[var(--a)] text-[11px] font-semibold not-italic text-[var(--on)]" style="border-radius:var(--rad)">T</i><span data-name class="text-[13px] tracking-[-0.02em]" style="font-weight:var(--hw)">Tu empresa</span></div>
+                <div class="flex items-center gap-3"><i class="block h-[4px] w-8 rounded bg-black/20"></i><i class="block h-[4px] w-8 rounded bg-black/20"></i><i class="block h-[4px] w-8 rounded bg-black/20"></i><span class="bg-[var(--ink)] px-3 py-[5px] text-[8.5px] text-white" style="border-radius:var(--rad)">Contacto</span></div>
+              </div>
+              <div class="grid grid-cols-[1.1fr_1fr] gap-5 px-5 pt-6">
+                <div>
+                  <p data-h class="text-[24px] leading-[1.02] tracking-[-0.04em]" style="font-weight:var(--hw)">Tu negocio, a la vista de todos</p>
+                  <p data-sub class="mt-3 text-[10.5px] leading-snug text-black/55">Presencia profesional para atraer clientes.</p>
+                  <span data-cta class="mt-4 inline-block bg-[var(--a)] px-4 py-[8px] text-[10px] font-medium text-[var(--on)]" style="border-radius:var(--rad)">Contáctanos</span>
+                </div>
+                <div class="h-[140px]" style="border-radius:calc(var(--rad) + 4px);background:linear-gradient(150deg,var(--a),var(--b))"></div>
+              </div>
+              <div class="mt-5 grid grid-cols-3 gap-3 px-5">{[0, 1, 2].map((i) => <div class="bg-black/[.045] p-3" style="border-radius:var(--rad)"><i class="block size-[18px] bg-[var(--a)]" style="border-radius:var(--rad)"></i><p data-card={i} class="mt-2 text-[9.5px]">Servicios</p></div>)}</div>
+              <span data-w="d2" class="cfg-w absolute right-3 top-[34px] rounded-full bg-[#14173f] px-3 py-1 text-[9px] text-white">SEO ✓ · Responsive ✓</span>
+            </div>
+
+            <div data-w="d1" class="cfg-w absolute left-[4px] top-[60px] w-[132px] rounded-[16px] bg-white p-3 text-[#14173f] shadow-[0_24px_50px_-24px_rgba(0,0,40,.6)]"><p class="text-[9px] text-[#8f8aa6]">Identidad</p><div class="mt-1.5 flex items-center gap-2"><i class="block size-8 rounded-full" style="background:linear-gradient(150deg,var(--a),var(--b))"></i><span class="text-[20px] font-light">Aa</span></div><div class="mt-2 flex gap-1.5"><i class="block size-3.5 rounded-full bg-[var(--a)]"></i><i class="block size-3.5 rounded-full bg-[var(--b)]"></i><i class="block size-3.5 rounded-full bg-[var(--ink)]"></i></div></div>
+            <div data-w="d4" class="cfg-w absolute left-[0px] top-[196px] w-[128px] rounded-[16px] bg-white p-3 text-[#14173f] shadow-[0_24px_50px_-24px_rgba(0,0,40,.6)]"><p class="text-[9px] text-[#8f8aa6]">Ventas y CRM</p><div class="mt-2 grid grid-cols-3 gap-1.5">{[2, 3, 1].map((n) => <div class="rounded-md bg-[#f5efe8] p-1">{Array.from({ length: n }).map(() => <i class="mb-1 block h-2 rounded-sm bg-[var(--a)]"></i>)}</div>)}</div><p class="mt-2 text-[9px] text-[#2F3A9E]">Seguimiento automático</p></div>
+            <div data-w="d6" class="cfg-w absolute left-[4px] top-[322px] w-[132px] rounded-[16px] bg-white p-3 text-[#14173f] shadow-[0_24px_50px_-24px_rgba(0,0,40,.6)]"><p class="text-[9px] text-[#8f8aa6]">Facturación y flujo de caja</p><p class="mt-1 text-[15px] font-medium">+ $182,400</p><svg viewBox="0 0 100 22" class="mt-1 w-full" fill="none" aria-hidden="true"><path d="M0 18 L20 12 L40 15 L60 7 L80 9 L100 2" stroke="var(--b)" stroke-width="2" stroke-linecap="round"/></svg></div>
+            <div data-w="d3" class="cfg-w absolute left-[490px] top-[44px] w-[146px] overflow-hidden rounded-[16px] bg-white text-[#14173f] shadow-[0_24px_50px_-24px_rgba(0,0,40,.6)]"><div class="flex items-center gap-1.5 px-2.5 py-2"><i class="block size-5 rounded-full" style="background:linear-gradient(45deg,var(--a),var(--b))"></i><span data-ig class="text-[9.5px] font-semibold">tuempresa</span></div><i class="block h-[62px]" style="background:linear-gradient(160deg,var(--b),var(--a))"></i><p class="px-2.5 py-1.5 text-[9px] text-[#8f8aa6]">♥ 2.4 mil · Meta Ads</p></div>
+            <div data-w="d5" class="cfg-w absolute left-[498px] top-[190px] w-[140px] space-y-1.5 rounded-[16px] bg-white p-3 text-[9.5px] text-[#14173f] shadow-[0_24px_50px_-24px_rgba(0,0,40,.6)]"><p class="ml-auto w-fit rounded-xl bg-[#f5efe8] px-2.5 py-1.5">¿Tienen horario?</p><p class="w-fit rounded-xl bg-[var(--ink)] px-2.5 py-1.5 text-white">Sí, abrimos a las 9.</p><p class="flex gap-1 pt-0.5"><i class="size-1.5 rounded-full bg-[var(--a)]"></i><i class="size-1.5 rounded-full bg-[var(--a)]"></i><i class="size-1.5 rounded-full bg-[var(--a)]"></i></p></div>
+            <div data-w="dc" class="cfg-w absolute left-[18px] top-[434px] flex w-[190px] items-center gap-2.5 rounded-[16px] bg-white p-3 text-[#14173f] shadow-[0_24px_50px_-24px_rgba(0,0,40,.6)]"><i class="grid size-8 shrink-0 place-items-center rounded-full bg-[#14173f] text-[11px] text-white">✓</i><div><p class="text-[10px] font-medium leading-tight">Asesoría contable y fiscal</p><p class="text-[8.5px] text-[#8f8aa6]">Con nuestro contador</p></div></div>
+            <div data-w="d7" class="cfg-w absolute left-[226px] top-[434px] w-[190px] rounded-[16px] bg-white p-3 text-[#14173f] shadow-[0_24px_50px_-24px_rgba(0,0,40,.6)]"><p class="text-[9px] text-[#8f8aa6]">Operaciones</p>{[70, 45].map((w) => <div class="mt-1.5 h-2 rounded-full bg-[#f5efe8]"><i class="block h-full rounded-full bg-[var(--a)]" style={`width:${w}%`}></i></div>)}<p class="mt-1.5 text-[9px]">Proyectos · Inventario · Equipo</p></div>
+            <div data-w="d8" class="cfg-w absolute left-[434px] top-[434px] w-[190px] rounded-[16px] bg-white p-3 text-[#14173f] shadow-[0_24px_50px_-24px_rgba(0,0,40,.6)]"><p class="text-[9px] text-[#8f8aa6]">Dashboard</p><div class="mt-1.5 flex h-[30px] items-end gap-1">{[40, 60, 48, 76, 90].map((h2) => <i class="block flex-1 rounded-t-sm bg-[var(--b)]" style={`height:${h2}%`}></i>)}</div></div>
           </div>
 
-          <div class="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.45fr)] lg:items-start lg:gap-6">
-            <!-- Escenario -->
-            <div class="sticky top-[68px] z-20 lg:top-[96px] lg:order-2 lg:row-start-1">
-              <div data-stage class="relative h-[300px] overflow-hidden rounded-[22px] border border-white/15 shadow-[0_40px_90px_-40px_rgba(0,0,40,.9)] sm:h-[380px] lg:h-[calc(100svh-150px)] lg:min-h-[520px]" style="background:radial-gradient(90% 80% at 15% 0%,rgba(0,51,255,.5),transparent 65%),radial-gradient(80% 70% at 100% 100%,rgba(151,125,255,.4),transparent 65%),#0a0c2b">
-                <i class="grain pointer-events-none absolute inset-0 opacity-[.12]" aria-hidden="true"></i>
-                <div data-canvas class="cfg absolute left-1/2 top-1/2 h-[520px] w-[640px]" style="--a:#F6B370;--b:#2F3A9E;--ink:#14173f;--bg:#fdf6ee;--on:#14173f;--rad:6px;--hw:300">
-                  <!-- Sitio -->
-                  <div class="cfg-browser absolute left-[142px] top-[78px] h-[330px] w-[380px] overflow-hidden bg-[var(--bg)] text-[var(--ink)]" style="border-radius:calc(var(--rad) + 6px);box-shadow:0 40px 80px -30px rgba(0,0,40,.8)">
-                    <div class="flex h-[26px] items-center gap-1.5 border-b border-black/10 bg-white/70 px-3"><i class="size-[7px] rounded-full bg-[#ff7a5c]"></i><i class="size-[7px] rounded-full bg-[#ffd47a]"></i><i class="size-[7px] rounded-full bg-[#2fbf8a]"></i><span data-url class="ml-3 flex-1 rounded-full bg-black/[.06] px-3 py-[2px] text-[9px] text-black/50">tuempresa.mx</span></div>
-                    <div class="flex items-center justify-between px-5 pt-4">
-                      <div class="flex items-center gap-2"><i data-mark class="grid size-[22px] place-items-center bg-[var(--a)] text-[11px] font-semibold not-italic text-[var(--on)]" style="border-radius:var(--rad)">T</i><span data-name class="text-[13px] tracking-[-0.02em]" style="font-weight:var(--hw)">Tu empresa</span></div>
-                      <div class="flex items-center gap-3"><i class="block h-[4px] w-8 rounded bg-black/20"></i><i class="block h-[4px] w-8 rounded bg-black/20"></i><i class="block h-[4px] w-8 rounded bg-black/20"></i><span class="bg-[var(--ink)] px-3 py-[5px] text-[8.5px] text-white" style="border-radius:var(--rad)" data-cta2>Contacto</span></div>
-                    </div>
-                    <div class="grid grid-cols-[1.1fr_1fr] gap-5 px-5 pt-6">
-                      <div>
-                        <p data-h class="text-[24px] leading-[1.02] tracking-[-0.04em]" style="font-weight:var(--hw)">Tu negocio, a la vista de todos</p>
-                        <p data-sub class="mt-3 text-[10.5px] leading-snug text-black/55">Presencia profesional para atraer clientes.</p>
-                        <span data-cta class="mt-4 inline-block bg-[var(--a)] px-4 py-[8px] text-[10px] font-medium text-[var(--on)]" style="border-radius:var(--rad)">Contáctanos</span>
-                      </div>
-                      <div class="h-[140px]" style="border-radius:calc(var(--rad) + 4px);background:linear-gradient(150deg,var(--a),var(--b))"></div>
-                    </div>
-                    <div class="mt-5 grid grid-cols-3 gap-3 px-5">{[0, 1, 2].map((i) => <div class="bg-black/[.045] p-3" style="border-radius:var(--rad)"><i class="block size-[18px] bg-[var(--a)]" style="border-radius:var(--rad)"></i><p data-card={i} class="mt-2 text-[9.5px]">Servicios</p></div>)}</div>
-                    <span data-w="d2" class="cfg-w absolute right-3 top-[34px] rounded-full bg-[#14173f] px-3 py-1 text-[9px] text-white">SEO ✓ · Responsive ✓</span>
-                  </div>
+          <!-- Vista 2: lámina de identidad -->
+          <div data-view="1" class="cfg-view absolute inset-0 text-[var(--ink)]">
+            <div class="absolute left-[40px] top-[50px] grid h-[200px] w-[200px] place-items-center text-white shadow-[0_30px_60px_-30px_rgba(0,0,40,.6)]" style="border-radius:calc(var(--rad) * 3 + 8px);background:linear-gradient(150deg,var(--a),var(--b))"><span data-mark2 class="text-[96px] leading-none" style="font-weight:var(--hw);color:var(--on)">T</span></div>
+            <div class="absolute left-[270px] top-[58px]"><p data-name2 class="text-[40px] leading-none tracking-[-0.04em]" style="font-weight:var(--hw)">Tu empresa</p><p data-tag2 class="mt-3 text-[13px] text-black/55">Presencia profesional para atraer clientes.</p></div>
+            <div class="absolute left-[270px] top-[150px] flex gap-2.5">{['a', 'b', 'ink', 'bg'].map((k) => <div class="w-[78px]"><i class="block h-[78px] border border-black/10" style={`background:var(--${k});border-radius:calc(var(--rad) + 4px)`}></i><p data-hex={k} class="mt-1.5 text-[9.5px] text-black/55">#000000</p></div>)}</div>
+            <div class="absolute left-[40px] top-[290px]"><p class="text-[10px] uppercase tracking-[0.14em] text-black/45">Tipografía</p><p class="mt-1 text-[66px] leading-none tracking-[-0.04em]" style="font-weight:var(--hw)">Aa</p><p data-styl class="mt-1 text-[11px] text-black/55">Minimalista</p></div>
+            <div class="absolute left-[200px] top-[312px] h-[116px] w-[200px] bg-white p-4 shadow-[0_24px_50px_-26px_rgba(0,0,40,.55)]" style="border-radius:calc(var(--rad) + 4px)"><i class="block h-1.5 w-8" style="background:var(--a)"></i><p data-name3 class="mt-3 text-[13px]" style="font-weight:var(--hw)">Tu empresa</p><p class="text-[9px] text-black/50">Dirección general</p><p data-url2 class="mt-5 text-[9px] text-black/60">tuempresa.mx · Mérida, Yucatán</p></div>
+            <div class="absolute left-[430px] top-[290px] h-[170px] w-[170px] p-4 text-white shadow-[0_24px_50px_-26px_rgba(0,0,40,.55)]" style="border-radius:calc(var(--rad) + 8px);background:linear-gradient(160deg,var(--b),var(--a))"><p data-ig2 class="text-[10px] opacity-80">@tuempresa</p><p data-post class="absolute bottom-4 left-4 right-4 text-[19px] leading-[1.05]" style="font-weight:var(--hw)">Tu negocio, a la vista de todos</p></div>
+            <div class="absolute left-[40px] top-[462px] flex gap-3"><span class="px-5 py-2.5 text-[11px] font-medium" style="border-radius:var(--rad);background:var(--a);color:var(--on)">Botón principal</span><span class="border px-5 py-2.5 text-[11px]" style="border-radius:var(--rad);border-color:var(--ink)">Secundario</span></div>
+          </div>
+        </div>
 
-                  <!-- Módulos -->
-                  <div data-w="d1" class="cfg-w absolute left-[4px] top-[60px] w-[132px] rounded-[16px] bg-white p-3 text-[#14173f] shadow-[0_24px_50px_-24px_rgba(0,0,40,.7)]"><p class="text-[9px] text-[#8f8aa6]">Identidad</p><div class="mt-1.5 flex items-center gap-2"><i class="block size-8 rounded-full" style="background:linear-gradient(150deg,var(--a),var(--b))"></i><span class="text-[20px] font-light">Aa</span></div><div class="mt-2 flex gap-1.5"><i class="block size-3.5 rounded-full bg-[var(--a)]"></i><i class="block size-3.5 rounded-full bg-[var(--b)]"></i><i class="block size-3.5 rounded-full bg-[var(--ink)]"></i></div></div>
-                  <div data-w="d4" class="cfg-w absolute left-[0px] top-[196px] w-[128px] rounded-[16px] bg-white p-3 text-[#14173f] shadow-[0_24px_50px_-24px_rgba(0,0,40,.7)]"><p class="text-[9px] text-[#8f8aa6]">Ventas y CRM</p><div class="mt-2 grid grid-cols-3 gap-1.5">{[2, 3, 1].map((n) => <div class="rounded-md bg-[#f5efe8] p-1">{Array.from({ length: n }).map(() => <i class="mb-1 block h-2 rounded-sm bg-[var(--a)]"></i>)}</div>)}</div><p class="mt-2 text-[9px] text-[#2F3A9E]">Seguimiento automático</p></div>
-                  <div data-w="d6" class="cfg-w absolute left-[4px] top-[322px] w-[132px] rounded-[16px] bg-white p-3 text-[#14173f] shadow-[0_24px_50px_-24px_rgba(0,0,40,.7)]"><p class="text-[9px] text-[#8f8aa6]">Facturación y flujo de caja</p><p class="mt-1 text-[15px] font-medium">+ $182,400</p><svg viewBox="0 0 100 22" class="mt-1 w-full" fill="none" aria-hidden="true"><path d="M0 18 L20 12 L40 15 L60 7 L80 9 L100 2" stroke="var(--b)" stroke-width="2" stroke-linecap="round"/></svg></div>
-                  <div data-w="d3" class="cfg-w absolute left-[490px] top-[44px] w-[146px] overflow-hidden rounded-[16px] bg-white text-[#14173f] shadow-[0_24px_50px_-24px_rgba(0,0,40,.7)]"><div class="flex items-center gap-1.5 px-2.5 py-2"><i class="block size-5 rounded-full" style="background:linear-gradient(45deg,var(--a),var(--b))"></i><span data-ig class="text-[9.5px] font-semibold">tuempresa</span></div><i class="block h-[62px]" style="background:linear-gradient(160deg,var(--b),var(--a))"></i><p class="px-2.5 py-1.5 text-[9px] text-[#8f8aa6]">♥ 2.4 mil · Meta Ads</p></div>
-                  <div data-w="d5" class="cfg-w absolute left-[498px] top-[190px] w-[140px] space-y-1.5 rounded-[16px] bg-white p-3 text-[9.5px] text-[#14173f] shadow-[0_24px_50px_-24px_rgba(0,0,40,.7)]"><p class="ml-auto w-fit rounded-xl bg-[#f5efe8] px-2.5 py-1.5">¿Tienen horario?</p><p class="w-fit rounded-xl bg-[var(--ink)] px-2.5 py-1.5 text-white">Sí, abrimos a las 9.</p><p class="flex gap-1 pt-0.5"><i class="size-1.5 rounded-full bg-[var(--a)]"></i><i class="size-1.5 rounded-full bg-[var(--a)]"></i><i class="size-1.5 rounded-full bg-[var(--a)]"></i></p></div>
-                  <div data-w="dc" class="cfg-w absolute left-[18px] top-[434px] flex w-[190px] items-center gap-2.5 rounded-[16px] bg-white p-3 text-[#14173f] shadow-[0_24px_50px_-24px_rgba(0,0,40,.7)]"><i class="grid size-8 shrink-0 place-items-center rounded-full bg-[#14173f] text-[11px] text-white">✓</i><div><p class="text-[10px] font-medium leading-tight">Asesoría contable y fiscal</p><p class="text-[8.5px] text-[#8f8aa6]">Con nuestro contador</p></div></div>
-                  <div data-w="d7" class="cfg-w absolute left-[226px] top-[434px] w-[190px] rounded-[16px] bg-white p-3 text-[#14173f] shadow-[0_24px_50px_-24px_rgba(0,0,40,.7)]"><p class="text-[9px] text-[#8f8aa6]">Operaciones</p>{[70, 45].map((w) => <div class="mt-1.5 h-2 rounded-full bg-[#f5efe8]"><i class="block h-full rounded-full bg-[var(--a)]" style={`width:${w}%`}></i></div>)}<p class="mt-1.5 text-[9px]">Proyectos · Inventario · Equipo</p></div>
-                  <div data-w="d8" class="cfg-w absolute left-[434px] top-[434px] w-[190px] rounded-[16px] bg-white p-3 text-[#14173f] shadow-[0_24px_50px_-24px_rgba(0,0,40,.7)]"><p class="text-[9px] text-[#8f8aa6]">Dashboard</p><div class="mt-1.5 flex h-[30px] items-end gap-1">{[40, 60, 48, 76, 90].map((h) => <i class="block flex-1 rounded-t-sm bg-[var(--b)]" style={`height:${h}%`}></i>)}</div></div>
-                </div>
-                <p data-note class="absolute bottom-3 left-4 text-[11px] text-white/45">Vista ilustrativa</p>
-              </div>
-            </div>
+        <button type="button" data-prev-view aria-label="Vista anterior" class="absolute left-5 top-1/2 z-20 grid size-10 -translate-y-1/2 place-items-center rounded-full bg-black/[.07] text-black/60 transition-colors hover:bg-black/15 hover:text-black lg:left-7"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <button type="button" data-next-view aria-label="Vista siguiente" class="absolute right-5 top-1/2 z-20 grid size-10 -translate-y-1/2 place-items-center rounded-full bg-black/[.07] text-black/60 transition-colors hover:bg-black/15 hover:text-black lg:right-7"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
 
-            <!-- Pasos -->
-            <div class="lg:order-1 lg:row-start-1">
-              <div class="rounded-[22px] border border-white/15 bg-white/[.07] p-5 backdrop-blur-xl md:p-7">
-                <div class="flex items-center justify-between text-[12.5px] text-white/60"><span data-stepname></span><span data-stepno></span></div>
-                <i class="relative mt-3 block h-[3px] overflow-hidden rounded-full bg-white/15"><b data-bar class="absolute inset-y-0 left-0 block w-full origin-left bg-white transition-transform duration-500" style="transform:scaleX(.2)"></b></i>
-
-                <div data-step="0" class="mt-6 space-y-6">
-                  <label class="block text-[13px] text-white/75">Nombre de tu empresa<input data-in-name maxlength="28" class="mt-2 w-full rounded-xl border border-white/15 bg-white/10 px-4 py-3.5 text-[16px] text-white outline-none placeholder:text-white/40 focus:border-white/60" placeholder="Tu empresa" /></label>
-                  <div><p class="text-[13px] text-white/75">¿Qué tipo de negocio eres?</p><div class="mt-3 grid gap-2 sm:grid-cols-2">{types.map(([id, l], i) => <button type="button" data-type={id} aria-pressed={i === 0} class={chip}>{l}</button>)}</div></div>
-                </div>
-
-                <div data-step="1" hidden class="mt-6 space-y-6">
-                  <div><p class="text-[13px] text-white/75">Paleta</p><div class="mt-3 grid grid-cols-2 gap-2">{palettes.map(([id, l, a, b], i) => <button type="button" data-pal={id} aria-pressed={i === 0} class={`${chip} flex items-center gap-3`}><span class="flex"><i class="block size-5 rounded-full ring-2 ring-black/10" style={`background:${a}`}></i><i class="-ml-2 block size-5 rounded-full ring-2 ring-black/10" style={`background:${b}`}></i></span>{l}</button>)}</div></div>
-                  <div><p class="text-[13px] text-white/75">Estilo</p><div class="mt-3 grid gap-2">{styles.map(([id, l, d], i) => <button type="button" data-sty={id} aria-pressed={i === 0} class={chip}><span class="block font-medium">{l}</span><span class="block text-[12.5px] opacity-65">{d}</span></button>)}</div></div>
-                </div>
-
-                <div data-step="2" hidden class="mt-6">
-                  <p class="text-[13px] text-white/75">Elige uno o varios módulos. Se suman al escenario.</p>
-                  <div class="mt-3 grid gap-2">{modules.map(([id, l, d]) => <button type="button" data-mod={id} aria-pressed="false" class={chip}><span class="block font-medium">{l}</span><span class="block text-[12.5px] opacity-65">{d}</span></button>)}</div>
-                </div>
-
-                <div data-step="3" hidden class="mt-6">
-                  <p class="text-[13px] text-white/75">¿Cómo prefieres trabajar con nosotros?</p>
-                  <div class="mt-3 grid gap-2">{modes.map(([id, l, d], i) => <button type="button" data-mode={id} aria-pressed={i === 0} class={chip}><span class="block font-medium">{l}</span><span class="block text-[12.5px] opacity-65">{d}</span></button>)}</div>
-                </div>
-
-                <div data-step="4" hidden class="mt-6">
-                  <p class="text-[13px] text-white/75">Esto es lo que armaste:</p>
-                  <ul data-summary class="mt-3 space-y-2 text-[14.5px]"></ul>
-                  <p class="mt-4 text-[12.5px] leading-relaxed text-white/55">No incluye precios: con esta configuración preparamos una propuesta por escrito, con alcance, entregables, tiempos e inversión.</p>
-                  <div class="mt-6 flex flex-wrap gap-3">
-                    <a data-send href="/contacto" class="rounded-full bg-white px-7 py-3.5 text-[15px] font-medium text-[#0b0c0f] transition-transform hover:scale-[1.03]">Enviar mi configuración</a>
-                    <button type="button" data-copy class="rounded-full border border-white/30 px-6 py-3.5 text-[15px] transition-colors hover:bg-white/10">Copiar resumen</button>
-                  </div>
-                </div>
-
-                <div class="mt-8 flex items-center justify-between">
-                  <button type="button" data-prev class="rounded-full border border-white/25 px-6 py-3 text-[14.5px] transition-colors hover:bg-white/10 disabled:opacity-30" disabled>Atrás</button>
-                  <button type="button" data-next class="rounded-full bg-white px-7 py-3 text-[14.5px] font-medium text-[#0b0c0f] transition-transform hover:scale-[1.03] active:scale-[0.98]">Siguiente</button>
-                </div>
-              </div>
-            </div>
+        <div class="absolute inset-x-0 bottom-3 z-20 flex justify-center px-4 lg:bottom-7">
+          <div class="flex items-center gap-6 rounded-2xl bg-white px-6 py-3.5 shadow-[0_20px_50px_-28px_rgba(0,0,0,.4)] sm:gap-10 sm:px-9 sm:py-4">
+            <div class="text-center"><p class="font-goog text-[1.35rem] leading-none tracking-[-0.02em]"><span data-st-mods>0</span></p><p class="mt-1.5 text-[10.5px] text-black/50">Módulos</p></div>
+            <div class="text-center"><p class="font-goog text-[1.35rem] leading-none tracking-[-0.02em]"><span data-st-areas>0</span><span class="text-[0.7em] text-black/45"> / 8</span></p><p class="mt-1.5 text-[10.5px] text-black/50">Divisiones</p></div>
+            <div class="text-center"><p data-st-mode class="font-goog text-[1.35rem] leading-none tracking-[-0.02em]">Proyecto</p><p class="mt-1.5 text-[10.5px] text-black/50">Modalidad</p></div>
           </div>
         </div>
       </section>
-    </main>
-    <ScrollFx />
 
-    <script define:vars={{ types, palettes, styles, modules, modes, stepNames }}>
-      const $ = (s, r = document) => r.querySelector(s);
-      const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+      <!-- Panel de opciones -->
+      <aside class="flex min-h-0 flex-col border-l border-black/10 bg-white">
+        <div data-scroller class="min-h-0 flex-1 overflow-y-auto px-6 pb-8 pt-6 lg:px-10 lg:pt-7">
+          <div class="flex items-center justify-between text-[12px] text-black/45"><a href="/" class="tracking-wide"><span class="font-light">HUMAN</span> <span class="font-semibold">CORP</span></a><a href="/contacto" class="hover:text-black">Contacto</a></div>
+          <h1 class="mt-8 font-goog text-[1.9rem] font-light uppercase tracking-[0.16em]">Tu proyecto</h1>
+          <p class="mt-2 max-w-[22rem] text-[13px] leading-relaxed text-black/55">Elige cómo es tu negocio y lo que necesitas. La vista se arma contigo. Es una propuesta visual inicial: la afinamos juntos.</p>
+
+          <label class="mt-8 block text-[12.5px] text-black/60">Nombre de tu empresa<input data-in-name maxlength="28" placeholder="Tu empresa" class="mt-2 w-full border border-black/20 px-4 py-3.5 text-[15px] outline-none transition-[border-color] placeholder:text-black/35 focus:border-[#0033FF]" /></label>
+
+          <h2 class={h}>Negocio</h2>
+          <div class="mt-4 space-y-3">{types.map(([id, l, d], i) => <button type="button" data-type={id} aria-pressed={i === 0} class={row}><span class="cfg-t block text-[14.5px] text-black/65">{l}</span><span class="mt-1 block text-[11.5px] leading-snug text-black/40">{d}</span></button>)}</div>
+
+          <h2 class={h}>Identidad</h2>
+          <div class="mt-4 flex flex-wrap gap-5">{palettes.map(([id, l, a, b], i) => <button type="button" data-pal={id} aria-pressed={i === 0} class="group text-left"><span class="relative block size-11 rounded-full ring-1 ring-black/10 transition-shadow group-aria-pressed:ring-2 group-aria-pressed:ring-[#0033FF] group-aria-pressed:ring-offset-2" style={`background:linear-gradient(135deg,${a} 50%,${b} 50%)`}></span><span class="mt-2 block text-[11.5px] text-black/55 group-aria-pressed:text-black">{l}</span></button>)}</div>
+          <div class="mt-5 space-y-3">{styles.map(([id, l, d], i) => <button type="button" data-sty={id} aria-pressed={i === 0} class={row}><span class="cfg-t block text-[14.5px] text-black/65">{l}</span><span class="mt-1 block text-[11.5px] leading-snug text-black/40">{d}</span></button>)}</div>
+
+          <h2 class={h}>Módulos</h2>
+          <p class="mt-1 text-[12px] text-black/45">Elige los que necesites. Se suman a la vista.</p>
+          <div class="mt-4 space-y-3">{modules.map(([id, l, d]) => <button type="button" data-mod={id} aria-pressed="false" class={`${row} flex items-start justify-between gap-4`}><span><span class="cfg-t block text-[14.5px] text-black/65">{l}</span><span class="mt-1 block text-[11.5px] leading-snug text-black/40">{d}</span></span><span class="cfg-add mt-0.5 shrink-0 text-[11.5px] text-black/40">Sumar</span></button>)}</div>
+
+          <h2 class={h}>Modalidad</h2>
+          <div class="mt-4 space-y-3">{modes.map(([id, l, d], i) => <button type="button" data-mode={id} aria-pressed={i === 0} class={row}><span class="cfg-t block text-[14.5px] text-black/65">{l}</span><span class="mt-1 block text-[11.5px] leading-snug text-black/40">{d}</span></button>)}</div>
+          <p class="mt-8 text-[11.5px] leading-relaxed text-black/40">No incluye precios. Con tu configuración preparamos una propuesta por escrito, con alcance, entregables, tiempos e inversión.</p>
+        </div>
+
+        <div class="relative border-t border-black/10 bg-white">
+          <div data-drawer hidden class="absolute inset-x-0 bottom-full max-h-[46svh] overflow-y-auto border-t border-black/10 bg-white px-6 py-5 shadow-[0_-20px_40px_-30px_rgba(0,0,0,.4)] lg:px-10">
+            <ul data-summary class="space-y-2.5 text-[13.5px]"></ul>
+            <button type="button" data-copy class="mt-4 text-[12.5px] text-black/55 underline underline-offset-4 hover:text-black">Copiar resumen</button>
+          </div>
+          <div class="flex items-center justify-between gap-4 px-6 py-4 lg:px-10 lg:py-5">
+            <button type="button" data-toggle aria-expanded="false" class="flex items-center gap-2 text-left font-goog text-[1.05rem] tracking-[-0.01em]"><span data-bar-sum>0 módulos</span><svg data-chev width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg></button>
+            <a data-send href="/contacto" class="bg-[#14161a] px-6 py-3.5 text-[13.5px] text-white transition-colors hover:bg-black">Enviar mi configuración</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <script define:vars={{ types, palettes, styles, modules, modes }}>
+      const $ = (s) => document.querySelector(s);
+      const $$ = (s) => [...document.querySelectorAll(s)];
       const stage = $('[data-stage]'), cv = $('[data-canvas]');
-      const fit = () => { const k = Math.min(stage.clientWidth / 640, stage.clientHeight / 520) * 0.97; cv.style.transform = `translate(-50%,-50%) scale(${k.toFixed(4)})`; };
+      const fit = () => { const k = Math.min(stage.clientWidth / 700, (stage.clientHeight - 100) / 540) ; cv.style.transform = `translate(-50%,-52%) scale(${Math.min(k, 1.5).toFixed(4)})`; };
       new ResizeObserver(fit).observe(stage); fit();
 
       const COPY = {
@@ -158,8 +165,10 @@ const chip = 'cfg-opt rounded-xl border border-white/15 bg-white/[.06] px-4 py-3
       };
       const PAL = { atardecer: ['#F6B370', '#2F3A9E', '#14173f', '#fdf6ee', '#14173f'], oceano: ['#0033FF', '#977DFF', '#0b0c2b', '#f3f5ff', '#ffffff'], bosque: ['#10b981', '#064e5a', '#06251f', '#f1faf6', '#06251f'], grafito: ['#14173f', '#8f8aa6', '#0b0b0c', '#f6f5f2', '#ffffff'] };
       const STY = { minimal: ['6px', '300'], calido: ['16px', '500'], audaz: ['0px', '700'] };
-      const S = { step: 0, name: '', type: 'pequena', pal: 'atardecer', sty: 'minimal', mods: new Set(), mode: 'proyecto' };
+      const VIEWS = ['Sitio web', 'Identidad'];
+      const S = { name: '', type: 'pequena', pal: 'atardecer', sty: 'minimal', mods: new Set(), mode: 'proyecto', view: 0 };
       const label = (list, id) => (list.find((x) => x[0] === id) || [])[1];
+      const AREAS = { d1: '1', d2: '2', d3: '3', d4: '4', d5: '5', d6: '6', dc: '6', d7: '7', d8: '8' };
 
       const render = () => {
         const nm = S.name.trim() || 'Tu empresa';
@@ -168,26 +177,28 @@ const chip = 'cfg-opt rounded-xl border border-white/15 bg-white/[.06] px-4 py-3
         const [rad, hw] = STY[S.sty];
         cv.style.cssText += `;--a:${a};--b:${b};--ink:${ink};--bg:${bg};--on:${on};--rad:${rad};--hw:${hw}`;
         const c = COPY[S.type];
-        $('[data-name]').textContent = nm; $('[data-mark]').textContent = nm[0].toUpperCase(); $('[data-url]').textContent = `${slug}.mx`; $('[data-ig]').textContent = slug;
-        $('[data-h]').textContent = c[0]; $('[data-sub]').textContent = c[1]; $('[data-cta]').textContent = c[2];
+        const set = (sel, t) => $$(sel).forEach((el) => (el.textContent = t));
+        set('[data-name],[data-name2],[data-name3]', nm); set('[data-mark],[data-mark2]', nm[0].toUpperCase());
+        set('[data-url]', `${slug}.mx`); set('[data-url2]', `${slug}.mx · Mérida, Yucatán`); set('[data-ig]', slug); set('[data-ig2]', '@' + slug);
+        set('[data-h],[data-post]', c[0]); set('[data-sub],[data-tag2]', c[1]); set('[data-cta]', c[2]); set('[data-styl]', label(styles, S.sty));
         $$('[data-card]').forEach((el, i) => (el.textContent = c[3][i]));
+        ['a', 'b', 'ink', 'bg'].forEach((k, i) => set(`[data-hex="${k}"]`, [a, b, ink, bg][i].toUpperCase()));
         $$('[data-w]').forEach((el) => el.classList.toggle('on', S.mods.has(el.dataset.w)));
-        // pasos
-        $$('[data-step]').forEach((el) => (el.hidden = +el.dataset.step !== S.step));
-        $('[data-stepname]').textContent = stepNames[S.step]; $('[data-stepno]').textContent = `Paso ${S.step + 1} de 5`;
-        $('[data-bar]').style.transform = `scaleX(${(S.step + 1) / 5})`;
-        $('[data-prev]').disabled = S.step === 0;
-        $('[data-next]').hidden = S.step === 4;
-        // botones
-        $$('[data-type]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.type === S.type)));
-        $$('[data-pal]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.pal === S.pal)));
-        $$('[data-sty]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.sty === S.sty)));
-        $$('[data-mode]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.mode === S.mode)));
-        $$('[data-mod]').forEach((b) => b.setAttribute('aria-pressed', String(S.mods.has(b.dataset.mod))));
-        // resumen
+        $$('[data-view]').forEach((el) => { const i = +el.dataset.view; el.style.opacity = i === S.view ? '1' : '0'; el.style.pointerEvents = i === S.view ? 'auto' : 'none'; el.style.transform = `translateX(${(i - S.view) * 40}px)`; });
+        set('[data-viewname]', VIEWS[S.view]);
+        // botones del panel
+        $$('[data-type]').forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.type === S.type)));
+        $$('[data-pal]').forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.pal === S.pal)));
+        $$('[data-sty]').forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.sty === S.sty)));
+        $$('[data-mode]').forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.mode === S.mode)));
+        $$('[data-mod]').forEach((x) => { const on = S.mods.has(x.dataset.mod); x.setAttribute('aria-pressed', String(on)); x.querySelector('.cfg-add').textContent = on ? 'Incluido ✓' : 'Sumar'; });
+        // cifras y resumen
         const mods = modules.filter((m) => S.mods.has(m[0])).map((m) => m[1]);
-        const rows = [['Empresa', nm], ['Tipo de negocio', label(types, S.type)], ['Identidad', `${label(palettes, S.pal)} · ${label(styles, S.sty)}`], ['Módulos', mods.length ? mods.join(', ') : 'Aún sin elegir'], ['Modalidad', label(modes, S.mode)]];
-        $('[data-summary]').innerHTML = rows.map(([k, v]) => `<li class="flex flex-col gap-0.5 border-b border-white/10 pb-2 sm:flex-row sm:gap-4"><span class="w-36 shrink-0 text-[12.5px] text-white/55">${k}</span><span>${v.replace(/</g, '&lt;')}</span></li>`).join('');
+        const areas = new Set([...S.mods].map((m) => AREAS[m])).size;
+        set('[data-st-mods]', String(S.mods.size)); set('[data-st-areas]', String(areas)); set('[data-st-mode]', label(modes, S.mode).split(' ')[0] === 'Proyecto' ? 'Proyecto' : label(modes, S.mode).split(' ')[0]);
+        set('[data-bar-sum]', `${S.mods.size} ${S.mods.size === 1 ? 'módulo' : 'módulos'}`);
+        const rows = [['Empresa', nm], ['Negocio', label(types, S.type)], ['Identidad', `${label(palettes, S.pal)} · ${label(styles, S.sty)}`], ['Módulos', mods.length ? mods.join(', ') : 'Aún sin elegir'], ['Modalidad', label(modes, S.mode)]];
+        $('[data-summary]').innerHTML = rows.map(([k, v]) => `<li class="flex flex-col gap-0.5 border-b border-black/10 pb-2.5 sm:flex-row sm:gap-4"><span class="w-24 shrink-0 text-[12px] text-black/45">${k}</span><span>${v.replace(/</g, '&lt;')}</span></li>`).join('');
         const text = `Hola, armé mi proyecto en el configurador de HumanCorp:\n- Empresa: ${nm}\n- Tipo de negocio: ${label(types, S.type)}\n- Identidad: ${label(palettes, S.pal)} · ${label(styles, S.sty)}\n- Módulos: ${mods.length ? mods.join(', ') : 'aún sin elegir'}\n- Modalidad: ${label(modes, S.mode)}\nMe gustaría recibir una propuesta.`;
         $('[data-send]').href = `/contacto?interes=${encodeURIComponent('Proyecto a la medida')}&mensaje=${encodeURIComponent(text)}`;
         S.text = text;
@@ -199,11 +210,13 @@ const chip = 'cfg-opt rounded-xl border border-white/15 bg-white/[.06] px-4 py-3
         else if (t.dataset.pal) S.pal = t.dataset.pal;
         else if (t.dataset.sty) S.sty = t.dataset.sty;
         else if (t.dataset.mode) S.mode = t.dataset.mode;
-        else if (t.dataset.mod) { S.mods.has(t.dataset.mod) ? S.mods.delete(t.dataset.mod) : S.mods.add(t.dataset.mod); }
-        else if (t.hasAttribute('data-next')) S.step = Math.min(4, S.step + 1);
-        else if (t.hasAttribute('data-prev')) S.step = Math.max(0, S.step - 1);
+        else if (t.dataset.mod) { S.mods.has(t.dataset.mod) ? S.mods.delete(t.dataset.mod) : S.mods.add(t.dataset.mod); S.view = 0; }
+        else if (t.hasAttribute('data-next-view')) S.view = (S.view + 1) % VIEWS.length;
+        else if (t.hasAttribute('data-prev-view')) S.view = (S.view + VIEWS.length - 1) % VIEWS.length;
+        else if (t.hasAttribute('data-toggle')) { const d = $('[data-drawer]'); d.hidden = !d.hidden; t.setAttribute('aria-expanded', String(!d.hidden)); $('[data-chev]').style.transform = d.hidden ? '' : 'rotate(180deg)'; return; }
         else if (t.hasAttribute('data-copy')) { navigator.clipboard?.writeText(S.text).then(() => { t.textContent = 'Copiado ✓'; setTimeout(() => (t.textContent = 'Copiar resumen'), 1800); }); return; }
         else return;
+        if (t.dataset.pal || t.dataset.sty) S.view = S.view; // la identidad se ve en ambas vistas
         render();
       });
       $('[data-in-name]').addEventListener('input', (e) => { S.name = e.target.value; render(); });

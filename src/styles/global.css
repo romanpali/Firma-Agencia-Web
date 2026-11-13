@@ -356,3 +356,7 @@ body { overflow-x: clip; }
 .cfg-browser { transition: border-radius 0.4s; }
 .cfg [data-h], .cfg [data-name] { transition: font-weight 0.4s; }
 @media (prefers-reduced-motion: reduce) { .cfg-w.on { animation: none; } .cfg-w { transition: none; } }
+.cfg-view { transition: opacity 0.5s ease, transform 0.6s cubic-bezier(.2, .8, .2, 1); }
+.cfg-row[aria-pressed="true"] .cfg-t { color: #0b0b0c; font-weight: 500; }
+.cfg-row[aria-pressed="true"] .cfg-add { color: #0033ff; }
+@media (prefers-reduced-motion: reduce) { .cfg-view { transition: none; } }
