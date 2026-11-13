@@ -1,0 +1,213 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import ScrollFx from '../components/ScrollFx.astro';
+
+const types: [string, string][] = [
+  ['pequena', 'Pequeña empresa'], ['crecimiento', 'Empresa en crecimiento'], ['consolidada', 'Empresa consolidada'],
+  ['comercio', 'Comercio o establecimiento'], ['profesional', 'Servicios profesionales'], ['ecommerce', 'Comercio electrónico'],
+];
+const palettes: [string, string, string, string][] = [
+  ['atardecer', 'Atardecer', '#F6B370', '#2F3A9E'], ['oceano', 'Océano', '#0033FF', '#977DFF'],
+  ['bosque', 'Bosque', '#10b981', '#064e5a'], ['grafito', 'Grafito', '#14173f', '#8f8aa6'],
+];
+const styles: [string, string, string][] = [
+  ['minimal', 'Minimalista', 'Aire, líneas finas y tipografía ligera.'], ['calido', 'Cálido', 'Formas suaves y cercanas.'], ['audaz', 'Audaz', 'Contraste fuerte y títulos contundentes.'],
+];
+const modules: [string, string, string][] = [
+  ['d1', 'Diseño e identidad', 'Marca, logotipo, material gráfico y producción creativa.'],
+  ['d2', 'Desarrollo digital', 'Sitio web, tienda en línea, aplicaciones y SEO.'],
+  ['d3', 'Marketing y crecimiento', 'Estrategia, publicidad digital y redes sociales.'],
+  ['d4', 'Ventas y CRM', 'Seguimiento de prospectos, cotizaciones y clientes.'],
+  ['d5', 'IA y automatización', 'Agentes, flujos automáticos y asistentes internos.'],
+  ['d6', 'Finanzas y administración', 'Facturación, flujo de caja y control administrativo.'],
+  ['dc', 'Asesoría contable y fiscal', 'Orientación de nuestro contador y tu información en orden.'],
+  ['d7', 'Operaciones y personas', 'Procesos, proyectos, inventarios y equipo.'],
+  ['d8', 'Datos e infraestructura', 'Dashboards, integración de datos y seguridad.'],
+];
+const modes: [string, string, string][] = [
+  ['proyecto', 'Proyecto único', 'Un alcance definido con entregables y fechas.'],
+  ['mensual', 'Plan mensual', 'Acompañamiento continuo: soporte, contenido y mejora.'],
+  ['consultoria', 'Consultoría primero', 'Un diagnóstico y un plan antes de construir.'],
+];
+const stepNames = ['Tu negocio', 'Tu identidad', 'Lo que necesitas', 'Cómo trabajamos', 'Tu configuración'];
+const chip = 'cfg-opt rounded-xl border border-white/15 bg-white/[.06] px-4 py-3 text-left text-[14px] transition-[background-color,border-color] hover:bg-white/[.11] aria-pressed:border-white aria-pressed:bg-white aria-pressed:text-[#0b0c0f]';
+---
+
+<!doctype html>
+<html lang="es-MX">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Configura tu solución con HumanCorp: elige tu tipo de negocio, tu identidad y los módulos que necesitas, y mira cómo se arma tu proyecto." />
+    <script is:inline>document.documentElement.classList.add('js')</script>
+    <title>Arma tu proyecto — HumanCorp</title>
+  </head>
+  <body class="bg-[#00033D] font-sans text-white">
+    <div class="sv-bg" aria-hidden="true"></div>
+    <Header />
+    <main class="relative z-10 overflow-x-clip">
+      <section data-tone="dark" class="px-4 pb-[8svh] pt-[16svh] md:px-8 lg:pt-[15svh]">
+        <div class="mx-auto max-w-[1360px]">
+          <div class="mb-6 lg:mb-8">
+            <p class="text-[13px] font-medium uppercase tracking-[0.14em] text-white/60">Arma tu proyecto</p>
+            <h1 class="mt-3 max-w-[22ch] font-goog text-[clamp(1.9rem,4.2vw,3.6rem)] font-light leading-[1.04] tracking-[-0.045em]">Configura tu solución y mírala cobrar forma.</h1>
+          </div>
+
+          <div class="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.45fr)] lg:items-start lg:gap-6">
+            <!-- Escenario -->
+            <div class="sticky top-[68px] z-20 lg:top-[96px] lg:order-2 lg:row-start-1">
+              <div data-stage class="relative h-[300px] overflow-hidden rounded-[22px] border border-white/15 shadow-[0_40px_90px_-40px_rgba(0,0,40,.9)] sm:h-[380px] lg:h-[calc(100svh-150px)] lg:min-h-[520px]" style="background:radial-gradient(90% 80% at 15% 0%,rgba(0,51,255,.5),transparent 65%),radial-gradient(80% 70% at 100% 100%,rgba(151,125,255,.4),transparent 65%),#0a0c2b">
+                <i class="grain pointer-events-none absolute inset-0 opacity-[.12]" aria-hidden="true"></i>
+                <div data-canvas class="cfg absolute left-1/2 top-1/2 h-[520px] w-[640px]" style="--a:#F6B370;--b:#2F3A9E;--ink:#14173f;--bg:#fdf6ee;--on:#14173f;--rad:6px;--hw:300">
+                  <!-- Sitio -->
+                  <div class="cfg-browser absolute left-[142px] top-[78px] h-[330px] w-[380px] overflow-hidden bg-[var(--bg)] text-[var(--ink)]" style="border-radius:calc(var(--rad) + 6px);box-shadow:0 40px 80px -30px rgba(0,0,40,.8)">
+                    <div class="flex h-[26px] items-center gap-1.5 border-b border-black/10 bg-white/70 px-3"><i class="size-[7px] rounded-full bg-[#ff7a5c]"></i><i class="size-[7px] rounded-full bg-[#ffd47a]"></i><i class="size-[7px] rounded-full bg-[#2fbf8a]"></i><span data-url class="ml-3 flex-1 rounded-full bg-black/[.06] px-3 py-[2px] text-[9px] text-black/50">tuempresa.mx</span></div>
+                    <div class="flex items-center justify-between px-5 pt-4">
+                      <div class="flex items-center gap-2"><i data-mark class="grid size-[22px] place-items-center bg-[var(--a)] text-[11px] font-semibold not-italic text-[var(--on)]" style="border-radius:var(--rad)">T</i><span data-name class="text-[13px] tracking-[-0.02em]" style="font-weight:var(--hw)">Tu empresa</span></div>
+                      <div class="flex items-center gap-3"><i class="block h-[4px] w-8 rounded bg-black/20"></i><i class="block h-[4px] w-8 rounded bg-black/20"></i><i class="block h-[4px] w-8 rounded bg-black/20"></i><span class="bg-[var(--ink)] px-3 py-[5px] text-[8.5px] text-white" style="border-radius:var(--rad)" data-cta2>Contacto</span></div>
+                    </div>
+                    <div class="grid grid-cols-[1.1fr_1fr] gap-5 px-5 pt-6">
+                      <div>
+                        <p data-h class="text-[24px] leading-[1.02] tracking-[-0.04em]" style="font-weight:var(--hw)">Tu negocio, a la vista de todos</p>
+                        <p data-sub class="mt-3 text-[10.5px] leading-snug text-black/55">Presencia profesional para atraer clientes.</p>
+                        <span data-cta class="mt-4 inline-block bg-[var(--a)] px-4 py-[8px] text-[10px] font-medium text-[var(--on)]" style="border-radius:var(--rad)">Contáctanos</span>
+                      </div>
+                      <div class="h-[140px]" style="border-radius:calc(var(--rad) + 4px);background:linear-gradient(150deg,var(--a),var(--b))"></div>
+                    </div>
+                    <div class="mt-5 grid grid-cols-3 gap-3 px-5">{[0, 1, 2].map((i) => <div class="bg-black/[.045] p-3" style="border-radius:var(--rad)"><i class="block size-[18px] bg-[var(--a)]" style="border-radius:var(--rad)"></i><p data-card={i} class="mt-2 text-[9.5px]">Servicios</p></div>)}</div>
+                    <span data-w="d2" class="cfg-w absolute right-3 top-[34px] rounded-full bg-[#14173f] px-3 py-1 text-[9px] text-white">SEO ✓ · Responsive ✓</span>
+                  </div>
+
+                  <!-- Módulos -->
+                  <div data-w="d1" class="cfg-w absolute left-[4px] top-[60px] w-[132px] rounded-[16px] bg-white p-3 text-[#14173f] shadow-[0_24px_50px_-24px_rgba(0,0,40,.7)]"><p class="text-[9px] text-[#8f8aa6]">Identidad</p><div class="mt-1.5 flex items-center gap-2"><i class="block size-8 rounded-full" style="background:linear-gradient(150deg,var(--a),var(--b))"></i><span class="text-[20px] font-light">Aa</span></div><div class="mt-2 flex gap-1.5"><i class="block size-3.5 rounded-full bg-[var(--a)]"></i><i class="block size-3.5 rounded-full bg-[var(--b)]"></i><i class="block size-3.5 rounded-full bg-[var(--ink)]"></i></div></div>
+                  <div data-w="d4" class="cfg-w absolute left-[0px] top-[196px] w-[128px] rounded-[16px] bg-white p-3 text-[#14173f] shadow-[0_24px_50px_-24px_rgba(0,0,40,.7)]"><p class="text-[9px] text-[#8f8aa6]">Ventas y CRM</p><div class="mt-2 grid grid-cols-3 gap-1.5">{[2, 3, 1].map((n) => <div class="rounded-md bg-[#f5efe8] p-1">{Array.from({ length: n }).map(() => <i class="mb-1 block h-2 rounded-sm bg-[var(--a)]"></i>)}</div>)}</div><p class="mt-2 text-[9px] text-[#2F3A9E]">Seguimiento automático</p></div>
+                  <div data-w="d6" class="cfg-w absolute left-[4px] top-[322px] w-[132px] rounded-[16px] bg-white p-3 text-[#14173f] shadow-[0_24px_50px_-24px_rgba(0,0,40,.7)]"><p class="text-[9px] text-[#8f8aa6]">Facturación y flujo de caja</p><p class="mt-1 text-[15px] font-medium">+ $182,400</p><svg viewBox="0 0 100 22" class="mt-1 w-full" fill="none" aria-hidden="true"><path d="M0 18 L20 12 L40 15 L60 7 L80 9 L100 2" stroke="var(--b)" stroke-width="2" stroke-linecap="round"/></svg></div>
+                  <div data-w="d3" class="cfg-w absolute left-[490px] top-[44px] w-[146px] overflow-hidden rounded-[16px] bg-white text-[#14173f] shadow-[0_24px_50px_-24px_rgba(0,0,40,.7)]"><div class="flex items-center gap-1.5 px-2.5 py-2"><i class="block size-5 rounded-full" style="background:linear-gradient(45deg,var(--a),var(--b))"></i><span data-ig class="text-[9.5px] font-semibold">tuempresa</span></div><i class="block h-[62px]" style="background:linear-gradient(160deg,var(--b),var(--a))"></i><p class="px-2.5 py-1.5 text-[9px] text-[#8f8aa6]">♥ 2.4 mil · Meta Ads</p></div>
+                  <div data-w="d5" class="cfg-w absolute left-[498px] top-[190px] w-[140px] space-y-1.5 rounded-[16px] bg-white p-3 text-[9.5px] text-[#14173f] shadow-[0_24px_50px_-24px_rgba(0,0,40,.7)]"><p class="ml-auto w-fit rounded-xl bg-[#f5efe8] px-2.5 py-1.5">¿Tienen horario?</p><p class="w-fit rounded-xl bg-[var(--ink)] px-2.5 py-1.5 text-white">Sí, abrimos a las 9.</p><p class="flex gap-1 pt-0.5"><i class="size-1.5 rounded-full bg-[var(--a)]"></i><i class="size-1.5 rounded-full bg-[var(--a)]"></i><i class="size-1.5 rounded-full bg-[var(--a)]"></i></p></div>
+                  <div data-w="dc" class="cfg-w absolute left-[18px] top-[434px] flex w-[190px] items-center gap-2.5 rounded-[16px] bg-white p-3 text-[#14173f] shadow-[0_24px_50px_-24px_rgba(0,0,40,.7)]"><i class="grid size-8 shrink-0 place-items-center rounded-full bg-[#14173f] text-[11px] text-white">✓</i><div><p class="text-[10px] font-medium leading-tight">Asesoría contable y fiscal</p><p class="text-[8.5px] text-[#8f8aa6]">Con nuestro contador</p></div></div>
+                  <div data-w="d7" class="cfg-w absolute left-[226px] top-[434px] w-[190px] rounded-[16px] bg-white p-3 text-[#14173f] shadow-[0_24px_50px_-24px_rgba(0,0,40,.7)]"><p class="text-[9px] text-[#8f8aa6]">Operaciones</p>{[70, 45].map((w) => <div class="mt-1.5 h-2 rounded-full bg-[#f5efe8]"><i class="block h-full rounded-full bg-[var(--a)]" style={`width:${w}%`}></i></div>)}<p class="mt-1.5 text-[9px]">Proyectos · Inventario · Equipo</p></div>
+                  <div data-w="d8" class="cfg-w absolute left-[434px] top-[434px] w-[190px] rounded-[16px] bg-white p-3 text-[#14173f] shadow-[0_24px_50px_-24px_rgba(0,0,40,.7)]"><p class="text-[9px] text-[#8f8aa6]">Dashboard</p><div class="mt-1.5 flex h-[30px] items-end gap-1">{[40, 60, 48, 76, 90].map((h) => <i class="block flex-1 rounded-t-sm bg-[var(--b)]" style={`height:${h}%`}></i>)}</div></div>
+                </div>
+                <p data-note class="absolute bottom-3 left-4 text-[11px] text-white/45">Vista ilustrativa</p>
+              </div>
+            </div>
+
+            <!-- Pasos -->
+            <div class="lg:order-1 lg:row-start-1">
+              <div class="rounded-[22px] border border-white/15 bg-white/[.07] p-5 backdrop-blur-xl md:p-7">
+                <div class="flex items-center justify-between text-[12.5px] text-white/60"><span data-stepname></span><span data-stepno></span></div>
+                <i class="relative mt-3 block h-[3px] overflow-hidden rounded-full bg-white/15"><b data-bar class="absolute inset-y-0 left-0 block w-full origin-left bg-white transition-transform duration-500" style="transform:scaleX(.2)"></b></i>
+
+                <div data-step="0" class="mt-6 space-y-6">
+                  <label class="block text-[13px] text-white/75">Nombre de tu empresa<input data-in-name maxlength="28" class="mt-2 w-full rounded-xl border border-white/15 bg-white/10 px-4 py-3.5 text-[16px] text-white outline-none placeholder:text-white/40 focus:border-white/60" placeholder="Tu empresa" /></label>
+                  <div><p class="text-[13px] text-white/75">¿Qué tipo de negocio eres?</p><div class="mt-3 grid gap-2 sm:grid-cols-2">{types.map(([id, l], i) => <button type="button" data-type={id} aria-pressed={i === 0} class={chip}>{l}</button>)}</div></div>
+                </div>
+
+                <div data-step="1" hidden class="mt-6 space-y-6">
+                  <div><p class="text-[13px] text-white/75">Paleta</p><div class="mt-3 grid grid-cols-2 gap-2">{palettes.map(([id, l, a, b], i) => <button type="button" data-pal={id} aria-pressed={i === 0} class={`${chip} flex items-center gap-3`}><span class="flex"><i class="block size-5 rounded-full ring-2 ring-black/10" style={`background:${a}`}></i><i class="-ml-2 block size-5 rounded-full ring-2 ring-black/10" style={`background:${b}`}></i></span>{l}</button>)}</div></div>
+                  <div><p class="text-[13px] text-white/75">Estilo</p><div class="mt-3 grid gap-2">{styles.map(([id, l, d], i) => <button type="button" data-sty={id} aria-pressed={i === 0} class={chip}><span class="block font-medium">{l}</span><span class="block text-[12.5px] opacity-65">{d}</span></button>)}</div></div>
+                </div>
+
+                <div data-step="2" hidden class="mt-6">
+                  <p class="text-[13px] text-white/75">Elige uno o varios módulos. Se suman al escenario.</p>
+                  <div class="mt-3 grid gap-2">{modules.map(([id, l, d]) => <button type="button" data-mod={id} aria-pressed="false" class={chip}><span class="block font-medium">{l}</span><span class="block text-[12.5px] opacity-65">{d}</span></button>)}</div>
+                </div>
+
+                <div data-step="3" hidden class="mt-6">
+                  <p class="text-[13px] text-white/75">¿Cómo prefieres trabajar con nosotros?</p>
+                  <div class="mt-3 grid gap-2">{modes.map(([id, l, d], i) => <button type="button" data-mode={id} aria-pressed={i === 0} class={chip}><span class="block font-medium">{l}</span><span class="block text-[12.5px] opacity-65">{d}</span></button>)}</div>
+                </div>
+
+                <div data-step="4" hidden class="mt-6">
+                  <p class="text-[13px] text-white/75">Esto es lo que armaste:</p>
+                  <ul data-summary class="mt-3 space-y-2 text-[14.5px]"></ul>
+                  <p class="mt-4 text-[12.5px] leading-relaxed text-white/55">No incluye precios: con esta configuración preparamos una propuesta por escrito, con alcance, entregables, tiempos e inversión.</p>
+                  <div class="mt-6 flex flex-wrap gap-3">
+                    <a data-send href="/contacto" class="rounded-full bg-white px-7 py-3.5 text-[15px] font-medium text-[#0b0c0f] transition-transform hover:scale-[1.03]">Enviar mi configuración</a>
+                    <button type="button" data-copy class="rounded-full border border-white/30 px-6 py-3.5 text-[15px] transition-colors hover:bg-white/10">Copiar resumen</button>
+                  </div>
+                </div>
+
+                <div class="mt-8 flex items-center justify-between">
+                  <button type="button" data-prev class="rounded-full border border-white/25 px-6 py-3 text-[14.5px] transition-colors hover:bg-white/10 disabled:opacity-30" disabled>Atrás</button>
+                  <button type="button" data-next class="rounded-full bg-white px-7 py-3 text-[14.5px] font-medium text-[#0b0c0f] transition-transform hover:scale-[1.03] active:scale-[0.98]">Siguiente</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <ScrollFx />
+
+    <script define:vars={{ types, palettes, styles, modules, modes, stepNames }}>
+      const $ = (s, r = document) => r.querySelector(s);
+      const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+      const stage = $('[data-stage]'), cv = $('[data-canvas]');
+      const fit = () => { const k = Math.min(stage.clientWidth / 640, stage.clientHeight / 520) * 0.97; cv.style.transform = `translate(-50%,-50%) scale(${k.toFixed(4)})`; };
+      new ResizeObserver(fit).observe(stage); fit();
+
+      const COPY = {
+        pequena: ['Tu negocio, a la vista de todos', 'Presencia profesional para atraer clientes.', 'Contáctanos', ['Servicios', 'Nosotros', 'Ubicación']],
+        crecimiento: ['Crece con orden', 'Sistemas conectados para escalar sin caos.', 'Agenda una demo', ['Soluciones', 'Casos', 'Equipo']],
+        consolidada: ['Una operación integrada', 'Departamentos, datos y procesos en un solo estándar.', 'Conoce más', ['Áreas', 'Plataforma', 'Seguridad']],
+        comercio: ['Visítanos o pide en línea', 'Catálogo, pedidos y facturación al día.', 'Ver catálogo', ['Productos', 'Promos', 'Sucursales']],
+        profesional: ['Confianza que se nota', 'Servicios claros, cotizaciones rápidas.', 'Solicitar cotización', ['Servicios', 'Equipo', 'Clientes']],
+        ecommerce: ['Tu tienda, siempre abierta', 'Compras, pagos y envíos sin fricción.', 'Comprar ahora', ['Novedades', 'Ofertas', 'Mi cuenta']],
+      };
+      const PAL = { atardecer: ['#F6B370', '#2F3A9E', '#14173f', '#fdf6ee', '#14173f'], oceano: ['#0033FF', '#977DFF', '#0b0c2b', '#f3f5ff', '#ffffff'], bosque: ['#10b981', '#064e5a', '#06251f', '#f1faf6', '#06251f'], grafito: ['#14173f', '#8f8aa6', '#0b0b0c', '#f6f5f2', '#ffffff'] };
+      const STY = { minimal: ['6px', '300'], calido: ['16px', '500'], audaz: ['0px', '700'] };
+      const S = { step: 0, name: '', type: 'pequena', pal: 'atardecer', sty: 'minimal', mods: new Set(), mode: 'proyecto' };
+      const label = (list, id) => (list.find((x) => x[0] === id) || [])[1];
+
+      const render = () => {
+        const nm = S.name.trim() || 'Tu empresa';
+        const slug = nm.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '') || 'tuempresa';
+        const [a, b, ink, bg, on] = PAL[S.pal];
+        const [rad, hw] = STY[S.sty];
+        cv.style.cssText += `;--a:${a};--b:${b};--ink:${ink};--bg:${bg};--on:${on};--rad:${rad};--hw:${hw}`;
+        const c = COPY[S.type];
+        $('[data-name]').textContent = nm; $('[data-mark]').textContent = nm[0].toUpperCase(); $('[data-url]').textContent = `${slug}.mx`; $('[data-ig]').textContent = slug;
+        $('[data-h]').textContent = c[0]; $('[data-sub]').textContent = c[1]; $('[data-cta]').textContent = c[2];
+        $$('[data-card]').forEach((el, i) => (el.textContent = c[3][i]));
+        $$('[data-w]').forEach((el) => el.classList.toggle('on', S.mods.has(el.dataset.w)));
+        // pasos
+        $$('[data-step]').forEach((el) => (el.hidden = +el.dataset.step !== S.step));
+        $('[data-stepname]').textContent = stepNames[S.step]; $('[data-stepno]').textContent = `Paso ${S.step + 1} de 5`;
+        $('[data-bar]').style.transform = `scaleX(${(S.step + 1) / 5})`;
+        $('[data-prev]').disabled = S.step === 0;
+        $('[data-next]').hidden = S.step === 4;
+        // botones
+        $$('[data-type]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.type === S.type)));
+        $$('[data-pal]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.pal === S.pal)));
+        $$('[data-sty]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.sty === S.sty)));
+        $$('[data-mode]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.mode === S.mode)));
+        $$('[data-mod]').forEach((b) => b.setAttribute('aria-pressed', String(S.mods.has(b.dataset.mod))));
+        // resumen
+        const mods = modules.filter((m) => S.mods.has(m[0])).map((m) => m[1]);
+        const rows = [['Empresa', nm], ['Tipo de negocio', label(types, S.type)], ['Identidad', `${label(palettes, S.pal)} · ${label(styles, S.sty)}`], ['Módulos', mods.length ? mods.join(', ') : 'Aún sin elegir'], ['Modalidad', label(modes, S.mode)]];
+        $('[data-summary]').innerHTML = rows.map(([k, v]) => `<li class="flex flex-col gap-0.5 border-b border-white/10 pb-2 sm:flex-row sm:gap-4"><span class="w-36 shrink-0 text-[12.5px] text-white/55">${k}</span><span>${v.replace(/</g, '&lt;')}</span></li>`).join('');
+        const text = `Hola, armé mi proyecto en el configurador de HumanCorp:\n- Empresa: ${nm}\n- Tipo de negocio: ${label(types, S.type)}\n- Identidad: ${label(palettes, S.pal)} · ${label(styles, S.sty)}\n- Módulos: ${mods.length ? mods.join(', ') : 'aún sin elegir'}\n- Modalidad: ${label(modes, S.mode)}\nMe gustaría recibir una propuesta.`;
+        $('[data-send]').href = `/contacto?interes=${encodeURIComponent('Proyecto a la medida')}&mensaje=${encodeURIComponent(text)}`;
+        S.text = text;
+      };
+
+      document.addEventListener('click', (e) => {
+        const t = e.target.closest('button'); if (!t) return;
+        if (t.dataset.type) S.type = t.dataset.type;
+        else if (t.dataset.pal) S.pal = t.dataset.pal;
+        else if (t.dataset.sty) S.sty = t.dataset.sty;
+        else if (t.dataset.mode) S.mode = t.dataset.mode;
+        else if (t.dataset.mod) { S.mods.has(t.dataset.mod) ? S.mods.delete(t.dataset.mod) : S.mods.add(t.dataset.mod); }
+        else if (t.hasAttribute('data-next')) S.step = Math.min(4, S.step + 1);
+        else if (t.hasAttribute('data-prev')) S.step = Math.max(0, S.step - 1);
+        else if (t.hasAttribute('data-copy')) { navigator.clipboard?.writeText(S.text).then(() => { t.textContent = 'Copiado ✓'; setTimeout(() => (t.textContent = 'Copiar resumen'), 1800); }); return; }
+        else return;
+        render();
+      });
+      $('[data-in-name]').addEventListener('input', (e) => { S.name = e.target.value; render(); });
+      render();
+    </script>
+  </body>
+</html>

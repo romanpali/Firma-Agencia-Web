@@ -348,3 +348,11 @@ body { overflow-x: clip; }
 .chk > input:checked + i svg { opacity: 1; }
 .chk > input:checked ~ span { color: #0b0b0c; }
 .chk > input:focus-visible + i { outline: 2px solid #977dff; outline-offset: 2px; }
+
+/* /arma-tu-proyecto: escenario */
+.cfg-w { opacity: 0; transform: translate3d(0, 14px, 0) scale(0.9); pointer-events: none; transition: opacity 0.5s ease, transform 0.6s cubic-bezier(.2, .8, .2, 1); }
+.cfg-w.on { opacity: 1; transform: none; animation: cfgBob 5s ease-in-out 0.7s infinite; }
+@keyframes cfgBob { 50% { translate: 0 -4px; } }
+.cfg-browser { transition: border-radius 0.4s; }
+.cfg [data-h], .cfg [data-name] { transition: font-weight 0.4s; }
+@media (prefers-reduced-motion: reduce) { .cfg-w.on { animation: none; } .cfg-w { transition: none; } }
