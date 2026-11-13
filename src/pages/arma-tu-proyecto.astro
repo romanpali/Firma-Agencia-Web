@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import Cursor from '../components/Cursor.astro';
+import BookProps from '../components/BookProps.astro';
 
 const types: [string, string, string][] = [
   ['pequena', 'Pequeña empresa', 'Presencia profesional para atraer clientes.'],
@@ -143,12 +144,9 @@ const idleImgs = ['/process/reel-1.webp', '/horizon/2.webp', '/process/reel-2.we
 
             <section class="gal-book" data-book>
               <div class="bw-stick">
-                <div class="bw">
+                <div class="bwv">
                   <div class="bw-world" data-bw>
-                    <i class="bw-desk"></i><i class="bw-lamp"></i>
-                    <svg class="bw-prop bw-cup" viewBox="0 0 160 150" aria-hidden="true"><defs><linearGradient id="cg1" x1="0" x2="1"><stop offset="0" stop-color="#bfb8aa"/><stop offset=".5" stop-color="#fbf8f1"/><stop offset="1" stop-color="#a8a091"/></linearGradient><radialGradient id="cof" cx=".4" cy=".35"><stop offset="0" stop-color="#7a4a2c"/><stop offset="1" stop-color="#2a170d"/></radialGradient></defs><ellipse cx="80" cy="130" rx="72" ry="17" fill="url(#cg1)"/><ellipse cx="80" cy="126" rx="54" ry="11" fill="#e6dfd2"/><path d="M104 122 L142 112" stroke="#cfc8bb" stroke-width="5" stroke-linecap="round"/><path d="M32 58 Q34 120 80 124 Q126 120 128 58Z" fill="url(#cg1)"/><path d="M126 70 Q156 66 152 94 Q148 114 118 110" fill="none" stroke="#e8e1d4" stroke-width="9" stroke-linecap="round"/><ellipse cx="80" cy="58" rx="48" ry="14" fill="#f4f0e7"/><ellipse cx="80" cy="59" rx="42" ry="11" fill="url(#cof)"/><path d="M80 66 c-12-8-18-14-12-19 4-3 9-1 12 4 3-5 8-7 12-4 6 5 0 11-12 19z" fill="#e9d4b6" opacity=".88"/><ellipse cx="62" cy="55" rx="16" ry="3.2" fill="rgba(255,255,255,.2)"/></svg>
-                    <svg class="bw-prop bw-plant" viewBox="0 0 120 130" aria-hidden="true"><defs><linearGradient id="pg1" x1="0" x2="1"><stop offset="0" stop-color="#4a4a48"/><stop offset=".5" stop-color="#8a8a86"/><stop offset="1" stop-color="#3a3a38"/></linearGradient></defs><path d="M22 70 H98 L90 124 Q60 132 30 124Z" fill="url(#pg1)"/><ellipse cx="60" cy="70" rx="38" ry="9" fill="#2a2a28"/><g>{[0, 1, 2, 3, 4, 5, 6, 7].map((i) => <ellipse cx="60" cy="42" rx="9" ry="26" fill={i % 2 ? '#6f9a63' : '#5b8651'} transform={`rotate(${-70 + i * 20} 60 66)`} />)}</g><g>{[0, 1, 2, 3, 4].map((i) => <ellipse cx="60" cy="52" rx="7" ry="17" fill="#86b277" transform={`rotate(${-40 + i * 20} 60 66)`} />)}</g></svg>
-                    <i class="bw-prop bw-pencil"></i>
+                    <BookProps />
                     <div class="bw-book" data-bk>
                       <i class="bw-sh r"></i><i class="bw-sh l"></i><i class="bw-fs"></i><i class="bw-base"></i><i class="bw-base l"></i>
                       <i class="bw-edge r"></i><i class="bw-edge l"></i>

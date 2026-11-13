@@ -1,16 +1,16 @@
 // Libro 3D de proyectos: páginas apaisadas con curvatura, escritorio en perspectiva y fotos que se «pixelan» al abrirse.
 // Se usa en /obra y en la plantilla Galería del configurador. Funciona del lado del servidor (HTML) y del cliente (animación).
 
-export const SEG = 8;
+export const SEG = 5;
 export type Proj = { n: string; cat: string; y: number; d: string; tags: string[]; hl: string; href?: string; img?: string; art: number; dark?: boolean; layout?: number };
 export type PageOpts = { brand: string; mail: string; mailHref?: string; year: number; endTitle: string; contentsTitle: string };
 
 const esc = (t: string) => String(t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c] as string));
 
-// Una hoja: cadena de segmentos anidados. Cada segmento muestra su rebanada de la página y se puede girar un poco respecto al anterior.
+// Una hoja: cadena de franjas anidadas (se curva girando cada franja un poco respecto a la anterior).
 export function leafHTML(front: string, back: string, S = SEG): string {
   const seg = (i: number): string =>
-    `<div class="sg"><div class="sf"><div class="sc" style="margin-left:calc(var(--pw)/${S}*${-i})">${front}</div></div><div class="sb"><div class="sc" style="margin-left:calc(var(--pw)/${S}*${-(S - 1 - i)})">${back}</div></div>${i < S - 1 ? seg(i + 1) : ''}</div>`;
+    `<div class="sg" style="width:calc(var(--pw)/${S})"><div class="sf"><div class="sc" style="margin-left:calc(var(--pw)/${S}*${-i})">${front}</div><i class="shd"></i></div><div class="sb"><div class="sc" style="margin-left:calc(var(--pw)/${S}*${-(S - 1 - i)})">${back}</div><i class="shd"></i></div>${i < S - 1 ? seg(i + 1) : ''}</div>`;
   return seg(0);
 }
 
@@ -65,15 +65,28 @@ const prepare = (url: string) => {
   return levels.get(url)!;
 };
 
+const cache = new WeakMap<Element, Record<string, string>>();
+const put = (el: HTMLElement, prop: 'transform' | 'opacity' | 'height' | 'width' | 'left' | 'display', v: string) => {
+  let c = cache.get(el); if (!c) cache.set(el, (c = {}));
+  if (c[prop] === v) return;
+  c[prop] = v; el.style[prop as 'opacity'] = v;
+};
+
 export function mountBook(o: Mount) {
   const sec = o.sec;
   const book = sec.querySelector<HTMLElement>('[data-bk]')!;
   const world = sec.querySelector<HTMLElement>('[data-bw]')!;
   const fs = sec.querySelector<HTMLElement>('.bw-fs');
+  const intro = sec.querySelector<HTMLElement>('.bw-intro');
+  const baseL = sec.querySelector<HTMLElement>('.bw-base.l');
+  const shL = sec.querySelector<HTMLElement>('.bw-sh.l');
+  const edgeR = sec.querySelector<HTMLElement>('.bw-edge.r');
+  const edgeL = sec.querySelector<HTMLElement>('.bw-edge.l');
   const count = sec.querySelector<HTMLElement>('[data-bk-count]');
   const barEl = sec.querySelector<HTMLElement>('[data-bk-bar]');
-  let leaves: HTMLElement[] = [];
-  let N = 0, active = -1;
+  type L = { el: HTMLElement; segs: HTMLElement[]; shds: HTMLElement[]; vis: boolean };
+  let L: L[] = [];
+  let N = 0, active = -1, pw = 1, ph = 1, lastKey = '';
   const timers = new Map<HTMLElement, number>();
 
   const runPix = (leaf: HTMLElement) => {
@@ -90,48 +103,55 @@ export function mountBook(o: Mount) {
       step();
     });
   };
-
+  const measure = () => { pw = book.offsetWidth / 2 || 1; ph = book.offsetHeight || 1; lastKey = ''; };
   const refresh = () => {
-    leaves = [...sec.querySelectorAll<HTMLElement>('.bw-leaf')]; N = leaves.length; active = -1;
-    leaves.forEach((l) => { if (l.dataset.img) { l.style.setProperty('--pix', `url("${l.dataset.img}")`); prepare(l.dataset.img); } });
+    L = [...sec.querySelectorAll<HTMLElement>('.bw-leaf')].map((el) => ({ el, segs: [...el.querySelectorAll<HTMLElement>('.sg')].slice(1), shds: [...el.querySelectorAll<HTMLElement>('.shd')], vis: true }));
+    N = L.length; active = -1; lastKey = '';
+    L.forEach(({ el }) => { if (el.dataset.img) prepare(el.dataset.img); });
+    measure();
   };
   const update = () => {
     if (!N) return;
     const range = Math.max(1, sec.offsetHeight - o.viewH());
     const p = cl((o.scrollY() - o.secTop()) / range);
+    const key = p.toFixed(4);
+    if (key === lastKey) return;
+    lastKey = key;
     const t = cl((p - 0.05) / 0.88) * N;
     const cur = Math.floor(Math.min(t, N - 0.001));
-    const pw = leaves[0].offsetWidth || 1;
     let shadowA = 0, shadowF = 0;
-    leaves.forEach((el, k) => {
+    L.forEach((l, k) => {
+      const show = k >= cur - 1 && k <= cur + 1;
+      if (show !== l.vis) { l.vis = show; put(l.el, 'display', show ? '' : 'none'); }
+      if (!show) return;
       const f = cl(t - k), a = sm(f) * 180;
-      el.style.setProperty('--ang', a.toFixed(2));
-      el.style.setProperty('--z', `${((a > 90 ? k : N - k) * 1.4).toFixed(1)}px`);
-      el.style.setProperty('--shade', (Math.sin((a * Math.PI) / 180) * 0.45).toFixed(3));
-      el.style.setProperty('--bend', ((Math.sin(Math.PI * f) * 62) / (SEG - 1)).toFixed(2));
-      el.style.visibility = k >= cur - 1 && k <= cur + 1 ? 'visible' : 'hidden';
+      put(l.el, 'transform', `translateZ(${((a > 90 ? k : N - k) * 1.4).toFixed(1)}px) rotateY(${(-a).toFixed(1)}deg)`);
+      const bend = ((Math.sin(Math.PI * f) * 62) / (SEG - 1)).toFixed(1);
+      for (const sg of l.segs) put(sg, 'transform', `rotateY(${bend}deg)`);
+      const sh = (Math.sin((a * Math.PI) / 180) * 0.45).toFixed(2);
+      for (const d of l.shds) put(d, 'opacity', sh);
       if (f > 0 && f < 1) { shadowA = a; shadowF = f; }
     });
-    const e = sm(cl(p / 0.28));
-    book.style.setProperty('--o', sm(cl(t)).toFixed(3));
-    book.style.setProperty('--lb', cl(t * 1.5).toFixed(3));
-    book.style.setProperty('--tr', `${(1 - t / N).toFixed(3)}`);
-    book.style.setProperty('--tl', `${(t / N).toFixed(3)}`);
-    world.style.setProperty('--rx', (44 - 15 * e).toFixed(2));
-    world.style.setProperty('--rz', (-6 * (1 - e)).toFixed(2));
-    world.style.setProperty('--bs', (0.9 + 0.1 * e).toFixed(3));
-    sec.style.setProperty('--bp', p.toFixed(3));
+    const e = sm(cl(p / 0.28)), tt = sm(cl(t));
+    put(world, 'transform', `rotateX(${(44 - 15 * e).toFixed(1)}deg) rotateZ(${(-6 * (1 - e)).toFixed(1)}deg) scale(${(0.9 + 0.1 * e).toFixed(3)})`);
+    put(book, 'transform', `translateX(${(-pw * 0.5 * (1 - tt)).toFixed(1)}px)`);
+    const lb = cl(t * 1.5).toFixed(2);
+    if (baseL) put(baseL, 'opacity', lb);
+    if (shL) put(shL, 'opacity', (+lb * 0.7).toFixed(2));
+    if (edgeR) put(edgeR, 'height', `${(ph * 0.052 * (1 - t / N)).toFixed(1)}px`);
+    if (edgeL) put(edgeL, 'height', `${(ph * 0.052 * (t / N)).toFixed(1)}px`);
+    if (intro) put(intro, 'opacity', cl(1 - p * 14).toFixed(2));
     if (fs) {
       const x = pw * Math.cos((shadowA * Math.PI) / 180);
-      fs.style.left = `calc(50% + ${Math.min(0, x).toFixed(1)}px)`;
-      fs.style.width = `${(Math.abs(x) + pw * 0.04).toFixed(1)}px`;
-      fs.style.opacity = shadowF > 0 ? (Math.sin(Math.PI * shadowF) * 0.7).toFixed(3) : '0';
+      put(fs, 'left', `calc(50% + ${Math.min(0, x).toFixed(0)}px)`);
+      put(fs, 'width', `${(Math.abs(x) + pw * 0.04).toFixed(0)}px`);
+      put(fs, 'opacity', shadowF > 0 ? (Math.sin(Math.PI * shadowF) * 0.7).toFixed(2) : '0');
     }
     const pg = Math.round(t);
-    if (count) count.textContent = pg < 1 ? 'Cubierta' : pg > N - 1 ? `Obra ${N - 1} de ${N - 1}` : `Obra ${pg} de ${N - 1}`;
-    if (barEl) barEl.style.transform = `scaleX(${(t / N).toFixed(3)})`;
+    if (count) { const txt = pg < 1 ? 'Cubierta' : pg > N - 1 ? `Obra ${N - 1} de ${N - 1}` : `Obra ${pg} de ${N - 1}`; if (count.textContent !== txt) count.textContent = txt; }
+    if (barEl) put(barEl, 'transform', `scaleX(${(t / N).toFixed(3)})`);
     const act = pg >= 1 && pg <= N - 1 ? pg : -1;
-    if (act !== active) { active = act; if (act > 0) runPix(leaves[act]); }
+    if (act !== active) { active = act; if (act > 0) runPix(L[act].el); }
   };
   const go = (t: number) => {
     const range = Math.max(1, sec.offsetHeight - o.viewH());
@@ -144,9 +164,10 @@ export function mountBook(o: Mount) {
     if (g) { go(+g.dataset.bkGo!); return; }
     const leaf = el.closest<HTMLElement>('.bw-leaf');
     if (!leaf) return;
-    const k = +leaf.dataset.k!, a = parseFloat(leaf.style.getPropertyValue('--ang')) || 0;
-    go(a > 90 ? k : k + 1);
+    const k = +leaf.dataset.k!, a = L[k] ? (leaf.style.transform.match(/rotateY\((-?[\d.]+)deg\)/)?.[1] ?? '0') : '0';
+    go(Math.abs(parseFloat(a)) > 90 ? k : k + 1);
   });
+  new ResizeObserver(() => { measure(); update(); }).observe(sec);
   refresh();
   return { update, refresh, go };
 }
