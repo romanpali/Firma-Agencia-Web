@@ -313,3 +313,23 @@ body { overflow-x: clip; }
 .sheet { --dim: 0; transform-origin: 50% 0; background: color-mix(in srgb, #dedaf6 calc(var(--dim) * 100%), #fff); box-shadow: 0 40px 80px -40px rgba(0, 0, 40, 0.65); will-change: transform; }
 .sheet-scroll { scrollbar-width: thin; scrollbar-color: rgba(0, 0, 0, 0.18) transparent; }
 @media (prefers-reduced-motion: reduce) { .a-tw, .a-bob, .a-glow, .a-float, .a-type, .a-rise, .a-draw { animation: none !important; } .a-draw { stroke-dashoffset: 0 !important; } .a-type, .a-rise { scale: 1 1 !important; } }
+
+/* /servicios: escenario inmersivo y áreas */
+.stage-bg { background: radial-gradient(90% 80% at 15% 0%, color-mix(in srgb, var(--sa) 75%, #0b0d2c), transparent 65%), radial-gradient(80% 70% at 100% 100%, color-mix(in srgb, var(--sb) 65%, #0b0d2c), transparent 65%), #0a0c2b; }
+.stage-orb { background: radial-gradient(circle, color-mix(in srgb, var(--sb) 60%, transparent), transparent 65%); filter: blur(10px); animation: stOrb 14s ease-in-out infinite alternate; }
+.stage-orb2 { background: radial-gradient(circle, color-mix(in srgb, var(--sa) 55%, transparent), transparent 65%); animation-duration: 18s; animation-direction: alternate-reverse; }
+@keyframes stOrb { to { translate: 8% -10%; scale: 1.15; } }
+.stage-panel { transform-origin: 50% 50%; }
+.stage-panel .pn { position: absolute; left: 0; top: 0; box-shadow: 0 50px 100px -30px rgba(0, 0, 40, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.18); }
+.area-l { background: rgba(11, 12, 15, 0.07); color: rgba(11, 12, 15, 0.55); transition: background-color 0.3s, color 0.3s; }
+.area-t { color: rgba(11, 12, 15, 0.55); transition: color 0.3s; }
+.area.is-on .area-l { background: #0b0c0f; color: #fff; }
+.area.is-on .area-t { color: #0b0c0f; font-weight: 500; }
+.area-bar { background: #977dff; transform: scaleX(0); }
+.area.is-on .area-bar { animation: arProg 4.8s linear forwards; animation-play-state: var(--run, paused); }
+@keyframes arProg { to { transform: scaleX(1); } }
+.words > span { display: inline; }
+.words > span:not(:last-child)::after { content: ' · '; color: rgba(255, 255, 255, 0.35); white-space: pre; }
+.words.swap > span { animation: wIn 0.5s both; animation-delay: calc(var(--i, 0) * 12ms); }
+@keyframes wIn { from { opacity: 0; filter: blur(4px); translate: 0 6px; } }
+@media (prefers-reduced-motion: reduce) { .stage-orb, .words.swap > span, .area.is-on .area-bar { animation: none !important; } .area.is-on .area-bar { transform: scaleX(1); } }

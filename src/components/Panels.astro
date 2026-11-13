@@ -1,7 +1,7 @@
 ---
-interface Props { i: number }
-const { i } = Astro.props;
-const labels = ['Branding', 'Sitio web', 'Finanzas', 'Datos', 'Asistentes', 'Marketing', 'Branding y redes'];
+interface Props { i: number; label?: string }
+const { i, label } = Astro.props;
+const labels = ['Branding', 'Sitio web', 'Finanzas', 'Datos', 'Asistentes', 'Marketing', 'Branding y redes', 'Datos'];
 const SB = [
   '<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
   '<path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h6M9 17h6"/>',
@@ -14,7 +14,7 @@ const HM = Array.from({ length: 4 }, (_, r) => Array.from({ length: 24 }, (_, c)
 ---
 
 <div class={`pn${i === 1 ? ' dk' : ''}`} data-pn={i}>
-  <span class="lb">{labels[i]}</span>
+  <span class="lb">{label ?? labels[i]}</span>
   <span class="ok rv" style="--a:.9;--b:.08">Listo</span>
 
               {i === 0 && (<>
@@ -301,6 +301,38 @@ const HM = Array.from({ length: 4 }, (_, r) => Array.from({ length: 24 }, (_, c)
                         </i>
                       </div>
                     ))}
+                  </div>
+                </div>
+              </>)}
+
+              {i === 7 && (<>
+                <div class="dash absolute inset-x-6 top-[16px] flex items-center justify-between pr-[78px]">
+                  <div class="rv flex items-baseline gap-3" style="--a:.02;--b:.12"><p class="text-[15px] font-medium text-[#14173f]">Inteligencia de negocios</p><span class="text-[11px] text-[#8f8aa6]">Octubre</span></div>
+                  <div class="rv flex gap-1.5 text-[10.5px]" style="--a:.04;--b:.12">{['Ventas', 'Finanzas', 'Operación'].map((t, k) => <span class={`rounded-full px-3 py-[3px] ${k === 0 ? 'bg-[#14173f] text-white' : 'bg-[#f5efe8] text-[#5f5a7a]'}`}>{t}</span>)}</div>
+                </div>
+                <div class="absolute left-6 top-[60px] w-[340px]">
+                  <p class="rv text-[11px] text-[#8f8aa6]" style="--a:.06;--b:.12">Ingresos del mes</p>
+                  <p class="rv flex items-baseline gap-3" style="--a:.08;--b:.15"><span class="text-[36px] font-light leading-[1.1] tracking-[-0.03em] text-[#14173f]" data-count="482" data-a=".1" data-b=".4">0</span><span class="text-[11px] text-[#8f8aa6]">mil MXN</span><span class="text-[11px] text-[#2F3A9E]">▲ 8 % vs. mes anterior</span></p>
+                  <div class="mt-3 flex h-[132px] items-end gap-[7px] border-b border-[#e4dcd0]">
+                    {[38, 52, 46, 64, 58, 72, 66, 80, 74, 90, 84, 100].map((h, k) => <i class="gy block flex-1 rounded-t-[4px]" style={`height:${h}%;background:${k === 11 ? 'linear-gradient(to top,#2F3A9E,#977DFF)' : 'linear-gradient(to top,#eccfa6,#F6B370)'};--a:${0.14 + k * 0.035};--b:.2`}></i>)}
+                  </div>
+                  <div class="mt-1.5 flex justify-between text-[9.5px] text-[#8f8aa6]">{['Ene', 'Mar', 'May', 'Jul', 'Sep', 'Nov'].map((m) => <span>{m}</span>)}</div>
+                </div>
+                <div class="absolute right-6 top-[64px] w-[232px]">
+                  <p class="rv text-[13px] font-medium text-[#14173f]" style="--a:.1;--b:.12">Estado de los sistemas</p>
+                  <div class="mt-3 space-y-[11px]">
+                    {[['Respaldos automáticos', 'Hoy 03:00'], ['Accesos y permisos', 'Revisados'], ['Integraciones', '12 conectadas'], ['Monitoreo', 'Sin incidencias']].map(([t, d], k) => (
+                      <div class="rv flex items-center gap-3" style={`--a:${0.2 + k * 0.09};--b:.12`}>
+                        <svg class="shrink-0" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="#14173f"/><path class="dw" style={`--a:${0.28 + k * 0.09};--b:.1`} d="M6 10.4l2.8 2.8L14 7.6" fill="none" stroke="#F6B370" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" pathLength="100"/></svg>
+                        <div><p class="text-[12.5px] text-[#14173f]">{t}</p><p class="text-[11px] text-[#8f8aa6]">{d}</p></div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div class="absolute inset-x-6 top-[290px]">
+                  <p class="rv text-[11.5px] font-medium text-[#14173f]" style="--a:.5;--b:.12">Fuentes conectadas a un solo panel</p>
+                  <div class="mt-3 flex flex-wrap gap-2">
+                    {['CRM', 'Facturación', 'Tienda en línea', 'Campañas', 'Inventario', 'Proyectos'].map((t, k) => <span class="rv rounded-full border border-[#e4dcd0] px-3.5 py-[6px] text-[11.5px] text-[#14173f]" style={`--a:${0.54 + k * 0.05};--b:.1`}>{t}</span>)}
                   </div>
                 </div>
               </>)}
