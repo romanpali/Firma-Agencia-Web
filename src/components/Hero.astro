@@ -1,11 +1,4 @@
 ---
-// Sitios de /obra que flotan junto al título (solo en pantallas amplias).
-const sites: { n: string; c: string; img?: string; bg: string; pos: string; d: string }[] = [
-  { n: 'Alba', c: 'Branding e identidad', img: '/obra/f1.webp', bg: '', pos: 'left-[5%] top-[20%] -rotate-3', d: '.7s' },
-  { n: 'Casa Lumbre', c: 'Sitio web y SEO', img: '/obra/f2.webp', bg: '', pos: 'left-[9%] top-[56%] rotate-2', d: '.9s' },
-  { n: 'Grupo Ceiba', c: 'Ventas y CRM', img: '/obra/f3.webp', bg: '', pos: 'right-[5%] top-[22%] rotate-3', d: '.8s' },
-  { n: 'Estudio Aurora', c: 'Asistentes y automatización', bg: 'linear-gradient(135deg,#977DFF,#0033FF)', pos: 'right-[9%] top-[58%] -rotate-2', d: '1s' },
-];
 ---
 
 <div data-hero-wrap class="relative z-10 h-[190svh]">
@@ -30,12 +23,6 @@ const sites: { n: string; c: string; img?: string; bg: string; pos: string; d: s
         <a href="/servicios" class="rounded-full bg-white px-7 py-3.5 text-[15px] font-medium text-[#0b0c0f] transition-transform hover:scale-[1.03]">Conocer servicios</a>
         <a href="/arma-tu-proyecto" class="rounded-full border border-white/45 px-7 py-3.5 text-[15px] transition-colors hover:bg-white/10">Arma tu proyecto</a>
       </div>
-      {sites.map((s) => (
-        <a href="/obra" tabindex="-1" aria-label={`${s.n}, ${s.c}`} class={`hf-rise absolute hidden w-[13.5rem] overflow-hidden rounded-2xl border border-white/30 bg-[#0b0d2c] text-left shadow-[0_24px_50px_-20px_rgba(0,0,30,.7)] transition-transform duration-300 hover:scale-[1.04] xl:block ${s.pos}`} style={`--d:${s.d}`}>
-          <span class="block h-[7.2rem] bg-cover bg-center" style={s.img ? `background-image:url(${s.img})` : `background:${s.bg}`}></span>
-          <span class="block px-3.5 py-3"><b class="block text-[14px] font-semibold">{s.n}</b><span class="block text-[11.5px] text-white/65">{s.c}</span></span>
-        </a>
-      ))}
       <div class="hf-rise absolute inset-x-0 bottom-[5%] flex flex-col items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-white/70" style="--d:1s" aria-hidden="true">
         <span>Desliza</span>
         <i class="block h-9 w-px origin-top bg-white/70" style="animation:scrollLine 2s ease-in-out 1.4s 3 both"></i>
