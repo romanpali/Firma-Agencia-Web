@@ -29,9 +29,10 @@ const G = '#cfc4ff', V = '#5b7bff', W = '#f4f2ff';
       <div data-ct-track class="absolute inset-0 flex will-change-transform" style="width:800vw">
         {steps.map((s, i) => (
           <article data-slide={i} class="ct-slide relative flex h-full w-screen shrink-0 flex-col items-center justify-center gap-5 px-6 pb-[118px] pt-[120px] md:flex-row md:gap-16 md:px-[8vw]">
-            <span data-ghost class="ct-ghost pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none text-[clamp(14rem,44vw,40rem)] font-extralight leading-none tracking-[-0.06em]">{String(i + 1).padStart(2, '0')}</span>
+            <span data-ghost class="ct-ghost md:hidden pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none text-[clamp(14rem,44vw,40rem)] font-extralight leading-none tracking-[-0.06em]">{String(i + 1).padStart(2, '0')}</span>
 
             <div class="relative z-10 order-2 w-full max-w-[34rem] text-center md:order-1 md:w-[40%] md:text-left">
+              <span class="rv mb-3 hidden bg-gradient-to-b from-white to-[#977DFF] bg-clip-text text-[clamp(4.5rem,9vw,9rem)] font-extralight leading-[.85] tracking-[-0.06em] text-transparent md:block" style="--a:.02;--b:.2" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
               <p class="rv text-[13px] tracking-[0.2em] text-[#cfc4ff]" style="--a:.05;--b:.2">PASO {String(i + 1).padStart(2, '0')} / 08</p>
               <h3 class="mt-3 text-[clamp(1.9rem,4.2vw,3.8rem)] font-light leading-[1.02] tracking-[-0.035em]">
                 <span class="block overflow-hidden"><span class="rl block" style="--a:.05;--b:.3">{s.t}</span></span>
@@ -141,8 +142,10 @@ const G = '#cfc4ff', V = '#5b7bff', W = '#f4f2ff';
     if (reduced) return;
     if (y + vh < m.top || y > m.top + m.height) return;
     const p = clamp((y - m.top) / Math.max(1, m.height - vh * 1.5));
-    tgt = smooth(clamp((p - 0.02) / 0.96)) * 0 + clamp((p - 0.02) / 0.96) * 7;
-    pos += (tgt - pos) * 0.12;
+    // cada paso se sostiene y el cambio al siguiente es rápido: nunca quedan dos pasos a medias, uno sobre otro
+    const raw = clamp((p - 0.02) / 0.96) * 7, base = Math.min(6, Math.floor(raw));
+    tgt = base + smooth(clamp((raw - base - 0.3) / 0.4));
+    pos += (tgt - pos) * 0.14;
     if (Math.abs(tgt - pos) < 0.0005) pos = tgt;
     put(track, 'transform', `translate3d(${(-pos * innerWidth).toFixed(1)}px,0,0)`);
     slides.forEach((s, i) => {
