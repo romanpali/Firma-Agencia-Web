@@ -60,17 +60,18 @@ const pill = 'hdr-pill rounded-full border border-white/20 bg-white/10 px-5 py-3
 
 <Cursor />
 
-<div id="site-menu" data-menu class="pointer-events-none fixed inset-0 z-[60] flex flex-col overflow-y-auto bg-[#07080b]/95 px-6 py-6 text-white opacity-0 backdrop-blur-xl transition-opacity duration-500" aria-hidden="true">
-  <div class="flex items-center justify-between">
-    <span class="text-[15px] tracking-wide"><span class="font-light">HUMAN</span> <span class="font-semibold">CORP</span></span>
-    <button type="button" class={pill} data-menu-close>Cerrar</button>
-  </div>
-  <nav class="my-auto flex flex-col gap-1 py-8" aria-label="Menú">
-    {menuLinks.map((l, i) => (
-      <a href={l.href} data-menu-link class="menu-link text-[clamp(1.9rem,8.5vw,3.4rem)] font-light leading-[1.12] tracking-[-0.04em] text-white/90 transition-colors hover:text-white" style={`--i:${i}`}>{l.label}</a>
+<div id="site-menu" data-menu class="pointer-events-none fixed inset-0 z-[60] flex flex-col overflow-y-auto px-6 pb-8 pt-4 text-center text-white opacity-0 transition-opacity duration-500" style="background:radial-gradient(70% 45% at 85% 12%,rgba(122,98,190,.75),transparent 70%),radial-gradient(80% 50% at 10% 55%,rgba(34,88,200,.8),transparent 72%),radial-gradient(70% 40% at 80% 92%,rgba(92,70,170,.7),transparent 70%),linear-gradient(180deg,#0b1a52 0%,#1b3f9e 38%,#4d4a9a 72%,#2a2561 100%)" aria-hidden="true">
+  <button type="button" data-menu-close class="mx-auto flex w-fit items-center gap-3 rounded-full border border-white/30 bg-white/15 px-6 py-3 text-[15px] font-medium shadow-[0_14px_34px_-14px_rgba(5,5,40,.6)] transition-colors hover:bg-white/25"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M1.5 1.5l11 11M12.5 1.5l-11 11"/></svg>Cerrar</button>
+  <nav class="my-auto flex flex-col items-center gap-0.5 py-8" aria-label="Menú">
+    {menuLinks.filter((l) => l.href !== '/arma-tu-proyecto').map((l, i) => (
+      <a href={l.href} data-menu-link class="menu-link text-[clamp(2rem,9.5vw,3rem)] font-medium leading-[1.1] tracking-[-0.04em] text-white" style={`--i:${i}`}>{l.label}</a>
     ))}
+    <a href="/arma-tu-proyecto" data-menu-link class="menu-link mt-6 rounded-full bg-white px-8 py-3.5 text-[15px] font-medium text-[#0b0c0f] shadow-[0_18px_40px_-14px_rgba(10,8,60,.7)]" style={`--i:${menuLinks.length - 1}`}>Arma tu proyecto</a>
   </nav>
-  <p class="text-[13px] text-white/45">Diseño, tecnología y operaciones empresariales.</p>
+  <div class="text-[13px]">
+    <p class="font-medium uppercase tracking-[0.14em] text-white/70">Contáctanos</p>
+    <a href="mailto:info@humancorp.co" class="mt-1 inline-block text-[1.35rem] font-medium underline decoration-white/40 underline-offset-[6px]">info@humancorp.co</a>
+  </div>
 </div>
 
 <script>
