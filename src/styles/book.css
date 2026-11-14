@@ -8,7 +8,7 @@
 
 .bw-world { --pw: min(42cqw, calc(var(--sh, 700px) * 1.05)); --ph: calc(var(--pw) / 1.5); position: absolute; left: 50%; top: 56%; width: 0; height: 0; transform-style: preserve-3d; transform: rotateX(44deg) rotateZ(-6deg) scale(0.9); will-change: transform; }
 .bw-desk { position: absolute; width: max(190cqw, calc(var(--sh, 700px) * 2.4)); height: max(150cqw, calc(var(--sh, 700px) * 3.2)); left: calc(max(190cqw, calc(var(--sh, 700px) * 2.4)) / -2); top: calc(max(150cqw, calc(var(--sh, 700px) * 3.2)) / -2 + 8cqw); transform: translateZ(-34px);
-  background: radial-gradient(36% 32% at 30% 28%, rgba(255, 196, 130, 0.42), transparent 72%), linear-gradient(180deg, rgba(0, 0, 0, 0.35), transparent 45%), url('/configurador/mesa-nogal.webp') center / 100% 100%, #14090a; }
+  background: radial-gradient(36% 32% at 30% 28%, rgba(255, 186, 120, 0.3), transparent 72%), linear-gradient(180deg, rgba(0, 0, 0, 0.3), transparent 45%), url('/configurador/mesa-nogal.webp') center / 100% 100%, #14090a; }
 .bw-lamp { position: absolute; width: 70cqw; height: 70cqw; left: -62cqw; top: -52cqw; transform: translateZ(-33px); pointer-events: none; background: radial-gradient(closest-side, rgba(255, 214, 160, 0.4), rgba(255, 190, 130, 0.12) 55%, transparent); }
 
 .bw-book { position: absolute; left: calc(var(--pw) * -1); top: calc(var(--ph) * -0.5); width: calc(var(--pw) * 2); height: var(--ph); transform-style: preserve-3d; transform: translateX(calc(var(--pw) * -0.5)); }
@@ -18,7 +18,7 @@
 .bw-fs { display: none; }
 .bw-base { position: absolute; left: 50%; top: -1.2%; width: calc(var(--pw) * 1.02); height: 102.4%; background: linear-gradient(120deg, #5a2a14, #160905); border-radius: 3px 7px 7px 3px; transform: translateZ(-24px); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.07); }
 .bw-base.l { left: auto; right: 50%; border-radius: 7px 3px 3px 7px; opacity: 0; }
-.bw-edge { position: absolute; top: 100%; transform-origin: 50% 0; transform: rotateX(-90deg); background: linear-gradient(#050506 0 9%, transparent 9%), repeating-linear-gradient(to bottom, #f6f1e7 0 0.8px, #d6cdbd 0.8px 1.6px, #bfb6a5 1.6px 2.1px); box-shadow: inset 0 -6px 8px rgba(0, 0, 0, 0.4); }
+.bw-edge { position: absolute; top: 100%; transform-origin: 50% 0; transform: rotateX(-90deg); background: linear-gradient(#050506 0 9%, transparent 9%), repeating-linear-gradient(to bottom, #d9d3c7 0 0.8px, #b8b1a3 0.8px 1.6px, #9d968a 1.6px 2.1px); box-shadow: inset 0 -6px 8px rgba(0, 0, 0, 0.4); }
 .bw-edge.r { left: 50%; width: var(--pw); height: calc(var(--ph) * 0.064); }
 .bw-edge.l { right: 50%; width: var(--pw); height: 0; }
 .bw-ribbon { position: absolute; left: calc(50% + var(--pw) * 0.07); top: 99%; width: calc(var(--pw) * 0.022); height: calc(var(--ph) * 0.17); background: linear-gradient(90deg, #5a3cff, #2a50ff 60%, #1a2fd0); clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 84%, 0 100%); transform: translateZ(-14px); }
@@ -87,8 +87,8 @@
 .bk-pn { position: absolute; right: 1.6em; bottom: 1.1em; z-index: 4; font-size: 0.6em; letter-spacing: 0.1em; opacity: 0.45; } .sb .bk-pn { right: auto; left: 1.6em; }
 /* Cubierta negra */
 .bw-cover { font-size: 1.18em; position: absolute; inset: 0; display: grid; place-items: center; border-radius: 2px 6px 6px 2px; overflow: hidden; color: #fff;
-  background: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.025) 0 1px, transparent 1px 3px), repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.18) 0 1px, transparent 1px 3px), linear-gradient(160deg, #1b1c20 0%, #0b0b0d 55%, #050506 100%); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.12); }
-.bw-cover::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0) 8%), radial-gradient(90% 70% at 24% 12%, rgba(255, 255, 255, 0.1), transparent 60%); }
+  background: url('/configurador/cuero-fino.webp') 0 0 / 200px 200px, linear-gradient(160deg, #17181b 0%, #0b0b0c 55%, #050505 100%); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.12); }
+.bw-cover::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, transparent 4.2%, rgba(0, 0, 0, 0.75) 4.6%, rgba(255, 255, 255, 0.1) 5.4%, transparent 7%), linear-gradient(90deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 4.2%), radial-gradient(90% 70% at 26% 10%, rgba(255, 255, 255, 0.09), transparent 60%); }
 .bw-wm { position: relative; z-index: 1; font-size: 2.1em; letter-spacing: 0.02em; white-space: nowrap; }
 .bw-wm i { font-style: normal; }
 .bw-wm .wl { font-weight: 300; } .bw-wm .ws { font-weight: 600; }
