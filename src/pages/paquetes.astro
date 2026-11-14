@@ -21,6 +21,19 @@ const all = [
   { t: 'Asesoría contable y fiscal', items: 'Asesoría contable continua|Orientación fiscal para tu empresa|Calendario de obligaciones y revisión periódica|Facturación electrónica (CFDI) y control de ingresos y egresos|Conciliaciones y estados financieros|Atención de requerimientos y trámites', d: 'Para empresas que requieren acompañamiento contable y fiscal permanente, a cargo del Director de Administración y Finanzas (contador) y su área, con el respaldo de nuestra tecnología.', divs: ['06'], cat: 'contable' },
   { t: 'Apoyo contable puntual', items: 'Diagnóstico de la situación contable y fiscal|Regularización y orden de la información|Revisión de facturación y registros|Plan de trabajo y recomendaciones', d: 'Para quien necesita ordenar su información contable o resolver una situación específica antes de contratar un servicio continuo.', divs: ['06'], cat: 'contable' },
 ];
+// Paquetes completos: combinaciones de divisiones (01 a 08) con su paleta.
+const combos: { t: string; d: string; divs: string[]; items: string[]; g: [string, string, string] }[] = [
+  { t: 'Marca y sitio', d: 'Una identidad clara y un sitio profesional para empezar con buen pie.', divs: ['01', '02'], items: ['Identidad y manual de marca', 'Sitio web a la medida', 'SEO base y formularios'], g: ['#5b7bff', '#9a7bff', '#e9a6ff'] },
+  { t: 'Lanzamiento', d: 'Marca, sitio y primeras campañas para presentarte al mercado.', divs: ['01', '02', '03'], items: ['Identidad y sitio web', 'Estrategia y campañas iniciales', 'Contenido para redes'], g: ['#ff8a6b', '#ff6f9c', '#b46bff'] },
+  { t: 'Crecimiento comercial', d: 'Atrae clientes y dales seguimiento sin perder ninguno.', divs: ['02', '03', '04'], items: ['Sitio con captación de contactos', 'Publicidad y analítica', 'CRM y cotizaciones'], g: ['#19b6a6', '#3b82f6', '#7c5cff'] },
+  { t: 'Venta en línea', d: 'Tienda, promoción y facturación conectadas.', divs: ['02', '03', '06'], items: ['Tienda en línea', 'Campañas y contenido de producto', 'Facturación electrónica (CFDI)'], g: ['#f59e0b', '#ef4f7a', '#8b5cf6'] },
+  { t: 'Creativo completo', d: 'Todo lo visual y de comunicación bajo una misma dirección.', divs: ['01', '03'], items: ['Identidad y dirección de arte', 'Producción de imagen y video', 'Marketing y redes sociales'], g: ['#ec4899', '#a855f7', '#6366f1'] },
+  { t: 'Técnico completo', d: 'Desarrollo, automatización e infraestructura, listos para operar.', divs: ['02', '05', '08'], items: ['Sitio o aplicación a la medida', 'Asistentes y automatizaciones', 'Datos, respaldo e infraestructura'], g: ['#0ea5e9', '#2563eb', '#4f46e5'] },
+  { t: 'Operación inteligente', d: 'Procesos claros y tareas repetitivas automatizadas con supervisión.', divs: ['04', '05', '07'], items: ['CRM y seguimiento', 'Flujos y asistentes', 'Procesos, proyectos e inventarios'], g: ['#22c55e', '#14b8a6', '#3b82f6'] },
+  { t: 'Orden financiero', d: 'Información contable, fiscal y operativa ordenada en un solo lugar.', divs: ['06', '07', '08'], items: ['Asesoría contable y fiscal', 'Facturación, flujo de caja y reportes', 'Tableros y respaldo de información'], g: ['#6d5dfc', '#4338ca', '#0ea5e9'] },
+  { t: 'Empresa conectada', d: 'Marca, sitio, ventas y administración trabajando como un solo equipo.', divs: ['01', '02', '04', '06'], items: ['Identidad y sitio web', 'CRM y automatización de ventas', 'Facturación y asesoría contable y fiscal'], g: ['#f97316', '#e11d8f', '#6d28d9'] },
+  { t: 'Ecosistema HumanCorp', d: 'Todas las divisiones conectadas bajo un solo estándar, con un plan de implementación a tu medida.', divs: ['01', '02', '03', '04', '05', '06', '07', '08'], items: ['Diseño, desarrollo y marketing', 'Ventas, IA y automatización', 'Finanzas, operaciones y datos'], g: ['#1d4ed8', '#7c3aed', '#db2777'] },
+];
 const recurring = ['Mantenimiento web', 'Administración de infraestructura', 'Gestión de campañas', 'Producción periódica de contenido', 'Administración de redes sociales', 'Monitoreo de automatizaciones', 'Soporte técnico', 'Actualización de sistemas', 'Administración de CRM', 'Reportes ejecutivos', 'Optimización continua'];
 const steps = [['Evaluación de la situación actual', 'Conocemos tu empresa y cómo trabaja hoy.'], ['Problemas y oportunidades', 'Identificamos qué conviene resolver primero.'], ['Diseño de la solución', 'Definimos cómo se conectan las piezas.'], ['Plan de implementación', 'Calendario, responsables y entregables.'], ['Desarrollo e integración', 'Construimos y conectamos todo.'], ['Capacitación', 'Tu equipo aprende a usarlo.'], ['Seguimiento y optimización', 'Medimos y mejoramos de forma continua.']];
 const name = (n: string) => divisions.find((d) => d.n === n)!.short;
@@ -40,9 +53,34 @@ const quote = (t: string) => `/contacto?interes=${encodeURIComponent('Paquete: '
     </div>
   </section>
 
+  <section data-tone="light" class="px-6 py-[4svh] md:px-10">
+    <div class="mx-auto max-w-[1280px] border-t border-[#e6e4df] pt-10">
+      <p data-reveal class="text-[13px] font-medium uppercase tracking-[0.14em] text-[#6b6e75]">Paquetes completos</p>
+      <h2 data-words class="mt-5 max-w-[20ch] font-goog text-[clamp(2rem,3.6vw,3.4rem)] font-light leading-[1.04] tracking-[-0.045em]">Combinaciones listas para tu etapa</h2>
+      <ul class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {combos.map((c, i) => (
+          <li data-reveal style={`--i:${i % 3}`} class={i === combos.length - 1 ? 'md:col-span-2 lg:col-span-3' : ''}>
+            <article class="relative flex h-full flex-col overflow-hidden rounded-[28px] p-6 text-white shadow-[0_30px_60px_-36px_rgba(30,20,90,.6)] transition-transform duration-500 hover:-translate-y-1" style={`background:linear-gradient(145deg,${c.g[0]},${c.g[1]} 55%,${c.g[2]})`}>
+              <i class="pointer-events-none absolute -right-16 -top-20 size-64 rounded-full opacity-70 blur-3xl" style={`background:${c.g[2]}`}></i>
+              <i class="pointer-events-none absolute -bottom-24 -left-16 size-64 rounded-full opacity-60 blur-3xl" style={`background:${c.g[0]}`}></i>
+              <div class="relative flex items-baseline justify-between text-[12.5px] text-white/80"><span>{String(i + 1).padStart(2, '0')}</span><span>{c.divs.length === 8 ? 'Todas las divisiones' : c.divs.length + ' divisiones'}</span></div>
+              <h3 class="relative mt-8 font-goog text-[1.9rem] font-normal leading-[1.05] tracking-[-0.04em]">{c.t}</h3>
+              <p class="relative mt-3 max-w-[34rem] text-[14.5px] leading-relaxed text-white/85">{c.d}</p>
+              <div class="relative mt-6 flex flex-wrap gap-1.5">{c.divs.map((d) => <span class="rounded-full border border-white/35 bg-white/15 px-3 py-[5px] text-[12px] backdrop-blur-md">{name(d)}</span>)}</div>
+              <div class="relative mt-6 rounded-[18px] border border-white/30 bg-white/[.14] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,.35)] backdrop-blur-xl">
+                <ul class={`grid gap-2 text-[13.5px] ${i === combos.length - 1 ? 'md:grid-cols-3' : ''}`}>{c.items.map((it) => <li class="flex gap-2.5"><span class="mt-[0.55em] block size-1 shrink-0 rounded-full bg-white"></span>{it}</li>)}</ul>
+              </div>
+              <a href={quote(c.t)} class="relative mt-6 inline-flex items-center gap-2 self-start rounded-full border border-white/40 bg-white/20 px-5 py-2.5 text-[14px] font-medium backdrop-blur-md transition-colors hover:bg-white/30">Cotizar este paquete <span aria-hidden="true">→</span></a>
+            </article>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
   <section data-tone="light" class="px-6 py-[6svh] md:px-10">
     <div class="mx-auto max-w-[1280px] border-t border-[#e6e4df] pt-10">
-      <p data-reveal class="text-[13px] font-medium uppercase tracking-[0.14em] text-[#6b6e75]">Soluciones integrales</p>
+      <p data-reveal class="text-[13px] font-medium uppercase tracking-[0.14em] text-[#6b6e75]">Por área</p>
       <div data-filter class="mt-6 flex flex-wrap gap-2" role="group" aria-label="Filtrar por tipo de paquete">
         {[['todos', 'Todos'], ['contable', 'Contable y fiscal'], ['creativa', 'Creativa'], ['tecnica', 'Técnica']].map(([v, l], k) => <button type="button" data-f={v} aria-pressed={k === 0 ? 'true' : 'false'} class="rounded-full border border-[#0b0b0c]/20 px-4 py-2.5 text-[13.5px] transition-colors hover:bg-[#0b0b0c]/5 aria-pressed:border-[#0b0b0c] aria-pressed:bg-[#0b0b0c] aria-pressed:text-white">{l}</button>)}
       </div>
