@@ -27,7 +27,7 @@ const details = (p: Proj, i: number) =>
 
 export function pagesFor(projs: Proj[], o: PageOpts) {
   const five = projs.slice(0, 5);
-  const cover = `<div class="bw-cover"><i class="hm">${esc(o.brand[0] || 'H')}</i><b>${esc(o.brand)}</b><span>Obra selecta · ${o.year}</span></div>`;
+  const cover = `<div class="bw-cover"><b>${esc(o.brand)}</b><span>Obra selecta · ${o.year}</span></div>`;
   const contents = `<div class="pg lt pc"><div class="pc-l"><h4>${esc(o.contentsTitle)}</h4><p>${five.length} obras</p></div><ul class="pc-r">${five.map((p, i) => `<li><button type="button" data-bk-go="${i + 1}"><em>0${i + 1}</em><b>${esc(p.n)}</b><i></i><span>${esc(p.cat)}</span></button></li>`).join('')}</ul><p class="pc-f">Elige una obra para saltar a ella</p>${pn(2)}</div>`;
   const leaves: { f: string; b: string; img?: string }[] = [{ f: cover, b: contents }];
   five.forEach((p, i) => leaves.push({ f: hero(p, i, o.brand), b: details(p, i), img: p.img }));
