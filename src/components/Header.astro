@@ -68,15 +68,14 @@ const pill = 'hdr-pill rounded-full border border-white/20 bg-white/10 px-5 py-3
 <Cursor />
 
 <div id="site-menu" data-menu data-index={JSON.stringify(index)} class="pointer-events-none fixed inset-0 z-[60] flex flex-col overflow-y-auto px-6 pb-7 pt-4 text-center text-white" style="background:radial-gradient(70% 45% at 85% 12%,rgba(122,98,190,.75),transparent 70%),radial-gradient(80% 50% at 10% 55%,rgba(34,88,200,.8),transparent 72%),radial-gradient(70% 40% at 80% 92%,rgba(92,70,170,.7),transparent 70%),linear-gradient(180deg,#0b1a52 0%,#1b3f9e 38%,#4d4a9a 72%,#2a2561 100%);clip-path:circle(0px at calc(100% - 44px) 44px);visibility:hidden" aria-hidden="true">
-  <div class="flex items-center justify-between gap-3"><a href="/" data-menu-link class="menu-link text-[17px] tracking-wide drop-shadow-[0_1px_12px_rgba(5,5,50,.6)]" style="--i:0" aria-label="HumanCorp, inicio"><span class="font-light">HUMAN</span> <span class="font-semibold">CORP</span></a>
-  <div class="menu-link flex w-fit items-center gap-1 rounded-full border border-white/30 bg-white/15 p-1 shadow-[0_14px_34px_-14px_rgba(5,5,40,.6)]" style="--i:0">
+  <div class="menu-link mx-auto flex w-fit items-center gap-1 rounded-full border border-white/30 bg-white/15 p-1 shadow-[0_14px_34px_-14px_rgba(5,5,40,.6)]" style="--i:0">
     <button type="button" data-menu-close class="flex items-center gap-2.5 rounded-full px-5 py-2.5 text-[15px] font-medium transition-colors hover:bg-white/15"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M1.5 1.5l11 11M12.5 1.5l-11 11"/></svg>Cerrar</button>
     <span class="h-5 w-px bg-white/25" aria-hidden="true"></span>
     <div class="flex items-center rounded-full text-[13px] font-medium" role="group" aria-label="Idioma">
       <button type="button" aria-pressed="true" class="rounded-full bg-white px-3.5 py-2 text-[#0b0c0f]">ES</button>
       <button type="button" disabled title="Próximamente" aria-label="Inglés (próximamente)" class="rounded-full px-3.5 py-2 text-white/55">EN</button>
     </div>
-  </div></div>
+  </div>
   <form data-search-form role="search" class="menu-link relative mx-auto mt-5 w-full max-w-[26rem]" style="--i:1">
     <svg class="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-white/70" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
     <input data-search type="search" autocomplete="off" placeholder="Buscar en el sitio" aria-label="Buscar en el sitio" class="w-full rounded-full border border-white/30 bg-white/15 py-3 pl-11 pr-4 text-[15px] text-white placeholder:text-white/65 focus:border-white/70 focus:outline-none" />

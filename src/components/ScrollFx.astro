@@ -29,7 +29,7 @@
     .reverse(); // later sections overlap earlier (sticky) ones
   onFrame((_t, y) => {
     let tone = 'dark';
-    for (const s of sections) if (y + 40 >= s.m.top && y + 40 < s.m.top + s.m.height) { tone = s.el.dataset.tone!; break; }
+    for (const s of sections) if (!s.el.hasAttribute('data-tone-off') && y + 40 >= s.m.top && y + 40 < s.m.top + s.m.height) { tone = s.el.dataset.tone!; break; }
     if (header && header.dataset.tone !== tone) header.dataset.tone = tone;
   });
 </script>

@@ -7,7 +7,7 @@ const N = 24, ARMS = 3;
 const tiles = Array.from({ length: N }, (_, k) => ({ k, arm: k % ARMS, idx: Math.floor(k / ARMS), img: k + 1, off: [-10, 6, -4, 12, -8, 5, -12, 9, -2, 10][k % 10] }));
 ---
 
-<div data-hero-wrap class="relative z-10 h-[190svh]">
+<div data-hero-wrap data-tone="dark" class="relative z-10 h-[190svh]">
   <section data-hero class="sticky top-0 h-lvh min-h-[600px] overflow-hidden text-white">
     <div data-hero-bg class="absolute inset-0 bg-black md:bg-[#1f4cb8] will-change-[opacity,transform]">
       <canvas id="hero-canvas" class="absolute inset-0 hidden size-full md:block" aria-hidden="true"></canvas>
@@ -15,8 +15,6 @@ const tiles = Array.from({ length: N }, (_, k) => ({ k, arm: k % ARMS, idx: Math
       <div class="pointer-events-none absolute inset-x-0 top-0 h-[12%] bg-gradient-to-b from-black/90 to-transparent"></div>
       <div class="pointer-events-none absolute inset-0" style="background:linear-gradient(to bottom,transparent 60%,rgba(2,8,36,.5))"></div>
     </div>
-    <!-- first light: a warm glow rises from the bottom while the silk dissolves into the horizon -->
-    <div data-hero-glow class="pointer-events-none absolute inset-x-0 bottom-0 h-[80%] origin-bottom opacity-0 will-change-[opacity,transform]" style="background:linear-gradient(to top,rgba(246,196,138,.95),rgba(216,142,118,.55) 38%,rgba(126,104,172,.2) 70%,transparent)"></div>
 
     <div data-hero-text class="absolute inset-0 will-change-[opacity,transform]">
       <!-- escritorio: seda con la marca al centro -->
@@ -42,6 +40,7 @@ const tiles = Array.from({ length: N }, (_, k) => ({ k, arm: k % ARMS, idx: Math
           <u class="hh-t" data-arm={t.arm} data-idx={t.idx} data-off={t.off}><b class="hh-s" style={`background-image:url(/hero/t${t.img}.webp)`}></b><b class="hh-b" style={`background-image:url(/hero/t${t.img}-b.webp)`}></b></u>
         ))}
       </div>
+      <p class="relative z-10 mb-5 overflow-hidden pb-[0.1em] text-[clamp(2rem,10vw,3rem)] leading-none tracking-[-0.02em]" aria-label="HumanCorp"><span class="hf-up block" style="--d:.1s"><span class="font-light">HUMAN</span> <span class="font-semibold">CORP</span></span></p>
       <h1 class="relative z-10 text-[clamp(2.4rem,11vw,4.6rem)] font-semibold leading-[0.98] tracking-[-0.05em]">
         <span class="sr-only">HumanCorp: </span>
         <span class="block overflow-hidden pb-[0.1em]"><span class="hf-up block" style="--d:.2s">Todo conectado.</span></span>
@@ -66,7 +65,6 @@ const tiles = Array.from({ length: N }, (_, k) => ({ k, arm: k % ARMS, idx: Math
   const canvas = document.getElementById('hero-canvas') as HTMLCanvasElement;
   const stage = document.querySelector<HTMLElement>('[data-hero]')!;
   const bg = document.querySelector<HTMLElement>('[data-hero-bg]')!;
-  const glow = document.querySelector<HTMLElement>('[data-hero-glow]')!;
   const text = document.querySelector<HTMLElement>('[data-hero-text]')!;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const field = document.querySelector<HTMLElement>('.hh-field')!;
@@ -169,8 +167,6 @@ void main(){
     // scroll-driven dissolve into the horizon (opacity / transform only: compositor work)
     put(bg, 'opacity', (1 - smooth(clamp((p - 0.12) / 0.78))).toFixed(3));
     put(bg, 'transform', `scale(${(1 + p * 0.06).toFixed(4)})`);
-    put(glow, 'opacity', (smooth(clamp(p / 0.45)) * (1 - smooth(clamp((p - 0.55) / 0.45)))).toFixed(3));
-    put(glow, 'transform', `scaleY(${(0.5 + p * 0.9).toFixed(3)})`);
     put(text, 'opacity', (1 - smooth(clamp(p / 0.55))).toFixed(3));
     put(text, 'transform', `translate3d(0, ${(-p * vh * 0.12).toFixed(1)}px, 0) scale(${(1 + p * 0.05).toFixed(4)})`);
     if (mobile) { if (!reduced) paintTiles(t / 1000); } else if (draw && !reduced && t - last > 24) { last = t; draw(t / 1000); }

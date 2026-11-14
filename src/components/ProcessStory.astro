@@ -220,6 +220,7 @@ const frags = [
   } else {
     onFrame((time, y, vh) => {
       // the white page dissolves in over the sunset while this chapter rises
+      root.toggleAttribute('data-tone-off', y - sm0.top < vh * 0.6); // hasta que se funde sobre el hero, el menú conserva el tono del hero
       const wo = clamp((y - sm0.top) / (vh * 0.85)).toFixed(3);
       put(root, 'opacity', sm(clamp((y - sm0.top) / (vh * 0.8) - 0.12)).toFixed(3));
       put(whiteEl, 'opacity', wo);

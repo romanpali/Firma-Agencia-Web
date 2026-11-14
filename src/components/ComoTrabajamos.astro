@@ -137,6 +137,7 @@ const G = '#cfc4ff', V = '#5b7bff', W = '#f4f2ff';
   let pos = 0, tgt = 0, lastT = 0;
   if (reduced) slides.forEach((s) => s.el.style.setProperty('--q', '1'));
   onFrame((t, y, vh) => {
+    root.toggleAttribute('data-tone-off', y - m.top < vh * 0.5);
     const bo = reduced ? 1 : clamp((y - m.top) / (vh * 0.85));
     put(bg, 'opacity', bo.toFixed(3));
     put(track, 'opacity', Math.max(0, (bo - 0.55) / 0.45).toFixed(3));
