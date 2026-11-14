@@ -713,13 +713,12 @@ img, picture, video, canvas { pointer-events: none; -webkit-user-drag: none; use
 [data-nav][data-tone="light"]::before { background: linear-gradient(to bottom, rgba(255, 255, 255, 0.95) 0, rgba(255, 255, 255, 0.85) 58%, rgba(255, 255, 255, 0)); }
 [data-nav][data-scrolled]::before { opacity: 1; }
 
-/* Hero: mosaicos en espiral (solo transformaciones, se animan en el compositor) */
-.hh-ring { --R: 28vw; --tile: 17vw; top: 27%; width: 0; height: 0; }
-.hh-spin { position: absolute; left: 0; top: 0; width: 0; height: 0; animation: hhSpin 110s linear infinite; }
-.hh-tile { position: absolute; left: calc(var(--x) * var(--R)); top: calc(var(--y) * var(--R)); width: calc(var(--tile) * var(--s)); aspect-ratio: 1; margin: calc(var(--tile) * var(--s) / -2) 0 0 calc(var(--tile) * var(--s) / -2); opacity: 0; animation: hhIn 1s cubic-bezier(.2, .8, .2, 1) var(--d) forwards, hhRev 110s linear infinite; rotate: var(--tilt); }
-.hh-tile b { display: block; width: 100%; height: 100%; border-radius: 26%; background-size: cover; background-position: center; border: 1px solid rgba(255, 255, 255, 0.5); box-shadow: 0 22px 40px -18px rgba(8, 6, 50, 0.65); }
-@keyframes hhSpin { to { rotate: 360deg; } }
-@keyframes hhRev { from { rotate: var(--tilt); } to { rotate: calc(var(--tilt) - 360deg); } }
+/* Hero: campo de mosaicos en espiral (solo giros y opacidad, en el compositor) */
+.hh-field { width: 0; height: 0; }
+.hh-orb { position: absolute; left: 0; top: 0; width: 0; height: 0; rotate: var(--a0); animation: hhOrb var(--T) linear infinite; }
+.hh-tile { position: absolute; left: calc(var(--r) * 100vmax); top: 0; width: calc(var(--s) * 100vmin); aspect-ratio: 1; margin: calc(var(--s) * -50vmin) 0 0 calc(var(--s) * -50vmin); opacity: 0; rotate: calc(var(--tilt) - var(--a0)); animation: hhIn 1.1s cubic-bezier(.2, .8, .2, 1) var(--d) forwards, hhCounter var(--T) linear infinite; }
+.hh-tile b { display: block; width: 100%; height: 100%; border-radius: 26%; background-size: cover; background-position: center; border: 1px solid rgba(255, 255, 255, 0.5); box-shadow: 0 22px 40px -18px rgba(8, 6, 50, 0.65); opacity: var(--o); }
+@keyframes hhOrb { to { rotate: calc(var(--a0) + 360deg); } }
+@keyframes hhCounter { to { rotate: calc(var(--tilt) - var(--a0) - 360deg); } }
 @keyframes hhIn { from { opacity: 0; scale: 0.6; } to { opacity: 1; scale: 1; } }
-@media (min-width: 768px) { .hh-ring { --R: 34vh; --tile: 13vh; top: 54%; } .hh-tile { opacity: 0; } }
-@media (prefers-reduced-motion: reduce) { .hh-spin, .hh-tile { animation: none !important; } .hh-tile { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .hh-orb, .hh-tile { animation: none !important; } .hh-tile { opacity: 1; } }
