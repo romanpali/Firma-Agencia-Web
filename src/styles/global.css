@@ -716,4 +716,4 @@ img, picture, video, canvas { pointer-events: none; -webkit-user-drag: none; use
 /* Hero: emisor de mosaicos en espiral (posición, escala y nitidez se escriben desde el script) */
 .hh-field { width: 0; height: 0; }
 .hh-t { position: absolute; left: 0; top: 0; opacity: 0; will-change: transform, opacity; }
-.hh-t b { position: absolute; inset: 0; display: block; border-radius: 24%; background-size: cover; background-position: center; box-shadow: 0 18px 36px -16px rgba(0, 0, 0, 0.8); }
+.hh-t b { position: absolute; inset: 0; display: block; border-radius: 7%; background-size: cover; background-position: center; }

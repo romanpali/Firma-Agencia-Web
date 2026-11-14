@@ -1,6 +1,6 @@
 ---
 // Emisor en espiral: cada mosaico nace pequeño y borroso en el centro y sale girando (antihorario) hasta los bordes, ganando tamaño y nitidez.
-const N = 20;
+const N = 14;
 const tiles = Array.from({ length: N }, (_, k) => ({ k, a: ((k * 137.508) % 360).toFixed(1), img: (k % 10) + 1, off: [-10, 6, -4, 12, -8, 5, -12, 9, -2, 10][k % 10] }));
 ---
 
@@ -49,12 +49,12 @@ const tiles = Array.from({ length: N }, (_, k) => ({ k, a: ((k * 137.508) % 360)
   let W = 160, R1 = 600, vw0 = 0;
   const fit = () => { const w = stage.clientWidth, h = stage.clientHeight; vw0 = w; W = Math.max(90, Math.min(190, Math.min(w, h) * 0.22)); R1 = Math.hypot(w, h) * 0.62; tl.forEach((t) => { t.el.style.width = t.el.style.height = `${W}px`; t.el.style.margin = `${-W / 2}px 0 0 ${-W / 2}px`; }); };
   fit(); addEventListener('resize', fit);
-  const T = 32, TURNS = 1.1;
+  const T = 44, TURNS = 1.15;
   const paintTiles = (sec: number) => {
     tl.forEach((t) => {
       const p = reduced ? (0.25 + t.ph * 0.7) : ((sec / T + t.ph) % 1);
       const th = t.a0 - 2 * Math.PI * TURNS * p;                // antihorario
-      const r = R1 * p;
+      const r = R1 * (0.09 + 0.91 * p);
       const e = smooth(p);
       const sc = 0.2 + 0.95 * e;
       const sharp = smooth(clamp((p - 0.1) / 0.42));
