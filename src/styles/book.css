@@ -8,7 +8,7 @@
 
 .bw-world { --pw: min(42cqw, calc(var(--sh, 700px) * 1.05)); --ph: calc(var(--pw) / 1.5); position: absolute; left: 50%; top: 56%; width: 0; height: 0; transform-style: preserve-3d; transform: rotateX(44deg) rotateZ(-6deg) scale(0.9); will-change: transform; }
 .bw-desk { position: absolute; width: max(190cqw, calc(var(--sh, 700px) * 2.4)); height: max(150cqw, calc(var(--sh, 700px) * 3.2)); left: calc(max(190cqw, calc(var(--sh, 700px) * 2.4)) / -2); top: calc(max(150cqw, calc(var(--sh, 700px) * 3.2)) / -2 + 8cqw); transform: translateZ(-34px);
-  background: radial-gradient(36% 32% at 30% 28%, rgba(255, 186, 120, 0.3), transparent 72%), linear-gradient(180deg, rgba(0, 0, 0, 0.3), transparent 45%), url('/configurador/mesa-nogal.webp') center / 100% 100%, #14090a; }
+  background: radial-gradient(36% 32% at 30% 28%, rgba(255, 186, 120, 0.3), transparent 72%), linear-gradient(180deg, rgba(0, 0, 0, 0.3), transparent 45%), url('/configurador/mesa-real.webp') center / 100% 100%, #0e0705; }
 .bw-lamp { position: absolute; width: 70cqw; height: 70cqw; left: -62cqw; top: -52cqw; transform: translateZ(-33px); pointer-events: none; background: radial-gradient(closest-side, rgba(255, 214, 160, 0.4), rgba(255, 190, 130, 0.12) 55%, transparent); }
 
 .bw-book { position: absolute; left: calc(var(--pw) * -1); top: calc(var(--ph) * -0.5); width: calc(var(--pw) * 2); height: var(--ph); transform-style: preserve-3d; transform: translateX(calc(var(--pw) * -0.5)); }
@@ -87,7 +87,7 @@
 .bk-pn { position: absolute; right: 1.6em; bottom: 1.1em; z-index: 4; font-size: 0.6em; letter-spacing: 0.1em; opacity: 0.45; } .sb .bk-pn { right: auto; left: 1.6em; }
 /* Cubierta negra */
 .bw-cover { font-size: 1.18em; position: absolute; inset: 0; display: grid; place-items: center; border-radius: 2px 6px 6px 2px; overflow: hidden; color: #fff;
-  background: url('/configurador/cuero-fino.webp') 0 0 / 200px 200px, linear-gradient(160deg, #17181b 0%, #0b0b0c 55%, #050505 100%); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.12); }
+  background: url('/configurador/cuero-real.webp') 0 0 / 180px 180px, #0a0a0b; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.12); }
 .bw-cover::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, transparent 4.2%, rgba(0, 0, 0, 0.75) 4.6%, rgba(255, 255, 255, 0.1) 5.4%, transparent 7%), linear-gradient(90deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 4.2%), radial-gradient(90% 70% at 26% 10%, rgba(255, 255, 255, 0.09), transparent 60%); }
 .bw-wm { position: relative; z-index: 1; font-size: 2.1em; letter-spacing: 0.02em; white-space: nowrap; }
 .bw-wm i { font-style: normal; }
@@ -169,3 +169,9 @@
 .bw-ribbon { display: none; }
 
 .bw-prop { display: none; }
+
+/* Libro cerrado: se muestra la imagen del libro; al empezar a hojear se desvanece y aparece el libro 3D */
+.ob-closed { position: absolute; right: 3.5cqw; top: 50%; width: min(50cqw, 135svh); height: auto; translate: 0 -48%; z-index: 5; opacity: 1; transition: opacity 0.55s ease; pointer-events: none; }
+.gal-book.is-open .ob-closed { opacity: 0; }
+.gal-book[data-closed] .bw-book { visibility: hidden; }
+@container (max-width: 700px) { .ob-closed { right: 6cqw; width: 88cqw; top: 66%; } }

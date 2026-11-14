@@ -31,7 +31,7 @@ const leavesHtml = leavesMarkup(leaves);
     <Header />
     <style is:global>[data-nav]::before { display: none; } .ob-cue, .ob-note, [data-bk-count] { display: none; }</style>
     <main class="@container relative z-10 overflow-x-clip" style="--a:#977DFF;--b:#0033FF;--ink:#14173f;--hw:420;--rad:10px;--sh:100svh;--sfont:'Inter Tight Variable',system-ui,sans-serif">
-      <section data-tone="dark" class="gal-book" data-book>
+      <section data-tone="dark" class="gal-book" data-book data-closed>
         <div class="bw-stick">
           <div class="bwv">
             <div class="bw-world" data-bw>
@@ -44,6 +44,7 @@ const leavesHtml = leavesMarkup(leaves);
               </div>
             </div>
           </div>
+          <img class="ob-closed" src="/obra/libro.webp" alt="Libro HumanCorp, obra selecta" width="1500" height="941" decoding="async" />
           <div class="bw-intro ob-hero">
             <p class="ob-pill"><i></i>Obra selecta · 2026</p>
             <h1 class="ob-title"><span class="ob-l"><span>Proyectos que</span></span><span class="ob-l"><span>puedes <em>explorar</em></span></span></h1>
@@ -92,6 +93,9 @@ const leavesHtml = leavesMarkup(leaves);
           if (target - cur > lag) cur = target - lag; else if (cur - target > lag) cur = target + lag;
           if (Math.abs(target - cur) < 0.5) cur = target;
         }
+        const open = cur - top > 10;
+        sec.classList.toggle('is-open', open);
+        if (open) sec.removeAttribute('data-closed'); else sec.setAttribute('data-closed', '');
         b.update();
         if (cur !== target) raf = requestAnimationFrame(update);
       };
