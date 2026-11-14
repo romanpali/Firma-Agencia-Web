@@ -77,11 +77,26 @@ const leavesHtml = leavesMarkup(leaves);
       let top = 0, raf = 0;
       const measure = () => { top = sec.getBoundingClientRect().top + scrollY; };
       measure();
-      const b = mountBook({ sec, scrollY: () => scrollY, secTop: () => top, viewH: () => innerHeight, scrollTo: (y) => scrollTo({ top: y, behavior: reduced ? 'auto' : 'smooth' }), reduced });
-      const update = () => { raf = 0; b.update(); };
-      addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(update); }, { passive: true });
-      addEventListener('resize', () => { measure(); b.update(); });
-      addEventListener('load', () => { measure(); b.update(); });
+      // Posición suavizada: al scrollear rápido las páginas se voltean una a una en lugar de saltar al final.
+      let cur = scrollY, lastT = 0;
+      const b = mountBook({ sec, scrollY: () => cur, secTop: () => top, viewH: () => innerHeight, scrollTo: (y) => scrollTo({ top: y, behavior: reduced ? 'auto' : 'smooth' }), reduced });
+      const update = (t: number) => {
+        raf = 0;
+        const dt = Math.min(64, t - lastT || 16); lastT = t;
+        const target = scrollY;
+        if (reduced) cur = target;
+        else {
+          cur += (target - cur) * (1 - Math.exp(-dt / 120));
+          const lag = innerHeight * 1.1;
+          if (target - cur > lag) cur = target - lag; else if (cur - target > lag) cur = target + lag;
+          if (Math.abs(target - cur) < 0.5) cur = target;
+        }
+        b.update();
+        if (cur !== target) raf = requestAnimationFrame(update);
+      };
+      addEventListener('scroll', () => { if (!raf) { lastT = 0; raf = requestAnimationFrame(update); } }, { passive: true });
+      addEventListener('resize', () => { measure(); cur = scrollY; b.update(); });
+      addEventListener('load', () => { measure(); cur = scrollY; b.update(); });
       const lamp = sec.querySelector<HTMLElement>('.bw-lamp')!;
       let lr = 0;
       addEventListener('pointermove', (e) => { if (lr) return; lr = requestAnimationFrame(() => { lr = 0; lamp.style.translate = `${((e.clientX / innerWidth - 0.5) * 50).toFixed(0)}px ${((e.clientY / innerHeight - 0.5) * 36).toFixed(0)}px`; }); }, { passive: true });

@@ -687,3 +687,20 @@ html { scrollbar-width: thin; scrollbar-color: rgba(125, 125, 140, 0.45) transpa
 @media (prefers-reduced-motion: reduce) { .gal-eyebrow i::after { animation: none; opacity: 0; } }
 
 .hf-em { font-family: 'Fraunces Variable', Georgia, serif; font-style: italic; font-weight: 400; background: linear-gradient(100deg, #ffffff, #d9ceff 60%, #b6caff); -webkit-background-clip: text; background-clip: text; color: transparent; padding-right: 0.06em; }
+
+/* Cómo lo construimos: solo se animan los módulos cercanos a la cámara y nada cuando el capítulo está fuera de pantalla */
+[data-pn][data-off], [data-pn][data-off] * { animation-play-state: paused !important; }
+.ps-away *, .ps-away *::before, .ps-away *::after { animation-play-state: paused !important; }
+/* Rendimiento en «Cómo lo construimos»: los desenfoques de fondo y las sombras por filtro se repintan en cada fotograma del scroll; aquí se sustituyen por fondos más opacos */
+#construccion * { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+#construccion .bus, #construccion .fr, #construccion .flow, #construccion .site .orb-ic { filter: none !important; }
+#construccion .site .a-card { background: rgba(255, 255, 255, 0.16); }
+#construccion .site .chip-f, #construccion .site .btn-o { background: rgba(255, 255, 255, 0.2); }
+
+/* Transición limpia entre páginas (navegación entre documentos): un fundido corto, sin movimiento */
+@view-transition { navigation: auto; }
+::view-transition-old(root) { animation: 0.28s cubic-bezier(.4, 0, .2, 1) both vtOut; }
+::view-transition-new(root) { animation: 0.38s cubic-bezier(.2, .8, .2, 1) 0.06s both vtIn; }
+@keyframes vtOut { to { opacity: 0; } }
+@keyframes vtIn { from { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; } }
