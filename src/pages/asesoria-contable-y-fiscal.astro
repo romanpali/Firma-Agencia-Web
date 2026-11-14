@@ -25,15 +25,6 @@ const how = [
   ['Orden y automatización', 'Organizamos tu información y automatizamos lo repetitivo con la tecnología de HumanCorp.'],
   ['Acompañamiento', 'Damos seguimiento, resolvemos dudas y revisamos contigo de forma continua.'],
 ];
-import { quote } from '../data/paquetes';
-// Acceso rápido a los paquetes contables y fiscales: el más básico, la asesoría y los extras.
-const acceso: { n: string; t: string; d: string; g: [string, string]; href: string }[] = [
-  { n: 'Básico', t: 'Apoyo contable puntual', d: 'Ordena tu información o resuelve una situación específica.', g: ['#10b981', '#0f766e'], href: quote('Apoyo contable puntual') },
-  { n: 'Asesoría', t: 'Asesoría contable y fiscal', d: 'Acompañamiento continuo del Director de Administración y Finanzas (contador) y su área.', g: ['#4f46e5', '#1e3a8a'], href: quote('Asesoría contable y fiscal') },
-  { n: 'Extra', t: 'Operaciones financieras', d: 'Facturación, flujo de caja, reportes y organización documental.', g: ['#0ea5e9', '#3730a3'], href: quote('Operaciones financieras') },
-  { n: 'Extra', t: 'Orden financiero', d: 'Contabilidad, operación y tableros en un solo lugar.', g: ['#7c3aed', '#3730a3'], href: quote('Orden financiero') },
-  { n: 'Extra', t: 'Venta en línea', d: 'Tienda, promoción y facturación electrónica conectadas.', g: ['#f59e0b', '#be185d'], href: quote('Venta en línea') },
-];
 ---
 
 <Light title="Asesoría contable y fiscal" description="Asesoría contable y fiscal de HumanCorp, a cargo de nuestro contador, con la tecnología y la automatización que ordenan tu información.">
@@ -49,26 +40,6 @@ const acceso: { n: string; t: string; d: string; g: [string, string]; href: stri
     </div>
   </section>
 
-  <section data-tone="light" class="px-6 pb-[4svh] md:px-10">
-    <div class="mx-auto max-w-[1280px]">
-      <div class="flex flex-wrap items-baseline justify-between gap-3 border-t border-[#e6e4df] pt-8">
-        <p data-reveal class="text-[13px] font-medium uppercase tracking-[0.14em] text-[#6b6e75]">Acceso rápido a paquetes</p>
-        <a data-reveal href="/paquetes#contable" class="text-[14px] underline decoration-[#0b0b0c]/25 underline-offset-[6px] hover:decoration-[#0b0b0c]">Ver todos los paquetes contables y fiscales →</a>
-      </div>
-      <ul class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-        {acceso.map((a, i) => (
-          <li data-reveal style={`--i:${i % 3}`}>
-            <a href={a.href} class="group flex h-full flex-col rounded-[20px] p-5 text-white shadow-[0_24px_50px_-30px_rgba(14,12,60,.7)] ring-1 ring-white/20 transition-transform duration-300 hover:-translate-y-1" style={`background:linear-gradient(rgba(7,8,38,.3),rgba(7,8,38,.45)),linear-gradient(150deg,${a.g[0]},${a.g[1]})`}>
-              <span class={`w-fit rounded-full px-2.5 py-[3px] text-[10.5px] font-semibold uppercase tracking-[0.16em] ${a.n === 'Extra' ? 'bg-black/25 ring-1 ring-white/30' : 'bg-white text-[#14163a]'}`}>{a.n}</span>
-              <h3 class="mt-5 font-goog text-[1.2rem] leading-[1.1] tracking-[-0.03em]">{a.t}</h3>
-              <p class="mt-2 text-[13px] leading-relaxed text-white/90">{a.d}</p>
-              <span class="mt-auto pt-5 text-[13.5px] font-medium">Cotizar <span aria-hidden="true" class="inline-block transition-transform group-hover:translate-x-1">→</span></span>
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
-  </section>
   <section data-tone="light" class="px-6 py-[6svh] md:px-10">
     <div class="mx-auto max-w-[1280px] border-t border-[#e6e4df] pt-10">
       <p data-reveal class="text-[13px] font-medium uppercase tracking-[0.14em] text-[#6b6e75]">Qué cubre</p>
