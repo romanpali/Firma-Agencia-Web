@@ -134,7 +134,7 @@ export function mountBook(o: Mount) {
     lastT = now;
     let shadowA = 0, shadowF = 0;
     L.forEach((l, k) => {
-      const show = k >= cur - 1 && k <= cur + 1;
+      const show = t < 0.004 ? k === 0 : k >= cur - 1 && k <= cur + 1; // con el libro cerrado solo se ve la portada
       if (show !== l.vis) { l.vis = show; put(l.el, 'display', show ? '' : 'none'); }
       if (!show) return;
       const f = cl(t - k), a = sm(f) * 180;
