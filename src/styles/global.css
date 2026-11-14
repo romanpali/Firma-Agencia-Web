@@ -704,3 +704,6 @@ html { scrollbar-width: thin; scrollbar-color: rgba(125, 125, 140, 0.45) transpa
 @keyframes vtOut { to { opacity: 0; } }
 @keyframes vtIn { from { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; } }
+
+/* Las imágenes no reciben clic derecho ni arrastre: el menú que aparece es el normal de la página (sin buscar con Lens, copiar o guardar imagen) */
+img, picture, video, canvas { pointer-events: none; -webkit-user-drag: none; user-select: none; -webkit-touch-callout: none; }

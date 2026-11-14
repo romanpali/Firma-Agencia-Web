@@ -1,6 +1,6 @@
 ---
 // Empaque de un paquete: gradiente profundo, emblema sólido, marco troquelado y contenido legible (texto blanco sobre fondos oscuros).
-export type Pk = { t: string; d: string; divs: string[]; items: string[]; g: [string, string, string]; mark: string; code: string; kind: string; href: string };
+import type { Pk } from '../data/paquetes';
 const { p, wide = false } = Astro.props as { p: Pk; wide?: boolean };
 ---
 

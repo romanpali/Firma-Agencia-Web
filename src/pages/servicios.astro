@@ -12,6 +12,9 @@ const reuse: Record<string, number> = { d1a: 0, d2a: 1, d3b: 5, d3c: 6, d5a: 4, 
 const sceneKey = (di: number, ai: number) => `d${di + 1}${String.fromCharCode(97 + ai)}`;
 const split = (s: string) => s.split('|');
 const palette = [['#0033ff', '#977dff'], ['#977dff', '#0600ab'], ['#0600ab', '#0033ff'], ['#977dff', '#0033ff']];
+import PackCard from '../components/PackCard.astro';
+import { area } from '../data/paquetes';
+const areaPacks = [area(0, 'creativa', 'HC-A01', 0), area(1, 'creativa', 'HC-A02', 4), area(3, 'creativa', 'HC-A03', 2), area(2, 'tecnica', 'HC-A04', 5), area(4, 'tecnica', 'HC-A05', 8), area(5, 'tecnica', 'HC-A06', 6), area(7, 'tecnica', 'HC-A07', 9), area(6, 'contable', 'HC-A08', 7)];
 ---
 
 <!doctype html>
@@ -167,16 +170,10 @@ const palette = [['#0033ff', '#977dff'], ['#977dff', '#0600ab'], ['#0600ab', '#0
             ))}
           </div>
           <h3 data-reveal class="mt-[9svh] font-goog text-[clamp(1.5rem,2.6vw,2.2rem)] font-light tracking-[-0.035em]">Soluciones integrales</h3>
-          <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {packages.map(([t, items], i) => (
-              <article data-reveal style={`--i:${i % 4}`} class="gl p-5">
-                <h4 class="font-goog text-[1.1rem] font-normal tracking-[-0.02em]">{t}</h4>
-                <ul class="mt-4 space-y-1.5 text-[13.5px] text-white/60">
-                  {split(items).map((s) => <li class="flex gap-2"><i class="mt-[0.55em] block size-1 shrink-0 rounded-full bg-[#977DFF]"></i>{s}</li>)}
-                </ul>
-              </article>
-            ))}
+          <div class="mt-6 grid gap-5 md:grid-cols-2">
+            {areaPacks.map((c, i) => <div data-reveal style={`--i:${i % 2}`}><PackCard p={c} /></div>)}
           </div>
+          <a data-reveal href="/paquetes" class="mt-8 inline-flex items-center gap-2 rounded-full border border-white/30 px-6 py-3 text-[15px] transition-colors hover:bg-white/10">Ver todos los paquetes <span aria-hidden="true">→</span></a>
         </div>
       </section>
 
