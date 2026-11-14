@@ -1,19 +1,12 @@
 ---
-// Campo de mosaicos en espiral (ángulo áureo): cada uno orbita a su propia velocidad, los internos más rápido, y deja libre el centro para el texto.
-const N = 26;
-const tiles = Array.from({ length: N }, (_, k) => {
-  const r = 0.29 + 0.26 * Math.sqrt(k / N);
-  const a = (k * 137.508) % 360;
-  const tilt = [-14, 9, -6, 16, -10, 7, -18, 12, -4, 14][k % 10];
-  const s = (0.16 - 0.07 * (k / N)) * [1, 0.86, 1.1, 0.92][k % 4];
-  return { k, r: r.toFixed(3), a: a.toFixed(1), tilt, s: s.toFixed(3), T: Math.round(95 * Math.pow(r / 0.29, 1.5)), o: (1 - 0.35 * (k / N)).toFixed(2), d: (0.1 + k * 0.06).toFixed(2), img: (k % 10) + 1 };
-});
+// Emisor en espiral: cada mosaico nace pequeño y borroso en el centro y sale girando (antihorario) hasta los bordes, ganando tamaño y nitidez.
+const N = 20;
+const tiles = Array.from({ length: N }, (_, k) => ({ k, a: ((k * 137.508) % 360).toFixed(1), img: (k % 10) + 1, off: [-10, 6, -4, 12, -8, 5, -12, 9, -2, 10][k % 10] }));
 ---
 
 <div data-hero-wrap class="relative z-10 h-[190svh]">
   <section data-hero class="sticky top-0 h-svh min-h-[600px] overflow-hidden text-white">
-    <div data-hero-bg class="absolute inset-0 bg-[#1f4cb8] will-change-[opacity,transform]">
-      <canvas id="hero-canvas" class="absolute inset-0 size-full" aria-hidden="true"></canvas>
+    <div data-hero-bg class="absolute inset-0 bg-black will-change-[opacity,transform]">
       <div class="pointer-events-none absolute inset-0 bg-black/20"></div>
       <div class="pointer-events-none absolute inset-x-0 top-0 h-[12%] bg-gradient-to-b from-black/90 to-transparent"></div>
       <div class="pointer-events-none absolute inset-0" style="background:linear-gradient(to bottom,transparent 60%,rgba(2,8,36,.5))"></div>
@@ -24,9 +17,7 @@ const tiles = Array.from({ length: N }, (_, k) => {
     <div data-hero-text class="absolute inset-0 flex flex-col items-center justify-center px-6 text-center will-change-[opacity,transform]">
       <div class="hh-field pointer-events-none absolute left-1/2 top-1/2" aria-hidden="true">
         {tiles.map((t) => (
-          <i class="hh-orb" style={`--a0:${t.a}deg;--T:${t.T}s`}>
-            <u class="hh-tile" style={`--r:${t.r};--tilt:${t.tilt}deg;--s:${t.s};--o:${t.o};--d:${t.d}s;--a0:${t.a}deg;--T:${t.T}s`}><b style={`background-image:url(/hero/t${t.img}.webp)`}></b></u>
-          </i>
+          <u class="hh-t" data-a={t.a} data-off={t.off}><b class="hh-s" style={`background-image:url(/hero/t${t.img}.webp)`}></b><b class="hh-b" style={`background-image:url(/hero/t${t.img}-b.webp)`}></b></u>
         ))}
       </div>
       <p class="hf-rise relative z-10 text-[clamp(.8rem,1vw,.95rem)] uppercase tracking-[0.3em]" style="--d:.1s"><span class="font-light">HUMAN</span> <span class="font-semibold">CORP</span></p>
@@ -48,77 +39,33 @@ const tiles = Array.from({ length: N }, (_, k) => {
 
 <script>
   import { onFrame, put, clamp, smooth } from '../scripts/frame';
-  const canvas = document.getElementById('hero-canvas') as HTMLCanvasElement;
   const stage = document.querySelector<HTMLElement>('[data-hero]')!;
   const bg = document.querySelector<HTMLElement>('[data-hero-bg]')!;
   const glow = document.querySelector<HTMLElement>('[data-hero-glow]')!;
   const text = document.querySelector<HTMLElement>('[data-hero-text]')!;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const VS = 'attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
-  const FS = `#ifdef GL_FRAGMENT_PRECISION_HIGH
-precision highp float;
-#else
-precision mediump float;
-#endif
-uniform vec2 res;
-uniform float t;
-
-float hash(vec2 p){ return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453); }
-
-void main(){
-  vec2 uv = gl_FragCoord.xy / res.y;
-  vec2 p = uv * 1.7;
-  float a = t * .3;
-  for (int i = 1; i < 5; i++) {
-    float k = float(i);
-    p += .42 / (k * k) * vec2(sin(k * 1.7 * p.y + a + k), sin(k * 1.5 * p.x - a * .8 + k * 1.7)) * 2.1;
-  }
-  float f = .5 + .5 * sin(p.x * 2.4 + p.y * 1.3 + a * .4);
-
-  vec3 purple = vec3(.43, .35, .66);
-  vec3 deep   = vec3(.10, .28, .70);
-  vec3 light  = vec3(.23, .39, .79);
-  vec3 blue = mix(light, deep, smoothstep(.5, .85, f));
-  vec3 col = mix(purple, blue, smoothstep(.26, .56, f));
-  col += vec3(.04, .06, .13) * exp(-pow((f - .46) * 9., 2.));
-  col += (hash(gl_FragCoord.xy + t) - .5) / 128.;
-  gl_FragColor = vec4(col, 1.);
-}`;
-
-  // The silk is a slow, soft gradient: render it small (about 0.7 MP) and at ~40 fps; the scroll motion stays at full refresh rate.
-  let draw: ((t: number) => void) | null = null;
-  const gl = canvas.getContext('webgl', { antialias: false, alpha: false, powerPreference: 'high-performance' });
-  if (gl) {
-    const sh = (type: number, src: string) => { const s = gl.createShader(type)!; gl.shaderSource(s, src); gl.compileShader(s); return s; };
-    const prog = gl.createProgram()!;
-    gl.attachShader(prog, sh(gl.VERTEX_SHADER, VS));
-    gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, FS));
-    gl.linkProgram(prog);
-    if (gl.getProgramParameter(prog, gl.LINK_STATUS)) {
-      gl.useProgram(prog);
-      gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
-      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
-      const loc = gl.getAttribLocation(prog, 'p');
-      gl.enableVertexAttribArray(loc);
-      gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-      const uRes = gl.getUniformLocation(prog, 'res');
-      const uT = gl.getUniformLocation(prog, 't');
-      draw = (t: number) => { gl.uniform1f(uT, t); gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); };
-      const fit = () => {
-        const w = canvas.clientWidth, h = canvas.clientHeight;
-        const k = Math.min(1, Math.sqrt(0.7e6 / Math.max(1, w * h)));
-        canvas.width = Math.max(1, Math.round(w * k));
-        canvas.height = Math.max(1, Math.round(h * k));
-        gl.viewport(0, 0, canvas.width, canvas.height);
-        gl.uniform2f(uRes, canvas.width, canvas.height);
-        draw!(4);
-      };
-      fit();
-      addEventListener('resize', fit);
-    }
-  }
-
-  let last = -1e9;
+  const field = document.querySelector<HTMLElement>('.hh-field')!;
+  const tl = [...field.querySelectorAll<HTMLElement>('.hh-t')].map((el, k, all) => ({ el, sh: el.firstElementChild as HTMLElement, bl: el.lastElementChild as HTMLElement, a0: (+el.dataset.a! * Math.PI) / 180, off: +el.dataset.off!, ph: k / all.length }));
+  let W = 160, R1 = 600, vw0 = 0;
+  const fit = () => { const w = stage.clientWidth, h = stage.clientHeight; vw0 = w; W = Math.max(90, Math.min(190, Math.min(w, h) * 0.22)); R1 = Math.hypot(w, h) * 0.62; tl.forEach((t) => { t.el.style.width = t.el.style.height = `${W}px`; t.el.style.margin = `${-W / 2}px 0 0 ${-W / 2}px`; }); };
+  fit(); addEventListener('resize', fit);
+  const T = 32, TURNS = 1.1;
+  const paintTiles = (sec: number) => {
+    tl.forEach((t) => {
+      const p = reduced ? (0.25 + t.ph * 0.7) : ((sec / T + t.ph) % 1);
+      const th = t.a0 - 2 * Math.PI * TURNS * p;                // antihorario
+      const r = R1 * p;
+      const e = smooth(p);
+      const sc = 0.2 + 0.95 * e;
+      const sharp = smooth(clamp((p - 0.1) / 0.42));
+      const life = clamp(p / 0.08) * (1 - clamp((p - 0.94) / 0.06));
+      put(t.el, 'transform', `translate3d(${(Math.cos(th) * r).toFixed(1)}px,${(Math.sin(th) * r).toFixed(1)}px,0) rotate(${((th * 180) / Math.PI - 90 + t.off).toFixed(1)}deg) scale(${sc.toFixed(3)})`);
+      put(t.el, 'opacity', (life * (0.35 + 0.65 * sharp)).toFixed(3));
+      put(t.sh, 'opacity', sharp.toFixed(3));
+      put(t.bl, 'opacity', (1 - sharp).toFixed(3));
+    });
+  };
+  paintTiles(0);
   onFrame((t, y, vh) => {
     const p = clamp(y / (vh * 0.85));
     const gone = p >= 1;
@@ -131,6 +78,6 @@ void main(){
     put(glow, 'transform', `scaleY(${(0.5 + p * 0.9).toFixed(3)})`);
     put(text, 'opacity', (1 - smooth(clamp(p / 0.55))).toFixed(3));
     put(text, 'transform', `translate3d(0, ${(-p * vh * 0.12).toFixed(1)}px, 0) scale(${(1 + p * 0.05).toFixed(4)})`);
-    if (draw && !reduced && t - last > 24) { last = t; draw(t / 1000); }
+    if (!reduced) paintTiles(t / 1000);
   });
 </script>
