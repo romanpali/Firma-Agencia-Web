@@ -1,6 +1,9 @@
 ---
 import Light from '../layouts/Light.astro';
 import { packages, divisions } from '../data/servicios';
+import PackCard from '../components/PackCard.astro';
+import type { Pk } from '../components/PackCard.astro';
+
 
 // Para quién es cada paquete y qué divisiones toca.
 const meta: [string, string[]][] = [
@@ -13,28 +16,7 @@ const meta: [string, string[]][] = [
   ['Para negocios que necesitan orden en facturación, flujo de caja y su información contable y fiscal.', ['06']],
   ['Para organizaciones que quieren procesos, proyectos, inventarios y equipos más claros.', ['07']],
 ];
-// Categoría de cada paquete: contable y fiscal, creativa o técnica.
-const cats = ['creativa', 'creativa', 'tecnica', 'creativa', 'tecnica', 'tecnica', 'contable', 'tecnica'];
-const catLabel: Record<string, string> = { contable: 'Contable y fiscal', creativa: 'Creativa', tecnica: 'Técnica' };
-const all = [
-  ...packages.map(([t, items], i) => ({ t, items, d: meta[i][0], divs: meta[i][1], cat: cats[i] })),
-  { t: 'Asesoría contable y fiscal', items: 'Asesoría contable continua|Orientación fiscal para tu empresa|Calendario de obligaciones y revisión periódica|Facturación electrónica (CFDI) y control de ingresos y egresos|Conciliaciones y estados financieros|Atención de requerimientos y trámites', d: 'Para empresas que requieren acompañamiento contable y fiscal permanente, a cargo del Director de Administración y Finanzas (contador) y su área, con el respaldo de nuestra tecnología.', divs: ['06'], cat: 'contable' },
-  { t: 'Apoyo contable puntual', items: 'Diagnóstico de la situación contable y fiscal|Regularización y orden de la información|Revisión de facturación y registros|Plan de trabajo y recomendaciones', d: 'Para quien necesita ordenar su información contable o resolver una situación específica antes de contratar un servicio continuo.', divs: ['06'], cat: 'contable' },
-];
-// Paquetes completos: combinaciones de divisiones (01 a 08) con su paleta.
-const combos: { t: string; d: string; divs: string[]; items: string[]; g: [string, string, string] }[] = [
-  { t: 'Marca y sitio', d: 'Una identidad clara y un sitio profesional para empezar con buen pie.', divs: ['01', '02'], items: ['Identidad y manual de marca', 'Sitio web a la medida', 'SEO base y formularios'], g: ['#5b7bff', '#9a7bff', '#e9a6ff'] },
-  { t: 'Lanzamiento', d: 'Marca, sitio y primeras campañas para presentarte al mercado.', divs: ['01', '02', '03'], items: ['Identidad y sitio web', 'Estrategia y campañas iniciales', 'Contenido para redes'], g: ['#ff8a6b', '#ff6f9c', '#b46bff'] },
-  { t: 'Crecimiento comercial', d: 'Atrae clientes y dales seguimiento sin perder ninguno.', divs: ['02', '03', '04'], items: ['Sitio con captación de contactos', 'Publicidad y analítica', 'CRM y cotizaciones'], g: ['#19b6a6', '#3b82f6', '#7c5cff'] },
-  { t: 'Venta en línea', d: 'Tienda, promoción y facturación conectadas.', divs: ['02', '03', '06'], items: ['Tienda en línea', 'Campañas y contenido de producto', 'Facturación electrónica (CFDI)'], g: ['#f59e0b', '#ef4f7a', '#8b5cf6'] },
-  { t: 'Creativo completo', d: 'Todo lo visual y de comunicación bajo una misma dirección.', divs: ['01', '03'], items: ['Identidad y dirección de arte', 'Producción de imagen y video', 'Marketing y redes sociales'], g: ['#ec4899', '#a855f7', '#6366f1'] },
-  { t: 'Técnico completo', d: 'Desarrollo, automatización e infraestructura, listos para operar.', divs: ['02', '05', '08'], items: ['Sitio o aplicación a la medida', 'Asistentes y automatizaciones', 'Datos, respaldo e infraestructura'], g: ['#0ea5e9', '#2563eb', '#4f46e5'] },
-  { t: 'Operación inteligente', d: 'Procesos claros y tareas repetitivas automatizadas con supervisión.', divs: ['04', '05', '07'], items: ['CRM y seguimiento', 'Flujos y asistentes', 'Procesos, proyectos e inventarios'], g: ['#22c55e', '#14b8a6', '#3b82f6'] },
-  { t: 'Orden financiero', d: 'Información contable, fiscal y operativa ordenada en un solo lugar.', divs: ['06', '07', '08'], items: ['Asesoría contable y fiscal', 'Facturación, flujo de caja y reportes', 'Tableros y respaldo de información'], g: ['#6d5dfc', '#4338ca', '#0ea5e9'] },
-  { t: 'Empresa conectada', d: 'Marca, sitio, ventas y administración trabajando como un solo equipo.', divs: ['01', '02', '04', '06'], items: ['Identidad y sitio web', 'CRM y automatización de ventas', 'Facturación y asesoría contable y fiscal'], g: ['#f97316', '#e11d8f', '#6d28d9'] },
-  { t: 'Ecosistema HumanCorp', d: 'Todas las divisiones conectadas bajo un solo estándar, con un plan de implementación a tu medida.', divs: ['01', '02', '03', '04', '05', '06', '07', '08'], items: ['Diseño, desarrollo y marketing', 'Ventas, IA y automatización', 'Finanzas, operaciones y datos'], g: ['#1d4ed8', '#7c3aed', '#db2777'] },
-];
-// Emblema de cada paquete (64x64, trazo blanco): identifica el contenido como si fuera un empaque.
+// Emblemas (64x64) de los paquetes.
 const marks: string[] = [
   '<rect x="10" y="22" width="30" height="30" rx="6"/><circle cx="42" cy="26" r="16"/>',
   '<path d="M32 8l12 30H20z"/><path d="M26 46h12M29 52h6"/><circle cx="32" cy="26" r="4"/>',
@@ -47,10 +29,48 @@ const marks: string[] = [
   '<circle cx="14" cy="14" r="5"/><circle cx="50" cy="14" r="5"/><circle cx="14" cy="50" r="5"/><circle cx="50" cy="50" r="5"/><path d="M19 14h26M19 50h26M14 19v26M50 19v26M17 17l30 30M47 17L17 47"/>',
   '<circle cx="32" cy="32" r="5"/><circle cx="32" cy="8" r="3"/><circle cx="49" cy="15" r="3"/><circle cx="56" cy="32" r="3"/><circle cx="49" cy="49" r="3"/><circle cx="32" cy="56" r="3"/><circle cx="15" cy="49" r="3"/><circle cx="8" cy="32" r="3"/><circle cx="15" cy="15" r="3"/><path d="M32 11v16M47 17L36 28M53 32H37M47 47L36 36M32 53V37M17 47l11-11M11 32h16M17 17l11 11"/>',
 ];
-const recurring = ['Mantenimiento web', 'Administración de infraestructura', 'Gestión de campañas', 'Producción periódica de contenido', 'Administración de redes sociales', 'Monitoreo de automatizaciones', 'Soporte técnico', 'Actualización de sistemas', 'Administración de CRM', 'Reportes ejecutivos', 'Optimización continua'];
-const steps = [['Evaluación de la situación actual', 'Conocemos tu empresa y cómo trabaja hoy.'], ['Problemas y oportunidades', 'Identificamos qué conviene resolver primero.'], ['Diseño de la solución', 'Definimos cómo se conectan las piezas.'], ['Plan de implementación', 'Calendario, responsables y entregables.'], ['Desarrollo e integración', 'Construimos y conectamos todo.'], ['Capacitación', 'Tu equipo aprende a usarlo.'], ['Seguimiento y optimización', 'Medimos y mejoramos de forma continua.']];
+
+const combos: { t: string; d: string; divs: string[]; items: string[]; g: [string, string, string] }[] = [
+  { t: 'Marca y sitio', d: 'Una identidad clara y un sitio profesional para empezar con buen pie.', divs: ['01', '02'], items: ['Identidad y manual de marca', 'Sitio web a la medida', 'SEO base y formularios'], g: ['#5b7bff', '#9a7bff', '#e9a6ff'] },
+  { t: 'Lanzamiento', d: 'Marca, sitio y primeras campañas para presentarte al mercado.', divs: ['01', '02', '03'], items: ['Identidad y sitio web', 'Estrategia y campañas iniciales', 'Contenido para redes'], g: ['#ff8a6b', '#ff6f9c', '#b46bff'] },
+  { t: 'Crecimiento comercial', d: 'Atrae clientes y dales seguimiento sin perder ninguno.', divs: ['02', '03', '04'], items: ['Sitio con captación de contactos', 'Publicidad y analítica', 'CRM y cotizaciones'], g: ['#19b6a6', '#3b82f6', '#7c5cff'] },
+  { t: 'Venta en línea', d: 'Tienda, promoción y facturación conectadas.', divs: ['02', '03', '06'], items: ['Tienda en línea', 'Campañas y contenido de producto', 'Facturación electrónica (CFDI)'], g: ['#f59e0b', '#ef4f7a', '#8b5cf6'] },
+  { t: 'Creativo completo', d: 'Todo lo visual y de comunicación bajo una misma dirección.', divs: ['01', '03'], items: ['Identidad y dirección de arte', 'Producción de imagen y video', 'Marketing y redes sociales'], g: ['#ec4899', '#a855f7', '#6366f1'] },
+  { t: 'Técnico completo', d: 'Desarrollo, automatización e infraestructura, listos para operar.', divs: ['02', '05', '08'], items: ['Sitio o aplicación a la medida', 'Asistentes y automatizaciones', 'Datos, respaldo e infraestructura'], g: ['#0ea5e9', '#2563eb', '#4f46e5'] },
+  { t: 'Operación inteligente', d: 'Procesos claros y tareas repetitivas automatizadas con supervisión.', divs: ['04', '05', '07'], items: ['CRM y seguimiento', 'Flujos y asistentes', 'Procesos, proyectos e inventarios'], g: ['#22c55e', '#14b8a6', '#3b82f6'] },
+  { t: 'Orden financiero', d: 'Información contable, fiscal y operativa ordenada en un solo lugar.', divs: ['06', '07', '08'], items: ['Asesoría contable y fiscal', 'Facturación, flujo de caja y reportes', 'Tableros y respaldo de información'], g: ['#6d5dfc', '#4338ca', '#0ea5e9'] },
+  { t: 'Empresa conectada', d: 'Marca, sitio, ventas y administración trabajando como un solo equipo.', divs: ['01', '02', '04', '06'], items: ['Identidad y sitio web', 'CRM y automatización de ventas', 'Facturación y asesoría contable y fiscal'], g: ['#f97316', '#e11d8f', '#6d28d9'] },
+  { t: 'Ecosistema HumanCorp', d: 'Todas las divisiones conectadas bajo un solo estándar, con un plan de implementación a tu medida.', divs: ['01', '02', '03', '04', '05', '06', '07', '08'], items: ['Diseño, desarrollo y marketing', 'Ventas, IA y automatización', 'Finanzas, operaciones y datos'], g: ['#1d4ed8', '#7c3aed', '#db2777'] },
+];
+
 const name = (n: string) => divisions.find((d) => d.n === n)!.short;
 const quote = (t: string) => `/contacto?interes=${encodeURIComponent('Paquete: ' + t)}&mensaje=${encodeURIComponent('Hola, me interesa el paquete «' + t + '». Me gustaría recibir una propuesta a mi medida.')}`;
+const pk = (t: string, d: string, divs: string[], items: string[], g: [string, string, string], mark: number, code: string, kind: string): Pk => ({ t, d, divs: divs.map(name), items, g, mark: marks[mark], code, kind, href: quote(t) });
+
+// Paquetes completos, ordenados por etapa.
+const stage = [
+  { id: 'empezar', h: 'Para empezar', s: 'Lo esencial para presentarte bien.', from: [0, 1, 4] },
+  { id: 'crecer', h: 'Para crecer', s: 'Atrae, vende y opera con herramientas propias.', from: [2, 3, 5] },
+  { id: 'operar', h: 'Para operar', s: 'Procesos y finanzas en orden.', from: [6, 7] },
+  { id: 'integrado', h: 'Todo integrado', s: 'Varias divisiones trabajando como un solo equipo.', from: [8, 9] },
+];
+const markOf = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+const completos = stage.map((s) => ({ ...s, list: s.from.map((i) => pk(combos[i].t, combos[i].d, combos[i].divs, combos[i].items, combos[i].g, markOf[i], `HC-C${String(i + 1).padStart(2, '0')}`, 'Paquete completo')) }));
+
+// Paquetes por área: creativos, técnicos y contables.
+const palette: Record<string, [string, string, string]> = { creativa: ['#c026d3', '#7c3aed', '#3730a3'], tecnica: ['#0ea5e9', '#2563eb', '#3730a3'], contable: ['#059669', '#0f766e', '#1e3a8a'] };
+const area = (i: number, cat: string, code: string, mk: number) => pk(packages[i][0], meta[i][0], meta[i][1], packages[i][1].split('|'), palette[cat], mk, code, 'Paquete por área');
+const porArea = [
+  { id: 'creativa', h: 'Creativa', s: 'Identidad, contenido y crecimiento.', list: [area(0, 'creativa', 'HC-A01', 0), area(1, 'creativa', 'HC-A02', 4), area(3, 'creativa', 'HC-A03', 2)] },
+  { id: 'tecnica', h: 'Técnica', s: 'Sitio, ventas, inteligencia artificial y operaciones.', list: [area(2, 'tecnica', 'HC-A04', 5), area(4, 'tecnica', 'HC-A05', 8), area(5, 'tecnica', 'HC-A06', 6), area(7, 'tecnica', 'HC-A07', 9)] },
+  { id: 'contable', h: 'Contable y fiscal', s: 'Asesoría a cargo del Director de Administración y Finanzas (contador) y su área, con el respaldo de nuestra tecnología.', list: [
+    area(6, 'contable', 'HC-A08', 7),
+    pk('Asesoría contable y fiscal', 'Para empresas que requieren acompañamiento contable y fiscal permanente.', ['06'], ['Asesoría contable continua', 'Orientación fiscal para tu empresa', 'Calendario de obligaciones y revisión periódica', 'Facturación electrónica (CFDI) y control de ingresos y egresos', 'Conciliaciones y estados financieros', 'Atención de requerimientos y trámites'], palette.contable, 7, 'HC-A09', 'Paquete por área'),
+    pk('Apoyo contable puntual', 'Para quien necesita ordenar su información contable o resolver una situación específica antes de contratar un servicio continuo.', ['06'], ['Diagnóstico de la situación contable y fiscal', 'Regularización y orden de la información', 'Revisión de facturación y registros', 'Plan de trabajo y recomendaciones'], palette.contable, 1, 'HC-A10', 'Paquete por área'),
+  ] },
+];
+const recurring = ['Mantenimiento web', 'Administración de infraestructura', 'Gestión de campañas', 'Producción periódica de contenido', 'Administración de redes sociales', 'Monitoreo de automatizaciones', 'Soporte técnico', 'Actualización de sistemas', 'Administración de CRM', 'Reportes ejecutivos', 'Optimización continua'];
+const steps = [['Evaluación de la situación actual', 'Conocemos tu empresa y cómo trabaja hoy.'], ['Problemas y oportunidades', 'Identificamos qué conviene resolver primero.'], ['Diseño de la solución', 'Definimos cómo se conectan las piezas.'], ['Plan de implementación', 'Calendario, responsables y entregables.'], ['Desarrollo e integración', 'Construimos y conectamos todo.'], ['Capacitación', 'Tu equipo aprende a usarlo.'], ['Seguimiento y optimización', 'Medimos y mejoramos de forma continua.']];
 ---
 
 <Light title="Paquetes" description="Soluciones completas de HumanCorp por necesidad: identidad, presencia digital, crecimiento, ventas, IA, finanzas y operaciones.">
@@ -66,64 +86,44 @@ const quote = (t: string) => `/contacto?interes=${encodeURIComponent('Paquete: '
     </div>
   </section>
 
-  <section data-tone="light" class="px-6 py-[4svh] md:px-10">
+  <nav data-tone="light" aria-label="Secciones de paquetes" class="px-6 pb-[4svh] md:px-10">
+    <div class="mx-auto flex max-w-[1280px] flex-wrap gap-2">
+      {[['#completos', 'Paquetes completos'], ['#por-area', 'Por área'], ['#contable', 'Contable y fiscal'], ['#recurrentes', 'Planes mensuales'], ['#consultoria', 'Consultoría']].map(([h, l]) => <a href={h} class="rounded-full border border-[#0b0b0c]/15 px-4 py-2.5 text-[13.5px] transition-colors hover:bg-[#0b0b0c] hover:text-white">{l}</a>)}
+    </div>
+  </nav>
+
+  <section id="completos" data-tone="light" class="scroll-mt-24 px-6 py-[5svh] md:px-10">
     <div class="mx-auto max-w-[1280px] border-t border-[#e6e4df] pt-10">
       <p data-reveal class="text-[13px] font-medium uppercase tracking-[0.14em] text-[#6b6e75]">Paquetes completos</p>
       <h2 data-words class="mt-5 max-w-[20ch] font-goog text-[clamp(2rem,3.6vw,3.4rem)] font-light leading-[1.04] tracking-[-0.045em]">Combinaciones listas para tu etapa</h2>
-      <ul class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-        {combos.map((c, i) => (
-          <li data-reveal style={`--i:${i % 3}`} class={i === combos.length - 1 ? 'md:col-span-2 lg:col-span-3' : ''}>
-            <article class="relative flex h-full flex-col overflow-hidden rounded-[28px] p-7 text-white shadow-[0_34px_70px_-34px_rgba(30,20,90,.7)] transition-transform duration-500 hover:-translate-y-1" style={`background:linear-gradient(150deg,${c.g[0]},${c.g[1]} 55%,${c.g[2]})`}>
-              <i class="pointer-events-none absolute -right-16 -top-20 size-64 rounded-full opacity-70 blur-3xl" style={`background:${c.g[2]}`}></i>
-              <i class="pointer-events-none absolute -bottom-24 -left-16 size-64 rounded-full opacity-60 blur-3xl" style={`background:${c.g[0]}`}></i>
-              <svg viewBox="0 0 64 64" class="pointer-events-none absolute -bottom-6 -right-6 size-[15rem] opacity-[.13]" fill="none" stroke="#fff" stroke-width=".7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={marks[i]}></svg>
-              <i class="pointer-events-none absolute inset-[10px] rounded-[20px] border border-white/25"></i>
-              <div class="relative flex items-center justify-between text-[10.5px] font-medium uppercase tracking-[0.22em] text-white/80"><span>Paquete Nº {String(i + 1).padStart(2, '0')}</span><span>HumanCorp</span></div>
-              <div class="relative mt-7 grid size-[72px] place-items-center rounded-[22px] border border-white/40 bg-white/[.16] shadow-[inset_0_1px_0_rgba(255,255,255,.5),0_14px_30px_-14px_rgba(0,0,0,.45)] backdrop-blur-xl">
-                <svg viewBox="0 0 64 64" class="size-[44px]" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={marks[i]}></svg>
-              </div>
-              <h3 class="relative mt-6 font-goog text-[2rem] font-normal leading-[1.03] tracking-[-0.045em]">{c.t}</h3>
-              <p class="relative mt-3 max-w-[34rem] text-[14.5px] leading-relaxed text-white/85">{c.d}</p>
-              <p class="relative mt-6 text-[10.5px] font-medium uppercase tracking-[0.22em] text-white/70">Contiene</p>
-              <div class="relative mt-2.5 flex flex-wrap gap-1.5">{c.divs.map((d) => <span class="rounded-full border border-white/35 bg-white/15 px-3 py-[5px] text-[12px] backdrop-blur-md">{name(d)}</span>)}</div>
-              <div class="relative mt-5 rounded-[18px] border border-white/30 bg-white/[.14] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,.35)] backdrop-blur-xl">
-                <ul class={`grid gap-2 text-[13.5px] ${i === combos.length - 1 ? 'md:grid-cols-3' : ''}`}>{c.items.map((it) => <li class="flex gap-2.5"><span class="mt-[0.55em] block size-1 shrink-0 rounded-full bg-white"></span>{it}</li>)}</ul>
-              </div>
-              <div class="relative mt-6 flex items-end justify-between gap-4">
-                <a href={quote(c.t)} class="inline-flex items-center gap-2 rounded-full border border-white/45 bg-white/20 px-5 py-2.5 text-[14px] font-medium backdrop-blur-md transition-colors hover:bg-white/30">Cotizar este paquete <span aria-hidden="true">→</span></a>
-                <div class="text-right"><i class="mb-1 ml-auto block h-[22px] w-[84px] opacity-80" style="background:repeating-linear-gradient(90deg,#fff 0 2px,transparent 2px 4px,#fff 4px 5px,transparent 5px 8px,#fff 8px 11px,transparent 11px 13px)"></i><span class="text-[9.5px] uppercase tracking-[0.2em] text-white/70">HC-{String(i + 1).padStart(2, '0')} · Edición 2026</span></div>
-              </div>
-            </article>
-          </li>
-        ))}
-      </ul>
+      {completos.map((g, gi) => (
+        <div class="mt-14">
+          <div class="flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-[#e6e4df] pb-4"><span class="font-goog text-[14px] text-[#6b6e75]">{String(gi + 1).padStart(2, '0')}</span><h3 class="font-goog text-[1.5rem] tracking-[-0.03em]">{g.h}</h3><p class="text-[14.5px] text-[#50535a]">{g.s}</p></div>
+          <ul class="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {g.list.map((c, i) => <li data-reveal style={`--i:${i % 3}`} class={g.id === 'integrado' && i === 1 ? 'md:col-span-2 lg:col-span-2' : ''}><PackCard p={c} wide={g.id === 'integrado' && i === 1} /></li>)}
+          </ul>
+        </div>
+      ))}
     </div>
   </section>
 
-  <section data-tone="light" class="px-6 py-[6svh] md:px-10">
+  <section id="por-area" data-tone="light" class="scroll-mt-24 px-6 py-[5svh] md:px-10">
     <div class="mx-auto max-w-[1280px] border-t border-[#e6e4df] pt-10">
       <p data-reveal class="text-[13px] font-medium uppercase tracking-[0.14em] text-[#6b6e75]">Por área</p>
-      <div data-filter class="mt-6 flex flex-wrap gap-2" role="group" aria-label="Filtrar por tipo de paquete">
-        {[['todos', 'Todos'], ['contable', 'Contable y fiscal'], ['creativa', 'Creativa'], ['tecnica', 'Técnica']].map(([v, l], k) => <button type="button" data-f={v} aria-pressed={k === 0 ? 'true' : 'false'} class="rounded-full border border-[#0b0b0c]/20 px-4 py-2.5 text-[13.5px] transition-colors hover:bg-[#0b0b0c]/5 aria-pressed:border-[#0b0b0c] aria-pressed:bg-[#0b0b0c] aria-pressed:text-white">{l}</button>)}
-      </div>
-      <ul class="mt-8 grid gap-5 md:grid-cols-2">
-        {all.map(({ t, items, d, divs, cat }, i) => (
-          <li data-reveal data-cat={cat} style={`--i:${i % 2}`}>
-            <article class="flex h-full flex-col rounded-[20px] border border-[#e6e4df] p-7 transition-[border-color,transform,box-shadow] duration-300 hover:-translate-y-1 hover:border-[#0b0b0c]/30 hover:shadow-[0_30px_60px_-40px_rgba(0,0,0,.35)]">
-              <div class="flex items-baseline justify-between"><span class="font-goog text-[14px] text-[#6b6e75]">{String(i + 1).padStart(2, '0')}</span><span class="text-[12px] text-[#6b6e75]">{cat === 'contable' ? catLabel[cat] : catLabel[cat] + ' · ' + divs.map(name).join(' · ')}</span></div>
-              <h2 class="mt-6 font-goog text-[1.8rem] font-normal leading-[1.05] tracking-[-0.04em]">{t}</h2>
-              <p class="mt-3 text-[14.5px] leading-relaxed text-[#50535a]">{d}</p>
-              <p class="mt-6 text-[11.5px] font-medium uppercase tracking-[0.14em] text-[#6b6e75]">Incluye</p>
-              <ul class="mt-3 grid gap-x-4 gap-y-2 text-[14px] sm:grid-cols-2">{items.split('|').map((s) => <li class="flex gap-2.5"><span class="mt-[0.55em] block size-1 shrink-0 rounded-full bg-[#0b0b0c]"></span>{s}</li>)}</ul>
-              <a href={quote(t)} class="mt-8 inline-flex items-center gap-2 self-start text-[14.5px] font-medium underline decoration-[#0b0b0c]/25 underline-offset-[6px] transition-[text-decoration-color] hover:decoration-[#0b0b0c]">Cotizar este paquete <span aria-hidden="true">→</span></a>
-            </article>
-          </li>
-        ))}
-      </ul>
+      <h2 data-words class="mt-5 max-w-[20ch] font-goog text-[clamp(2rem,3.6vw,3.4rem)] font-light leading-[1.04] tracking-[-0.045em]">Si solo necesitas una parte</h2>
+      {porArea.map((g, gi) => (
+        <div id={g.id === 'contable' ? 'contable' : undefined} class="mt-14 scroll-mt-24">
+          <div class="flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-[#e6e4df] pb-4"><span class="font-goog text-[14px] text-[#6b6e75]">{String(gi + 1).padStart(2, '0')}</span><h3 class="font-goog text-[1.5rem] tracking-[-0.03em]">{g.h}</h3><p class="max-w-[40rem] text-[14.5px] text-[#50535a]">{g.s}</p></div>
+          <ul class="mt-6 grid gap-5 md:grid-cols-2">
+            {g.list.map((c, i) => <li data-reveal style={`--i:${i % 2}`}><PackCard p={c} /></li>)}
+          </ul>
+        </div>
+      ))}
     </div>
   </section>
 
-  <section data-tone="light" class="px-6 py-[9svh] md:px-10">
+
+  <section id="recurrentes" data-tone="light" class="scroll-mt-24 px-6 py-[9svh] md:px-10">
     <div class="mx-auto grid max-w-[1280px] gap-10 border-t border-[#e6e4df] pt-10 md:grid-cols-12 md:gap-14">
       <div class="md:col-span-5">
         <p data-reveal class="text-[13px] font-medium uppercase tracking-[0.14em] text-[#6b6e75]">Servicios recurrentes</p>
@@ -137,7 +137,7 @@ const quote = (t: string) => `/contacto?interes=${encodeURIComponent('Paquete: '
     </div>
   </section>
 
-  <section data-tone="light" class="px-6 pb-[12svh] pt-[4svh] md:px-10">
+  <section id="consultoria" data-tone="light" class="scroll-mt-24 px-6 pb-[12svh] pt-[4svh] md:px-10">
     <div class="mx-auto max-w-[1280px] border-t border-[#e6e4df] pt-10">
       <p data-reveal class="text-[13px] font-medium uppercase tracking-[0.14em] text-[#6b6e75]">Consultoría e implementación</p>
       <h2 data-words class="mt-5 max-w-[18ch] font-goog text-[clamp(2rem,3.6vw,3.4rem)] font-light leading-[1.04] tracking-[-0.045em]">Si primero necesitas un plan</h2>
@@ -150,14 +150,4 @@ const quote = (t: string) => `/contacto?interes=${encodeURIComponent('Paquete: '
       </div>
     </div>
   </section>
-  <script>
-    const bar = document.querySelector<HTMLElement>('[data-filter]')!;
-    const items = [...document.querySelectorAll<HTMLElement>('li[data-cat]')];
-    bar.addEventListener('click', (e) => {
-      const b = (e.target as HTMLElement).closest<HTMLButtonElement>('[data-f]');
-      if (!b) return;
-      bar.querySelectorAll('[data-f]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
-      items.forEach((li) => { li.hidden = b.dataset.f !== 'todos' && li.dataset.cat !== b.dataset.f; });
-    });
-  </script>
 </Light>
