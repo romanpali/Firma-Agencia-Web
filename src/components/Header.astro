@@ -155,15 +155,19 @@ const pill = 'hdr-pill rounded-full border border-white/20 bg-white/10 px-5 py-3
   const pick = (a: HTMLAnchorElement, e: MouseEvent) => {
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0 || reducedM) { set(false); return; }
     e.preventDefault();
+    // Estilo Apple: el resto se aleja (escala, desenfoque y opacidad) en cascada desde la opción elegida, que se acerca un poco.
+    const items = [...menu.querySelectorAll<HTMLElement>('.menu-link, [data-results] li')];
+    const sel = (a.closest('.menu-link, li') as HTMLElement | null) ?? a;
+    const si = items.indexOf(sel);
+    items.forEach((el, i) => el.style.setProperty('--pd', `${Math.min(Math.abs(i - si), 6) * 35}ms`));
     menu.classList.add('is-picking');
     menu.querySelectorAll('.is-picked').forEach((x) => x.classList.remove('is-picked'));
-    (a.closest('.menu-link') as HTMLElement | null ?? a).classList.add('is-picked');
-    a.classList.add('is-picked');
+    sel.classList.add('is-picked');
     setTimeout(() => {
       const u = new URL(a.href, location.href);
       if (u.pathname === location.pathname && u.search === location.search) { set(false); if (u.hash) location.hash = u.hash; menu.classList.remove('is-picking'); }
       else location.href = u.href;
-    }, 520);
+    }, 700);
   };
   menu.addEventListener('click', (e) => { const a = (e.target as HTMLElement).closest<HTMLAnchorElement>('a[data-menu-link]'); if (a) pick(a, e); });
   addEventListener('pageshow', () => { menu.classList.remove('is-picking'); menu.querySelectorAll('.is-picked').forEach((x) => x.classList.remove('is-picked')); });

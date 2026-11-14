@@ -156,7 +156,7 @@
 @keyframes obUp { from { transform: translateY(112%); } }
 @keyframes obFade { from { opacity: 0; transform: translateY(12px); } }
 @keyframes obLine { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); } 100% { transform: scaleY(1); opacity: 0; } }
-@container (max-width: 700px) { .ob-cue, .ob-note, .ob-sub, .ob-idx, .bw-prop { display: none; } .ob-hero { max-width: 100%; right: 20px; top: clamp(84px, 13svh, 140px); translate: none; margin-top: 0; } .ob-title { font-size: clamp(2.1rem, 9.5cqw, 3rem); } .bw-world { --pw: 42cqw; top: 62%; } }
+@container (max-width: 700px) { .ob-cue, .ob-note, .ob-sub, .ob-idx, .bw-prop { display: none; } .ob-hero { max-width: 100%; right: 20px; top: clamp(84px, 13svh, 140px); translate: none; margin-top: 0; } .ob-title { font-size: clamp(2.1rem, 9.5cqw, 3rem); } .bw-world { --pw: 88cqw; top: 58%; } .ob-closed { right: 6cqw; width: 88cqw; top: 58%; translate: 0 -50%; } }
 
 /* Modo ligero: se activa solo si el equipo no mantiene los fotogramas */
 .bw-lite .bw-prop, .bw-lite .bw-lamp, .bw-lite .bw-gutter, .bw-lite .bw-ribbon { display: none; }

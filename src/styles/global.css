@@ -726,8 +726,10 @@ img, picture, video, canvas { pointer-events: none; -webkit-user-drag: none; use
 @keyframes hfTick { to { transform: translate3d(-50%, 0, 0); } }
 @media (prefers-reduced-motion: reduce) { .hf-up, .hf-track { animation: none !important; } }
 
-/* Menú: al elegir una opción las demás se desenfocan y se apagan (solo opacidad y filtro, sin mover nada) */
-.is-open.is-picking .menu-link:not(.is-picked):not(:has(.is-picked)) { opacity: 0.18; filter: blur(7px); transition: opacity 0.45s ease, filter 0.45s ease; transition-delay: 0s; }
-.is-open.is-picking .menu-link.is-picked, .is-open.is-picking .menu-link:has(.is-picked) { opacity: 1; filter: none; }
-.is-open.is-picking .is-picked { transition: transform 0.5s cubic-bezier(.2, .8, .2, 1); transform: scale(1.06); }
-.is-open.is-picking [data-results] li:not(:has(.is-picked)) { opacity: 0.18; filter: blur(7px); transition: opacity 0.45s ease, filter 0.45s ease; }
+/* Menú: al elegir una opción, las demás se alejan y se desenfocan como en iOS (curva de resorte suave, en cascada); la elegida se acerca */
+.is-open.is-picking .menu-link:not(.is-picked):not(:has(.is-picked)), .is-open.is-picking [data-results] li:not(.is-picked):not(:has(.is-picked)) {
+  opacity: 0.28; filter: blur(14px) saturate(0.8); transform: scale(0.94);
+  transition: opacity 0.7s cubic-bezier(.32, .72, 0, 1) var(--pd, 0s), filter 0.7s cubic-bezier(.32, .72, 0, 1) var(--pd, 0s), transform 0.7s cubic-bezier(.32, .72, 0, 1) var(--pd, 0s);
+}
+.is-open.is-picking .menu-link.is-picked, .is-open.is-picking [data-results] li.is-picked { opacity: 1; filter: none; transform: scale(1.05); transition: transform 0.7s cubic-bezier(.32, .72, 0, 1), opacity 0.4s ease, filter 0.4s ease; }
+@media (prefers-reduced-motion: reduce) { .is-open.is-picking .menu-link, .is-open.is-picking [data-results] li { transition: none !important; } }
