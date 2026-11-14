@@ -50,8 +50,8 @@ const areaPacks = [area(0, 'creativa', 'HC-A01', 0), area(1, 'creativa', 'HC-A02
       </section>
 
       <!-- Divisiones: hojas apiladas; cada área es una escena que avanza con el scroll -->
-      <section id="divisiones" data-tone="dark" class="relative px-3 pb-[10svh] pt-[6svh] md:px-10">
-        <div class="mx-auto flow-root max-w-[1180px]" data-sheets>
+      <section id="divisiones" data-tone="dark" class="relative px-2 pb-[10svh] pt-[6svh] md:px-4">
+        <div class="mx-auto flow-root max-w-none" data-sheets>
           {divisions.map((d, di) => (
             <>
               <i data-m class="block h-0" id={`div-${d.n}`} aria-hidden="true"></i>
@@ -62,10 +62,10 @@ const areaPacks = [area(0, 'creativa', 'HC-A01', 0), area(1, 'creativa', 'HC-A02
                   <span class="hidden sm:inline">humancorp.co</span><span class="sm:hidden">{d.n} / 08</span>
                 </header>
                 <div class="flex h-[calc(100%-49px)] flex-col md:grid md:h-[calc(100%-57px)] md:grid-cols-[0.8fr_1.2fr] md:grid-rows-[auto_minmax(0,1fr)_auto]">
-                  <div class="px-4 pb-1 pt-3 md:col-start-1 md:row-start-1 md:px-9 md:pb-2 md:pt-9">
+                  <div class="px-4 pb-1 pt-3 md:col-start-1 md:row-start-1 md:px-10 md:pb-2 md:pt-10">
                     <p class="text-[10.5px] font-medium uppercase tracking-[0.14em] text-black/45">División {d.n} de 08</p>
-                    <h2 class="mt-1.5 font-goog text-[clamp(1.2rem,5vw,1.5rem)] font-normal leading-[1.05] tracking-[-0.04em] md:mt-3 md:text-[clamp(1.9rem,2.9vw,2.8rem)] md:leading-[1.03] md:tracking-[-0.045em]">{d.title}</h2>
-                    <p class="mt-4 hidden text-[14px] leading-relaxed text-black/60 md:block">{d.intro}</p>
+                    <h2 class="mt-1.5 font-goog text-[clamp(1.2rem,5vw,1.5rem)] font-normal leading-[1.05] tracking-[-0.04em] md:mt-3 md:text-[clamp(2.1rem,3.3vw,3.8rem)] md:leading-[1.03] md:tracking-[-0.045em]">{d.title}</h2>
+                    <p class="mt-4 hidden text-[15.5px] leading-relaxed text-black/70 md:block">{d.intro}</p>
                   </div>
 
                   <div class="relative m-2 min-h-0 flex-1 overflow-hidden rounded-[18px] text-white md:col-start-2 md:row-span-3 md:row-start-1 md:m-3 md:rounded-[22px]" style={`--sa:${palette[di % 4][0]};--sb:${palette[di % 4][1]}`}>
@@ -96,14 +96,14 @@ const areaPacks = [area(0, 'creativa', 'HC-A01', 0), area(1, 'creativa', 'HC-A02
                     {d.areas.map(([t, items], ai) => (
                       <button type="button" data-area={ai} data-items={items} aria-pressed={ai === 0} class={`area group relative flex shrink-0 items-center gap-2.5 rounded-full border border-black/10 px-3 py-2 text-left transition-colors md:w-full md:gap-3 md:rounded-xl md:border-0 md:px-3 md:py-2.5 md:hover:bg-black/[.04] ${ai === 0 ? 'is-on' : ''}`}>
                         <span class="area-l grid size-[22px] shrink-0 place-items-center rounded-md text-[10.5px] font-medium">{String.fromCharCode(65 + ai)}</span>
-                        <span class="area-t whitespace-nowrap font-goog text-[13px] leading-snug tracking-[-0.015em] md:whitespace-normal md:text-[14.5px]">{t}</span>
+                        <span class="area-t whitespace-nowrap font-goog text-[13px] leading-snug tracking-[-0.015em] md:whitespace-normal md:text-[16.5px]">{t}</span>
                         <i class="area-bar absolute inset-x-3 bottom-0 hidden h-px origin-left md:block" aria-hidden="true"></i>
                       </button>
                     ))}
                   </div>
 
                   <div class="hidden px-9 pb-8 pt-2 md:col-start-1 md:row-start-3 md:block">
-                    <p class="border-t border-black/[.07] pt-4 text-[12.5px] leading-relaxed text-black/70"><span class="mb-1 block text-[10px] font-medium uppercase tracking-[0.14em] text-[#4b32c9]">Objetivo</span>{d.goal}</p>
+                    <p class="border-t border-black/[.07] pt-4 text-[14px] leading-relaxed text-black/75"><span class="mb-1 block text-[10px] font-medium uppercase tracking-[0.14em] text-[#4b32c9]">Objetivo</span>{d.goal}</p>
                     {d.note && <p class="mt-3 text-[11px] leading-relaxed text-black/45">{d.note}</p>}
                   </div>
                 </div>

@@ -74,6 +74,11 @@ const pill = 'hdr-pill rounded-full border border-white/20 bg-white/10 px-5 py-3
 </div>
 
 <script>
+  const nav = document.querySelector<HTMLElement>('[data-nav]')!;
+  let sr = 0;
+  const mark = () => { sr = 0; nav.toggleAttribute('data-scrolled', scrollY > 24); };
+  addEventListener('scroll', () => { if (!sr) sr = requestAnimationFrame(mark); }, { passive: true });
+  mark();
   const menu = document.querySelector<HTMLElement>('[data-menu]')!;
   const open = document.querySelector<HTMLElement>('[data-menu-open]')!;
   const set = (on: boolean) => {

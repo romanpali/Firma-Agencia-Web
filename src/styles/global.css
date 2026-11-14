@@ -322,7 +322,7 @@ body { overflow-x: clip; }
 .stage-panel { transform-origin: 50% 50%; }
 .stage-panel .pn { position: absolute; left: 0; top: 0; box-shadow: 0 50px 100px -30px rgba(0, 0, 40, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.18); }
 .area-l { background: rgba(11, 12, 15, 0.07); color: rgba(11, 12, 15, 0.55); transition: background-color 0.3s, color 0.3s; }
-.area-t { color: rgba(11, 12, 15, 0.55); transition: color 0.3s; }
+.area-t { color: rgba(11, 12, 15, 0.72); transition: color 0.3s; }
 .area.is-on .area-l { background: #0b0c0f; color: #fff; }
 .area.is-on .area-t { color: #0b0c0f; font-weight: 500; }
 .area-bar { background: #977dff; transform: scaleX(0); }
@@ -707,3 +707,8 @@ html { scrollbar-width: thin; scrollbar-color: rgba(125, 125, 140, 0.45) transpa
 
 /* Las imágenes no reciben clic derecho ni arrastre: el menú que aparece es el normal de la página (sin buscar con Lens, copiar o guardar imagen) */
 img, picture, video, canvas { pointer-events: none; -webkit-user-drag: none; user-select: none; -webkit-touch-callout: none; }
+
+/* Barra superior: al bajar se vuelve un degradado opaco que evita que el texto de la página choque con el menú */
+[data-nav]::before { content: ""; position: absolute; inset: 0 0 -22px; z-index: -1; pointer-events: none; opacity: 0; transition: opacity 0.3s; background: linear-gradient(to bottom, rgba(5, 7, 32, 0.9) 0, rgba(5, 7, 32, 0.78) 58%, rgba(5, 7, 32, 0)); }
+[data-nav][data-tone="light"]::before { background: linear-gradient(to bottom, rgba(255, 255, 255, 0.95) 0, rgba(255, 255, 255, 0.85) 58%, rgba(255, 255, 255, 0)); }
+[data-nav][data-scrolled]::before { opacity: 1; }
