@@ -1,4 +1,10 @@
 ---
+// Mosaicos que giran en espiral alrededor del texto: radio (fracción), ángulo inicial, giro propio y tamaño.
+const tiles = Array.from({ length: 10 }, (_, i) => {
+  const a = (i / 10) * Math.PI * 2 - Math.PI / 2;
+  const r = 0.95 + (i % 5) * 0.08 + i * 0.01;
+  return { i: i + 1, x: Math.cos(a) * r, y: Math.sin(a) * r, tilt: [-14, 9, -6, 16, -10, 7, -18, 12, -4, 14][i], s: [1, 0.86, 1.08, 0.8, 0.96, 0.9, 1.04, 0.82, 1, 0.88][i], d: 0.15 + i * 0.07 };
+});
 ---
 
 <div data-hero-wrap class="relative z-10 h-[190svh]">
@@ -13,15 +19,24 @@
     <div data-hero-glow class="pointer-events-none absolute inset-x-0 bottom-0 h-[80%] origin-bottom opacity-0 will-change-[opacity,transform]" style="background:linear-gradient(to top,rgba(246,196,138,.95),rgba(216,142,118,.55) 38%,rgba(126,104,172,.2) 70%,transparent)"></div>
 
     <div data-hero-text class="absolute inset-0 flex flex-col items-start justify-end px-6 pb-[17svh] text-left will-change-[opacity,transform] md:items-center md:justify-center md:pb-0 md:text-center">
-      <h1 class="hf-rise text-[clamp(4rem,23.5vw,7rem)] leading-[0.86] tracking-[-0.045em] md:text-[clamp(2.9rem,6.4vw,6.2rem)] md:leading-[0.95] md:tracking-[-0.03em]" style="--d:.25s" aria-label="HumanCorp">
-        <span class="block font-light md:inline">HUMAN</span> <span class="block font-semibold md:inline">CORP</span>
+      <div class="hh-ring pointer-events-none absolute left-1/2" aria-hidden="true">
+        <div class="hh-spin">
+          {tiles.map((t) => (
+            <i class="hh-tile" style={`--x:${t.x.toFixed(3)};--y:${t.y.toFixed(3)};--tilt:${t.tilt}deg;--s:${t.s};--d:${t.d}s`}><b style={`background-image:url(/hero/t${t.i}.webp)`}></b></i>
+          ))}
+        </div>
+      </div>
+      <h1 class="hf-rise relative z-10 max-md:sr-only md:text-[clamp(2.9rem,6.4vw,6.2rem)] md:leading-[0.95] md:tracking-[-0.03em]" style="--d:.25s" aria-label="HumanCorp">
+        <span class="font-light">HUMAN</span> <span class="font-semibold">CORP</span>
       </h1>
-      <p class="hf-rise mt-7 max-w-[19rem] border-t border-white/35 pt-5 text-[clamp(1.05rem,1.35vw,1.4rem)] font-medium leading-[1.5] tracking-tight text-white/90 text-balance md:mt-6 md:max-w-[32rem] md:border-0 md:pt-0" style="--d:.45s">
+      <p class="hf-rise relative z-10 w-full max-w-[19rem] text-[0.95rem] font-medium leading-[1.4] text-white/85 md:hidden" style="--d:.3s">Todo lo que hace funcionar a una empresa,</p>
+      <p class="hf-rise relative z-10 mt-2 text-[clamp(2.7rem,14vw,4rem)] font-semibold leading-[0.95] tracking-[-0.045em] md:hidden" style="--d:.42s" aria-hidden="true">Conectado.<span class="block text-white/55">Bajo un solo estándar.</span></p>
+      <p class="hf-rise relative z-10 mt-7 hidden max-w-[19rem] text-[clamp(1.05rem,1.35vw,1.4rem)] font-medium leading-[1.5] tracking-tight text-white/90 text-balance md:mt-6 md:block md:max-w-[32rem]" style="--d:.45s">
         Todo lo que hace funcionar a una empresa, conectado bajo un solo <em class="hf-em">estándar</em>.
       </p>
-      <div class="hf-rise mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row md:mt-9 md:justify-center" style="--d:.62s">
-        <a href="/servicios" class="rounded-full bg-white px-7 py-3.5 text-center text-[15px] font-medium text-[#0b0c0f] transition-transform hover:scale-[1.03]">Conocer servicios</a>
-        <a href="/arma-tu-proyecto" class="rounded-full border border-white/45 bg-white/10 px-7 py-3.5 text-center text-[15px] transition-colors hover:bg-white/10">Arma tu proyecto</a>
+      <div class="hf-rise relative z-10 mt-5 flex gap-3 max-md:absolute max-md:inset-x-0 max-md:bottom-[4.5%] max-md:mt-0 max-md:justify-center md:mt-9 md:justify-center" style="--d:.62s">
+        <a href="/servicios" class="rounded-full bg-white px-8 py-3.5 text-center text-[15px] font-medium max-md:shadow-[0_18px_40px_-14px_rgba(10,8,60,.7)] text-[#0b0c0f] transition-transform hover:scale-[1.03]">Conocer servicios</a>
+        <a href="/arma-tu-proyecto" class="hidden rounded-full border border-white/45 bg-white/10 px-7 py-3.5 text-center text-[15px] md:inline-block transition-colors hover:bg-white/10">Arma tu proyecto</a>
       </div>
       <div class="hf-rise absolute inset-x-0 bottom-[4%] hidden flex-col items-center gap-2 md:flex text-[11px] uppercase tracking-[0.2em] text-white/70" style="--d:1s" aria-hidden="true">
         <span>Desliza</span>
