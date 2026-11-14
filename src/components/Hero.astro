@@ -12,18 +12,18 @@
     <!-- first light: a warm glow rises from the bottom while the silk dissolves into the horizon -->
     <div data-hero-glow class="pointer-events-none absolute inset-x-0 bottom-0 h-[80%] origin-bottom opacity-0 will-change-[opacity,transform]" style="background:linear-gradient(to top,rgba(246,196,138,.95),rgba(216,142,118,.55) 38%,rgba(126,104,172,.2) 70%,transparent)"></div>
 
-    <div data-hero-text class="absolute inset-0 flex flex-col items-center justify-center px-6 text-center will-change-[opacity,transform]">
-      <h1 class="hf-rise text-[clamp(2.9rem,6.4vw,6.2rem)] leading-[0.95] tracking-[-0.03em]" style="--d:.25s" aria-label="HumanCorp">
-        <span class="font-light">HUMAN</span> <span class="font-semibold">CORP</span>
+    <div data-hero-text class="absolute inset-0 flex flex-col items-start justify-end px-6 pb-[17svh] text-left will-change-[opacity,transform] md:items-center md:justify-center md:pb-0 md:text-center">
+      <h1 class="hf-rise text-[clamp(4rem,23.5vw,7rem)] leading-[0.86] tracking-[-0.045em] md:text-[clamp(2.9rem,6.4vw,6.2rem)] md:leading-[0.95] md:tracking-[-0.03em]" style="--d:.25s" aria-label="HumanCorp">
+        <span class="block font-light md:inline">HUMAN</span> <span class="block font-semibold md:inline">CORP</span>
       </h1>
-      <p class="hf-rise mt-6 max-w-[21rem] text-[clamp(1.05rem,1.35vw,1.4rem)] font-medium leading-[1.5] tracking-tight text-white/90 text-balance md:max-w-[32rem]" style="--d:.45s">
+      <p class="hf-rise mt-7 max-w-[19rem] border-t border-white/35 pt-5 text-[clamp(1.05rem,1.35vw,1.4rem)] font-medium leading-[1.5] tracking-tight text-white/90 text-balance md:mt-6 md:max-w-[32rem] md:border-0 md:pt-0" style="--d:.45s">
         Todo lo que hace funcionar a una empresa, conectado bajo un solo <em class="hf-em">estándar</em>.
       </p>
-      <div class="hf-rise mt-9 flex flex-wrap justify-center gap-3" style="--d:.62s">
-        <a href="/servicios" class="rounded-full bg-white px-7 py-3.5 text-[15px] font-medium text-[#0b0c0f] transition-transform hover:scale-[1.03]">Conocer servicios</a>
-        <a href="/arma-tu-proyecto" class="rounded-full border border-white/45 px-7 py-3.5 text-[15px] transition-colors hover:bg-white/10">Arma tu proyecto</a>
+      <div class="hf-rise mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row md:mt-9 md:justify-center" style="--d:.62s">
+        <a href="/servicios" class="rounded-full bg-white px-7 py-3.5 text-center text-[15px] font-medium text-[#0b0c0f] transition-transform hover:scale-[1.03]">Conocer servicios</a>
+        <a href="/arma-tu-proyecto" class="rounded-full border border-white/45 bg-white/10 px-7 py-3.5 text-center text-[15px] transition-colors hover:bg-white/10">Arma tu proyecto</a>
       </div>
-      <div class="hf-rise absolute inset-x-0 bottom-[5%] flex flex-col items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-white/70" style="--d:1s" aria-hidden="true">
+      <div class="hf-rise absolute inset-x-0 bottom-[4%] hidden flex-col items-center gap-2 md:flex text-[11px] uppercase tracking-[0.2em] text-white/70" style="--d:1s" aria-hidden="true">
         <span>Desliza</span>
         <i class="block h-9 w-px origin-top bg-white/70" style="animation:scrollLine 2s ease-in-out 1.4s 3 both"></i>
       </div>
