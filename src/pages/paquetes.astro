@@ -34,6 +34,19 @@ const combos: { t: string; d: string; divs: string[]; items: string[]; g: [strin
   { t: 'Empresa conectada', d: 'Marca, sitio, ventas y administración trabajando como un solo equipo.', divs: ['01', '02', '04', '06'], items: ['Identidad y sitio web', 'CRM y automatización de ventas', 'Facturación y asesoría contable y fiscal'], g: ['#f97316', '#e11d8f', '#6d28d9'] },
   { t: 'Ecosistema HumanCorp', d: 'Todas las divisiones conectadas bajo un solo estándar, con un plan de implementación a tu medida.', divs: ['01', '02', '03', '04', '05', '06', '07', '08'], items: ['Diseño, desarrollo y marketing', 'Ventas, IA y automatización', 'Finanzas, operaciones y datos'], g: ['#1d4ed8', '#7c3aed', '#db2777'] },
 ];
+// Emblema de cada paquete (64x64, trazo blanco): identifica el contenido como si fuera un empaque.
+const marks: string[] = [
+  '<rect x="10" y="22" width="30" height="30" rx="6"/><circle cx="42" cy="26" r="16"/>',
+  '<path d="M32 8l12 30H20z"/><path d="M26 46h12M29 52h6"/><circle cx="32" cy="26" r="4"/>',
+  '<path d="M10 52V40M24 52V30M38 52V20M52 52V10"/><path d="M10 34l14-10 14-8 14-8"/><path d="M44 8h8v8"/>',
+  '<rect x="12" y="24" width="40" height="30" rx="5"/><path d="M22 24v-4a10 10 0 0 1 20 0v4"/><path d="M24 36h16"/>',
+  '<circle cx="24" cy="26" r="14"/><circle cx="40" cy="26" r="14"/><circle cx="32" cy="40" r="14"/>',
+  '<path d="M22 20L8 32l14 12M42 20l14 12-14 12M36 14L28 50"/>',
+  '<path d="M32 6l22 13v26L32 58 10 45V19z"/><circle cx="32" cy="32" r="6"/><path d="M32 6v20M54 19L37 29M10 19l17 10"/>',
+  '<circle cx="32" cy="32" r="22"/><circle cx="32" cy="32" r="12"/><path d="M32 20v24M26 26h9a4 4 0 0 1 0 8h-9"/>',
+  '<circle cx="14" cy="14" r="5"/><circle cx="50" cy="14" r="5"/><circle cx="14" cy="50" r="5"/><circle cx="50" cy="50" r="5"/><path d="M19 14h26M19 50h26M14 19v26M50 19v26M17 17l30 30M47 17L17 47"/>',
+  '<circle cx="32" cy="32" r="5"/><circle cx="32" cy="8" r="3"/><circle cx="49" cy="15" r="3"/><circle cx="56" cy="32" r="3"/><circle cx="49" cy="49" r="3"/><circle cx="32" cy="56" r="3"/><circle cx="15" cy="49" r="3"/><circle cx="8" cy="32" r="3"/><circle cx="15" cy="15" r="3"/><path d="M32 11v16M47 17L36 28M53 32H37M47 47L36 36M32 53V37M17 47l11-11M11 32h16M17 17l11 11"/>',
+];
 const recurring = ['Mantenimiento web', 'Administración de infraestructura', 'Gestión de campañas', 'Producción periódica de contenido', 'Administración de redes sociales', 'Monitoreo de automatizaciones', 'Soporte técnico', 'Actualización de sistemas', 'Administración de CRM', 'Reportes ejecutivos', 'Optimización continua'];
 const steps = [['Evaluación de la situación actual', 'Conocemos tu empresa y cómo trabaja hoy.'], ['Problemas y oportunidades', 'Identificamos qué conviene resolver primero.'], ['Diseño de la solución', 'Definimos cómo se conectan las piezas.'], ['Plan de implementación', 'Calendario, responsables y entregables.'], ['Desarrollo e integración', 'Construimos y conectamos todo.'], ['Capacitación', 'Tu equipo aprende a usarlo.'], ['Seguimiento y optimización', 'Medimos y mejoramos de forma continua.']];
 const name = (n: string) => divisions.find((d) => d.n === n)!.short;
@@ -60,17 +73,26 @@ const quote = (t: string) => `/contacto?interes=${encodeURIComponent('Paquete: '
       <ul class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {combos.map((c, i) => (
           <li data-reveal style={`--i:${i % 3}`} class={i === combos.length - 1 ? 'md:col-span-2 lg:col-span-3' : ''}>
-            <article class="relative flex h-full flex-col overflow-hidden rounded-[28px] p-6 text-white shadow-[0_30px_60px_-36px_rgba(30,20,90,.6)] transition-transform duration-500 hover:-translate-y-1" style={`background:linear-gradient(145deg,${c.g[0]},${c.g[1]} 55%,${c.g[2]})`}>
+            <article class="relative flex h-full flex-col overflow-hidden rounded-[28px] p-7 text-white shadow-[0_34px_70px_-34px_rgba(30,20,90,.7)] transition-transform duration-500 hover:-translate-y-1" style={`background:linear-gradient(150deg,${c.g[0]},${c.g[1]} 55%,${c.g[2]})`}>
               <i class="pointer-events-none absolute -right-16 -top-20 size-64 rounded-full opacity-70 blur-3xl" style={`background:${c.g[2]}`}></i>
               <i class="pointer-events-none absolute -bottom-24 -left-16 size-64 rounded-full opacity-60 blur-3xl" style={`background:${c.g[0]}`}></i>
-              <div class="relative flex items-baseline justify-between text-[12.5px] text-white/80"><span>{String(i + 1).padStart(2, '0')}</span><span>{c.divs.length === 8 ? 'Todas las divisiones' : c.divs.length + ' divisiones'}</span></div>
-              <h3 class="relative mt-8 font-goog text-[1.9rem] font-normal leading-[1.05] tracking-[-0.04em]">{c.t}</h3>
+              <svg viewBox="0 0 64 64" class="pointer-events-none absolute -bottom-6 -right-6 size-[15rem] opacity-[.13]" fill="none" stroke="#fff" stroke-width=".7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={marks[i]}></svg>
+              <i class="pointer-events-none absolute inset-[10px] rounded-[20px] border border-white/25"></i>
+              <div class="relative flex items-center justify-between text-[10.5px] font-medium uppercase tracking-[0.22em] text-white/80"><span>Paquete Nº {String(i + 1).padStart(2, '0')}</span><span>HumanCorp</span></div>
+              <div class="relative mt-7 grid size-[72px] place-items-center rounded-[22px] border border-white/40 bg-white/[.16] shadow-[inset_0_1px_0_rgba(255,255,255,.5),0_14px_30px_-14px_rgba(0,0,0,.45)] backdrop-blur-xl">
+                <svg viewBox="0 0 64 64" class="size-[44px]" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={marks[i]}></svg>
+              </div>
+              <h3 class="relative mt-6 font-goog text-[2rem] font-normal leading-[1.03] tracking-[-0.045em]">{c.t}</h3>
               <p class="relative mt-3 max-w-[34rem] text-[14.5px] leading-relaxed text-white/85">{c.d}</p>
-              <div class="relative mt-6 flex flex-wrap gap-1.5">{c.divs.map((d) => <span class="rounded-full border border-white/35 bg-white/15 px-3 py-[5px] text-[12px] backdrop-blur-md">{name(d)}</span>)}</div>
-              <div class="relative mt-6 rounded-[18px] border border-white/30 bg-white/[.14] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,.35)] backdrop-blur-xl">
+              <p class="relative mt-6 text-[10.5px] font-medium uppercase tracking-[0.22em] text-white/70">Contiene</p>
+              <div class="relative mt-2.5 flex flex-wrap gap-1.5">{c.divs.map((d) => <span class="rounded-full border border-white/35 bg-white/15 px-3 py-[5px] text-[12px] backdrop-blur-md">{name(d)}</span>)}</div>
+              <div class="relative mt-5 rounded-[18px] border border-white/30 bg-white/[.14] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,.35)] backdrop-blur-xl">
                 <ul class={`grid gap-2 text-[13.5px] ${i === combos.length - 1 ? 'md:grid-cols-3' : ''}`}>{c.items.map((it) => <li class="flex gap-2.5"><span class="mt-[0.55em] block size-1 shrink-0 rounded-full bg-white"></span>{it}</li>)}</ul>
               </div>
-              <a href={quote(c.t)} class="relative mt-6 inline-flex items-center gap-2 self-start rounded-full border border-white/40 bg-white/20 px-5 py-2.5 text-[14px] font-medium backdrop-blur-md transition-colors hover:bg-white/30">Cotizar este paquete <span aria-hidden="true">→</span></a>
+              <div class="relative mt-6 flex items-end justify-between gap-4">
+                <a href={quote(c.t)} class="inline-flex items-center gap-2 rounded-full border border-white/45 bg-white/20 px-5 py-2.5 text-[14px] font-medium backdrop-blur-md transition-colors hover:bg-white/30">Cotizar este paquete <span aria-hidden="true">→</span></a>
+                <div class="text-right"><i class="mb-1 ml-auto block h-[22px] w-[84px] opacity-80" style="background:repeating-linear-gradient(90deg,#fff 0 2px,transparent 2px 4px,#fff 4px 5px,transparent 5px 8px,#fff 8px 11px,transparent 11px 13px)"></i><span class="text-[9.5px] uppercase tracking-[0.2em] text-white/70">HC-{String(i + 1).padStart(2, '0')} · Edición 2026</span></div>
+              </div>
             </article>
           </li>
         ))}
