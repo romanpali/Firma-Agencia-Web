@@ -25,7 +25,7 @@ body { overflow-x: clip; }
 
 /* Entrances */
 @keyframes hfFade { from { opacity: 0; } }
-@keyframes hfRise { from { opacity: 0; transform: translate3d(0, 22px, 0); } }
+@keyframes hfRise { from { opacity: 0; } }
 .hf-fade { animation: hfFade 1.2s ease-out both; animation-delay: var(--d, 0s); }
 .hf-rise { animation: hfRise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; animation-delay: var(--d, 0s); }
 @keyframes scrollLine { from { transform: translateX(-100%); } to { transform: translateX(200%); } }
@@ -35,7 +35,7 @@ body { overflow-x: clip; }
 .grain { opacity: 0.16; background-image: url(/grain.png); background-size: 112px 112px; }
 @keyframes spinSlow { to { transform: rotate(360deg); } }
 .spin-slow { animation: spinSlow 160s linear infinite; }
-.menu-link { opacity: 0; transform: translate3d(0, 40px, 0); transition: opacity 0.7s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), color 0.3s; transition-delay: calc(0.15s + var(--i) * 0.08s); }
+.menu-link { opacity: 0; transition: opacity 0.7s ease, color 0.3s; transition-delay: calc(0.15s + var(--i) * 0.08s); }
 .is-open .menu-link { opacity: 1; transform: none; }
 
 /* Horizon carousel tiles */
@@ -118,8 +118,7 @@ body { overflow-x: clip; }
 /* Reveal on scroll (only when JS is on, so content never stays hidden) */
 .js [data-reveal] {
   opacity: 0;
-  transform: translate3d(0, 28px, 0);
-  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1);
   transition-delay: calc(var(--i, 0) * 90ms);
 }
 .js [data-reveal].is-in { opacity: 1; transform: none; }
@@ -129,8 +128,7 @@ body { overflow-x: clip; }
   display: inline-block;
   opacity: 0;
   filter: blur(12px);
-  transform: translate3d(0, 25%, 0);
-  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), filter 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), filter 0.7s cubic-bezier(0.22, 1, 0.36, 1);
   transition-delay: calc(var(--w, 0) * 70ms);
 }
 .js [data-words].is-in .w { opacity: 1; filter: none; transform: none; }
@@ -720,7 +718,7 @@ img, picture, video, canvas { pointer-events: none; -webkit-user-drag: none; use
 
 /* Hero: titular que sube desde una máscara y cinta lenta con las ocho divisiones */
 .hf-up { animation: hfUp 1.1s cubic-bezier(.2, .8, .2, 1) both; animation-delay: var(--d, 0s); }
-@keyframes hfUp { from { transform: translate3d(0, 112%, 0); } }
+@keyframes hfUp { from { opacity: 0; } }
 .hf-tick { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
 .hf-track { display: flex; width: max-content; animation: hfTick 70s linear infinite; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255, 255, 255, 0.7); }
 .hf-track span { flex: none; padding: 0 22px; }
