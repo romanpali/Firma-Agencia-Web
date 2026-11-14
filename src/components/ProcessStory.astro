@@ -20,8 +20,8 @@ const frags = [
 ];
 ---
 
-<section id="construccion" data-tone="light" data-titles={JSON.stringify(titles)} class="relative z-10 -mt-[70svh] font-goog text-[#202124]">
-  <div data-process class="h-[910vh]">
+<section id="construccion" data-tone="light" data-titles={JSON.stringify(titles)} class="pointer-events-none relative z-10 -mt-[190svh] font-goog text-[#202124]">
+  <div data-process class="h-[calc(910vh+90svh)]">
     <div data-process-inner class="sticky top-0 h-lvh overflow-hidden" style="--fade:#fff">
       <i data-white class="absolute inset-0 bg-white opacity-0" style="mask-image:linear-gradient(to bottom,transparent 0,#000 28svh);-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 28svh)" aria-hidden="true"></i>
       <div data-night class="pointer-events-none absolute inset-0 opacity-0" aria-hidden="true">
@@ -78,6 +78,7 @@ const frags = [
   const cam = root.querySelector<HTMLElement>('[data-cam]')!;
   const fragsEl = root.querySelector<HTMLElement>('[data-frags]')!;
   const sm0 = measure(sec);
+  const LEAD = 0.9; // el capítulo ya está fijo sobre el hero: aparece en su lugar mientras el hero se disuelve y su línea de tiempo empieza después
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) dissolveOut(inner, document.getElementById('como-trabajamos')!);
   const night = inner.querySelector<HTMLElement>('[data-night]')!;
   const whiteEl = inner.querySelector<HTMLElement>('[data-white]')!;
@@ -142,7 +143,7 @@ const frags = [
   const EXTRA = 1.2, HOLD = 2; // extra scroll spent on the website module (search result, then the site)
   let target = 0, rr = 0, u = 0, shown = -1, ecoOn = false, lastTime = 0, paused = false; const MAXLAG = 0.9;
   const read = (y: number, vh: number) => {
-    const p = clamp((y - sm0.top) / Math.max(1, sm0.height - vh * 1.65));
+    const p = clamp((y - sm0.top - vh * LEAD) / Math.max(1, sm0.height - vh * (LEAD + 1.65)));
     target = reduced ? LAST + EXTRA : clamp(p * (LAST + EXTRA + 0.6) - 0.3, 0, LAST + EXTRA);
   };
   const setTitle = (i: number) => {
@@ -216,7 +217,8 @@ const frags = [
   } else {
     onFrame((time, y, vh) => {
       // the white page dissolves in over the sunset while this chapter rises
-      const wo = clamp((y - (sm0.top - vh)) / (vh * 0.85)).toFixed(3);
+      const wo = clamp((y - sm0.top) / (vh * 0.85)).toFixed(3);
+      put(root, 'opacity', sm(clamp((y - sm0.top) / (vh * 0.8) - 0.12)).toFixed(3));
       put(whiteEl, 'opacity', wo);
       fogs.forEach((f, k) => put(f, 'opacity', k === 0 ? clamp((+wo - 0.9) / 0.1).toFixed(3) : wo));
       read(y, vh);
