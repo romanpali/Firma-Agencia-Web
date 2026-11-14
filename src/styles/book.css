@@ -86,11 +86,12 @@
 .pc-f { position: absolute; left: 2.4em; bottom: 1.8em; font-size: 0.6em; opacity: 0.5; }
 .bk-pn { position: absolute; right: 1.6em; bottom: 1.1em; z-index: 4; font-size: 0.6em; letter-spacing: 0.1em; opacity: 0.45; } .sb .bk-pn { right: auto; left: 1.6em; }
 /* Cubierta negra */
-.bw-cover { font-size: 1.18em; position: absolute; inset: 0; border-radius: 2px 6px 6px 2px; overflow: hidden; color: #fff8ec;
-  background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.035) 0 1px, transparent 1px 3px), repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 3px), linear-gradient(180deg, #efe7d6 0%, #ecdcb4 30%, #f2c673 50%, #ee9042 74%, #e1612a 100%); }
-.bw-cover::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(0, 0, 0, 0.38), rgba(0, 0, 0, 0) 7%), radial-gradient(90% 70% at 24% 14%, rgba(255, 255, 255, 0.28), transparent 60%), linear-gradient(to top, rgba(60, 14, 0, 0.35), transparent 40%); }
-.bw-cover b { position: absolute; left: 31%; top: 16%; writing-mode: vertical-rl; font-size: 1.02em; font-weight: 500; letter-spacing: 0.5em; text-transform: uppercase; color: #fffaf0; text-shadow: 0 1px 1px rgba(120, 70, 20, 0.6), 0 0 6px rgba(120, 70, 20, 0.25); }
-.bw-cover span { position: absolute; left: 31%; bottom: 10%; writing-mode: vertical-rl; font-size: 0.62em; letter-spacing: 0.34em; text-transform: uppercase; color: #fff6e6; text-shadow: 0 1px 1px rgba(90, 30, 0, 0.45); }
+.bw-cover { font-size: 1.18em; position: absolute; inset: 0; display: grid; place-items: center; border-radius: 2px 6px 6px 2px; overflow: hidden; color: #fff;
+  background: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.025) 0 1px, transparent 1px 3px), repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.18) 0 1px, transparent 1px 3px), linear-gradient(160deg, #1b1c20 0%, #0b0b0d 55%, #050506 100%); }
+.bw-cover::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0) 8%), radial-gradient(90% 70% at 24% 12%, rgba(255, 255, 255, 0.1), transparent 60%); }
+.bw-wm { position: relative; z-index: 1; font-size: 2.1em; letter-spacing: 0.02em; white-space: nowrap; }
+.bw-wm i { font-style: normal; }
+.bw-wm .wl { font-weight: 300; } .bw-wm .ws { font-weight: 600; }
 .pe { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1em; text-align: center; background: radial-gradient(90% 80% at 70% 20%, #1c2030, #090a0e 70%); }
 .pe b { font-size: 1.6em; letter-spacing: 0.01em; max-width: 12em; line-height: 1.15; } .pe a { font-size: 0.7em; border-bottom: 1px solid currentColor; padding-bottom: 0.2em; }
 
@@ -164,3 +165,5 @@
 /* Hero de Obra más limpio y cinematográfico: solo título y botones */
 .ob-sub, .ob-idx, .ob-pill { display: none; }
 .bw-intro .ob-title { margin-top: 0; }
+
+.bw-ribbon { display: none; }
