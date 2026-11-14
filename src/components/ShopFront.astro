@@ -1,0 +1,19 @@
+---
+// Frente de la tarjeta de tienda en línea: portada inmersiva a pantalla completa con barra de vidrio, título con acento en cursiva y producto destacado.
+---
+
+<div class="absolute inset-0 overflow-hidden bg-[#1b2a2a] text-[#f7f1e8]">
+  <img src="/configurador/valle.webp" alt="" width="1200" height="675" decoding="async" class="absolute inset-0 size-full object-cover" />
+  <i class="absolute inset-0" style="background:linear-gradient(180deg,rgba(12,20,22,.45),rgba(12,20,22,.05) 40%,rgba(12,20,22,.6))"></i>
+  <div class="absolute left-1/2 top-[6%] flex -translate-x-1/2 items-center gap-[4%] whitespace-nowrap rounded-full border border-white/30 bg-white/10 px-[4%] py-[1%] text-[clamp(5px,.95vw,10px)]"><span>Colección</span><span>Hombre</span><span>Mujer</span><b class="font-medium">TIENDA</b><span>Novedades</span><span>Carrito (2)</span></div>
+  <div class="absolute inset-x-0 top-[24%] text-center">
+    <p class="text-[clamp(14px,2.7vw,32px)] font-light leading-[1.05] tracking-[-0.03em]">Piezas para quedarse</p>
+    <p class="font-serif text-[clamp(14px,2.7vw,32px)] font-normal italic leading-[1.05]">Colección otoño 2026</p>
+    <span class="mt-[2%] inline-block rounded-full bg-[#f7f1e8] px-[4%] py-[1%] text-[clamp(5px,.95vw,10px)] font-medium text-[#1d2a28]">Comprar ahora</span>
+  </div>
+  <div class="absolute inset-x-[5%] bottom-[7%] flex justify-center gap-[2%]">
+    {[['Abrigo lana', '$2,490'], ['Suéter merino', '$1,290'], ['Bufanda', '$590']].map(([n, p]) => (
+      <div class="w-[22%] rounded-[8px] border border-white/25 bg-white/15 p-[1.2%] text-[clamp(4px,.8vw,9px)]"><i class="mb-[6%] block aspect-[4/3] rounded-[5px] bg-gradient-to-br from-[#e7d7c1] to-[#a9825d]"></i><b class="block font-medium">{n}</b><span class="text-white/75">{p}</span></div>
+    ))}
+  </div>
+</div>

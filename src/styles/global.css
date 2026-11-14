@@ -39,14 +39,14 @@ body { overflow-x: clip; }
 .is-open .menu-link { opacity: 1; transform: none; }
 
 /* Horizon carousel tiles */
-.hz-tile { position: absolute; left: calc(var(--tw) / -2); top: calc(var(--th) / -2); width: var(--tw); height: var(--th); transform-style: preserve-3d; transform: rotateY(calc(var(--i) * 20deg)) translateZ(calc(var(--R) * -1)); }
+.hz-tile { position: absolute; left: calc(var(--tw) / -2); top: calc(var(--th) / -2); width: var(--tw); height: var(--th); transform-style: preserve-3d; transform: rotateY(calc(var(--i) * 17deg)) translateZ(calc(var(--R) * -1)); }
 .hz-flip { position: absolute; inset: 0; transform-style: preserve-3d; }
 .hz-face { position: absolute; inset: 0; overflow: hidden; border-radius: 10px; background: #0b0c10; backface-visibility: hidden; box-shadow: 0 30px 60px -24px rgba(40, 20, 10, 0.55); }
 .hz-back { transform: rotateY(180deg); background: #fff; }
 .hz-front .hz-sheen { background: linear-gradient(105deg, transparent 38%, rgba(255, 255, 255, 0.55) 50%, transparent 62%); opacity: 0; pointer-events: none; mix-blend-mode: soft-light; }
 .hz-pn { position: absolute; left: 0; top: 0; width: 640px; height: 400px; transform-origin: 0 0; scale: var(--sc, 0.5); pointer-events: none; }
 .hz-pn .pn { left: 0; top: 0; border-radius: 26px; box-shadow: none; border-color: transparent; }
-.hz-link { position: absolute; left: calc(var(--tw) * -0.075); top: -1px; width: calc(var(--tw) * 0.15); height: 2px; transform: rotateY(calc(var(--i) * 20deg)) translateZ(calc(var(--R) * -1 - 6px)); opacity: var(--lk, 0.35); border-radius: 2px; background: linear-gradient(90deg, rgba(255, 244, 222, 0), rgba(255, 244, 222, 0.95) 22%, rgba(255, 244, 222, 0.95) 78%, rgba(255, 244, 222, 0)); box-shadow: 0 0 14px 2px rgba(255, 214, 150, 0.7); }
+.hz-link { position: absolute; left: calc(var(--tw) * -0.075); top: -1px; width: calc(var(--tw) * 0.15); height: 2px; transform: rotateY(calc(var(--i) * 17deg)) translateZ(calc(var(--R) * -1 - 6px)); opacity: var(--lk, 0.35); border-radius: 2px; background: linear-gradient(90deg, rgba(255, 244, 222, 0), rgba(255, 244, 222, 0.95) 22%, rgba(255, 244, 222, 0.95) 78%, rgba(255, 244, 222, 0)); box-shadow: 0 0 14px 2px rgba(255, 214, 150, 0.7); }
 .hz-link::before, .hz-link::after { content: ""; position: absolute; top: -3px; width: 8px; height: 8px; border-radius: 50%; background: #fff6e4; box-shadow: 0 0 12px 3px rgba(255, 214, 150, 0.85); }
 .hz-link::before { left: 20%; }
 .hz-link::after { right: 20%; }

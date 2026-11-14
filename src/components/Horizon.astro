@@ -1,11 +1,12 @@
 ---
-import Kit from './Kit.astro';
 import KitSpritzle from './KitSpritzle.astro';
-import KitNightlight from './KitNightlight.astro';
-import KitNike from './KitNike.astro';
-import KitFelix from './KitFelix.astro';
-// Five cards: the photograph of a reference site on the front; on the back, the whole kit (identity, marketing, assistants, operations, finance, live system) in that site's own visual identity.
-const cards = ['/horizon/1.webp', '/horizon/2.webp', '/horizon/3.webp', '/horizon/4.webp', '/horizon/5.webp'];
+import KitSite from './KitSite.astro';
+import ShopFront from './ShopFront.astro';
+// Seis tarjetas: por delante, un sitio de referencia; por detrás, el sistema completo (identidad, sitio, ventas, asistentes y finanzas) con la identidad visual de ese sitio.
+const cards: { img?: string; v?: 'luno' | 'polaris' | 'lunera' | 'yohaku' | 'tienda' }[] = [
+  { img: '/horizon/1.webp' }, { img: '/horizon/luno.webp', v: 'luno' }, { img: '/horizon/polaris.webp', v: 'polaris' },
+  { img: '/horizon/lunera.webp', v: 'lunera' }, { img: '/horizon/yohaku.webp', v: 'yohaku' }, { v: 'tienda' },
+];
 ---
 
 <section data-horizon class="relative z-10 -mt-[90svh] h-[340svh]">
@@ -17,16 +18,16 @@ const cards = ['/horizon/1.webp', '/horizon/2.webp', '/horizon/3.webp', '/horizo
     </div>
 
     <!-- Curved carousel: cards flip from photograph to module -->
-    <div data-stage class="absolute inset-x-0 top-[55%] z-10 h-0" style="perspective:1500px;--tw:clamp(190px,23vw,420px);--th:calc(var(--tw)*0.62);--R:calc(var(--tw)*3.2)">
+    <div data-stage class="absolute inset-x-0 top-[55%] z-10 h-0" style="perspective:1500px;--tw:clamp(190px,23vw,420px);--th:calc(var(--tw)*0.62);--R:calc(var(--tw)*3.6)">
       <div data-cyl class="absolute left-1/2 top-0 size-0" style="transform-style:preserve-3d">
-        {cards.map((img, i) => (
+        {cards.map((c, i) => (
           <figure class="hz-tile" style={`--i:${i}`}>
             <div class="hz-flip" data-flip>
               <div class="hz-face hz-front">
-                <img src={img} alt="" width="960" height="600" decoding="async" class="size-full object-cover" />
+                {c.img ? <img src={c.img} alt="" width="960" height="600" decoding="async" class="size-full object-cover" /> : <ShopFront />}
                 <i class="hz-sheen absolute inset-0"></i>
               </div>
-              <div class="hz-face hz-back"><div class="hz-pn" data-hzpn>{i === 0 && <KitSpritzle />}{i === 1 && <KitNightlight />}{i === 2 && <Kit focus={4} />}{i === 3 && <KitNike />}{i === 4 && <KitFelix />}</div></div>
+              <div class="hz-face hz-back"><div class="hz-pn" data-hzpn>{i === 0 ? <KitSpritzle /> : <KitSite v={c.v!} n={i} />}</div></div>
             </div>
           </figure>
         ))}
@@ -54,7 +55,7 @@ const cards = ['/horizon/1.webp', '/horizon/2.webp', '/horizon/3.webp', '/horizo
   const m = measure(sec);
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) dissolveOut(sec.firstElementChild as HTMLElement, document.getElementById('construccion')!);
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const STEP = 20; // degrees between cards
+  const STEP = 17; // degrees between cards
   const ptr = { x: 0 }, tgt = { x: 0 };
   addEventListener('pointermove', (e) => { if (e.pointerType === 'mouse') tgt.x = e.clientX / innerWidth - 0.5; }, { passive: true });
 
@@ -79,13 +80,13 @@ const cards = ['/horizon/1.webp', '/horizon/2.webp', '/horizon/3.webp', '/horizo
     const p = clamp((y - m.top) / Math.max(1, m.height - vh));
     ptr.x += (tgt.x - ptr.x) * 0.05;
     const idle = reduced ? 0 : Math.sin(now / 2600) * 0.08;
-    // the carousel settles with all five cards in view, then every card turns together on the last scroll
-    const idx = 0.75 + 1.25 * smooth(clamp(p / 0.5)) + idle - ptr.x * 0.2;
+    // the carousel settles with all six cards in view, then every card turns together on the last scroll
+    const idx = 1 + 1.5 * smooth(clamp(p / 0.5)) + idle - ptr.x * 0.2;
     put(cyl, 'transform', `translateZ(var(--R)) rotateY(${(-idx * STEP).toFixed(2)}deg)`);
     if (reduced) return;
     const f = smooth(clamp((p - 0.5) / 0.2));
     tiles.forEach((t) => paint(180 * f, t));
     put(cyl, '--lk', (0.35 + 0.65 * f).toFixed(3));
-    put(stage, 'scale', (1 - 0.27 * smooth(clamp((p - 0.38) / 0.3))).toFixed(4)); // pull back so the whole kit is in view
+    put(stage, 'scale', (1 - 0.34 * smooth(clamp((p - 0.38) / 0.3))).toFixed(4)); // pull back so the whole kit is in view
   });
 </script>

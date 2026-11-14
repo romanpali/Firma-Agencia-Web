@@ -1,0 +1,70 @@
+---
+// Reverso de una tarjeta: el sistema de HumanCorp (identidad, sitio, ventas, asistentes y finanzas) con la identidad visual del sitio de referencia.
+type V = 'luno' | 'polaris' | 'lunera' | 'yohaku' | 'tienda';
+const { v, n } = Astro.props as { v: V; n: number };
+const T: Record<V, { bg: string; ink: string; mute: string; line: string; card: string; btn: string; btnInk: string; font: string; em: string; nav: string }> = {
+  luno: { bg: 'linear-gradient(180deg,#161b3a 0%,#2a3463 46%,#7d7a99 84%,#b39e92 100%)', ink: '#eef0f8', mute: 'rgba(238,240,248,.62)', line: 'rgba(255,255,255,.2)', card: 'rgba(255,255,255,.1)', btn: '#f4f1ee', btnInk: '#1b2040', font: 'font-light', em: 'font-normal', nav: 'pill' },
+  polaris: { bg: 'radial-gradient(60% 50% at 52% 30%,rgba(255,224,190,.55),transparent 70%),linear-gradient(180deg,#2c4a7c 0%,#3e5489 42%,#1d2748 100%)', ink: '#f4f6fb', mute: 'rgba(244,246,251,.68)', line: 'rgba(255,255,255,.22)', card: 'rgba(255,255,255,.12)', btn: 'rgba(255,255,255,.14)', btnInk: '#fff', font: 'font-normal', em: 'font-normal', nav: 'bar' },
+  lunera: { bg: 'linear-gradient(180deg,#6d9a9f 0%,#a9a894 52%,#d9a077 100%)', ink: '#fbf6ee', mute: 'rgba(251,246,238,.75)', line: 'rgba(255,255,255,.3)', card: 'rgba(255,255,255,.16)', btn: '#fbf3e6', btnInk: '#2a2a26', font: 'font-light', em: 'font-serif italic font-normal', nav: 'plain' },
+  yohaku: { bg: '#efede6', ink: '#15161a', mute: '#6d6e72', line: 'rgba(21,22,26,.14)', card: '#ffffff', btn: '#15161a', btnInk: '#fff', font: 'font-medium', em: 'font-medium text-[#8a8b90]', nav: 'plain' },
+  tienda: { bg: 'linear-gradient(180deg,#1b2a2a 0%,#2f4a44 48%,#c98f66 100%)', ink: '#f7f1e8', mute: 'rgba(247,241,232,.72)', line: 'rgba(255,255,255,.26)', card: 'rgba(255,255,255,.14)', btn: '#f7f1e8', btnInk: '#1d2a28', font: 'font-light', em: 'font-serif italic font-normal', nav: 'pill' },
+};
+const t = T[v];
+const heads: Record<V, [string, string]> = {
+  luno: ['Todo tu negocio,', 'en un solo sistema.'],
+  polaris: ['HumanCorp', 'Conecta con claridad.'],
+  lunera: ['Empieza por donde estás.', 'Diseña, conecta y opera.'],
+  yohaku: ['Identidad, sitio y operación,', 'con espacio para respirar.'],
+  tienda: ['Vende en línea,', 'con una tienda a tu medida.'],
+};
+const mods: [string, string][] = [['Identidad', 'Manual de marca'], ['Sitio web', '0.8 s de carga'], ['Ventas', '24 prospectos'], ['Asistentes', '12 flujos activos'], ['Finanzas', 'Facturación CFDI']];
+const brand = v === 'polaris' ? '' : 'HumanCorp';
+const links = ['Identidad', 'Sitio', 'Operación'];
+const [h1, h2] = heads[v];
+const bottom = v === 'polaris';
+---
+
+<div class="pn kit" data-pn={n} style={`background:${t.bg};color:${t.ink};border-color:transparent;font-family:var(--font-sans)`}>
+  {!bottom && (
+    <div class="rv absolute inset-x-0 top-[14px] flex items-center justify-between px-6 text-[10px]" style="--a:.02;--b:.12">
+      <span class="text-[14px] font-medium tracking-[-0.01em]">{brand}</span>
+      <span class={`flex gap-2 ${t.nav === 'pill' ? '' : 'gap-5'}`}>{links.map((l) => <span class={t.nav === 'pill' ? 'rounded-full px-3 py-[4px]' : ''} style={t.nav === 'pill' ? `background:${t.card}` : `color:${t.mute}`}>{l}</span>)}</span>
+      <span class="rounded-full px-3.5 py-[5px] text-[10px]" style={`background:${t.btn};color:${t.btnInk}`}>Hablemos</span>
+    </div>
+  )}
+  {bottom && (
+    <div class="rv absolute left-1/2 top-[14px] flex -translate-x-1/2 items-center gap-5 rounded-full px-6 py-[7px] text-[10px]" style={`--a:.02;--b:.12;background:${t.card};border:1px solid ${t.line}`}>{['Cómo funciona', 'Casos', 'Servicios', 'Contacto'].map((l) => <span>{l}</span>)}</div>
+  )}
+
+  {!bottom && (
+    <div class="absolute inset-x-0 top-[78px] text-center">
+      <h4 class={`text-[33px] leading-[1.08] tracking-[-0.035em] ${t.font}`}>
+        <span class="block overflow-hidden"><span class="rl block" style="--a:.08;--b:.2">{h1}</span></span>
+        <span class="block overflow-hidden"><span class={`rl block ${t.em}`} style="--a:.14;--b:.2">{h2}</span></span>
+      </h4>
+      <p class="rv mx-auto mt-3 max-w-[300px] text-[10.5px] leading-[1.5]" style={`--a:.3;--b:.15;color:${t.mute}`}>Diseño, tecnología y operaciones de tu empresa, conectadas bajo un solo estándar.</p>
+      <span class="rv mt-4 inline-block rounded-full px-5 py-[7px] text-[10.5px] font-medium" style={`--a:.38;--b:.15;background:${t.btn};color:${t.btnInk}`}>Conocer el sistema</span>
+    </div>
+  )}
+  {bottom && (
+    <>
+      <div class="absolute left-8 top-[118px]">
+        <h4 class="text-[40px] font-normal leading-none tracking-[-0.03em]"><span class="rl block" style="--a:.08;--b:.2">{h1}</span></h4>
+        <p class="rl mt-1 text-[22px] leading-none tracking-[-0.02em]" style={`--a:.14;--b:.2;color:${t.mute}`}>{h2}</p>
+      </div>
+      <span class="rv absolute right-9 top-[134px] rounded-full px-4 py-[6px] text-[10.5px]" style={`--a:.3;--b:.15;background:${t.btn};border:1px solid ${t.line}`}>Empezar</span>
+      <i class="absolute inset-x-8 top-[196px] block h-px" style={`background:${t.line}`}></i>
+      <p class="rv absolute right-9 top-[206px] w-[230px] text-[10px] leading-[1.5]" style={`--a:.36;--b:.15;color:${t.ink}`}>Un solo sistema que reúne tu identidad, tu sitio, tus ventas y tus finanzas, con supervisión humana.</p>
+    </>
+  )}
+
+  <div class="absolute inset-x-6 bottom-[16px] grid grid-cols-5 gap-2">
+    {mods.map(([m, d], k) => (
+      <div class="rv rounded-[10px] px-2.5 py-2" style={`--a:${0.45 + k * 0.08};--b:.14;background:${t.card};border:1px solid ${t.line};${v === 'yohaku' ? 'box-shadow:0 8px 18px -12px rgba(0,0,0,.25)' : ''}`}>
+        <p class="text-[9.5px] font-medium">{m}</p>
+        <p class="mt-[3px] text-[8px]" style={`color:${t.mute}`}>{d}</p>
+        <i class="mt-2 block h-[3px] rounded-full" style={`background:${t.line}`}><b class="gx block h-full rounded-full" style={`--a:${0.5 + k * 0.08};--b:.2;width:${[92, 80, 68, 76, 86][k]}%;background:${v === 'yohaku' ? '#15161a' : t.ink}`}></b></i>
+      </div>
+    ))}
+  </div>
+</div>
