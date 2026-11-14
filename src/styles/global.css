@@ -717,3 +717,13 @@ img, picture, video, canvas { pointer-events: none; -webkit-user-drag: none; use
 .hh-field { width: 0; height: 0; }
 .hh-t { position: absolute; left: 0; top: 0; opacity: 0; will-change: transform, opacity; }
 .hh-t b { position: absolute; inset: 0; display: block; border-radius: 7%; background-size: cover; background-position: center; }
+
+/* Hero: titular que sube desde una máscara y cinta lenta con las ocho divisiones */
+.hf-up { animation: hfUp 1.1s cubic-bezier(.2, .8, .2, 1) both; animation-delay: var(--d, 0s); }
+@keyframes hfUp { from { transform: translate3d(0, 112%, 0); } }
+.hf-tick { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
+.hf-track { display: flex; width: max-content; animation: hfTick 70s linear infinite; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255, 255, 255, 0.7); }
+.hf-track span { flex: none; padding: 0 22px; }
+.hf-track span::after { content: "·"; margin-left: 44px; color: rgba(255, 255, 255, 0.4); }
+@keyframes hfTick { to { transform: translate3d(-50%, 0, 0); } }
+@media (prefers-reduced-motion: reduce) { .hf-up, .hf-track { animation: none !important; } }

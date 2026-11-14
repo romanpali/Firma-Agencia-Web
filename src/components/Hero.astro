@@ -1,4 +1,6 @@
 ---
+import { divisions } from '../data/servicios';
+const names = divisions.map((d) => d.short);
 // Celular: emisor en espiral. Cada mosaico nace pequeño y borroso en el centro y sale girando (antihorario) hasta los bordes, ganando tamaño y nitidez.
 const N = 24;
 const tiles = Array.from({ length: N }, (_, k) => ({ k, a: ((k * 137.508) % 360).toFixed(1), img: k + 1, off: [-10, 6, -4, 12, -8, 5, -12, 9, -2, 10][k % 10] }));
@@ -18,8 +20,8 @@ const tiles = Array.from({ length: N }, (_, k) => ({ k, a: ((k * 137.508) % 360)
     <div data-hero-text class="absolute inset-0 will-change-[opacity,transform]">
       <!-- escritorio: seda con la marca al centro -->
       <div class="absolute inset-0 hidden flex-col items-center justify-center px-6 text-center md:flex">
-      <h1 class="hf-rise text-[clamp(2.9rem,6.4vw,6.2rem)] leading-[0.95] tracking-[-0.03em]" style="--d:.25s" aria-label="HumanCorp">
-        <span class="font-light">HUMAN</span> <span class="font-semibold">CORP</span>
+      <h1 class="overflow-hidden pb-[0.12em] text-[clamp(3.2rem,7.4vw,7rem)] leading-[0.95] tracking-[-0.035em]" aria-label="HumanCorp">
+        <span class="hf-up block" style="--d:.25s"><span class="font-light">HUMAN</span> <span class="font-semibold">CORP</span></span>
       </h1>
       <p class="hf-rise mt-6 max-w-[32rem] text-[clamp(1.05rem,1.35vw,1.4rem)] font-medium leading-[1.5] tracking-tight text-white/90 text-balance" style="--d:.45s">
         Todo lo que hace funcionar a una empresa, conectado bajo un solo <em class="hf-em">estándar</em>.
@@ -28,9 +30,8 @@ const tiles = Array.from({ length: N }, (_, k) => ({ k, a: ((k * 137.508) % 360)
         <a href="/servicios" class="rounded-full bg-white px-7 py-3.5 text-[15px] font-medium text-[#0b0c0f] transition-transform hover:scale-[1.03]">Conocer servicios</a>
         <a href="/arma-tu-proyecto" class="rounded-full border border-white/45 px-7 py-3.5 text-[15px] transition-colors hover:bg-white/10">Arma tu proyecto</a>
       </div>
-      <div class="hf-rise absolute inset-x-0 bottom-[4%] flex flex-col items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-white/70" style="--d:1s" aria-hidden="true">
-        <span>Desliza</span>
-        <i class="block h-9 w-px origin-top bg-white/70" style="animation:scrollLine 2s ease-in-out 1.4s 3 both"></i>
+      <div class="hf-rise absolute inset-x-0 bottom-[3.5%] z-10" style="--d:1s" aria-hidden="true">
+        <div class="hf-tick"><div class="hf-track">{[0, 1].map(() => names.map((n) => <span>{n}</span>))}</div></div>
       </div>
       </div>
       <!-- celular: fondo negro con mosaicos en espiral -->
@@ -40,18 +41,19 @@ const tiles = Array.from({ length: N }, (_, k) => ({ k, a: ((k * 137.508) % 360)
           <u class="hh-t" data-a={t.a} data-off={t.off}><b class="hh-s" style={`background-image:url(/hero/t${t.img}.webp)`}></b><b class="hh-b" style={`background-image:url(/hero/t${t.img}-b.webp)`}></b></u>
         ))}
       </div>
-      <p class="hf-rise relative z-10 text-[clamp(.8rem,1vw,.95rem)] uppercase tracking-[0.3em]" style="--d:.1s"><span class="font-light">HUMAN</span> <span class="font-semibold">CORP</span></p>
-      <h1 class="hf-rise relative z-10 mt-5 text-[clamp(2.7rem,7.4vw,6.4rem)] font-semibold leading-[0.96] tracking-[-0.045em] [text-shadow:0_2px_40px_rgba(10,8,60,.35)]" style="--d:.25s">
-        <span class="sr-only">HumanCorp: </span>Todo conectado.<span class="block text-white/55">Bajo un solo estándar.</span>
+      <h1 class="relative z-10 text-[clamp(2.4rem,11vw,4.6rem)] font-semibold leading-[0.98] tracking-[-0.05em]">
+        <span class="sr-only">HumanCorp: </span>
+        <span class="block overflow-hidden pb-[0.1em]"><span class="hf-up block" style="--d:.2s">Todo conectado.</span></span>
+        <span class="block overflow-hidden pb-[0.1em] text-white/55"><span class="hf-up block" style="--d:.34s">Bajo un solo</span></span>
+        <span class="block overflow-hidden pb-[0.1em] text-white/55"><span class="hf-up block" style="--d:.46s">estándar.</span></span>
       </h1>
       <p class="hf-rise relative z-10 mt-6 max-w-[22rem] text-[clamp(1rem,1.25vw,1.25rem)] leading-[1.5] text-white/90 text-balance" style="--d:.45s">Todo lo que hace funcionar a una empresa, bajo un mismo estándar.</p>
       <div class="hf-rise relative z-10 mt-8 flex flex-wrap justify-center gap-3" style="--d:.62s">
         <a href="/servicios" class="rounded-full bg-white px-8 py-3.5 text-[15px] font-medium text-[#0b0c0f] shadow-[0_18px_40px_-14px_rgba(10,8,60,.7)] transition-transform hover:scale-[1.03]">Conocer servicios</a>
         <a href="/arma-tu-proyecto" class="rounded-full border border-white/45 bg-white/10 px-8 py-3.5 text-[15px] transition-colors hover:bg-white/20">Arma tu proyecto</a>
       </div>
-      <div class="hf-rise absolute inset-x-0 bottom-[3.5%] z-10 flex flex-col items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-white/70" style="--d:1s" aria-hidden="true">
-        <span>Desliza</span>
-        <i class="block h-7 w-px origin-top bg-white/70" style="animation:scrollLine 2s ease-in-out 1.4s 3 both"></i>
+      <div class="hf-rise absolute inset-x-0 bottom-[3.5%] z-10" style="--d:1s" aria-hidden="true">
+        <div class="hf-tick"><div class="hf-track">{[0, 1].map(() => names.map((n) => <span>{n}</span>))}</div></div>
       </div>
       </div>
     </div>
@@ -89,6 +91,8 @@ const tiles = Array.from({ length: N }, (_, k) => ({ k, a: ((k * 137.508) % 360)
   };
   paintTiles(0);
   const mobile = !matchMedia('(min-width: 768px)').matches;
+  const ptr = { x: 0, y: 0, tx: 0, ty: 0 };
+  addEventListener('pointermove', (e) => { if (e.pointerType === 'mouse') { ptr.tx = e.clientX / innerWidth - 0.5; ptr.ty = 0.5 - e.clientY / innerHeight; } }, { passive: true });
   const VS = 'attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
   const FS = `#ifdef GL_FRAGMENT_PRECISION_HIGH
 precision highp float;
@@ -97,12 +101,13 @@ precision mediump float;
 #endif
 uniform vec2 res;
 uniform float t;
+uniform vec2 m;
 
 float hash(vec2 p){ return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453); }
 
 void main(){
   vec2 uv = gl_FragCoord.xy / res.y;
-  vec2 p = uv * 1.7;
+  vec2 p = uv * 1.7 + m * .3;
   float a = t * .3;
   for (int i = 1; i < 5; i++) {
     float k = float(i);
@@ -138,7 +143,8 @@ void main(){
       gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
       const uRes = gl.getUniformLocation(prog, 'res');
       const uT = gl.getUniformLocation(prog, 't');
-      draw = (t: number) => { gl.uniform1f(uT, t); gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); };
+      const uM = gl.getUniformLocation(prog, 'm');
+      draw = (t: number) => { ptr.x += (ptr.tx - ptr.x) * 0.06; ptr.y += (ptr.ty - ptr.y) * 0.06; gl.uniform2f(uM, ptr.x, ptr.y); gl.uniform1f(uT, t); gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); };
       const fit = () => {
         const w = canvas.clientWidth, h = canvas.clientHeight;
         const k = Math.min(1, Math.sqrt(0.7e6 / Math.max(1, w * h)));
