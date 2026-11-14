@@ -79,7 +79,7 @@ const frags = [
   const fragsEl = root.querySelector<HTMLElement>('[data-frags]')!;
   const sm0 = measure(sec);
   const LEAD = 0.9; // el capítulo ya está fijo sobre el hero: aparece en su lugar mientras el hero se disuelve y su línea de tiempo empieza después
-  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) dissolveOut(inner, document.getElementById('como-trabajamos')!);
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) dissolveOut(inner, document.getElementById('como-trabajamos')!, 0.06, 0);
   const night = inner.querySelector<HTMLElement>('[data-night]')!;
   const whiteEl = inner.querySelector<HTMLElement>('[data-white]')!;
   const fogs = [...inner.querySelectorAll<HTMLElement>('[data-fog]')];
@@ -141,7 +141,7 @@ const frags = [
 
   // ---- scroll → timeline u in [0, LAST]
   const EXTRA = 1.2, HOLD = 2; // extra scroll spent on the website module (search result, then the site)
-  let target = 0, rr = 0, u = 0, shown = -1, ecoOn = false, lastTime = 0, paused = false; const MAXLAG = 0.9;
+  let target = 0, rr = 0, u = 0, shown = -1, ecoOn = false, lastTime = 0, paused = false; const MAXV = 2.4; // pasos por segundo (la línea de tiempo completa dura unos 4.5 s como mínimo)
   const read = (y: number, vh: number) => {
     const p = clamp((y - sm0.top - vh * LEAD) / Math.max(1, sm0.height - vh * (LEAD + 1.65)));
     target = reduced ? LAST + EXTRA : clamp(p * (LAST + EXTRA + 0.6) - 0.3, 0, LAST + EXTRA);
@@ -153,12 +153,15 @@ const frags = [
   const lastQ: number[] = [];
   const counts = pns.map((el) => countsOf(el));
   const render = (time: number) => {
-    // suavizado independiente de los fotogramas y con retraso acotado: al scrollear rápido la cámara nunca se queda atrás ni «salta» al final
+    // Control de velocidad: la animación sigue al scroll con suavizado, pero nunca avanza más rápido que MAXV pasos por segundo
+    // (si te alejas mucho, el tope sube poco a poco para no quedarse atrás). Así, por rápido que bajes, cada paso se alcanza a ver.
     const dt = Math.min(64, time - lastTime || 16); lastTime = time;
     if (reduced) rr = target;
     else {
-      rr += (target - rr) * (1 - Math.exp(-dt / 90));
-      if (target - rr > MAXLAG) rr = target - MAXLAG; else if (rr - target > MAXLAG) rr = target + MAXLAG;
+      const gap = target - rr;
+      const want = gap * (1 - Math.exp(-dt / 90));
+      const vmax = MAXV * (1 + Math.max(0, Math.abs(gap) - 3) * 0.5) * (dt / 1000);
+      rr += Math.max(-vmax, Math.min(vmax, want));
       if (Math.abs(target - rr) < 0.0005) rr = target;
     }
     u = rr <= HOLD ? rr : rr <= HOLD + EXTRA ? HOLD : rr - EXTRA;

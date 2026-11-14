@@ -12,8 +12,8 @@ const steps = [
 const G = '#cfc4ff', V = '#5b7bff', W = '#f4f2ff';
 ---
 
-<section id="como-trabajamos" data-tone="dark" class="relative z-10 -mt-[60svh] font-goog text-[#f4efe6]">
-  <div data-ct class="h-[900vh]">
+<section id="como-trabajamos" data-tone="dark" class="pointer-events-none relative z-10 -mt-[100lvh] font-goog text-[#f4efe6]">
+  <div data-ct class="h-[calc(900vh+90svh)]">
     <div data-ct-stage class="sticky top-0 h-lvh overflow-hidden">
       <div data-ct-bg class="absolute inset-0 opacity-0" style="mask-image:linear-gradient(to bottom,transparent 0,#000 28svh);-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 28svh)"><i class="absolute inset-0" style="background:linear-gradient(165deg,#00033D 0%,#0600AB 52%,#2a1fb8 80%,#4a35d8 100%)"></i>
       <i class="ct-o ct-o1 absolute"></i><i class="ct-o ct-o2 absolute"></i><i class="ct-o ct-o3 absolute"></i>
@@ -133,19 +133,23 @@ const G = '#cfc4ff', V = '#5b7bff', W = '#f4f2ff';
   const stageEl = root.querySelector<HTMLElement>('[data-ct-stage]')!;
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) dissolveOut(stageEl, document.getElementById('cierre')!);
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let pos = 0, tgt = 0;
+  const LEAD = 0.9, MAXV = 2.2; // el capítulo ya está fijo sobre el anterior (aparece en su lugar); MAXV = pasos por segundo como máximo
+  let pos = 0, tgt = 0, lastT = 0;
   if (reduced) slides.forEach((s) => s.el.style.setProperty('--q', '1'));
-  onFrame((_t, y, vh) => {
-    const bo = reduced ? 1 : clamp((y - (m.top - vh)) / (vh * 0.85));
+  onFrame((t, y, vh) => {
+    const bo = reduced ? 1 : clamp((y - m.top) / (vh * 0.85));
     put(bg, 'opacity', bo.toFixed(3));
     put(track, 'opacity', Math.max(0, (bo - 0.55) / 0.45).toFixed(3));
     if (reduced) return;
     if (y + vh < m.top || y > m.top + m.height) return;
-    const p = clamp((y - m.top) / Math.max(1, m.height - vh * 1.5));
+    const p = clamp((y - m.top - vh * LEAD) / Math.max(1, m.height - vh * (LEAD + 1.5)));
     // cada paso se sostiene y el cambio al siguiente es rápido: nunca quedan dos pasos a medias, uno sobre otro
     const raw = clamp((p - 0.02) / 0.96) * 7, base = Math.min(6, Math.floor(raw));
     tgt = base + smooth(clamp((raw - base - 0.3) / 0.4));
-    pos += (tgt - pos) * 0.14;
+    // control de velocidad: suavizado + tope de pasos por segundo, así un scroll muy rápido no se «salta» los pasos
+    const dt = Math.min(64, t - lastT || 16); lastT = t;
+    const gap = tgt - pos, vmax = MAXV * (1 + Math.max(0, Math.abs(gap) - 2) * 0.5) * (dt / 1000);
+    pos += Math.max(-vmax, Math.min(vmax, gap * (1 - Math.exp(-dt / 100))));
     if (Math.abs(tgt - pos) < 0.0005) pos = tgt;
     put(track, 'transform', `translate3d(${(-pos * innerWidth).toFixed(1)}px,0,0)`);
     slides.forEach((s, i) => {

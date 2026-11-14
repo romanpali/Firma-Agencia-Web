@@ -88,9 +88,9 @@ const leavesHtml = leavesMarkup(leaves);
         const target = scrollY;
         if (reduced) cur = target;
         else {
-          cur += (target - cur) * (1 - Math.exp(-dt / 120));
-          const lag = innerHeight * 1.1;
-          if (target - cur > lag) cur = target - lag; else if (cur - target > lag) cur = target + lag;
+          // control de velocidad: suavizado + tope (en alturas de pantalla por segundo), así las páginas se voltean una a una por rápido que bajes
+          const gap = target - cur, vmax = innerHeight * 1.8 * (1 + Math.max(0, Math.abs(gap) / innerHeight - 2) * 0.5) * (dt / 1000);
+          cur += Math.max(-vmax, Math.min(vmax, gap * (1 - Math.exp(-dt / 120))));
           if (Math.abs(target - cur) < 0.5) cur = target;
         }
         const open = cur - top > 10;
