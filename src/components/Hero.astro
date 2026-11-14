@@ -2,8 +2,9 @@
 import { divisions } from '../data/servicios';
 const names = divisions.map((d) => d.short);
 // Celular: emisor en espiral. Cada mosaico nace pequeño y borroso en el centro y sale girando (antihorario) hasta los bordes, ganando tamaño y nitidez.
-const N = 24;
-const tiles = Array.from({ length: N }, (_, k) => ({ k, a: ((k * 137.508) % 360).toFixed(1), img: k + 1, off: [-10, 6, -4, 12, -8, 5, -12, 9, -2, 10][k % 10] }));
+const N = 24, ARMS = 3;
+// Tres brazos de una misma espiral: cada mosaico pertenece a un brazo y recorre la curva de adentro hacia afuera.
+const tiles = Array.from({ length: N }, (_, k) => ({ k, arm: k % ARMS, idx: Math.floor(k / ARMS), img: k + 1, off: [-10, 6, -4, 12, -8, 5, -12, 9, -2, 10][k % 10] }));
 ---
 
 <div data-hero-wrap class="relative z-10 h-[190svh]">
@@ -38,7 +39,7 @@ const tiles = Array.from({ length: N }, (_, k) => ({ k, a: ((k * 137.508) % 360)
       <div class="absolute inset-0 flex flex-col items-center justify-center px-6 text-center md:hidden">
       <div class="hh-field pointer-events-none absolute left-1/2 top-1/2" aria-hidden="true">
         {tiles.map((t) => (
-          <u class="hh-t" data-a={t.a} data-off={t.off}><b class="hh-s" style={`background-image:url(/hero/t${t.img}.webp)`}></b><b class="hh-b" style={`background-image:url(/hero/t${t.img}-b.webp)`}></b></u>
+          <u class="hh-t" data-arm={t.arm} data-idx={t.idx} data-off={t.off}><b class="hh-s" style={`background-image:url(/hero/t${t.img}.webp)`}></b><b class="hh-b" style={`background-image:url(/hero/t${t.img}-b.webp)`}></b></u>
         ))}
       </div>
       <h1 class="relative z-10 text-[clamp(2.4rem,11vw,4.6rem)] font-semibold leading-[0.98] tracking-[-0.05em]">
@@ -69,7 +70,7 @@ const tiles = Array.from({ length: N }, (_, k) => ({ k, a: ((k * 137.508) % 360)
   const text = document.querySelector<HTMLElement>('[data-hero-text]')!;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const field = document.querySelector<HTMLElement>('.hh-field')!;
-  const tl = [...field.querySelectorAll<HTMLElement>('.hh-t')].map((el, k, all) => ({ el, sh: el.firstElementChild as HTMLElement, bl: el.lastElementChild as HTMLElement, a0: (+el.dataset.a! * Math.PI) / 180, off: +el.dataset.off!, ph: k / all.length }));
+  const tl = [...field.querySelectorAll<HTMLElement>('.hh-t')].map((el, k, all) => ({ el, sh: el.firstElementChild as HTMLElement, bl: el.lastElementChild as HTMLElement, a0: (+el.dataset.arm! * 2 * Math.PI) / 3, off: +el.dataset.off!, ph: +el.dataset.idx! / (all.length / 3) }));
   let W = 160, R1 = 600, vw0 = 0;
   const fit = () => { const w = stage.clientWidth, h = stage.clientHeight; vw0 = w; W = Math.max(90, Math.min(190, Math.min(w, h) * 0.22)); R1 = Math.hypot(w, h) * 0.62; tl.forEach((t) => { t.el.style.width = t.el.style.height = `${W}px`; t.el.style.margin = `${-W / 2}px 0 0 ${-W / 2}px`; }); };
   fit(); addEventListener('resize', fit);
