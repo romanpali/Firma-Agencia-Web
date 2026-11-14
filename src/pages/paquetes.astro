@@ -13,6 +13,14 @@ const meta: [string, string[]][] = [
   ['Para negocios que necesitan orden en facturación, flujo de caja y su información contable y fiscal.', ['06']],
   ['Para organizaciones que quieren procesos, proyectos, inventarios y equipos más claros.', ['07']],
 ];
+// Categoría de cada paquete: contable y fiscal, creativa o técnica.
+const cats = ['creativa', 'creativa', 'tecnica', 'creativa', 'tecnica', 'tecnica', 'contable', 'tecnica'];
+const catLabel: Record<string, string> = { contable: 'Contable y fiscal', creativa: 'Creativa', tecnica: 'Técnica' };
+const all = [
+  ...packages.map(([t, items], i) => ({ t, items, d: meta[i][0], divs: meta[i][1], cat: cats[i] })),
+  { t: 'Asesoría contable y fiscal', items: 'Asesoría contable continua|Orientación fiscal para tu empresa|Calendario de obligaciones y revisión periódica|Facturación electrónica (CFDI) y control de ingresos y egresos|Conciliaciones y estados financieros|Atención de requerimientos y trámites', d: 'Para empresas que requieren acompañamiento contable y fiscal permanente, a cargo del Director de Administración y Finanzas (contador) y su área, con el respaldo de nuestra tecnología.', divs: ['06'], cat: 'contable' },
+  { t: 'Apoyo contable puntual', items: 'Diagnóstico de la situación contable y fiscal|Regularización y orden de la información|Revisión de facturación y registros|Plan de trabajo y recomendaciones', d: 'Para quien necesita ordenar su información contable o resolver una situación específica antes de contratar un servicio continuo.', divs: ['06'], cat: 'contable' },
+];
 const recurring = ['Mantenimiento web', 'Administración de infraestructura', 'Gestión de campañas', 'Producción periódica de contenido', 'Administración de redes sociales', 'Monitoreo de automatizaciones', 'Soporte técnico', 'Actualización de sistemas', 'Administración de CRM', 'Reportes ejecutivos', 'Optimización continua'];
 const steps = [['Evaluación de la situación actual', 'Conocemos tu empresa y cómo trabaja hoy.'], ['Problemas y oportunidades', 'Identificamos qué conviene resolver primero.'], ['Diseño de la solución', 'Definimos cómo se conectan las piezas.'], ['Plan de implementación', 'Calendario, responsables y entregables.'], ['Desarrollo e integración', 'Construimos y conectamos todo.'], ['Capacitación', 'Tu equipo aprende a usarlo.'], ['Seguimiento y optimización', 'Medimos y mejoramos de forma continua.']];
 const name = (n: string) => divisions.find((d) => d.n === n)!.short;
@@ -35,13 +43,16 @@ const quote = (t: string) => `/contacto?interes=${encodeURIComponent('Paquete: '
   <section data-tone="light" class="px-6 py-[6svh] md:px-10">
     <div class="mx-auto max-w-[1280px] border-t border-[#e6e4df] pt-10">
       <p data-reveal class="text-[13px] font-medium uppercase tracking-[0.14em] text-[#6b6e75]">Soluciones integrales</p>
+      <div data-filter class="mt-6 flex flex-wrap gap-2" role="group" aria-label="Filtrar por tipo de paquete">
+        {[['todos', 'Todos'], ['contable', 'Contable y fiscal'], ['creativa', 'Creativa'], ['tecnica', 'Técnica']].map(([v, l], k) => <button type="button" data-f={v} aria-pressed={k === 0 ? 'true' : 'false'} class="rounded-full border border-[#0b0b0c]/20 px-4 py-2.5 text-[13.5px] transition-colors hover:bg-[#0b0b0c]/5 aria-pressed:border-[#0b0b0c] aria-pressed:bg-[#0b0b0c] aria-pressed:text-white">{l}</button>)}
+      </div>
       <ul class="mt-8 grid gap-5 md:grid-cols-2">
-        {packages.map(([t, items], i) => (
-          <li data-reveal style={`--i:${i % 2}`}>
+        {all.map(({ t, items, d, divs, cat }, i) => (
+          <li data-reveal data-cat={cat} style={`--i:${i % 2}`}>
             <article class="flex h-full flex-col rounded-[20px] border border-[#e6e4df] p-7 transition-[border-color,transform,box-shadow] duration-300 hover:-translate-y-1 hover:border-[#0b0b0c]/30 hover:shadow-[0_30px_60px_-40px_rgba(0,0,0,.35)]">
-              <div class="flex items-baseline justify-between"><span class="font-goog text-[14px] text-[#6b6e75]">{String(i + 1).padStart(2, '0')}</span><span class="text-[12px] text-[#6b6e75]">{meta[i][1].map(name).join(' · ')}</span></div>
+              <div class="flex items-baseline justify-between"><span class="font-goog text-[14px] text-[#6b6e75]">{String(i + 1).padStart(2, '0')}</span><span class="text-[12px] text-[#6b6e75]">{cat === 'contable' ? catLabel[cat] : catLabel[cat] + ' · ' + divs.map(name).join(' · ')}</span></div>
               <h2 class="mt-6 font-goog text-[1.8rem] font-normal leading-[1.05] tracking-[-0.04em]">{t}</h2>
-              <p class="mt-3 text-[14.5px] leading-relaxed text-[#50535a]">{meta[i][0]}</p>
+              <p class="mt-3 text-[14.5px] leading-relaxed text-[#50535a]">{d}</p>
               <p class="mt-6 text-[11.5px] font-medium uppercase tracking-[0.14em] text-[#6b6e75]">Incluye</p>
               <ul class="mt-3 grid gap-x-4 gap-y-2 text-[14px] sm:grid-cols-2">{items.split('|').map((s) => <li class="flex gap-2.5"><span class="mt-[0.55em] block size-1 shrink-0 rounded-full bg-[#0b0b0c]"></span>{s}</li>)}</ul>
               <a href={quote(t)} class="mt-8 inline-flex items-center gap-2 self-start text-[14.5px] font-medium underline decoration-[#0b0b0c]/25 underline-offset-[6px] transition-[text-decoration-color] hover:decoration-[#0b0b0c]">Cotizar este paquete <span aria-hidden="true">→</span></a>
@@ -79,4 +90,14 @@ const quote = (t: string) => `/contacto?interes=${encodeURIComponent('Paquete: '
       </div>
     </div>
   </section>
+  <script>
+    const bar = document.querySelector<HTMLElement>('[data-filter]')!;
+    const items = [...document.querySelectorAll<HTMLElement>('li[data-cat]')];
+    bar.addEventListener('click', (e) => {
+      const b = (e.target as HTMLElement).closest<HTMLButtonElement>('[data-f]');
+      if (!b) return;
+      bar.querySelectorAll('[data-f]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+      items.forEach((li) => { li.hidden = b.dataset.f !== 'todos' && li.dataset.cat !== b.dataset.f; });
+    });
+  </script>
 </Light>
