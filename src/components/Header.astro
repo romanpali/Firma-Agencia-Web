@@ -24,6 +24,13 @@ const menuLinks = [
   { href: '/recursos', label: 'Recursos' },
   { href: '/contacto', label: 'Contacto' },
 ];
+// Índice de búsqueda: páginas, divisiones y áreas de servicio.
+const norm = (t: string) => t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+const index = [
+  ...menuLinks.map((l) => ({ t: l.label, h: l.href, k: 'Página' })),
+  { t: 'Terminos y privacidad', h: '/terminos', k: 'Página' },
+  ...divisions.flatMap((d) => [{ t: d.title, h: `/servicios#div-${d.n}`, k: `División ${d.n}` }, ...d.areas.map(([a, items]) => ({ t: a, h: `/servicios#div-${d.n}`, k: `División ${d.n}`, x: items }))]),
+].map((e) => ({ ...e, n: norm(`${e.t} ${(e as { x?: string }).x ?? ''}`), x: undefined }));
 const pill = 'hdr-pill rounded-full border border-white/20 bg-white/10 px-5 py-3 text-[15px] font-medium text-white backdrop-blur-md transition-[background-color,transform] duration-200 hover:bg-white/20 active:scale-[0.97]';
 ---
 
@@ -60,17 +67,32 @@ const pill = 'hdr-pill rounded-full border border-white/20 bg-white/10 px-5 py-3
 
 <Cursor />
 
-<div id="site-menu" data-menu class="pointer-events-none fixed inset-0 z-[60] flex flex-col overflow-y-auto px-6 pb-8 pt-4 text-center text-white opacity-0 transition-opacity duration-500" style="background:radial-gradient(70% 45% at 85% 12%,rgba(122,98,190,.75),transparent 70%),radial-gradient(80% 50% at 10% 55%,rgba(34,88,200,.8),transparent 72%),radial-gradient(70% 40% at 80% 92%,rgba(92,70,170,.7),transparent 70%),linear-gradient(180deg,#0b1a52 0%,#1b3f9e 38%,#4d4a9a 72%,#2a2561 100%)" aria-hidden="true">
-  <button type="button" data-menu-close class="mx-auto flex w-fit items-center gap-3 rounded-full border border-white/30 bg-white/15 px-6 py-3 text-[15px] font-medium shadow-[0_14px_34px_-14px_rgba(5,5,40,.6)] transition-colors hover:bg-white/25"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M1.5 1.5l11 11M12.5 1.5l-11 11"/></svg>Cerrar</button>
-  <nav class="my-auto flex flex-col items-center gap-0.5 py-8" aria-label="Menú">
+<div id="site-menu" data-menu data-index={JSON.stringify(index)} class="pointer-events-none fixed inset-0 z-[60] flex flex-col overflow-y-auto px-6 pb-7 pt-4 text-center text-white" style="background:radial-gradient(70% 45% at 85% 12%,rgba(122,98,190,.75),transparent 70%),radial-gradient(80% 50% at 10% 55%,rgba(34,88,200,.8),transparent 72%),radial-gradient(70% 40% at 80% 92%,rgba(92,70,170,.7),transparent 70%),linear-gradient(180deg,#0b1a52 0%,#1b3f9e 38%,#4d4a9a 72%,#2a2561 100%);clip-path:circle(0px at calc(100% - 44px) 44px);visibility:hidden" aria-hidden="true">
+  <div class="menu-link mx-auto flex w-fit items-center gap-1 rounded-full border border-white/30 bg-white/15 p-1 shadow-[0_14px_34px_-14px_rgba(5,5,40,.6)]" style="--i:0">
+    <button type="button" data-menu-close class="flex items-center gap-2.5 rounded-full px-5 py-2.5 text-[15px] font-medium transition-colors hover:bg-white/15"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M1.5 1.5l11 11M12.5 1.5l-11 11"/></svg>Cerrar</button>
+    <span class="h-5 w-px bg-white/25" aria-hidden="true"></span>
+    <div class="flex items-center rounded-full text-[13px] font-medium" role="group" aria-label="Idioma">
+      <button type="button" aria-pressed="true" class="rounded-full bg-white px-3.5 py-2 text-[#0b0c0f]">ES</button>
+      <button type="button" disabled title="Próximamente" aria-label="Inglés (próximamente)" class="rounded-full px-3.5 py-2 text-white/55">EN</button>
+    </div>
+  </div>
+  <form data-search-form role="search" class="menu-link relative mx-auto mt-5 w-full max-w-[26rem]" style="--i:1">
+    <svg class="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-white/70" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+    <input data-search type="search" autocomplete="off" placeholder="Buscar en el sitio" aria-label="Buscar en el sitio" class="w-full rounded-full border border-white/30 bg-white/15 py-3 pl-11 pr-4 text-[15px] text-white placeholder:text-white/65 focus:border-white/70 focus:outline-none" />
+  </form>
+  <ul data-results class="mx-auto mt-4 hidden w-full max-w-[26rem] flex-col gap-1 text-left" aria-live="polite"></ul>
+  <nav data-menu-nav class="my-auto flex flex-col items-center gap-0 py-3" aria-label="Menú">
     {menuLinks.filter((l) => l.href !== '/arma-tu-proyecto').map((l, i) => (
-      <a href={l.href} data-menu-link class="menu-link text-[clamp(2rem,9.5vw,3rem)] font-medium leading-[1.1] tracking-[-0.04em] text-white" style={`--i:${i}`}>{l.label}</a>
+      <a href={l.href} data-menu-link class="menu-link text-[clamp(1.75rem,8.2vw,2.6rem)] font-medium leading-[1.12] tracking-[-0.04em] text-white" style={`--i:${i + 2}`}>{l.label}</a>
     ))}
-    <a href="/arma-tu-proyecto" data-menu-link class="menu-link mt-6 rounded-full bg-white px-8 py-3.5 text-[15px] font-medium text-[#0b0c0f] shadow-[0_18px_40px_-14px_rgba(10,8,60,.7)]" style={`--i:${menuLinks.length - 1}`}>Arma tu proyecto</a>
+    <div class="menu-link mt-4 flex flex-col items-center gap-2.5 sm:flex-row" style={`--i:${menuLinks.length + 1}`}>
+      <a href="/contacto?interes=Consultor%C3%ADa&mensaje=Hola%2C%20me%20gustar%C3%ADa%20agendar%20una%20llamada." data-menu-link class="rounded-full bg-white px-8 py-3.5 text-[15px] font-medium text-[#0b0c0f] shadow-[0_18px_40px_-14px_rgba(10,8,60,.7)]">Agenda una llamada</a>
+      <a href="/arma-tu-proyecto" data-menu-link class="rounded-full border border-white/40 bg-white/10 px-7 py-3.5 text-[15px] font-medium">Arma tu proyecto</a>
+    </div>
   </nav>
-  <div class="text-[13px]">
+  <div class="menu-link text-[13px]" style={`--i:${menuLinks.length + 2}`}>
     <p class="font-medium uppercase tracking-[0.14em] text-white/70">Contáctanos</p>
-    <a href="mailto:info@humancorp.co" class="mt-1 inline-block text-[1.35rem] font-medium underline decoration-white/40 underline-offset-[6px]">info@humancorp.co</a>
+    <a href="mailto:info@humancorp.co" class="mt-1 inline-block text-[1.25rem] font-medium underline decoration-white/40 underline-offset-[6px]">info@humancorp.co</a>
   </div>
 </div>
 
@@ -82,14 +104,52 @@ const pill = 'hdr-pill rounded-full border border-white/20 bg-white/10 px-5 py-3
   mark();
   const menu = document.querySelector<HTMLElement>('[data-menu]')!;
   const open = document.querySelector<HTMLElement>('[data-menu-open]')!;
+  const reducedM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let hideT = 0;
+  // Apertura: un círculo de luz crece desde el botón y las piezas entran en cascada con un fundido; al cerrar se repliega al mismo punto.
   const set = (on: boolean) => {
-    menu.style.opacity = on ? '1' : '0';
+    clearTimeout(hideT);
+    const r = open.getBoundingClientRect();
+    const at = `${r.left + r.width / 2}px ${r.top + r.height / 2}px`;
+    const big = Math.hypot(innerWidth, innerHeight) + 40;
+    if (on) {
+      menu.style.visibility = 'visible';
+      menu.style.transition = 'none';
+      menu.style.clipPath = `circle(0px at ${at})`;
+      void menu.offsetWidth;
+      menu.style.transition = reducedM ? 'none' : 'clip-path 0.85s cubic-bezier(.7,0,.2,1)';
+      menu.style.clipPath = `circle(${big}px at ${at})`;
+    } else {
+      menu.style.transition = reducedM ? 'none' : 'clip-path 0.6s cubic-bezier(.7,0,.2,1)';
+      menu.style.clipPath = `circle(0px at ${at})`;
+      hideT = window.setTimeout(() => { menu.style.visibility = 'hidden'; }, reducedM ? 0 : 620);
+    }
     menu.style.pointerEvents = on ? 'auto' : 'none';
     menu.setAttribute('aria-hidden', String(!on));
     open.setAttribute('aria-expanded', String(on));
     menu.classList.toggle('is-open', on);
     document.documentElement.style.overflow = on ? 'hidden' : '';
+    if (!on) { input.value = ''; showResults(''); }
   };
+  // Buscador
+  const input = menu.querySelector<HTMLInputElement>('[data-search]')!;
+  const list = menu.querySelector<HTMLElement>('[data-results]')!;
+  const mnav = menu.querySelector<HTMLElement>('[data-menu-nav]')!;
+  const idx: { t: string; h: string; k: string; n: string }[] = JSON.parse(menu.dataset.index!);
+  const norm2 = (t: string) => t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  const showResults = (q: string) => {
+    const w = norm2(q).trim().split(/\s+/).filter(Boolean);
+    if (!w.length) { list.classList.add('hidden'); list.classList.remove('flex'); mnav.classList.remove('hidden'); list.innerHTML = ''; return; }
+    const hits = idx.filter((e) => w.every((x) => e.n.includes(x))).slice(0, 7);
+    mnav.classList.add('hidden');
+    list.classList.remove('hidden'); list.classList.add('flex');
+    list.innerHTML = hits.length
+      ? hits.map((e) => `<li><a href="${e.h}" data-menu-link class="flex items-baseline justify-between gap-3 rounded-2xl border border-white/20 bg-white/10 px-4 py-3 text-[15px] hover:bg-white/20"><span>${e.t}</span><span class="shrink-0 text-[11px] uppercase tracking-[0.12em] text-white/60">${e.k}</span></a></li>`).join('')
+      : '<li class="px-2 py-3 text-[15px] text-white/75">Sin resultados. Escríbenos y te ayudamos a encontrarlo.</li>';
+    list.querySelectorAll('[data-menu-link]').forEach((a) => a.addEventListener('click', () => set(false)));
+  };
+  input.addEventListener('input', () => showResults(input.value));
+  menu.querySelector('[data-search-form]')!.addEventListener('submit', (e) => { e.preventDefault(); (list.querySelector('a') as HTMLAnchorElement | null)?.click(); });
   open.addEventListener('click', () => set(true));
   menu.querySelector('[data-menu-close]')!.addEventListener('click', () => set(false));
   menu.querySelectorAll('[data-menu-link]').forEach((a) => a.addEventListener('click', () => set(false)));
