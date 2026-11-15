@@ -206,3 +206,26 @@
 .pg-ph.photo { transition: transform 1.2s cubic-bezier(.2, .7, .2, 1); will-change: auto; }
 .bw-leaf:hover .pg.v1 .pg-ph { transform: scale(1.045); }
 .pg.v1 .pg-ph { transform-origin: 60% 60%; }
+
+/* Temporada navideña (1 dic – 6 ene, o ?navidad=1): noche en Nueva York. La mesa termina en una ventana con la ciudad nevando,
+   guirnaldas desenfocadas y una cámara más abierta para que se vea más escena. */
+.ob-win, .ob-snow { display: none; }
+.ob-book[data-xmas] .ob-win { display: block; position: absolute; inset: 0 0 auto; height: var(--winh, 66%); background: url('/obra/ventana-ny.webp') 50% 100% / cover no-repeat, #05070f; }
+.ob-book[data-xmas] .ob-snow { display: block; position: absolute; inset: 0 0 auto; width: 100%; height: var(--winh, 66%); pointer-events: none; }
+.ob-book[data-xmas] .bw-stick { background: #05070f; }
+.ob-book[data-xmas] .bw-desk {
+  -webkit-mask-image: linear-gradient(to bottom, transparent var(--dm0, 31%), #000 var(--dm1, 33.5%)); mask-image: linear-gradient(to bottom, transparent var(--dm0, 31%), #000 var(--dm1, 33.5%));
+  background: linear-gradient(180deg, transparent 31%, rgba(120, 150, 220, 0.16) 33.5%, transparent 44%), radial-gradient(34% 22% at 50% 52%, rgba(255, 186, 110, 0.18), transparent 72%), url('/obra/mesa-estriada.webp') center / 100% 100%, #0d0b0a; }
+.ob-book[data-xmas] .bw-stick::after { background:
+  radial-gradient(60% 40% at 50% 88%, rgba(255, 170, 90, 0.12), transparent 70%),
+  radial-gradient(130% 110% at 50% 60%, transparent 45%, rgba(0, 0, 0, 0.7)),
+  linear-gradient(90deg, rgba(0, 0, 0, 0.6), transparent 40%); }
+.ob-book[data-xmas] .bw-flat { display: none; }
+@container (min-width: 701px) {
+  .ob-book[data-xmas] .bw-world { --pw: min(30cqw, calc(var(--sh, 700px) * 0.74)); top: 70%; }
+}
+@container (max-width: 700px) {
+  .ob-book[data-xmas] .bw-world { --pw: 80cqw; top: 64%; }
+  .ob-book[data-xmas] .bw-desk { --dm0: 39%; --dm1: 41.5%; }
+  .ob-book[data-xmas] .ob-win, .ob-book[data-xmas] .ob-snow { height: 58%; }
+}
