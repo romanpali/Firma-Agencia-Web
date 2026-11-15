@@ -31,7 +31,7 @@ const leavesHtml = leavesMarkup(leaves);
     <Header />
     <style is:global>[data-nav]::before { display: none; } .ob-cue, .ob-note, [data-bk-count] { display: none; }</style>
     <main class="@container relative z-10 overflow-x-clip" style="--a:#977DFF;--b:#0033FF;--ink:#14173f;--hw:420;--rad:10px;--sh:100svh;--sfont:'Inter Tight Variable',system-ui,sans-serif">
-      <section data-tone="dark" class="gal-book" data-book data-closed>
+      <section data-tone="dark" class="gal-book ob-book" data-book data-frame="cine" data-closed>
         <div class="bw-stick">
           <div class="bwv">
             <div class="bw-world" data-bw>
@@ -48,7 +48,7 @@ const leavesHtml = leavesMarkup(leaves);
           <div class="bw-intro ob-hero">
             <p class="ob-pill"><i></i>Obra selecta · 2026</p>
             <h1 class="ob-title"><span class="ob-l"><span>Proyectos que</span></span><span class="ob-l"><span>puedes <em>explorar</em></span></span></h1>
-            <p class="ob-sub">Cinco proyectos ilustrativos de lo que construimos: identidad, sitios web, ventas, inteligencia artificial y finanzas. Hojea el libro para recorrerlos.</p>
+            <p class="ob-sub ob-hint">Haz clic en las páginas para ver cada proyecto; desliza para hojear el libro.</p>
             <div class="ob-cta"><button type="button" class="ob-b1" data-ob-start>Empezar a hojear <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button><a class="ob-b2" href="/contacto">Hablemos</a></div>
             <ol class="ob-idx">{projs.map((p, i) => <li><em>{`0${i + 1}`}</em>{p.cat.split(' ')[0] === 'Sitio' ? 'Sitios web' : p.cat.split(' y ')[0]}</li>)}</ol>
           </div>

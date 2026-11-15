@@ -158,7 +158,7 @@ export function mountBook(o: Mount) {
     const wide = sec.clientWidth > 760;
     // Escritorio: el libro se centra al abrirse. Celular: se ve una página a la vez; la cámara se desplaza a la página izquierda mientras gira la hoja y vuelve a la derecha.
     let sx: number;
-    if (wide) sx = -0.05 * pw * (1 - tt);
+    if (wide) sx = sec.dataset.frame === 'cine' ? pw * (-0.5 * (1 - tt) + 0.26 * tt) : -0.05 * pw * (1 - tt);
     else { const f = t - Math.floor(t); const pan = t < 0.02 ? 0 : sm(cl((f - 0.5) / 0.25)) * (1 - sm(cl((f - 0.88) / 0.12))); sx = pw * (-0.5 + pan); }
     put(book, 'transform', `translateX(${sx.toFixed(1)}px)`);
     if (gutter) put(gutter, 'opacity', (tt * 0.9).toFixed(2));
