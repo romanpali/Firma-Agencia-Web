@@ -4,6 +4,7 @@ import Header from '../components/Header.astro';
 import Contact from '../components/Contact.astro';
 import ScrollFx from '../components/ScrollFx.astro';
 import BookProps from '../components/BookProps.astro';
+import XmasProps from '../components/XmasProps.astro';
 import { pagesFor, leavesMarkup, type Proj } from '../scripts/book';
 
 // Proyectos ilustrativos (nombres ficticios): ejemplos de lo que HumanCorp construye en cada división.
@@ -33,11 +34,12 @@ const leavesHtml = leavesMarkup(leaves);
     <main class="@container relative z-10 overflow-x-clip" style="--a:#977DFF;--b:#0033FF;--ink:#14173f;--hw:420;--rad:10px;--sh:100svh;--sfont:'Inter Tight Variable',system-ui,sans-serif">
       <section data-tone="dark" class="gal-book ob-book" data-book data-frame="cine" data-closed>
         <div class="bw-stick">
-          <img class="ob-photo" data-src="/obra/navidad-escritorio.webp" alt="" aria-hidden="true" decoding="async" />
-          <script is:inline>(()=>{const d=new Date(),m=d.getMonth(),q=new URLSearchParams(location.search).get('navidad');if(q==='1'||(q!=='0'&&((m===10&&d.getDate()>=15)||m===11||(m===0&&d.getDate()<=6)))){const s=document.currentScript,sec=s.closest('[data-book]'),im=s.previousElementSibling;sec.dataset.xmas='';im.src=im.dataset.src}})()</script>
+          <script is:inline>(()=>{const d=new Date(),m=d.getMonth(),q=new URLSearchParams(location.search).get('navidad');if(q==='1'||(q!=='0'&&((m===10&&d.getDate()>=15)||m===11||(m===0&&d.getDate()<=6))))document.currentScript.closest('[data-book]').dataset.xmas=''})()</script>
+          <i class="ob-win" aria-hidden="true"></i><canvas class="ob-snow" data-snow aria-hidden="true"></canvas>
           <div class="bwv">
             <div class="bw-world" data-bw>
               <BookProps />
+              <XmasProps />
               <div class="bw-book" data-bk>
                 <i class="bw-sh r"></i><i class="bw-sh l"></i><i class="bw-fs"></i><i class="bw-base"></i><i class="bw-base l"></i>
                 <i class="bw-edge r"></i><i class="bw-edge l"></i>
@@ -78,8 +80,6 @@ const leavesHtml = leavesMarkup(leaves);
       const sec = document.querySelector<HTMLElement>('[data-book]')!;
       const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
       const xmas = 'xmas' in sec.dataset;
-      // Navidad: cerrado, el libro yace sobre la mesa con la misma inclinación que la foto; al abrirse se ve desde arriba.
-      if (xmas) { sec.dataset.rx0 = '62'; sec.dataset.dy0 = '9'; }
       let top = 0, raf = 0;
       const measure = () => { top = sec.getBoundingClientRect().top + scrollY; };
       measure();
@@ -112,6 +112,31 @@ const leavesHtml = leavesMarkup(leaves);
       document.querySelector('[data-ob-start]')?.addEventListener('click', () => b.go(1));
       b.update();
 
+      // Temporada navideña: se cargan los objetos y cae nieve detrás de la ventana (solo mientras la escena está a la vista).
+      if (xmas) {
+        sec.querySelectorAll<HTMLImageElement>('img[data-xm-src]').forEach((im) => { im.src = im.dataset.xmSrc!; });
+        const snow = sec.querySelector<HTMLCanvasElement>('[data-snow]')!, ctx = snow.getContext('2d');
+        if (ctx && !reduced) {
+          let fl: { x: number; y: number; r: number; v: number; s: number; a: number }[] = [], w = 0, h = 0, on = false, id = 0, last = 0;
+          const size = () => {
+            const dpr = Math.min(devicePixelRatio || 1, 1.5);
+            w = snow.clientWidth; h = snow.clientHeight; snow.width = w * dpr; snow.height = h * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            fl = Array.from({ length: Math.round(Math.min(200, (w * h) / 6500)) }, () => { const z = Math.random(); return { x: Math.random() * w, y: Math.random() * h, r: 0.5 + z * z * 2.2, v: 12 + z * 40, s: Math.random() * 6.28, a: 0.25 + z * 0.5 }; });
+          };
+          const tick = (now: number) => {
+            const dt = Math.min(0.05, (now - (last || now)) / 1000); last = now;
+            ctx.clearRect(0, 0, w, h); ctx.fillStyle = '#fff';
+            for (const f of fl) {
+              f.y += f.v * dt; f.s += dt * 0.8; f.x += Math.sin(f.s) * f.r * 6 * dt;
+              if (f.y > h + 4) { f.y = -4; f.x = Math.random() * w; }
+              ctx.globalAlpha = f.a; ctx.beginPath(); ctx.arc(f.x, f.y, f.r, 0, 6.283); ctx.fill();
+            }
+            id = on ? requestAnimationFrame(tick) : 0;
+          };
+          size(); addEventListener('resize', size);
+          new IntersectionObserver(([e]) => { on = e.isIntersecting; if (on && !id) { last = 0; id = requestAnimationFrame(tick); } }).observe(sec);
+        }
+      }
     </script>
   </body>
 </html>

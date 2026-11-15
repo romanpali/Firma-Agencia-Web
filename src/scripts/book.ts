@@ -156,11 +156,8 @@ export function mountBook(o: Mount) {
       if (f > 0 && f < 1) { shadowA = a; shadowF = f; }
     });
     const e = sm(cl(p / 0.28)), tt = sm(cl(t));
-    // inclinación de cámara: cerrado → abierto (la página puede cambiarla con data-rx0 / data-rx1)
-    const rx0 = +(sec.dataset.rx0 || 44), rx1 = +(sec.dataset.rx1 || 29);
-    const rx = rx0 - (rx0 - rx1) * e, rz = -6 * (1 - e);
-    const dy = +(sec.dataset.dy0 || 0) * (1 - e); // desplazamiento vertical del libro cerrado (en % de la pantalla)
-    put(world, 'transform', `${dy ? `translateY(${dy.toFixed(2)}svh) ` : ''}rotateX(${rx.toFixed(1)}deg) rotateZ(${rz.toFixed(1)}deg) scale(${(0.9 + 0.1 * e).toFixed(3)})`);
+    const rx = 44 - 15 * e, rz = -6 * (1 - e);
+    put(world, 'transform', `rotateX(${rx.toFixed(1)}deg) rotateZ(${rz.toFixed(1)}deg) scale(${(0.9 + 0.1 * e).toFixed(3)})`);
     for (const pr of props) put(pr, 'transform', `translateZ(-33px) rotateZ(${(-rz).toFixed(1)}deg) rotateX(${(-rx).toFixed(1)}deg)`);
     const wide = sec.clientWidth > 760;
     // Escritorio: el libro se centra al abrirse. Celular: se ve una página a la vez; la cámara se desplaza a la página izquierda mientras gira la hoja y vuelve a la derecha.
