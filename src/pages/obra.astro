@@ -8,11 +8,11 @@ import { pagesFor, leavesMarkup, type Proj } from '../scripts/book';
 
 // Proyectos ilustrativos (nombres ficticios): ejemplos de lo que HumanCorp construye en cada división.
 const projs: Proj[] = [
-  { n: 'Alba', cat: 'Branding e identidad', y: 2026, hl: 'Una marca con voz propia', d: 'Identidad, sistema visual y manual de marca para una app de inteligencia artificial.', tags: ['Branding', 'Dirección de arte', 'Manual de marca'], art: 0, dark: true, layout: 1 },
-  { n: 'Casa Lumbre', cat: 'Sitio web y SEO', y: 2026, hl: 'Presencia que se encuentra', d: 'Un sitio rápido y claro, pensado para aparecer en su ciudad y recibir contactos.', tags: ['Diseño web', 'SEO local', 'Formularios'], art: 2, dark: false, layout: 0 },
-  { n: 'Grupo Ceiba', cat: 'Ventas y CRM', y: 2025, hl: 'Todo el seguimiento, en un solo lugar', d: 'Prospectos, cotizaciones y reportes conectados en un mismo tablero.', tags: ['CRM', 'Automatización', 'Reportes'], art: 4, dark: true, layout: 0 },
-  { n: 'Estudio Aurora', cat: 'Asistentes y automatización', y: 2025, hl: 'Un asistente que sí ayuda', d: 'Responde, da seguimiento y avisa al equipo, con supervisión humana.', tags: ['Agentes de IA', 'Flujos', 'Integraciones'], art: 7, dark: false, layout: 2 },
-  { n: 'Taller 33', cat: 'Finanzas y operaciones', y: 2025, hl: 'Números claros, decisiones tranquilas', d: 'Facturación, flujo de caja y procesos internos ordenados.', tags: ['Facturación CFDI', 'Dashboards', 'Procesos'], art: 6, dark: true, layout: 2 },
+  { n: 'Alba', cat: 'Branding e identidad', y: 2026, hl: 'Una marca con voz propia', d: 'Identidad, sistema visual y manual de marca para una app de inteligencia artificial.', tags: ['Branding', 'Dirección de arte', 'Manual de marca'], art: 0, dark: true, layout: 1, img: '/obra/p1.webp' },
+  { n: 'Casa Lumbre', cat: 'Sitio web y SEO', y: 2026, hl: 'Presencia que se encuentra', d: 'Un sitio rápido y claro, pensado para aparecer en su ciudad y recibir contactos.', tags: ['Diseño web', 'SEO local', 'Formularios'], art: 2, dark: false, layout: 1, img: '/obra/p2.webp' },
+  { n: 'Grupo Ceiba', cat: 'Ventas y CRM', y: 2025, hl: 'Todo el seguimiento, en un solo lugar', d: 'Prospectos, cotizaciones y reportes conectados en un mismo tablero.', tags: ['CRM', 'Automatización', 'Reportes'], art: 4, dark: true, layout: 1, img: '/obra/p3.webp' },
+  { n: 'Estudio Aurora', cat: 'Asistentes y automatización', y: 2025, hl: 'Un asistente que sí ayuda', d: 'Responde, da seguimiento y avisa al equipo, con supervisión humana.', tags: ['Agentes de IA', 'Flujos', 'Integraciones'], art: 7, dark: false, layout: 1, img: '/obra/p4.webp' },
+  { n: 'Taller 33', cat: 'Finanzas y operaciones', y: 2025, hl: 'Números claros, decisiones tranquilas', d: 'Facturación, flujo de caja y procesos internos ordenados.', tags: ['Facturación CFDI', 'Dashboards', 'Procesos'], art: 6, dark: true, layout: 1, img: '/obra/p5.webp' },
 ];
 const { leaves, end } = pagesFor(projs, { brand: 'HumanCorp', mail: 'info@humancorp.co', mailHref: '/contacto', year: 2026, endTitle: 'Diseño, tecnología y operaciones empresariales', contentsTitle: 'Contenido' });
 const leavesHtml = leavesMarkup(leaves);
@@ -44,7 +44,6 @@ const leavesHtml = leavesMarkup(leaves);
               </div>
             </div>
           </div>
-          <img class="ob-closed" src="/obra/libro.webp" alt="Libro HumanCorp, obra selecta" width="1500" height="941" decoding="async" />
           <div class="bw-intro ob-hero">
             <p class="ob-pill"><i></i>Obra selecta · 2026</p>
             <h1 class="ob-title"><span class="ob-l"><span>Proyectos que</span></span><span class="ob-l"><span>puedes <em>explorar</em></span></span></h1>

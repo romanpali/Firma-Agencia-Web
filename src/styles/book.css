@@ -8,7 +8,7 @@
 
 .bw-world { --pw: min(42cqw, calc(var(--sh, 700px) * 1.05)); --ph: calc(var(--pw) / 1.5); position: absolute; left: 50%; top: 56%; width: 0; height: 0; transform-style: preserve-3d; transform: rotateX(44deg) rotateZ(-6deg) scale(0.9); will-change: transform; }
 .bw-desk { position: absolute; width: max(190cqw, calc(var(--sh, 700px) * 2.4)); height: max(150cqw, calc(var(--sh, 700px) * 3.2)); left: calc(max(190cqw, calc(var(--sh, 700px) * 2.4)) / -2); top: calc(max(150cqw, calc(var(--sh, 700px) * 3.2)) / -2 + 8cqw); transform: translateZ(-34px);
-  background: radial-gradient(36% 32% at 30% 28%, rgba(255, 186, 120, 0.3), transparent 72%), linear-gradient(180deg, rgba(0, 0, 0, 0.3), transparent 45%), url('/configurador/mesa-real.webp') center / 100% 100%, #0e0705; }
+  background: radial-gradient(40% 36% at 26% 30%, rgba(255, 190, 120, 0.16), transparent 72%), linear-gradient(180deg, rgba(0, 0, 0, 0.4), transparent 45%), url('/obra/mesa-estriada.webp') center / 100% 100%, #0d0b0a; }
 .bw-lamp { position: absolute; width: 70cqw; height: 70cqw; left: -62cqw; top: -52cqw; transform: translateZ(-33px); pointer-events: none; background: radial-gradient(closest-side, rgba(255, 214, 160, 0.4), rgba(255, 190, 130, 0.12) 55%, transparent); }
 
 .bw-book { position: absolute; left: calc(var(--pw) * -1); top: calc(var(--ph) * -0.5); width: calc(var(--pw) * 2); height: var(--ph); transform-style: preserve-3d; transform: translateX(calc(var(--pw) * -0.5)); }
@@ -87,9 +87,9 @@
 .bk-pn { position: absolute; right: 1.6em; bottom: 1.1em; z-index: 4; font-size: 0.6em; letter-spacing: 0.1em; opacity: 0.45; } .sb .bk-pn { right: auto; left: 1.6em; }
 /* Cubierta negra */
 .bw-cover { font-size: 1.18em; position: absolute; inset: 0; display: grid; place-items: center; border-radius: 2px 6px 6px 2px; overflow: hidden; color: #fff;
-  background: url('/configurador/cuero-real.webp') 0 0 / 180px 180px, #0a0a0b; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.12); }
+  background: url('/configurador/cuero-fino.webp') 0 0 / 200px 200px, linear-gradient(160deg, #1a1a1d 0%, #0d0d0f 55%, #060607 100%); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.12); }
 .bw-cover::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, transparent 4.2%, rgba(0, 0, 0, 0.75) 4.6%, rgba(255, 255, 255, 0.1) 5.4%, transparent 7%), linear-gradient(90deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 4.2%), radial-gradient(90% 70% at 26% 10%, rgba(255, 255, 255, 0.09), transparent 60%); }
-.bw-wm { position: relative; z-index: 1; font-size: 2.1em; letter-spacing: 0.02em; white-space: nowrap; }
+.bw-wm { position: relative; z-index: 1; font-size: 1.5em; letter-spacing: 0.02em; white-space: nowrap; }
 .bw-wm i { font-style: normal; }
 .bw-wm .wl { font-weight: 300; } .bw-wm .ws { font-weight: 600; }
 .pe { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1em; text-align: center; background: #0b0b0d; }
@@ -159,7 +159,7 @@
 @container (max-width: 700px) { .ob-cue, .ob-note, .ob-sub, .ob-idx, .bw-prop { display: none; } .ob-hero { max-width: 100%; right: 20px; top: clamp(84px, 13svh, 140px); translate: none; margin-top: 0; } .ob-title { font-size: clamp(2.1rem, 9.5cqw, 3rem); } .bw-world { --pw: 88cqw; top: 58%; } .ob-closed { right: 6cqw; width: 88cqw; top: 58%; translate: 0 -50%; } }
 
 /* Modo ligero: se activa solo si el equipo no mantiene los fotogramas */
-.bw-lite .bw-prop, .bw-lite .bw-lamp, .bw-lite .bw-gutter, .bw-lite .bw-ribbon { display: none; }
+.bw-lite .bw-flat, .bw-lite .bw-prop, .bw-lite .bw-lamp, .bw-lite .bw-gutter, .bw-lite .bw-ribbon { display: none; }
 @media (prefers-reduced-motion: reduce) { .bwv, .ob-pill, .ob-l > span, .ob-sub, .ob-cta, .ob-cue, .ob-note, .ob-cue i { animation: none !important; } }
 
 /* Hero de Obra más limpio y cinematográfico: solo título y botones */
@@ -168,12 +168,10 @@
 
 .bw-ribbon { display: none; }
 
-.bw-prop { display: none; }
 
 /* Libro cerrado: se muestra la imagen del libro; al empezar a hojear se desvanece y aparece el libro 3D */
 .ob-closed { position: absolute; right: 3.5cqw; top: 50%; width: min(50cqw, 135svh); height: auto; translate: 0 -48%; z-index: 5; opacity: 1; transition: opacity 0.55s ease; pointer-events: none; }
 .gal-book.is-open .ob-closed { opacity: 0; }
-.gal-book[data-closed] .bw-book { visibility: hidden; }
 @container (max-width: 700px) { .ob-closed { right: 6cqw; width: 88cqw; top: 66%; } }
 
 /* Obra: encuadre cinematográfico como la referencia. El libro abierto es grande, queda abajo a la derecha y se corta por los bordes;
@@ -192,3 +190,21 @@
 .ob-book .bw-lamp { display: none; }
 .ob-book .ob-cta, .ob-book .ob-idx { display: none; }
 .ob-book .ob-hint { display: block; max-width: 34rem; margin-top: 18px; font-size: 14px; color: rgba(255, 255, 255, 0.55); letter-spacing: 0; }
+
+/* Objetos sobre la mesa (vistos desde arriba): se colocan en unidades del libro para que acompañen a la cámara */
+.bw-flat { position: absolute; pointer-events: none; transform: translateZ(-33px) rotate(var(--r, 0deg)); transform-origin: 50% 50%; }
+.bw-succ { width: calc(var(--pw) * 0.3); left: calc(var(--pw) * -1.02); top: calc(var(--ph) * -0.55); --r: 18deg; }
+.bw-pencil { width: calc(var(--pw) * 0.5); left: calc(var(--pw) * -0.92); top: calc(var(--ph) * 0.5); --r: -32deg; }
+.bw-cupf { width: calc(var(--pw) * 0.34); left: calc(var(--pw) * 0.62); top: calc(var(--ph) * -1.18); --r: -8deg; }
+@container (max-width: 700px) { .bw-flat { display: none; } }
+
+/* Contenido como la referencia: papel crema, marca diminuta, título en sans */
+.pc { position: absolute; }
+.pc-top { position: absolute; left: 2.4em; right: 2.4em; top: 1.7em; display: flex; justify-content: space-between; align-items: center; font-size: 0.6em; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(21, 22, 26, 0.5); }
+.pc-top b { font-size: 1.15em; letter-spacing: 0.1em; color: #15161a; font-weight: 500; text-transform: none; } .pc-top .wl { font-weight: 300; } .pc-top .ws { font-weight: 600; }
+.pc-l h4 { font-family: 'Inter Tight Variable', system-ui, sans-serif; font-style: normal; font-weight: 500; font-size: 2.1em; letter-spacing: -0.035em; color: #15161a; }
+.pc-r button { font-size: 0.82em; }
+/* Hover: la página «se mueve» (la foto se acerca despacio) */
+.pg-ph.photo { transition: transform 1.2s cubic-bezier(.2, .7, .2, 1); will-change: auto; }
+.bw-leaf:hover .pg.v1 .pg-ph { transform: scale(1.045); }
+.pg.v1 .pg-ph { transform-origin: 60% 60%; }

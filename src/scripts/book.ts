@@ -22,13 +22,17 @@ const hero = (p: Proj, i: number, brand: string) => {
   const ph = p.img ? `<div class="pg-ph photo"></div>` : `<div class="pg-ph pa${p.art % 8}"><i class="s1"></i><i class="s2"></i><i class="s3"></i></div>`;
   return `<div class="pg ${p.dark ? 'dk' : 'lt'} v${lay}">${ph}${bar(p.n)}<div class="pg-txt"><p class="pg-k">${esc(p.cat)}</p><h4>${esc(p.hl)}</h4><p class="pg-s">${esc(p.d)}</p><span class="pg-btn">Ver proyecto →</span></div><span class="pg-pct"></span>${pn(3 + i * 2)}</div>`;
 };
+const tile = (p: Proj, k: number) => p.img
+  ? `<div class="pg-tile ph" style="background-image:url(${p.img});background-position:${['18% 40%', '82% 30%', '50% 78%'][k]};background-size:${['260%', '240%', '300%'][k]}"></div>`
+  : `<div class="pg-tile pa${(p.art + [1, 3, 5][k]) % 8}"><i class="s1"></i><i class="s2"></i><i class="s3"></i></div>`;
 const details = (p: Proj, i: number) =>
-  `<div class="pg ${p.dark ? 'lt' : 'dk'} pd">${bar(p.n)}<div class="pd-txt"><span class="pd-no">0${i + 1}</span><h5>${esc(p.n)}</h5><p class="pg-k">${esc(p.cat)} · ${p.y}</p><p class="pg-s">${esc(p.d)}</p><ul class="pg-tags">${p.tags.map((t) => `<li>${esc(t)}</li>`).join('')}</ul></div><div class="pd-grid"><div class="pg-tile pa${(p.art + 1) % 8}"><i class="s1"></i><i class="s2"></i><i class="s3"></i></div><div class="pg-tile pa${(p.art + 3) % 8}"><i class="s1"></i><i class="s2"></i><i class="s3"></i></div><div class="pg-tile pa${(p.art + 5) % 8}"><i class="s1"></i><i class="s2"></i><i class="s3"></i></div></div>${pn(4 + i * 2)}</div>`;
+  `<div class="pg ${p.dark ? 'lt' : 'dk'} pd">${bar(p.n)}<div class="pd-txt"><span class="pd-no">0${i + 1}</span><h5>${esc(p.n)}</h5><p class="pg-k">${esc(p.cat)} · ${p.y}</p><p class="pg-s">${esc(p.d)}</p><ul class="pg-tags">${p.tags.map((t) => `<li>${esc(t)}</li>`).join('')}</ul></div><div class="pd-grid">${tile(p, 0)}${tile(p, 1)}${tile(p, 2)}</div>${pn(4 + i * 2)}</div>`;
 
 export function pagesFor(projs: Proj[], o: PageOpts) {
   const five = projs.slice(0, 5);
   const cover = `<div class="bw-cover"><b class="bw-wm">${/^human\s*corp$/i.test(o.brand) ? '<i class="wl">HUMAN</i> <i class="ws">CORP</i>' : esc(o.brand)}</b></div>`;
-  const contents = `<div class="pg lt pc"><div class="pc-l"><h4>${esc(o.contentsTitle)}</h4><p>${five.length} obras</p></div><ul class="pc-r">${five.map((p, i) => `<li><button type="button" data-bk-go="${i + 1}"><em>0${i + 1}</em><b>${esc(p.n)}</b><i></i><span>${esc(p.cat)}</span></button></li>`).join('')}</ul><p class="pc-f">Elige una obra para saltar a ella</p>${pn(2)}</div>`;
+  const wm = /^human\s*corp$/i.test(o.brand) ? '<span class="wl">HUMAN</span> <span class="ws">CORP</span>' : esc(o.brand);
+  const contents = `<div class="pg lt pc"><div class="pc-top"><b>${wm}</b><span>Obra selecta · ${o.year}</span></div><div class="pc-l"><h4>${esc(o.contentsTitle)}</h4><p>${five.length} obras</p></div><ul class="pc-r">${five.map((p, i) => `<li><button type="button" data-bk-go="${i + 1}"><em>0${i + 1}</em><b>${esc(p.n)}</b><i></i><span>${esc(p.cat)}</span></button></li>`).join('')}</ul><p class="pc-f">Elige una obra para saltar a ella</p>${pn(2)}</div>`;
   const leaves: { f: string; b: string; img?: string }[] = [{ f: cover, b: contents }];
   five.forEach((p, i) => leaves.push({ f: hero(p, i, o.brand), b: details(p, i), img: p.img }));
   const end = `<div class="pg dk pe"><i class="hm">${esc(o.brand[0] || 'H')}</i><b>${esc(o.endTitle)}</b><a href="${o.mailHref || '/contacto'}">${esc(o.mail)}</a>${pn(leaves.length * 2 + 2)}</div>`;
