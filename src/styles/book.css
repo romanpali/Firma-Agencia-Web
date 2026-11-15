@@ -207,7 +207,7 @@
 .bw-leaf:hover .pg.v1 .pg-ph { transform: scale(1.045); }
 .pg.v1 .pg-ph { transform-origin: 60% 60%; }
 
-/* Temporada navideña (1 dic – 6 ene, o ?navidad=1): escritorio en Nueva York de noche. Con el libro cerrado se ve la fotografía completa;
+/* Temporada navideña (15 nov – 6 ene, o ?navidad=1): escritorio en Nueva York de noche. Con el libro cerrado se ve la fotografía completa;
    al empezar a bajar la cámara desenfoca y oscurece la escena y el libro 3D toma el primer plano. --xo va de 0 a 1 con el scroll. */
 .ob-win { display: none; }
 .ob-book[data-xmas] { --xo: 0; }
