@@ -177,7 +177,7 @@
 /* Obra: encuadre cinematográfico como la referencia. El libro abierto es grande, queda abajo a la derecha y se corta por los bordes;
    una luz cálida de lámpara cae sobre él y todo lo demás se hunde en negro. */
 @container (min-width: 701px) {
-  .ob-book .bw-world { --pw: min(52cqw, calc(var(--sh, 700px) * 1.25)); top: 75%; }
+  .ob-book .bw-world { --pw: min(36cqw, calc(var(--sh, 700px) * 0.9)); top: 64%; }
   .ob-book .ob-closed { right: -2cqw; top: 70%; width: min(58cqw, 150svh); translate: 0 -50%; }
   .ob-book .ob-hero { top: 44%; max-width: min(40rem, 48cqw); }
   .ob-book .ob-title { font-size: clamp(2.6rem, 4.6cqw, 5rem); line-height: 1.02; letter-spacing: -0.04em; }
@@ -193,9 +193,7 @@
 
 /* Objetos sobre la mesa (vistos desde arriba): se colocan en unidades del libro para que acompañen a la cámara */
 .bw-flat { position: absolute; pointer-events: none; transform: translateZ(-33px) rotate(var(--r, 0deg)); transform-origin: 50% 50%; }
-.bw-succ { width: calc(var(--pw) * 0.3); left: calc(var(--pw) * -1.02); top: calc(var(--ph) * -0.55); --r: 18deg; }
 .bw-pencil { width: calc(var(--pw) * 0.5); left: calc(var(--pw) * -0.92); top: calc(var(--ph) * 0.5); --r: -32deg; }
-.bw-cupf { width: calc(var(--pw) * 0.34); left: calc(var(--pw) * 0.62); top: calc(var(--ph) * -1.18); --r: -8deg; }
 @container (max-width: 700px) { .bw-flat { display: none; } }
 
 /* Contenido como la referencia: papel crema, marca diminuta, título en sans */
