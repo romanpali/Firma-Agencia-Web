@@ -33,8 +33,8 @@ const leavesHtml = leavesMarkup(leaves);
     <main class="@container relative z-10 overflow-x-clip" style="--a:#977DFF;--b:#0033FF;--ink:#14173f;--hw:420;--rad:10px;--sh:100svh;--sfont:'Inter Tight Variable',system-ui,sans-serif">
       <section data-tone="dark" class="gal-book ob-book" data-book data-frame="cine" data-closed>
         <div class="bw-stick">
-          <script is:inline>(()=>{const d=new Date(),m=d.getMonth(),q=new URLSearchParams(location.search).get('navidad');if(q==='1'||(q!=='0'&&((m===10&&d.getDate()>=15)||m===11||(m===0&&d.getDate()<=6))))document.currentScript.closest('[data-book]').dataset.xmas=''})()</script>
-          <i class="ob-win" aria-hidden="true"></i><i class="ob-win ob-win-b" aria-hidden="true"></i>
+          <img class="ob-photo" data-src="/obra/navidad-ny.webp" alt="" aria-hidden="true" decoding="async" />
+          <script is:inline>(()=>{const d=new Date(),m=d.getMonth(),q=new URLSearchParams(location.search).get('navidad');if(q==='1'||(q!=='0'&&((m===10&&d.getDate()>=15)||m===11||(m===0&&d.getDate()<=6)))){const s=document.currentScript,sec=s.closest('[data-book]'),im=s.previousElementSibling;sec.dataset.xmas='';im.src=im.dataset.src}})()</script>
           <div class="bwv">
             <div class="bw-world" data-bw>
               <BookProps />
@@ -77,13 +77,52 @@ const leavesHtml = leavesMarkup(leaves);
       const main = document.querySelector<HTMLElement>('main')!;
       const sec = document.querySelector<HTMLElement>('[data-book]')!;
       const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const xmas = 'xmas' in sec.dataset; let lastXo = '';
+      const xmas = 'xmas' in sec.dataset;
       let top = 0, raf = 0;
       const measure = () => { top = sec.getBoundingClientRect().top + scrollY; };
       measure();
       // Posición suavizada: al scrollear rápido las páginas se voltean una a una en lugar de saltar al final.
       let cur = scrollY, lastT = 0;
-      const b = mountBook({ sec, scrollY: () => cur, secTop: () => top, viewH: () => innerHeight, scrollTo: (y) => scrollTo({ top: y, behavior: reduced ? 'auto' : 'smooth' }), reduced });
+      // Navidad: el libro 3D se monta exactamente sobre el libro de la fotografía. La cámara de la foto se reconstruyó a partir de las
+      // cuatro esquinas de la portada (homografía → rotación, traslación y focal); el encuadre solo acerca y desplaza la imagen.
+      const XM = { W: 2178, H: 937, EX: 500, f: 1638.21, cx: 1339, cy: 468.5, M: [0.935506, -0.044679, -0.322942, 0, 0.323695, 0.351416, 0.889069, 0, 0.073765, -0.936263, 0.343214, 0, 1158.313375, 654.958077, 168.242735, 1] };
+      const photo = sec.querySelector<HTMLElement>('.ob-photo')!, bwv = sec.querySelector<HTMLElement>('.bwv')!, world = sec.querySelector<HTMLElement>('[data-bw]')!;
+      const nLeaves = sec.querySelectorAll('.bw-leaf').length;
+      const proj = (x: number, y: number, z: number) => {
+        const m = XM.M, X = m[0] * x + m[4] * y + m[8] * z + m[12], Y = m[1] * x + m[5] * y + m[9] * z + m[13], Z = m[2] * x + m[6] * y + m[10] * z + m[14];
+        const k = XM.f / (XM.f - Z); return [XM.cx + (X - XM.cx) * k, XM.cy + (Y - XM.cy) * k];
+      };
+      const lerp = (a: number, b: number, k: number) => a + (b - a) * k;
+      let camKey = '';
+      const camera = ({ tt, pan, wide, pw, ph }: { tt: number; pan: number; wide: boolean; pw: number; ph: number }) => {
+        if (!xmas) return false;
+        const vw = sec.clientWidth, vh = innerHeight, zc = nLeaves * 1.4, W0 = XM.W - XM.EX;
+        // encuadre inicial: la fotografía original cubre la pantalla (en celular, centrada en el libro)
+        // (celular: el libro completo a lo ancho, la foto como franja que se funde con el fondo oscuro)
+        const s0 = wide ? Math.max(vw / W0, vh / XM.H) : Math.min(vh / XM.H, (0.98 * vw) / 740);
+        const fx = wide ? XM.EX + W0 / 2 : XM.EX + 962;
+        const ox0 = Math.min(-s0 * XM.EX, Math.max(vw - s0 * XM.W, vw / 2 - s0 * fx)), oy0 = wide ? (vh - s0 * XM.H) / 2 : vh * 0.66 - s0 * 690;
+        // encuadre abierto: el libro abierto (o la página en turno, en celular) ocupa el centro
+        const xs = wide ? [-pw, pw] : [pw * (0.5 - pan) - pw / 2, pw * (0.5 - pan) + pw / 2];
+        const pts = [[xs[0], -ph / 2], [xs[1], -ph / 2], [xs[1], ph / 2], [xs[0], ph / 2]].map(([x, y]) => proj(x, y, zc));
+        const minX = Math.min(...pts.map((q) => q[0])), maxX = Math.max(...pts.map((q) => q[0])), minY = Math.min(...pts.map((q) => q[1])), maxY = Math.max(...pts.map((q) => q[1]));
+        const s1 = Math.min((wide ? 0.88 : 0.94) * vw / (maxX - minX), (wide ? 0.66 : 0.5) * vh / (maxY - minY));
+        const ox1 = vw / 2 - s1 * (minX + maxX) / 2, oy1 = vh * (wide ? 0.56 : 0.6) - s1 * (minY + maxY) / 2;
+        // escritorio: la foto siempre cubre la pantalla (el encuadre se corrige para no dejar huecos)
+        const s = Math.max(lerp(s0, s1, tt), wide ? vh / XM.H : 0, vw / XM.W);
+        const ox = Math.min(0, Math.max(vw - s * XM.W, lerp(ox0, ox1, tt)));
+        const oy = wide ? Math.min(0, Math.max(vh - s * XM.H, lerp(oy0, oy1, tt))) : lerp(oy0, oy1, tt);
+        const key = `${s.toFixed(4)}|${ox.toFixed(1)}|${oy.toFixed(1)}`;
+        if (key !== camKey) {
+          camKey = key;
+          photo.style.transform = `translate(${ox.toFixed(1)}px, ${oy.toFixed(1)}px) scale(${s.toFixed(4)})`;
+          bwv.style.perspective = `${(XM.f * s).toFixed(1)}px`;
+          bwv.style.perspectiveOrigin = `${(ox + s * XM.cx).toFixed(1)}px ${(oy + s * XM.cy).toFixed(1)}px`;
+          world.style.transform = `translate3d(${ox.toFixed(1)}px, ${oy.toFixed(1)}px, 0) scale3d(${s.toFixed(4)}, ${s.toFixed(4)}, ${s.toFixed(4)}) matrix3d(${XM.M.join(',')}) translateZ(${(-zc).toFixed(1)}px)`;
+        }
+        return true;
+      };
+      const b = mountBook({ sec, scrollY: () => cur, secTop: () => top, viewH: () => innerHeight, scrollTo: (y) => scrollTo({ top: y, behavior: reduced ? 'auto' : 'smooth' }), reduced, camera });
       const update = (t: number) => {
         raf = 0;
         const dt = Math.min(64, t - lastT || 16); lastT = t;
@@ -97,7 +136,6 @@ const leavesHtml = leavesMarkup(leaves);
         }
         const open = cur - top > 10;
         sec.classList.toggle('is-open', open);
-        if (xmas) { const xo = Math.max(0, Math.min(1, (cur - top) / (innerHeight * 0.45))).toFixed(3); if (xo !== lastXo) { lastXo = xo; sec.style.setProperty('--xo', xo); } }
         if (open) sec.removeAttribute('data-closed'); else sec.setAttribute('data-closed', '');
         b.update();
         if (cur !== target) raf = requestAnimationFrame(update);
