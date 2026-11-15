@@ -34,7 +34,7 @@ const leavesHtml = leavesMarkup(leaves);
       <section data-tone="dark" class="gal-book ob-book" data-book data-frame="cine" data-closed>
         <div class="bw-stick">
           <script is:inline>(()=>{const d=new Date(),m=d.getMonth(),q=new URLSearchParams(location.search).get('navidad');if(q==='1'||(q!=='0'&&(m===11||(m===0&&d.getDate()<=6))))document.currentScript.closest('[data-book]').dataset.xmas=''})()</script>
-          <i class="ob-win" aria-hidden="true"></i><canvas class="ob-snow" data-snow aria-hidden="true"></canvas>
+          <i class="ob-win" aria-hidden="true"></i><i class="ob-win ob-win-b" aria-hidden="true"></i>
           <div class="bwv">
             <div class="bw-world" data-bw>
               <BookProps />
@@ -77,6 +77,7 @@ const leavesHtml = leavesMarkup(leaves);
       const main = document.querySelector<HTMLElement>('main')!;
       const sec = document.querySelector<HTMLElement>('[data-book]')!;
       const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const xmas = 'xmas' in sec.dataset; let lastXo = '';
       let top = 0, raf = 0;
       const measure = () => { top = sec.getBoundingClientRect().top + scrollY; };
       measure();
@@ -96,6 +97,7 @@ const leavesHtml = leavesMarkup(leaves);
         }
         const open = cur - top > 10;
         sec.classList.toggle('is-open', open);
+        if (xmas) { const xo = Math.max(0, Math.min(1, (cur - top) / (innerHeight * 0.45))).toFixed(3); if (xo !== lastXo) { lastXo = xo; sec.style.setProperty('--xo', xo); } }
         if (open) sec.removeAttribute('data-closed'); else sec.setAttribute('data-closed', '');
         b.update();
         if (cur !== target) raf = requestAnimationFrame(update);
@@ -109,30 +111,6 @@ const leavesHtml = leavesMarkup(leaves);
       document.querySelector('[data-ob-start]')?.addEventListener('click', () => b.go(1));
       b.update();
 
-      // Temporada navideña: nieve que cae detrás de la ventana. Solo corre mientras la escena está a la vista.
-      const snow = sec.querySelector<HTMLCanvasElement>('[data-snow]')!;
-      if ('xmas' in sec.dataset && !reduced) {
-        const ctx = snow.getContext('2d')!;
-        let fl: { x: number; y: number; r: number; v: number; s: number; a: number }[] = [], w = 0, h = 0, on = false, id = 0, last = 0;
-        const size = () => {
-          const dpr = Math.min(devicePixelRatio || 1, 1.5);
-          w = snow.clientWidth; h = snow.clientHeight; snow.width = w * dpr; snow.height = h * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-          const n = Math.round(Math.min(220, w * h / 6000));
-          fl = Array.from({ length: n }, () => { const z = Math.random(); return { x: Math.random() * w, y: Math.random() * h, r: 0.5 + z * z * 2.6, v: 14 + z * 46, s: Math.random() * 6.28, a: 0.35 + z * 0.55 }; });
-        };
-        const tick = (now: number) => {
-          const dt = Math.min(0.05, (now - (last || now)) / 1000); last = now;
-          ctx.clearRect(0, 0, w, h); ctx.fillStyle = '#fff';
-          for (const f of fl) {
-            f.y += f.v * dt; f.s += dt * 0.8; f.x += Math.sin(f.s) * f.r * 6 * dt;
-            if (f.y > h + 4) { f.y = -4; f.x = Math.random() * w; }
-            ctx.globalAlpha = f.a; ctx.beginPath(); ctx.arc(f.x, f.y, f.r, 0, 6.283); ctx.fill();
-          }
-          id = on ? requestAnimationFrame(tick) : 0;
-        };
-        size(); addEventListener('resize', size);
-        new IntersectionObserver(([e]) => { on = e.isIntersecting; if (on && !id) { last = 0; id = requestAnimationFrame(tick); } }).observe(sec);
-      }
     </script>
   </body>
 </html>
