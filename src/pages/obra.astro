@@ -33,7 +33,7 @@ const leavesHtml = leavesMarkup(leaves);
     <main class="@container relative z-10 overflow-x-clip" style="--a:#977DFF;--b:#0033FF;--ink:#14173f;--hw:420;--rad:10px;--sh:100svh;--sfont:'Inter Tight Variable',system-ui,sans-serif">
       <section data-tone="dark" class="gal-book ob-book" data-book data-frame="cine" data-closed>
         <div class="bw-stick">
-          <img class="ob-photo" data-src="/obra/navidad-ny.webp" alt="" aria-hidden="true" decoding="async" />
+          <img class="ob-photo" data-src="/obra/navidad-escritorio.webp" alt="" aria-hidden="true" decoding="async" />
           <script is:inline>(()=>{const d=new Date(),m=d.getMonth(),q=new URLSearchParams(location.search).get('navidad');if(q==='1'||(q!=='0'&&((m===10&&d.getDate()>=15)||m===11||(m===0&&d.getDate()<=6)))){const s=document.currentScript,sec=s.closest('[data-book]'),im=s.previousElementSibling;sec.dataset.xmas='';im.src=im.dataset.src}})()</script>
           <div class="bwv">
             <div class="bw-world" data-bw>
@@ -78,6 +78,8 @@ const leavesHtml = leavesMarkup(leaves);
       const sec = document.querySelector<HTMLElement>('[data-book]')!;
       const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
       const xmas = 'xmas' in sec.dataset;
+      // Navidad: cerrado, el libro yace sobre la mesa con la misma inclinación que la foto; al abrirse se ve desde arriba.
+      if (xmas) { sec.dataset.rx0 = '62'; sec.dataset.dy0 = '9'; }
       let top = 0, raf = 0;
       const measure = () => { top = sec.getBoundingClientRect().top + scrollY; };
       measure();

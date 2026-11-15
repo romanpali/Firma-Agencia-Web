@@ -207,8 +207,8 @@
 .bw-leaf:hover .pg.v1 .pg-ph { transform: scale(1.045); }
 .pg.v1 .pg-ph { transform-origin: 60% 60%; }
 
-/* Temporada navideña (15 nov – 6 ene, o ?navidad=1): escritorio en Nueva York de noche (fotografía 1920×1080).
-   El libro se ve desde arriba sobre la mesa de la foto y se abre ahí; la foto no se mueve ni se desenfoca. */
+/* Temporada navideña (15 nov – 6 ene, o ?navidad=1): escritorio en Nueva York de noche (fotografía 1920×1080 con la ciudad
+   desenfocada y los objetos nítidos). El libro descansa sobre la mesa y al abrirse se ve desde arriba; la foto no se mueve. */
 .ob-photo { display: none; }
 .ob-book[data-xmas] .bw-stick { background: #07080c; }
 .ob-book[data-xmas] .ob-photo { display: block; position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; user-select: none; pointer-events: none; }
@@ -219,7 +219,8 @@
   linear-gradient(to bottom, rgba(0, 0, 0, 0.4), transparent 20%),
   radial-gradient(140% 120% at 50% 55%, transparent 60%, rgba(0, 0, 0, 0.45)); }
 @container (min-width: 701px) {
-  .ob-book[data-xmas] .bw-world { --pw: min(30cqw, calc(var(--sh, 700px) * 0.7)); top: 74%; }
+  .ob-book[data-xmas] .bw-world { --pw: min(28cqw, calc(var(--sh, 700px) * 0.64)); top: 71%; }
+  .ob-book[data-xmas] .bwv { perspective-origin: 50% 42%; }
 }
 @container (max-width: 700px) {
   .ob-book[data-xmas] .ob-photo { object-position: 64% 50%; }
