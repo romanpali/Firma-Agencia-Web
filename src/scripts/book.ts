@@ -44,9 +44,7 @@ export function leavesMarkup(leaves: { f: string; b: string; img?: string }[]) {
 }
 
 // ---------------------------------------------------------------- cliente
-type Mount = { sec: HTMLElement; scrollY: () => number; secTop: () => number; viewH: () => number; scrollTo: (y: number) => void; reduced?: boolean;
-  // Cámara externa: si devuelve true, el motor no mueve el mundo ni el libro (la página encuadra la escena por su cuenta).
-  camera?: (s: { t: number; tt: number; e: number; pan: number; wide: boolean; pw: number; ph: number }) => boolean };
+type Mount = { sec: HTMLElement; scrollY: () => number; secTop: () => number; viewH: () => number; scrollTo: (y: number) => void; reduced?: boolean };
 const cl = (x: number) => Math.max(0, Math.min(1, x));
 const sm = (x: number) => x * x * (3 - 2 * x);
 // Niveles de pixelado ya horneados (foto.webp → foto-1…4.webp): no se calcula nada en el navegador.
@@ -159,16 +157,14 @@ export function mountBook(o: Mount) {
     });
     const e = sm(cl(p / 0.28)), tt = sm(cl(t));
     const rx = 44 - 15 * e, rz = -6 * (1 - e);
+    put(world, 'transform', `rotateX(${rx.toFixed(1)}deg) rotateZ(${rz.toFixed(1)}deg) scale(${(0.9 + 0.1 * e).toFixed(3)})`);
+    for (const pr of props) put(pr, 'transform', `translateZ(-33px) rotateZ(${(-rz).toFixed(1)}deg) rotateX(${(-rx).toFixed(1)}deg)`);
     const wide = sec.clientWidth > 760;
-    // Celular: se ve una página a la vez; la cámara se desplaza a la página izquierda mientras gira la hoja y vuelve a la derecha.
-    const pan = (() => { const f = t - Math.floor(t); return t < 0.02 ? 0 : sm(cl((f - 0.5) / 0.25)) * (1 - sm(cl((f - 0.88) / 0.12))); })();
-    if (!o.camera?.({ t, tt, e, pan, wide, pw, ph })) {
-      put(world, 'transform', `rotateX(${rx.toFixed(1)}deg) rotateZ(${rz.toFixed(1)}deg) scale(${(0.9 + 0.1 * e).toFixed(3)})`);
-      for (const pr of props) put(pr, 'transform', `translateZ(-33px) rotateZ(${(-rz).toFixed(1)}deg) rotateX(${(-rx).toFixed(1)}deg)`);
-      // Escritorio: el libro se centra al abrirse.
-      const sx = wide ? (sec.dataset.frame === 'cine' ? pw * (-0.53 * (1 - tt) - 0.01 * tt) : -0.05 * pw * (1 - tt)) : pw * (-0.5 + pan);
-      put(book, 'transform', `translateX(${sx.toFixed(1)}px)`);
-    } else put(book, 'transform', 'none');
+    // Escritorio: el libro se centra al abrirse. Celular: se ve una página a la vez; la cámara se desplaza a la página izquierda mientras gira la hoja y vuelve a la derecha.
+    let sx: number;
+    if (wide) sx = sec.dataset.frame === 'cine' ? pw * (-0.53 * (1 - tt) - 0.01 * tt) : -0.05 * pw * (1 - tt);
+    else { const f = t - Math.floor(t); const pan = t < 0.02 ? 0 : sm(cl((f - 0.5) / 0.25)) * (1 - sm(cl((f - 0.88) / 0.12))); sx = pw * (-0.5 + pan); }
+    put(book, 'transform', `translateX(${sx.toFixed(1)}px)`);
     if (gutter) put(gutter, 'opacity', (tt * 0.9).toFixed(2));
     const lb = cl(t * 1.5).toFixed(2);
     if (baseL) put(baseL, 'opacity', lb);

@@ -207,21 +207,21 @@
 .bw-leaf:hover .pg.v1 .pg-ph { transform: scale(1.045); }
 .pg.v1 .pg-ph { transform-origin: 60% 60%; }
 
-/* Temporada navideña (15 nov – 6 ene, o ?navidad=1): escritorio en Nueva York de noche. El libro 3D se monta sobre el libro de la
-   fotografía con la misma cámara (ver obra.astro) y se abre ahí mismo; la imagen solo se acerca y se desplaza para encuadrarlo. */
+/* Temporada navideña (15 nov – 6 ene, o ?navidad=1): escritorio en Nueva York de noche (fotografía 1920×1080).
+   El libro se ve desde arriba sobre la mesa de la foto y se abre ahí; la foto no se mueve ni se desenfoca. */
 .ob-photo { display: none; }
 .ob-book[data-xmas] .bw-stick { background: #07080c; }
-.ob-book[data-xmas] .ob-photo { display: block; position: absolute; left: 0; top: 0; width: 2178px; max-width: none; height: 937px; transform-origin: 0 0; user-select: none; pointer-events: none; }
+.ob-book[data-xmas] .ob-photo { display: block; position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; user-select: none; pointer-events: none; }
 .ob-book[data-xmas] .bwv { animation: none; }
-.ob-book[data-xmas] .bw-world { --pw: 600px; left: 0; top: 0; transform-origin: 0 0; will-change: auto; }
-.ob-book[data-xmas] .bw-desk, .ob-book[data-xmas] .bw-lamp, .ob-book[data-xmas] .bw-flat, .ob-book[data-xmas] .bw-sh.r { display: none; }
-.ob-book[data-xmas] .bw-base { background: linear-gradient(120deg, #1e1e21, #070708); }
-.ob-book[data-xmas] .bw-cover { background: url('/obra/navidad-portada.webp') 0 0 / 100% 100%, #121214; }
-.ob-book[data-xmas] .bw-cover .bw-wm { color: #e6e7ea; text-shadow: 0 1px 0 rgba(0, 0, 0, 0.6); }
+.ob-book[data-xmas] .bw-desk, .ob-book[data-xmas] .bw-lamp, .ob-book[data-xmas] .bw-flat { display: none; }
 .ob-book[data-xmas] .bw-stick::after { background:
-  linear-gradient(90deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.16) 36%, transparent 52%),
-  linear-gradient(to bottom, rgba(0, 0, 0, 0.42), transparent 20%),
-  radial-gradient(140% 120% at 50% 55%, transparent 58%, rgba(0, 0, 0, 0.5)); }
+  linear-gradient(90deg, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.12) 36%, transparent 52%),
+  linear-gradient(to bottom, rgba(0, 0, 0, 0.4), transparent 20%),
+  radial-gradient(140% 120% at 50% 55%, transparent 60%, rgba(0, 0, 0, 0.45)); }
+@container (min-width: 701px) {
+  .ob-book[data-xmas] .bw-world { --pw: min(30cqw, calc(var(--sh, 700px) * 0.7)); top: 74%; }
+}
 @container (max-width: 700px) {
-  .ob-book[data-xmas] .ob-photo { -webkit-mask-image: linear-gradient(to bottom, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(to bottom, transparent, #000 10%, #000 90%, transparent); }
+  .ob-book[data-xmas] .ob-photo { object-position: 64% 50%; }
+  .ob-book[data-xmas] .bw-world { --pw: 84cqw; top: 70%; }
 }
