@@ -220,6 +220,11 @@ export function mountBook(o: Mount) {
       el.appendChild(r); r.addEventListener('animationend', () => r.remove(), { once: true });
     }, { passive: true });
   }
+  // Una página interactiva cambió: su versión curva (si existe) queda desactualizada y se vuelve a crear cuando haga falta.
+  book.addEventListener('bk-dirty', (ev) => {
+    const leaf = (ev.target as HTMLElement).closest('.bw-leaf'); const l = L.find((x) => x.el === leaf);
+    if (l) dropCurved(l);
+  });
   new ResizeObserver(() => { measure(); update(); }).observe(sec);
   refresh();
   return { update, refresh, go };
