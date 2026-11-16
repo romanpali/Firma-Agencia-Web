@@ -1,0 +1,86 @@
+/* Proyecto «Alba» (concepto). Páginas de 40em × 26.7em; 1em = ancho de página / 40. Minimalista, corporativo y premium. */
+.pg[data-rp] { --vi: #7a6cff; --co: #ff8f6b; --am: #ffc98a; --ink: #0c0f24; }
+.pg[data-rp='dark'] { --rc: rgba(255, 255, 255, 0.7); --rg: rgba(255, 255, 255, 0.14); }
+.pg[data-rp='light'] { --rc: rgba(20, 23, 63, 0.5); --rg: rgba(122, 108, 255, 0.2); }
+
+/* Capa de ondas al pasar el cursor: anillos finos que se expanden y se desvanecen (sin salpicaduras) */
+.rp-s { position: absolute; inset: 0; z-index: 9; overflow: hidden; }
+.rp { position: absolute; width: 34em; aspect-ratio: 1; margin: -17em 0 0 -17em; border-radius: 50%; pointer-events: none; opacity: 0.9; transform: scale(0.03);
+  border: 0.09em solid var(--rc); background: radial-gradient(closest-side, transparent 80%, var(--rg) 94%, transparent); box-shadow: 0 0 1.6em var(--rg), inset 0 0 1.8em var(--rg); animation: rpOut 1.9s cubic-bezier(0.1, 0.6, 0.2, 1) forwards; }
+.rp::before, .rp::after { content: ""; position: absolute; border-radius: 50%; border: 0.05em solid var(--rc); }
+.rp::before { inset: 11%; opacity: 0.55; } .rp::after { inset: 24%; opacity: 0.3; }
+@keyframes rpOut { 0% { opacity: 0.9; } 70% { opacity: 0.25; } 100% { transform: scale(1); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .rp { display: none; } }
+
+.al-glyph { position: relative; display: inline-block; flex: none; width: 1em; height: 1em; border-radius: 50%; border: 0.1em solid currentColor; overflow: hidden; }
+.al-glyph::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 48%; background: currentColor; }
+.al-mesh { position: absolute; inset: -12%; background:
+  radial-gradient(52% 62% at 16% 18%, rgba(122, 108, 255, 0.95), transparent 64%),
+  radial-gradient(50% 60% at 88% 28%, rgba(255, 143, 107, 0.85), transparent 62%),
+  radial-gradient(64% 56% at 58% 98%, rgba(255, 201, 138, 0.78), transparent 64%),
+  radial-gradient(46% 58% at 4% 92%, rgba(64, 44, 170, 0.95), transparent 62%), #0c0f24; }
+.al-grain { position: absolute; inset: 0; background: url('/grain.png'); opacity: 0.2; }
+
+/* 1 · Identidad: portada difuminada */
+.al-brand { background: #0c0f24; color: #fff; }
+.al-bt, .al-bb { position: absolute; left: 2.4em; right: 2.4em; display: flex; justify-content: space-between; font-size: 0.6em; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.8; }
+.al-bt { top: 3.2em; } .al-bb { bottom: 3.2em; }
+.al-wm { position: absolute; left: 0; right: 0; top: 44%; display: flex; align-items: center; justify-content: center; gap: 0.18em; font-size: 1em; transform: translateY(-50%); }
+.al-wm .al-glyph { font-size: 3.7em; margin-right: 0.12em; }
+.al-wm b { font-size: 7.6em; font-weight: 300; letter-spacing: -0.045em; line-height: 1; transform: translateY(-0.04em); }
+.al-tag { position: absolute; left: 0; right: 0; top: 62%; text-align: center; font-size: 0.78em; font-weight: 400; letter-spacing: 0.34em; text-transform: uppercase; opacity: 0.8; }
+
+/* 2 · Sitio web */
+.al-web { background: #f6f1e9; color: #14173f; }
+.aw-bar { position: absolute; left: 2.4em; right: 2.4em; top: 2em; display: flex; align-items: center; gap: 2.4em; font-size: 0.62em; }
+.aw-bar b { display: flex; align-items: center; gap: 0.5em; margin-right: auto; font-size: 1.9em; font-weight: 500; letter-spacing: -0.03em; }
+.aw-bar nav { display: flex; gap: 2.2em; opacity: 0.7; } .aw-bar i { font-style: normal; padding: 0.8em 1.7em; border-radius: 99em; background: #14173f; color: #f6f1e9; }
+.aw-orb { position: absolute; right: -4em; top: 3em; width: 28em; height: 28em; border-radius: 50%; background: radial-gradient(closest-side, rgba(255, 143, 107, 0.42), rgba(122, 108, 255, 0.22) 55%, transparent 78%); }
+.aw-hero { position: absolute; left: 2.4em; top: 6.6em; width: 21em; }
+.aw-k { font-size: 0.62em; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.6; }
+.al-web .aw-hero h4 { margin-top: 1.1em; font-family: inherit; font-style: normal; font-weight: 500; font-size: 3.2em; line-height: 1.02; letter-spacing: -0.045em; }
+.aw-s { margin-top: 1.1em; font-size: 0.8em; line-height: 1.5; opacity: 0.68; max-width: 24em; }
+.aw-cta { display: flex; align-items: center; gap: 1.4em; margin-top: 2em; font-size: 0.72em; }
+.aw-cta i { font-style: normal; padding: 1em 1.9em; border-radius: 99em; background: #14173f; color: #fff; } .aw-cta span { opacity: 0.75; }
+.aw-phone { position: absolute; right: 3em; top: 4.4em; width: 10.6em; height: 20em; padding: 0.5em; border-radius: 1.7em; background: #0c0f24; box-shadow: 0 1.8em 2.8em -1em rgba(20, 23, 63, 0.55), inset 0 0 0 0.08em rgba(255, 255, 255, 0.14); transform: rotate(3deg); }
+.aw-scr { position: relative; width: 100%; height: 100%; border-radius: 1.3em; overflow: hidden; padding: 1.6em 0.9em 0; color: #fff; }
+.aw-mesh { position: absolute; inset: 0; background: radial-gradient(70% 45% at 20% 12%, rgba(122, 108, 255, 0.95), transparent 70%), radial-gradient(70% 45% at 90% 40%, rgba(255, 143, 107, 0.7), transparent 70%), radial-gradient(80% 40% at 40% 100%, rgba(255, 201, 138, 0.6), transparent 70%), #0c0f24; }
+.aw-hi { position: relative; font-size: 1.05em; font-weight: 500; letter-spacing: -0.02em; margin-bottom: 1.1em; }
+.aw-b { position: relative; margin-top: 0.55em; padding: 0.7em 0.8em; border-radius: 0.9em; background: rgba(255, 255, 255, 0.16); box-shadow: inset 0 0 0 0.06em rgba(255, 255, 255, 0.22); }
+.aw-b small { display: block; font-size: 0.52em; letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.75; } .aw-b b { display: block; margin-top: 0.25em; font-size: 0.82em; font-weight: 500; } .aw-b span { display: block; margin-top: 0.2em; font-size: 0.55em; opacity: 0.75; line-height: 1.35; }
+.aw-ok { background: rgba(255, 255, 255, 0.9); color: #14173f; } .aw-ok small { opacity: 0.55; }
+
+/* 3 · Redes sociales */
+.al-soc { background: #0c0f24; color: #fff; }
+.as-head { position: absolute; left: 2.4em; right: 2.4em; top: 1.9em; display: flex; align-items: center; gap: 0.9em; }
+.as-av { display: grid; place-items: center; width: 2.4em; height: 2.4em; border-radius: 50%; background: linear-gradient(135deg, #7a6cff, #ff8f6b); font-style: normal; font-size: 1em; } .as-av .al-glyph { font-size: 1em; }
+.as-head > div { display: flex; flex-direction: column; } .as-head b { font-size: 0.82em; font-weight: 500; } .as-head span { font-size: 0.6em; opacity: 0.6; }
+.as-head em { margin-left: auto; font-style: normal; font-size: 0.6em; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.55; }
+.as-grid { position: absolute; left: 2.4em; right: 2.4em; top: 5.2em; bottom: 2.2em; display: grid; grid-template-columns: 1fr 7.4em 7.4em; grid-template-rows: 7.4em 1fr; gap: 0.9em; }
+.as-grid > div { position: relative; overflow: hidden; border-radius: 0.9em; }
+.as-a { grid-row: 1 / 3; color: #fff; } .as-a .as-wm { position: absolute; left: 1.6em; top: 1.5em; display: flex; align-items: center; gap: 0.35em; font-size: 0.95em; } .as-wm .al-glyph { font-size: 1.2em; } .as-wm b { font-size: 1.6em; font-weight: 400; letter-spacing: -0.04em; }
+.as-a p { position: absolute; left: 1.5em; bottom: 1.4em; font-size: 2.9em; font-weight: 300; line-height: 1; letter-spacing: -0.045em; }
+.as-b { background: #f6f1e9; color: #14173f; } .as-c { background: linear-gradient(150deg, #7a6cff, #4a3fd0); }
+.as-b p, .as-c p { position: absolute; left: 0.9em; bottom: 0.8em; right: 0.6em; font-size: 1.25em; font-weight: 500; line-height: 1.02; letter-spacing: -0.04em; }
+.as-d { grid-column: 2 / 4; background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.04)); box-shadow: inset 0 0 0 0.06em rgba(255, 255, 255, 0.14); padding: 1.3em 1.4em; }
+.as-d span { font-size: 0.55em; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.6; } .as-d b { display: block; margin-top: 0.7em; font-size: 1.45em; font-weight: 500; letter-spacing: -0.035em; line-height: 1.05; }
+.as-d p { margin-top: 0.8em; font-size: 0.66em; line-height: 1.5; opacity: 0.7; } .as-d i { position: absolute; right: -2.5em; bottom: -2.5em; width: 8em; height: 8em; border-radius: 50%; background: radial-gradient(closest-side, rgba(255, 143, 107, 0.7), transparent); }
+
+/* 4 · Dashboard con barra lateral de divisiones */
+.al-dash { background: #0e1127; color: #fff; }
+.ad-side { position: absolute; left: 0; top: 0; bottom: 0; width: 11.4em; padding: 2em 1em; background: #090b1c; box-shadow: inset -0.06em 0 0 rgba(255, 255, 255, 0.07); }
+.ad-logo { display: flex; align-items: center; gap: 0.5em; padding: 0 0.4em; font-size: 1.1em; } .ad-logo b { font-size: 1.35em; font-weight: 500; letter-spacing: -0.04em; }
+.ad-side > p { margin: 2.6em 0 0.8em 0.5em; font-size: 0.5em; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.45; }
+.ad-side ul { display: flex; flex-direction: column; gap: 0.3em; padding: 0; list-style: none; }
+.ad-side li { display: flex; align-items: center; gap: 0.7em; padding: 0.75em 0.7em; border-radius: 0.7em; font-size: 0.66em; line-height: 1.2; color: rgba(255, 255, 255, 0.62); }
+.ad-side li svg { flex: none; width: 1.55em; height: 1.55em; }
+.ad-side li.on { color: #fff; background: rgba(122, 108, 255, 0.2); box-shadow: inset 0.2em 0 0 #9b8fff; }
+.ad-main { position: absolute; left: 11.4em; right: 0; top: 0; bottom: 0; padding: 2em 2.2em 0 2em; }
+.ad-top { display: flex; align-items: center; justify-content: space-between; } .ad-top h5 { font-size: 1.25em; font-weight: 500; letter-spacing: -0.035em; }
+.ad-top em { font-style: normal; font-size: 0.55em; padding: 0.5em 1.1em; border-radius: 99em; background: rgba(255, 255, 255, 0.08); box-shadow: inset 0 0 0 0.07em rgba(255, 255, 255, 0.14); letter-spacing: 0.08em; }
+.ad-kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.7em; margin-top: 1.1em; }
+.ad-kpis > div, .ad-chart { padding: 0.9em 1em; border-radius: 0.9em; background: rgba(255, 255, 255, 0.045); box-shadow: inset 0 0 0 0.06em rgba(255, 255, 255, 0.09); }
+.ad-kpis small { display: block; font-size: 0.55em; opacity: 0.6; } .ad-kpis b { display: block; margin-top: 0.3em; font-size: 1.6em; font-weight: 500; letter-spacing: -0.04em; } .ad-kpis i { font-style: normal; font-size: 0.5em; color: #b9b0ff; }
+.ad-chart { margin-top: 0.7em; } .ad-ct { display: flex; justify-content: space-between; font-size: 0.6em; } .ad-ct small { opacity: 0.5; } .ad-chart svg { display: block; width: 100%; height: 4.4em; margin-top: 0.7em; }
+.ad-list { margin-top: 0.8em; padding: 0; list-style: none; }
+.ad-list li { display: grid; grid-template-columns: 1fr 1.4fr auto; gap: 1em; padding: 0.62em 0; font-size: 0.62em; box-shadow: 0 -0.07em 0 rgba(255, 255, 255, 0.08); } .ad-list b { font-weight: 500; } .ad-list span { opacity: 0.6; } .ad-list i { font-style: normal; opacity: 0.5; }

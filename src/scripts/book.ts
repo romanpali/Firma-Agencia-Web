@@ -2,7 +2,7 @@
 // Se usa en /obra y en la plantilla Galería del configurador. Funciona del lado del servidor (HTML) y del cliente (animación).
 
 export const SEG = 8;
-export type Proj = { n: string; cat: string; y: number; d: string; tags: string[]; hl: string; href?: string; img?: string; art: number; dark?: boolean; layout?: number };
+export type Proj = { n: string; cat: string; y: number; d: string; tags: string[]; hl: string; href?: string; img?: string; art: number; dark?: boolean; layout?: number; leaves?: { f: string; b: string }[] };
 export type PageOpts = { brand: string; mail: string; mailHref?: string; year: number; endTitle: string; contentsTitle: string };
 
 const esc = (t: string) => String(t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c] as string));
@@ -17,24 +17,30 @@ export function leafHTML(front: string, back: string, S = SEG): string {
 const pn = (n: number) => `<span class="bk-pn">${String(n).padStart(2, '0')}</span>`;
 const bar = (brand: string) => `<div class="pg-bar"><b>${esc(brand)}</b><span>Inicio</span><span>Obra</span><span>Estudio</span><i>Contacto</i></div>`;
 
-const hero = (p: Proj, i: number, brand: string) => {
+const hero = (p: Proj, i: number, brand: string, pg = 3 + i * 2) => {
   const lay = p.layout ?? i % 3;
   const ph = p.img ? `<div class="pg-ph photo"></div>` : `<div class="pg-ph pa${p.art % 8}"><i class="s1"></i><i class="s2"></i><i class="s3"></i></div>`;
-  return `<div class="pg ${p.dark ? 'dk' : 'lt'} v${lay}">${ph}${bar(p.n)}<div class="pg-txt"><p class="pg-k">${esc(p.cat)}</p><h4>${esc(p.hl)}</h4><p class="pg-s">${esc(p.d)}</p><span class="pg-btn">Ver proyecto →</span></div><span class="pg-pct"></span>${pn(3 + i * 2)}</div>`;
+  return `<div class="pg ${p.dark ? 'dk' : 'lt'} v${lay}">${ph}${bar(p.n)}<div class="pg-txt"><p class="pg-k">${esc(p.cat)}</p><h4>${esc(p.hl)}</h4><p class="pg-s">${esc(p.d)}</p><span class="pg-btn">Ver proyecto →</span></div><span class="pg-pct"></span>${pn(pg)}</div>`;
 };
 const tile = (p: Proj, k: number) => p.img
   ? `<div class="pg-tile ph" style="background-image:url(${p.img});background-position:${['18% 40%', '82% 30%', '50% 78%'][k]};background-size:${['260%', '240%', '300%'][k]}"></div>`
   : `<div class="pg-tile pa${(p.art + [1, 3, 5][k]) % 8}"><i class="s1"></i><i class="s2"></i><i class="s3"></i></div>`;
-const details = (p: Proj, i: number) =>
-  `<div class="pg ${p.dark ? 'lt' : 'dk'} pd">${bar(p.n)}<div class="pd-txt"><span class="pd-no">0${i + 1}</span><h5>${esc(p.n)}</h5><p class="pg-k">${esc(p.cat)} · ${p.y}</p><p class="pg-s">${esc(p.d)}</p><ul class="pg-tags">${p.tags.map((t) => `<li>${esc(t)}</li>`).join('')}</ul></div><div class="pd-grid">${tile(p, 0)}${tile(p, 1)}${tile(p, 2)}</div>${pn(4 + i * 2)}</div>`;
+const details = (p: Proj, i: number, pg = 4 + i * 2) =>
+  `<div class="pg ${p.dark ? 'lt' : 'dk'} pd">${bar(p.n)}<div class="pd-txt"><span class="pd-no">0${i + 1}</span><h5>${esc(p.n)}</h5><p class="pg-k">${esc(p.cat)} · ${p.y}</p><p class="pg-s">${esc(p.d)}</p><ul class="pg-tags">${p.tags.map((t) => `<li>${esc(t)}</li>`).join('')}</ul></div><div class="pd-grid">${tile(p, 0)}${tile(p, 1)}${tile(p, 2)}</div>${pn(pg)}</div>`;
 
 export function pagesFor(projs: Proj[], o: PageOpts) {
   const five = projs.slice(0, 5);
+  // hoja donde empieza cada proyecto (algunos, como Alba, ocupan varias hojas)
+  const start: number[] = []; let nl = 1;
+  five.forEach((p, i) => { start[i] = nl; nl += p.leaves?.length ?? 1; });
   const cover = `<div class="bw-cover"><b class="bw-wm">${/^human\s*corp$/i.test(o.brand) ? '<i class="wl">HUMAN</i> <i class="ws">CORP</i>' : esc(o.brand)}</b></div>`;
   const wm = /^human\s*corp$/i.test(o.brand) ? '<span class="wl">HUMAN</span> <span class="ws">CORP</span>' : esc(o.brand);
-  const contents = `<div class="pg lt pc"><div class="pc-top"><b>${wm}</b><span>Obra selecta · ${o.year}</span></div><div class="pc-l"><h4>${esc(o.contentsTitle)}</h4><p>${five.length} obras</p></div><ul class="pc-r">${five.map((p, i) => `<li><button type="button" data-bk-go="${i + 1}"><em>0${i + 1}</em><b>${esc(p.n)}</b><i></i><span>${esc(p.cat)}</span></button></li>`).join('')}</ul><p class="pc-f">Elige una obra para saltar a ella</p>${pn(2)}</div>`;
+  const contents = `<div class="pg lt pc"><div class="pc-top"><b>${wm}</b><span>Obra selecta · ${o.year}</span></div><div class="pc-l"><h4>${esc(o.contentsTitle)}</h4><p>${five.length} obras</p></div><ul class="pc-r">${five.map((p, i) => `<li><button type="button" data-bk-go="${start[i]}"><em>0${i + 1}</em><b>${esc(p.n)}</b><i></i><span>${esc(p.cat)}</span></button></li>`).join('')}</ul><p class="pc-f">Elige una obra para saltar a ella</p>${pn(2)}</div>`;
   const leaves: { f: string; b: string; img?: string }[] = [{ f: cover, b: contents }];
-  five.forEach((p, i) => leaves.push({ f: hero(p, i, o.brand), b: details(p, i), img: p.img }));
+  five.forEach((p, i) => {
+    if (p.leaves) { p.leaves.forEach((l) => leaves.push({ f: l.f, b: l.b })); return; }
+    leaves.push({ f: hero(p, i, o.brand, start[i] * 2 + 1), b: details(p, i, start[i] * 2 + 2), img: p.img });
+  });
   const end = `<div class="pg dk pe"><i class="hm">${esc(o.brand[0] || 'H')}</i><b>${esc(o.endTitle)}</b><a href="${o.mailHref || '/contacto'}">${esc(o.mail)}</a>${pn(leaves.length * 2 + 2)}</div>`;
   return { leaves, end };
 }
@@ -198,6 +204,19 @@ export function mountBook(o: Mount) {
     const k = +leaf.dataset.k!, a = L[k] ? (leaf.style.transform.match(/rotateY\((-?[\d.]+)deg\)/)?.[1] ?? '0') : '0';
     go(Math.abs(parseFloat(a)) > 90 ? k : k + 1);
   });
+  // Ondas: sobre las páginas con capa .rp-s, el cursor deja anillos finos que se expanden y se desvanecen.
+  if (!o.reduced) {
+    let lx = -99, ly = -99, lt = 0;
+    book.addEventListener('pointermove', (ev) => {
+      const el = ev.target as HTMLElement;
+      if (!el.classList?.contains('rp-s') || ev.pointerType === 'touch') return;
+      const now = performance.now(), x = ev.offsetX, y = ev.offsetY;
+      if (now - lt < 80 || (Math.hypot(x - lx, y - ly) < 22 && now - lt < 500) || el.childElementCount > 5) return;
+      lx = x; ly = y; lt = now;
+      const r = document.createElement('i'); r.className = 'rp'; r.style.left = `${x}px`; r.style.top = `${y}px`;
+      el.appendChild(r); r.addEventListener('animationend', () => r.remove(), { once: true });
+    }, { passive: true });
+  }
   new ResizeObserver(() => { measure(); update(); }).observe(sec);
   refresh();
   return { update, refresh, go };
