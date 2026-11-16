@@ -34,7 +34,7 @@ const leavesHtml = leavesMarkup(leaves);
     <main class="@container relative z-10 overflow-x-clip" style="--a:#977DFF;--b:#0033FF;--ink:#14173f;--hw:420;--rad:10px;--sh:100svh;--sfont:'Inter Tight Variable',system-ui,sans-serif">
       <section data-tone="dark" class="gal-book ob-book" data-book data-frame="cine" data-closed>
         <div class="bw-stick">
-          <script is:inline>(()=>{const d=new Date(),m=d.getMonth(),q=new URLSearchParams(location.search).get('navidad');if(q==='1'||(q!=='0'&&((m===10&&d.getDate()>=15)||m===11||(m===0&&d.getDate()<=6))))document.currentScript.closest('[data-book]').dataset.xmas=''})()</script>
+          <script is:inline>(()=>{const d=new Date(),m=d.getMonth(),q=new URLSearchParams(location.search).get('navidad');if(q==='1'||(q!=='0'&&((m===10&&d.getDate()>=15)||m===11||(m===0&&d.getDate()<=6)))){document.currentScript.closest('[data-book]').dataset.xmas='';document.documentElement.dataset.xmas=''}})()</script>
           <i class="ob-win" aria-hidden="true"></i><canvas class="ob-snow" data-snow aria-hidden="true"></canvas>
           <div class="bwv">
             <div class="bw-world" data-bw>
@@ -58,6 +58,37 @@ const leavesHtml = leavesMarkup(leaves);
           <div class="bw-intro ob-cue"><i></i><span>Desliza</span></div>
           <p class="bw-intro ob-note">Ejemplos ilustrativos, no son clientes reales.</p>
           <div class="bw-ui"><span data-bk-count>Cubierta</span><i><b data-bk-bar></b></i></div>
+        </div>
+      </section>
+
+      <!-- Celular: experiencia propia, sin libro 3D. Portada, y cinco tarjetas a pantalla casi completa que se apilan al bajar. -->
+      <section class="ob-m" data-obm data-tone="dark">
+        <header class="obm-hero">
+          <i class="obm-win" aria-hidden="true"></i>
+          <canvas class="obm-snow" data-snow aria-hidden="true"></canvas>
+          <p class="obm-eye">Obra selecta · 2026</p>
+          <h2 class="obm-title">Proyectos que <em>puedes explorar</em></h2>
+          <p class="obm-sub">Cinco ejemplos de lo que construimos en cada división de HumanCorp.</p>
+          <div class="obm-covw">
+            <img class="obm-garl" data-xm-src="/obra/xm-guirnalda.webp" alt="" aria-hidden="true" decoding="async" />
+            <div class="obm-cover" aria-hidden="true"><b><i class="l">HUMAN</i> <i class="s">CORP</i></b></div>
+          </div>
+        </header>
+        <div class="obm-stack">
+          {projs.map((p, i) => (
+            <article class="obm-card" data-obm-card id={`obra-${i + 1}`} style={`--i:${i}`}>
+              <img src={p.img} alt="" width="1200" height="800" loading={i === 0 ? 'eager' : 'lazy'} decoding="async" />
+              <i class="obm-dim" aria-hidden="true"></i>
+              <div class="obm-top"><b>{`0${i + 1}`}<small> / 0{projs.length}</small></b><em>{p.cat}</em></div>
+              <div class="obm-bot">
+                <p class="obm-name">{p.n} · {p.y}</p>
+                <h3>{p.hl}</h3>
+                <p class="obm-d">{p.d}</p>
+                <ul>{p.tags.map((t) => <li>{t}</li>)}</ul>
+                <a class="obm-cta" href="/contacto">Quiero algo así <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              </div>
+            </article>
+          ))}
         </div>
       </section>
 
@@ -88,6 +119,7 @@ const leavesHtml = leavesMarkup(leaves);
       const b = mountBook({ sec, scrollY: () => cur, secTop: () => top, viewH: () => innerHeight, scrollTo: (y) => scrollTo({ top: y, behavior: reduced ? 'auto' : 'smooth' }), reduced });
       const update = (t: number) => {
         raf = 0;
+        if (!sec.offsetHeight) return; // celular: el libro está oculto
         const dt = Math.min(64, t - lastT || 16); lastT = t;
         const target = scrollY;
         if (reduced) cur = target;
@@ -112,16 +144,17 @@ const leavesHtml = leavesMarkup(leaves);
       document.querySelector('[data-ob-start]')?.addEventListener('click', () => b.go(1));
       b.update();
 
-      // Temporada navideña: se cargan los objetos y cae nieve detrás de la ventana (solo mientras la escena está a la vista).
+      // Temporada navideña: se cargan solo las imágenes de la versión visible y cae nieve detrás de la ventana (solo mientras está a la vista).
+      const mobile = matchMedia('(max-width: 700px)').matches;
       if (xmas) {
-        sec.querySelectorAll<HTMLImageElement>('img[data-xm-src]').forEach((im) => { im.src = im.dataset.xmSrc!; });
-        const snow = sec.querySelector<HTMLCanvasElement>('[data-snow]')!, ctx = snow.getContext('2d');
-        if (ctx && !reduced) {
+        document.querySelectorAll<HTMLImageElement>('img[data-xm-src]').forEach((im) => { if (!!im.closest('.ob-m') === mobile) im.src = im.dataset.xmSrc!; });
+        document.querySelectorAll<HTMLCanvasElement>('[data-snow]').forEach((snow) => {
+          const ctx = snow.getContext('2d'); if (!ctx || reduced) return;
           let fl: { x: number; y: number; r: number; v: number; s: number; a: number }[] = [], w = 0, h = 0, on = false, id = 0, last = 0;
           const size = () => {
             const dpr = Math.min(devicePixelRatio || 1, 1.5);
             w = snow.clientWidth; h = snow.clientHeight; snow.width = w * dpr; snow.height = h * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-            fl = Array.from({ length: Math.round(Math.min(200, (w * h) / 6500)) }, () => { const z = Math.random(); return { x: Math.random() * w, y: Math.random() * h, r: 0.5 + z * z * 2.2, v: 12 + z * 40, s: Math.random() * 6.28, a: 0.25 + z * 0.5 }; });
+            fl = Array.from({ length: Math.round(Math.min(160, (w * h) / 6500)) }, () => { const z = Math.random(); return { x: Math.random() * w, y: Math.random() * h, r: 0.5 + z * z * 2.2, v: 12 + z * 40, s: Math.random() * 6.28, a: 0.25 + z * 0.5 }; });
           };
           const tick = (now: number) => {
             const dt = Math.min(0.05, (now - (last || now)) / 1000); last = now;
@@ -134,8 +167,28 @@ const leavesHtml = leavesMarkup(leaves);
             id = on ? requestAnimationFrame(tick) : 0;
           };
           size(); addEventListener('resize', size);
-          new IntersectionObserver(([e]) => { on = e.isIntersecting; if (on && !id) { last = 0; id = requestAnimationFrame(tick); } }).observe(sec);
-        }
+          new IntersectionObserver(([e]) => { on = e.isIntersecting; if (on && !id) { last = 0; id = requestAnimationFrame(tick); } }).observe(snow.parentElement!);
+        });
+      }
+
+      // Celular: las tarjetas se apilan; la anterior se hunde un poco y se oscurece cuando la siguiente la cubre.
+      const obm = document.querySelector<HTMLElement>('[data-obm]');
+      if (obm) {
+        const cards = [...obm.querySelectorAll<HTMLElement>('[data-obm-card]')];
+        const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.3 });
+        cards.forEach((c) => io.observe(c));
+        const prev: string[] = []; let tk = false;
+        const run = () => {
+          tk = false;
+          if (!obm.offsetHeight) return;
+          cards.forEach((c, i) => {
+            const nx = cards[i + 1]; if (!nx) return;
+            const h = c.offsetHeight, k = Math.max(0, Math.min(1, (h - (nx.getBoundingClientRect().top - (78 + i * 12))) / h)).toFixed(3);
+            if (prev[i] !== k) { prev[i] = k; c.style.setProperty('--c', k); }
+          });
+        };
+        const req = () => { if (!tk) { tk = true; requestAnimationFrame(run); } };
+        addEventListener('scroll', req, { passive: true }); addEventListener('resize', req); run();
       }
     </script>
   </body>

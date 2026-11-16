@@ -251,3 +251,53 @@
 }
 @media (prefers-reduced-motion: reduce) { .xm-garl i { animation: none; opacity: 0.6; } }
 .bw-lite .xm-garl i { animation: none; opacity: 0.6; }
+
+/* ===== Obra en celular: experiencia propia (sin libro 3D) =====
+   Portada con el libro cerrado y cinco tarjetas a pantalla casi completa que se apilan al bajar. Solo se muestra en pantallas angostas. */
+.ob-m { display: none; }
+@media (max-width: 700px) {
+  .ob-book { display: none; }
+  .ob-m { display: block; position: relative; background: #07080c; color: #fff; font-family: 'Inter Tight Variable', system-ui, sans-serif; }
+  .obm-hero { position: relative; display: flex; flex-direction: column; min-height: 100svh; padding: 112px 22px 40px; overflow: hidden; isolation: isolate;
+    background: radial-gradient(80% 42% at 50% 100%, rgba(255, 170, 90, 0.18), transparent 72%), linear-gradient(180deg, rgba(7, 8, 12, 0.5), #07080c 80%), url('/obra/mesa-estriada.webp') 50% 100% / cover, #07080c; }
+  .obm-hero::before { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(180deg, rgba(5, 7, 13, 0.78), rgba(5, 7, 13, 0.1) 46%, transparent); }
+  .obm-win, .obm-snow, .obm-garl { display: none; }
+  [data-xmas] .obm-win { display: block; position: absolute; inset: 0 0 auto; height: 62%; z-index: 0; background: url('/obra/xm-ventana.webp') 50% 82% / cover no-repeat; -webkit-mask-image: linear-gradient(#000 52%, transparent); mask-image: linear-gradient(#000 52%, transparent); }
+  [data-xmas] .obm-snow { display: block; position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; pointer-events: none; }
+  .obm-hero > .obm-eye, .obm-hero > .obm-title, .obm-hero > .obm-sub, .obm-hero > .obm-covw { position: relative; z-index: 2; }
+  .obm-eye { font-size: 12.5px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255, 255, 255, 0.6); }
+  .obm-title { margin-top: 16px; font-size: clamp(2.7rem, 13.4vw, 3.7rem); line-height: 0.98; font-weight: 500; letter-spacing: -0.045em; }
+  .obm-title em { display: block; font-style: normal; }
+  .obm-sub { margin-top: 18px; max-width: 24rem; font-size: 15.5px; line-height: 1.5; color: rgba(255, 255, 255, 0.66); }
+  .obm-covw { position: relative; display: grid; place-items: center; margin-top: auto; padding-top: 48px; }
+  [data-xmas] .obm-garl { display: block; position: absolute; left: -14%; bottom: -6%; width: 128%; max-width: none; transform: rotate(-7deg); pointer-events: none; z-index: 0; }
+  .obm-cover { position: relative; z-index: 1; width: min(76vw, 330px); aspect-ratio: 3 / 2; display: grid; place-items: center; transform: rotate(-5deg); border-radius: 3px 8px 8px 3px;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.6), transparent 4%, rgba(255, 255, 255, 0.08) 5.4%, transparent 8%), linear-gradient(135deg, rgba(255, 255, 255, 0.06), transparent 45%), url('/configurador/cuero-fino.webp') 0 0 / 200px 200px, #121214;
+    box-shadow: 0 34px 50px -14px rgba(0, 0, 0, 0.95), 0 0 0 1px rgba(255, 255, 255, 0.07); }
+  .obm-cover::after { content: ""; position: absolute; left: 2%; right: -1.4%; bottom: -8px; height: 8px; z-index: -1; border-radius: 0 0 4px 4px; background: repeating-linear-gradient(180deg, #ebe8e1 0 1px, #b9b5aa 1px 2px); }
+  .obm-cover b { font-size: 21px; letter-spacing: 0.03em; color: #e8e9ec; white-space: nowrap; }
+  .obm-cover i { font-style: normal; } .obm-cover .l { font-weight: 300; } .obm-cover .s { font-weight: 600; }
+
+  .obm-stack { position: relative; padding: 4px 12px 28px; background: #07080c; }
+  .obm-card { position: sticky; top: calc(78px + var(--i) * 12px); height: min(76svh, 660px); margin-bottom: 14px; border-radius: 26px; overflow: hidden; isolation: isolate; background: #101115;
+    transform-origin: 50% 0; transform: scale(calc(1 - var(--c, 0) * 0.055)); will-change: transform; box-shadow: 0 -16px 40px -16px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.06); }
+  .obm-card > img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; }
+  .obm-card::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(0, 0, 0, 0.5), transparent 26%, transparent 34%, rgba(0, 0, 0, 0.9) 100%); }
+  .obm-dim { position: absolute; inset: 0; z-index: 3; background: #07080c; opacity: calc(var(--c, 0) * 0.6); pointer-events: none; }
+  .obm-top { position: absolute; left: 20px; right: 20px; top: 18px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .obm-top b { font-size: 14px; font-weight: 500; letter-spacing: 0.06em; } .obm-top small { color: rgba(255, 255, 255, 0.55); font-size: 14px; }
+  .obm-top em { font-style: normal; font-size: 12px; padding: 6px 12px; border-radius: 99px; background: rgba(0, 0, 0, 0.42); border: 1px solid rgba(255, 255, 255, 0.2); white-space: nowrap; }
+  .obm-bot { position: absolute; left: 22px; right: 22px; bottom: 22px; }
+  .obm-name { font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255, 255, 255, 0.72); }
+  .obm-bot h3 { margin-top: 10px; font-family: 'Fraunces Variable', Georgia, serif; font-style: italic; font-weight: 400; font-size: clamp(2.15rem, 10vw, 2.9rem); line-height: 1; letter-spacing: -0.02em; text-wrap: balance; }
+  .obm-d { margin-top: 12px; font-size: 14.5px; line-height: 1.45; color: rgba(255, 255, 255, 0.8); }
+  .obm-bot ul { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; padding: 0; list-style: none; }
+  .obm-bot li { padding: 6px 11px; border-radius: 99px; font-size: 11.5px; border: 1px solid rgba(255, 255, 255, 0.3); background: rgba(0, 0, 0, 0.25); }
+  .obm-cta { display: inline-flex; align-items: center; gap: 8px; height: 46px; margin-top: 18px; padding: 0 22px; border-radius: 99px; background: #d4f83c; color: #0b0c0f; font-size: 14.5px; font-weight: 600; }
+  /* aparecen en su lugar (solo opacidad), una a una */
+  .js .obm-top, .js .obm-bot > * { opacity: 0; transition: opacity 0.9s ease; }
+  .js .obm-card.in .obm-top, .js .obm-card.in .obm-bot > * { opacity: 1; }
+  .js .obm-card.in .obm-bot > :nth-child(2) { transition-delay: 0.1s; } .js .obm-card.in .obm-bot > :nth-child(3) { transition-delay: 0.2s; }
+  .js .obm-card.in .obm-bot > :nth-child(4) { transition-delay: 0.3s; } .js .obm-card.in .obm-bot > :nth-child(5) { transition-delay: 0.4s; }
+  @media (prefers-reduced-motion: reduce) { .obm-card { transform: none; } .js .obm-top, .js .obm-bot > * { transition: none; } }
+}
