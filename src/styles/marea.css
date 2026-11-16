@@ -92,7 +92,7 @@
 [data-int] { cursor: pointer; }
 .md-main { position: relative; flex: 1; min-width: 0; }
 .mv { position: absolute; left: 1.2em; right: 1.2em; top: 1.5em; bottom: 1em; display: none; }
-.mr-dash[data-view='inicio'] .mv-inicio, .mr-dash[data-view='ventas'] .mv-ventas, .mr-dash[data-view='finanzas'] .mv-finanzas, .mr-dash[data-view='operaciones'] .mv-operaciones, .mr-dash[data-view='datos'] .mv-datos, .mr-dash[data-view='automatizacion'] .mv-automatizacion { display: block; }
+.mr-dash[data-view='inicio'] .mv-inicio, .mr-dash[data-view='ventas'] .mv-ventas, .mr-dash[data-view='finanzas'] .mv-finanzas, .mr-dash[data-view='calendario'] .mv-calendario, .mr-dash[data-view='datos'] .mv-datos, .mr-dash[data-view='automatizacion'] .mv-automatizacion { display: block; }
 .mv-anim .mv { animation: mvFade 0.45s ease both; } @keyframes mvFade { from { opacity: 0; } }
 
 /* Inicio: bienvenida → conversación */
@@ -137,7 +137,7 @@
 .md-tgl { position: absolute; right: 1em; top: 1em; z-index: 2; display: none; place-items: center; width: 2.2em; height: 2.2em; border-radius: 50%; background: #fff; box-shadow: inset 0 0 0 0.07em rgba(20, 24, 43, 0.14); } .md-tgl svg { width: 1.2em; height: 1.2em; }
 .mr-dash[data-nohist][data-view='inicio'] .md-tgl { display: grid; }
 
-/* Áreas: Ventas, Finanzas, Operaciones, Datos y Automatización */
+/* Áreas: Automatización, Ventas, Finanzas, Calendario y Datos */
 .mv-h { display: flex; align-items: center; justify-content: space-between; } .mv-h h5 { font-size: 1.3em; font-weight: 600; letter-spacing: -0.04em; }
 .mv-h em { font-style: normal; font-size: 0.52em; padding: 0.5em 1.1em; border-radius: 99em; background: rgba(20, 24, 43, 0.06); letter-spacing: 0.06em; }
 .mv-k { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6em; margin-top: 1.1em; }
@@ -156,9 +156,19 @@
 .e1 { background: #e4defa; } .e2 { background: #d8eefb; } .e3 { background: #fde6c9; } .e4 { background: #d6f3e2; } .e5 { background: #fcd7d3; }
 .md-srv { margin-top: 0.9em; padding: 0; list-style: none; border-radius: 0.9em; background: #fff; box-shadow: inset 0 0 0 0.06em rgba(20, 24, 43, 0.06); } .md-srv li { display: grid; grid-template-columns: auto 1.4fr 1.4fr auto; gap: 0.9em; align-items: center; padding: 0.95em 1em; font-size: 0.6em; box-shadow: 0 -0.07em 0 rgba(20, 24, 43, 0.07); } .md-srv li:first-child { box-shadow: none; }
 .md-srv i { width: 0.8em; height: 0.8em; border-radius: 50%; background: #3fb581; box-shadow: 0 0 0 0.35em rgba(63, 181, 129, 0.18); } .md-srv i.w { background: #e8a23a; box-shadow: 0 0 0 0.35em rgba(232, 162, 58, 0.2); } .md-srv b { font-weight: 600; } .md-srv span { opacity: 0.6; } .md-srv em { font-style: normal; font-weight: 600; }
-.ma { margin-top: 0.9em; padding: 0; list-style: none; } .ma li { display: grid; grid-template-columns: 1fr auto auto; gap: 1.2em; align-items: center; margin-top: 0.5em; padding: 0.8em 1em; border-radius: 0.9em; background: #fff; box-shadow: 0 0.15em 0.7em -0.45em rgba(20, 24, 43, 0.3), inset 0 0 0 0.06em rgba(20, 24, 43, 0.05); }
-.ma b { display: block; font-size: 0.62em; font-weight: 600; } .ma span { display: block; margin-top: 0.25em; font-size: 0.5em; color: rgba(20, 24, 43, 0.55); } .ma em { font-style: normal; font-size: 0.5em; opacity: 0.6; }
-.ma i { position: relative; width: 2.2em; height: 1.3em; border-radius: 99em; background: rgba(20, 24, 43, 0.18); } .ma i::after { content: ""; position: absolute; left: 0.15em; top: 0.15em; width: 1em; height: 1em; border-radius: 50%; background: #fff; box-shadow: 0 0.1em 0.3em rgba(0, 0, 0, 0.25); } .ma i.on { background: #3fb581; } .ma i.on::after { left: 1em; }
+
+/* Automatización: todo lo que el negocio envía solo, por canal */
+.mv-k4 { grid-template-columns: repeat(4, 1fr); gap: 0.5em; margin-top: 0.8em; } .mv-k4 > div { padding: 0.55em 0.7em; } .mv-k4 b { margin-top: 0.1em; font-size: 1.2em; } .mv-k4 i { white-space: nowrap; } .mv-k4 i { color: rgba(20, 24, 43, 0.5); }
+.mf { margin-top: 0.6em; padding: 0.55em 0.9em; border-radius: 0.9em; background: #fff; box-shadow: 0 0.2em 0.9em -0.5em rgba(20, 24, 43, 0.3), inset 0 0 0 0.06em rgba(20, 24, 43, 0.05); }
+.mf-t { display: flex; align-items: center; gap: 0.6em; font-size: 0.58em; font-weight: 600; } .mf-t em { margin-left: auto; font-style: normal; font-weight: 400; opacity: 0.5; }
+.mf-live { width: 0.8em; height: 0.8em; border-radius: 50%; background: #3fb581; box-shadow: 0 0 0 0.3em rgba(63, 181, 129, 0.2); animation: mfPulse 1.8s ease-in-out infinite; } @keyframes mfPulse { 50% { opacity: 0.35; } }
+.mf ul { margin: 0.4em 0 0; padding: 0; list-style: none; } .mf li { display: grid; grid-template-columns: auto 1fr auto; gap: 0.8em; align-items: center; padding: 0.4em 0; box-shadow: 0 -0.07em 0 rgba(20, 24, 43, 0.07); } .mf li:first-child { box-shadow: none; }
+.mf-i { display: grid; place-items: center; width: 1.8em; height: 1.8em; border-radius: 0.6em; } .mf-i svg { width: 1.05em; height: 1.05em; }
+.mf-i.wa { background: #d6f3e2; color: #2b8a5d; } .mf-i.call { background: #e4defa; color: #6a54b8; } .mf-i.ig { background: #fde1ea; color: #c2456f; } .mf-i.ag { background: #d8eefb; color: #2f7db0; }
+.mf li b { display: flex; align-items: baseline; gap: 0.6em; font-size: 0.6em; font-weight: 600; } .mf li small { font-size: 0.82em; font-weight: 500; opacity: 0.5; }
+.mf li span { display: block; margin-top: 0.15em; font-size: 0.5em; line-height: 1.35; color: rgba(20, 24, 43, 0.62); } .mf li em { font-style: normal; font-size: 0.5em; opacity: 0.5; }
+.mf-flows { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4em; margin-top: 0.55em; font-size: 0.52em; } .mf-flows small { margin-right: 0.4em; font-size: 1em; opacity: 0.55; }
+.mf-flows span { display: flex; align-items: center; gap: 0.6em; padding: 0.45em 0.9em; border-radius: 99em; background: #fff; box-shadow: inset 0 0 0 0.07em rgba(20, 24, 43, 0.12); } .mf-flows i { width: 0.8em; height: 0.8em; border-radius: 50%; background: #3fb581; } .mf-flows span.off { opacity: 0.55; } .mf-flows span.off i { background: rgba(20, 24, 43, 0.3); }
 
 /* Celular: las piezas viven en un carrusel */
 .obm-pg .mw-photo { transform: none; }

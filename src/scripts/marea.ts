@@ -14,6 +14,8 @@ const ico: Record<string, string> = {
   clip: '<path d="M20 11.5l-7.7 7.7a4.6 4.6 0 0 1-6.5-6.5l8-8a3 3 0 0 1 4.3 4.3l-8 8a1.5 1.5 0 0 1-2.2-2.2l7.2-7.2"/>',
   find: '<circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/>',
   up: '<path d="M12 19V5M6 11l6-6 6 6"/>',
+  phone: '<path d="M5.5 4h3.2l1.6 4-2 1.3a10 10 0 0 0 5.4 5.4l1.3-2 4 1.6v3.2A1.8 1.8 0 0 1 17.2 19 12.7 12.7 0 0 1 5 6.8 1.8 1.8 0 0 1 5.5 4z"/>',
+  share: '<rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="3.8"/><circle cx="17" cy="7" r=".6"/>',
   bolt: '<path d="M13 3L5 13.5h6L10 21l8-10.5h-6z"/>',
   x: '<path d="M6 6l12 12M18 6L6 18"/>',
   panel: '<rect x="3.5" y="4.5" width="17" height="15" rx="3"/><path d="M14.5 4.5v15"/>',
@@ -53,7 +55,7 @@ const soc = `<div class="pg mr-soc" data-rp="dark">
 </div>${rp}</div>`;
 
 // 4 · Panel con asistente de IA: menú lateral por áreas (cada una se abre), chat al centro con una conversación animada e historial a la derecha (se puede ocultar)
-const nav: [string, string, string][] = [['crm', 'Ventas y CRM', 'ventas'], ['fin', 'Finanzas', 'finanzas'], ['ops', 'Operaciones', 'operaciones'], ['dat', 'Datos e Infraestructura', 'datos'], ['bolt', 'Automatización', 'automatizacion']];
+const nav: [string, string, string][] = [['bolt', 'Automatización', 'automatizacion'], ['crm', 'Ventas y CRM', 'ventas'], ['fin', 'Finanzas', 'finanzas'], ['cal', 'Calendario', 'calendario'], ['dat', 'Datos e Infraestructura', 'datos']];
 const hist: [string, string, string, string][] = [['Cobranza de la semana', 'Resumen de pagos pendientes y recordatorios…', 'Hace 2 h', 'c1'], ['Cotización para hotel', 'Paquete de clases para 12 huéspedes…', 'Hace 3 h', 'c2'], ['Facturas por emitir', 'Tres clientes esperan su CFDI de…', 'Ayer', 'c3']];
 const head = (t: string) => `<div class="mv-h"><h5>${t}</h5><em>Datos de ejemplo</em></div>`;
 const kpi = (l: string, v: string, n: string) => `<div><small>${l}</small><b>${v}</b><i>${n}</i></div>`;
@@ -70,14 +72,16 @@ const views = `
 <div class="mv-k">${kpi('Ingresos del mes', '$186,400', '+9 % vs. mes anterior')}${kpi('Gastos del mes', '$94,300', 'Equipo y personal')}${kpi('Por cobrar', '$31,200', '5 facturas abiertas')}</div>
 <div class="mv-box"><div class="mv-bt"><span>Ingresos y gastos</span><small><i class="l1"></i>Ingresos <i class="l2"></i>Gastos</small></div>${chart}</div>
 <ul class="mv-list"><li><b>Hotel Costa Brava</b><span>Factura 0142</span><em>$12,400</em><i>Vence en 3 días</i></li><li><b>Club Náutico Sur</b><span>Factura 0139</span><em>$9,800</em><i>Vence hoy</i></li><li><b>Posada Las Gaviotas</b><span>Factura 0137</span><em>$6,300</em><i>Vencida 4 días</i></li></ul></section>
-<section class="mv mv-operaciones">${head('Operaciones · Semana')}
+<section class="mv mv-calendario">${head('Calendario · Semana')}
 <div class="mo"><div class="mo-d"><span></span><b>Lun</b><b>Mar</b><b>Mié</b><b>Jue</b><b>Vie</b><b>Sáb</b></div><div class="mo-g"><i class="mo-t" style="grid-row:1">07:00</i><i class="mo-t" style="grid-row:2">09:00</i><i class="mo-t" style="grid-row:3">11:00</i><i class="mo-t" style="grid-row:4">17:00</i>
 ${ev(2, 1, 'Principiantes', '6 / 6 lugares', 'e1')}${ev(3, 1, 'Intermedio', '4 / 6 lugares', 'e2')}${ev(5, 1, 'Principiantes', '5 / 6 lugares', 'e1')}${ev(7, 1, 'Principiantes', '6 / 6 lugares', 'e1')}${ev(2, 2, 'Clase privada', '1 / 1', 'e3')}${ev(4, 2, 'Niños', '3 / 6 lugares', 'e4')}${ev(6, 2, 'Intermedio', '2 / 6 lugares', 'e2')}${ev(3, 3, 'Clase privada', '1 / 1', 'e3')}${ev(7, 3, 'Niños', '5 / 6 lugares', 'e4')}${ev(2, 4, 'Atardecer', '5 / 6 lugares', 'e5')}${ev(5, 4, 'Atardecer', '4 / 6 lugares', 'e5')}${ev(6, 4, 'Atardecer', '6 / 6 lugares', 'e5')}</div></div></section>
 <section class="mv mv-datos">${head('Datos e Infraestructura')}
 <div class="mv-k">${kpi('Visitas al sitio', '4,820', 'Últimos 7 días')}${kpi('Reservas en línea', '212', 'Este mes')}${kpi('Último respaldo', '03:00', 'Hoy · respaldo diario')}</div>
 <ul class="md-srv"><li><i></i><b>Sitio web</b><span>Operando</span><em>99.9 %</em></li><li><i></i><b>Reservas en línea</b><span>Operando</span><em>99.8 %</em></li><li><i></i><b>Pagos</b><span>Operando</span><em>100 %</em></li><li><i class="w"></i><b>Correo y avisos</b><span>Revisión programada</span><em>98.6 %</em></li></ul></section>
 <section class="mv mv-automatizacion">${head('Automatización')}
-<ul class="ma"><li><div><b>Recordatorio de clase</b><span>WhatsApp, 24 horas antes de cada clase</span></div><em>Hoy · 18 envíos</em><i class="on"></i></li><li><div><b>Factura al cobrar</b><span>Se prepara el CFDI cuando entra un pago</span></div><em>Ayer · 6 facturas</em><i class="on"></i></li><li><div><b>Reseña después de la clase</b><span>Mensaje con enlace a las 3 horas</span></div><em>Hoy · 11 envíos</em><i class="on"></i></li><li><div><b>Aviso de mal clima</b><span>Reprograma con el grupo cuando el mar no es seguro</span></div><em>Pausado</em><i></i></li></ul></section>`;
+<div class="mv-k mv-k4"><div><small>WhatsApp</small><b>48</b><i>mensajes hoy</i></div><div><small>Redes sociales</small><b>6</b><i>publicaciones</i></div><div><small>Llamadas</small><b>12</b><i>seguimientos</i></div><div><small>Agenda</small><b>9</b><i>citas nuevas</i></div></div>
+<div class="mf"><p class="mf-t"><span class="mf-live"></span>Lo que tu negocio envía solo<em>Hoy</em></p><ul><li><i class="mf-i wa">${svg('chat')}</i><div><b>Recordatorio de clase<small>WhatsApp</small></b><span>Hola Mariana, te esperamos mañana a las 07:00 en la playa. Lleva bloqueador y toalla.</span></div><em>10:42</em></li><li><i class="mf-i call">${svg('phone')}</i><div><b>Seguimiento de cotización<small>Llamada</small></b><span>Llamada a Club Náutico Sur de 2 min 14 s. Pidieron la propuesta por correo.</span></div><em>10:15</em></li><li><i class="mf-i ig">${svg('share')}</i><div><b>Publicación programada<small>Redes sociales</small></b><span>«Hoy rompe a la derecha» se publicó en Instagram y Facebook.</span></div><em>08:00</em></li><li><i class="mf-i ag">${svg('cal')}</i><div><b>Nueva reserva<small>Agenda</small></b><span>Familia Ortega reservó 8 clases privadas. Quedaron en el calendario del sábado.</span></div><em>07:31</em></li></ul></div>
+<div class="mf-flows"><small>Flujos activos</small><span data-int="tog"><i></i>Recordatorio</span><span data-int="tog"><i></i>Factura al cobrar</span><span data-int="tog"><i></i>Reseña</span><span data-int="tog" class="off"><i></i>Aviso de clima</span></div></section>`;
 const answer = `<div class="mc-ans"><p class="mc-b mc-lead">Vas <b>12 % arriba</b> frente a la semana pasada.</p>
 <strong class="mc-b mc-hh">Resumen de la semana</strong>
 <div class="mc-rows"><div class="mc-b"><span>Ingresos</span><b>$48,200</b><em>+12 %</em></div><div class="mc-b"><span>Clases vendidas</span><b>64</b><em>78 % de ocupación</em></div><div class="mc-b"><span>Cotizaciones abiertas</span><b>6</b><em>2 vencen mañana</em></div></div>

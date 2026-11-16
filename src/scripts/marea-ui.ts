@@ -57,7 +57,8 @@ function act(t: HTMLElement, root: HTMLElement) {
     root.querySelectorAll('.md-side li').forEach((li) => li.classList.toggle('on', (li as HTMLElement).dataset.v === v));
     if (!reduced) { root.classList.add('mv-anim'); setTimeout(() => root.classList.remove('mv-anim'), 500); }
     if (v === 'inicio') c?.play(); else c?.stop();
-  } else if (kind === 'hist') root.toggleAttribute('data-nohist');
+  } else if (kind === 'tog') t.classList.toggle('off');
+  else if (kind === 'hist') root.toggleAttribute('data-nohist');
   else if (kind === 'new') { root.dataset.view = 'inicio'; root.querySelectorAll('.md-side li').forEach((li) => li.classList.toggle('on', (li as HTMLElement).dataset.v === 'inicio')); c?.play(); }
   dirty(root);
 }
