@@ -5,13 +5,13 @@ import Contact from '../components/Contact.astro';
 import ScrollFx from '../components/ScrollFx.astro';
 import BookProps from '../components/BookProps.astro';
 import XmasProps from '../components/XmasProps.astro';
-import '../styles/alba.css';
+import '../styles/marea.css';
 import { pagesFor, leavesMarkup, type Proj } from '../scripts/book';
-import { albaLeaves, albaPieces } from '../scripts/alba';
+import { mareaLeaves, mareaPieces } from '../scripts/marea';
 
 // Proyectos ilustrativos (nombres ficticios): ejemplos de lo que HumanCorp construye en cada división.
 const projs: Proj[] = [
-  { n: 'Alba', leaves: albaLeaves(), cat: 'Branding e identidad', y: 2026, hl: 'Una marca con voz propia', d: 'Identidad, sistema visual y manual de marca para una app de inteligencia artificial.', tags: ['Branding', 'Dirección de arte', 'Manual de marca'], art: 0, dark: true, layout: 1, img: '/obra/p1.webp' },
+  { n: 'Marea', leaves: mareaLeaves(), cat: 'Identidad, web y panel con IA', y: 2026, hl: 'Aprende a leer el mar', d: 'Identidad, sitio web, redes sociales y un panel con asistente de IA para una escuela de surf.', tags: ['Identidad', 'Sitio web', 'Redes sociales', 'Panel con IA'], art: 0, dark: true, layout: 1, img: '/obra/p1.webp' },
   { n: 'Casa Lumbre', cat: 'Sitio web y SEO', y: 2026, hl: 'Presencia que se encuentra', d: 'Un sitio rápido y claro, pensado para aparecer en su ciudad y recibir contactos.', tags: ['Diseño web', 'SEO local', 'Formularios'], art: 2, dark: false, layout: 1, img: '/obra/p2.webp' },
   { n: 'Grupo Ceiba', cat: 'Ventas y CRM', y: 2025, hl: 'Todo el seguimiento, en un solo lugar', d: 'Prospectos, cotizaciones y reportes conectados en un mismo tablero.', tags: ['CRM', 'Automatización', 'Reportes'], art: 4, dark: true, layout: 1, img: '/obra/p3.webp' },
   { n: 'Estudio Aurora', cat: 'Asistentes y automatización', y: 2025, hl: 'Un asistente que sí ayuda', d: 'Responde, da seguimiento y avisa al equipo, con supervisión humana.', tags: ['Agentes de IA', 'Flujos', 'Integraciones'], art: 7, dark: false, layout: 1, img: '/obra/p4.webp' },
@@ -83,8 +83,8 @@ const leavesHtml = leavesMarkup(leaves);
               <i class="obm-dim" aria-hidden="true"></i>
               <div class="obm-top"><b>{`0${i + 1}`}<small> / 0{projs.length}</small></b><em>{p.cat}</em></div>
               {p.leaves && (
-                <div class="obm-pieces" aria-label="Identidad, sitio web, redes sociales y dashboard de Alba">
-                  {albaPieces.map((pc) => (
+                <div class="obm-pieces" aria-label="Identidad, sitio web, redes sociales y panel con IA de Marea">
+                  {mareaPieces.map((pc) => (
                     <figure class="obm-pc"><div class="obm-pg" set:html={pc.h}></div><figcaption>{pc.t}</figcaption></figure>
                   ))}
                 </div>
@@ -180,7 +180,7 @@ const leavesHtml = leavesMarkup(leaves);
         });
       }
 
-      // Celular: al tocar una pieza de Alba se dibujan las mismas ondas finas.
+      // Celular: al tocar una pieza de Marea se dibujan las mismas ondas finas.
       document.querySelectorAll<HTMLElement>('.obm-pg .rp-s').forEach((el) => el.addEventListener('pointerdown', (ev) => {
         if (reduced || el.childElementCount > 4) return;
         const r = document.createElement('i'); r.className = 'rp'; r.style.left = `${ev.offsetX}px`; r.style.top = `${ev.offsetY}px`;

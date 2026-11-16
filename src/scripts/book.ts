@@ -30,7 +30,7 @@ const details = (p: Proj, i: number, pg = 4 + i * 2) =>
 
 export function pagesFor(projs: Proj[], o: PageOpts) {
   const five = projs.slice(0, 5);
-  // hoja donde empieza cada proyecto (algunos, como Alba, ocupan varias hojas)
+  // hoja donde empieza cada proyecto (algunos, como Marea, ocupan varias hojas)
   const start: number[] = []; let nl = 1;
   five.forEach((p, i) => { start[i] = nl; nl += p.leaves?.length ?? 1; });
   const cover = `<div class="bw-cover"><b class="bw-wm">${/^human\s*corp$/i.test(o.brand) ? '<i class="wl">HUMAN</i> <i class="ws">CORP</i>' : esc(o.brand)}</b></div>`;
@@ -76,7 +76,7 @@ export function mountBook(o: Mount) {
   let gutter: HTMLElement | null = null;
   const count = sec.querySelector<HTMLElement>('[data-bk-count]');
   const barEl = sec.querySelector<HTMLElement>('[data-bk-bar]');
-  type L = { el: HTMLElement; flat: HTMLElement; curved: HTMLElement | null; segs: HTMLElement[]; shds: HTMLElement[]; flatShds: HTMLElement[]; vis: boolean; mode: 'flat' | 'curved' };
+  type L = { el: HTMLElement; flat: HTMLElement; curved: HTMLElement | null; segs: HTMLElement[]; shds: HTMLElement[]; flatShds: HTMLElement[]; vis: boolean; live: boolean; mode: 'flat' | 'curved' };
   let L: L[] = [];
   let N = 0, active = -1, pw = 1, ph = 1, lastKey = '', props: HTMLElement[] = [], curNear = -2, lite = false, lastT = 0; const dts: number[] = [];
   const timers = new Map<HTMLElement, number>();
@@ -116,7 +116,7 @@ export function mountBook(o: Mount) {
   };
   const idle = (f: () => void) => (window.requestIdleCallback ? window.requestIdleCallback(f, { timeout: 300 }) : setTimeout(f, 80));
   const refresh = () => {
-    L = [...sec.querySelectorAll<HTMLElement>('.bw-leaf')].map((el) => ({ el, flat: el.querySelector<HTMLElement>('.lf')!, curved: null, segs: [], shds: [], flatShds: [...el.querySelectorAll<HTMLElement>('.lf .shd')], vis: true, mode: 'flat' as const }));
+    L = [...sec.querySelectorAll<HTMLElement>('.bw-leaf')].map((el) => ({ el, flat: el.querySelector<HTMLElement>('.lf')!, curved: null, segs: [], shds: [], flatShds: [...el.querySelectorAll<HTMLElement>('.lf .shd')], vis: true, live: false, mode: 'flat' as const }));
     N = L.length; active = -1; lastKey = '';
     L.forEach(({ el }) => { if (el.dataset.img) el.style.setProperty('--pix', `url("${levelsOf(el.dataset.img)[2]}")`); });
     if (!book.querySelector('.bw-ribbon')) book.insertAdjacentHTML('beforeend', '<i class="bw-ribbon"></i><i class="bw-gutter"></i>');
@@ -146,6 +146,9 @@ export function mountBook(o: Mount) {
     L.forEach((l, k) => {
       const show = t < 0.004 ? k === 0 : k >= cur - 1 && k <= cur + 1; // con el libro cerrado solo se ve la portada
       if (show !== l.vis) { l.vis = show; put(l.el, 'display', show ? '' : 'none'); }
+      // .live: la hoja está en el spread visible o junto a él; las piezas con entradas (fundidos y barridos) se animan al recibirla.
+      const live = show && k >= cur - 1 && k <= cur + 1;
+      if (live !== l.live) { l.live = live; if (live) requestAnimationFrame(() => requestAnimationFrame(() => l.live && l.el.classList.add('live'))); else l.el.classList.remove('live'); }
       if (!show) return;
       const f = cl(t - k), a = sm(f) * 180;
       const turning = f > 0.002 && f < 0.998;

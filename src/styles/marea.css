@@ -1,0 +1,112 @@
+/* Proyecto «Marea» (concepto). Páginas de 40em × 26.7em; 1em = ancho de página / 40. Paleta tomada de la fotografía: azul noche, violeta y naranja atardecer. */
+.pg[data-rp] { --nv: #0a1f36; --vi: #8b78b8; --na: #ff9a62; --cr: #f6efe6; }
+.pg[data-rp='dark'] { --rc: rgba(255, 255, 255, 0.7); --rg: rgba(255, 255, 255, 0.14); }
+.pg[data-rp='light'] { --rc: rgba(10, 31, 54, 0.45); --rg: rgba(139, 120, 184, 0.22); }
+
+/* Ondas al pasar el cursor: anillos finos que se expanden y se desvanecen (sin salpicaduras) */
+.rp-s { position: absolute; inset: 0; z-index: 9; overflow: hidden; }
+.rp { position: absolute; width: 34em; aspect-ratio: 1; margin: -17em 0 0 -17em; border-radius: 50%; pointer-events: none; opacity: 0.9; transform: scale(0.03);
+  border: 0.09em solid var(--rc); background: radial-gradient(closest-side, transparent 80%, var(--rg) 94%, transparent); box-shadow: 0 0 1.6em var(--rg), inset 0 0 1.8em var(--rg); animation: rpOut 1.9s cubic-bezier(0.1, 0.6, 0.2, 1) forwards; }
+.rp::before, .rp::after { content: ""; position: absolute; border-radius: 50%; border: 0.05em solid var(--rc); }
+.rp::before { inset: 11%; opacity: 0.55; } .rp::after { inset: 24%; opacity: 0.3; }
+@keyframes rpOut { 0% { opacity: 0.9; } 70% { opacity: 0.25; } 100% { transform: scale(1); opacity: 0; } }
+
+/* Entradas: se muestran en su lugar cuando la hoja está a la vista (.live). Sin transformaciones de subida. */
+.js .mw-f { opacity: 0; }
+.js .live .mw-f, .js .obm-card.in .mw-f { opacity: 1; transition: opacity 1s ease var(--d, 0s); }
+.js .mw-w { display: block; clip-path: inset(-0.15em 100% -0.15em 0); }
+.js .live .mw-w, .js .obm-card.in .mw-w { clip-path: inset(-0.15em -0.15em -0.15em 0); transition: clip-path 1.2s cubic-bezier(0.6, 0, 0.2, 1) var(--d, 0s); }
+@media (prefers-reduced-motion: reduce) { .rp { display: none; } .js .mw-f { opacity: 1 !important; transition: none !important; } .js .mw-w { clip-path: none !important; transition: none !important; } .mw-photo { transform: none !important; transition: none !important; } }
+
+/* Logotipo: círculo con ola */
+.mr-glyph { display: inline-block; flex: none; width: 1em; height: 1em; background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.9' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M5.2 13.4c2.1-2.6 3.8-2.6 5.7 0s3.6 2.6 5.7 0c.9-1.1 1.6-1.6 2.4-1.7'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.9' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M5.2 13.4c2.1-2.6 3.8-2.6 5.7 0s3.6 2.6 5.7 0c.9-1.1 1.6-1.6 2.4-1.7'/%3E%3C/svg%3E") center / contain no-repeat; }
+.mr-grain { position: absolute; inset: 0; background: url('/grain.png'); opacity: 0.2; }
+
+/* 1 · Identidad */
+.mr-brand { background: #0a1f36; color: #fff; }
+.mr-blur { position: absolute; inset: -4%; background: linear-gradient(180deg, rgba(5, 14, 28, 0.35), rgba(5, 14, 28, 0.1) 40%, rgba(5, 14, 28, 0.5)), url('/obra/marea-brand.webp') 54% 50% / cover; }
+.mb-t, .mb-b { position: absolute; left: 2.4em; right: 2.4em; display: flex; justify-content: space-between; font-size: 0.6em; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.85; }
+.mb-t { top: 3.2em; } .mb-b { bottom: 3.2em; }
+.mb-wm { position: absolute; left: 0; right: 0; top: 44%; display: flex; align-items: center; justify-content: center; transform: translateY(-50%); }
+.mb-wm .mr-glyph { font-size: 3.5em; margin-right: 0.2em; }
+.mb-wm b { font-size: 7.4em; font-weight: 300; letter-spacing: -0.05em; line-height: 1; transform: translateY(-0.04em); }
+.mb-tag { position: absolute; left: 0; right: 0; top: 62%; text-align: center; font-size: 0.78em; letter-spacing: 0.34em; text-transform: uppercase; opacity: 0.88; }
+
+/* 2 · Sitio web */
+.mr-web { background: #06111f; color: #fff; }
+.mw-photo { position: absolute; inset: -3%; background: url('/obra/marea-surf.webp') 56% 50% / cover; }
+.js .mw-photo { transform: scale(1.12); } .js .live .mw-photo { transform: scale(1); transition: transform 9s cubic-bezier(0.2, 0.6, 0.2, 1); }
+.mw-shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(4, 12, 26, 0.74), rgba(4, 12, 26, 0.18) 58%, transparent), linear-gradient(180deg, rgba(4, 12, 26, 0.5), transparent 26%, transparent 62%, rgba(4, 12, 26, 0.55)); }
+.mw-nav { position: absolute; left: 50%; top: 1.5em; transform: translateX(-50%); display: flex; align-items: center; gap: 2.2em; padding: 0.55em 0.55em 0.55em 1.5em; border-radius: 99em; font-size: 0.6em; white-space: nowrap;
+  background: rgba(8, 20, 38, 0.5); box-shadow: inset 0 0 0 0.07em rgba(255, 255, 255, 0.24), 0 1.2em 2.4em -1em rgba(0, 0, 0, 0.7); }
+.mw-nav b { display: flex; align-items: center; gap: 0.55em; font-size: 1.5em; font-weight: 500; letter-spacing: -0.03em; } .mw-nav b .mr-glyph { font-size: 1.1em; }
+.mw-nav nav { display: flex; gap: 2em; opacity: 0.8; } .mw-nav i { font-style: normal; padding: 0.85em 1.8em; border-radius: 99em; background: #fff; color: #0a1f36; font-weight: 500; }
+.mw-hero { position: absolute; left: 2.6em; top: 6em; width: 30em; }
+.mw-k { display: inline-flex; align-items: center; gap: 0.7em; padding: 0.55em 1.2em 0.55em 0.9em; border-radius: 99em; font-size: 0.58em; letter-spacing: 0.1em; background: rgba(8, 20, 38, 0.42); box-shadow: inset 0 0 0 0.08em rgba(255, 255, 255, 0.22); }
+.mw-k i { width: 0.7em; height: 0.7em; border-radius: 50%; background: #ff9a62; box-shadow: 0 0 0 0.35em rgba(255, 154, 98, 0.25); }
+.mr-web .mw-h { margin-top: 1.2em; font-family: inherit; font-style: normal; font-weight: 300; font-size: 3.5em; line-height: 1.02; letter-spacing: -0.05em; }
+.mr-web .mw-h .mw-it { font-family: 'Fraunces Variable', Georgia, serif; font-style: italic; font-weight: 300; letter-spacing: -0.03em; color: #ffd9bd; }
+.mw-s { margin-top: 1.3em; max-width: 30em; font-size: 0.82em; line-height: 1.5; opacity: 0.82; }
+.mw-cta { display: flex; align-items: center; gap: 1.6em; margin-top: 1.7em; font-size: 0.72em; }
+.mw-cta i { font-style: normal; padding: 1.05em 2em; border-radius: 99em; background: #fff; color: #0a1f36; font-weight: 500; } .mw-cta span { opacity: 0.85; }
+.mw-cond { position: absolute; right: 2.6em; top: 7.2em; display: flex; align-items: center; gap: 1.5em; padding: 0.9em 1.4em; border-radius: 1em; font-size: 0.6em; background: rgba(8, 20, 38, 0.5); box-shadow: inset 0 0 0 0.07em rgba(255, 255, 255, 0.2); }
+.mw-cond small { font-size: 0.9em; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.65; } .mw-cond div { display: flex; flex-direction: column; } .mw-cond b { font-size: 1.8em; font-weight: 400; letter-spacing: -0.03em; } .mw-cond span { opacity: 0.6; font-size: 0.9em; }
+.mw-book { position: absolute; left: 2.6em; right: 2.6em; bottom: 2em; display: grid; grid-template-columns: 1.15fr 1.15fr 1fr auto; align-items: center; gap: 1.4em; padding: 0.65em 0.65em 0.65em 1.8em; border-radius: 99em; font-size: 0.62em;
+  background: rgba(8, 20, 38, 0.55); box-shadow: inset 0 0 0 0.07em rgba(255, 255, 255, 0.24), 0 1.4em 2.6em -1em rgba(0, 0, 0, 0.7); }
+.mw-book div { display: flex; flex-direction: column; gap: 0.3em; } .mw-book small { font-size: 0.8em; letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.6; } .mw-book b { font-weight: 500; font-size: 1.05em; }
+.mw-book i { font-style: normal; padding: 1.2em 2.3em; border-radius: 99em; background: linear-gradient(135deg, #ff9a62, #ff7a59); color: #1c0d05; font-weight: 600; }
+
+/* 3 · Redes sociales */
+.mr-soc { background: #0a1f36; color: #fff; }
+.ms-head { position: absolute; left: 2.4em; right: 2.4em; top: 1.9em; display: flex; align-items: center; gap: 0.9em; }
+.ms-av { display: grid; place-items: center; width: 2.4em; height: 2.4em; border-radius: 50%; background: linear-gradient(135deg, #8b78b8, #ff9a62); font-size: 1em; } .ms-av .mr-glyph { font-size: 1.15em; }
+.ms-head > div { display: flex; flex-direction: column; } .ms-head b { font-size: 0.82em; font-weight: 500; } .ms-head span { font-size: 0.6em; opacity: 0.6; }
+.ms-head em { margin-left: auto; font-style: normal; font-size: 0.6em; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.55; }
+.ms-grid { position: absolute; left: 2.4em; right: 2.4em; top: 5.2em; bottom: 2.2em; display: grid; grid-template-columns: 1fr 7.4em 7.4em; grid-template-rows: 7.4em 1fr; gap: 0.9em; }
+.ms-grid > div { position: relative; overflow: hidden; border-radius: 0.9em; }
+.ms-a { grid-row: 1 / 3; color: #fff; } .ms-ph { position: absolute; inset: 0; background: url('/obra/marea-surf.webp') 66% 40% / 230% auto; }
+.ms-sh { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(4, 12, 26, 0.55), transparent 35%, rgba(4, 12, 26, 0.75)); }
+.ms-a .ms-wm { position: absolute; left: 1.5em; top: 1.4em; display: flex; align-items: center; gap: 0.4em; } .ms-wm .mr-glyph { font-size: 1.2em; } .ms-wm b { font-size: 1.5em; font-weight: 400; letter-spacing: -0.04em; }
+.ms-a p { position: absolute; left: 1.4em; bottom: 1.3em; font-size: 2.6em; font-weight: 300; line-height: 1; letter-spacing: -0.045em; }
+.ms-b { background: #f6efe6; color: #0a1f36; } .ms-b p { position: absolute; left: 0.9em; bottom: 0.8em; right: 0.5em; font-size: 1.05em; font-weight: 500; line-height: 1.06; letter-spacing: -0.035em; }
+.ms-c { background: linear-gradient(150deg, #ff9a62, #d9648a 70%, #8b78b8); } .ms-c small { position: absolute; left: 0.9em; top: 0.9em; font-size: 0.6em; letter-spacing: 0.2em; text-transform: uppercase; } .ms-c b { position: absolute; left: 0.7em; bottom: 0.5em; font-size: 2.5em; font-weight: 300; letter-spacing: -0.05em; }
+.ms-d { grid-column: 2 / 4; background: linear-gradient(135deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.04)); box-shadow: inset 0 0 0 0.06em rgba(255, 255, 255, 0.16); padding: 1.3em 1.4em; }
+.ms-d span { font-size: 0.55em; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.6; } .ms-d b { display: block; margin-top: 0.7em; font-size: 1.45em; font-weight: 500; letter-spacing: -0.035em; line-height: 1.05; }
+.ms-d p { margin-top: 0.8em; font-size: 0.66em; line-height: 1.5; opacity: 0.7; } .ms-d i { position: absolute; right: -2.5em; bottom: -2.5em; width: 8em; height: 8em; border-radius: 50%; background: radial-gradient(closest-side, rgba(255, 154, 98, 0.75), transparent); }
+
+/* 4 · Panel con asistente de IA (menú lateral, chat al centro, historial a la derecha) */
+.mr-dash { background: linear-gradient(180deg, #d7dadd 0%, #e3e5e6 50%, #f4c9b2 100%); color: #14182b; }
+.md-app { position: absolute; inset: 1em; display: flex; border-radius: 1.5em; overflow: hidden; background: #f8f8f7; box-shadow: 0 1.6em 3em -1.4em rgba(20, 24, 43, 0.4); }
+.md-side { position: relative; flex: none; width: 9.8em; padding: 1.5em 0.9em 0; background: linear-gradient(165deg, #d9e6e6, #eef0f0 55%, #f4f4f3); }
+.md-logo { display: flex; align-items: center; gap: 0.5em; padding: 0 0.5em; } .md-logo .mr-glyph { font-size: 1.2em; } .md-logo b { font-size: 1.2em; font-weight: 500; letter-spacing: -0.04em; }
+.md-side > p { margin: 1.8em 0 0.6em 0.6em; font-size: 0.52em; color: rgba(20, 24, 43, 0.5); }
+.md-side ul { display: flex; flex-direction: column; gap: 0.12em; padding: 0; list-style: none; }
+.md-side li { display: flex; align-items: center; gap: 0.7em; padding: 0.62em 0.7em; border-radius: 99em; font-size: 0.62em; line-height: 1.2; color: rgba(20, 24, 43, 0.78); }
+.md-side li svg { flex: none; width: 1.5em; height: 1.5em; }
+.md-side li.on { background: #fff; color: #14182b; font-weight: 600; box-shadow: 0 0.3em 0.9em -0.4em rgba(20, 24, 43, 0.3); }
+.md-user { position: absolute; left: 0.9em; right: 0.9em; bottom: 1em; display: flex; align-items: center; gap: 0.7em; padding: 0.7em; border-radius: 1em; background: rgba(20, 24, 43, 0.06); }
+.md-user i { display: grid; place-items: center; width: 2em; height: 2em; border-radius: 50%; font-style: normal; font-size: 0.8em; font-weight: 600; color: #fff; background: linear-gradient(135deg, #8b78b8, #ff9a62); }
+.md-user div { display: flex; flex-direction: column; } .md-user b { font-size: 0.62em; font-weight: 600; } .md-user span { font-size: 0.5em; opacity: 0.6; }
+.md-main { position: relative; flex: 1; min-width: 0; padding: 1.8em 1.1em 0; text-align: center; }
+.md-star { display: block; width: 2.8em; height: 2.8em; margin: 0.4em auto 0; background: conic-gradient(from 25deg, #ffb89a, #c9a9e8, #9fd3e6, #ffb89a);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 1.5C12.9 7.3 16.7 11.1 22.5 12 16.7 12.9 12.9 16.7 12 22.5 11.1 16.7 7.3 12.9 1.5 12 7.3 11.1 11.1 7.3 12 1.5Z'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 1.5C12.9 7.3 16.7 11.1 22.5 12 16.7 12.9 12.9 16.7 12 22.5 11.1 16.7 7.3 12.9 1.5 12 7.3 11.1 11.1 7.3 12 1.5Z'/%3E%3C/svg%3E") center / contain no-repeat; }
+.md-main h5 { margin-top: 0.6em; font-size: 1.4em; font-weight: 600; letter-spacing: -0.04em; } .md-sub { margin-top: 0.4em; font-size: 0.62em; color: rgba(20, 24, 43, 0.55); }
+.md-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5em; margin-top: 1.3em; text-align: left; }
+.md-cards > div { padding: 0.7em; border-radius: 0.9em; background: #fff; box-shadow: 0 0.2em 0.9em -0.4em rgba(20, 24, 43, 0.3), inset 0 0 0 0.06em rgba(20, 24, 43, 0.05); }
+.md-cards svg { display: block; width: 1.5em; height: 1.5em; margin-bottom: 0.7em; color: #d9648a; } .md-cards b { display: block; font-size: 0.58em; line-height: 1.25; font-weight: 600; } .md-cards span { display: block; margin-top: 0.3em; font-size: 0.5em; line-height: 1.35; color: rgba(20, 24, 43, 0.55); }
+.md-in { position: absolute; left: 1.2em; right: 1.2em; bottom: 1em; padding: 0.8em 0.9em; border-radius: 1em; text-align: left; background: rgba(255, 255, 255, 0.7); box-shadow: inset 0 0 0 0.06em rgba(20, 24, 43, 0.1); }
+.md-in p { display: flex; align-items: center; gap: 0.5em; font-size: 0.56em; color: rgba(20, 24, 43, 0.5); } .md-in p svg { width: 1.2em; height: 1.2em; }
+.md-in > div { display: flex; align-items: center; gap: 0.5em; margin-top: 0.9em; font-size: 0.52em; } .md-in > div span { display: flex; align-items: center; gap: 0.5em; padding: 0.7em 1.2em; border-radius: 99em; background: #fff; box-shadow: inset 0 0 0 0.07em rgba(20, 24, 43, 0.1); }
+.md-in > div span svg { width: 1.3em; height: 1.3em; } .md-in > div i { display: grid; place-items: center; width: 2.2em; height: 2.2em; margin-left: auto; border-radius: 50%; background: #14182b; color: #fff; } .md-in > div i svg { width: 1.2em; height: 1.2em; }
+.md-hist { flex: none; width: 9.6em; margin: 0.7em 0.7em 0.7em 0; padding: 1em 0.9em; border-radius: 1.2em; background: #fff; box-shadow: 0 0.3em 1.2em -0.6em rgba(20, 24, 43, 0.35), inset 0 0 0 0.06em rgba(20, 24, 43, 0.06); display: flex; flex-direction: column; }
+.md-hist h6 { font-size: 0.82em; font-weight: 600; letter-spacing: -0.02em; } .md-find { display: flex; align-items: center; gap: 0.5em; margin-top: 0.8em; padding: 0.65em 0.9em; border-radius: 99em; font-size: 0.52em; color: rgba(20, 24, 43, 0.5); box-shadow: inset 0 0 0 0.07em rgba(20, 24, 43, 0.12); } .md-find svg { width: 1.3em; height: 1.3em; }
+.md-hist ul { margin-top: 0.8em; padding: 0; list-style: none; flex: 1; } .md-hist li { padding: 0.65em 0; box-shadow: 0 -0.07em 0 rgba(20, 24, 43, 0.07); } .md-hist li:first-child { box-shadow: none; }
+.md-hist li b { display: block; font-size: 0.58em; font-weight: 600; } .md-hist li span { display: block; margin-top: 0.25em; font-size: 0.48em; line-height: 1.35; color: rgba(20, 24, 43, 0.55); }
+.md-hist li div { display: flex; align-items: center; justify-content: space-between; margin-top: 0.5em; } .md-hist li i { width: 1.1em; height: 1.1em; border-radius: 50%; background: linear-gradient(135deg, #ffb89a, #d9648a); } .md-hist li i.c2 { background: linear-gradient(135deg, #9fd3e6, #8b78b8); } .md-hist li i.c3 { background: linear-gradient(135deg, #ffd9bd, #ff9a62); } .md-hist li em { font-style: normal; font-size: 0.44em; opacity: 0.5; }
+.md-new { margin-top: auto; padding: 0.85em; border-radius: 99em; text-align: center; font-size: 0.56em; font-weight: 600; background: #14182b; color: #fff; }
+
+/* Celular: las piezas viven en un carrusel */
+.obm-pg .mw-photo { transform: none; }
