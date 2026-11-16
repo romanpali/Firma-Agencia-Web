@@ -196,13 +196,6 @@ const leavesHtml = leavesMarkup(leaves);
         });
       }
 
-      // Celular: al tocar una pieza de Marea se dibujan las mismas ondas finas.
-      document.querySelectorAll<HTMLElement>('.obm-pg .rp-s').forEach((el) => el.addEventListener('pointerdown', (ev) => {
-        if (reduced || el.childElementCount > 4) return;
-        const r = document.createElement('i'); r.className = 'rp'; r.style.left = `${ev.offsetX}px`; r.style.top = `${ev.offsetY}px`;
-        el.appendChild(r); r.addEventListener('animationend', () => r.remove(), { once: true });
-      }, { passive: true }));
-
       // Celular: las tarjetas se apilan; la anterior se hunde un poco y se oscurece cuando la siguiente la cubre.
       const obm = document.querySelector<HTMLElement>('[data-obm]');
       if (obm) {

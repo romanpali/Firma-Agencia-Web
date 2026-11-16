@@ -1,6 +1,5 @@
 // Interactividad del panel de «Marea» (páginas del libro y piezas del carrusel en celular):
 // menú lateral que abre cada área, historial que se puede ocultar y una conversación con el asistente que se escribe y responde sola.
-// Las páginas tienen una capa de ondas (.rp-s) encima; los clics sobre ella se reenvían al control que quede debajo.
 
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const PROMPT = '¿Cómo van las ventas de esta semana y qué debo atender primero?';
@@ -63,30 +62,12 @@ function act(t: HTMLElement, root: HTMLElement) {
   dirty(root);
 }
 
-// Control interactivo que queda bajo las capas de ondas, en el punto del puntero: es el primer elemento visible que no sea una capa de ondas.
-const under = (x: number, y: number) => {
-  for (const e of document.elementsFromPoint(x, y)) {
-    if (!(e instanceof HTMLElement) || e.classList.contains('rp-s')) continue;
-    const t = e.closest<HTMLElement>('[data-int]');
-    return t && !t.closest('.lc') ? t : null;
-  }
-  return null;
-};
-
 document.addEventListener('click', (ev) => {
-  const ov = ev.target as HTMLElement;
-  if (!ov.classList?.contains('rp-s')) return;
-  const t = under(ev.clientX, ev.clientY), root = t?.closest<HTMLElement>('.mr-dash');
-  if (!t || !root) return;
+  const t = (ev.target as HTMLElement).closest<HTMLElement>('[data-int]');
+  const root = t?.closest<HTMLElement>('.mr-dash');
+  if (!t || !root || t.closest('.lc')) return;
   ev.stopPropagation(); act(t, root);
-}, true);
-
-let pend = 0;
-document.addEventListener('pointermove', (ev) => {
-  const ov = ev.target as HTMLElement;
-  if (!ov.classList?.contains('rp-s') || pend) return;
-  pend = requestAnimationFrame(() => { pend = 0; ov.style.cursor = under(ev.clientX, ev.clientY) ? 'pointer' : ''; });
-}, { passive: true });
+});
 
 init();
 addEventListener('load', init);

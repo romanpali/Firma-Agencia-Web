@@ -75,39 +75,39 @@ ${nav}
  <div class="wh"><i class="mw-photo"></i><i class="mw-shade"></i>
   <div class="mw-hero">
    <p class="mw-k mw-f" style="--d:.5s"><i></i>Escuela de surf · Puerto Escondido</p>
-   <h4 class="mw-h"><span class="mw-w" style="--d:.65s">Aprende a</span><span class="mw-w mw-it" style="--d:.95s">leer el mar.</span></h4>
+   <h4 class="mw-h"><span class="mw-w" style="--d:.65s">Aprende a</span><span class="mw-w mw-it" style="--d:.95s"><span class="mw-rot"><span class="mw-r" style="--i:0">leer el mar.</span><span class="mw-r" style="--i:1">encontrar tu ola.</span><span class="mw-r" style="--i:2">perder el miedo.</span><span class="mw-r" style="--i:3">volver al agua.</span></span></span></h4>
    <p class="mw-s mw-f" style="--d:1.4s">Clases para todos los niveles, con equipo incluido y grupos reducidos.</p>
    <div class="mw-cta mw-f" style="--d:1.6s">${btn('reservar', 'wb wb-l', 'Reservar clase')}${btn('clases', 'wb-g', 'Ver clases →')}</div>
   </div>
   <div class="mw-cond mw-f" style="--d:1.2s"><small>Mar hoy</small><div><b>1.2 m</b><span>Oleaje</span></div><div><b>14 s</b><span>Periodo</span></div><div><b>27 °</b><span>Agua</span></div></div>
   <div class="mw-book mw-f" style="--d:1.85s" ${go('reservar')}><div><small>Nivel</small><b>Principiante</b></div><div><small>Fecha</small><b>Sáb 14 · 07:00</b></div><div><small>Personas</small><b>2 personas</b></div><i>Buscar horarios</i></div>
  </div>
- <div class="ws"><p class="wk-o rv">Nuestras clases</p><h3 class="wt rv">Un nivel para cada <em>ola.</em></h3>
+ <div class="wsx"><p class="wk-o rv">Nuestras clases</p><h3 class="wt rv">Un nivel para cada <em>ola.</em></h3>
   <div class="wg3 rv">${clases.slice(0, 3).map((c) => `<button type="button" class="wm" ${go('clases')}><div class="wc-ph ${c.ph}"><span>${c.lv}</span></div><b>${c.t}</b><small>${c.d}</small><em>Desde ${money(c.p)}</em></button>`).join('')}</div></div>
  <div class="wband rv"><i class="wband-ph"></i><div><p class="wk-o">Experiencia</p><h3 class="wt">Surf a la hora <em>dorada.</em></h3><p class="ws-p">Una clase corta con el mar más suave, fotos de tu sesión y fruta al terminar.</p>${btn('experiencias', 'wb wb-l', 'Ver experiencias')}</div></div>
- <div class="ws wfeat"><div class="rv"><i>${svg('check')}</i><b>Equipo incluido</b><span>Tabla, licra y protector.</span></div><div class="rv"><i>${svg('crm')}</i><b>Grupos de máx. 6</b><span>Atención real de tu instructor.</span></div><div class="rv"><i>${svg('cal')}</i><b>Reserva en línea</b><span>Elige día y hora en un minuto.</span></div></div>
+ <div class="wsx wfeat"><div class="rv"><i>${svg('check')}</i><b>Equipo incluido</b><span>Tabla, licra y protector.</span></div><div class="rv"><i>${svg('crm')}</i><b>Grupos de máx. 6</b><span>Atención real de tu instructor.</span></div><div class="rv"><i>${svg('cal')}</i><b>Reserva en línea</b><span>Elige día y hora en un minuto.</span></div></div>
  ${foot}
 </section>
 
-<section class="wv wv-clases"><div class="ws wtop"><p class="wk-o rv">Clases</p><h3 class="wt rv">Elige tu <em>nivel.</em></h3><p class="ws-p rv">Todas incluyen tabla, licra y protector solar. Si el mar no está seguro, reprogramamos sin costo.</p>
+<section class="wv wv-clases"><div class="wsx wtop"><p class="wk-o rv">Clases</p><h3 class="wt rv">Elige tu <em>nivel.</em></h3><p class="ws-p rv">Todas incluyen tabla, licra y protector solar. Si el mar no está seguro, reprogramamos sin costo.</p>
  <div class="wg2">${clases.map(classCard).join('')}</div>
  <div class="wsch rv"><p class="wk-o">Horarios de la semana</p><div>${[['07:00', 'Principiantes · Intermedio'], ['09:00', 'Clases privadas · Niños'], ['11:00', 'Niños · Principiantes'], ['17:00', 'Atardecer · Intermedio']].map(([h, t]) => `<p><b>${h}</b><span>${t}</span></p>`).join('')}</div></div></div>${foot}</section>
 
-<section class="wv wv-experiencias"><div class="ws wtop"><p class="wk-o rv">Experiencias</p><h3 class="wt rv">Más que una <em>clase.</em></h3><p class="ws-p rv">Jornadas pensadas para disfrutar el mar con calma, solos, en pareja o con tu equipo.</p>
+<section class="wv wv-experiencias"><div class="wsx wtop"><p class="wk-o rv">Experiencias</p><h3 class="wt rv">Más que una <em>clase.</em></h3><p class="ws-p rv">Jornadas pensadas para disfrutar el mar con calma, solos, en pareja o con tu equipo.</p>
  <div class="wcol">${exps.map(expRow).join('')}</div></div>${foot}</section>
 
-<section class="wv wv-tienda"><div class="ws wtop"><p class="wk-o rv">Tienda</p><h3 class="wt rv">Para el agua y para <em>después.</em></h3>
+<section class="wv wv-tienda"><div class="wsx wtop"><p class="wk-o rv">Tienda</p><h3 class="wt rv">Para el agua y para <em>después.</em></h3>
  <p class="wcart rv"><span data-cart-n>0</span> artículos en tu carrito · <b data-cart-t>$0</b></p>
  <div class="wg3 wg3p">${prods.map(prodCard).join('')}</div></div>${foot}</section>
 
-<section class="wv wv-nosotros"><div class="ws wtop"><p class="wk-o rv">Nosotros</p><h3 class="wt rv">Una escuela <em>hecha en el agua.</em></h3>
+<section class="wv wv-nosotros"><div class="wsx wtop"><p class="wk-o rv">Nosotros</p><h3 class="wt rv">Una escuela <em>hecha en el agua.</em></h3>
  <div class="wnos"><p class="ws-p rv">Marea nació para enseñar a surfear sin presión: con grupos pequeños, equipo cuidado y un mar que se respeta. Nos importa más que disfrutes tu primera ola que la cantidad de clases que tomes.</p><i class="wnos-ph ph2 rv"></i></div>
  <div class="wvals">${vals.map(([n, t, d]) => `<div class="rv"><em>${n}</em><b>${t}</b><span>${d}</span></div>`).join('')}</div>
  <p class="wk-o rv" style="margin-top:2.6em">El equipo</p>
  <div class="wteam">${team.map(([i, n, r, c]) => `<div class="rv"><i class="av-${c}">${i}</i><b>${n}</b><span>${r}</span></div>`).join('')}</div>
  <div class="wloc rv"><div><p class="wk-o">Dónde estamos</p><b>Playa Carrizalillo, Puerto Escondido</b><span>Todos los días de 6:30 a 19:00 · hola@marea.example</span></div>${btn('reservar', 'wb wb-l', 'Reservar clase')}</div></div>${foot}</section>
 
-<section class="wv wv-reservar"><div class="ws wtop"><p class="wk-o rv">Reservar</p><h3 class="wt rv">Reserva tu <em>lugar.</em></h3>
+<section class="wv wv-reservar"><div class="wsx wtop"><p class="wk-o rv">Reservar</p><h3 class="wt rv">Reserva tu <em>lugar.</em></h3>
  <div class="wres">
   <div class="wform">
    <div class="wst"><p><i>1</i>Clase</p><div>${clases.map((c) => chip('nivel', c.k, c.t, `${money(c.p)} · ${c.h}`)).join('')}</div></div>
@@ -125,23 +125,20 @@ ${nav}
 
 </div></div>`;
 
-// ---------- ficha del proyecto ----------
-const hd: [string, string, string][] = [
-  ['brush', 'Identidad de marca', 'Logotipo, paleta, tipografías y manual de uso.'],
-  ['globe', 'Sitio web completo', 'Inicio, clases, experiencias, tienda y nosotros.'],
-  ['cal', 'Reservas en línea', 'Clase, día y hora con cupos y confirmación.'],
-  ['bag', 'Tienda en línea', 'Catálogo y carrito de tablas, trajes y ropa.'],
-  ['crm', 'Ventas y CRM', 'Prospectos, cotizaciones y seguimiento.'],
-  ['fin', 'Finanzas y facturación', 'Ingresos, gastos, cobranza y facturas CFDI.'],
-  ['cal', 'Calendario de clases', 'Cupos por horario y nivel, a la semana.'],
-  ['bolt', 'Automatización', 'WhatsApp, redes sociales, llamadas y agenda.'],
-  ['ia', 'Asistente con IA', 'Un chat con resúmenes y prioridades del negocio.'],
-  ['dat', 'Datos e infraestructura', 'Hospedaje, respaldos diarios y monitoreo.'],
+// ---------- ficha del proyecto: mismo diseño que la página «Contenido» del libro de HumanCorp ----------
+const hd: [string, string][] = [
+  ['Identidad de marca', 'Logotipo y manual'],
+  ['Sitio web', '6 secciones navegables'],
+  ['Reservas en línea', 'Cupos y confirmación'],
+  ['Tienda en línea', 'Catálogo y carrito'],
+  ['Ventas y CRM', 'Prospectos y cotizaciones'],
+  ['Finanzas', 'Cobranza y facturas CFDI'],
+  ['Calendario', 'Cupos por horario'],
+  ['Automatización', 'WhatsApp, redes y llamadas'],
+  ['Asistente con IA', 'Resúmenes y prioridades'],
+  ['Datos e infraestructura', 'Respaldos y monitoreo'],
 ];
-export const caseHTML = `<div class="pg mr-case" data-rp="dark"><i class="mk-bg"></i><i class="mr-grain"></i>
-<div class="mk-l mw-f" style="--d:.2s"><p class="mk-k">Proyecto · 2026</p><h4>Marea</h4><p class="mk-d">Escuela de surf en el Pacífico mexicano. Una marca, un sitio y un panel pensados juntos.</p>
-<dl><div><dt>Giro</dt><dd>Escuela de surf</dd></div><div><dt>Lugar</dt><dd>Puerto Escondido</dd></div><div><dt>Tipo</dt><dd>Proyecto propio</dd></div></dl>
-<p class="mk-h">Paleta</p><div class="mk-sw"><i style="--c:#0a1f36"></i><i style="--c:#8b78b8"></i><i style="--c:#ff9a62"></i><i style="--c:#f6efe6"></i></div>
-<p class="mk-f">Inter Tight · Fraunces</p></div>
-<div class="mk-g">${hd.map(([i, t, d], n) => `<div class="mw-f" style="--d:${(0.35 + n * 0.09).toFixed(2)}s"><i>${svg(i)}</i><div><b>${t}</b><span>${d}</span></div></div>`).join('')}</div>
-<p class="mk-n">Concepto de HumanCorp · No es un cliente real; los datos son de ejemplo.</p></div>`;
+export const caseHTML = `<div class="pg lt pc mr-case"><div class="pc-top"><b><span class="wl">HUMAN</span> <span class="ws">CORP</span></b><span>Proyecto Marea · 2026</span></div>
+<div class="pc-l"><h4>Lo que se hizo</h4><p>${hd.length} entregables</p></div>
+<ul class="pc-r">${hd.map(([t, d], n) => `<li><div class="pc-i"><em>${String(n + 1).padStart(2, '0')}</em><b>${t}</b><i></i><span>${d}</span></div></li>`).join('')}</ul>
+<p class="pc-f">Marea · escuela de surf · concepto, datos de ejemplo</p><span class="bk-pn">04</span></div>`;

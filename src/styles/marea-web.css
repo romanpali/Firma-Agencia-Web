@@ -30,7 +30,7 @@
 .mw-photo { position: absolute; inset: -3%; background: url('/obra/marea-surf.webp') 56% 50% / cover; translate: 0 calc(var(--sy, 0) * 0.2px); }
 .js .mw-photo { transform: scale(1.12); } .js .live .mw-photo { transform: scale(1); transition: transform 9s cubic-bezier(0.2, 0.6, 0.2, 1); }
 .mw-shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(4, 12, 26, 0.74), rgba(4, 12, 26, 0.18) 58%, transparent), linear-gradient(180deg, rgba(4, 12, 26, 0.5), transparent 26%, transparent 62%, rgba(4, 12, 26, 0.7)); }
-.mw-hero { position: absolute; left: 2.6em; top: 6em; width: 30em; }
+.mw-hero { position: absolute; left: 2.6em; top: 5.3em; width: 30em; }
 .mw-k { display: inline-flex; align-items: center; gap: 0.7em; padding: 0.55em 1.2em 0.55em 0.9em; border-radius: 99em; font-size: 0.58em; letter-spacing: 0.1em; background: rgba(8, 20, 38, 0.42); box-shadow: inset 0 0 0 0.08em rgba(255, 255, 255, 0.22); }
 .mw-k i { width: 0.7em; height: 0.7em; border-radius: 50%; background: #ff9a62; box-shadow: 0 0 0 0.35em rgba(255, 154, 98, 0.25); }
 .mw-h { margin-top: 1.2em; font-family: inherit; font-style: normal; font-weight: 300; font-size: 3.5em; line-height: 1.02; letter-spacing: -0.05em; }
@@ -49,7 +49,7 @@
 .mw-book i { font-style: normal; padding: 1.2em 2.3em; border-radius: 99em; background: linear-gradient(135deg, #ff9a62, #ff7a59); color: #1c0d05; font-weight: 600; }
 
 /* secciones comunes */
-.ws { padding: 4.2em 2.6em 0; } .wtop { padding-top: 6.6em; }
+.wsx { padding: 4.2em 2.6em 0; } .wtop { padding-top: 6.6em; }
 .wk-o { font-size: 0.56em; letter-spacing: 0.22em; text-transform: uppercase; color: #ffb085; }
 .wt { margin-top: 0.7em; font-size: 2.3em; font-weight: 300; line-height: 1.04; letter-spacing: -0.045em; }
 .wt em { font-family: 'Fraunces Variable', Georgia, serif; font-style: italic; font-weight: 300; letter-spacing: -0.03em; color: #ffd9bd; }
@@ -127,20 +127,10 @@
 .wf b { display: flex; align-items: center; gap: 0.5em; font-size: 1.15em; font-weight: 500; letter-spacing: -0.03em; } .wf p { margin-top: 0.8em; font-size: 0.62em; line-height: 1.6; opacity: 0.6; }
 .wf-m { display: flex; flex-wrap: wrap; align-content: flex-start; gap: 0.5em 1.4em; } .wf-a { font-size: 0.66em; opacity: 0.7; } .wf-a:hover { opacity: 1; } .wf-r { margin-top: 0 !important; text-align: right; }
 
-/* ficha del proyecto (página del libro) */
-.mr-case { background: #0a1f36; color: #fff; }
-.mk-bg { position: absolute; inset: -4%; background: linear-gradient(180deg, rgba(5, 14, 28, 0.72), rgba(5, 14, 28, 0.9)), url('/obra/marea-brand.webp') 54% 50% / cover; }
-.mk-l { position: absolute; left: 2.4em; top: 2.4em; width: 11em; }
-.mk-k { font-size: 0.56em; letter-spacing: 0.22em; text-transform: uppercase; color: #ffb085; } .mk-l h4 { margin-top: 0.4em; font-family: inherit; font-style: normal; font-weight: 300; font-size: 3.6em; line-height: 1; letter-spacing: -0.055em; }
-.mk-d { margin-top: 0.9em; font-size: 0.66em; line-height: 1.55; opacity: 0.78; }
-.mk-l dl { margin: 1.4em 0 0; } .mk-l dl > div { display: flex; justify-content: space-between; gap: 0.6em; padding: 0.5em 0; font-size: 0.58em; box-shadow: 0 -0.07em 0 rgba(255, 255, 255, 0.14); } .mk-l dt { opacity: 0.6; } .mk-l dd { margin: 0; font-weight: 500; text-align: right; }
-.mk-h { margin-top: 1.8em; font-size: 0.52em; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.6; } .mk-sw { display: flex; gap: 0.5em; margin-top: 0.7em; } .mk-sw i { width: 2.2em; height: 2.2em; border-radius: 50%; background: var(--c); box-shadow: inset 0 0 0 0.08em rgba(255, 255, 255, 0.28); }
-.mk-f { margin-top: 0.9em; font-size: 0.56em; opacity: 0.7; }
-.mk-g { position: absolute; left: 14.8em; right: 2.4em; top: 2.4em; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.55em; }
-.mk-g > div { display: flex; align-items: center; gap: 0.8em; height: 3.9em; padding: 0 0.9em; border-radius: 0.9em; background: rgba(255, 255, 255, 0.07); box-shadow: inset 0 0 0 0.07em rgba(255, 255, 255, 0.14); }
-.mk-g i { display: grid; place-items: center; flex: none; width: 2em; height: 2em; border-radius: 0.65em; background: rgba(255, 154, 98, 0.2); color: #ffb085; } .mk-g svg { width: 1.15em; height: 1.15em; }
-.mk-g b { display: block; font-size: 0.64em; font-weight: 600; } .mk-g span { display: block; margin-top: 0.25em; font-size: 0.5em; line-height: 1.35; opacity: 0.7; }
-.mk-n { position: absolute; left: 14.8em; right: 2.4em; bottom: 1.5em; font-size: 0.5em; letter-spacing: 0.06em; opacity: 0.5; }
+/* ficha del proyecto: reutiliza la página «Contenido» (papel crema, mismo título y lista con puntos) con 10 filas más compactas */
+.mr-case .pc-r .pc-i { display: grid; grid-template-columns: 2em auto 1fr auto; align-items: baseline; gap: 0.7em; padding: 0.46em 0; border-bottom: 1px solid rgba(0, 0, 0, 0.14); font-size: 0.74em; }
+.mr-case .pc-i em { font-style: normal; opacity: 0.45; font-size: 0.8em; } .mr-case .pc-i b { font-weight: 600; } .mr-case .pc-i i { border-bottom: 1px dotted rgba(0, 0, 0, 0.3); transform: translateY(-0.3em); } .mr-case .pc-i span { opacity: 0.55; font-size: 0.85em; }
+.mr-case.pc { padding-top: 4.3em; }
 
 /* vista ampliada del sitio (se abre con el botón de la barra) */
 .mr-ex { position: fixed; inset: 0; z-index: 100000; display: grid; place-items: center; background: rgba(2, 6, 12, 0.88); overscroll-behavior: contain; animation: wvIn 0.35s ease both; }
@@ -152,3 +142,11 @@
 
 /* celular: el sitio ya está dentro del carrusel; sus páginas se desplazan solas */
 .obm-pg .mw-scroll { touch-action: pan-y; }
+
+/* texto del hero: la segunda línea cambia sola, con un barrido que entra y sale y un brillo que la recorre */
+.mw-rot { display: inline-grid; } .mw-r { grid-area: 1 / 1; white-space: nowrap; background: linear-gradient(100deg, #ffd9bd 34%, #fff 50%, #ffd9bd 66%) 120% 0 / 260% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; padding-right: 0.08em; }
+.js .mw-r { clip-path: inset(-0.2em 100% -0.2em 0); }
+.js .live .mw-r, .js .obm-card.in .mw-r { animation: mwRot 12s linear infinite both, mwSh 4.5s linear infinite; animation-delay: calc(1.1s + var(--i) * 3s), 0s; }
+@keyframes mwRot { 0% { clip-path: inset(-0.2em 100% -0.2em 0); } 5% { clip-path: inset(-0.2em 0 -0.2em 0); } 22% { clip-path: inset(-0.2em 0 -0.2em 0); } 27% { clip-path: inset(-0.2em 0 -0.2em 100%); } 27.01%, 100% { clip-path: inset(-0.2em 100% -0.2em 0); } }
+@keyframes mwSh { to { background-position: -120% 0; } }
+@media (prefers-reduced-motion: reduce) { .js .mw-r { clip-path: none !important; animation: none !important; } .mw-r:not(:first-child) { display: none; } }

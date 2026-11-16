@@ -204,7 +204,7 @@ export function mountBook(o: Mount) {
   };
   book.addEventListener('click', (ev) => {
     const el = ev.target as HTMLElement;
-    if (el.closest('a, .mr-web')) return; // el sitio de Marea es interactivo: sus clics no voltean la hoja
+    if (el.closest('a, .mr-web, [data-int]')) return; // el sitio de Marea es interactivo: sus clics no voltean la hoja
     const g = el.closest<HTMLElement>('[data-bk-go]');
     if (g) { go(+g.dataset.bkGo!); return; }
     const leaf = el.closest<HTMLElement>('.bw-leaf');
@@ -212,19 +212,6 @@ export function mountBook(o: Mount) {
     const k = +leaf.dataset.k!, a = L[k] ? (leaf.style.transform.match(/rotateY\((-?[\d.]+)deg\)/)?.[1] ?? '0') : '0';
     go(Math.abs(parseFloat(a)) > 90 ? k : k + 1);
   });
-  // Ondas: sobre las páginas con capa .rp-s, el cursor deja anillos finos que se expanden y se desvanecen.
-  if (!o.reduced) {
-    let lx = -99, ly = -99, lt = 0;
-    book.addEventListener('pointermove', (ev) => {
-      const el = ev.target as HTMLElement;
-      if (!el.classList?.contains('rp-s') || ev.pointerType === 'touch') return;
-      const now = performance.now(), x = ev.offsetX, y = ev.offsetY;
-      if (now - lt < 80 || (Math.hypot(x - lx, y - ly) < 22 && now - lt < 500) || el.childElementCount > 5) return;
-      lx = x; ly = y; lt = now;
-      const r = document.createElement('i'); r.className = 'rp'; r.style.left = `${x}px`; r.style.top = `${y}px`;
-      el.appendChild(r); r.addEventListener('animationend', () => r.remove(), { once: true });
-    }, { passive: true });
-  }
   // Una página interactiva cambió: su versión curva (si existe) queda desactualizada y se vuelve a crear cuando haga falta.
   book.addEventListener('bk-dirty', (ev) => {
     const leaf = (ev.target as HTMLElement).closest('.bw-leaf'); const l = L.find((x) => x.el === leaf);

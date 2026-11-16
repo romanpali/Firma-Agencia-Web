@@ -1,22 +1,12 @@
 /* Proyecto «Marea» (concepto). Páginas de 40em × 26.7em; 1em = ancho de página / 40. Paleta tomada de la fotografía: azul noche, violeta y naranja atardecer. */
 .pg[data-rp] { --nv: #0a1f36; --vi: #8b78b8; --na: #ff9a62; --cr: #f6efe6; }
-.pg[data-rp='dark'] { --rc: rgba(255, 255, 255, 0.7); --rg: rgba(255, 255, 255, 0.14); }
-.pg[data-rp='light'] { --rc: rgba(10, 31, 54, 0.45); --rg: rgba(139, 120, 184, 0.22); }
-
-/* Ondas al pasar el cursor: anillos finos que se expanden y se desvanecen (sin salpicaduras) */
-.rp-s { position: absolute; inset: 0; z-index: 9; overflow: hidden; }
-.rp { position: absolute; width: 34em; aspect-ratio: 1; margin: -17em 0 0 -17em; border-radius: 50%; pointer-events: none; opacity: 0.9; transform: scale(0.03);
-  border: 0.09em solid var(--rc); background: radial-gradient(closest-side, transparent 80%, var(--rg) 94%, transparent); box-shadow: 0 0 1.6em var(--rg), inset 0 0 1.8em var(--rg); animation: rpOut 1.9s cubic-bezier(0.1, 0.6, 0.2, 1) forwards; }
-.rp::before, .rp::after { content: ""; position: absolute; border-radius: 50%; border: 0.05em solid var(--rc); }
-.rp::before { inset: 11%; opacity: 0.55; } .rp::after { inset: 24%; opacity: 0.3; }
-@keyframes rpOut { 0% { opacity: 0.9; } 70% { opacity: 0.25; } 100% { transform: scale(1); opacity: 0; } }
 
 /* Entradas: se muestran en su lugar cuando la hoja está a la vista (.live). Sin transformaciones de subida. */
 .js .mw-f { opacity: 0; }
 .js .live .mw-f, .js .obm-card.in .mw-f { opacity: 1; transition: opacity 1s ease var(--d, 0s); }
 .js .mw-w { display: block; clip-path: inset(-0.15em 100% -0.15em 0); }
 .js .live .mw-w, .js .obm-card.in .mw-w { clip-path: inset(-0.15em -0.15em -0.15em 0); transition: clip-path 1.2s cubic-bezier(0.6, 0, 0.2, 1) var(--d, 0s); }
-@media (prefers-reduced-motion: reduce) { .rp { display: none; } .js .mw-f { opacity: 1 !important; transition: none !important; } .js .mw-w { clip-path: none !important; transition: none !important; } .mw-photo { transform: none !important; transition: none !important; } }
+@media (prefers-reduced-motion: reduce) { .js .mw-f { opacity: 1 !important; transition: none !important; } .js .mw-w { clip-path: none !important; transition: none !important; } .mw-photo { transform: none !important; transition: none !important; } }
 
 /* Logotipo: círculo con ola */
 .mr-glyph { display: inline-block; flex: none; width: 1em; height: 1em; background: currentColor;
@@ -32,6 +22,7 @@
 .mb-wm { position: absolute; left: 0; right: 0; top: 44%; display: flex; align-items: center; justify-content: center; transform: translateY(-50%); }
 .mb-wm .mr-glyph { font-size: 3.5em; margin-right: 0.2em; }
 .mb-wm b { font-size: 7.4em; font-weight: 300; letter-spacing: -0.05em; line-height: 1; transform: translateY(-0.04em); }
+.mb-by { position: absolute; left: 0; right: 0; bottom: 1.5em; text-align: center; font-size: 0.58em; letter-spacing: 0.26em; text-transform: uppercase; opacity: 0.85; } .mb-by b { margin-left: 0.5em; letter-spacing: 0.04em; text-transform: none; font-size: 1.25em; font-weight: 500; } .mb-by i { font-style: normal; } .mb-by .wl { font-weight: 300; } .mb-by .ws { font-weight: 600; }
 .mb-tag { position: absolute; left: 0; right: 0; top: 62%; text-align: center; font-size: 0.78em; letter-spacing: 0.34em; text-transform: uppercase; opacity: 0.88; }
 
 /* 4 · Panel con asistente de IA (menú lateral, chat al centro, historial a la derecha). Cada área del menú se abre; el historial se puede ocultar. */

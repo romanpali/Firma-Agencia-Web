@@ -25,5 +25,4 @@ const ico: Record<string, string> = {
   plus: '<path d="M12 5v14M5 12h14"/>',
 };
 export const svg = (k: string) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ico[k]}</svg>`;
-export const rp = '<div class="rp-s"></div>';
 export const g = '<span class="mr-glyph"></span>';

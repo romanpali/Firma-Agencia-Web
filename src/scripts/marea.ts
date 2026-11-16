@@ -2,7 +2,7 @@
 // Cada pieza es una página del libro (40em × 26.7em), en HTML/CSS (nítido a cualquier tamaño). Estilos en styles/marea.css. Sin ids ni filtros: se clona en las franjas curvas.
 // Las entradas (.mw-f fundido, .mw-w barrido) se disparan cuando la hoja está a la vista (clase .live que pone el motor del libro).
 
-import { svg, rp, g } from './marea-ico';
+import { svg, g } from './marea-ico';
 import { webHTML, caseHTML } from './marea-web';
 
 
@@ -11,7 +11,8 @@ const brand = `<div class="pg mr-brand" data-rp="dark"><i class="mr-blur"></i><i
 <div class="mb-t mw-f" style="--d:.2s"><span>Manual de marca</span><span>2026 · v1.0</span></div>
 <div class="mb-wm mw-f" style="--d:.45s">${g}<b>marea</b></div>
 <p class="mb-tag mw-f" style="--d:.8s">Aprende a leer el mar</p>
-<div class="mb-b mw-f" style="--d:1s"><span>Identidad visual</span><span>Logotipo · Color · Tipografía</span></div>${rp}</div>`;
+<div class="mb-b mw-f" style="--d:1s"><span>Identidad visual</span><span>Logotipo · Color · Tipografía</span></div>
+<p class="mb-by mw-f" style="--d:1.2s">Made by <b><i class="wl">Human</i><i class="ws">Corp</i></b></p></div>`;
 
 // 4 · Panel con asistente de IA: menú lateral por áreas (cada una se abre), chat al centro con una conversación animada e historial a la derecha (se puede ocultar)
 const nav: [string, string, string][] = [['bolt', 'Automatización', 'automatizacion'], ['crm', 'Ventas y CRM', 'ventas'], ['fin', 'Finanzas', 'finanzas'], ['cal', 'Calendario', 'calendario'], ['dat', 'Datos e Infraestructura', 'datos']];
@@ -61,7 +62,7 @@ const dash = `<div class="pg mr-dash" data-rp="light" data-view="inicio"><div cl
 <i class="md-tgl" data-int="hist" title="Mostrar historial">${svg('panel')}</i>
 </main>
 <aside class="md-hist"><h6>Historial de chats<i data-int="hist" title="Ocultar historial">${svg('x')}</i></h6><div class="md-find">${svg('find')}Buscar…</div><ul>${hist.map(([t, d, h, c]) => `<li><b>${t}</b><span>${d}</span><div><i class="${c}"></i><em>${h}</em></div></li>`).join('')}</ul><div class="md-new" data-int="new">${svg('plus')}Crear nuevo chat</div></aside>
-</div>${rp}</div>`;
+</div></div>`;
 
 // Dos hojas: [portada | ficha del proyecto] → [sitio web | panel]
 export const mareaLeaves = (): { f: string; b: string }[] => [{ f: brand, b: caseHTML }, { f: webHTML, b: dash }];
