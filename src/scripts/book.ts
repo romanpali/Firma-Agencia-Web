@@ -143,7 +143,12 @@ export function mountBook(o: Mount) {
     if (!lite && lastT && now - lastT < 120) { dts.push(now - lastT); if (dts.length > 36) { dts.shift(); const m = [...dts].sort((a, b) => a - b)[18]; if (m > 34) { lite = true; sec.classList.add('bw-lite'); } } }
     lastT = now;
     let shadowA = 0, shadowF = 0;
+    // Solo las hojas que dan la cara reciben el puntero (la de la página derecha y la de la izquierda): el navegador no ordena bien por profundidad
+    // hojas separadas por 1 px, y sin esto un clic sobre el sitio interactivo caería en la hoja de abajo.
+    let ownR = -1, ownL = -1;
+    L.forEach((_, k) => { if (sm(cl(t - k)) * 180 <= 90) { if (ownR < 0) ownR = k; } else ownL = k; });
     L.forEach((l, k) => {
+      put(l.el, 'pointerEvents', k === ownR || k === ownL ? '' : 'none');
       const show = t < 0.004 ? k === 0 : k >= cur - 1 && k <= cur + 1; // con el libro cerrado solo se ve la portada
       if (show !== l.vis) { l.vis = show; put(l.el, 'display', show ? '' : 'none'); }
       // .live: la hoja está en el spread visible o junto a él; las piezas con entradas (fundidos y barridos) se animan al recibirla.
@@ -151,7 +156,7 @@ export function mountBook(o: Mount) {
       if (live !== l.live) { l.live = live; if (live) requestAnimationFrame(() => requestAnimationFrame(() => l.live && l.el.classList.add('live'))); else l.el.classList.remove('live'); }
       if (!show) return;
       const f = cl(t - k), a = sm(f) * 180;
-      const turning = f > 0.002 && f < 0.998;
+      const turning = f > 0.01 && f < 0.99; // casi en reposo la hoja se queda plana (y su contenido interactivo)
       if (turning) ensureCurved(l);
       const want = turning && l.curved ? 'curved' : 'flat';
       if (want !== l.mode) { l.mode = want; put(l.flat, 'display', want === 'flat' ? '' : 'none'); if (l.curved) put(l.curved, 'display', want === 'curved' ? '' : 'none'); }
@@ -199,7 +204,7 @@ export function mountBook(o: Mount) {
   };
   book.addEventListener('click', (ev) => {
     const el = ev.target as HTMLElement;
-    if (el.closest('a')) return;
+    if (el.closest('a, .mr-web')) return; // el sitio de Marea es interactivo: sus clics no voltean la hoja
     const g = el.closest<HTMLElement>('[data-bk-go]');
     if (g) { go(+g.dataset.bkGo!); return; }
     const leaf = el.closest<HTMLElement>('.bw-leaf');

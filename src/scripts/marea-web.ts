@@ -1,0 +1,147 @@
+// Sitio web (funcional) y ficha del proyecto de «Marea». Páginas de 40em × 26.7em, en HTML/CSS.
+// El sitio vive dentro de la página del libro: pestañas (Inicio, Clases, Experiencias, Tienda, Nosotros, Reservar), desplazamiento propio,
+// carrito y reservas con total. La lógica está en marea-ui.ts (clics delegados por data-int); los estilos, en styles/marea-web.css.
+import { svg, g } from './marea-ico';
+
+const tabs: [string, string][] = [['clases', 'Clases'], ['experiencias', 'Experiencias'], ['tienda', 'Tienda'], ['nosotros', 'Nosotros']];
+const go = (t: string) => `data-int="wtab" data-t="${t}"`;
+const btn = (t: string, cls: string, label: string) => `<button type="button" class="${cls}" ${go(t)}>${label}</button>`;
+
+const nav = `<div class="mw-nav mw-f" style="--d:.15s">
+<button type="button" class="wn-logo" ${go('inicio')}>${g}marea</button>
+<nav>${tabs.map(([k, t]) => btn(k, 'wn-t', t)).join('')}</nav>
+<button type="button" class="wn-bag" ${go('tienda')} aria-label="Carrito">${svg('bag')}<em data-cart-n>0</em></button>
+<button type="button" class="wn-cta" ${go('reservar')}>Reservar</button>
+<button type="button" class="wn-ex" data-int="wex" aria-label="Ampliar sitio">${svg('expand')}</button></div>`;
+
+const foot = `<footer class="wf"><div class="wf-l"><b>${g}marea</b><p>Escuela de surf<br>Puerto Escondido, Oaxaca</p></div>
+<div class="wf-m">${tabs.map(([k, t]) => btn(k, 'wf-a', t)).join('')}${btn('reservar', 'wf-a', 'Reservar')}</div>
+<p class="wf-r">hola@marea.example<br>Concepto de HumanCorp · Datos de ejemplo</p></footer>`;
+
+// ---------- clases ----------
+type Cl = { k: string; t: string; lv: string; d: string; h: string; p: number; ph: string; li: string[] };
+const clases: Cl[] = [
+  { k: 'principiante', t: 'Principiante', lv: 'Nivel 1', d: 'Tu primera ola, sin prisa.', h: '2 h', p: 650, ph: 'ph1', li: ['Seguridad y teoría en la arena', 'Remada, equilibrio y cómo ponerte de pie', 'Primeras olas con un instructor a tu lado'] },
+  { k: 'intermedio', t: 'Intermedio', lv: 'Nivel 2', d: 'Aprende a leer la ola y a girar.', h: '2 h', p: 750, ph: 'ph2', li: ['Lectura de olas y posicionamiento', 'Giros y control de velocidad', 'Revisión de tu sesión con video'] },
+  { k: 'ninos', t: 'Niños', lv: '7 a 13 años', d: 'Mar tranquilo y mucho juego.', h: '1 h 30', p: 550, ph: 'ph3', li: ['Grupos de la misma edad', 'Juegos para perder el miedo al agua', 'Un adulto de la escuela por cada tres niños'] },
+  { k: 'privada', t: 'Clase privada', lv: 'Uno a uno', d: 'Tu ritmo, tu objetivo.', h: '1 h 30', p: 1200, ph: 'ph4', li: ['Plan según tu nivel y tus metas', 'Horario flexible, también al amanecer', 'Ideal para parejas o familias'] },
+];
+const money = (n: number) => `$${n.toLocaleString('es-MX')}`;
+const classCard = (c: Cl) => `<article class="wc rv"><div class="wc-ph ${c.ph}"><span>${c.lv}</span></div><div class="wc-b"><h4>${c.t}</h4><p class="wc-d">${c.d}</p><ul>${c.li.map((x) => `<li>${x}</li>`).join('')}</ul>
+<div class="wc-f"><div><b>${money(c.p)}</b><small>por persona · ${c.h}</small></div><button type="button" class="wb" data-int="wbook" data-nivel="${c.k}">Reservar</button></div></div></article>`;
+
+// ---------- tienda ----------
+const prodArt: Record<string, string> = {
+  tabla: '<svg viewBox="0 0 60 120" aria-hidden="true"><path d="M30 4C42 22 46 52 44 86c-1 16-7 26-14 30-7-4-13-14-14-30C14 52 18 22 30 4z" fill="#f6efe6"/><path d="M30 10v100" stroke="#ff9a62" stroke-width="1.6"/><path d="M18 78c8 3 16 3 24 0" stroke="#0a1f36" stroke-width="1.4" fill="none" opacity=".55"/><path d="M23 104l-2 8 5-3zM37 104l2 8-5-3z" fill="#0a1f36" opacity=".6"/></svg>',
+  traje: '<svg viewBox="0 0 100 100" aria-hidden="true"><path d="M34 6h32l18 10 8 40-12 4-5-24v60H54V62h-8v34H23V36l-5 24-12-4 8-40z" fill="#0a1f36"/><path d="M34 6c3 9 9 13 16 13s13-4 16-13" stroke="#ff9a62" stroke-width="2.4" fill="none"/><path d="M50 19v34" stroke="rgba(255,255,255,.25)" stroke-width="1.4"/></svg>',
+  playera: '<svg viewBox="0 0 100 90" aria-hidden="true"><path d="M30 6L8 18l8 18 10-5v51h48V31l10 5 8-18L70 6c-4 8-12 11-20 11S34 14 30 6z" fill="#f6efe6"/><path d="M38 44c8-5 16-5 24 0M36 52c9-5 19-5 28 0" stroke="#8b78b8" stroke-width="2" fill="none" stroke-linecap="round"/></svg>',
+  gorra: '<svg viewBox="0 0 100 80" aria-hidden="true"><path d="M16 56C16 30 32 16 52 16s30 14 30 40z" fill="#8b78b8"/><path d="M10 58c20-6 46-6 74 0 7 2 5 9-2 9H14c-6 0-8-7-4-9z" fill="#5d4b8f"/><circle cx="52" cy="14" r="3" fill="#ffd9bd"/></svg>',
+  parafina: '<svg viewBox="0 0 100 80" aria-hidden="true"><rect x="14" y="22" width="72" height="42" rx="10" fill="#ffd9bd"/><path d="M26 22v42M42 22v42M58 22v42M74 22v42" stroke="#ff9a62" stroke-width="1.2" opacity=".6"/><rect x="30" y="38" width="40" height="10" rx="5" fill="#0a1f36"/></svg>',
+  bolsa: '<svg viewBox="0 0 100 100" aria-hidden="true"><path d="M22 36h56l4 56H18z" fill="#ff9a62"/><path d="M36 36c0-16 4-24 14-24s14 8 14 24" fill="none" stroke="#0a1f36" stroke-width="4" stroke-linecap="round"/><path d="M34 62c10-5 22-5 32 0" stroke="#0a1f36" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg>',
+};
+const prods: [string, string, string, number, string][] = [
+  ['tabla', 'Tabla Marea 7′0″', 'Epoxi · ideal para aprender', 9800, 'pt1'],
+  ['traje', 'Traje 3/2 mm', 'Neopreno · tallas S a XL', 2450, 'pt2'],
+  ['playera', 'Playera Marea', 'Algodón orgánico · unisex', 480, 'pt3'],
+  ['gorra', 'Gorra de sol', 'Ajustable · protección UV', 390, 'pt4'],
+  ['parafina', 'Parafina de coco', 'Para agua tibia · 80 g', 120, 'pt5'],
+  ['bolsa', 'Bolsa de playa', 'Lona resistente al agua', 650, 'pt6'],
+];
+const prodCard = ([k, t, d, p, c]: (typeof prods)[number]) => `<article class="wp rv"><div class="wp-ph ${c}">${prodArt[k]}</div><h4>${t}</h4><p>${d}</p><div class="wp-f"><b>${money(p)}</b><button type="button" class="wb wb-s" data-int="wadd" data-p="${p}">Agregar</button></div></article>`;
+
+// ---------- experiencias ----------
+const exps: [string, string, string, string, string[], string][] = [
+  ['Atardecer', 'Sesión al atardecer', 'La hora dorada, con el mar más suave. Una clase corta, fotos de tu sesión y fruta al terminar.', 'ph2', ['2 h', 'Máx. 6 personas', '$850'], 'e1'],
+  ['Fin de semana', 'Retiro de surf y calma', 'Dos noches frente al mar: clases por la mañana, yoga al atardecer y comidas ligeras.', 'ph4', ['2 noches', 'Todo incluido', '$6,900'], 'e2'],
+  ['Surf y yoga', 'Mañana de mar y movimiento', 'Calentamiento con yoga, clase de surf y un desayuno largo en la playa.', 'ph1', ['3 h', 'Máx. 8 personas', '$980'], 'e3'],
+  ['Para equipos', 'Hoteles, empresas y grupos', 'Armamos la jornada para tu equipo o tus huéspedes, con horarios y precios a medida.', 'ph3', ['Desde 8 personas', 'A medida', 'Cotiza'], 'e4'],
+];
+const expRow = ([tag, t, d, ph, m]: (typeof exps)[number]) => `<article class="we rv"><div class="we-ph ${ph}"><span>${tag}</span></div><div class="we-b"><h4>${t}</h4><p>${d}</p><div class="we-m">${m.map((x) => `<i>${x}</i>`).join('')}</div><button type="button" class="wb" ${go('reservar')}>Pedir fecha</button></div></article>`;
+
+// ---------- nosotros ----------
+const team: [string, string, string, string][] = [['DS', 'Diego Salas', 'Instructor principal · 12 años en el agua', 'a'], ['AR', 'Ana Rivera', 'Surf y yoga · primeros auxilios', 'b'], ['LM', 'Luis Mendoza', 'Clases para niños y familias', 'c']];
+const vals: [string, string, string][] = [['01', 'El mar manda', 'Si las condiciones no son seguras, reprogramamos sin costo.'], ['02', 'Grupos pequeños', 'Máximo seis personas por instructor para que nadie quede atrás.'], ['03', 'Aprender sin prisa', 'Cada quien avanza a su ritmo. La primera ola llega cuando llega.']];
+
+// ---------- reservar ----------
+const days = ['Sáb 14', 'Dom 15', 'Lun 16', 'Mar 17', 'Mié 18', 'Jue 19', 'Vie 20'];
+const hours: [string, string, boolean][] = [['07:00', '2 lugares', false], ['09:00', '4 lugares', false], ['11:00', 'Lleno', true], ['17:00', '5 lugares', false]];
+const chip = (g_: string, v: string, label: string, sub = '', full = false) => `<button type="button" class="wk${full ? ' full' : ''}" data-int="wpick" data-g="${g_}" data-v="${v}">${label}${sub ? `<small>${sub}</small>` : ''}</button>`;
+
+export const webHTML = `<div class="pg mr-web" data-rp="dark" data-tab="inicio" data-nivel="principiante" data-dia="0" data-hora="07:00" data-pax="2" data-cart="0" data-total="0">
+${nav}
+<div class="mw-scroll">
+
+<section class="wv wv-inicio">
+ <div class="wh"><i class="mw-photo"></i><i class="mw-shade"></i>
+  <div class="mw-hero">
+   <p class="mw-k mw-f" style="--d:.5s"><i></i>Escuela de surf · Puerto Escondido</p>
+   <h4 class="mw-h"><span class="mw-w" style="--d:.65s">Aprende a</span><span class="mw-w mw-it" style="--d:.95s">leer el mar.</span></h4>
+   <p class="mw-s mw-f" style="--d:1.4s">Clases para todos los niveles, con equipo incluido y grupos reducidos.</p>
+   <div class="mw-cta mw-f" style="--d:1.6s">${btn('reservar', 'wb wb-l', 'Reservar clase')}${btn('clases', 'wb-g', 'Ver clases →')}</div>
+  </div>
+  <div class="mw-cond mw-f" style="--d:1.2s"><small>Mar hoy</small><div><b>1.2 m</b><span>Oleaje</span></div><div><b>14 s</b><span>Periodo</span></div><div><b>27 °</b><span>Agua</span></div></div>
+  <div class="mw-book mw-f" style="--d:1.85s" ${go('reservar')}><div><small>Nivel</small><b>Principiante</b></div><div><small>Fecha</small><b>Sáb 14 · 07:00</b></div><div><small>Personas</small><b>2 personas</b></div><i>Buscar horarios</i></div>
+ </div>
+ <div class="ws"><p class="wk-o rv">Nuestras clases</p><h3 class="wt rv">Un nivel para cada <em>ola.</em></h3>
+  <div class="wg3 rv">${clases.slice(0, 3).map((c) => `<button type="button" class="wm" ${go('clases')}><div class="wc-ph ${c.ph}"><span>${c.lv}</span></div><b>${c.t}</b><small>${c.d}</small><em>Desde ${money(c.p)}</em></button>`).join('')}</div></div>
+ <div class="wband rv"><i class="wband-ph"></i><div><p class="wk-o">Experiencia</p><h3 class="wt">Surf a la hora <em>dorada.</em></h3><p class="ws-p">Una clase corta con el mar más suave, fotos de tu sesión y fruta al terminar.</p>${btn('experiencias', 'wb wb-l', 'Ver experiencias')}</div></div>
+ <div class="ws wfeat"><div class="rv"><i>${svg('check')}</i><b>Equipo incluido</b><span>Tabla, licra y protector.</span></div><div class="rv"><i>${svg('crm')}</i><b>Grupos de máx. 6</b><span>Atención real de tu instructor.</span></div><div class="rv"><i>${svg('cal')}</i><b>Reserva en línea</b><span>Elige día y hora en un minuto.</span></div></div>
+ ${foot}
+</section>
+
+<section class="wv wv-clases"><div class="ws wtop"><p class="wk-o rv">Clases</p><h3 class="wt rv">Elige tu <em>nivel.</em></h3><p class="ws-p rv">Todas incluyen tabla, licra y protector solar. Si el mar no está seguro, reprogramamos sin costo.</p>
+ <div class="wg2">${clases.map(classCard).join('')}</div>
+ <div class="wsch rv"><p class="wk-o">Horarios de la semana</p><div>${[['07:00', 'Principiantes · Intermedio'], ['09:00', 'Clases privadas · Niños'], ['11:00', 'Niños · Principiantes'], ['17:00', 'Atardecer · Intermedio']].map(([h, t]) => `<p><b>${h}</b><span>${t}</span></p>`).join('')}</div></div></div>${foot}</section>
+
+<section class="wv wv-experiencias"><div class="ws wtop"><p class="wk-o rv">Experiencias</p><h3 class="wt rv">Más que una <em>clase.</em></h3><p class="ws-p rv">Jornadas pensadas para disfrutar el mar con calma, solos, en pareja o con tu equipo.</p>
+ <div class="wcol">${exps.map(expRow).join('')}</div></div>${foot}</section>
+
+<section class="wv wv-tienda"><div class="ws wtop"><p class="wk-o rv">Tienda</p><h3 class="wt rv">Para el agua y para <em>después.</em></h3>
+ <p class="wcart rv"><span data-cart-n>0</span> artículos en tu carrito · <b data-cart-t>$0</b></p>
+ <div class="wg3 wg3p">${prods.map(prodCard).join('')}</div></div>${foot}</section>
+
+<section class="wv wv-nosotros"><div class="ws wtop"><p class="wk-o rv">Nosotros</p><h3 class="wt rv">Una escuela <em>hecha en el agua.</em></h3>
+ <div class="wnos"><p class="ws-p rv">Marea nació para enseñar a surfear sin presión: con grupos pequeños, equipo cuidado y un mar que se respeta. Nos importa más que disfrutes tu primera ola que la cantidad de clases que tomes.</p><i class="wnos-ph ph2 rv"></i></div>
+ <div class="wvals">${vals.map(([n, t, d]) => `<div class="rv"><em>${n}</em><b>${t}</b><span>${d}</span></div>`).join('')}</div>
+ <p class="wk-o rv" style="margin-top:2.6em">El equipo</p>
+ <div class="wteam">${team.map(([i, n, r, c]) => `<div class="rv"><i class="av-${c}">${i}</i><b>${n}</b><span>${r}</span></div>`).join('')}</div>
+ <div class="wloc rv"><div><p class="wk-o">Dónde estamos</p><b>Playa Carrizalillo, Puerto Escondido</b><span>Todos los días de 6:30 a 19:00 · hola@marea.example</span></div>${btn('reservar', 'wb wb-l', 'Reservar clase')}</div></div>${foot}</section>
+
+<section class="wv wv-reservar"><div class="ws wtop"><p class="wk-o rv">Reservar</p><h3 class="wt rv">Reserva tu <em>lugar.</em></h3>
+ <div class="wres">
+  <div class="wform">
+   <div class="wst"><p><i>1</i>Clase</p><div>${clases.map((c) => chip('nivel', c.k, c.t, `${money(c.p)} · ${c.h}`)).join('')}</div></div>
+   <div class="wst"><p><i>2</i>Día</p><div>${days.map((d, i) => chip('dia', String(i), d)).join('')}</div></div>
+   <div class="wst"><p><i>3</i>Hora</p><div>${hours.map(([h, s, f]) => chip('hora', h, h, s, f)).join('')}</div></div>
+   <div class="wst wst-p"><p><i>4</i>Personas</p><div class="wpax"><button type="button" data-int="wpax" data-d="-1" aria-label="Menos">−</button><b data-sum="pax">2</b><button type="button" data-int="wpax" data-d="1" aria-label="Más">+</button></div></div>
+   <div class="wst"><p><i>5</i>Tus datos</p><div class="wfld"><input type="text" placeholder="Nombre" aria-label="Nombre" /><input type="text" placeholder="WhatsApp" aria-label="WhatsApp" /></div></div>
+  </div>
+  <aside class="wsum"><div class="wsum-i"><p class="wk-o">Tu reserva</p>
+   <dl><div><dt>Clase</dt><dd data-sum="clase">Principiante</dd></div><div><dt>Día</dt><dd data-sum="dia">Sáb 14</dd></div><div><dt>Hora</dt><dd data-sum="hora">07:00</dd></div><div><dt>Personas</dt><dd data-sum="pax2">2</dd></div></dl>
+   <div class="wtot"><span>Total</span><b data-sum="total">$1,300</b></div>
+   <button type="button" class="wb wb-l wb-w" data-int="wconfirm">Confirmar reserva</button><small>Equipo incluido · Cancela sin costo hasta 24 h antes</small></div>
+   <div class="wdone"><i>${svg('check')}</i><h4>¡Reserva confirmada!</h4><p data-sum="done">Te esperamos en la playa.</p><span data-sum="code">MAR-0142</span><button type="button" class="wb-g" data-int="wreset">Hacer otra reserva</button></div></aside>
+ </div></div>${foot}</section>
+
+</div></div>`;
+
+// ---------- ficha del proyecto ----------
+const hd: [string, string, string][] = [
+  ['brush', 'Identidad de marca', 'Logotipo, paleta, tipografías y manual de uso.'],
+  ['globe', 'Sitio web completo', 'Inicio, clases, experiencias, tienda y nosotros.'],
+  ['cal', 'Reservas en línea', 'Clase, día y hora con cupos y confirmación.'],
+  ['bag', 'Tienda en línea', 'Catálogo y carrito de tablas, trajes y ropa.'],
+  ['crm', 'Ventas y CRM', 'Prospectos, cotizaciones y seguimiento.'],
+  ['fin', 'Finanzas y facturación', 'Ingresos, gastos, cobranza y facturas CFDI.'],
+  ['cal', 'Calendario de clases', 'Cupos por horario y nivel, a la semana.'],
+  ['bolt', 'Automatización', 'WhatsApp, redes sociales, llamadas y agenda.'],
+  ['ia', 'Asistente con IA', 'Un chat con resúmenes y prioridades del negocio.'],
+  ['dat', 'Datos e infraestructura', 'Hospedaje, respaldos diarios y monitoreo.'],
+];
+export const caseHTML = `<div class="pg mr-case" data-rp="dark"><i class="mk-bg"></i><i class="mr-grain"></i>
+<div class="mk-l mw-f" style="--d:.2s"><p class="mk-k">Proyecto · 2026</p><h4>Marea</h4><p class="mk-d">Escuela de surf en el Pacífico mexicano. Una marca, un sitio y un panel pensados juntos.</p>
+<dl><div><dt>Giro</dt><dd>Escuela de surf</dd></div><div><dt>Lugar</dt><dd>Puerto Escondido</dd></div><div><dt>Tipo</dt><dd>Proyecto propio</dd></div></dl>
+<p class="mk-h">Paleta</p><div class="mk-sw"><i style="--c:#0a1f36"></i><i style="--c:#8b78b8"></i><i style="--c:#ff9a62"></i><i style="--c:#f6efe6"></i></div>
+<p class="mk-f">Inter Tight · Fraunces</p></div>
+<div class="mk-g">${hd.map(([i, t, d], n) => `<div class="mw-f" style="--d:${(0.35 + n * 0.09).toFixed(2)}s"><i>${svg(i)}</i><div><b>${t}</b><span>${d}</span></div></div>`).join('')}</div>
+<p class="mk-n">Concepto de HumanCorp · No es un cliente real; los datos son de ejemplo.</p></div>`;

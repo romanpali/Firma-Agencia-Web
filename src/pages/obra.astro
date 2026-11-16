@@ -6,6 +6,7 @@ import ScrollFx from '../components/ScrollFx.astro';
 import BookProps from '../components/BookProps.astro';
 import XmasProps from '../components/XmasProps.astro';
 import '../styles/marea.css';
+import '../styles/marea-web.css';
 import { pagesFor, leavesMarkup, type Proj } from '../scripts/book';
 import { mareaLeaves, mareaPieces } from '../scripts/marea';
 
@@ -117,6 +118,7 @@ const leavesHtml = leavesMarkup(leaves);
     <script>
       import { mountBook } from '../scripts/book';
       import '../scripts/marea-ui';
+      import '../scripts/marea-site';
       const main = document.querySelector<HTMLElement>('main')!;
       const sec = document.querySelector<HTMLElement>('[data-book]')!;
       const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -146,6 +148,19 @@ const leavesHtml = leavesMarkup(leaves);
         if (cur !== target) raf = requestAnimationFrame(update);
       };
       addEventListener('scroll', () => { if (!raf) { lastT = 0; raf = requestAnimationFrame(update); } }, { passive: true });
+      // Al dejar de desplazarse, si una hoja quedó casi abierta o casi cerrada, el libro la asienta del todo:
+      // así las páginas interactivas (como el sitio de Marea) quedan planas y se pueden usar.
+      let snapT = 0;
+      addEventListener('scroll', () => {
+        clearTimeout(snapT);
+        if (reduced || !sec.offsetHeight) return;
+        snapT = window.setTimeout(() => {
+          const n = sec.querySelectorAll('.bw-leaf').length, range = Math.max(1, sec.offsetHeight - innerHeight);
+          const t = Math.max(0, Math.min(1, ((scrollY - top) / range - 0.05) / 0.88)) * n, k = Math.round(t);
+          if (k < 1 || k > n - 1 || Math.abs(t - k) < 0.004 || Math.abs(t - k) > 0.2) return;
+          scrollTo({ top: top + (0.05 + (k / n) * 0.88) * range, behavior: 'smooth' });
+        }, 260);
+      }, { passive: true });
       addEventListener('resize', () => { measure(); cur = scrollY; b.update(); });
       addEventListener('load', () => { measure(); cur = scrollY; b.update(); });
       const lamp = sec.querySelector<HTMLElement>('.bw-lamp')!;
