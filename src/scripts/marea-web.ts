@@ -7,13 +7,6 @@ const tabs: [string, string][] = [['clases', 'Clases'], ['experiencias', 'Experi
 const go = (t: string) => `data-int="wtab" data-t="${t}"`;
 const btn = (t: string, cls: string, label: string) => `<button type="button" class="${cls}" ${go(t)}>${label}</button>`;
 
-const nav = `<div class="mw-nav mw-f" style="--d:.15s">
-<button type="button" class="wn-logo" ${go('inicio')}>${g}marea</button>
-<nav>${tabs.map(([k, t]) => btn(k, 'wn-t', t)).join('')}</nav>
-<button type="button" class="wn-bag" ${go('tienda')} aria-label="Carrito">${svg('bag')}<em data-cart-n>0</em></button>
-<button type="button" class="wn-cta" ${go('reservar')}>Reservar</button>
-<button type="button" class="wn-ex" data-int="wex" aria-label="Ampliar sitio">${svg('expand')}</button></div>`;
-
 const foot = `<footer class="wf"><div class="wf-l"><b>${g}marea</b><p>Escuela de surf<br>Puerto Escondido, Oaxaca</p></div>
 <div class="wf-m">${tabs.map(([k, t]) => btn(k, 'wf-a', t)).join('')}${btn('reservar', 'wf-a', 'Reservar')}</div>
 <p class="wf-r">hola@marea.example<br>Concepto de HumanCorp · Datos de ejemplo</p></footer>`;
@@ -30,24 +23,31 @@ const money = (n: number) => `$${n.toLocaleString('es-MX')}`;
 const classCard = (c: Cl) => `<article class="wc rv"><div class="wc-ph ${c.ph}"><span>${c.lv}</span></div><div class="wc-b"><h4>${c.t}</h4><p class="wc-d">${c.d}</p><ul>${c.li.map((x) => `<li>${x}</li>`).join('')}</ul>
 <div class="wc-f"><div><b>${money(c.p)}</b><small>por persona · ${c.h}</small></div><button type="button" class="wb" data-int="wbook" data-nivel="${c.k}">Reservar</button></div></div></article>`;
 
-// ---------- tienda ----------
+// ---------- tienda (merch: minimalista, casual y de lujo discreto) ----------
 const prodArt: Record<string, string> = {
-  tabla: '<svg viewBox="0 0 60 120" aria-hidden="true"><path d="M30 4C42 22 46 52 44 86c-1 16-7 26-14 30-7-4-13-14-14-30C14 52 18 22 30 4z" fill="#f6efe6"/><path d="M30 10v100" stroke="#ff9a62" stroke-width="1.6"/><path d="M18 78c8 3 16 3 24 0" stroke="#0a1f36" stroke-width="1.4" fill="none" opacity=".55"/><path d="M23 104l-2 8 5-3zM37 104l2 8-5-3z" fill="#0a1f36" opacity=".6"/></svg>',
-  traje: '<svg viewBox="0 0 100 100" aria-hidden="true"><path d="M34 6h32l18 10 8 40-12 4-5-24v60H54V62h-8v34H23V36l-5 24-12-4 8-40z" fill="#0a1f36"/><path d="M34 6c3 9 9 13 16 13s13-4 16-13" stroke="#ff9a62" stroke-width="2.4" fill="none"/><path d="M50 19v34" stroke="rgba(255,255,255,.25)" stroke-width="1.4"/></svg>',
-  playera: '<svg viewBox="0 0 100 90" aria-hidden="true"><path d="M30 6L8 18l8 18 10-5v51h48V31l10 5 8-18L70 6c-4 8-12 11-20 11S34 14 30 6z" fill="#f6efe6"/><path d="M38 44c8-5 16-5 24 0M36 52c9-5 19-5 28 0" stroke="#8b78b8" stroke-width="2" fill="none" stroke-linecap="round"/></svg>',
-  gorra: '<svg viewBox="0 0 100 80" aria-hidden="true"><path d="M16 56C16 30 32 16 52 16s30 14 30 40z" fill="#8b78b8"/><path d="M10 58c20-6 46-6 74 0 7 2 5 9-2 9H14c-6 0-8-7-4-9z" fill="#5d4b8f"/><circle cx="52" cy="14" r="3" fill="#ffd9bd"/></svg>',
-  parafina: '<svg viewBox="0 0 100 80" aria-hidden="true"><rect x="14" y="22" width="72" height="42" rx="10" fill="#ffd9bd"/><path d="M26 22v42M42 22v42M58 22v42M74 22v42" stroke="#ff9a62" stroke-width="1.2" opacity=".6"/><rect x="30" y="38" width="40" height="10" rx="5" fill="#0a1f36"/></svg>',
-  bolsa: '<svg viewBox="0 0 100 100" aria-hidden="true"><path d="M22 36h56l4 56H18z" fill="#ff9a62"/><path d="M36 36c0-16 4-24 14-24s14 8 14 24" fill="none" stroke="#0a1f36" stroke-width="4" stroke-linecap="round"/><path d="M34 62c10-5 22-5 32 0" stroke="#0a1f36" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg>',
+  tabla: '<svg viewBox="0 0 60 120" aria-hidden="true"><path d="M30 4C42 22 46 52 44 86c-1 16-7 26-14 30-7-4-13-14-14-30C14 52 18 22 30 4z" fill="#fbf9f4"/><path d="M30 10v100" stroke="#0a1f36" stroke-width="1.2" opacity=".55"/><path d="M19 82c7 3 15 3 22 0" stroke="#0a1f36" stroke-width="1.2" fill="none" opacity=".4"/><path d="M23 104l-2 8 5-3zM37 104l2 8-5-3z" fill="#0a1f36" opacity=".7"/></svg>',
+  traje: '<svg viewBox="0 0 100 100" aria-hidden="true"><path d="M34 6h32l18 10 8 40-12 4-5-24v60H54V62h-8v34H23V36l-5 24-12-4 8-40z" fill="#0a1f36"/><path d="M34 6c3 9 9 13 16 13s13-4 16-13" stroke="#f4f1ea" stroke-width="1.6" fill="none" opacity=".7"/><path d="M50 19v34" stroke="rgba(255,255,255,.22)" stroke-width="1.2"/></svg>',
+  playera: '<svg viewBox="0 0 100 90" aria-hidden="true"><path d="M30 6L8 18l8 18 10-5v51h48V31l10 5 8-18L70 6c-4 8-12 11-20 11S34 14 30 6z" fill="#fbf9f4"/><path d="M40 46c7-4 13-4 20 0M38 52c8-4 16-4 24 0" stroke="#0a1f36" stroke-width="1.6" fill="none" stroke-linecap="round" opacity=".8"/></svg>',
+  gorra: '<svg viewBox="0 0 100 80" aria-hidden="true"><path d="M16 56C16 30 32 16 52 16s30 14 30 40z" fill="#0a1f36"/><path d="M10 58c20-6 46-6 74 0 7 2 5 9-2 9H14c-6 0-8-7-4-9z" fill="#14304f"/><circle cx="52" cy="14" r="2.6" fill="#f4f1ea"/></svg>',
+  parafina: '<svg viewBox="0 0 100 80" aria-hidden="true"><rect x="14" y="22" width="72" height="42" rx="10" fill="#fbf9f4"/><path d="M26 22v42M42 22v42M58 22v42M74 22v42" stroke="#0a1f36" stroke-width="1" opacity=".18"/><rect x="30" y="38" width="40" height="10" rx="5" fill="#0a1f36"/></svg>',
+  bolsa: '<svg viewBox="0 0 100 100" aria-hidden="true"><path d="M22 36h56l4 56H18z" fill="#efe6d6"/><path d="M36 36c0-16 4-24 14-24s14 8 14 24" fill="none" stroke="#0a1f36" stroke-width="3.2" stroke-linecap="round"/><path d="M34 62c10-5 22-5 32 0" stroke="#0a1f36" stroke-width="2" fill="none" stroke-linecap="round" opacity=".8"/></svg>',
+  toalla: '<svg viewBox="0 0 80 110" aria-hidden="true"><rect x="12" y="6" width="56" height="88" rx="3" fill="#fbf9f4"/><path d="M12 26h56M12 34h56" stroke="#0a1f36" stroke-width="3.4"/><path d="M12 62h56" stroke="#0a1f36" stroke-width="1.2" opacity=".3"/><path d="M18 94v10M26 94v10M34 94v10M42 94v10M50 94v10M58 94v10" stroke="#e6dfd2" stroke-width="2"/></svg>',
+  sudadera: '<svg viewBox="0 0 100 110" aria-hidden="true"><path d="M34 12c4 8 10 12 16 12s12-4 16-12l18 8 10 38-12 4-4-20v54H26V42l-4 20-12-4 10-38z" fill="#3a3f4a"/><path d="M36 12c0-8 7-12 14-12s14 4 14 12c-4 6-9 9-14 9s-10-3-14-9z" fill="#2b2f38"/><path d="M38 78h24v10H38z" fill="#2b2f38"/><path d="M45 22v16M55 22v16" stroke="#f4f1ea" stroke-width="1.2" opacity=".6"/></svg>',
+  termo: '<svg viewBox="0 0 70 120" aria-hidden="true"><rect x="24" y="4" width="22" height="12" rx="4" fill="#14304f"/><rect x="18" y="16" width="34" height="92" rx="10" fill="#0a1f36"/><path d="M24 62c4-4 8-4 11 0s7 4 11 0" stroke="#f4f1ea" stroke-width="1.4" fill="none" opacity=".8" stroke-linecap="round"/></svg>',
 };
-const prods: [string, string, string, number, string][] = [
-  ['tabla', 'Tabla Marea 7′0″', 'Epoxi · ideal para aprender', 9800, 'pt1'],
-  ['traje', 'Traje 3/2 mm', 'Neopreno · tallas S a XL', 2450, 'pt2'],
-  ['playera', 'Playera Marea', 'Algodón orgánico · unisex', 480, 'pt3'],
-  ['gorra', 'Gorra de sol', 'Ajustable · protección UV', 390, 'pt4'],
-  ['parafina', 'Parafina de coco', 'Para agua tibia · 80 g', 120, 'pt5'],
-  ['bolsa', 'Bolsa de playa', 'Lona resistente al agua', 650, 'pt6'],
+const prods: [string, string, string, number, string, string, string][] = [
+  ['playera', 'Playera Marea', 'Algodón orgánico', 480, 'pt3', 'ropa', 'Nuevo'],
+  ['sudadera', 'Sudadera Costa', 'Felpa gruesa', 1150, 'pt7', 'ropa', ''],
+  ['gorra', 'Gorra de sol', 'Protección UV', 390, 'pt1', 'accesorios', ''],
+  ['bolsa', 'Bolsa de playa', 'Lona resistente al agua', 650, 'pt6', 'accesorios', ''],
+  ['toalla', 'Toalla Rayas', 'Algodón turco', 720, 'pt4', 'accesorios', 'Nuevo'],
+  ['termo', 'Termo Marea', 'Acero · 750 ml', 540, 'pt5', 'accesorios', ''],
+  ['tabla', 'Tabla Marea 7′0″', 'Epoxi, ideal para aprender', 9800, 'pt1', 'equipo', ''],
+  ['traje', 'Traje 3/2 mm', 'Neopreno · S a XL', 2450, 'pt8', 'equipo', ''],
+  ['parafina', 'Parafina de coco', 'Para agua tibia', 120, 'pt4', 'equipo', ''],
 ];
-const prodCard = ([k, t, d, p, c]: (typeof prods)[number]) => `<article class="wp rv"><div class="wp-ph ${c}">${prodArt[k]}</div><h4>${t}</h4><p>${d}</p><div class="wp-f"><b>${money(p)}</b><button type="button" class="wb wb-s" data-int="wadd" data-p="${p}">Agregar</button></div></article>`;
+const prodCard = ([k, t, d, p, c, cat, tag]: (typeof prods)[number]) => `<article class="wp rv" data-c="${cat}"><div class="wp-ph ${c}">${prodArt[k]}${tag ? `<span class="wp-tag">${tag}</span>` : ''}<button type="button" class="wp-add" data-int="wadd" data-p="${p}">Agregar +</button></div><div class="wp-i"><div><h4>${t}</h4><p>${d}</p></div><b>${money(p)}</b></div></article>`;
+const filtros: [string, string][] = [['todo', 'Todo'], ['ropa', 'Ropa'], ['accesorios', 'Accesorios'], ['equipo', 'Equipo']];
 
 // ---------- experiencias ----------
 const exps: [string, string, string, string, string[], string][] = [
@@ -67,8 +67,8 @@ const days = ['Sáb 14', 'Dom 15', 'Lun 16', 'Mar 17', 'Mié 18', 'Jue 19', 'Vie
 const hours: [string, string, boolean][] = [['07:00', '2 lugares', false], ['09:00', '4 lugares', false], ['11:00', 'Lleno', true], ['17:00', '5 lugares', false]];
 const chip = (g_: string, v: string, label: string, sub = '', full = false) => `<button type="button" class="wk${full ? ' full' : ''}" data-int="wpick" data-g="${g_}" data-v="${v}">${label}${sub ? `<small>${sub}</small>` : ''}</button>`;
 
-export const webHTML = `<div class="pg mr-web" data-rp="dark" data-tab="inicio" data-nivel="principiante" data-dia="0" data-hora="07:00" data-pax="2" data-cart="0" data-total="0">
-${nav}
+export const webHTML = `<div class="pg mr-web" data-rp="dark" data-fil="todo" data-nivel="principiante" data-dia="0" data-hora="07:00" data-pax="2" data-cart="0" data-total="0">
+<button type="button" class="wn-ex" data-int="wex" aria-label="Ampliar sitio">${svg('expand')}</button>
 <div class="mw-scroll">
 
 <section class="wv wv-inicio">
@@ -81,31 +81,31 @@ ${nav}
   </div>
   <div class="mw-cond mw-f" style="--d:1.2s"><small>Mar hoy</small><div><b>1.2 m</b><span>Oleaje</span></div><div><b>14 s</b><span>Periodo</span></div><div><b>27 °</b><span>Agua</span></div></div>
   <div class="mw-book mw-f" style="--d:1.85s" ${go('reservar')}><div><small>Nivel</small><b>Principiante</b></div><div><small>Fecha</small><b>Sáb 14 · 07:00</b></div><div><small>Personas</small><b>2 personas</b></div><i>Buscar horarios</i></div>
+  <p class="mw-hint mw-f" style="--d:2.2s">Desplázate</p>
  </div>
- <div class="wsx"><p class="wk-o rv">Nuestras clases</p><h3 class="wt rv">Un nivel para cada <em>ola.</em></h3>
-  <div class="wg3 rv">${clases.slice(0, 3).map((c) => `<button type="button" class="wm" ${go('clases')}><div class="wc-ph ${c.ph}"><span>${c.lv}</span></div><b>${c.t}</b><small>${c.d}</small><em>Desde ${money(c.p)}</em></button>`).join('')}</div></div>
- <div class="wband rv"><i class="wband-ph"></i><div><p class="wk-o">Experiencia</p><h3 class="wt">Surf a la hora <em>dorada.</em></h3><p class="ws-p">Una clase corta con el mar más suave, fotos de tu sesión y fruta al terminar.</p>${btn('experiencias', 'wb wb-l', 'Ver experiencias')}</div></div>
  <div class="wsx wfeat"><div class="rv"><i>${svg('check')}</i><b>Equipo incluido</b><span>Tabla, licra y protector.</span></div><div class="rv"><i>${svg('crm')}</i><b>Grupos de máx. 6</b><span>Atención real de tu instructor.</span></div><div class="rv"><i>${svg('cal')}</i><b>Reserva en línea</b><span>Elige día y hora en un minuto.</span></div></div>
- ${foot}
 </section>
 
 <section class="wv wv-clases"><div class="wsx wtop"><p class="wk-o rv">Clases</p><h3 class="wt rv">Elige tu <em>nivel.</em></h3><p class="ws-p rv">Todas incluyen tabla, licra y protector solar. Si el mar no está seguro, reprogramamos sin costo.</p>
  <div class="wg2">${clases.map(classCard).join('')}</div>
- <div class="wsch rv"><p class="wk-o">Horarios de la semana</p><div>${[['07:00', 'Principiantes · Intermedio'], ['09:00', 'Clases privadas · Niños'], ['11:00', 'Niños · Principiantes'], ['17:00', 'Atardecer · Intermedio']].map(([h, t]) => `<p><b>${h}</b><span>${t}</span></p>`).join('')}</div></div></div>${foot}</section>
+ <div class="wsch rv"><p class="wk-o">Horarios de la semana</p><div>${[['07:00', 'Principiantes · Intermedio'], ['09:00', 'Clases privadas · Niños'], ['11:00', 'Niños · Principiantes'], ['17:00', 'Atardecer · Intermedio']].map(([h, t]) => `<p><b>${h}</b><span>${t}</span></p>`).join('')}</div></div></div></section>
 
-<section class="wv wv-experiencias"><div class="wsx wtop"><p class="wk-o rv">Experiencias</p><h3 class="wt rv">Más que una <em>clase.</em></h3><p class="ws-p rv">Jornadas pensadas para disfrutar el mar con calma, solos, en pareja o con tu equipo.</p>
- <div class="wcol">${exps.map(expRow).join('')}</div></div>${foot}</section>
+<section class="wv wv-experiencias wlt"><div class="wsx wtop"><p class="wk-o rv">Experiencias</p><h3 class="wt rv">Más que una <em>clase.</em></h3><p class="ws-p rv">Jornadas pensadas para disfrutar el mar con calma, solos, en pareja o con tu equipo.</p>
+ <div class="wcol">${exps.map(expRow).join('')}</div></div></section>
 
-<section class="wv wv-tienda"><div class="wsx wtop"><p class="wk-o rv">Tienda</p><h3 class="wt rv">Para el agua y para <em>después.</em></h3>
- <p class="wcart rv"><span data-cart-n>0</span> artículos en tu carrito · <b data-cart-t>$0</b></p>
- <div class="wg3 wg3p">${prods.map(prodCard).join('')}</div></div>${foot}</section>
+<section class="wv wv-tienda wlt"><div class="wsx wtop">
+ <div class="wsh"><div><p class="wk-o rv">Tienda · Marea Goods</p><h3 class="wt rv">Hecho para el agua,<br><em>y para después.</em></h3></div>
+ <p class="wcartb rv">Carrito<b><i data-cart-n>0</i> · <i data-cart-t>$0</i></b></p></div>
+ <div class="wfil rv">${filtros.map(([k, t]) => `<button type="button" class="wf-c" data-int="wfil" data-f="${k}">${t}</button>`).join('')}</div>
+ <div class="wshop">${prods.map(prodCard).join('')}</div>
+ <div class="wship rv"><p>Envíos a todo México</p><p>Cambios en 30 días</p><p>Pago seguro</p></div></div></section>
 
-<section class="wv wv-nosotros"><div class="wsx wtop"><p class="wk-o rv">Nosotros</p><h3 class="wt rv">Una escuela <em>hecha en el agua.</em></h3>
+<section class="wv wv-nosotros wlt"><div class="wsx wtop"><p class="wk-o rv">Nosotros</p><h3 class="wt rv">Una escuela <em>hecha en el agua.</em></h3>
  <div class="wnos"><p class="ws-p rv">Marea nació para enseñar a surfear sin presión: con grupos pequeños, equipo cuidado y un mar que se respeta. Nos importa más que disfrutes tu primera ola que la cantidad de clases que tomes.</p><i class="wnos-ph ph2 rv"></i></div>
  <div class="wvals">${vals.map(([n, t, d]) => `<div class="rv"><em>${n}</em><b>${t}</b><span>${d}</span></div>`).join('')}</div>
  <p class="wk-o rv" style="margin-top:2.6em">El equipo</p>
  <div class="wteam">${team.map(([i, n, r, c]) => `<div class="rv"><i class="av-${c}">${i}</i><b>${n}</b><span>${r}</span></div>`).join('')}</div>
- <div class="wloc rv"><div><p class="wk-o">Dónde estamos</p><b>Playa Carrizalillo, Puerto Escondido</b><span>Todos los días de 6:30 a 19:00 · hola@marea.example</span></div>${btn('reservar', 'wb wb-l', 'Reservar clase')}</div></div>${foot}</section>
+ <div class="wloc rv"><div><p class="wk-o">Dónde estamos</p><b>Playa Carrizalillo, Puerto Escondido</b><span>Todos los días de 6:30 a 19:00 · hola@marea.example</span></div>${btn('reservar', 'wb wb-l', 'Reservar clase')}</div></div></section>
 
 <section class="wv wv-reservar"><div class="wsx wtop"><p class="wk-o rv">Reservar</p><h3 class="wt rv">Reserva tu <em>lugar.</em></h3>
  <div class="wres">
@@ -121,7 +121,9 @@ ${nav}
    <div class="wtot"><span>Total</span><b data-sum="total">$1,300</b></div>
    <button type="button" class="wb wb-l wb-w" data-int="wconfirm">Confirmar reserva</button><small>Equipo incluido · Cancela sin costo hasta 24 h antes</small></div>
    <div class="wdone"><i>${svg('check')}</i><h4>¡Reserva confirmada!</h4><p data-sum="done">Te esperamos en la playa.</p><span data-sum="code">MAR-0142</span><button type="button" class="wb-g" data-int="wreset">Hacer otra reserva</button></div></aside>
- </div></div>${foot}</section>
+ </div></div>
+ ${foot}
+</section>
 
 </div></div>`;
 

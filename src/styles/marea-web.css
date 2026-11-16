@@ -6,31 +6,15 @@
 .mw-scroll { position: absolute; inset: 0; overflow-x: hidden; overflow-y: auto; scrollbar-width: thin; scrollbar-color: rgba(255, 255, 255, 0.28) transparent; }
 .mw-scroll::-webkit-scrollbar { width: 0.4em; } .mw-scroll::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.28); border-radius: 1em; }
 
-/* vistas */
-.wv { display: none; }
-.mr-web[data-tab='inicio'] .wv-inicio, .mr-web[data-tab='clases'] .wv-clases, .mr-web[data-tab='experiencias'] .wv-experiencias, .mr-web[data-tab='tienda'] .wv-tienda, .mr-web[data-tab='nosotros'] .wv-nosotros, .mr-web[data-tab='reservar'] .wv-reservar { display: block; animation: wvIn 0.5s ease both; }
-@keyframes wvIn { from { opacity: 0; } }
-
-/* barra de navegación tipo píldora (fija) */
-.mw-nav { position: absolute; z-index: 6; left: 50%; top: 1.5em; transform: translateX(-50%); display: flex; align-items: center; gap: 1.6em; padding: 0.55em 0.55em 0.55em 1.5em; border-radius: 99em; font-size: 0.6em; white-space: nowrap;
-  background: rgba(8, 20, 38, 0.8); box-shadow: inset 0 0 0 0.07em rgba(255, 255, 255, 0.24), 0 1.2em 2.4em -1em rgba(0, 0, 0, 0.7); }
-.wn-logo { display: flex; align-items: center; gap: 0.55em; font-size: 1.5em; font-weight: 500; letter-spacing: -0.03em; } .wn-logo .mr-glyph { font-size: 1.1em; }
-.mw-nav nav { display: flex; gap: 1.8em; }
-.wn-t { opacity: 0.72; padding: 0.35em 0; position: relative; transition: opacity 0.25s; } .wn-t:hover { opacity: 1; }
-.mr-web[data-tab='clases'] [data-t='clases'].wn-t, .mr-web[data-tab='experiencias'] [data-t='experiencias'].wn-t, .mr-web[data-tab='tienda'] [data-t='tienda'].wn-t, .mr-web[data-tab='nosotros'] [data-t='nosotros'].wn-t { opacity: 1; }
-.mr-web[data-tab='clases'] [data-t='clases'].wn-t::after, .mr-web[data-tab='experiencias'] [data-t='experiencias'].wn-t::after, .mr-web[data-tab='tienda'] [data-t='tienda'].wn-t::after, .mr-web[data-tab='nosotros'] [data-t='nosotros'].wn-t::after { content: ""; position: absolute; left: 0; right: 0; bottom: -0.15em; height: 0.14em; border-radius: 1em; background: #ff9a62; }
-.wn-bag { position: relative; display: grid; place-items: center; width: 2.6em; height: 2.6em; border-radius: 50%; box-shadow: inset 0 0 0 0.07em rgba(255, 255, 255, 0.24); } .wn-bag svg { width: 1.35em; height: 1.35em; }
-.wn-bag em { position: absolute; right: -0.35em; top: -0.35em; min-width: 1.6em; height: 1.6em; padding: 0 0.3em; display: none; place-items: center; border-radius: 99em; font-style: normal; font-size: 0.85em; font-weight: 600; background: #ff9a62; color: #1c0d05; }
-.mr-web:not([data-cart='0']) .wn-bag em { display: grid; }
-.wn-cta { padding: 0.85em 1.8em; border-radius: 99em; background: #fff; color: #0a1f36; font-weight: 500; } .wn-cta:hover { background: #ffd9bd; }
-.wn-ex { display: grid; place-items: center; width: 2.6em; height: 2.6em; border-radius: 50%; opacity: 0.8; } .wn-ex:hover { opacity: 1; } .wn-ex svg { width: 1.25em; height: 1.25em; }
+/* botón para ampliar el sitio (no hay barra de navegación: el sitio se hojea desplazándose) */
+.wn-ex { position: absolute; z-index: 6; right: 1.3em; top: 1.3em; display: grid; place-items: center; width: 2.4em; height: 2.4em; border-radius: 50%; color: #fff; background: rgba(8, 20, 38, 0.55); box-shadow: inset 0 0 0 0.07em rgba(255, 255, 255, 0.3); opacity: 0.85; transition: opacity 0.2s, transform 0.2s; } .wn-ex:hover { opacity: 1; transform: scale(1.06); } .wn-ex svg { width: 1.2em; height: 1.2em; }
 
 /* hero */
 .wh { position: relative; height: 26.7em; overflow: hidden; }
 .mw-photo { position: absolute; inset: -3%; background: url('/obra/marea-surf.webp') 56% 50% / cover; translate: 0 calc(var(--sy, 0) * 0.2px); }
 .js .mw-photo { transform: scale(1.12); } .js .live .mw-photo { transform: scale(1); transition: transform 9s cubic-bezier(0.2, 0.6, 0.2, 1); }
 .mw-shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(4, 12, 26, 0.74), rgba(4, 12, 26, 0.18) 58%, transparent), linear-gradient(180deg, rgba(4, 12, 26, 0.5), transparent 26%, transparent 62%, rgba(4, 12, 26, 0.7)); }
-.mw-hero { position: absolute; left: 2.6em; top: 5.3em; width: 30em; }
+.mw-hero { position: absolute; left: 2.6em; top: 3.6em; width: 30em; }
 .mw-k { display: inline-flex; align-items: center; gap: 0.7em; padding: 0.55em 1.2em 0.55em 0.9em; border-radius: 99em; font-size: 0.58em; letter-spacing: 0.1em; background: rgba(8, 20, 38, 0.42); box-shadow: inset 0 0 0 0.08em rgba(255, 255, 255, 0.22); }
 .mw-k i { width: 0.7em; height: 0.7em; border-radius: 50%; background: #ff9a62; box-shadow: 0 0 0 0.35em rgba(255, 154, 98, 0.25); }
 .mw-h { margin-top: 1.2em; font-family: inherit; font-style: normal; font-weight: 300; font-size: 3.5em; line-height: 1.02; letter-spacing: -0.05em; }
@@ -41,7 +25,7 @@
 .wb-l { font-size: inherit; background: #fff; color: #0a1f36; } .wb-l:hover { background: #ffd9bd; }
 .wb-g { opacity: 0.85; font-size: inherit; } .wb-g:hover { opacity: 1; }
 .wb-s { padding: 0.7em 1.3em; font-size: 0.62em; } .wb-w { width: 100%; text-align: center; padding: 1.1em; }
-.mw-cond { position: absolute; right: 2.6em; top: 7.2em; display: flex; align-items: center; gap: 1.5em; padding: 0.9em 1.4em; border-radius: 1em; font-size: 0.6em; background: rgba(8, 20, 38, 0.5); box-shadow: inset 0 0 0 0.07em rgba(255, 255, 255, 0.2); }
+.mw-cond { position: absolute; right: 5.2em; top: 3.2em; display: flex; align-items: center; gap: 1.5em; padding: 0.9em 1.4em; border-radius: 1em; font-size: 0.6em; background: rgba(8, 20, 38, 0.5); box-shadow: inset 0 0 0 0.07em rgba(255, 255, 255, 0.2); }
 .mw-cond small { font-size: 0.9em; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.65; } .mw-cond div { display: flex; flex-direction: column; } .mw-cond b { font-size: 1.8em; font-weight: 400; letter-spacing: -0.03em; } .mw-cond span { opacity: 0.6; font-size: 0.9em; }
 .mw-book { position: absolute; left: 2.6em; right: 2.6em; bottom: 2em; display: grid; grid-template-columns: 1.15fr 1.15fr 1fr auto; align-items: center; gap: 1.4em; padding: 0.65em 0.65em 0.65em 1.8em; border-radius: 99em; font-size: 0.62em; cursor: pointer;
   background: rgba(8, 20, 38, 0.55); box-shadow: inset 0 0 0 0.07em rgba(255, 255, 255, 0.24), 0 1.4em 2.6em -1em rgba(0, 0, 0, 0.7); }
@@ -49,13 +33,13 @@
 .mw-book i { font-style: normal; padding: 1.2em 2.3em; border-radius: 99em; background: linear-gradient(135deg, #ff9a62, #ff7a59); color: #1c0d05; font-weight: 600; }
 
 /* secciones comunes */
-.wsx { padding: 4.2em 2.6em 0; } .wtop { padding-top: 6.6em; }
+.wsx { padding: 4.2em 2.6em 0; } .wtop { padding-top: 4.4em; padding-bottom: 4.4em; }
 .wk-o { font-size: 0.56em; letter-spacing: 0.22em; text-transform: uppercase; color: #ffb085; }
 .wt { margin-top: 0.7em; font-size: 2.3em; font-weight: 300; line-height: 1.04; letter-spacing: -0.045em; }
 .wt em { font-family: 'Fraunces Variable', Georgia, serif; font-style: italic; font-weight: 300; letter-spacing: -0.03em; color: #ffd9bd; }
 .ws-p { margin-top: 1em; max-width: 30em; font-size: 0.76em; line-height: 1.6; opacity: 0.74; }
 .js .rv { opacity: 0; } .js .rv.in { opacity: 1; transition: opacity 0.9s ease; }
-@media (prefers-reduced-motion: reduce) { .js .rv { opacity: 1; } .wv { animation: none !important; } }
+@media (prefers-reduced-motion: reduce) { .js .rv { opacity: 1; } }
 .wg3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.9em; margin-top: 1.6em; } .wg2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.9em; margin-top: 1.6em; }
 
 /* fotografías recortadas de la misma imagen (variedad sin más archivos) */
@@ -69,13 +53,13 @@
 .wband { position: relative; display: flex; align-items: center; margin: 4.2em 2.6em 0; min-height: 13em; border-radius: 1.4em; overflow: hidden; background: #0a1f36; }
 .wband-ph { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(6, 17, 31, 0.92), rgba(6, 17, 31, 0.25)), url('/obra/marea-surf.webp') 80% 40% / cover; }
 .wband > div { position: relative; padding: 2.4em; max-width: 22em; } .wband .wt { font-size: 2em; } .wband .ws-p { margin-bottom: 1.4em; font-size: 0.7em; }
-.wfeat { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4em; padding-bottom: 0.5em; } .wfeat > div { padding-top: 1em; box-shadow: 0 -0.07em 0 rgba(255, 255, 255, 0.14); }
+.wfeat { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4em; padding-bottom: 4em; } .wfeat > div { padding-top: 1em; box-shadow: 0 -0.07em 0 rgba(255, 255, 255, 0.14); }
 .wfeat i { display: grid; place-items: center; width: 2.2em; height: 2.2em; border-radius: 0.7em; background: rgba(255, 154, 98, 0.16); color: #ffb085; } .wfeat svg { width: 1.2em; height: 1.2em; } .wfeat b { display: block; margin-top: 0.9em; font-size: 0.8em; font-weight: 500; } .wfeat span { display: block; margin-top: 0.3em; font-size: 0.62em; opacity: 0.62; line-height: 1.4; }
 
 /* clases */
 .wc { display: flex; flex-direction: column; border-radius: 1.1em; overflow: hidden; background: rgba(255, 255, 255, 0.05); box-shadow: inset 0 0 0 0.07em rgba(255, 255, 255, 0.12); } .wc .wc-ph { height: 7em; border-radius: 0; }
 .wc-b { display: flex; flex: 1; flex-direction: column; padding: 1em 1.1em 1.1em; } .wc-b h4 { font-size: 1.15em; font-weight: 500; letter-spacing: -0.03em; } .wc-d { margin-top: 0.3em; font-size: 0.64em; opacity: 0.7; }
-.wc ul { margin: 0.8em 0 0; padding: 0; list-style: none; } .wc li { position: relative; padding: 0.35em 0 0.35em 1.3em; font-size: 0.58em; line-height: 1.35; opacity: 0.85; } .wc li::before { content: ""; position: absolute; left: 0; top: 0.75em; width: 0.7em; height: 0.14em; border-radius: 1em; background: #ff9a62; }
+.wc ul { margin: 0.8em 0 0; padding: 0; list-style: none; } .wc li { position: relative; padding: 0.35em 0 0.35em 1.3em; font-size: 0.58em; line-height: 1.35; opacity: 0.85; } .wc li::before { content: ""; position: absolute; left: 0.1em; top: 0.9em; width: 0.28em; height: 0.28em; border-radius: 50%; background: rgba(255, 255, 255, 0.4); }
 .wc-f { display: flex; align-items: flex-end; justify-content: space-between; gap: 1em; margin-top: auto; padding-top: 1em; } .wc-f b { display: block; font-size: 1.2em; font-weight: 400; letter-spacing: -0.03em; } .wc-f small { font-size: 0.52em; opacity: 0.6; }
 .wsch { margin-top: 2em; padding: 1.2em 1.4em; border-radius: 1.1em; background: rgba(255, 255, 255, 0.05); box-shadow: inset 0 0 0 0.07em rgba(255, 255, 255, 0.12); } .wsch > div { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1em; margin-top: 0.9em; } .wsch p { font-size: 0.6em; } .wsch b { display: block; font-size: 1.5em; font-weight: 300; letter-spacing: -0.03em; } .wsch span { opacity: 0.65; }
 
@@ -85,16 +69,6 @@
 .we-ph { position: relative; min-height: 11em; } .we-ph span { position: absolute; left: 1em; top: 1em; padding: 0.45em 1em; border-radius: 99em; font-size: 0.52em; letter-spacing: 0.1em; background: rgba(8, 20, 38, 0.55); box-shadow: inset 0 0 0 0.08em rgba(255, 255, 255, 0.25); }
 .we-b { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 1.4em 1.6em; } .we-b h4 { font-size: 1.35em; font-weight: 300; line-height: 1.08; letter-spacing: -0.04em; } .we-b p { margin-top: 0.7em; font-size: 0.64em; line-height: 1.55; opacity: 0.72; }
 .we-m { display: flex; flex-wrap: wrap; gap: 0.5em; margin: 1em 0 1.2em; } .we-m i { font-style: normal; padding: 0.45em 0.9em; border-radius: 99em; font-size: 0.54em; box-shadow: inset 0 0 0 0.08em rgba(255, 255, 255, 0.25); }
-
-/* tienda */
-.wcart { margin-top: 0.9em; font-size: 0.7em; opacity: 0.8; } .wcart b { font-weight: 600; color: #ffb085; }
-.wg3p { grid-template-columns: repeat(3, 1fr); }
-.wp { padding: 0.6em 0.6em 0.9em; border-radius: 1.1em; background: rgba(255, 255, 255, 0.05); box-shadow: inset 0 0 0 0.07em rgba(255, 255, 255, 0.12); }
-.wp-ph { display: grid; place-items: center; height: 8.6em; border-radius: 0.8em; } .wp-ph svg { height: 72%; width: auto; max-width: 70%; filter: drop-shadow(0 0.5em 0.6em rgba(0, 0, 0, 0.25)); }
-.pt1 { background: linear-gradient(150deg, #3b4f79, #1d2d4d); } .pt2 { background: linear-gradient(150deg, #ff9a62, #d9648a); } .pt3 { background: linear-gradient(150deg, #8b78b8, #4f4290); } .pt4 { background: linear-gradient(150deg, #f6efe6, #cfc4b6); } .pt5 { background: linear-gradient(150deg, #2d6f7c, #153f4e); } .pt6 { background: linear-gradient(150deg, #ffd9bd, #ff9a62); }
-.wp h4 { margin: 0.9em 0.4em 0; font-size: 0.78em; font-weight: 500; letter-spacing: -0.02em; } .wp p { margin: 0.25em 0.4em 0; font-size: 0.55em; opacity: 0.62; }
-.wp-f { display: flex; align-items: center; justify-content: space-between; margin: 0.8em 0.4em 0; } .wp-f b { font-size: 0.9em; font-weight: 400; }
-.wb.added { background: #3fb581; color: #fff; }
 
 /* nosotros */
 .wnos { margin-top: 1.8em; display: grid; grid-template-columns: 1.2fr 1fr; gap: 2em; align-items: center; } .wnos-ph { display: block; height: 11em; border-radius: 1.2em; }
@@ -123,7 +97,7 @@
 .mr-web[data-done] .wsum-i { display: none; } .mr-web[data-done] .wdone { display: flex; animation: wvIn 0.6s ease both; }
 
 /* pie */
-.wf { display: grid; grid-template-columns: 1.2fr 1.4fr 1.3fr; gap: 1.5em; margin-top: 4.4em; padding: 2em 2.6em 2.4em; background: #040b15; box-shadow: 0 -0.07em 0 rgba(255, 255, 255, 0.08); font-size: 0.9em; }
+.wf { display: grid; grid-template-columns: 1.2fr 1.4fr 1.3fr; gap: 1.5em; margin-top: 2em; padding: 2em 2.6em 2.4em; background: #040b15; box-shadow: 0 -0.07em 0 rgba(255, 255, 255, 0.08); font-size: 0.9em; }
 .wf b { display: flex; align-items: center; gap: 0.5em; font-size: 1.15em; font-weight: 500; letter-spacing: -0.03em; } .wf p { margin-top: 0.8em; font-size: 0.62em; line-height: 1.6; opacity: 0.6; }
 .wf-m { display: flex; flex-wrap: wrap; align-content: flex-start; gap: 0.5em 1.4em; } .wf-a { font-size: 0.66em; opacity: 0.7; } .wf-a:hover { opacity: 1; } .wf-r { margin-top: 0 !important; text-align: right; }
 
@@ -150,3 +124,32 @@
 @keyframes mwRot { 0% { clip-path: inset(-0.2em 100% -0.2em 0); } 5% { clip-path: inset(-0.2em 0 -0.2em 0); } 22% { clip-path: inset(-0.2em 0 -0.2em 0); } 27% { clip-path: inset(-0.2em 0 -0.2em 100%); } 27.01%, 100% { clip-path: inset(-0.2em 100% -0.2em 0); } }
 @keyframes mwSh { to { background-position: -120% 0; } }
 @media (prefers-reduced-motion: reduce) { .js .mw-r { clip-path: none !important; animation: none !important; } .mw-r:not(:first-child) { display: none; } }
+
+.mw-hint { position: absolute; left: 50%; bottom: 0.5em; translate: -50% 0; font-size: 0.5em; letter-spacing: 0.24em; text-transform: uppercase; opacity: 0.55; }
+
+/* secciones en blanco (como las páginas claras del libro de HumanCorp): Experiencias, Tienda y Nosotros */
+.wlt { background: #f4f1ea; color: #15161a; }
+.wlt .wk-o { color: rgba(21, 22, 26, 0.5); } .wlt .wt em { color: #7a6f60; } .wlt .ws-p { opacity: 0.62; }
+.wlt .wb { background: #15161a; color: #f4f1ea; } .wlt .wb:hover { background: #2c2e36; } .wlt .wb-l { background: #15161a; color: #f4f1ea; }
+.wlt .we { background: #fff; box-shadow: inset 0 0 0 0.07em rgba(0, 0, 0, 0.08); } .wlt .we-m i { box-shadow: inset 0 0 0 0.08em rgba(0, 0, 0, 0.18); }
+.wlt .wvals > div { box-shadow: 0 -0.07em 0 rgba(0, 0, 0, 0.14); } .wlt .wvals em { color: rgba(21, 22, 26, 0.45); }
+.wlt .wteam > div { background: #fff; box-shadow: inset 0 0 0 0.07em rgba(0, 0, 0, 0.08); }
+.wlt .wloc { background: #15161a; color: #f4f1ea; box-shadow: none; } .wlt .wloc .wk-o { color: rgba(244, 241, 234, 0.55); } .wlt .wloc .wb { background: #f4f1ea; color: #15161a; }
+.wlt .wnos-ph { box-shadow: 0 1.2em 2em -1.2em rgba(0, 0, 0, 0.5); }
+
+/* tienda: merch casual, minimalista y de lujo discreto */
+.wsh { display: flex; align-items: flex-end; justify-content: space-between; gap: 2em; } .wsh .wt { font-size: 2.1em; }
+.wcartb { display: flex; flex-direction: column; align-items: flex-end; gap: 0.3em; font-size: 0.56em; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(21, 22, 26, 0.5); } .wcartb b { font-size: 1.15em; letter-spacing: 0.02em; text-transform: none; color: #15161a; font-weight: 500; } .wcartb i { font-style: normal; }
+.wfil { display: flex; gap: 0.4em; margin-top: 1.8em; padding-bottom: 1.1em; box-shadow: 0 0.07em 0 rgba(0, 0, 0, 0.12); }
+.wf-c { padding: 0.55em 1.2em; border-radius: 99em; font-size: 0.62em; color: rgba(21, 22, 26, 0.62); transition: background 0.25s, color 0.25s; } .wf-c:hover { color: #15161a; } .wf-c.on { background: #15161a; color: #f4f1ea; }
+.wshop { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.2em 1.1em; margin-top: 1.6em; }
+.mr-web[data-fil='ropa'] .wp:not([data-c='ropa']), .mr-web[data-fil='accesorios'] .wp:not([data-c='accesorios']), .mr-web[data-fil='equipo'] .wp:not([data-c='equipo']) { display: none; }
+.wp { display: block; }
+.wp-ph { position: relative; display: grid; place-items: center; aspect-ratio: 4 / 5; overflow: hidden; } .wp-ph svg { height: 58%; width: auto; max-width: 66%; transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1); } .wp:hover .wp-ph svg { transform: scale(1.06); }
+.wp-tag { position: absolute; left: 0.8em; top: 0.8em; font-size: 0.5em; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(21, 22, 26, 0.6); }
+.wp-add { position: absolute; left: 0.7em; right: 0.7em; bottom: 0.7em; padding: 0.85em; border-radius: 99em; text-align: center; font-size: 0.56em; letter-spacing: 0.1em; text-transform: uppercase; background: rgba(255, 255, 255, 0.92); color: #15161a; opacity: 0; transition: opacity 0.3s, background 0.3s; } .wp:hover .wp-add, .wp-add:focus-visible { opacity: 1; } .wp-add:hover { background: #15161a; color: #f4f1ea; } .wp-add.added { opacity: 1; background: #15161a; color: #f4f1ea; }
+.wp-i { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.8em; margin-top: 0.8em; } .wp-i h4 { font-family: inherit; font-style: normal; font-size: 0.72em; font-weight: 500; letter-spacing: -0.01em; } .wp-i p { margin-top: 0.25em; font-size: 0.54em; color: rgba(21, 22, 26, 0.5); } .wp-i b { font-size: 0.68em; font-weight: 400; }
+.pt1 { background: #e6e1d6; } .pt3 { background: #dde3dc; } .pt4 { background: #ebe6dd; } .pt5 { background: #d9dfe5; } .pt6 { background: #e5d8cc; } .pt7 { background: #d4d6da; } .pt8 { background: #e8e1d4; }
+.wship { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1em; margin-top: 3em; padding-top: 1.2em; box-shadow: 0 -0.07em 0 rgba(0, 0, 0, 0.12); } .wship p { font-size: 0.56em; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(21, 22, 26, 0.55); }
+
+@keyframes wvIn { from { opacity: 0; } }

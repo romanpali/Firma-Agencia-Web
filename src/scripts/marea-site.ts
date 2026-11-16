@@ -17,6 +17,7 @@ function sync(root: HTMLElement) {
   setAll(root, '[data-sum=clase]', lv.n); setAll(root, '[data-sum=dia]', DIAS[+(d.dia || 0)]); setAll(root, '[data-sum=hora]', d.hora || '07:00');
   setAll(root, '[data-sum=pax]', String(pax)); setAll(root, '[data-sum=pax2]', String(pax)); setAll(root, '[data-sum=total]', peso(lv.p * pax));
   root.querySelectorAll<HTMLElement>('[data-g]').forEach((b) => b.classList.toggle('on', d[b.dataset.g!] === b.dataset.v));
+  root.querySelectorAll<HTMLElement>('[data-f]').forEach((b) => b.classList.toggle('on', (d.fil || 'todo') === b.dataset.f));
   setAll(root, '[data-cart-n]', d.cart || '0'); setAll(root, '[data-cart-t]', peso(+(d.total || 0)));
 }
 
@@ -54,9 +55,9 @@ function expand(root: HTMLElement) {
 
 function act(t: HTMLElement, root: HTMLElement) {
   const d = root.dataset, k = t.dataset.int, sc = root.querySelector<HTMLElement>('.mw-scroll');
-  if (sc) tgt.delete(sc); // detiene la inercia de la rueda
-  if (k === 'wtab') { d.tab = t.dataset.t!; sc?.scrollTo({ top: 0 }); }
-  else if (k === 'wbook') { d.nivel = t.dataset.nivel!; d.tab = 'reservar'; sc?.scrollTo({ top: 0 }); }
+  if (k === 'wtab') { if (sc) toSection(sc, t.dataset.t!); }
+  else if (k === 'wbook') { d.nivel = t.dataset.nivel!; if (sc) toSection(sc, 'reservar'); }
+  else if (k === 'wfil') { d.fil = t.dataset.f!; }
   else if (k === 'wpick') { if (t.classList.contains('full')) return; d[t.dataset.g!] = t.dataset.v!; }
   else if (k === 'wpax') d.pax = String(Math.max(1, Math.min(6, +(d.pax || 2) + +t.dataset.d!)));
   else if (k === 'wadd') {
@@ -80,6 +81,28 @@ document.addEventListener('click', (ev) => {
   ev.stopPropagation(); act(t, root);
 });
 
+// Desplazamiento con inercia suave hacia una posición (rueda del ratón y botones que llevan a otra sección)
+function glide(sc: HTMLElement, y: number) {
+  const to = Math.max(0, Math.min(sc.scrollHeight - sc.clientHeight, y)); tgt.set(sc, to);
+  if (reduced) { sc.scrollTop = to; return; }
+  if (anim.has(sc)) return; anim.add(sc);
+  let last = performance.now(), still = 0;
+  const step = (now: number) => {
+    const goal = tgt.get(sc); if (goal === undefined) { anim.delete(sc); return; }
+    const before = sc.scrollTop, d = goal - before, dt = Math.min(64, now - last); last = now;
+    // el navegador redondea scrollTop a píxeles: se termina al llegar o cuando ya no avanza
+    if (Math.abs(d) < 1.2 || still > 3) { sc.scrollTop = goal; anim.delete(sc); tgt.delete(sc); return; }
+    sc.scrollTop = before + d * (1 - Math.exp(-dt / 130));
+    still = Math.abs(sc.scrollTop - before) < 0.3 ? still + 1 : 0;
+    requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+// El sitio es una sola página larga: los botones llevan a su sección
+function toSection(sc: HTMLElement, name: string) {
+  const el = sc.querySelector<HTMLElement>(`.wv-${name}`); if (el) glide(sc, el.offsetTop);
+}
+
 // Rueda del ratón sobre el sitio (dentro del libro): el navegador no desplaza contenedores dentro de una escena 3D, así que se hace a mano,
 // con inercia suave. Si el sitio ya llegó a su inicio o a su fin, la rueda sigue de largo y pasa la hoja del libro.
 document.addEventListener('wheel', (ev) => {
@@ -89,16 +112,7 @@ document.addEventListener('wheel', (ev) => {
   const cur = tgt.get(sc) ?? sc.scrollTop;
   if (!((dy > 0 && cur < max - 1) || (dy < 0 && cur > 1))) return;
   ev.preventDefault();
-  const to = Math.max(0, Math.min(max, cur + dy)); tgt.set(sc, to);
-  if (reduced) { sc.scrollTop = to; return; }
-  if (anim.has(sc)) return; anim.add(sc);
-  const step = () => {
-    const goal = tgt.get(sc); if (goal === undefined) { anim.delete(sc); return; }
-    const d = goal - sc.scrollTop;
-    if (Math.abs(d) < 0.6) { sc.scrollTop = goal; anim.delete(sc); tgt.delete(sc); return; }
-    sc.scrollTop += d * 0.2; requestAnimationFrame(step);
-  };
-  requestAnimationFrame(step);
+  glide(sc, cur + dy);
 }, { passive: false });
 
 const boot = () => document.querySelectorAll<HTMLElement>('.mr-web').forEach((r) => { if (!r.closest('.lc') && !r.dataset.ready) { r.dataset.ready = '1'; init(r); sync(r); } });
