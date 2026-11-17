@@ -5,8 +5,7 @@ export type Frame = (t: number, y: number, vh: number) => void;
 const subs: Frame[] = [];
 let running = false;
 const tick = (t: number) => {
-  const y = scrollY, vh = innerHeight;
-  for (const f of subs) f(t, y, vh);
+  if (!document.documentElement.hasAttribute('data-menu-on')) { const y = scrollY, vh = innerHeight; for (const f of subs) f(t, y, vh); }
   if (document.hidden) running = false;
   else requestAnimationFrame(tick);
 };
@@ -21,7 +20,7 @@ let pending = false;
 const remeasure = () => {
   if (pending) return;
   pending = true;
-  requestAnimationFrame(() => { pending = false; readers.forEach((r) => r()); });
+  requestAnimationFrame(() => { pending = false; if (!document.documentElement.hasAttribute('data-menu-on')) readers.forEach((r) => r()); });
 };
 addEventListener('resize', remeasure);
 addEventListener('load', remeasure);

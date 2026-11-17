@@ -816,3 +816,7 @@ aside[data-sheet] [data-foot] { background: #0b0c0f !important; box-shadow: 0 -1
 aside[data-sheet] [data-reroll] { background: rgba(255, 255, 255, 0.08) !important; color: #f3f4f7 !important; }
 aside[data-sheet] [data-send] { background: #f3f4f7 !important; color: #0b0c0f !important; }
 aside[data-sheet] [data-grab] i, aside[data-sheet] [data-sheet-toggle] { color: rgba(255, 255, 255, 0.45); } aside[data-sheet] [data-grab] i { background: rgba(255, 255, 255, 0.25) !important; }
+
+/* el menú bloquea el scroll sin mover el ancho de la página (evita recalcular toda la escena) */
+html { scrollbar-gutter: stable; }
+html[data-menu-on] main * { animation-play-state: paused !important; }

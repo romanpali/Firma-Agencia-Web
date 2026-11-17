@@ -137,6 +137,7 @@ const pill = 'hdr-pill rounded-full border border-white/20 bg-white/10 px-5 py-3
     menu.setAttribute('aria-hidden', String(!on));
     open.setAttribute('aria-expanded', String(on));
     menu.classList.toggle('is-open', on);
+    document.documentElement.toggleAttribute('data-menu-on', on);
     document.documentElement.style.overflow = on ? 'hidden' : '';
     clearTimeout(pageT); if (on) pageT = window.setTimeout(() => document.documentElement.classList.add('menu-open'), reducedM ? 0 : 900); else document.documentElement.classList.remove('menu-open');
     if (!on) { input.value = ''; showResults(''); }
