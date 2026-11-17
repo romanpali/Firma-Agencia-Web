@@ -1,5 +1,5 @@
 // Interactividad del sitio web de «Marea» (dentro del libro, en el carrusel de celular y en la vista ampliada):
-// pestañas, carrito, reserva con total, aparición al desplazar y botón para ampliar el sitio.
+// pestañas, reserva con total, aparición al desplazar, contadores y botón para ampliar el sitio.
 // Los clics se delegan por data-int; el estado vive en data-* de la raíz .mr-web, así que se copia con la hoja (versión curva y vista ampliada).
 import { svg } from './marea-ico';
 
@@ -19,13 +19,20 @@ function sync(root: HTMLElement) {
   setAll(root, '[data-sum=clase]', lv.n); setAll(root, '[data-sum=dia]', DIAS[+(d.dia || 0)]); setAll(root, '[data-sum=hora]', noches(nn));
   setAll(root, '[data-sum=pax]', String(pax)); setAll(root, '[data-sum=pax2]', String(pax)); setAll(root, '[data-sum=total]', peso(lv.p * nn));
   root.querySelectorAll<HTMLElement>('[data-g]').forEach((b) => b.classList.toggle('on', d[b.dataset.g!] === b.dataset.v));
-  root.querySelectorAll<HTMLElement>('[data-f]').forEach((b) => b.classList.toggle('on', (d.fil || 'todo') === b.dataset.f));
-  setAll(root, '[data-cart-n]', d.cart || '0'); setAll(root, '[data-cart-t]', peso(+(d.total || 0)));
+}
+
+// número que sube de 0 al valor final (data-count, data-dec)
+function count(el: HTMLElement) {
+  const to = +(el.dataset.count || 0), dec = +(el.dataset.dec || 0);
+  if (reduced) { el.textContent = to.toFixed(dec); return; }
+  const t0 = performance.now();
+  const step = (now: number) => { const k = Math.min(1, (now - t0) / 1500), e = 1 - Math.pow(1 - k, 3); el.textContent = (to * e).toFixed(dec); if (k < 1) requestAnimationFrame(step); };
+  requestAnimationFrame(step);
 }
 
 function init(root: HTMLElement) {
   const sc = root.querySelector<HTMLElement>('.mw-scroll'); if (!sc) return;
-  const show = (e: Element) => e.classList.add('in');
+  const show = (e: Element) => { e.classList.add('in'); (e.matches('[data-count]') ? [e] : [...e.querySelectorAll('[data-count]')]).forEach((c) => count(c as HTMLElement)); };
   if (reduced || !('IntersectionObserver' in window)) root.querySelectorAll('.rv').forEach(show);
   else {
     const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { show(e.target); io.unobserve(e.target); } }), { root: sc, threshold: 0.12 });
@@ -62,14 +69,9 @@ function act(t: HTMLElement, root: HTMLElement) {
   const d = root.dataset, k = t.dataset.int, sc = root.querySelector<HTMLElement>('.mw-scroll');
   if (k === 'wtab') { if (sc) toSection(sc, t.dataset.t!); }
   else if (k === 'wbook') { d.nivel = t.dataset.nivel!; if (sc) toSection(sc, 'reservar'); }
-  else if (k === 'wfil') { d.fil = t.dataset.f!; }
   else if (k === 'wpick') { if (t.classList.contains('full')) return; d[t.dataset.g!] = t.dataset.v!; }
   else if (k === 'wpax') d.pax = String(Math.max(1, Math.min(6, +(d.pax || 2) + +t.dataset.d!)));
-  else if (k === 'wadd') {
-    d.cart = String(+(d.cart || 0) + 1); d.total = String(+(d.total || 0) + +t.dataset.p!);
-    const old = t.textContent; t.textContent = 'Añadido'; t.classList.add('added');
-    setTimeout(() => { t.textContent = old; t.classList.remove('added'); dirty(root); }, 1300);
-  } else if (k === 'wconfirm') {
+  else if (k === 'wconfirm') {
     const nm = root.querySelector<HTMLInputElement>('.wfld input')?.value.trim();
     setAll(root, '[data-sum=done]', `${nm ? `${nm}, t` : 'T'}e esperamos el ${DIAS[+(d.dia || 0)]} en ${NIVEL[d.nivel || 'cristal'].n}: ${noches(+(d.hora || 2))}. El check-in es desde las 15:00.`);
     setAll(root, '[data-sum=code]', `MAR-${100 + Math.floor(Math.random() * 900)}`);
