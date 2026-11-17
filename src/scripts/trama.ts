@@ -92,18 +92,44 @@ ${nav}
 
 </div></div>`;
 
-// ---------- 3 · panel de la tienda (reverso de la hoja del sitio) ----------
-const kpis: [string, string, string][] = [['Ventas hoy', '$48,320', '+12 %'], ['Pedidos', '64', '+8 %'], ['Conversión', '3.4 %', '+0.4'], ['Ticket promedio', '$755', '−2 %']];
+// ---------- 3 · panel de la tienda (reverso de la hoja del sitio): interactivo, lógica en trama-dash.ts ----------
+const RANGE: [string, string, string][][] = [[['Ventas', '$48,320', '+12 %'], ['Pedidos', '64', '+8 %'], ['Conversión', '3.4 %', '+0.4'], ['Ticket promedio', '$755', '−2 %']], [['Ventas', '$312,900', '+9 %'], ['Pedidos', '421', '+6 %'], ['Conversión', '3.1 %', '+0.2'], ['Ticket promedio', '$743', '−1 %']], [['Ventas', '$1,284,500', '+14 %'], ['Pedidos', '1,736', '+11 %'], ['Conversión', '3.3 %', '+0.5'], ['Ticket promedio', '$740', '+1 %']]];
 const days = [['L', 46], ['M', 58], ['X', 52], ['J', 71], ['V', 88], ['S', 100], ['D', 64]] as [string, number][];
-const orders: [string, string, string, string, string][] = [['TR-2041', 'Mariana R.', 'Plumífero rojo · M', '$1,799', 'Pagado'], ['TR-2040', 'Andrés P.', 'Sudadera con capucha · L', '$899', 'Preparando'], ['TR-2039', 'Lucía F.', 'Chaleco acolchado · S', '$1,199', 'Enviado']];
-const stock: [string, number][] = [['Plumífero rojo · M', 12], ['Chamarra varsity · S', 22], ['Chaleco acolchado · L', 38]];
-const dash = `<div class="pg tz-dash" data-rp="light"><aside class="td-s"><b>TRAMA<small>Panel</small></b>${[['crm', 'Resumen', 1], ['bag', 'Pedidos', 0], ['clip', 'Productos', 0], ['dat', 'Inventario', 0], ['crm', 'Clientes', 0], ['bolt', 'Campañas', 0], ['ia', 'Asistente', 0]].map(([i, t, on]) => `<span class="${on ? 'on' : ''}">${svg(String(i))}${t}</span>`).join('')}</aside>
-<main class="td-m"><header><div><p>Buenos días, Sofía</p><h4>Resumen de la tienda</h4></div><i>Hoy · 17 nov</i></header>
-<div class="td-k">${kpis.map(([a, b, c]) => `<div class="mw-f" style="--d:.2s"><small>${a}</small><b>${b}</b><em class="${c.startsWith('−') ? 'dn' : ''}">${c}</em></div>`).join('')}</div>
+const orders: [string, string, string, string, string][] = [['TR-2041', 'Mariana R.', 'Plumífero rojo · M', '$1,799', 'Pagado'], ['TR-2040', 'Andrés P.', 'Sudadera con capucha · L', '$899', 'Preparando'], ['TR-2039', 'Lucía F.', 'Chaleco acolchado · S', '$1,199', 'Enviado'], ['TR-2038', 'Diego S.', 'Pantalón cargo · M', '$999', 'Entregado'], ['TR-2037', 'Paula C.', 'Chamarra varsity · XS', '$1,899', 'Pagado'], ['TR-2036', 'Jorge T.', 'Plumífero acolchado · L', '$1,799', 'Preparando']];
+const stock: [string, string, number][] = [['h6', 'Plumífero rojo · M', 12], ['m2', 'Chamarra varsity · S', 22], ['m1', 'Chaleco acolchado · L', 38], ['h2', 'Pantalón cargo · M', 64], ['m5', 'Chamarra polar · S', 9], ['h1', 'Sudadera con capucha · L', 80]];
+const sw = (on = true) => `<button type="button" class="td-sw${on ? ' on' : ''}" data-int="dsw" aria-label="Activar o desactivar"><i></i></button>`;
+const customers: [string, number, string, string][] = [['Mariana Reyes', 7, '$9,840', 'VIP'], ['Andrés Pérez', 4, '$4,290', ''], ['Lucía Fuentes', 3, '$3,100', ''], ['Diego Salas', 5, '$6,720', 'VIP'], ['Paula Cruz', 2, '$2,160', 'Nueva']];
+const camps: [string, string, string, string, boolean][] = [['Plumíferos de temporada', 'Instagram · Reels', '$4,200', '4.8x', true], ['Recupera tu cesta', 'Correo automático', '$300', '9.2x', true], ['Lookbook edición 02', 'TikTok', '$2,800', '2.4x', false]];
+const dnav: [string, string, string][] = [['resumen', 'Resumen', 'crm'], ['pedidos', 'Pedidos', 'bag'], ['productos', 'Productos', 'clip'], ['inventario', 'Inventario', 'dat'], ['clientes', 'Clientes', 'crm'], ['campanas', 'Campañas', 'bolt'], ['asistente', 'Asistente', 'ia']];
+const FIL = ['todo', 'Pagado', 'Preparando', 'Enviado', 'Entregado'];
+const dash = `<div class="pg tz-dash" data-rp="light" data-v="resumen" data-of="todo" data-r="0"><aside class="td-s"><b>TRAMA<small>Panel</small></b>${dnav.map(([k, t, i]) => `<button type="button" data-int="dnav" data-v="${k}">${svg(i)}${t}</button>`).join('')}</aside>
+<main class="td-m">
+<section class="td-vw v-resumen"><header><div><p>Buenos días, Sofía</p><h4>Resumen de la tienda</h4></div><div class="td-ch">${['Hoy', '7 días', '30 días'].map((t, i) => `<button type="button" data-int="drg" data-r="${i}">${t}</button>`).join('')}</div></header>
+<div class="td-k">${RANGE[0].map(([a, b, c], i) => `<div data-k="${i}"><small>${a}</small><b>${b}</b><em class="${c.startsWith('−') ? 'dn' : ''}">${c}</em></div>`).join('')}</div>
 <div class="td-g"><section class="td-c"><h6>Ventas de la semana</h6><div class="td-b">${days.map(([d, v], i) => `<span style="--h:${v}%;--i:${i}"><i></i><small>${d}</small></span>`).join('')}</div></section>
-<section class="td-c"><h6>Inventario bajo</h6><ul class="td-i">${stock.map(([n, v]) => `<li><span>${n}</span><b>${v}</b><i style="--v:${v}%"></i></li>`).join('')}</ul></section></div>
+<section class="td-c"><h6>Inventario bajo</h6><ul class="td-i">${stock.slice(0, 3).map(([, n, v]) => `<li><span>${n}</span><b>${v}</b><i style="--v:${v}%"></i></li>`).join('')}</ul></section></div>
 <div class="td-g"><section class="td-c td-o"><h6>Pedidos recientes</h6><table>${orders.slice(0, 2).map(([a, , c, d, e]) => `<tr><td>${a}</td><td>${c}</td><td>${d}</td><td><em class="s-${e}">${e}</em></td></tr>`).join('')}</table></section>
-<section class="td-ia"><i>${svg('ia')}</i><p><b>Asistente</b>El plumífero rojo (M) se agota en unos 5 días. Sugiero reabastecer M y L.</p></section></div></main></div>`;
+<section class="td-ia"><i>${svg('ia')}</i><p><b>Asistente</b>El plumífero rojo (M) se agota en unos 5 días. Sugiero reabastecer M y L.</p></section></div></section>
+
+<section class="td-vw v-pedidos"><header><div><p>Gestión</p><h4>Pedidos</h4></div><div class="td-ch">${FIL.map((f) => `<button type="button" data-int="dfil" data-f="${f}">${f === 'todo' ? 'Todos' : f}</button>`).join('')}</div></header>
+<div class="td-c td-o"><table>${orders.map(([a, b, c, d, e]) => `<tr data-st="${e}"><td>${a}</td><td>${b}</td><td>${c}</td><td>${d}</td><td><button type="button" class="td-st s-${e}" data-int="dord">${e}</button></td></tr>`).join('')}</table></div><p class="td-hint">Toca el estado de un pedido para avanzarlo: Pagado, Preparando, Enviado y Entregado.</p></section>
+
+<section class="td-vw v-productos"><header><div><p>Catálogo</p><h4>Productos</h4></div><i class="td-pill">12 prendas</i></header>
+<div class="td-pg">${['h6', 'm1', 'm2', 'm5', 'h4', 'm4'].map((id) => { const p = byId(id); return `<div class="td-pc"><div class="tz-ph">${img(id)}</div><b>${p.n}</b><span>${money(p.p)}</span><div class="td-pr"><small>Visible en la tienda</small>${sw()}</div></div>`; }).join('')}</div></section>
+
+<section class="td-vw v-inventario"><header><div><p>Existencias por talla M</p><h4>Inventario</h4></div><i class="td-pill">Toca «Reabastecer» para sumar 24</i></header>
+<div class="td-c"><ul class="td-inv">${stock.map(([id, n, v]) => `<li data-s="${v}" class="${v < 20 ? 'low' : ''}"><div class="tz-ph">${img(id)}</div><span>${n}</span><b>${v}</b><i style="--v:${Math.min(100, v)}%"></i><button type="button" data-int="dstk">Reabastecer</button></li>`).join('')}</ul></div></section>
+
+<section class="td-vw v-clientes"><header><div><p>Relación con clientes</p><h4>Clientes</h4></div><i class="td-pill">1,248 en total</i></header>
+<div class="td-c td-o"><table><tr class="th"><td>Cliente</td><td>Pedidos</td><td>Gasto total</td><td></td></tr>${customers.map(([a, b, c, d]) => `<tr><td>${a}</td><td>${b}</td><td>${c}</td><td>${d ? `<em class="s-${d === 'VIP' ? 'Pagado' : 'Enviado'}">${d}</em>` : ''}</td></tr>`).join('')}</table></div></section>
+
+<section class="td-vw v-campanas"><header><div><p>Marketing</p><h4>Campañas</h4></div><i class="td-pill">Activa o pausa con el interruptor</i></header>
+<div class="td-cp">${camps.map(([a, b, c, d, on]) => `<div class="td-c"><b>${a}</b><span>${b}</span><div><small>Inversión</small><em>${c}</em></div><div><small>Retorno</small><em>${d}</em></div><div class="td-pr"><small data-on>${on ? 'Activa' : 'Pausada'}</small>${sw(on)}</div></div>`).join('')}</div></section>
+
+<section class="td-vw v-asistente"><header><div><p>Pregúntale a tus datos</p><h4>Asistente</h4></div></header>
+<div class="td-c td-chat"><div class="td-msgs"><p class="bot">Hola, Sofía. Elige una pregunta y te respondo con los datos de la tienda.</p></div>
+<div class="td-qs">${['¿Qué se vendió más esta semana?', '¿Qué debo reabastecer?', '¿Qué campaña conviene pausar?'].map((q, i) => `<button type="button" data-int="dask" data-q="${i}">${q}</button>`).join('')}</div></div></section>
+</main></div>`;
 
 // ---------- ficha del proyecto: misma página «Contenido» del libro ----------
 const hd: [string, string][] = [['Identidad de marca', 'Logotipo y manual'], ['Tienda en línea', 'Catálogo, tallas y cesta'], ['Fichas de producto', 'Fotos, detalle y composición'], ['Lookbook', 'Looks con compra directa'], ['Pedidos', 'Pago y seguimiento'], ['Inventario', 'Existencias por talla'], ['Ventas y reportes', 'Tablero diario'], ['Asistente con IA', 'Alertas y sugerencias'], ['Datos e infraestructura', 'Respaldos y monitoreo']];
