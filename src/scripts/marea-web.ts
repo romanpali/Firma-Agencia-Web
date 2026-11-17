@@ -10,7 +10,7 @@ const money = (n: number) => `$${n.toLocaleString('es-MX')}`;
 
 // foto: la misma toma con encuadres distintos (punto de enfoque x/y en % y acercamiento)
 type Crop = [number, number, number, string?];
-const C: Record<string, Crop> = { casa: [27, 56, 2.1], pino: [4, 58, 2.3], reflejo: [24, 82, 2.4], cerros: [62, 44, 1.5], cielo: [86, 22, 1.3], agua: [72, 86, 1.5], lago: [50, 55, 1], sala: [50, 50, 1, 'sala'], comedor: [50, 50, 1, 'comedor'], cocina: [50, 50, 1, 'cocina'], pasillo: [50, 50, 1, 'pasillo'], recamara: [50, 50, 1, 'recamara'] };
+const C: Record<string, Crop> = { casa: [27, 56, 2.1], pino: [4, 58, 2.3], reflejo: [24, 82, 2.4], cerros: [62, 44, 1.5], cielo: [86, 22, 1.3], agua: [72, 86, 1.5], lago: [50, 55, 1], sala: [50, 50, 1, 'sala'], comedor: [50, 50, 1, 'comedor'], cocina: [50, 50, 1, 'cocina'], pasillo: [50, 50, 1, 'pasillo'], recamara: [50, 50, 1, 'recamara'], bano: [50, 50, 1, 'bano'], biblioteca: [50, 50, 1, 'biblioteca'] };
 const im = (c: Crop, cls = '') => `<div class="im ${cls}"><img src="${c[3] ? `/obra/marea/${c[3]}.webp` : '/obra/marea-lago-uhd.webp'}" alt="" loading="lazy" decoding="async" style="--x:${c[0]}%;--y:${c[1]}%;--z:${c[2]}"></div>`;
 
 const nav = `<div class="mw-nav mw-f" style="--d:.15s"><button type="button" class="wn-logo" ${go('inicio')}>marea<sup>®</sup></button><div class="wn-r"><nav>${tabs.map(([k, t]) => btn(k, 'wn-t', t)).join('')}</nav><button type="button" class="wn-cta" ${go('reservar')}>Reservar</button></div></div>
@@ -51,9 +51,9 @@ const rates = `<table class="wtbl wrate rv"><thead><tr><th>Por noche</th><th>Baj
 // ---------- experiencias ----------
 const exps: [string, string, string, Crop, string[], string][] = [
   ['01', 'Atardecer en kayak', 'Remo suave a la hora dorada y una copa al volver al muelle. Salimos 40 minutos antes de que caiga el sol.', C.cielo, ['2 h', 'Máx. 6 personas'], '$850'],
-  ['02', 'Retiro de calma', 'Dos noches frente al lago con yoga al amanecer, baño de bosque y comidas ligeras. Sin pantallas si quieres.', C.pino, ['2 noches', 'Todo incluido'], '$6,900'],
+  ['02', 'Retiro de calma', 'Dos noches frente al lago con yoga al amanecer, baño de bosque y comidas ligeras. Sin pantallas si quieres.', C.biblioteca, ['2 noches', 'Todo incluido'], '$6,900'],
   ['03', 'Yoga y desayuno largo', 'Una clase suave frente al agua y un desayuno sin prisa en la terraza, con pan y fruta de la región.', C.reflejo, ['3 h', 'Máx. 8 personas'], '$980'],
-  ['04', 'Retiros y celebraciones', 'Armamos la estancia para tu equipo o tu familia, con fechas, comidas y precios a medida.', C.cerros, ['Desde 8 personas', 'A medida'], 'Cotiza'],
+  ['04', 'Retiros y celebraciones', 'Armamos la estancia para tu equipo o tu familia, con fechas, comidas y precios a medida.', C.comedor, ['Desde 8 personas', 'A medida'], 'Cotiza'],
 ];
 const expRow = ([n, t, d, c, m, pr]: (typeof exps)[number]) => `<article class="wxr rv"><span class="wxn">${n}</span>${im(c, 'rm wxi')}<div class="wxb"><h4>${t}</h4><p>${d}</p></div><div class="wxm"><ul>${m.map((x) => `<li>${x}</li>`).join('')}</ul><b>${pr}</b>${btn('reservar', 'wb wb-s', 'Pedir fecha')}</div></article>`;
 const semana: [string, string, string, string][] = [['Lunes', 'Yoga suave · 8:00', 'Kayak libre', 'Cena en la terraza'], ['Martes', 'Caminata al mirador', 'Lectura en el muelle', 'Fogata'], ['Miércoles', 'Yoga suave · 8:00', 'Paseo en lancha', 'Noche de cine al aire libre'], ['Jueves', 'Baño de bosque', 'Kayak libre', 'Cena de mercado'], ['Viernes', 'Yoga · 8:00', 'Taller de cerámica', 'Fogata y música'], ['Sábado', 'Desayuno largo', 'Atardecer en kayak', 'Cena con el chef'], ['Domingo', 'Yoga suave · 8:00', 'Comida de despedida', '—']];
@@ -129,7 +129,7 @@ ${nav}
   <ol class="wroute">${[['Ciudad de México', 'Salida por la carretera a Toluca.', '0 min'], ['Toluca', 'Sigues por la carretera a Valle de Bravo.', '55 min'], ['Valle de Bravo', 'Cruzas el centro hacia la orilla del lago.', '1 h 55 min'], ['Camino al Muelle 12', 'Llegas a Marea. Te esperamos con una bebida.', '2 h 10 min']].map(([a, b, c]) => `<li class="rv"><b>${a}</b><span>${b}</span><time>${c}</time></li>`).join('')}</ol></div>
   <div class="wmap-m rv">${mapa}</div></div></div>
 
- <div class="wgal" aria-hidden="true"><div>${[0, 1].map(() => `<span>${[[C.sala, 13, 'Sala frente al lago'], [C.cielo, 7, 'Cielo de octubre'], [C.comedor, 13, 'Comedor al atardecer'], [C.reflejo, 9, 'Reflejo en el agua'], [C.cocina, 13, 'Cocina de nogal'], [C.pasillo, 8, 'Pasillo de madera'], [C.recamara, 13, 'Recámara, 7:10 pm'], [C.agua, 8, 'Lago en calma']].map(([c, w, t]) => `<figure style="--w:${w}em">${im(c as Crop)}<figcaption>${t}</figcaption></figure>`).join('')}</span>`).join('')}</div></div>
+ <div class="wgal" aria-hidden="true"><div>${[0, 1].map(() => `<span>${[[C.sala, 13, 'Sala frente al lago'], [C.cielo, 7, 'Cielo de octubre'], [C.comedor, 13, 'Comedor al atardecer'], [C.reflejo, 9, 'Reflejo en el agua'], [C.cocina, 13, 'Cocina de nogal'], [C.biblioteca, 13, 'Rincón de lectura'], [C.pasillo, 8, 'Pasillo de madera'], [C.bano, 13, 'Baño con vista al lago'], [C.recamara, 13, 'Recámara, 7:10 pm'], [C.agua, 8, 'Lago en calma']].map(([c, w, t]) => `<figure style="--w:${w}em">${im(c as Crop)}<figcaption>${t}</figcaption></figure>`).join('')}</span>`).join('')}</div></div>
 
  <div class="wsx wrevs"><p class="wk-o rv">Lo que cuentan</p><div class="wrev">${rev.map(([q, n, s]) => `<figure class="rv"><i>★★★★★</i><blockquote>“${q}”</blockquote><figcaption><b>${n}</b>${s}</figcaption></figure>`).join('')}</div></div>
 
