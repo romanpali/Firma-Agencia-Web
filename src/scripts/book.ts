@@ -2,7 +2,7 @@
 // Se usa en /obra y en la plantilla Galería del configurador. Funciona del lado del servidor (HTML) y del cliente (animación).
 
 export const SEG = 8;
-export type Proj = { n: string; cat: string; y: number; d: string; tags: string[]; hl: string; href?: string; img?: string; art: number; dark?: boolean; layout?: number; leaves?: { f: string; b: string }[] };
+export type Proj = { n: string; cat: string; y: number; d: string; tags: string[]; hl: string; href?: string; img?: string; art: number; dark?: boolean; layout?: number; leaves?: { f: string; b: string }[]; pieces?: { t: string; h: string }[] };
 export type PageOpts = { brand: string; mail: string; mailHref?: string; year: number; endTitle: string; contentsTitle: string };
 
 const esc = (t: string) => String(t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c] as string));
