@@ -13,7 +13,7 @@ function render(r: HTMLElement) {
   const li = bag.map(([id, s, q], i) => {
     const t = tileOf(r, id); if (!t) return '';
     const p = +(t.dataset.p || 0); n += q; tot += p * q;
-    return `<li><div class="tz-ph tz-bt" style="--bg:${t.dataset.bg}">${t.querySelector('.tz-fig')!.outerHTML}</div><div><b>${t.dataset.n}</b><span>${t.dataset.col} · Talla ${s}</span><div class="tz-q"><button type="button" data-int="tqty" data-i="${i}" data-d="-1" aria-label="Menos">−</button><i>${q}</i><button type="button" data-int="tqty" data-i="${i}" data-d="1" aria-label="Más">+</button></div></div><em>${money(p * q)}</em></li>`;
+    return `<li><div class="tz-ph tz-bt">${t.querySelector('.tz-img')!.outerHTML}</div><div><b>${t.dataset.n}</b><span>${t.dataset.col} · Talla ${s}</span><div class="tz-q"><button type="button" data-int="tqty" data-i="${i}" data-d="-1" aria-label="Menos">−</button><i>${q}</i><button type="button" data-int="tqty" data-i="${i}" data-d="1" aria-label="Más">+</button></div></div><em>${money(p * q)}</em></li>`;
   }).join('');
   r.querySelector('.tz-bl')!.innerHTML = li; r.dataset.cn = String(n);
   setAll(r, '[data-cn]', String(n)); setAll(r, '[data-tot]', money(tot));
@@ -21,13 +21,13 @@ function render(r: HTMLElement) {
 const toTab = (r: HTMLElement, tab: string) => { const sc = r.querySelector<HTMLElement>('.mw-scroll'); r.dataset.tab = tab; if (sc) sc.scrollTop = 0; r.removeAttribute('data-sc'); };
 
 function pdp(r: HTMLElement, id: string) {
-  const t = tileOf(r, id); if (!t) return; const d = t.dataset, fig = t.querySelector('.tz-fig')!.outerHTML;
+  const t = tileOf(r, id); if (!t) return; const d = t.dataset, fig = t.querySelector('.tz-img')!.outerHTML;
   if (r.dataset.tab !== 'producto') r.dataset.from = r.dataset.tab || 'inicio';
   const seen = new Set<string>([id]);
   const more = [...r.querySelectorAll<HTMLElement>('.tz-mujer .tz-p, .tz-hombre .tz-p')].filter((x) => x.dataset.sx === d.sx && !seen.has(x.dataset.id!) && (seen.add(x.dataset.id!), true)).slice(0, 4);
-  r.querySelector('.tz-prod')!.innerHTML = `<div class="tz-pd"><div class="tz-pgl">${['c0', 'c1', 'c2', 'c3'].map((c) => `<div class="tz-ph tz-pc ${c}" style="--bg:${d.bg}">${fig}</div>`).join('')}</div>
+  r.querySelector('.tz-prod')!.innerHTML = `<div class="tz-pd"><div class="tz-pgl">${['c0', 'c1', 'c2', 'c3'].map((c) => `<div class="tz-ph tz-pc ${c}">${fig}</div>`).join('')}</div>
 <aside class="tz-pa"><button type="button" class="tz-bk" data-int="tback">← Volver</button><p class="tz-k">${d.sx} · ${d.kn}</p><h2>${d.n}</h2><b class="tz-pr">${money(+d.p!)}</b><p class="tz-pdsc">${d.d}</p>
-<p class="tz-lb2">Color <b>${d.col}</b></p><div class="tz-sw"><i style="--c:${d.bg}"></i></div>
+<p class="tz-lb2">Color <b>${d.col}</b></p>
 <p class="tz-lb2">Talla <u>Guía de tallas</u></p><div class="tz-sz">${['XS', 'S', 'M', 'L', 'XL'].map((s) => `<button type="button" data-int="tsz" data-s="${s}">${s}</button>`).join('')}</div>
 <button type="button" class="tz-add" data-int="tadd" data-id="${id}" data-s="">Añadir a la cesta</button><p class="tz-need">Elige una talla para añadirlo.</p>
 <ul class="tz-det"><li><b>Composición</b><span>${d.comp}</span></li><li><b>Envío</b><span>Gratis desde $1,200 · 2 a 4 días hábiles</span></li><li><b>Cambios</b><span>30 días, en tienda o por mensajería</span></li></ul></aside></div>
