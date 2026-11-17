@@ -37,6 +37,8 @@ const { n, html } = Astro.props;
       [data-nav]::before { display: none; }
       body { overflow: hidden; }
       .mr-ex.mr-pg { top: 4.4rem; z-index: 10; animation: none; }
+      .mr-pg .mw-scroll { scrollbar-width: none; } .mr-pg .mw-scroll::-webkit-scrollbar { display: none; }
+      .mr-sb { position: absolute; right: 6px; top: 14px; bottom: 14px; z-index: 15; width: 3px; border-radius: 3px; pointer-events: none; background: rgba(255, 255, 255, 0.14); mix-blend-mode: difference; transition: opacity 0.4s; } .mr-sb b { display: block; width: 100%; border-radius: 3px; background: #fff; will-change: transform; }
       .mr-back { position: fixed; left: 1.2rem; bottom: 1.2rem; z-index: 20; padding: 0.7em 1.2em; font-size: 13px; color: #fff; border-radius: 99em; background: rgba(10, 7, 6, 0.78); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); text-decoration: none; transition: background 0.3s, color 0.3s; }
       .mr-back:hover { background: #fff; color: #0a0706; }
     </style>
@@ -52,6 +54,11 @@ const { n, html } = Astro.props;
       const box = document.querySelector<HTMLElement>('.mr-exw')!, site = box.querySelector<HTMLElement>('.mr-web')!;
       const fit = () => { const w = innerWidth, h = innerHeight - 70, fs = Math.min(w / 40, Math.max(22, w / 65), h / 26.7); box.style.fontSize = `${fs}px`; site.style.setProperty('--hh', `${h / fs}em`); };
       fit(); addEventListener('resize', fit);
+      // barra de desplazamiento mínima: un hilo fino que muestra dónde vas
+      const sc = site.querySelector<HTMLElement>('.mw-scroll')!, sb = document.createElement('i'), th = document.createElement('b');
+      sb.className = 'mr-sb'; sb.appendChild(th); document.querySelector('.mr-pg')!.appendChild(sb);
+      const upd = () => { const h = sc.scrollHeight, v = sc.clientHeight, t = Math.max(0.06, v / h); th.style.height = `${t * 100}%`; th.style.transform = `translateY(${(h > v ? sc.scrollTop / (h - v) : 0) * (1 / t - 1) * 100}%)`; sb.style.opacity = h > v + 2 ? '1' : '0'; };
+      sc.addEventListener('scroll', upd, { passive: true }); addEventListener('resize', upd); setInterval(upd, 400); upd();
     </script>
   </body>
 </html>
