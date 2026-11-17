@@ -1,18 +1,19 @@
 // Sitio web (funcional) y ficha del proyecto de «Marea». Páginas de 40em × 26.7em, en HTML/CSS.
 // El sitio vive dentro de la página del libro: pestañas (Inicio, Estancias, Experiencias, Tienda, Nosotros, Reservar), desplazamiento propio,
 // carrito y reservas con total. La lógica está en marea-ui.ts (clics delegados por data-int); los estilos, en styles/marea-web.css.
-import { svg, g } from './marea-ico';
+import { svg } from './marea-ico';
 
 const tabs: [string, string][] = [['clases', 'Estancias'], ['experiencias', 'Experiencias'], ['tienda', 'Tienda'], ['nosotros', 'Nosotros']];
 const go = (t: string) => `data-int="wtab" data-t="${t}"`;
 const btn = (t: string, cls: string, label: string) => `<button type="button" class="${cls}" ${go(t)}>${label}</button>`;
 
-const nav = `<div class="mw-nav mw-f" style="--d:.15s"><button type="button" class="wn-logo" ${go('inicio')}>${g}marea</button><nav>${tabs.map(([k, t]) => btn(k, 'wn-t', t)).join('')}</nav><button type="button" class="wn-bag" ${go('tienda')} aria-label="Carrito">${svg('bag')}<em data-cart-n>0</em></button><button type="button" class="wn-cta" ${go('reservar')}>Reservar</button></div>
+
+const nav = `<div class="mw-nav mw-f" style="--d:.15s"><button type="button" class="wn-logo" ${go('inicio')}>marea<sup>®</sup></button><div class="wn-r"><nav>${tabs.map(([k, t]) => btn(k, 'wn-t', t)).join('')}</nav><button type="button" class="wn-cta" ${go('reservar')}>Reservar</button></div></div>
 <button type="button" class="wn-ex" data-int="wex" aria-label="Ver en pantalla completa"><i></i>Entrar al sitio</button>`;
 
-const foot = `<footer class="wf"><div class="wf-l"><b>${g}marea</b><p>Estancias junto al lago<br>Valle de Bravo, Edo. de México</p></div>
+const foot = `<footer class="wf"><div class="wf-t"><p class="wf-l">Estancias junto al lago<br>Valle de Bravo, Edo. de México</p>
 <div class="wf-m">${tabs.map(([k, t]) => btn(k, 'wf-a', t)).join('')}${btn('reservar', 'wf-a', 'Reservar')}</div>
-<p class="wf-r">hola@marea.example<br>Concepto de HumanCorp · Datos de ejemplo</p></footer>`;
+<p class="wf-r">hola@marea.example<br>Concepto de HumanCorp · Datos de ejemplo</p></div><b class="wf-big" aria-hidden="true">marea<sup>®</sup></b></footer>`;
 
 // ---------- estancias ----------
 type Cl = { k: string; t: string; lv: string; d: string; p: number; ph: string; li: string[] };
@@ -75,6 +76,8 @@ const chip = (g_: string, v: string, label: string, sub = '', full = false) => `
 // frase animada del hero: cada frase se escribe letra por letra (el CSS anima cada <i>)
 const rot = (ph: string[]) => `<span class="mw-rot">${ph.map((t, i) => `<span class="mw-r" style="--i:${i}">${[...t].map((c, k) => `<i style="--k:${k}">${c === ' ' ? '&nbsp;' : c}</i>`).join('')}</span>`).join('')}</span>`;
 
+const hdr = (k: string, t: string, p: string, pos: string, extra = '') => `<header class="wph" style="--p:${pos}"><div><p class="wk-o rv">${k}</p><h3 class="wt rv">${t}</h3>${p ? `<p class="ws-p rv">${p}</p>` : ''}</div>${extra}</header>`;
+
 export const webHTML = `<div class="pg mr-web" data-rp="dark" data-tab="inicio" data-fil="todo" data-nivel="cristal" data-dia="0" data-hora="2" data-pax="2" data-cart="0" data-total="0">
 ${nav}
 <div class="mw-scroll">
@@ -82,61 +85,61 @@ ${nav}
 <section class="wv wv-inicio">
  <div class="wh"><i class="mw-photo"></i><i class="mw-shade"></i>
   <div class="mw-hero">
-   <p class="mw-k mw-f" style="--d:.5s">Estancias junto al lago · Valle de Bravo</p>
-   <h4 class="mw-h"><span class="mw-w" style="--d:.65s">Un lugar para</span><span class="mw-w mw-it" style="--d:.95s">${rot(['bajar el ritmo.', 'mirar el lago.', 'dormir con calma.', 'volver a ti.'])}</span></h4>
+   <h4 class="mw-h"><span class="mw-w" style="--d:.5s">Un lugar para</span><span class="mw-w mw-it" style="--d:.8s">${rot(['bajar el ritmo.', 'mirar el lago.', 'dormir con calma.', 'volver a ti.'])}</span></h4>
+   <p class="mw-s mw-f" style="--d:1.2s">Ocho estancias frente al agua, con desayuno incluido y anfitriones que te cuidan sin estorbar.</p>
+   <button type="button" class="wb wb-h mw-f" style="--d:1.4s" ${go('reservar')}>Reservar estancia</button>
   </div>
-  <div class="mw-side mw-f" style="--d:1.4s"><p>Ocho estancias frente al agua, con desayuno incluido y anfitriones que te cuidan sin estorbar.</p>${btn('clases', 'wb-g', 'Ver estancias →')}</div>
- </div>
- <div class="wdk"><div class="mw-book rv" ${go('reservar')}><div><small>Estancia</small><b>Casa de cristal</b></div><div><small>Llegada</small><b>Vie 14 · 3 pm</b></div><div><small>Noches</small><b>2 noches</b></div><i>Buscar fechas</i></div>
-  <div class="mw-cond rv"><small>Lago hoy</small><div><b>22 °</b><span>Aire</span></div><div><b>19 °</b><span>Agua</span></div><div><b>7:42</b><span>Atardecer</span></div></div></div>
- <div class="wlt wfw"><div class="wsx wfeat"><div class="rv"><i>${svg('check')}</i><b>Desayuno incluido</b><span>Con producto local, cada mañana.</span></div><div class="rv"><i>${svg('crm')}</i><b>Solo ocho estancias</b><span>Atención personal de tu anfitrión.</span></div><div class="rv"><i>${svg('cal')}</i><b>Reserva en línea</b><span>Elige fechas en un minuto.</span></div></div></div>
- <div class="wlt wfw wmore">
-  <div class="wsx"><p class="wk-o">Estancias</p><h3 class="wt">Un refugio para <em>cada plan</em></h3>
-   <div class="wg3">${clases.slice(0, 3).map((c) => `<article class="wm rv"><div class="wc-ph ${c.ph}"><span>${c.lv}</span></div><b>${c.t}</b><small>${c.d}</small><em>${money(c.p)} / noche</em></article>`).join('')}</div></div>
-  <div class="wsx wsteps"><p class="wk-o">Cómo funciona</p><h3 class="wt">Tu estancia en <em>tres pasos</em></h3>
-   <div class="wg3">${[['01', 'Elige tu estancia', 'Casa, llegada y noches. Te mostramos la disponibilidad al momento.'], ['02', 'Llega al lago', 'Check-in desde las 15:00. Te recibimos con una bebida y te mostramos todo.'], ['03', 'Desconecta', 'Desayuno, muelle, chimenea y silencio. Lo demás lo decides tú.']].map(([n, t, d]) => `<div class="wstep rv"><em>${n}</em><b>${t}</b><span>${d}</span></div>`).join('')}</div></div>
-  <div class="wsx wquote"><div class="wq rv"><p>“Dormimos con el lago frente a la cama. Fue el fin de semana más tranquilo del año.”</p><small>Mariana R. · Casa de cristal</small></div>
-   <div class="wq rv"><p>“Fuimos en familia a la casa completa. Todo cuidado, sin prisa y con el muelle solo para nosotros.”</p><small>Familia Ortega · Casa completa</small></div></div>
-  <div class="wband rv"><i class="wband-ph"></i><div><p class="wk-o">Esta semana</p><h3 class="wt">Aún hay fechas <em>entre semana</em></h3><p class="ws-p">Reserva en un minuto. Cancelas sin costo hasta 72 horas antes de tu llegada.</p>${btn('reservar', 'wb wb-l', 'Ver fechas')}</div></div>
-  <div class="wsx wfaq"><p class="wk-o">Dudas frecuentes</p><div class="wg2">${[['¿Cuánto tarda llegar desde la Ciudad de México?', 'Unas dos horas por carretera. Te enviamos la ruta y el código de acceso.'], ['¿Qué incluye la estancia?', 'Desayuno, kayaks, uso del muelle y leña para la chimenea.'], ['¿Aceptan mascotas?', 'Sí, en la cabaña del bosque y con aviso previo.'], ['¿A qué hora es la entrada y la salida?', 'Entras desde las 15:00 y sales hasta las 12:00.']].map(([q, a]) => `<div class="wqa rv"><b>${q}</b><span>${a}</span></div>`).join('')}</div></div>
+  <button type="button" class="mw-feat mw-f" style="--d:1.6s" data-int="wbook" data-nivel="cristal"><i class="mf-img ph4"></i><span class="mf-card"><b>Casa de cristal</b><small>Sobre el agua, con la cama frente al lago. Desde $4,800 por noche.</small><em>Ver estancia<i></i></em></span></button>
  </div>
 
+ <div class="wsx wbar"><div class="mw-book rv" ${go('reservar')}><div><small>Estancia</small><b>Casa de cristal</b></div><div><small>Llegada</small><b>Vie 14 · 3 pm</b></div><div><small>Noches</small><b>2 noches</b></div><i>Buscar fechas</i></div>
+  <div class="mw-cond rv"><small>Lago hoy</small><div><b>22°</b><span>Aire</span></div><div><b>19°</b><span>Agua</span></div><div><b>7:42</b><span>Atardecer</span></div></div></div>
+ <div class="wsx wfeat">${[['check', 'Desayuno incluido', 'Con producto local, cada mañana.'], ['crm', 'Solo ocho estancias', 'Atención personal de tu anfitrión.'], ['cal', 'Reserva en línea', 'Elige fechas en un minuto.']].map(([i, b, s]) => `<div class="rv"><i>${svg(i)}</i><b>${b}</b><span>${s}</span></div>`).join('')}</div>
+
+ <div class="wsx wsec"><div class="wsh"><div><p class="wk-o">Estancias</p><h3 class="wt">Un refugio para <em>cada plan</em></h3></div>${btn('clases', 'wb wb-s', 'Ver todas')}</div>
+  <div class="wg3">${clases.slice(0, 3).map((c) => `<article class="wm rv" ${go('clases')}><div class="wc-ph ${c.ph}"><span>${c.lv}</span></div><b>${c.t}</b><small>${c.d}</small><em>${money(c.p)} <i>/ noche</i></em></article>`).join('')}</div></div>
+
+ <div class="wdarkb"><div class="wsx wsteps"><p class="wk-o">Cómo funciona</p><h3 class="wt">Tu estancia en <em>tres pasos</em></h3>
+  <div class="wg3">${[['01', 'Elige tu estancia', 'Casa, llegada y noches. Te mostramos la disponibilidad al momento.'], ['02', 'Llega al lago', 'Check-in desde las 15:00. Te recibimos con una bebida y te mostramos todo.'], ['03', 'Desconecta', 'Desayuno, muelle, chimenea y silencio. Lo demás lo decides tú.']].map(([n, t, d]) => `<div class="wstep rv"><em>${n}</em><b>${t}</b><span>${d}</span></div>`).join('')}</div></div></div>
+
+ <div class="wsx wquote"><div class="wq rv"><p>“Dormimos con el lago frente a la cama. Fue el fin de semana más tranquilo del año.”</p><small>Mariana R. · Casa de cristal</small></div>
+  <div class="wq rv"><p>“Fuimos en familia a la casa completa. Todo cuidado, sin prisa y con el muelle solo para nosotros.”</p><small>Familia Ortega · Casa completa</small></div></div>
+
+ <div class="wband rv"><i class="wband-ph"></i><div><p class="wk-o">Esta semana</p><h3 class="wt">Aún hay fechas <em>entre semana</em></h3><p class="ws-p">Reserva en un minuto. Cancelas sin costo hasta 72 horas antes de tu llegada.</p>${btn('reservar', 'wb wb-h', 'Ver fechas')}</div></div>
+
+ <div class="wsx wfaq"><p class="wk-o">Dudas frecuentes</p><div class="wg2">${[['¿Cuánto tarda llegar desde la Ciudad de México?', 'Unas dos horas por carretera. Te enviamos la ruta y el código de acceso.'], ['¿Qué incluye la estancia?', 'Desayuno, kayaks, uso del muelle y leña para la chimenea.'], ['¿Aceptan mascotas?', 'Sí, en la cabaña del bosque y con aviso previo.'], ['¿A qué hora es la entrada y la salida?', 'Entras desde las 15:00 y sales hasta las 12:00.']].map(([q, a]) => `<div class="wqa rv"><b>${q}</b><span>${a}</span></div>`).join('')}</div></div>
  ${foot}
 </section>
 
-<section class="wv wv-clases wlt"><div class="wsx wtop"><p class="wk-o rv">Estancias</p><h3 class="wt rv">Elige tu <em>refugio.</em></h3><p class="ws-p rv">Todas incluyen desayuno, kayaks y uso del muelle. Cancelas sin costo hasta 72 horas antes.</p>
- <div class="wg2">${clases.map(classCard).join('')}</div>
+<section class="wv wv-clases">${hdr('Estancias', 'Elige tu <em>refugio.</em>', 'Todas incluyen desayuno, kayaks y uso del muelle. Cancelas sin costo hasta 72 horas antes.', '50% 22%')}
+ <div class="wsx wbody"><div class="wg2">${clases.map(classCard).join('')}</div>
  <div class="wsch rv"><p class="wk-o">Disponibilidad de la semana</p><div>${[['Vie 14', 'Cabaña · Suite del muelle'], ['Sáb 15', 'Casa completa'], ['Dom 16', 'Casa de cristal · Cabaña'], ['Lun 17', 'Todas las estancias']].map(([h, t]) => `<p><b>${h}</b><span>${t}</span></p>`).join('')}</div></div></div>
-<div class="wwave" aria-hidden="true"><svg viewBox="0 0 800 150" preserveAspectRatio="none"><path d="M0 66l60-14 90 8 110-22 120 18 100-14 130 12 110-8 80 6V150H0z" fill="#8b9fb8" opacity=".35"/><path d="M0 92h800V150H0z" fill="#0a1f36" opacity=".9"/><path d="M60 104h180M300 112h260M120 124h140M420 132h300M520 104h200" stroke="#a0b4cc" stroke-width="1.4" stroke-linecap="round" opacity=".4"/><path d="M0 128h800V150H0z" fill="#06111f"/></svg></div>
-
  ${foot}
 </section>
 
-<section class="wv wv-experiencias wlt"><div class="wsx wtop"><p class="wk-o rv">Experiencias</p><h3 class="wt rv">Más que una <em>estancia.</em></h3><p class="ws-p rv">Momentos pensados para quedarte con el lago: solos, en pareja o con tu equipo.</p>
- <div class="wcol">${exps.map(expRow).join('')}</div></div>
+<section class="wv wv-experiencias">${hdr('Experiencias', 'Más que una <em>estancia.</em>', 'Momentos pensados para quedarte con el lago: solos, en pareja o con tu equipo.', '50% 62%')}
+ <div class="wsx wbody"><div class="wcol">${exps.map(expRow).join('')}</div></div>
  ${foot}
 </section>
 
-<section class="wv wv-tienda wlt"><div class="wsx wtop">
- <div class="wsh"><div><p class="wk-o rv">Tienda · Marea Goods</p><h3 class="wt rv">Hecho para quedarse,<br><em>también en casa.</em></h3></div>
- <p class="wcartb rv">Carrito<b><i data-cart-n>0</i> · <i data-cart-t>$0</i></b></p></div>
- <div class="wfil rv">${filtros.map(([k, t]) => `<button type="button" class="wf-c" data-int="wfil" data-f="${k}">${t}</button>`).join('')}</div>
+<section class="wv wv-tienda">${hdr('Tienda · Marea Goods', 'Hecho para quedarse, <em>también en casa.</em>', '', '50% 40%', '<p class="wcartb rv">Carrito<b><i data-cart-n>0</i> · <i data-cart-t>$0</i></b></p>')}
+ <div class="wsx wbody"><div class="wfil rv">${filtros.map(([k, t]) => `<button type="button" class="wf-c" data-int="wfil" data-f="${k}">${t}</button>`).join('')}</div>
  <div class="wshop">${prods.map(prodCard).join('')}</div>
  <div class="wship rv"><p>Envíos a todo México</p><p>Cambios en 30 días</p><p>Pago seguro</p></div></div>
  ${foot}
 </section>
 
-<section class="wv wv-nosotros wlt"><div class="wsx wtop"><p class="wk-o rv">Nosotros</p><h3 class="wt rv">Una casa <em>junto al lago.</em></h3>
- <div class="wnos"><p class="ws-p rv">Marea nació para ofrecer descanso sin ruido: pocas estancias, anfitriones presentes y un lago que se respeta. Nos importa más que descanses que llenar el calendario.</p><i class="wnos-ph ph2 rv"></i></div>
+<section class="wv wv-nosotros">${hdr('Nosotros', 'Una casa <em>junto al lago.</em>', '', '50% 70%')}
+ <div class="wsx wbody"><div class="wnos"><p class="ws-p rv">Marea nació para ofrecer descanso sin ruido: pocas estancias, anfitriones presentes y un lago que se respeta. Nos importa más que descanses que llenar el calendario.</p><i class="wnos-ph ph2 rv"></i></div>
  <div class="wvals">${vals.map(([n, t, d]) => `<div class="rv"><em>${n}</em><b>${t}</b><span>${d}</span></div>`).join('')}</div>
  <p class="wk-o rv" style="margin-top:2.6em">El equipo</p>
  <div class="wteam">${team.map(([i, n, r, c]) => `<div class="rv"><i class="av-${c}">${i}</i><b>${n}</b><span>${r}</span></div>`).join('')}</div>
- <div class="wloc rv"><div><p class="wk-o">Dónde estamos</p><b>Valle de Bravo, Estado de México</b><span>Check-in desde las 15:00 · hola@marea.example</span></div>${btn('reservar', 'wb wb-l', 'Reservar estancia')}</div></div>
+ <div class="wloc rv"><div><p class="wk-o">Dónde estamos</p><b>Valle de Bravo, Estado de México</b><span>Check-in desde las 15:00 · hola@marea.example</span></div>${btn('reservar', 'wb wb-h', 'Reservar estancia')}</div></div>
  ${foot}
 </section>
 
-<section class="wv wv-reservar"><div class="wsx wtop"><p class="wk-o rv">Reservar</p><h3 class="wt rv">Reserva tu <em>estancia.</em></h3>
- <div class="wres">
+<section class="wv wv-reservar">${hdr('Reservar', 'Reserva tu <em>estancia.</em>', '', '50% 30%')}
+ <div class="wsx wbody"><div class="wres">
   <div class="wform">
    <div class="wst"><p><i>1</i>Estancia</p><div>${clases.map((c) => chip('nivel', c.k, c.t, `${money(c.p)} / noche`)).join('')}</div></div>
    <div class="wst"><p><i>2</i>Llegada</p><div>${days.map((d, i) => chip('dia', String(i), d)).join('')}</div></div>
@@ -147,7 +150,7 @@ ${nav}
   <aside class="wsum"><div class="wsum-i"><p class="wk-o">Tu reserva</p>
    <dl><div><dt>Estancia</dt><dd data-sum="clase">Casa de cristal</dd></div><div><dt>Llegada</dt><dd data-sum="dia">Vie 14</dd></div><div><dt>Noches</dt><dd data-sum="hora">2 noches</dd></div><div><dt>Huéspedes</dt><dd data-sum="pax2">2</dd></div></dl>
    <div class="wtot"><span>Total</span><b data-sum="total">$9,600</b></div>
-   <button type="button" class="wb wb-l wb-w" data-int="wconfirm">Confirmar reserva</button><small>Desayuno incluido · Cancela sin costo hasta 72 h antes</small></div>
+   <button type="button" class="wb wb-h wb-w" data-int="wconfirm">Confirmar reserva</button><small>Desayuno incluido · Cancela sin costo hasta 72 h antes</small></div>
    <div class="wdone"><i>${svg('check')}</i><h4>¡Reserva confirmada!</h4><p data-sum="done">Te esperamos en el lago.</p><span data-sum="code">MAR-0142</span><button type="button" class="wb-g" data-int="wreset">Hacer otra reserva</button></div></aside>
  </div></div>
  ${foot}

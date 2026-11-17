@@ -33,7 +33,7 @@ function init(root: HTMLElement) {
   }
   let raf = 0, t = 0;
   sc.addEventListener('scroll', () => {
-    if (!raf) raf = requestAnimationFrame(() => { raf = 0; root.style.setProperty('--sy', String(Math.round(sc.scrollTop))); });
+    if (!raf) raf = requestAnimationFrame(() => { raf = 0; root.style.setProperty('--sy', String(Math.round(sc.scrollTop))); root.toggleAttribute('data-sc', sc.scrollTop > 24); });
     clearTimeout(t); t = window.setTimeout(() => dirty(root), 350);
   }, { passive: true });
   root.addEventListener('input', (ev) => { const i = ev.target as HTMLInputElement; if (i.tagName === 'INPUT') i.setAttribute('value', i.value); });
@@ -106,7 +106,7 @@ function glide(sc: HTMLElement, y: number) {
 // Cada sección es su propia página: los botones cambian de página
 function toSection(sc: HTMLElement, name: string) {
   const root = sc.closest<HTMLElement>('.mr-web')!;
-  tgt.delete(sc); root.dataset.tab = name; sc.scrollTop = 0;
+  tgt.delete(sc); root.dataset.tab = name; sc.scrollTop = 0; root.removeAttribute('data-sc');
 }
 
 // Rueda del ratón sobre el sitio (dentro del libro): el navegador no desplaza contenedores dentro de una escena 3D, así que se hace a mano,
