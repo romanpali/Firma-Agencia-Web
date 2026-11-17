@@ -84,6 +84,9 @@ const frags = [
   const whiteEl = inner.querySelector<HTMLElement>('[data-white]')!;
   const fogs = [...inner.querySelectorAll<HTMLElement>('[data-fog]')];
   let nightOn = false;
+  // en celular el capítulo es negro desde el principio (sin la página blanca)
+  const dark0 = matchMedia('(max-width: 700px)').matches;
+  if (dark0) { whiteEl.style.background = '#000'; inner.classList.add('ps-night'); inner.style.setProperty('--fade', '#000'); root.dataset.tone = 'dark'; }
   const W = 640, H = 400, GAP = 40;
 
   // ---- layout: panels on a grid, camera stops, data bus between them
@@ -204,9 +207,9 @@ const frags = [
     // cinematic night: the chapter leaves the white page as soon as the building starts
     const nt = sm(clamp((u - 0.25) / 0.9));
     put(night, 'opacity', nt.toFixed(3));
-    const ch = Math.round(255 + (2 - 255) * nt), cg = Math.round(255 + (3 - 255) * nt), cb = Math.round(255 + (26 - 255) * nt);
+    const base = dark0 ? 0 : 255, ch = Math.round(base + (2 - base) * nt), cg = Math.round(base + (3 - base) * nt), cb = Math.round(base + (26 - base) * nt);
     put(inner, '--fade', `rgb(${ch}, ${cg}, ${cb})`);
-    if ((nt > 0.5) !== nightOn) { nightOn = nt > 0.5; inner.classList.toggle('ps-night', nightOn); root.dataset.tone = nightOn ? 'dark' : 'light'; }
+    if ((nt > 0.5) !== nightOn) { nightOn = nt > 0.5; inner.classList.toggle('ps-night', nightOn || dark0); root.dataset.tone = nightOn || dark0 ? 'dark' : 'light'; }
     // subtitle
     const idx = clamp(Math.round(u), 0, LAST);
     if (idx !== shown) { if (shown >= 0) setTitle(idx); else titleEl.textContent = titles[idx]; shown = idx; }

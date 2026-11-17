@@ -102,7 +102,6 @@
 </style>
 
 <script>
-  type Mode = [string, string, string];
   type Topic = [string, string, string, number];
   const TOPICS: Topic[] = [
     ['descubrimiento', 'Llamada de descubrimiento', 'Platicamos de tu empresa y de lo que necesitas.', 30],
@@ -110,7 +109,6 @@
     ['web', 'Diseño y sitio web', 'Identidad, sitio, tienda en línea o galería.', 30],
     ['tecnologia', 'Tecnología y automatización', 'Procesos, paneles, asistentes y sistemas.', 45],
   ];
-  const MODES: Mode[] = [['video', 'Videollamada', 'Enlace por correo'], ['tel', 'Llamada', 'Te marcamos'], ['oficina', 'En la oficina', 'Mérida, Yucatán']];
   const MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
   const DIAS = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
   const OFFSET = 6; // Mérida: UTC−6 todo el año
@@ -156,7 +154,7 @@
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const now = new Date();
-  const S = { step: 0, topic: '', mode: 'video', date: '', time: '', month: new Date(now.getFullYear(), now.getMonth(), 1), name: '', company: '', email: '', phone: '', notes: '', consent: false, id: '', sending: false, err: '' };
+  const S = { step: 0, topic: '', date: '', time: '', month: new Date(now.getFullYear(), now.getMonth(), 1), name: '', company: '', email: '', phone: '', notes: '', consent: false, id: '', sending: false, err: '' };
   let avail: string[] | null = null, slots: string[] | null = null, token = 0, tokenS = 0;
   const topic = () => TOPICS.find((t) => t[0] === S.topic);
   const mins = () => topic()?.[3] ?? 30;
@@ -168,25 +166,24 @@
   const local = (iso: string, hm: string) => new Date(epochOf(iso, hm)).toLocaleTimeString('es-MX', { hour: 'numeric', minute: '2-digit', hour12: true });
   const merida = (hm: string) => { const [h, m] = hm.split(':').map(Number); return `${h % 12 || 12}:${pad(m)} ${h < 12 ? 'a. m.' : 'p. m.'}`; };
   const sameTz = () => new Date().getTimezoneOffset() === OFFSET * 60;
-  const modeName = () => MODES.find((m) => m[0] === S.mode)![1];
 
   const valid = () => {
     if (S.step === 0) return !!S.topic;
     if (S.step === 1) return !!(S.date && S.time);
-    if (S.step === 2) return S.name.trim().length > 1 && /^\S+@\S+\.\S+$/.test(S.email.trim()) && (S.mode !== 'tel' || S.phone.replace(/\D/g, '').length >= 8);
+    if (S.step === 2) return S.name.trim().length > 1 && /^\S+@\S+\.\S+$/.test(S.email.trim()) && (!S.phone.trim() || S.phone.replace(/\D/g, '').length >= 8);
     if (S.step === 3) return S.consent && !S.sending;
     return true;
   };
   const hintFor = () => {
-    if (S.step === 0) return S.topic ? `${mins()} minutos · ${modeName()}` : 'Elige un tema para continuar.';
+    if (S.step === 0) return S.topic ? `${mins()} minutos` : 'Elige un tema para continuar.';
     if (S.step === 1) return S.time ? `${longDate(S.date)} · ${merida(S.time)} (Mérida)` : S.date ? 'Elige una hora.' : 'Elige un día disponible.';
-    if (S.step === 2) return valid() ? '' : S.mode === 'tel' ? 'Nombre, correo y un teléfono válidos.' : 'Escribe tu nombre y un correo válido.';
+    if (S.step === 2) return valid() ? '' : 'Escribe tu nombre, un correo válido y, si lo pones, un teléfono completo.';
     if (S.step === 3) return S.consent ? '' : 'Acepta el aviso de privacidad para confirmar.';
     return '';
   };
 
   const renderSum = () => {
-    const rows: [string, string][] = [['Tema', topic()?.[1] || ''], ['Duración y modalidad', S.topic ? `${mins()} min · ${modeName()}` : ''], ['Fecha', S.date ? longDate(S.date) : ''], ['Hora', S.time ? `${merida(S.time)} · Mérida` : '']];
+    const rows: [string, string][] = [['Tema', topic()?.[1] || ''], ['Duración', S.topic ? `${mins()} minutos` : ''], ['Fecha', S.date ? longDate(S.date) : ''], ['Hora', S.time ? `${merida(S.time)} · Mérida` : '']];
     sum.innerHTML = rows.map(([k, v]) => `<div><dt>${k}</dt><dd class="${v ? '' : 'e'}">${v ? esc(v) : '—'}</dd></div>`).join('');
   };
 
@@ -225,34 +222,33 @@
   };
 
   const reviewHTML = (edit: boolean) => {
-    const rows: [string, string, number][] = [['Tema', `${topic()?.[1]} · ${mins()} min`, 0], ['Modalidad', modeName(), 0], ['Fecha y hora', `${longDate(S.date)}, ${merida(S.time)} (Mérida)${sameTz() ? '' : ` · ${local(S.date, S.time)} tu hora`}`, 1], ['Contacto', `${S.name.trim()} · ${S.email.trim()}${S.phone.trim() ? ' · ' + S.phone.trim() : ''}`, 2]];
+    const rows: [string, string, number][] = [['Tema', `${topic()?.[1]} · ${mins()} min`, 0], ['Fecha y hora', `${longDate(S.date)}, ${merida(S.time)} (Mérida)${sameTz() ? '' : ` · ${local(S.date, S.time)} tu hora`}`, 1], ['Contacto', `${S.name.trim()} · ${S.email.trim()}${S.phone.trim() ? ' · ' + S.phone.trim() : ''}`, 2]];
     return `<div class="ag-rev">${rows.map(([k, v, st]) => `<div><span><small>${k}</small><b>${esc(v)}</b></span>${edit ? `<button type="button" data-go="${st}">Cambiar</button>` : ''}</div>`).join('')}</div>`;
   };
   const stamp = (t: number) => new Date(t).toISOString().replace(/[-:]|\.\d{3}/g, '');
-  const gcal = () => { const s = epochOf(S.date, S.time); return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent('Llamada con HumanCorp')}&dates=${stamp(s)}/${stamp(s + mins() * 60000)}&details=${encodeURIComponent(`${topic()![1]} · ${modeName()} · Folio ${S.id}`)}&location=${encodeURIComponent(S.mode === 'oficina' ? 'Mérida, Yucatán' : 'En línea')}`; };
+  const gcal = () => { const s = epochOf(S.date, S.time); return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent('Llamada con HumanCorp')}&dates=${stamp(s)}/${stamp(s + mins() * 60000)}&details=${encodeURIComponent(`${topic()![1]} · Folio ${S.id}`)}&location=${encodeURIComponent('Por confirmar')}`; };
   const ics = () => {
     const s = epochOf(S.date, S.time), e = s + mins() * 60000;
-    const t = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//HumanCorp//Agendar//ES', 'BEGIN:VEVENT', `UID:${S.id}@humancorp.co`, `DTSTAMP:${stamp(Date.now())}`, `DTSTART:${stamp(s)}`, `DTEND:${stamp(e)}`, 'SUMMARY:Llamada con HumanCorp', `DESCRIPTION:${topic()![1]} · ${modeName()} · Folio ${S.id}`, 'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
+    const t = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//HumanCorp//Agendar//ES', 'BEGIN:VEVENT', `UID:${S.id}@humancorp.co`, `DTSTAMP:${stamp(Date.now())}`, `DTSTART:${stamp(s)}`, `DTEND:${stamp(e)}`, 'SUMMARY:Llamada con HumanCorp', `DESCRIPTION:${topic()![1]} · Folio ${S.id}`, 'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
     const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([t], { type: 'text/calendar' })); a.download = 'llamada-humancorp.ics'; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
   };
 
   const stepHTML = () => {
-    if (S.step === 0) return `<div class="ag-step"><h3>¿De qué quieres platicar?</h3><p class="sub">Elige el tema y cómo prefieres la llamada.</p>
-      <div class="ag-opts">${TOPICS.map(([id, t, d, m]) => `<button type="button" class="ag-opt" data-topic="${id}" aria-pressed="${S.topic === id}"><div><b>${t}</b><span>${d}</span></div><em>${m} min</em></button>`).join('')}</div>
-      <p class="ag-h4">Modalidad</p><div class="ag-seg">${MODES.map(([id, t, d]) => `<button type="button" class="ag-opt" data-mode="${id}" aria-pressed="${S.mode === id}"><b>${t}</b><span>${d}</span></button>`).join('')}</div></div>`;
-    if (S.step === 1) return `<div class="ag-step"><h3>Elige día y hora</h3><p class="sub">${mins()} minutos · ${modeName()}. Atendemos de lunes a viernes de 9:00 a 18:00 y los sábados de 10:00 a 14:00.</p>
+    if (S.step === 0) return `<div class="ag-step"><h3>¿De qué quieres platicar?</h3><p class="sub">Elige el tema. Después te confirmamos cómo prefieres la llamada.</p>
+      <div class="ag-opts">${TOPICS.map(([id, t, d, m]) => `<button type="button" class="ag-opt" data-topic="${id}" aria-pressed="${S.topic === id}"><div><b>${t}</b><span>${d}</span></div><em>${m} min</em></button>`).join('')}</div></div>`;
+    if (S.step === 1) return `<div class="ag-step"><h3>Elige día y hora</h3><p class="sub">${mins()} minutos. Atendemos de lunes a viernes de 9:00 a 18:00 y los sábados de 10:00 a 14:00.</p>
       <div class="ag-cols"><div data-cal>${calHTML()}</div><div data-slots>${slotsHTML()}</div></div></div>`;
     if (S.step === 2) return `<div class="ag-step"><h3>¿A nombre de quién la agendamos?</h3><p class="sub">Solo usamos tus datos para esta llamada.</p>
       <div class="ag-form"><label>Nombre completo<input class="ag-in" data-f="name" autocomplete="name" placeholder="Tu nombre" value="${esc(S.name)}" /></label>
       <label>Empresa <span style="opacity:.5">(opcional)</span><input class="ag-in" data-f="company" autocomplete="organization" placeholder="Nombre de tu empresa" value="${esc(S.company)}" /></label>
       <label>Correo electrónico<input class="ag-in" data-f="email" type="email" inputmode="email" autocomplete="email" placeholder="tu@correo.com" value="${esc(S.email)}" /></label>
-      <label>Teléfono ${S.mode === 'tel' ? '' : '<span style="opacity:.5">(opcional)</span>'}<input class="ag-in" data-f="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+52 999 000 0000" value="${esc(S.phone)}" /></label>
+      <label>Teléfono <span style="opacity:.5">(opcional)</span><input class="ag-in" data-f="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+52 999 000 0000" value="${esc(S.phone)}" /></label>
       <label class="w">¿Algo que quieras adelantarnos? <span style="opacity:.5">(opcional)</span><textarea class="ag-in" data-f="notes" placeholder="Cuéntanos en una línea de qué trata tu empresa o qué necesitas">${esc(S.notes)}</textarea></label></div></div>`;
     if (S.step === 3) return `<div class="ag-step"><h3>Revisa y confirma</h3><p class="sub">Si algo no es correcto, cámbialo antes de confirmar.</p>${reviewHTML(true)}
       <label class="ag-chk"><input type="checkbox" data-consent ${S.consent ? 'checked' : ''} /><span>Acepto el <a href="/privacidad" target="_blank" rel="noopener">aviso de privacidad</a> y que HumanCorp use estos datos para agendar y dar seguimiento a esta llamada.</span></label>
       ${S.err ? `<p class="ag-err" role="alert">${S.err}</p>` : ''}</div>`;
     return `<div class="ag-step ag-ok"><svg viewBox="0 0 84 84" aria-hidden="true"><circle cx="42" cy="42" r="30"/><path d="M30 43l9 9 16-18"/></svg><h3>Listo, ${esc(S.name.trim().split(' ')[0])}. Tu llamada está agendada.</h3>
-      <p class="sub">${S.mode === 'video' ? 'Te enviaremos el enlace de la videollamada a' : 'Te enviaremos la confirmación a'} ${esc(S.email.trim())}.</p><span class="ag-id">Folio ${S.id}</span>${reviewHTML(false)}
+      <p class="sub">${'Te enviaremos la confirmación y los detalles de la llamada a'} ${esc(S.email.trim())}.</p><span class="ag-id">Folio ${S.id}</span>${reviewHTML(false)}
       <div class="ag-links"><a href="${gcal()}" target="_blank" rel="noopener">Agregar a Google Calendar</a><button type="button" data-ics>Descargar .ics</button></div></div>`;
   };
 
@@ -272,7 +268,7 @@
   const confirm = async () => {
     S.sending = true; S.err = ''; render(false);
     try {
-      const r = await cal().book({ tema: topic()![1], modalidad: modeName(), fecha: S.date, hora: S.time, zona: 'America/Merida (UTC-6)', duracion: String(mins()), nombre: S.name.trim(), empresa: S.company.trim(), correo: S.email.trim(), telefono: S.phone.trim(), notas: S.notes.trim() });
+      const r = await cal().book({ tema: topic()![1], modalidad: 'Por confirmar', fecha: S.date, hora: S.time, zona: 'America/Merida (UTC-6)', duracion: String(mins()), nombre: S.name.trim(), empresa: S.company.trim(), correo: S.email.trim(), telefono: S.phone.trim(), notas: S.notes.trim() });
       if (!r.ok) throw new Error('no');
       S.id = r.id; S.sending = false; go(4);
     } catch {
@@ -286,7 +282,6 @@
     const t = (e.target as HTMLElement).closest<HTMLElement>('button,input[data-consent]'); if (!t) return;
     const d = t.dataset;
     if (d.topic) { if (S.topic !== d.topic) { S.topic = d.topic; S.date = ''; S.time = ''; } render(false); }
-    else if (d.mode) { S.mode = d.mode; render(false); }
     else if (d.mv) { S.month = new Date(S.month.getFullYear(), S.month.getMonth() + +d.mv, 1); loadMonth(); }
     else if (d.d) { S.date = d.d; S.time = ''; renderCal(); loadSlots(); refresh(); renderSum(); }
     else if (d.t) { S.time = d.t; renderSlots(); refresh(); renderSum(); }
@@ -307,7 +302,7 @@
     if (!root.hidden) return;
     document.querySelector<HTMLElement>('[data-menu].is-open [data-menu-close]')?.click();
     last = document.activeElement as HTMLElement | null;
-    Object.assign(S, { step: 0, topic: '', mode: 'video', date: '', time: '', consent: false, err: '', sending: false, id: '' });
+    Object.assign(S, { step: 0, topic: '', date: '', time: '', consent: false, err: '', sending: false, id: '' });
     root.hidden = false; root.setAttribute('aria-hidden', 'false'); document.documentElement.classList.add('ag-lock');
     render(false); void root.offsetWidth; root.classList.add('on'); card.focus({ preventScroll: true });
   };

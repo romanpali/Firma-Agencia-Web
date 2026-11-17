@@ -696,7 +696,8 @@ html { scrollbar-width: thin; scrollbar-color: rgba(125, 125, 140, 0.45) transpa
 #construccion .site .chip-f, #construccion .site .btn-o { background: rgba(255, 255, 255, 0.2); }
 
 /* Transición limpia entre páginas (navegación entre documentos): un fundido corto, sin movimiento */
-@view-transition { navigation: auto; }
+/* en celular se desactiva: el fundido del documento completo dejaba capas mezcladas unos segundos al volver al inicio */
+@media (min-width: 901px) { @view-transition { navigation: auto; } }
 ::view-transition-old(root) { animation: 0.28s cubic-bezier(.4, 0, .2, 1) both vtOut; }
 ::view-transition-new(root) { animation: 0.38s cubic-bezier(.2, .8, .2, 1) 0.06s both vtIn; }
 @keyframes vtOut { to { opacity: 0; } }
