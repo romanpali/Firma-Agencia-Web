@@ -126,9 +126,10 @@ const dash = `<div class="pg tz-dash" data-rp="light" data-v="resumen" data-of="
 <section class="td-vw v-campanas"><header><div><p>Marketing</p><h4>Campañas</h4></div><i class="td-pill">Activa o pausa con el interruptor</i></header>
 <div class="td-cp">${camps.map(([a, b, c, d, on]) => `<div class="td-c"><b>${a}</b><span>${b}</span><div><small>Inversión</small><em>${c}</em></div><div><small>Retorno</small><em>${d}</em></div><div class="td-pr"><small data-on>${on ? 'Activa' : 'Pausada'}</small>${sw(on)}</div></div>`).join('')}</div></section>
 
-<section class="td-vw v-asistente"><header><div><p>Pregúntale a tus datos</p><h4>Asistente</h4></div></header>
-<div class="td-c td-chat"><div class="td-msgs"><p class="bot">Hola, Sofía. Elige una pregunta y te respondo con los datos de la tienda.</p></div>
-<div class="td-qs">${['¿Qué se vendió más esta semana?', '¿Qué debo reabastecer?', '¿Qué campaña conviene pausar?'].map((q, i) => `<button type="button" data-int="dask" data-q="${i}">${q}</button>`).join('')}</div></div></section>
+<section class="td-vw v-asistente"><div class="td-ai"><div class="td-top"><span><i>${svg('ia')}</i>Asistente Trama</span><em>Respuestas de ejemplo</em></div>
+<div class="td-thread"><div class="td-hello"><i>${svg('ia')}</i><h4>¿En qué te ayudo, Sofía?</h4><p>Pregunta por ventas, inventario o campañas.</p>
+<div class="td-sug">${[['¿Qué se vendió más esta semana?', 'Ranking de prendas'], ['¿Qué debo reabastecer?', 'Inventario en riesgo'], ['¿Qué campaña conviene pausar?', 'Retorno por campaña']].map(([q, d]) => `<button type="button" data-int="dask" data-t="${q}"><b>${q}</b><span>${d}</span></button>`).join('')}</div></div><div class="td-msgs"></div></div>
+<div class="td-in"><input type="text" placeholder="Pregunta algo sobre tu tienda…" aria-label="Pregunta" /><button type="button" class="td-send" data-int="dsend" aria-label="Enviar">${svg('up')}</button></div></div></section>
 </main></div>`;
 
 // ---------- ficha del proyecto: misma página «Contenido» del libro ----------
