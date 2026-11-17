@@ -820,3 +820,5 @@ aside[data-sheet] [data-grab] i, aside[data-sheet] [data-sheet-toggle] { color: 
 /* el menú bloquea el scroll sin mover el ancho de la página (evita recalcular toda la escena) */
 html { scrollbar-gutter: stable; }
 html[data-menu-on] main * { animation-play-state: paused !important; }
+/* ecommerce: la foto se ve completa, con su proporción original */
+.shop-hero1 { aspect-ratio: 1694 / 928; min-height: 380px !important; max-height: 100svh; } .shop-hero1 .shop-photo img { object-fit: cover; object-position: 55% 30%; }

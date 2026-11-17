@@ -472,7 +472,7 @@ const idleImgs = ['/configurador/c5.webp', '/configurador/c1.webp', '/configurad
       let cartN = 0, toastT = 0;
       const drawShop = (nm) => {
         const D = SHOP[G.giro];
-        const photo = G.giro === 'moda' ? ['/obra/trama/hero.webp', '50% 45%'] : G.giro === 'belleza' ? ['/configurador/retrato.webp', '55% 22%'] : ARQ[G.bg ?? 0];
+        const photo = ['/configurador/retrato.webp', '55% 30%'];
         $$('[data-sh-img]').forEach((im) => { im.src = photo[0]; im.style.objectPosition = photo[1]; });
         $$('[data-hero]').forEach((h) => (h.hidden = +h.dataset.hero !== G.hero));
         set('[data-sh-eyebrow]', S.desc.trim() || D.eyebrow);
