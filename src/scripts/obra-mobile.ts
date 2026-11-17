@@ -9,7 +9,7 @@ function adapt(root: HTMLElement) {
     if (el.closest('svg')) return;
     const cs = getComputedStyle(el);
     if (cs.display === 'grid' && cs.gridTemplateColumns.split(' ').length > 1 && !el.matches('.mw-book, .mw-cond, .tz-nav')) {
-      const short = el.children.length >= 4 && [...el.children].every((c) => (c.textContent || '').length < 70);
+      const short = el.querySelector(':scope > .tz-p') !== null || el.children.length >= 4 && [...el.children].every((c) => (c.textContent || '').length < 70);
       el.style.gridTemplateColumns = `repeat(auto-fit, minmax(min(100%, ${short ? 7.5 : 11.5}em), 1fr))`; el.style.gridTemplateRows = 'none';
       [...el.children].forEach((c) => { (c as HTMLElement).style.gridColumn = 'auto'; (c as HTMLElement).style.gridRow = 'auto'; });
     } else if (cs.display === 'flex' && cs.flexDirection === 'row' && cs.animationName === 'none' && el.scrollWidth > el.clientWidth + 2) el.style.flexWrap = 'wrap';
