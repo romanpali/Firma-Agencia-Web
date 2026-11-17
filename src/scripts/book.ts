@@ -204,7 +204,7 @@ export function mountBook(o: Mount) {
   };
   book.addEventListener('click', (ev) => {
     const el = ev.target as HTMLElement;
-    if (el.closest('a, .mr-web, [data-int]')) return; // el sitio de Marea es interactivo: sus clics no voltean la hoja
+    if (el.closest('a, button, input, [data-int]')) return; // controles del sitio de Marea: no voltean la hoja (el resto del sitio sí)
     const g = el.closest<HTMLElement>('[data-bk-go]');
     if (g) { go(+g.dataset.bkGo!); return; }
     const leaf = el.closest<HTMLElement>('.bw-leaf');

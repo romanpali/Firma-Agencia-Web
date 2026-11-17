@@ -8,11 +8,11 @@ import { webHTML, caseHTML } from './marea-web';
 
 // 1 · Identidad: portada difuminada (la propia fotografía de marca, muy desenfocada)
 const brand = `<div class="pg mr-brand" data-rp="dark"><i class="mr-blur"></i><i class="mr-grain"></i>
-<div class="mb-t mw-f" style="--d:.2s"><span>Manual de marca</span><span>2026 · v1.0</span></div>
+<div class="mb-t mw-f" style="--d:.2s"><span>Manual de marca</span><span class="mb-by2">Made by <b><i class="wl">Human</i><i class="ws">Corp</i></b></span></div>
 <div class="mb-wm mw-f" style="--d:.45s">${g}<b>marea</b></div>
 <p class="mb-tag mw-f" style="--d:.8s">Aprende a leer el mar</p>
 <div class="mb-b mw-f" style="--d:1s"><span>Identidad visual</span><span>Logotipo · Color · Tipografía</span></div>
-<p class="mb-by mw-f" style="--d:1.2s">Made by <b><i class="wl">Human</i><i class="ws">Corp</i></b></p></div>`;
+</div>`;
 
 // 4 · Panel con asistente de IA: menú lateral por áreas (cada una se abre), chat al centro con una conversación animada e historial a la derecha (se puede ocultar)
 const nav: [string, string, string][] = [['bolt', 'Automatización', 'automatizacion'], ['crm', 'Ventas y CRM', 'ventas'], ['fin', 'Finanzas', 'finanzas'], ['cal', 'Calendario', 'calendario'], ['dat', 'Datos e Infraestructura', 'datos']];

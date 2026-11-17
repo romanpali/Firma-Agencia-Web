@@ -43,8 +43,8 @@ function expand(root: HTMLElement) {
   ex.innerHTML = `<button type="button" class="mr-exx" aria-label="Salir">${svg('x')}</button><div class="mr-exw">${root.outerHTML}</div><p class="mr-exh">Esc para salir</p>`;
   const box = ex.querySelector<HTMLElement>('.mr-exw')!, site = box.querySelector<HTMLElement>('.mr-web')!;
   site.querySelectorAll('.rv').forEach((e) => e.classList.remove('in'));
-  // pantalla completa de verdad: el sitio usa todo el alto y el ancho (1em = lo que quepa a ancho o, si es más angosto, a alto)
-  const fit = () => { const w = innerWidth, h = innerHeight, fs = Math.max(8, Math.min(w / 40, h / 26.7)); box.style.fontSize = `${fs}px`; site.style.setProperty('--hh', `${h / fs}em`); };
+  // pantalla completa como un sitio normal: texto de tamaño de lectura (≈ 62 em de ancho), no la hoja ampliada
+  const fit = () => { const w = innerWidth, h = innerHeight, fs = Math.max(9, Math.min(w / 62, h / 34)); box.style.fontSize = `${fs}px`; site.style.setProperty('--hh', `${h / fs}em`); };
   const key = (e: KeyboardEvent) => { if (e.key === 'Escape') close(); };
   const fsc = () => { if (!document.fullscreenElement) close(); };
   const close = () => { ex.remove(); removeEventListener('resize', fit); removeEventListener('keydown', key); document.removeEventListener('fullscreenchange', fsc); document.documentElement.style.overflow = ''; if (document.fullscreenElement) document.exitFullscreen?.().catch(() => {}); };
@@ -118,6 +118,23 @@ document.addEventListener('wheel', (ev) => {
   ev.preventDefault();
   glide(sc, cur + dy);
 }, { passive: false });
+
+// Arrastrar con el ratón para bajar o subir (dentro del libro no hay desplazamiento nativo). Un arrastre no cuenta como clic.
+let dr: { sc: HTMLElement; y: number; top: number; moved: boolean } | null = null, dropClick = false;
+document.addEventListener('pointerdown', (ev) => {
+  const t = ev.target as HTMLElement, sc = t.closest?.<HTMLElement>('.mw-scroll');
+  if (!sc || ev.pointerType !== 'mouse' || ev.button !== 0 || sc.closest('.lc') || t.closest('input')) return;
+  tgt.delete(sc); dr = { sc, y: ev.clientY, top: sc.scrollTop, moved: false };
+});
+document.addEventListener('pointermove', (ev) => {
+  if (!dr) return; const d = ev.clientY - dr.y;
+  if (!dr.moved && Math.abs(d) < 6) return;
+  if (!dr.moved) { dr.moved = true; dr.sc.classList.add('drag'); }
+  dr.sc.scrollTop = dr.top - d;
+});
+const endDrag = () => { if (!dr) return; if (dr.moved) { dropClick = true; setTimeout(() => (dropClick = false), 0); } dr.sc.classList.remove('drag'); dr = null; };
+document.addEventListener('pointerup', endDrag); document.addEventListener('pointercancel', endDrag);
+document.addEventListener('click', (ev) => { if (dropClick) { ev.stopPropagation(); ev.preventDefault(); } }, true);
 
 const boot = () => document.querySelectorAll<HTMLElement>('.mr-web').forEach((r) => { if (!r.closest('.lc') && !r.dataset.ready) { r.dataset.ready = '1'; init(r); sync(r); } });
 boot(); addEventListener('load', boot);

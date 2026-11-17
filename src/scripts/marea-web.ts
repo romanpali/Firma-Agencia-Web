@@ -86,6 +86,16 @@ ${nav}
   <div class="mw-book mw-f" style="--d:1.85s" ${go('reservar')}><div><small>Nivel</small><b>Principiante</b></div><div><small>Fecha</small><b>Sáb 14 · 07:00</b></div><div><small>Personas</small><b>2 personas</b></div><i>Buscar horarios</i></div>
  </div>
  <div class="wlt wfw"><div class="wsx wfeat"><div class="rv"><i>${svg('check')}</i><b>Equipo incluido</b><span>Tabla, licra y protector.</span></div><div class="rv"><i>${svg('crm')}</i><b>Grupos de máx. 6</b><span>Atención real de tu instructor.</span></div><div class="rv"><i>${svg('cal')}</i><b>Reserva en línea</b><span>Elige día y hora en un minuto.</span></div></div></div>
+ <div class="wlt wfw wmore">
+  <div class="wsx"><p class="wk-o">Clases</p><h3 class="wt">Un nivel para <em>cada ola</em></h3>
+   <div class="wg3">${clases.slice(0, 3).map((c) => `<article class="wm rv"><div class="wc-ph ${c.ph}"><span>${c.lv}</span></div><b>${c.t}</b><small>${c.d}</small><em>${money(c.p)} · ${c.h}</em></article>`).join('')}</div></div>
+  <div class="wsx wsteps"><p class="wk-o">Cómo funciona</p><h3 class="wt">Tu primera clase en <em>tres pasos</em></h3>
+   <div class="wg3">${[['01', 'Elige tu clase', 'Nivel, día y hora. Te mostramos los lugares libres al momento.'], ['02', 'Llega a la playa', 'Te damos tabla, licra y protector. Solo trae ganas.'], ['03', 'Entra al agua', 'Teoría corta en la arena y después, a remar con tu instructor.']].map(([n, t, d]) => `<div class="wstep rv"><em>${n}</em><b>${t}</b><span>${d}</span></div>`).join('')}</div></div>
+  <div class="wsx wquote"><div class="wq rv"><p>“Llegué con miedo al mar y salí de pie en la tercera ola. Diego nunca tuvo prisa y siempre estuvo cerca.”</p><small>Mariana R. · Clase de principiantes</small></div>
+   <div class="wq rv"><p>“Fuimos en familia con dos niños. Pequeños grupos, mar tranquilo y muchas risas. Ya reservamos otra vez.”</p><small>Familia Ortega · Clase para niños</small></div></div>
+  <div class="wband rv"><i class="wband-ph"></i><div><p class="wk-o">Esta semana</p><h3 class="wt">Aún hay lugares <em>al amanecer</em></h3><p class="ws-p">Reserva en un minuto y paga en la playa. Si el mar no está seguro, reprogramamos sin costo.</p>${btn('reservar', 'wb wb-l', 'Ver horarios')}</div></div>
+  <div class="wsx wfaq"><p class="wk-o">Dudas frecuentes</p><div class="wg2">${[['¿Necesito saber nadar?', 'Sí, lo básico. Siempre hay un instructor a tu lado y trabajamos en agua poco profunda.'], ['¿Qué llevo?', 'Traje de baño, toalla y ganas. La tabla, la licra y el protector van incluidos.'], ['¿Y si no hay olas?', 'Reprogramamos tu clase sin costo o te devolvemos tu pago.'], ['¿Desde qué edad?', 'Clases para niños desde 7 años, con un adulto de la escuela por cada tres.']].map(([q, a]) => `<div class="wqa rv"><b>${q}</b><span>${a}</span></div>`).join('')}</div></div>
+ </div>
 
  ${foot}
 </section>
