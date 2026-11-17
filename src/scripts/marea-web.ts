@@ -9,9 +9,9 @@ const btn = (t: string, cls: string, label: string) => `<button type="button" cl
 const money = (n: number) => `$${n.toLocaleString('es-MX')}`;
 
 // foto: la misma toma con encuadres distintos (punto de enfoque x/y en % y acercamiento)
-type Crop = [number, number, number];
-const C: Record<string, Crop> = { casa: [27, 56, 2.1], pino: [4, 58, 2.3], reflejo: [24, 82, 2.4], cerros: [62, 44, 1.5], cielo: [86, 22, 1.3], agua: [72, 86, 1.5], lago: [50, 55, 1] };
-const im = (c: Crop, cls = '') => `<div class="im ${cls}"><img src="/obra/marea-lago-uhd.webp" alt="" loading="lazy" decoding="async" style="--x:${c[0]}%;--y:${c[1]}%;--z:${c[2]}"></div>`;
+type Crop = [number, number, number, string?];
+const C: Record<string, Crop> = { casa: [27, 56, 2.1], pino: [4, 58, 2.3], reflejo: [24, 82, 2.4], cerros: [62, 44, 1.5], cielo: [86, 22, 1.3], agua: [72, 86, 1.5], lago: [50, 55, 1], sala: [50, 50, 1, 'sala'], comedor: [50, 50, 1, 'comedor'], cocina: [50, 50, 1, 'cocina'], pasillo: [50, 50, 1, 'pasillo'], recamara: [50, 50, 1, 'recamara'] };
+const im = (c: Crop, cls = '') => `<div class="im ${cls}"><img src="${c[3] ? `/obra/marea/${c[3]}.webp` : '/obra/marea-lago-uhd.webp'}" alt="" loading="lazy" decoding="async" style="--x:${c[0]}%;--y:${c[1]}%;--z:${c[2]}"></div>`;
 
 const nav = `<div class="mw-nav mw-f" style="--d:.15s"><button type="button" class="wn-logo" ${go('inicio')}>marea<sup>®</sup></button><div class="wn-r"><nav>${tabs.map(([k, t]) => btn(k, 'wn-t', t)).join('')}</nav><button type="button" class="wn-cta" ${go('reservar')}>Reservar</button></div></div>
 <button type="button" class="wn-ex" data-int="wex" aria-label="Ver en pantalla completa"><i></i>Entrar al sitio</button>`;
@@ -25,13 +25,13 @@ const foot = `<footer class="wf"><div class="wf-t"><div class="wf-l"><b>Marea</b
 type Room = [number, number, number, number, string, boolean?];
 type Cl = { k: string; t: string; lv: string; d: string; long: string; p: number; m2: number; cama: string; crop: Crop; li: string[]; plan: Room[]; ocu: number[] };
 const clases: Cl[] = [
-  { k: 'cristal', t: 'Casa de cristal', lv: '2 huéspedes', d: 'Sobre el agua, con la cama frente al lago.', long: 'Muros de vidrio del piso al techo y una terraza que entra al lago. Es la que más pide la gente que viene a no hacer nada.', p: 4800, m2: 62, cama: 'cama king', crop: C.casa, li: ['Muros de cristal y terraza sobre el agua', 'Cama king y baño de piedra con tina', 'Desayuno, kayaks y muelle incluidos', 'Calefacción de piso'], ocu: [0, 1, 1, 0, 0, 1, 0],
+  { k: 'cristal', t: 'Casa de cristal', lv: '2 huéspedes', d: 'Sobre el agua, con la cama frente al lago.', long: 'Muros de vidrio del piso al techo y una terraza que entra al lago. Es la que más pide la gente que viene a no hacer nada.', p: 4800, m2: 62, cama: 'cama king', crop: C.sala, li: ['Muros de cristal y terraza sobre el agua', 'Cama king y baño de piedra con tina', 'Desayuno, kayaks y muelle incluidos', 'Calefacción de piso'], ocu: [0, 1, 1, 0, 0, 1, 0],
     plan: [[0, 40, 100, 20, 'Terraza sobre el agua', true], [4, 4, 52, 36, 'Sala y comedor'], [56, 4, 40, 22, 'Recámara king'], [56, 26, 40, 14, 'Baño y tina']] },
-  { k: 'bosque', t: 'Cabaña del bosque', lv: '2 a 3 huéspedes', d: 'Madera, chimenea y silencio.', long: 'Entre los pinos, a cinco minutos caminando del muelle. Tiene chimenea y un sillón junto a la ventana que nadie quiere dejar.', p: 3200, m2: 48, cama: 'cama queen y sofá cama', crop: C.pino, li: ['Chimenea con leña incluida', 'Sala con vista a los pinos', 'Porche con hamaca', 'Acepta mascotas con aviso'], ocu: [1, 0, 0, 0, 1, 1, 1],
+  { k: 'bosque', t: 'Cabaña del bosque', lv: '2 a 3 huéspedes', d: 'Madera, chimenea y silencio.', long: 'Entre los pinos, a cinco minutos caminando del muelle. Tiene chimenea y un sillón junto a la ventana que nadie quiere dejar.', p: 3200, m2: 48, cama: 'cama queen y sofá cama', crop: C.pasillo, li: ['Chimenea con leña incluida', 'Sala con vista a los pinos', 'Porche con hamaca', 'Acepta mascotas con aviso'], ocu: [1, 0, 0, 0, 1, 1, 1],
     plan: [[0, 40, 100, 20, 'Porche', true], [4, 4, 46, 36, 'Sala con chimenea'], [50, 4, 46, 24, 'Recámara'], [50, 28, 46, 12, 'Baño']] },
-  { k: 'muelle', t: 'Suite del muelle', lv: '2 huéspedes', d: 'Terraza propia y el lago a tus pies.', long: 'Un solo ambiente, amplio, con la terraza pegada al agua. Se desayuna en el muelle y se nada desde la escalera.', p: 3900, m2: 40, cama: 'cama king', crop: C.reflejo, li: ['Terraza privada sobre el muelle', 'Desayuno servido en la terraza', 'Acceso directo al agua para nadar', 'Regadera exterior'], ocu: [0, 0, 1, 1, 0, 0, 1],
+  { k: 'muelle', t: 'Suite del muelle', lv: '2 huéspedes', d: 'Terraza propia y el lago a tus pies.', long: 'Un solo ambiente, amplio, con la terraza pegada al agua. Se desayuna en el muelle y se nada desde la escalera.', p: 3900, m2: 40, cama: 'cama king', crop: C.recamara, li: ['Terraza privada sobre el muelle', 'Desayuno servido en la terraza', 'Acceso directo al agua para nadar', 'Regadera exterior'], ocu: [0, 0, 1, 1, 0, 0, 1],
     plan: [[0, 40, 100, 20, 'Terraza y muelle', true], [4, 4, 60, 36, 'Recámara y estar'], [64, 4, 32, 36, 'Baño']] },
-  { k: 'casa', t: 'Casa completa', lv: 'Hasta 6 huéspedes', d: 'Tres recámaras para ir en familia o con amigos.', long: 'La casa grande de la orilla, con cocina abierta, tres recámaras y el muelle y la fogata solo para ustedes.', p: 9800, m2: 180, cama: '3 recámaras', crop: C.cerros, li: ['Tres recámaras y cocina abierta', 'Muelle y fogata solo para ustedes', 'Anfitrión y chef bajo petición', 'Estacionamiento para tres autos'], ocu: [0, 0, 0, 1, 1, 0, 0],
+  { k: 'casa', t: 'Casa completa', lv: 'Hasta 6 huéspedes', d: 'Tres recámaras para ir en familia o con amigos.', long: 'La casa grande de la orilla, con cocina abierta, tres recámaras y el muelle y la fogata solo para ustedes.', p: 9800, m2: 180, cama: '3 recámaras', crop: C.cocina, li: ['Tres recámaras y cocina abierta', 'Muelle y fogata solo para ustedes', 'Anfitrión y chef bajo petición', 'Estacionamiento para tres autos'], ocu: [0, 0, 0, 1, 1, 0, 0],
     plan: [[0, 40, 100, 20, 'Muelle y fogata', true], [4, 4, 44, 36, 'Sala y cocina'], [48, 4, 24, 20, 'Recámara 1'], [72, 4, 24, 20, 'Recámara 2'], [48, 24, 24, 16, 'Recámara 3'], [72, 24, 24, 16, 'Baños']] },
 ];
 const plan = (r: Room[]) => `<svg viewBox="0 0 100 60" aria-hidden="true">${r.map(([x, y, w, h, t, o]) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" class="${o ? 'po' : 'pr'}"/><text x="${x + w / 2}" y="${y + h / 2 + 1.2}" text-anchor="middle">${t}</text>`).join('')}</svg>`;
@@ -108,7 +108,7 @@ ${nav}
    <p class="mw-s mw-f" style="--d:1.2s">Ocho estancias frente al agua, con desayuno incluido y anfitriones que te cuidan sin estorbar.</p>
    <button type="button" class="wb wb-h mw-f" style="--d:1.4s" ${go('reservar')}>Reservar estancia</button>
   </div>
-  <button type="button" class="mw-feat mw-f" style="--d:1.6s" data-int="wbook" data-nivel="cristal">${im(C.casa, 'mf-img')}<span class="mf-card"><b>Casa de cristal</b><small>62 m², cama king y terraza sobre el agua. Desde $4,800 por noche.</small><em>Ver estancia<i></i></em></span></button>
+  <button type="button" class="mw-feat mw-f" style="--d:1.6s" data-int="wbook" data-nivel="cristal">${im(C.sala, 'mf-img')}<span class="mf-card"><b>Casa de cristal</b><small>62 m², cama king y terraza sobre el agua. Desde $4,800 por noche.</small><em>Ver estancia<i></i></em></span></button>
  </div>
  ${ticker}
 
@@ -129,7 +129,7 @@ ${nav}
   <ol class="wroute">${[['Ciudad de México', 'Salida por la carretera a Toluca.', '0 min'], ['Toluca', 'Sigues por la carretera a Valle de Bravo.', '55 min'], ['Valle de Bravo', 'Cruzas el centro hacia la orilla del lago.', '1 h 55 min'], ['Camino al Muelle 12', 'Llegas a Marea. Te esperamos con una bebida.', '2 h 10 min']].map(([a, b, c]) => `<li class="rv"><b>${a}</b><span>${b}</span><time>${c}</time></li>`).join('')}</ol></div>
   <div class="wmap-m rv">${mapa}</div></div></div>
 
- <div class="wgal" aria-hidden="true"><div>${[0, 1].map(() => `<span>${[[C.casa, 11, 'Muelle, 7:40 pm'], [C.cielo, 7, 'Cielo de octubre'], [C.reflejo, 9, 'Reflejo en el agua'], [C.pino, 8, 'El pino de la orilla'], [C.cerros, 12, 'Cerros de Valle'], [C.agua, 8, 'Lago en calma']].map(([c, w, t]) => `<figure style="--w:${w}em">${im(c as Crop)}<figcaption>${t}</figcaption></figure>`).join('')}</span>`).join('')}</div></div>
+ <div class="wgal" aria-hidden="true"><div>${[0, 1].map(() => `<span>${[[C.sala, 13, 'Sala frente al lago'], [C.cielo, 7, 'Cielo de octubre'], [C.comedor, 13, 'Comedor al atardecer'], [C.reflejo, 9, 'Reflejo en el agua'], [C.cocina, 13, 'Cocina de nogal'], [C.pasillo, 8, 'Pasillo de madera'], [C.recamara, 13, 'Recámara, 7:10 pm'], [C.agua, 8, 'Lago en calma']].map(([c, w, t]) => `<figure style="--w:${w}em">${im(c as Crop)}<figcaption>${t}</figcaption></figure>`).join('')}</span>`).join('')}</div></div>
 
  <div class="wsx wrevs"><p class="wk-o rv">Lo que cuentan</p><div class="wrev">${rev.map(([q, n, s]) => `<figure class="rv"><i>★★★★★</i><blockquote>“${q}”</blockquote><figcaption><b>${n}</b>${s}</figcaption></figure>`).join('')}</div></div>
 
