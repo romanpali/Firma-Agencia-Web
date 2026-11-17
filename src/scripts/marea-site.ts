@@ -5,17 +5,19 @@ import { svg } from './marea-ico';
 
 const tgt = new WeakMap<HTMLElement, number>(), anim = new WeakSet<HTMLElement>();
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const NIVEL: Record<string, { n: string; p: number }> = { principiante: { n: 'Principiante', p: 650 }, intermedio: { n: 'Intermedio', p: 750 }, ninos: { n: 'Niños', p: 550 }, privada: { n: 'Clase privada', p: 1200 } };
-const DIAS = ['Sáb 14', 'Dom 15', 'Lun 16', 'Mar 17', 'Mié 18', 'Jue 19', 'Vie 20'];
+// estancias: precio por noche
+const NIVEL: Record<string, { n: string; p: number }> = { cristal: { n: 'Casa de cristal', p: 4800 }, bosque: { n: 'Cabaña del bosque', p: 3200 }, muelle: { n: 'Suite del muelle', p: 3900 }, casa: { n: 'Casa completa', p: 9800 } };
+const DIAS = ['Vie 14', 'Sáb 15', 'Dom 16', 'Lun 17', 'Mar 18', 'Mié 19', 'Jue 20'];
+const noches = (n: number) => `${n} ${n === 1 ? 'noche' : 'noches'}`;
 const peso = (n: number) => `$${n.toLocaleString('es-MX')}`;
 const setAll = (root: HTMLElement, sel: string, v: string) => root.querySelectorAll(sel).forEach((e) => { if (e.textContent !== v) e.textContent = v; });
 // avisa al libro que la hoja cambió: su versión curva (si existe) se descarta y se vuelve a crear con el estado actual
 const dirty = (root: HTMLElement) => root.dispatchEvent(new CustomEvent('bk-dirty', { bubbles: true }));
 
 function sync(root: HTMLElement) {
-  const d = root.dataset, lv = NIVEL[d.nivel || 'principiante'], pax = +(d.pax || 2);
-  setAll(root, '[data-sum=clase]', lv.n); setAll(root, '[data-sum=dia]', DIAS[+(d.dia || 0)]); setAll(root, '[data-sum=hora]', d.hora || '07:00');
-  setAll(root, '[data-sum=pax]', String(pax)); setAll(root, '[data-sum=pax2]', String(pax)); setAll(root, '[data-sum=total]', peso(lv.p * pax));
+  const d = root.dataset, lv = NIVEL[d.nivel || 'cristal'], pax = +(d.pax || 2), nn = +(d.hora || 2);
+  setAll(root, '[data-sum=clase]', lv.n); setAll(root, '[data-sum=dia]', DIAS[+(d.dia || 0)]); setAll(root, '[data-sum=hora]', noches(nn));
+  setAll(root, '[data-sum=pax]', String(pax)); setAll(root, '[data-sum=pax2]', String(pax)); setAll(root, '[data-sum=total]', peso(lv.p * nn));
   root.querySelectorAll<HTMLElement>('[data-g]').forEach((b) => b.classList.toggle('on', d[b.dataset.g!] === b.dataset.v));
   root.querySelectorAll<HTMLElement>('[data-f]').forEach((b) => b.classList.toggle('on', (d.fil || 'todo') === b.dataset.f));
   setAll(root, '[data-cart-n]', d.cart || '0'); setAll(root, '[data-cart-t]', peso(+(d.total || 0)));
@@ -69,7 +71,7 @@ function act(t: HTMLElement, root: HTMLElement) {
     setTimeout(() => { t.textContent = old; t.classList.remove('added'); dirty(root); }, 1300);
   } else if (k === 'wconfirm') {
     const nm = root.querySelector<HTMLInputElement>('.wfld input')?.value.trim();
-    setAll(root, '[data-sum=done]', `${nm ? `${nm}, t` : 'T'}e esperamos el ${DIAS[+(d.dia || 0)]} a las ${d.hora}. Llega 15 minutos antes.`);
+    setAll(root, '[data-sum=done]', `${nm ? `${nm}, t` : 'T'}e esperamos el ${DIAS[+(d.dia || 0)]} en ${NIVEL[d.nivel || 'cristal'].n}: ${noches(+(d.hora || 2))}. El check-in es desde las 15:00.`);
     setAll(root, '[data-sum=code]', `MAR-${100 + Math.floor(Math.random() * 900)}`);
     d.done = '1';
   } else if (k === 'wreset') { root.removeAttribute('data-done'); }

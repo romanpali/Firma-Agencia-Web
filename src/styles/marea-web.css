@@ -13,7 +13,7 @@
 
 /* hero */
 .wh { position: relative; height: var(--hh, 26.7em); overflow: hidden; }
-.mw-photo { position: absolute; inset: -3%; background: url('/obra/marea-surf.webp') 56% 50% / cover; translate: 0 calc(var(--sy, 0) * 0.2px); }
+.mw-photo { position: absolute; inset: -3%; background: url('/obra/marea-lago.webp') 26% 70% / auto 132%; translate: 0 calc(var(--sy, 0) * 0.2px); }
 .js .mw-photo { transform: scale(1.12); } .js .live .mw-photo { transform: scale(1); transition: transform 9s cubic-bezier(0.2, 0.6, 0.2, 1); }
 .mw-shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(4, 12, 26, 0.74), rgba(4, 12, 26, 0.18) 58%, transparent), linear-gradient(180deg, rgba(4, 12, 26, 0.5), transparent 26%, transparent 62%, rgba(4, 12, 26, 0.7)); }
 .mw-hero { position: absolute; left: 2.6em; top: 3.6em; width: 30em; }
@@ -45,15 +45,15 @@
 .wg3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.9em; margin-top: 1.6em; } .wg2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.9em; margin-top: 1.6em; }
 
 /* fotografías recortadas de la misma imagen (variedad sin más archivos) */
-.ph1 { background: url('/obra/marea-surf.webp') 62% 40% / 250% auto; } .ph2 { background: url('/obra/marea-surf.webp') 90% 28% / 280% auto; }
-.ph3 { background: url('/obra/marea-surf.webp') 14% 60% / 260% auto; } .ph4 { background: url('/obra/marea-surf.webp') 60% 92% / 170% auto; }
+.ph1 { background: url('/obra/marea-lago.webp') 24% 57% / 360% auto; } .ph2 { background: url('/obra/marea-lago.webp') 92% 34% / 220% auto; }
+.ph3 { background: url('/obra/marea-lago.webp') 20% 88% / 300% auto; } .ph4 { background: url('/obra/marea-lago.webp') 4% 48% / 320% auto; }
 
 /* inicio */
 .wm { display: block; padding: 0.6em 0.6em 1em; border-radius: 1.1em; background: rgba(255, 255, 255, 0.05); box-shadow: inset 0 0 0 0.07em rgba(255, 255, 255, 0.12); transition: background 0.3s, transform 0.3s; } .wm:hover { background: rgba(255, 255, 255, 0.09); transform: translateY(-0.2em); }
 .wm .wc-ph { height: 7.2em; } .wm b { display: block; margin: 0.9em 0.4em 0; font-size: 0.9em; font-weight: 500; letter-spacing: -0.02em; } .wm small { display: block; margin: 0.3em 0.4em 0; font-size: 0.6em; opacity: 0.65; } .wm em { display: block; margin: 0.8em 0.4em 0; font-style: normal; font-size: 0.62em; color: #ffb085; }
 .wc-ph { position: relative; border-radius: 0.8em; overflow: hidden; } .wc-ph span { position: absolute; left: 0.7em; top: 0.7em; padding: 0.4em 0.9em; border-radius: 99em; font-size: 0.5em; letter-spacing: 0.1em; background: rgba(8, 20, 38, 0.55); box-shadow: inset 0 0 0 0.08em rgba(255, 255, 255, 0.25); }
 .wband { position: relative; display: flex; align-items: center; margin: 4.2em 2.6em 0; min-height: 13em; border-radius: 1.4em; overflow: hidden; background: #0a1f36; }
-.wband-ph { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(6, 17, 31, 0.92), rgba(6, 17, 31, 0.25)), url('/obra/marea-surf.webp') 80% 40% / cover; }
+.wband-ph { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(6, 17, 31, 0.92), rgba(6, 17, 31, 0.25)), url('/obra/marea-lago.webp') 30% 56% / cover; }
 .wband > div { position: relative; padding: 2.4em; max-width: 22em; } .wband .wt { font-size: 2em; } .wband .ws-p { margin-bottom: 1.4em; font-size: 0.7em; }
 .wfeat { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4em; padding-bottom: 4em; } .wfeat > div { padding-top: 1em; box-shadow: 0 -0.07em 0 rgba(255, 255, 255, 0.14); }
 .wfeat i { display: grid; place-items: center; width: 2.2em; height: 2.2em; border-radius: 0.7em; background: rgba(255, 154, 98, 0.16); color: #ffb085; } .wfeat svg { width: 1.2em; height: 1.2em; } .wfeat b { display: block; margin-top: 0.9em; font-size: 0.8em; font-weight: 500; } .wfeat span { display: block; margin-top: 0.3em; font-size: 0.62em; opacity: 0.62; line-height: 1.4; }

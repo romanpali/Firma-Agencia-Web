@@ -8,7 +8,7 @@
 .js .live .mw-w, .js .obm-card.in .mw-w { clip-path: inset(-0.15em -0.15em -0.15em 0); transition: clip-path 1.2s cubic-bezier(0.6, 0, 0.2, 1) var(--d, 0s); }
 @media (prefers-reduced-motion: reduce) { .js .mw-f { opacity: 1 !important; transition: none !important; } .js .mw-w { clip-path: none !important; transition: none !important; } .mw-photo { transform: none !important; transition: none !important; } }
 
-/* Logotipo: círculo con ola */
+/* Logotipo: círculo con ola (el agua) */
 .mr-glyph { display: inline-block; flex: none; width: 1em; height: 1em; background: currentColor;
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.9' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M5.2 13.4c2.1-2.6 3.8-2.6 5.7 0s3.6 2.6 5.7 0c.9-1.1 1.6-1.6 2.4-1.7'/%3E%3C/svg%3E") center / contain no-repeat;
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.9' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M5.2 13.4c2.1-2.6 3.8-2.6 5.7 0s3.6 2.6 5.7 0c.9-1.1 1.6-1.6 2.4-1.7'/%3E%3C/svg%3E") center / contain no-repeat; }
@@ -16,7 +16,7 @@
 
 /* 1 · Identidad */
 .mr-brand { background: #0a1f36; color: #fff; }
-.mr-blur { position: absolute; inset: -4%; background: linear-gradient(180deg, rgba(5, 14, 28, 0.35), rgba(5, 14, 28, 0.1) 40%, rgba(5, 14, 28, 0.5)), url('/obra/marea-brand.webp') 54% 50% / cover; }
+.mr-blur { position: absolute; inset: -4%; background: linear-gradient(180deg, rgba(5, 14, 28, 0.35), rgba(5, 14, 28, 0.1) 40%, rgba(5, 14, 28, 0.5)), url('/obra/marea-lago-brand.webp') 50% 50% / cover; }
 .mb-t, .mb-b { position: absolute; left: 2.4em; right: 2.4em; display: flex; justify-content: space-between; font-size: 0.6em; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.85; }
 .mb-t { top: 3.2em; } .mb-b { bottom: 3.2em; }
 .mb-wm { position: absolute; left: 0; right: 0; top: 44%; display: flex; align-items: center; justify-content: center; transform: translateY(-50%); }
