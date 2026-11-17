@@ -34,6 +34,21 @@ function adapt(root: HTMLElement) {
   });
 }
 
+// Identidad: la portada vertical del proyecto a pantalla completa
+function idScreen(stage: HTMLElement, o: HTMLElement) {
+  const n = o.dataset.name || '', img = o.dataset.img || '', hl = o.dataset.hl || '';
+  const own = /hikari|ábaco|abaco/i.test(n); // esas portadas ya traen su nombre y su texto
+  stage.innerHTML = `<div class="idv"><img class="idv-i" src="${img}" alt="" /><i class="idv-s"></i>${own ? '' : `<div class="idv-t"><span>Manual de marca</span><span>Made by <b>HumanCorp</b></span></div><div class="idv-w"><b>${n.split(' ')[0].toLowerCase()}</b><span>${hl}</span></div>`}</div>`;
+}
+
+// Proyecto: «Lo que se hizo» como lista de entregables, a pantalla completa
+function prScreen(stage: HTMLElement, o: HTMLElement, el: HTMLElement) {
+  const rows = [...el.querySelectorAll<HTMLElement>('.pc-r li')].map((li) => ({ n: li.querySelector('em')?.textContent || '', t: li.querySelector('b')?.textContent || '', d: li.querySelector('span')?.textContent || '' }));
+  const title = el.querySelector('.pc-l h4')?.textContent || 'Lo que se hizo', count = el.querySelector('.pc-l p')?.textContent || '', foot = el.querySelector('.pc-f')?.textContent || '';
+  stage.innerHTML = `<div class="prv"><i class="prv-b"></i><p class="prv-k"><span>Proyecto</span><em>${o.dataset.name || ''}</em></p><h2>${title}</h2><p class="prv-c">${count}</p>
+<ol>${rows.map((r, i) => `<li style="--i:${i}"><em>${r.n}</em><div><b>${r.t}</b><span>${r.d}</span></div><u></u></li>`).join('')}</ol><p class="prv-f">${foot}</p></div>`;
+}
+
 // Panel como una app: encabezado con la vista actual y barra de pestañas inferior con iconos
 const ICON = { grid: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>', doc: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></svg>', ok: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg>' };
 // Chat de Marea (celular): saludo, atajos, campo de texto y respuestas que se escriben solas
@@ -46,31 +61,50 @@ const REPLIES: [RegExp, string, string[]?][] = [
 function buildChat(root: HTMLElement) {
   const host = root.querySelector<HTMLElement>('.mv-inicio'); if (!host || host.querySelector('.obv-chat')) return;
   const G = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8z"/></svg>';
-  const c = document.createElement('div'); c.className = 'obv-chat';
-  const I = { chart: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>', doc: '<path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/>', bolt: '<path d="M13 2 4 14h7l-1 8 9-12h-7z"/>', cal: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>' };
-  const sug: [string, string][] = [['Resumen de ventas de la semana', I.chart], ['Facturas por emitir', I.doc], ['Automatizar avisos a huéspedes', I.bolt], ['Ocupación de octubre', I.cal]];
   const ic = (d: string) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+  const I = { chart: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>', doc: '<path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/>', bolt: '<path d="M13 2 4 14h7l-1 8 9-12h-7z"/>', cal: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>', img: '<rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.8"/><path d="m21 16-5-5-8 9"/>', search: '<circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/>', pen: '<path d="M4 20h4L19 9l-4-4L4 16z"/>', clip: '<path d="M20 11 12 19a5 5 0 0 1-7-7l8-8a3.3 3.3 0 0 1 5 5l-8 8a1.7 1.7 0 0 1-2.5-2.5L15 7"/>' };
+  const sug: [string, string][] = [['Resumen de ventas de la semana', I.chart], ['Facturas por emitir', I.doc], ['Automatizar avisos a huéspedes', I.bolt], ['Ocupación de octubre', I.cal]];
+  const TOOLS: [string, string, string][] = [['Crear imagen', I.img, 'Genera una imagen para tus redes'], ['Investigar', I.search, 'Busca y resume información'], ['Escribir un informe', I.pen, 'Redacta un resumen con tus datos'], ['Analizar un archivo', I.clip, 'Sube una foto o documento y pregunta']];
+  const c = document.createElement('div'); c.className = 'obv-chat';
   c.innerHTML = `<div class="oc-msgs"><div class="oc-hi"><h3><span>Hola, Sofía</span></h3><p>¿Por dónde empezamos?</p></div>
 <div class="oc-sg">${sug.map(([t, d]) => `<button type="button" data-q="${t}"><b>${t}</b><i>${ic(d)}</i></button>`).join('')}</div></div>
-<form class="oc-in"><input type="text" placeholder="Pregúntale a Marea IA" aria-label="Mensaje" />
-<div class="oc-bar"><button type="button" class="oc-pl" aria-label="Adjuntar">${ic('<path d="M12 5v14M5 12h14"/>')}</button><span class="oc-tool">${ic('<path d="M4 6h16M4 12h10M4 18h6"/>')}Herramientas</span><i></i><button type="button" class="oc-mic" aria-label="Voz">${ic('<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>')}</button><button type="submit" class="oc-go" aria-label="Enviar">${ic('<path d="M12 19V5M5 12l7-7 7 7"/>')}</button></div></form>
+<form class="oc-in"><div class="oc-ch"></div><input type="text" placeholder="Pregúntale a Marea IA" aria-label="Mensaje" />
+<div class="oc-bar"><button type="button" class="oc-pl" aria-label="Subir imágenes">${ic('<path d="M12 5v14M5 12h14"/>')}</button><button type="button" class="oc-tool">${ic('<path d="M4 6h16M4 12h10M4 18h6"/>')}Herramientas</button><i></i><button type="button" class="oc-mic" aria-label="Voz">${ic('<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>')}</button><button type="submit" class="oc-go" aria-label="Enviar">${ic('<path d="M12 19V5M5 12l7-7 7 7"/>')}</button></div>
+<input type="file" accept="image/*" multiple hidden class="oc-file" />
+<div class="oc-menu"><p>Herramientas</p>${TOOLS.map(([t, d, h], i) => `<button type="button" data-t="${i}">${ic(d)}<span><b>${t}</b><small>${h}</small></span></button>`).join('')}</div></form>
 <p class="oc-fine">Marea IA puede equivocarse. Respuestas de ejemplo.</p>`;
   host.appendChild(c);
-  const msgs = c.querySelector<HTMLElement>('.oc-msgs')!, input = c.querySelector<HTMLInputElement>('input')!;
+  const msgs = c.querySelector<HTMLElement>('.oc-msgs')!, input = c.querySelector<HTMLInputElement>('input[type=text]')!, form = c.querySelector<HTMLElement>('.oc-in')!;
+  const file = c.querySelector<HTMLInputElement>('.oc-file')!, chips = c.querySelector<HTMLElement>('.oc-ch')!, menu = c.querySelector<HTMLElement>('.oc-menu')!;
+  let imgs: string[] = [], tool = '';
+  const draw = () => {
+    chips.innerHTML = (tool ? `<span class="oc-tg">${tool}<u data-x="t">×</u></span>` : '') + imgs.map((u, i) => `<span class="oc-th"><img src="${u}" alt="" /><u data-x="${i}">×</u></span>`).join('');
+    form.classList.toggle('has', !!(tool || imgs.length));
+  };
+  c.querySelector('.oc-pl')!.addEventListener('click', () => { menu.classList.remove('on'); file.click(); });
+  file.addEventListener('change', () => { [...(file.files || [])].slice(0, 4 - imgs.length).forEach((f) => imgs.push(URL.createObjectURL(f))); file.value = ''; draw(); });
+  c.querySelector('.oc-tool')!.addEventListener('click', () => menu.classList.toggle('on'));
+  menu.addEventListener('click', (e) => { const b = (e.target as HTMLElement).closest<HTMLElement>('[data-t]'); if (!b) return; tool = TOOLS[+b.dataset.t!][0]; menu.classList.remove('on'); if (/imagen|archivo/i.test(tool) && !imgs.length) file.click(); draw(); input.focus(); });
+  chips.addEventListener('click', (e) => { const x = (e.target as HTMLElement).closest<HTMLElement>('[data-x]'); if (!x) return; if (x.dataset.x === 't') tool = ''; else imgs.splice(+x.dataset.x!, 1); draw(); });
   const ask = (q: string) => {
-    if (!q.trim()) return; c.classList.add('talk');
-    const me = document.createElement('div'); me.className = 'oc-me'; me.textContent = q; msgs.appendChild(me);
+    if (!q.trim() && !imgs.length) return; c.classList.add('talk'); menu.classList.remove('on');
+    const used = tool, pics = imgs.slice(); imgs = []; tool = ''; draw();
+    const me = document.createElement('div'); me.className = 'oc-me';
+    me.innerHTML = `${pics.length ? `<div class="oc-ph">${pics.map((u) => `<img src="${u}" alt="" />`).join('')}</div>` : ''}${used ? `<small>${used}</small>` : ''}${q ? `<span></span>` : ''}`;
+    if (q) me.querySelector('span')!.textContent = q;
+    msgs.appendChild(me);
     const bot = document.createElement('div'); bot.className = 'oc-bot'; bot.innerHTML = `<i>${G}</i><div><span class="oc-dots"><u></u><u></u><u></u></span></div>`; msgs.appendChild(bot);
-    const hit = REPLIES.find(([re]) => re.test(q)); const text = hit ? hit[1] : 'Lo reviso y te aviso en unos segundos. Mientras tanto, puedo prepararte un resumen de ventas, facturas o avisos a huéspedes.';
+    const hit = REPLIES.find(([re]) => re.test(q));
+    const text = pics.length ? `Recibí ${pics.length === 1 ? 'tu imagen' : `tus ${pics.length} imágenes`}. ${used === 'Crear imagen' ? 'Puedo usarla como referencia para crear una versión nueva para tus redes. ¿Qué estilo prefieres?' : 'Se ve una buena base para una publicación de Marea: luz cálida y mucho espacio. ¿Quieres que prepare un texto y un horario para publicarla?'}` : used === 'Investigar' ? 'Lo investigo y te resumo lo más importante en un momento. Mientras tanto: el mejor horario para publicar en Valle de Bravo es entre 7 y 9 pm.' : used === 'Escribir un informe' ? 'Listo el borrador: ventas de la semana $48,320, ocupación 78 % y 3 reservas por confirmar. ¿Lo envío por correo?' : hit ? hit[1] : 'Lo reviso y te aviso en unos segundos. Mientras tanto, puedo prepararte un resumen de ventas, facturas o avisos a huéspedes.';
     const box = bot.querySelector('div')!; input.value = '';
     setTimeout(() => {
       box.innerHTML = '<p></p>'; const p = box.querySelector('p')!; let n = 0;
-      const t = setInterval(() => { p.textContent = text.slice(0, ++n); msgs.scrollTop = msgs.scrollHeight; if (n >= text.length) { clearInterval(t); box.insertAdjacentHTML('beforeend', '<div class="oc-act"><i></i><i></i><i></i><i></i></div>'); (hit?.[2] || []).forEach((k) => { const [a, b] = k.split('|'); box.insertAdjacentHTML('beforeend', `<div class="oc-card"><b>${a}</b><span>${b}</span></div>`); }); const st = c.closest<HTMLElement>('.obv-st'); if (st) st.scrollTop = st.scrollHeight; } }, 16);
+      const t = setInterval(() => { p.textContent = text.slice(0, ++n); const st = c.closest<HTMLElement>('.obv-st'); if (st) st.scrollTop = st.scrollHeight; if (n >= text.length) { clearInterval(t); box.insertAdjacentHTML('beforeend', '<div class="oc-act"><i></i><i></i><i></i><i></i></div>'); (!pics.length && !used && hit?.[2] || []).forEach((k) => { const [a, b] = k.split('|'); box.insertAdjacentHTML('beforeend', `<div class="oc-card"><b>${a}</b><span>${b}</span></div>`); }); if (st) st.scrollTop = st.scrollHeight; } }, 16);
     }, 900);
     const st = c.closest<HTMLElement>('.obv-st'); if (st) requestAnimationFrame(() => (st.scrollTop = st.scrollHeight));
   };
   c.addEventListener('click', (e) => { const b = (e.target as HTMLElement).closest<HTMLElement>('[data-q]'); if (b) ask(b.dataset.q!); });
-  c.querySelector('form')!.addEventListener('submit', (e) => { e.preventDefault(); ask(input.value); });
+  form.addEventListener('submit', (e) => { e.preventDefault(); ask(input.value); });
 }
 
 function dashBar(stage: HTMLElement, w: HTMLElement, brand: string) {
@@ -164,7 +198,7 @@ function close() {
 
 function show(o: HTMLElement, pieces: { t: string; dash?: boolean; el: HTMLElement; site: boolean }[], k: number) {
   const stage = o.querySelector<HTMLElement>('.obv-st')!;
-  stage.innerHTML = ''; stage.removeAttribute('data-site'); stage.removeAttribute('data-dash'); stage.removeAttribute('data-app'); if (pieces[k].site) stage.dataset.site = '1';
+  stage.innerHTML = ''; stage.removeAttribute('data-scr'); stage.removeAttribute('data-site'); stage.removeAttribute('data-dash'); stage.removeAttribute('data-app'); if (pieces[k].site) stage.dataset.site = '1';
   const node = pieces[k].el.cloneNode(true) as HTMLElement;
   node.querySelectorAll<HTMLElement>('[data-ready], [data-tready]').forEach((e) => { delete e.dataset.ready; delete e.dataset.tready; });
   delete node.dataset.ready; delete node.dataset.tready;
@@ -174,7 +208,9 @@ function show(o: HTMLElement, pieces: { t: string; dash?: boolean; el: HTMLEleme
   } else {
     const zoom = !!pieces[k].dash;
     const w = document.createElement('div');
-    if (zoom) {
+    if (pieces[k].t === 'Identidad') { stage.dataset.scr = 'id'; idScreen(stage, o); }
+    else if (pieces[k].t === 'Proyecto') { stage.dataset.scr = 'pr'; prScreen(stage, o, pieces[k].el); }
+    else if (zoom) {
       // panel: diseño móvil (una columna, a todo el ancho, se desliza hacia abajo)
       stage.dataset.dash = '1'; w.className = 'obv-dashw live'; w.style.fontSize = '16px';
       w.appendChild(node); stage.appendChild(w);
@@ -227,7 +263,7 @@ export function openProject(i: number, x = innerWidth / 2, y = innerHeight * 0.5
   const first = Math.max(0, pieces.findIndex((p) => p.site));
   const o = document.createElement('div');
   o.className = 'obv'; o.dataset.th = c.dataset.th!; origin(o, x, y);
-  o.dataset.name = c.dataset.n!;
+  o.dataset.name = c.dataset.n!; o.dataset.img = c.dataset.img || ''; o.dataset.hl = c.dataset.hl || ''; o.dataset.cat = c.dataset.cat || '';
   o.innerHTML = `<div class="obv-st"></div><nav class="obv-tb"><button type="button" class="obv-back" aria-label="Volver"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>${pieces.map((p, n) => `<button type="button" data-k="${n}">${p.t}</button>`).join('')}</nav>`;
   document.body.appendChild(o);
   document.documentElement.style.overflow = 'hidden';
