@@ -86,9 +86,9 @@ const mapa = `<svg viewBox="0 0 400 270" aria-hidden="true"><rect width="400" he
 <path class="mp-l2" d="M96 130c10-34 66-48 116-30 42 15 80 6 100 34 14 22-16 52-62 50-34-1-48-24-80-20-34 4-84-4-74-34Z"/>
 <ellipse cx="236" cy="118" rx="14" ry="8" class="mp-i"/>
 <path class="mp-r" d="M-10 250C40 230 70 190 96 168S130 150 150 158" pathLength="1"/>
-<g class="mp-p" transform="translate(150 158)"><circle class="rg" r="6"/><circle class="rg rg2" r="6"/><circle r="5" fill="#2d4d59"/><text x="10" y="-8">Marea</text></g>
+<g class="mp-p" transform="translate(150 158)"><circle class="rg" r="6"/><circle class="rg rg2" r="6"/><circle r="5" fill="#1f3558"/><text x="10" y="-8">Marea</text></g>
 <g class="mp-d"><circle cx="332" cy="196" r="3.4"/><text x="340" y="199">Valle de Bravo</text><circle cx="96" cy="62" r="3.4"/><text x="104" y="60">Mirador</text><circle cx="262" cy="64" r="3.4"/><text x="270" y="62">Embarcadero</text></g>
-<g transform="translate(364 28)"><circle r="13" class="mp-n"/><path d="M0-9L3 3L0 1L-3 3Z" fill="#2d4d59"/><text y="22" text-anchor="middle">N</text></g></svg>`;
+<g transform="translate(364 28)"><circle r="13" class="mp-n"/><path d="M0-9L3 3L0 1L-3 3Z" fill="#1f3558"/><text y="22" text-anchor="middle">N</text></g></svg>`;
 const sol = `<svg viewBox="0 0 400 190" aria-hidden="true"><path class="sl-a" d="M20 130A180 120 0 0 1 380 130" pathLength="1"/><line x1="0" y1="130" x2="400" y2="130" class="sl-h"/>
 <g class="sl-w"><path d="M30 146h90M170 152h120M80 164h150M260 172h100M140 180h80"/></g>
 <circle r="11" class="sl-s"><animateMotion dur="18s" repeatCount="indefinite" path="M20 130A180 120 0 0 1 380 130" calcMode="spline" keySplines=".45 0 .55 1" keyTimes="0;1"/></circle>
