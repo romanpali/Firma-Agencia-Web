@@ -741,3 +741,4 @@ img, picture, video, canvas { pointer-events: none; -webkit-user-drag: none; use
 .sheet-arrow:active { transform: translateX(-50%) scale(0.94); }
 [data-scroller]::before { content: ""; display: block; height: 1.5rem; } [data-scroller]::after { content: ""; display: block; height: 2rem; }
 @media (min-width: 1024px) { [data-scroller]::before { height: 1.75rem; } }
+html.i18n-wait body { opacity: 0; }

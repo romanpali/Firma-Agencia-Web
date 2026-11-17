@@ -73,8 +73,8 @@ const pill = 'hdr-pill rounded-full border border-white/20 bg-white/10 px-5 py-3
     <button type="button" data-menu-close class="flex items-center gap-2.5 rounded-full px-5 py-2.5 text-[15px] font-medium transition-colors hover:bg-white/15"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M1.5 1.5l11 11M12.5 1.5l-11 11"/></svg>Cerrar</button>
     <span class="h-5 w-px bg-white/25" aria-hidden="true"></span>
     <div class="flex items-center rounded-full text-[13px] font-medium" role="group" aria-label="Idioma">
-      <button type="button" aria-pressed="true" class="rounded-full bg-white px-3.5 py-2 text-[#0b0c0f]">ES</button>
-      <button type="button" disabled title="Próximamente" aria-label="Inglés (próximamente)" class="rounded-full px-3.5 py-2 text-white/55">EN</button>
+      <button type="button" data-lang="es" aria-pressed="true" aria-label="Español" class="rounded-full bg-white px-3.5 py-2 text-[#0b0c0f]">ES</button>
+      <button type="button" data-lang="en" aria-pressed="false" aria-label="English" class="rounded-full px-3.5 py-2 text-white/55">EN</button>
     </div>
   </div>
   <form data-search-form role="search" class="menu-link relative mx-auto mt-5 w-full max-w-[26rem]" style="--i:1">
@@ -98,7 +98,9 @@ const pill = 'hdr-pill rounded-full border border-white/20 bg-white/10 px-5 py-3
 </div>
 
 <Agendar />
+<script is:inline>try{if(localStorage.getItem("hc-lang")==="en"||/[?&]lang=en/.test(location.search))document.documentElement.classList.add("i18n-wait")}catch(e){}</script>
 <script>
+  import '../scripts/i18n';
   const nav = document.querySelector<HTMLElement>('[data-nav]')!;
   let sr = 0;
   const mark = () => { sr = 0; nav.toggleAttribute('data-scrolled', scrollY > 24); };

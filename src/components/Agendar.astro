@@ -111,6 +111,9 @@
   ];
   const MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
   const DIAS = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+  const MESES_EN = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  const DIAS_EN = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const en = () => document.documentElement.lang === 'en';
   const OFFSET = 6; // Mérida: UTC−6 todo el año
 
   type Cal = { days(ym: string, mins: number): Promise<string[]>; slots(iso: string, mins: number): Promise<string[]>; book(d: Record<string, string>): Promise<{ ok: boolean; id: string }> };
@@ -162,9 +165,9 @@
   const pad = (n: number) => String(n).padStart(2, '0');
   const ym = (d: Date) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}`;
   const epochOf = (iso: string, hm: string) => { const [y, m, d] = iso.split('-').map(Number), [h, mi] = hm.split(':').map(Number); return Date.UTC(y, m - 1, d, h + OFFSET, mi); };
-  const longDate = (iso: string) => { const [, m, d] = iso.split('-').map(Number); return `${DIAS[new Date(epochOf(iso, '12:00')).getUTCDay()]} ${d} de ${MESES[m - 1]}`; };
-  const local = (iso: string, hm: string) => new Date(epochOf(iso, hm)).toLocaleTimeString('es-MX', { hour: 'numeric', minute: '2-digit', hour12: true });
-  const merida = (hm: string) => { const [h, m] = hm.split(':').map(Number); return `${h % 12 || 12}:${pad(m)} ${h < 12 ? 'a. m.' : 'p. m.'}`; };
+  const longDate = (iso: string) => { const [, m, d] = iso.split('-').map(Number), w = new Date(epochOf(iso, '12:00')).getUTCDay(); return en() ? `${DIAS_EN[w]}, ${MESES_EN[m - 1]} ${d}` : `${DIAS[w]} ${d} de ${MESES[m - 1]}`; };
+  const local = (iso: string, hm: string) => new Date(epochOf(iso, hm)).toLocaleTimeString(en() ? 'en-US' : 'es-MX', { hour: 'numeric', minute: '2-digit', hour12: true });
+  const merida = (hm: string) => { const [h, m] = hm.split(':').map(Number); return `${h % 12 || 12}:${pad(m)} ${en() ? (h < 12 ? 'AM' : 'PM') : (h < 12 ? 'a. m.' : 'p. m.')}`; };
   const sameTz = () => new Date().getTimezoneOffset() === OFFSET * 60;
 
   const valid = () => {
@@ -198,15 +201,15 @@
       const iso = `${y}-${pad(m + 1)}-${pad(d)}`, ok = !!avail?.includes(iso);
       cells += `<button type="button" class="ag-d${ok ? ' av' : ''}${iso === today ? ' td' : ''}${avail ? '' : ' ld'}" data-d="${iso}" aria-pressed="${S.date === iso}" ${ok ? '' : 'disabled'} aria-label="${longDate(iso)}${ok ? '' : ', sin horarios'}">${d}</button>`;
     }
-    return `<div class="ag-cal-h"><b>${MESES[m]} ${y}</b><div><button type="button" data-mv="-1" aria-label="Mes anterior" ${S.month <= minM ? 'disabled' : ''}>${chev('M15 6l-6 6 6 6')}</button><button type="button" data-mv="1" aria-label="Mes siguiente" ${S.month >= maxM ? 'disabled' : ''}>${chev('M9 6l6 6-6 6')}</button></div></div>
-      <div class="ag-wd">${['L', 'M', 'M', 'J', 'V', 'S', 'D'].map((x) => `<span>${x}</span>`).join('')}</div><div class="ag-days">${cells}</div>`;
+    return `<div class="ag-cal-h"><b>${en() ? MESES_EN[m] : MESES[m]} ${y}</b><div><button type="button" data-mv="-1" aria-label="Mes anterior" ${S.month <= minM ? 'disabled' : ''}>${chev('M15 6l-6 6 6 6')}</button><button type="button" data-mv="1" aria-label="Mes siguiente" ${S.month >= maxM ? 'disabled' : ''}>${chev('M9 6l6 6-6 6')}</button></div></div>
+      <div class="ag-wd">${(en() ? ['M', 'T', 'W', 'T', 'F', 'S', 'S'] : ['L', 'M', 'M', 'J', 'V', 'S', 'D']).map((x) => `<span>${x}</span>`).join('')}</div><div class="ag-days">${cells}</div>`;
   };
   const slotsHTML = () => {
     if (!S.date) return `<p class="ag-slots-h">Horarios</p><p class="ag-tz">Elige un día para ver los horarios disponibles.</p>`;
     const head = `<p class="ag-slots-h">${longDate(S.date)}</p><p class="ag-tz">${sameTz() ? 'Horario de Mérida (UTC−6), igual al de tu zona.' : 'Horario de Mérida (UTC−6); debajo, la hora en tu zona.'}</p>`;
     if (!slots) return `${head}<div class="ag-slots">${'<i class="ag-sk"></i>'.repeat(6)}</div>`;
     if (!slots.length) return `${head}<p class="ag-empty">Ya no quedan horarios este día. Prueba con otra fecha.</p>`;
-    return `${head}<div class="ag-slots">${slots.map((t) => `<button type="button" class="ag-s" data-t="${t}" aria-pressed="${S.time === t}">${merida(t)}${sameTz() ? '' : `<small style="display:block;font-size:10.5px;opacity:.6">${local(S.date, t)} tu hora</small>`}</button>`).join('')}</div>`;
+    return `${head}<div class="ag-slots">${slots.map((t) => `<button type="button" class="ag-s" data-t="${t}" aria-pressed="${S.time === t}">${merida(t)}${sameTz() ? '' : `<small style="display:block;font-size:10.5px;opacity:.6">${local(S.date, t)} ${en() ? 'your time' : 'tu hora'}</small>`}</button>`).join('')}</div>`;
   };
   const renderCal = () => { const c = body.querySelector('[data-cal]'); if (c) c.innerHTML = calHTML(); };
   const renderSlots = () => { const c = body.querySelector('[data-slots]'); if (c) c.innerHTML = slotsHTML(); };
@@ -222,8 +225,8 @@
   };
 
   const reviewHTML = (edit: boolean) => {
-    const rows: [string, string, number][] = [['Tema', `${topic()?.[1]} · ${mins()} min`, 0], ['Fecha y hora', `${longDate(S.date)}, ${merida(S.time)} (Mérida)${sameTz() ? '' : ` · ${local(S.date, S.time)} tu hora`}`, 1], ['Contacto', `${S.name.trim()} · ${S.email.trim()}${S.phone.trim() ? ' · ' + S.phone.trim() : ''}`, 2]];
-    return `<div class="ag-rev">${rows.map(([k, v, st]) => `<div><span><small>${k}</small><b>${esc(v)}</b></span>${edit ? `<button type="button" data-go="${st}">Cambiar</button>` : ''}</div>`).join('')}</div>`;
+    const rows: [string, string, number][] = [['Tema', `${topic()?.[1]}<span style="font-weight:400;opacity:.6"> · ${mins()} min</span>`, 0], ['Fecha y hora', `${longDate(S.date)}, ${merida(S.time)} (Mérida)${sameTz() ? '' : ` · ${local(S.date, S.time)} ${en() ? 'your time' : 'tu hora'}`}`, 1], ['Contacto', `${S.name.trim()} · ${S.email.trim()}${S.phone.trim() ? ' · ' + S.phone.trim() : ''}`, 2]];
+    return `<div class="ag-rev">${rows.map(([k, v, st]) => `<div><span><small>${k}</small><b>${k === 'Tema' ? v : esc(v)}</b></span>${edit ? `<button type="button" data-go="${st}">Cambiar</button>` : ''}</div>`).join('')}</div>`;
   };
   const stamp = (t: number) => new Date(t).toISOString().replace(/[-:]|\.\d{3}/g, '');
   const gcal = () => { const s = epochOf(S.date, S.time); return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent('Llamada con HumanCorp')}&dates=${stamp(s)}/${stamp(s + mins() * 60000)}&details=${encodeURIComponent(`${topic()![1]} · Folio ${S.id}`)}&location=${encodeURIComponent('Por confirmar')}`; };
