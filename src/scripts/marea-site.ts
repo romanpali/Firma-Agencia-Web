@@ -40,16 +40,19 @@ function init(root: HTMLElement) {
 function expand(root: HTMLElement) {
   if (document.querySelector('.mr-ex')) return;
   const ex = document.createElement('div'); ex.className = 'mr-ex live';
-  ex.innerHTML = `<button type="button" class="mr-exx" aria-label="Cerrar">${svg('x')}</button><div class="mr-exw">${root.outerHTML}</div><p class="mr-exh">${innerWidth < innerHeight ? 'Gira tu teléfono para verlo más grande' : 'Desplázate dentro del sitio · Esc para cerrar'}</p>`;
+  ex.innerHTML = `<button type="button" class="mr-exx" aria-label="Salir">${svg('x')}</button><div class="mr-exw">${root.outerHTML}</div><p class="mr-exh">Esc para salir</p>`;
   const box = ex.querySelector<HTMLElement>('.mr-exw')!, site = box.querySelector<HTMLElement>('.mr-web')!;
   site.querySelectorAll('.rv').forEach((e) => e.classList.remove('in'));
-  const fit = () => { const w = Math.min(innerWidth * 0.97, innerHeight * 0.95 * 1.5); box.style.width = `${w}px`; box.style.height = `${w / 1.5}px`; box.style.fontSize = `${w / 40}px`; };
+  // pantalla completa de verdad: el sitio usa todo el alto y el ancho (1em = lo que quepa a ancho o, si es más angosto, a alto)
+  const fit = () => { const w = innerWidth, h = innerHeight, fs = Math.max(8, Math.min(w / 40, h / 26.7)); box.style.fontSize = `${fs}px`; site.style.setProperty('--hh', `${h / fs}em`); };
   const key = (e: KeyboardEvent) => { if (e.key === 'Escape') close(); };
-  const close = () => { ex.remove(); removeEventListener('resize', fit); removeEventListener('keydown', key); document.documentElement.style.overflow = ''; };
+  const fsc = () => { if (!document.fullscreenElement) close(); };
+  const close = () => { ex.remove(); removeEventListener('resize', fit); removeEventListener('keydown', key); document.removeEventListener('fullscreenchange', fsc); document.documentElement.style.overflow = ''; if (document.fullscreenElement) document.exitFullscreen?.().catch(() => {}); };
   fit(); addEventListener('resize', fit); addEventListener('keydown', key);
-  ex.addEventListener('click', (e) => { if (e.target === ex || (e.target as HTMLElement).closest('.mr-exx')) close(); });
+  ex.addEventListener('click', (e) => { if ((e.target as HTMLElement).closest('.mr-exx')) close(); });
   document.documentElement.style.overflow = 'hidden';
   document.body.appendChild(ex);
+  ex.requestFullscreen?.().then(() => document.addEventListener('fullscreenchange', fsc)).catch(() => {});
   init(site); sync(site);
 }
 
