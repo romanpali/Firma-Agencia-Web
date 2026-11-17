@@ -640,7 +640,7 @@ html { scrollbar-width: thin; scrollbar-color: rgba(125, 125, 140, 0.45) transpa
 .gcard.art3 { background: repeating-linear-gradient(90deg, var(--a) 0 12%, color-mix(in srgb, var(--a) 40%, #fff) 12% 24%); }
 .gcard.art3 .s1 { inset: 0; background: linear-gradient(to top, rgba(0, 0, 0, 0.55), transparent 60%); }
 .gcard.art4 { background: linear-gradient(90deg, var(--b) 50%, color-mix(in srgb, var(--a) 70%, #fff) 50%); }
-.gcard.art4 .s1 { left: 50%; top: 50%; width: 40%; aspect-ratio: 1; translate: -50% -60%; border-radius: 50%; background: #fff; mix-blend-mode: difference; }
+.gcard.art4 .s1 { left: 50%; top: 50%; width: 40%; aspect-ratio: 1; translate: -50% -60%; border-radius: 50%; background: rgba(255, 255, 255, 0.88); }
 .gcard.art5 { background: color-mix(in srgb, var(--b) 40%, #111); }
 .gcard.art5 .s1 { left: 6%; top: 8%; width: 60%; aspect-ratio: 1; border-radius: 50%; background: var(--a); filter: blur(28px); opacity: 0.9; }
 .gcard.art5 .s2 { right: 6%; bottom: 14%; width: 46%; aspect-ratio: 1; border-radius: 50%; background: color-mix(in srgb, var(--b) 50%, #fff); filter: blur(24px); }
@@ -806,7 +806,7 @@ aside[data-sheet] .bg-white\/90, aside[data-sheet] [class*="bg-white/"] { backgr
 aside[data-sheet] button:not([aria-pressed]):not(.gen-btn):not([class*="bg-[#14161a]"]) { color: #f3f4f7; }
 
 /* ===== galería: imagen del monte y paleta azul marino / ámbar ===== */
-.site .gal { --a: #f0b56e; --b: #2f4a73; }
+.site .gal { --a: #8fb0f0; --b: #2a3f86; }
 .gal-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 62%; animation: galK 28s ease-in-out infinite alternate; } @keyframes galK { from { transform: scale(1.02); } to { transform: scale(1.1) translate3d(-1%, -1%, 0); } }
 .gal-bgs { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(6, 12, 28, 0.55), rgba(6, 12, 28, 0.15) 40%, rgba(6, 12, 28, 0.75)); pointer-events: none; }
 .gal-hero { color: #fff; } .gal-glow { z-index: 0; mix-blend-mode: screen; opacity: 0.22 !important; }
