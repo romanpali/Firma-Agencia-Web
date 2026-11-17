@@ -759,8 +759,8 @@ html[data-tr]::after { content: ""; position: fixed; inset: 0; z-index: 100000; 
 html.intro { overflow: hidden; }
 html.intro .hc-intro { position: fixed; inset: 0; z-index: 200000; display: grid; place-items: center; background: #fff; color: #0b0c0f; }
 .hci-in { position: relative; display: flex; flex-direction: column; align-items: center; }
-.hci-w { position: relative; display: flex; gap: 0.3em; font-size: clamp(1.9rem, 8vw, 2.6rem); letter-spacing: 0.04em; line-height: 1; } .hci-w span { display: block; clip-path: inset(0 100% 0 0); animation: hciR 1.1s cubic-bezier(0.6, 0, 0.2, 1) forwards; } .hci-l { font-weight: 300; animation-delay: 0.35s !important; } .hci-s { font-weight: 600; animation-delay: 0.6s !important; }
-.hc-intro.out { animation: hciFadeBg 0.9s ease forwards; } .hc-intro.out .hci-in { animation: hciFadeIn 0.6s ease forwards; }
+.hci-w { position: relative; display: flex; gap: 0.3em; font-size: clamp(1.9rem, 8vw, 2.6rem); letter-spacing: 0.04em; line-height: 1; } .hci-w span { display: block; clip-path: inset(0 100% 0 0); animation: hciR 0.8s cubic-bezier(0.6, 0, 0.2, 1) forwards; } .hci-l { font-weight: 300; animation-delay: 0.12s !important; } .hci-s { font-weight: 600; animation-delay: 0.3s !important; }
+.hc-intro.out { animation: hciFadeBg 0.7s ease forwards; } .hc-intro.out .hci-in { animation: hciFadeIn 0.6s ease forwards; }
 @keyframes hciFadeBg { to { opacity: 0; } } @keyframes hciFadeIn { to { opacity: 0; transform: scale(0.97); } }
 @keyframes hciR { to { clip-path: inset(-0.1em); } } @keyframes hciLine { 0% { transform: scaleX(0); transform-origin: left; } 45% { transform: scaleX(1); transform-origin: left; } 55% { transform: scaleX(1); transform-origin: right; } 100% { transform: scaleX(0); transform-origin: right; } }
 @keyframes hciDot { to { transform: none; } } @keyframes hciFade { to { opacity: 1; } } @keyframes hciBar { to { transform: none; } }
