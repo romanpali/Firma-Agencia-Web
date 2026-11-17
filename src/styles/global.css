@@ -309,7 +309,7 @@ i.live { animation: livePulse 1.6s ease-in-out infinite; }
 @media (prefers-reduced-motion: reduce) { .art * { animation: none !important; } .a-draw { stroke-dashoffset: 0; } }
 
 /* /servicios: hojas apiladas */
-.sheet { --dim: 0; transform-origin: 50% 0; background: color-mix(in srgb, #dedaf6 calc(var(--dim) * 100%), #fff); box-shadow: 0 40px 80px -40px rgba(0, 0, 40, 0.65); will-change: transform; }
+.sheet { transform-origin: 50% 0; background: #fff; box-shadow: 0 40px 80px -40px rgba(0, 0, 40, 0.65); will-change: transform; }
 .sheet-scroll { scrollbar-width: thin; scrollbar-color: rgba(0, 0, 0, 0.18) transparent; }
 @media (prefers-reduced-motion: reduce) { .a-tw, .a-bob, .a-glow, .a-float, .a-type, .a-rise, .a-draw { animation: none !important; } .a-draw { stroke-dashoffset: 0 !important; } .a-type, .a-rise { scale: 1 1 !important; } }
 
@@ -822,3 +822,7 @@ html { scrollbar-gutter: stable; }
 html[data-menu-on] main * { animation-play-state: paused !important; }
 /* ecommerce: la foto se ve completa, con su proporción original */
 .shop-hero1 { aspect-ratio: 1694 / 928; min-height: 380px !important; max-height: 100svh; } .shop-hero1 .shop-photo img { object-fit: cover; object-position: 55% 30%; }
+
+/* Servicios: al quedar atrás, cada hoja se oscurece con capas de opacidad (se componen en la GPU; una variable heredada recalculaba todo el subárbol). */
+.dim-l, .dim-o { position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; will-change: opacity; }
+.dim-l { z-index: -1; background: #dedaf6; } .dim-o { z-index: 60; background: rgba(2, 3, 26, 0.5); }
