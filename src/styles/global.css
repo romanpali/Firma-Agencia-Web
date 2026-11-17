@@ -828,3 +828,6 @@ html[data-menu-on] main * { animation-play-state: paused !important; }
 .dim-l { z-index: -1; background: #dedaf6; } .dim-o { z-index: 60; background: rgba(2, 3, 26, 0.5); }
 
 #como-trabajamos[data-away='1'] * { animation-play-state: paused !important; }
+
+/* Pantalla de entrada: lo de abajo espera quieto (sus animaciones arrancan al revelarse) */
+html.intro main * , html.intro main *::before, html.intro main *::after { animation-play-state: paused !important; }
