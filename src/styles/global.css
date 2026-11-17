@@ -202,7 +202,7 @@ i.live { animation: livePulse 1.6s ease-in-out infinite; }
 .ct-o2 { right: -22vmax; top: 10vmax; width: 60vmax; height: 60vmax; background: radial-gradient(circle, rgba(0, 51, 255, 0.6), transparent 65%); animation: nbB 30s ease-in-out infinite alternate; }
 .ct-o3 { left: 20vmax; bottom: -34vmax; width: 80vmax; height: 70vmax; background: radial-gradient(circle, rgba(255, 190, 240, 0.4), transparent 65%); animation: nbA 36s ease-in-out infinite alternate-reverse; }
 .ct-halo { background: radial-gradient(circle, rgba(151, 125, 255, 0.5), rgba(0, 51, 255, 0.25) 50%, transparent 72%); filter: blur(30px); }
-.ct-stars { background-image: radial-gradient(circle, rgba(220, 215, 255, 0.7) 0.8px, transparent 1.4px), radial-gradient(circle, rgba(220, 215, 255, 0.4) 0.8px, transparent 1.4px); background-size: 170px 170px, 260px 260px; background-position: 0 0, 60px 90px; opacity: 0.35; animation: dust 140s linear infinite; }
+.ct-stars { background-image: radial-gradient(circle, rgba(220, 215, 255, 0.7) 0.8px, transparent 1.4px), radial-gradient(circle, rgba(220, 215, 255, 0.4) 0.8px, transparent 1.4px); background-size: 170px 170px, 260px 260px; background-position: 0 0, 60px 90px; opacity: 0.35; }
 .ct-dot { background: rgba(255, 255, 255, 0.28); transition: background 0.4s, box-shadow 0.4s; }
 .ct-dot.on { background: #d9d0ff; box-shadow: 0 0 14px 3px rgba(151, 125, 255, 0.9); }
 .ct-ping { transform-box: fill-box; transform-origin: center; animation: ctPing 2.6s ease-out infinite; }
@@ -826,3 +826,5 @@ html[data-menu-on] main * { animation-play-state: paused !important; }
 /* Servicios: al quedar atrás, cada hoja se oscurece con capas de opacidad (se componen en la GPU; una variable heredada recalculaba todo el subárbol). */
 .dim-l, .dim-o { position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; will-change: opacity; }
 .dim-l { z-index: -1; background: #dedaf6; } .dim-o { z-index: 60; background: rgba(2, 3, 26, 0.5); }
+
+#como-trabajamos[data-away='1'] * { animation-play-state: paused !important; }

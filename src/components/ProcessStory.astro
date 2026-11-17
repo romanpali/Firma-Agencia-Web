@@ -232,7 +232,8 @@ const frags = [
       fogs.forEach((f, k) => put(f, 'opacity', k === 0 ? clamp((+wo - 0.9) / 0.1).toFixed(3) : wo));
       read(y, vh);
       // only animate while the chapter is on screen (or still settling after leaving)
-      const away = y + vh * 1.5 < sm0.top || y - vh * 0.5 > sm0.top + sm0.height;
+      // una vez armado, el capítulo solo se anima cuando ya se ve (antes del fundido su opacidad es 0)
+      const away = (ready ? y < sm0.top + vh * 0.08 : y + vh * 1.5 < sm0.top) || y - vh * 0.5 > sm0.top + sm0.height;
       if (!ready && !away) { layout(); read(y, vh); rr = target; render(time); ready = true; root.style.visibility = ''; }
       if (!ready) return;
       if (away !== paused) { paused = away; root.classList.toggle('ps-away', away); try { away ? bus.pauseAnimations() : bus.unpauseAnimations(); } catch {} if (away) rr = target; }
