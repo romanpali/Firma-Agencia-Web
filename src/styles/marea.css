@@ -130,12 +130,12 @@
 .hc-blk { position: absolute; inset: 0; display: grid; place-items: center; background: #000; color: #fff; clip-path: inset(100% 0 0 0); }
 .hc-blk.hc-on { clip-path: none; }
 .hc-wm { font-size: 2.2em; font-weight: 400; letter-spacing: 0.03em; white-space: nowrap; } .hc-wm i { font-style: normal; } .hc-l { font-weight: 300; } .hc-s { font-weight: 600; }
-.js .live .hc-intro > * { animation: hcIn 1s ease both; } .js .live .hc-ph { animation-delay: 0.2s; } .js .live .hc-tx { animation-delay: 0.45s; }
-.js .live .hc-blk:not(.hc-on) { animation: hcWipe 1.5s cubic-bezier(0.76, 0, 0.24, 1) 6.5s both; }
-.js .live .hc-blk:not(.hc-on) .hc-wm { animation: hcWm 1.8s ease 7.4s both; }
+.js .seen .hc-intro > * { animation: hcIn 0.7s ease both; } .js .seen .hc-ph { animation-delay: 0.05s; } .js .seen .hc-tx { animation-delay: 0.2s; }
+.js .seen .hc-blk:not(.hc-on) { animation: hcWipe 1.5s cubic-bezier(0.76, 0, 0.24, 1) 6.5s both; }
+.js .seen .hc-blk:not(.hc-on) .hc-wm { animation: hcWm 1.8s ease 7.4s both; }
 .js .hc-blk:not(.hc-on) .hc-wm { opacity: 0; }
 @keyframes hcIn { from { opacity: 0; filter: blur(0.4em); } }
 @keyframes hcWipe { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0); } }
 @keyframes hcWm { from { opacity: 0; letter-spacing: 0.3em; filter: blur(0.3em); } to { opacity: 1; letter-spacing: 0.03em; filter: blur(0); } }
-@media (prefers-reduced-motion: reduce) { .js .live .hc-blk:not(.hc-on), .js .live .hc-blk:not(.hc-on) .hc-wm { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .js .seen .hc-blk:not(.hc-on), .js .seen .hc-blk:not(.hc-on) .hc-wm { animation: none; } }
 .hc-tx h4 { font-family: inherit; font-style: normal; }
