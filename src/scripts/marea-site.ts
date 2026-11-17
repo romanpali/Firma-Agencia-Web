@@ -121,4 +121,4 @@ document.addEventListener('pointerup', endDrag); document.addEventListener('poin
 document.addEventListener('click', (ev) => { if (dropClick) { ev.stopPropagation(); ev.preventDefault(); } }, true);
 
 const boot = () => document.querySelectorAll<HTMLElement>('.mr-web').forEach((r) => { if (!r.closest('.lc') && !r.dataset.ready) { r.dataset.ready = '1'; init(r); sync(r); } });
-boot(); addEventListener('load', boot);
+boot(); addEventListener('load', boot); addEventListener('mw-boot', boot);

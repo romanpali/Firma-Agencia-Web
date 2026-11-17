@@ -65,4 +65,4 @@ document.addEventListener('click', (ev) => {
   ev.stopPropagation(); act(t, r);
 });
 const boot = () => document.querySelectorAll<HTMLElement>('.tz-web').forEach((r) => { if (!r.closest('.lc') && !r.dataset.tready) { r.dataset.tready = '1'; render(r); } });
-boot(); addEventListener('load', boot);
+boot(); addEventListener('load', boot); addEventListener('mw-boot', boot);

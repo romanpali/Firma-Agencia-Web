@@ -10,6 +10,7 @@ import '../styles/marea-web.css';
 import '../styles/trama.css';
 import '../styles/aurora.css';
 import '../styles/abaco.css';
+import '../styles/obra-mobile.css';
 import { pagesFor, leavesMarkup, type Proj } from '../scripts/book';
 import { mareaLeaves, mareaPieces } from '../scripts/marea';
 import { tramaLeaves, tramaPieces } from '../scripts/trama';
@@ -78,17 +79,19 @@ const leavesHtml = leavesMarkup(leaves);
         <header class="obm-hero">
           <i class="obm-win" aria-hidden="true"></i>
           <canvas class="obm-snow" data-snow aria-hidden="true"></canvas>
-          <p class="obm-eye">Obra selecta · 2026</p>
-          <h2 class="obm-title">Proyectos que <em>puedes explorar</em></h2>
-          <p class="obm-sub">Cinco ejemplos de lo que construimos en cada división de HumanCorp.</p>
-          <div class="obm-covw">
-            <img class="obm-garl" data-xm-src="/obra/xm-guirnalda.webp" alt="" aria-hidden="true" decoding="async" />
-            <div class="obm-cover" aria-hidden="true"><b><i class="l">HUMAN</i> <i class="s">CORP</i></b></div>
+          <p class="obm-eye"><i></i>Obra selecta · 2026</p>
+          <h2 class="obm-title"><span>Cinco</span> <span>proyectos,</span> <em>cinco formas de hacerlo.</em></h2>
+          <p class="obm-sub">Identidad, sitios y paneles de ejemplo. Toca uno para verlo a fondo.</p>
+          <div class="obm-orb" aria-hidden="true">
+            <svg viewBox="0 0 200 200"><circle class="r1" cx="100" cy="100" r="86" pathLength="1" /><circle class="r2" cx="100" cy="100" r="58" pathLength="1" /><circle class="r3" cx="100" cy="100" r="30" pathLength="1" />
+              <g class="spin">{[0, 1, 2, 3, 4].map((k) => <circle class="dot" cx={100 + 86 * Math.cos((k * 72 - 90) * Math.PI / 180)} cy={100 + 86 * Math.sin((k * 72 - 90) * Math.PI / 180)} r="3.2" />)}</g></svg>
+            <b>05</b>
           </div>
+          <a class="obm-cue" href="#obra-1"><span>Desliza</span><i></i></a>
         </header>
         <div class="obm-stack">
           {projs.map((p, i) => (
-            <article class={`obm-card${p.leaves ? ' obm-case' : ''}`} data-obm-card id={`obra-${i + 1}`} style={`--i:${i}`}>
+            <article class={`obm-card${p.leaves ? ' obm-case' : ''}`} data-th={i} data-obm-card id={`obra-${i + 1}`} style={`--i:${i}`}>
               {p.leaves ? <i class="obm-mesh" aria-hidden="true"></i> : <img src={p.img} alt="" width="1200" height="800" loading={i === 0 ? 'eager' : 'lazy'} decoding="async" />}
               <i class="obm-dim" aria-hidden="true"></i>
               <div class="obm-top"><b>{`0${i + 1}`}<small> / 0{projs.length}</small></b><em>{p.cat}</em></div>
@@ -104,7 +107,7 @@ const leavesHtml = leavesMarkup(leaves);
                 <h3>{p.hl}</h3>
                 <p class="obm-d">{p.d}</p>
                 <ul>{p.tags.map((t) => <li>{t}</li>)}</ul>
-                <a class="obm-cta" href="/contacto">Quiero algo así <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+                <div class="obm-act"><button type="button" class="obm-open" data-obm-open={i}>Ver más a fondo <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button><a class="obm-cta" href="/contacto">Quiero algo así</a></div>
               </div>
             </article>
           ))}
@@ -132,6 +135,7 @@ const leavesHtml = leavesMarkup(leaves);
       import '../scripts/trama-dash';
       import '../scripts/au-site';
       import '../scripts/abaco-site';
+      import '../scripts/obra-mobile';
       const main = document.querySelector<HTMLElement>('main')!;
       const sec = document.querySelector<HTMLElement>('[data-book]')!;
       const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
