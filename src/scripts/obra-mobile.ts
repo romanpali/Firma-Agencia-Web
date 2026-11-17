@@ -54,24 +54,31 @@ function dashBar(stage: HTMLElement, w: HTMLElement, brand: string) {
   sync(); new MutationObserver(sync).observe(root, { attributes: true, subtree: true, attributeFilter: ['class', 'data-v', 'data-view'] });
 }
 
-// Barra de pestañas inferior (como una app): replica los botones del menú del sitio
-function appBar(stage: HTMLElement, root: HTMLElement) {
+// Menú del sitio: icono de hamburguesa en su barra; abre una pantalla completa con los enlaces en grande (cada sitio con su estilo)
+function siteMenu(stage: HTMLElement, root: HTMLElement, brand: string) {
   const nav = root.querySelector<HTMLElement>('.mw-nav, .tz-nav, .au-nav, .ab-nav');
   if (!nav) return;
+  const kind = root.classList.contains('tz-web') ? 'trama' : root.classList.contains('au-web') ? 'hikari' : root.classList.contains('ab-web') ? 'abaco' : 'marea';
   const src = [...nav.querySelectorAll<HTMLElement>('nav button[data-int="wtab"]')];
   const home = nav.querySelector<HTMLElement>('[data-int="wtab"][data-t="inicio"]');
-  const all = [...(home ? [home] : []), ...src];
-  const bar = document.createElement('nav'); bar.className = 'obv-app';
-  all.forEach((b) => {
-    const t = document.createElement('button'); t.type = 'button'; t.dataset.t = b.dataset.t!;
-    t.textContent = b === home ? 'Inicio' : (b.textContent || '').trim();
-    t.addEventListener('click', () => { b.click(); });
-    bar.appendChild(t);
-  });
-  stage.appendChild(bar);
-  const sync = () => bar.querySelectorAll<HTMLElement>('button').forEach((x) => x.classList.toggle('on', x.dataset.t === (root.dataset.tab || 'inicio')));
+  type It = { label: string; run: () => void; t?: string; cta?: boolean };
+  const items: It[] = [...(home ? [home] : []), ...src].map((b) => ({ label: b === home ? 'Inicio' : (b.textContent || '').trim(), t: b.dataset.t, run: () => b.click() }));
+  if (kind === 'marea') { const c = nav.querySelector<HTMLElement>('.wn-cta'); if (c) items.push({ label: 'Reservar', run: () => c.click(), cta: true }); }
+  if (kind === 'trama') { const c = root.querySelector<HTMLElement>('[data-int="tcart"]'); if (c) items.push({ label: 'Mi carrito', run: () => c.click(), cta: true }); }
+  const foot: Record<string, string> = { marea: 'Check-in 15:00 · hola@marea.example', trama: 'Envío gratis desde $1,200 · Cambios en 30 días', hikari: 'hola@hikari.example · Ciudad de México', abaco: 'hola@abaco.example · Lun a vie, 9 a 18' };
+  const hb = document.createElement('button'); hb.type = 'button'; hb.className = 'obv-hb'; hb.setAttribute('aria-label', 'Abrir menú'); hb.innerHTML = '<i></i><i></i><i></i>';
+  nav.appendChild(hb); nav.classList.add('obv-nav');
+  const menu = document.createElement('div'); menu.className = 'obv-menu'; menu.dataset.k = kind;
+  menu.innerHTML = `<div class="obv-mt"><span>${brand}</span><button type="button" class="obv-mx" aria-label="Cerrar menú"><i></i><i></i></button></div>
+<ol>${items.map((it, i) => `<li${it.cta ? ' class="cta"' : ''}><button type="button" data-i="${i}"><em>${String(i + 1).padStart(2, '0')}</em><b>${it.label}</b><u></u></button></li>`).join('')}</ol>
+<p class="obv-mf">${foot[kind]}</p><div class="obv-mg" aria-hidden="true"><s></s><s></s><s></s></div>`;
+  stage.appendChild(menu);
+  const open = () => { const r = hb.getBoundingClientRect(), sr = stage.getBoundingClientRect(); menu.style.setProperty('--mx', `${r.left + r.width / 2 - sr.left}px`); menu.style.setProperty('--my', `${r.top + r.height / 2 - sr.top}px`); menu.classList.add('on'); };
+  const shut = () => menu.classList.remove('on');
+  hb.addEventListener('click', open); menu.querySelector('.obv-mx')!.addEventListener('click', shut);
+  menu.querySelectorAll<HTMLElement>('ol button').forEach((b) => b.addEventListener('click', () => { const it = items[+b.dataset.i!]; shut(); setTimeout(() => it.run(), 250); }));
+  const sync = () => menu.querySelectorAll<HTMLElement>('ol button').forEach((b) => b.classList.toggle('now', items[+b.dataset.i!].t === (root.dataset.tab || 'inicio')));
   sync(); new MutationObserver(sync).observe(root, { attributes: true, attributeFilter: ['data-tab'] });
-  nav.classList.add('obv-nav');
 }
 function close() {
   if (!ov) return;
@@ -112,7 +119,7 @@ function show(o: HTMLElement, pieces: { t: string; el: HTMLElement; site: boolea
     const root = node.classList.contains('mr-web') ? node : node.querySelector<HTMLElement>('.mr-web')!;
     const run = () => requestAnimationFrame(() => adapt(root));
     run(); new MutationObserver(run).observe(root, { attributes: true, attributeFilter: ['data-tab'] });
-    appBar(stage, root);
+    siteMenu(stage, root, (o.querySelector('.obv-bar b')?.textContent || '').trim());
   }
   requestAnimationFrame(() => stage.querySelectorAll('.rv').forEach((e) => e.classList.remove('in')));
 }
