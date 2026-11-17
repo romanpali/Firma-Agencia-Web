@@ -7,7 +7,11 @@ const get = (): 'es' | 'en' => {
   try {
     const q = new URLSearchParams(location.search).get('lang');
     if (q === 'en' || q === 'es') { localStorage.setItem(KEY, q); return q; }
-    return localStorage.getItem(KEY) === 'en' ? 'en' : 'es';
+    const saved = localStorage.getItem(KEY);
+    if (saved === 'en' || saved === 'es') return saved;
+    // sin elección guardada: el idioma del navegador o del sistema (inglés → inglés; cualquier otro → español)
+    const n = ((navigator.languages && navigator.languages[0]) || navigator.language || 'es').toLowerCase();
+    return n.startsWith('en') ? 'en' : 'es';
   } catch { return 'es'; }
 };
 export const lang = get();
@@ -73,7 +77,7 @@ document.addEventListener('click', (e) => {
 
 const init = () => {
   mark();
-  if (lang !== 'en') return;
+  if (lang !== 'en') { document.documentElement.classList.remove('i18n-wait'); return; }
   document.documentElement.lang = 'en';
   const ti = tr(document.title); if (ti) document.title = ti;
   walk(document.body);

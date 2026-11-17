@@ -32,7 +32,7 @@ const idleImgs = ['/configurador/c5.webp', '/configurador/c1.webp', '/configurad
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Genera una propuesta de sitio web para tu negocio con HumanCorp: solo cuéntanos lo básico y mírala generarse." />
-    <script is:inline>document.documentElement.classList.add('js')</script>
+    <script is:inline>document.documentElement.classList.add('js');try{var l=localStorage.getItem("hc-lang"),q=/[?&]lang=en/.test(location.search),n=((navigator.languages&&navigator.languages[0])||navigator.language||"es").toLowerCase();if(q||l==="en"||(!l&&n.indexOf("en")===0))document.documentElement.classList.add("i18n-wait")}catch(e){}</script>
     <title>Personaliza tu sitio (beta) — HumanCorp</title>
   </head>
   <body class="overflow-hidden bg-white font-sans text-[#14161a]">
@@ -697,6 +697,9 @@ const idleImgs = ['/configurador/c5.webp', '/configurador/c1.webp', '/configurad
     <script>
       import { pagesFor, leavesMarkup, mountBook } from '../scripts/book';
       (window as unknown as { HCBook: unknown }).HCBook = { pagesFor, leavesMarkup, mountBook };
+    </script>
+      <script>
+      import '../scripts/i18n';
     </script>
   </body>
 </html>

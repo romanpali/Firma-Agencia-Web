@@ -105,7 +105,7 @@
   type Topic = [string, string, string, number];
   const TOPICS: Topic[] = [
     ['descubrimiento', 'Llamada de descubrimiento', 'Platicamos de tu empresa y de lo que necesitas.', 30],
-    ['contable', 'Asesoría contable y fiscal', 'Con nuestro Director de Administración y Finanzas.', 45],
+    ['contable', 'Servicio contable y fiscal', 'Con nuestro Director de Administración y Finanzas.', 45],
     ['web', 'Diseño y sitio web', 'Identidad, sitio, tienda en línea o galería.', 30],
     ['tecnologia', 'Tecnología y automatización', 'Procesos, paneles, asistentes y sistemas.', 45],
   ];
@@ -301,13 +301,15 @@
   });
 
   let last: HTMLElement | null = null;
-  const open = () => {
+  const open = (pre?: string) => {
     if (!root.hidden) return;
     document.querySelector<HTMLElement>('[data-menu].is-open [data-menu-close]')?.click();
     last = document.activeElement as HTMLElement | null;
     Object.assign(S, { step: 0, topic: '', date: '', time: '', consent: false, err: '', sending: false, id: '' });
     root.hidden = false; root.setAttribute('aria-hidden', 'false'); document.documentElement.classList.add('ag-lock');
+    if (pre && TOPICS.some((t) => t[0] === pre)) S.topic = pre;
     render(false); void root.offsetWidth; root.classList.add('on'); card.focus({ preventScroll: true });
+    if (S.topic) go(1); // con el tema ya elegido se empieza directo en el día y la hora
   };
   function close() {
     root.classList.remove('on'); root.setAttribute('aria-hidden', 'true'); document.documentElement.classList.remove('ag-lock');
@@ -315,6 +317,6 @@
   }
   root.addEventListener('click', (e) => { if ((e.target as HTMLElement).closest('[data-ag-close]')) close(); });
   addEventListener('keydown', (e) => { if (!root.hidden && e.key === 'Escape') close(); });
-  document.addEventListener('click', (e) => { const t = (e.target as HTMLElement).closest('[data-agendar]'); if (t) { e.preventDefault(); open(); } });
+  document.addEventListener('click', (e) => { const t = (e.target as HTMLElement).closest('[data-agendar]'); if (t) { e.preventDefault(); open((t as HTMLElement).dataset.agendarTopic); } });
   if (/[?&]agendar=1/.test(location.search) || location.hash === '#agendar') open();
 </script>

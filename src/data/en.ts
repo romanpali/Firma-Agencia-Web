@@ -1,6 +1,14 @@
 // Diccionario español → inglés (texto exacto, sin espacios sobrantes). Lo usa scripts/i18n.ts.
 // Cubre el menú, el inicio, contacto y «Agendar una llamada». Las demás páginas y las maquetas de ejemplo (paneles, buscador, redes) siguen en español.
-export const EN: Record<string, string> = {
+import { P1 } from './en-p1';
+import { P2 } from './en-p2';
+import { P3 } from './en-p3';
+import { P4 } from './en-p4';
+import { P5 } from './en-p5';
+import { P6, P6_RE } from './en-p6';
+import { P7, P7_RE } from './en-p7';
+
+const BASE: Record<string, string> = {
   'HumanCorp — Diseño, tecnología y operaciones empresariales': 'HumanCorp — Design, technology and business operations', 'Contacto — HumanCorp': 'Contact — HumanCorp',
   // menú y encabezado
   'Servicios': 'Services', 'Las 8 divisiones': 'The 8 divisions', 'Diseño e identidad': 'Design & identity', 'Desarrollo digital': 'Digital development',
@@ -10,7 +18,7 @@ export const EN: Record<string, string> = {
   'Diagnóstico gratis': 'Free diagnostic', '¿Qué tan conectada está tu empresa?': 'How connected is your company?', 'Recursos': 'Resources',
   'Listas prácticas para revisar tu negocio.': 'Practical checklists to review your business.', 'Obra': 'Work', 'Paquetes': 'Packages', 'Contable y fiscal': 'Accounting & tax',
   'Nosotros': 'About us', 'Contacto': 'Contact', 'Arma tu proyecto': 'Build your project', 'Cerrar': 'Close', 'Diagnóstico': 'Diagnostic', 'Agenda una llamada': 'Book a call',
-  'Contáctanos': 'Contact us', 'Agendar una llamada': 'Book a call', 'Abrir menú': 'Open menu', 'Buscar en el sitio': 'Search the site', 'Idioma': 'Language', 'Principal': 'Main',
+  'Contáctanos': 'Contact us', 'Agendar una llamada': 'Book a call', 'Servicio contable y fiscal': 'Accounting and tax service', 'Abrir menú': 'Open menu', 'Buscar en el sitio': 'Search the site', 'Idioma': 'Language', 'Principal': 'Main',
   'Menú': 'Menu', 'Volver': 'Back', 'Pie': 'Footer', 'Idiomas y países': 'Languages and countries', 'Próximamente': 'Coming soon',
   // inicio: portada
   'Todo lo que hace funcionar a una empresa, conectado bajo un solo': 'Everything that keeps a company running, connected under a single', 'estándar': 'standard',
@@ -54,7 +62,7 @@ export const EN: Record<string, string> = {
   'Con un contacto inicial y una llamada de descubrimiento para conocer tu empresa, tus necesidades y tus objetivos. Después hacemos un diagnóstico y te presentamos una propuesta con servicios, entregables, tiempos y precios.': 'With a first contact and a discovery call to learn about your company, your needs and your goals. Then we run a diagnosis and present a proposal with services, deliverables, timelines and pricing.',
   '¿Cuánto tiempo toma un proyecto?': 'How long does a project take?', 'Depende del alcance. Los tiempos se definen por escrito en la propuesta comercial, antes de contratar.': 'It depends on the scope. Timelines are set in writing in the commercial proposal, before you hire us.',
   '¿Me ayudan también con la contabilidad y los temas fiscales?': 'Do you also help with accounting and tax matters?',
-  'Sí. Nuestro Director de Administración y Finanzas es contador y, junto con su área, te brinda asesoría contable y fiscal y todo lo relacionado con lo contable, apoyado en la tecnología y la automatización que construimos. En temas jurídicos o de seguridad especializada trabajamos con profesionales aliados.': 'Yes. Our Director of Administration and Finance is an accountant and, together with his team, provides accounting and tax advice and everything related to accounting, supported by the technology and automation we build. For legal or specialized security matters we work with partner professionals.',
+  'Sí. Nuestro Director de Administración y Finanzas es contador y, junto con su área, te brinda asesoría contable y fiscal y todo lo relacionado con lo contable, apoyado en la tecnología y la automatización que construimos. En temas jurídicos o de seguridad especializada trabajamos con profesionales aliados.': 'Yes. Our Director of Administration and Finance is an accountant and, together with the finance team, provides accounting and tax advice and everything related to accounting, supported by the technology and automation we build. For legal or specialized security matters we work with partner professionals.',
   '¿Garantizan resultados?': 'Do you guarantee results?', 'Trabajamos con claridad y calidad, y damos seguimiento a los resultados de cada proyecto, pero no prometemos resultados comerciales garantizados.': 'We work with clarity and quality and track the results of every project, but we do not promise guaranteed commercial results.',
   '¿Qué pasa después de la entrega?': 'What happens after delivery?', 'Hacemos una validación formal, aplicamos los ajustes acordados y seguimos contigo con soporte, mantenimiento y seguimiento de resultados, además de posibles nuevos servicios.': 'We run a formal validation, apply the agreed adjustments and stay with you with support, maintenance and results tracking, plus possible new services.',
   'Lo que suelen preguntarnos ': 'What people usually ask us',
@@ -82,8 +90,11 @@ export const EN: Record<string, string> = {
   'Horario de Mérida (UTC−6), igual al de tu zona.': 'Mérida time (UTC−6), same as your time zone.', 'Horario de Mérida (UTC−6); debajo, la hora en tu zona.': 'Mérida time (UTC−6); your local time is shown below.',
 };
 
+export const EN: Record<string, string> = { ...P4, ...P3, ...P2, ...P1, ...P5, ...P6, ...P7, ...BASE };
+
 // Frases con partes variables (nombre, fechas, números).
 export const EN_RE: [RegExp, string][] = [
+  ...P6_RE, ...P7_RE,
   [/^Listo, (.+)\. Tu llamada está agendada\.$/, 'All set, $1. Your call is booked.'],
   [/^Folio (.+)$/, 'Reference $1'],
   [/^(\d+) minutos$/, '$1 minutes'], [/^(\d+) min$/, '$1 min'],

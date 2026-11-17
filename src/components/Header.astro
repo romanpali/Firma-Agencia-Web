@@ -98,7 +98,7 @@ const pill = 'hdr-pill rounded-full border border-white/20 bg-white/10 px-5 py-3
 </div>
 
 <Agendar />
-<script is:inline>try{if(localStorage.getItem("hc-lang")==="en"||/[?&]lang=en/.test(location.search))document.documentElement.classList.add("i18n-wait")}catch(e){}</script>
+<script is:inline>try{var l=localStorage.getItem("hc-lang"),q=/[?&]lang=en/.test(location.search),n=((navigator.languages&&navigator.languages[0])||navigator.language||"es").toLowerCase();if(q||l==="en"||(!l&&n.indexOf("en")===0))document.documentElement.classList.add("i18n-wait")}catch(e){}</script>
 <script>
   import '../scripts/i18n';
   const nav = document.querySelector<HTMLElement>('[data-nav]')!;
