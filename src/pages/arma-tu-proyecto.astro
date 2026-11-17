@@ -12,10 +12,10 @@ const types: [string, string, string][] = [
   ['ecommerce', 'Comercio electrónico', 'Tienda, pagos y envíos.'],
 ];
 const sites: [string, string, string][] = [
-  ['landing', 'Landing', 'Una página enfocada en que te contacten.'],
   ['corporativo', 'Sitio corporativo', 'Servicios, proceso, preguntas y contacto.'],
-  ['galeria', 'Galería', 'Tus proyectos y trabajos presentados como una exposición.'],
   ['ecommerce', 'Ecommerce', 'Una tienda en línea con catálogo y cesta.'],
+  ['landing', 'Landing', 'Una página enfocada en que te contacten.'],
+  ['galeria', 'Galería', 'Tus proyectos y trabajos presentados como una exposición.'],
 ];
 const giros: [string, string][] = [['moda', 'Moda'], ['hogar', 'Hogar'], ['belleza', 'Belleza'], ['alimentos', 'Alimentos'], ['tecnologia', 'Tecnología']];
 
@@ -47,8 +47,7 @@ const idleImgs = ['/configurador/c5.webp', '/configurador/c1.webp', '/configurad
         <div data-idle class="@container absolute inset-0 max-lg:bottom-[var(--sh,0px)] overflow-hidden text-[#14161a] transition-[opacity,filter] duration-700" style="background:radial-gradient(75% 65% at 50% 40%,#ffffff,#eef0f6 80%)">
           <i class="pointer-events-none absolute left-1/2 top-[18%] h-[60%] w-[70%] -translate-x-1/2 rounded-full opacity-[.22] blur-[90px]" style="background:radial-gradient(circle,#977dff,transparent 70%)" aria-hidden="true"></i>
           <div class="absolute inset-0 flex flex-col items-center justify-center px-6">
-            <span class="grid size-12 place-items-center rounded-full border border-black/20 text-[15px] font-semibold tracking-wider">H</span>
-            <div class="idle-fan relative mt-[clamp(18px,3cqw,40px)] h-[clamp(150px,30cqw,290px)] w-full" data-fan>
+                        <div class="idle-fan relative mt-[clamp(18px,3cqw,40px)] h-[clamp(150px,30cqw,290px)] w-full" data-fan>
               {idleImgs.map((src, i) => <div data-card={i} class="idle-card absolute left-1/2 top-0 aspect-[4/5] w-[clamp(110px,17cqw,210px)] overflow-hidden rounded-[22px] border border-black/10 shadow-[0_30px_60px_-30px_rgba(10,12,40,.45)]"><img src={src} alt="" width="360" height="640" loading="eager" decoding="async" class="size-full object-cover" /></div>)}
             </div>
             <h2 class="mt-[clamp(20px,4cqw,44px)] flex items-center justify-center gap-3 text-center font-goog text-[clamp(1.6rem,4cqw,3rem)] font-light tracking-[-0.03em]">Tu sitio, a tu medida<span class="rounded-full bg-[#14161a] px-3 py-1 text-[11px] font-medium uppercase tracking-[0.14em] text-white">Beta</span></h2>
@@ -123,6 +122,7 @@ const idleImgs = ['/configurador/c5.webp', '/configurador/c1.webp', '/configurad
           <!-- Plantilla D: Galería (portafolio) -->
           <div data-d="d" hidden class="gal">
             <section class="gal-hero">
+              <img class="gal-bg" src="/configurador/fuji.webp" alt="" width="1672" height="941" decoding="async" /><i class="gal-bgs"></i>
               <i class="gal-glow g1"></i><i class="gal-glow g2"></i>
               <i class="grain pointer-events-none absolute inset-0 opacity-[.14]"></i>
               <nav class="gal-nav rise" style="--d:.1s">
@@ -421,7 +421,7 @@ const idleImgs = ['/configurador/c5.webp', '/configurador/c1.webp', '/configurad
 
       const ARQ = [['/configurador/arq-1.webp', '50% 62%', 'Casa en la colina'], ['/configurador/arq-2.webp', '50% 55%', 'Sala frente al mar'], ['/configurador/arq-3.webp', '50% 58%', 'Terraza y alberca']];
       let bgIx = Math.floor(Math.random() * 3);
-      const S = { name: '', city: 'Mérida, Yucatán', desc: '', type: 'pequena', site: 'landing', giro: 'moda' };
+      const S = { name: '', city: 'Mérida, Yucatán', desc: '', type: 'pequena', site: 'corporativo', giro: 'moda' };
       let G = null, phase = 'idle', dirty = false, token = 0, roll = 0, last = null;
 
       const compose = () => {
@@ -433,7 +433,7 @@ const idleImgs = ['/configurador/c5.webp', '/configurador/c1.webp', '/configurad
         if (S.site === 'galeria') {
           o.tpl = 'd'; o.theme = r() < 0.5 ? 'oscuro' : 'claro'; o.font = pick(r, ['moderna', 'geometrica', 'editorial']); o.sty = pick(r, ['minimal', 'calido', 'audaz']);
         } else if (S.site === 'ecommerce') {
-          o.tpl = 'c'; o.hero = last && last.tpl === 'c' && r() < 0.8 ? 1 - last.hero : pick(r, [0, 1]);
+          o.tpl = 'c'; o.hero = 1;
           o.theme = r() < 0.3 ? 'oscuro' : 'claro'; o.font = pick(r, ['moderna', 'geometrica']); o.sty = pick(r, ['minimal', 'minimal', 'calido']);
         } else {
           o.tpl = pick(r, ['a', 'b']);
@@ -472,7 +472,7 @@ const idleImgs = ['/configurador/c5.webp', '/configurador/c1.webp', '/configurad
       let cartN = 0, toastT = 0;
       const drawShop = (nm) => {
         const D = SHOP[G.giro];
-        const photo = G.giro === 'moda' || G.giro === 'belleza' ? ['/configurador/retrato.webp', '55% 22%'] : ARQ[G.bg ?? 0];
+        const photo = G.giro === 'moda' ? ['/obra/trama/hero.webp', '50% 45%'] : G.giro === 'belleza' ? ['/configurador/retrato.webp', '55% 22%'] : ARQ[G.bg ?? 0];
         $$('[data-sh-img]').forEach((im) => { im.src = photo[0]; im.style.objectPosition = photo[1]; });
         $$('[data-hero]').forEach((h) => (h.hidden = +h.dataset.hero !== G.hero));
         set('[data-sh-eyebrow]', S.desc.trim() || D.eyebrow);

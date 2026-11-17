@@ -424,8 +424,8 @@ body { overflow-x: clip; }
 @media (prefers-reduced-motion: reduce) { .site *, .site *::before { animation: none !important; } .site .sr { opacity: 1; translate: none; filter: none; } .idle-card { transition: none; } }
 
 /* Botón principal del configurador: intersección de los degradados 3 y 4 */
-.gen-btn { background: linear-gradient(180deg, #0033ff 0%, #0600ab 52%, #00033d 100%); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 14px 34px -14px rgba(0, 3, 61, 0.9); }
-.gen-btn:hover { background: linear-gradient(180deg, #1a48ff 0%, #0a05c0 52%, #02094f 100%); }
+.gen-btn { background: linear-gradient(120deg, #1f3558 0%, #2f4a73 42%, #c98f55 78%, #f0b56e 100%); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 14px 34px -14px rgba(31, 53, 88, 0.9); }
+.gen-btn:hover { background: linear-gradient(120deg, #284670 0%, #3a5d92 42%, #d9a063 78%, #ffc984 100%); }
 
 /* ── Cursor circular minimalista (blanco cristal) ── */
 .cursor-ring, .cursor-dot { position: fixed; left: 0; top: 0; pointer-events: none; z-index: 2147483000; opacity: 0; border-radius: 50%; }
@@ -786,3 +786,33 @@ html.menu-open main, html.menu-open .hc-snow { visibility: hidden; }
 @media (min-width: 768px) and (max-height: 840px) { article.sheet { --z: 0.84; zoom: var(--z); top: calc(100px / var(--z)) !important; height: calc((100svh - 116px) / var(--z)) !important; min-height: 0 !important; margin-bottom: calc((var(--n) * 48svh + 16px) / var(--z)) !important; } article.sheet:last-child, article.sheet[data-last] { margin-bottom: 0 !important; } }
 @media (min-width: 768px) and (max-height: 720px) { article.sheet { --z: 0.74; } }
 @media (min-width: 768px) and (max-height: 620px) { article.sheet { --z: 0.64; } }
+
+/* ===== configurador: panel derecho negro ===== */
+aside[data-sheet].sheet, aside[data-sheet] { background: #0b0c0f !important; color: #f3f4f7; }
+aside[data-sheet] [class*="text-black/"] { color: rgba(243, 244, 247, 0.6) !important; }
+aside[data-sheet] .text-\[\#14161a\] { color: #f3f4f7; }
+aside[data-sheet] [class*="bg-[#f5f5f7]"], aside[data-sheet] .cfg-row { background: rgba(255, 255, 255, 0.06) !important; color: #f3f4f7; }
+aside[data-sheet] [class*="hover:bg-[#ededf0]"]:hover { background: rgba(255, 255, 255, 0.11) !important; }
+aside[data-sheet] .cfg-row[aria-pressed="true"] { background: rgba(240, 181, 110, 0.1) !important; box-shadow: 0 0 0 2px #f0b56e, 0 12px 30px -18px rgba(240, 181, 110, 0.6) !important; }
+aside[data-sheet] .cfg-row .cfg-t { color: #f3f4f7 !important; }
+aside[data-sheet] [aria-pressed="true"][class*="rounded-full"] { background: #f3f4f7 !important; color: #0b0c0f !important; }
+aside[data-sheet] input, aside[data-sheet] textarea { background: rgba(255, 255, 255, 0.06) !important; color: #fff !important; }
+aside[data-sheet] input::placeholder, aside[data-sheet] textarea::placeholder { color: rgba(255, 255, 255, 0.35) !important; }
+aside[data-sheet] input:focus { background: rgba(255, 255, 255, 0.1) !important; box-shadow: 0 0 0 2px #f0b56e !important; }
+aside[data-sheet] h1, aside[data-sheet] h2 { color: #f3f4f7; }
+aside[data-sheet] .bg-\[\#0033FF\] { background: linear-gradient(120deg, #2f4a73, #f0b56e) !important; color: #0b0c0f !important; }
+aside[data-sheet] [class*="border-black"] { border-color: rgba(255, 255, 255, 0.12) !important; }
+aside[data-sheet] .bg-white\/90, aside[data-sheet] [class*="bg-white/"] { background: rgba(11, 12, 15, 0.9) !important; }
+aside[data-sheet] button:not([aria-pressed]):not(.gen-btn):not([class*="bg-[#14161a]"]) { color: #f3f4f7; }
+
+/* ===== galería: imagen del monte y paleta azul marino / ámbar ===== */
+.site .gal { --a: #f0b56e; --b: #2f4a73; }
+.gal-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 62%; animation: galK 28s ease-in-out infinite alternate; } @keyframes galK { from { transform: scale(1.02); } to { transform: scale(1.1) translate3d(-1%, -1%, 0); } }
+.gal-bgs { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(6, 12, 28, 0.55), rgba(6, 12, 28, 0.15) 40%, rgba(6, 12, 28, 0.75)); pointer-events: none; }
+.gal-hero { color: #fff; } .gal-glow { z-index: 0; mix-blend-mode: screen; opacity: 0.22 !important; }
+.gal-hero > *:not(.gal-bg):not(.gal-bgs):not(.gal-glow) { position: relative; z-index: 2; }
+@media (prefers-reduced-motion: reduce) { .gal-bg { animation: none; } }
+aside[data-sheet] [data-foot] { background: #0b0c0f !important; box-shadow: 0 -12px 30px -18px rgba(0, 0, 0, 0.8) !important; }
+aside[data-sheet] [data-reroll] { background: rgba(255, 255, 255, 0.08) !important; color: #f3f4f7 !important; }
+aside[data-sheet] [data-send] { background: #f3f4f7 !important; color: #0b0c0f !important; }
+aside[data-sheet] [data-grab] i, aside[data-sheet] [data-sheet-toggle] { color: rgba(255, 255, 255, 0.45); } aside[data-sheet] [data-grab] i { background: rgba(255, 255, 255, 0.25) !important; }
