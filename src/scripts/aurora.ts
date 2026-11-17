@@ -11,10 +11,10 @@ const words = (s: string) => s.split(' ').map((w, i) => `<span style="--w:${i}">
 const nav = `<div class="au-nav mw-f" style="--d:.15s"><button type="button" class="au-logo" ${go('inicio')}>Estudio Aurora</button><nav>${tabs.map(([k, t]) => btn(k, 'au-t', t)).join('')}</nav></div>
 <button type="button" class="wn-ex" data-int="wex" aria-label="Ver en pantalla completa"><i></i>Entrar al sitio</button>`;
 const foot = `<footer class="au-ft"><div class="au-fg"><div><b>Estudio Aurora</b><p>Asistentes y automatización<br>para equipos pequeños y medianos.</p></div><div><p class="au-k">Sitio</p>${tabs.map(([k, t]) => btn(k, 'au-fa', t)).join('')}</div><div><p class="au-k">Escríbenos</p><span class="au-fa">hola@aurora.example</span><span class="au-fa">+52 55 0000 0000</span></div></div><b class="au-big" aria-hidden="true">aurora</b><p class="au-cp">Concepto de HumanCorp · Datos de ejemplo</p></footer>`;
-const hdr = (k: string, t: string, p: string, pos: string) => `<header class="au-ph">${photo(pos, 1.5, 'au-phi')}<div><p class="au-k rv">${k}</p><h3 class="au-t2 rv">${t}</h3>${p ? `<p class="au-p rv">${p}</p>` : ''}</div></header>`;
+const hdr = (k: string, t: string, p: string, pos: string) => `<header class="au-ph">${photo(pos, 1.6, 'au-phi')}<div><p class="au-k rv">${k}</p><h3 class="au-t2 rv">${t}</h3>${p ? `<p class="au-p rv">${p}</p>` : ''}</div></header>`;
 
 const logos = ['WhatsApp', 'Gmail', 'Google Calendar', 'Slack', 'Notion', 'HubSpot', 'Shopify', 'Stripe', 'Zapier'];
-const ticker = `<div class="au-tick" aria-hidden="true"><div>${[0, 1].map(() => `<span>${logos.map((l) => `<em>${l}</em>`).join('')}</span>`).join('')}</div></div>`;
+const ticker = `<div class="au-tools"><p>${logos.slice(0, 7).join('<i></i>')}</p></div>`;
 const stat = (n: number, dec: number, suf: string, label: string) => `<div class="rv"><b><span data-count="${n}" data-dec="${dec}">${n.toFixed(dec)}</span>${suf}</b><small>${label}</small></div>`;
 const serv: [string, string, string, string[]][] = [
   ['01', 'Agentes de atención', 'Responden por WhatsApp, correo y chat con la información de tu negocio. Si no saben algo, pasan la conversación a una persona.', ['Base de conocimiento de tu negocio', 'Tono de voz propio', 'Reglas para pasar a una persona', 'Panel de conversaciones']],
@@ -38,10 +38,10 @@ ${nav}
 <div class="mw-scroll">
 
 <section class="au-v au-inicio">
- <div class="au-h0"><img class="au-img" src="${IMG}" alt="" width="1500" height="1000" decoding="async"><i class="au-vig"></i><i class="au-grain"></i><i class="au-streak"></i>
+ <div class="au-h0"><i class="au-vl"></i><div class="au-hp"><img class="au-img" src="${IMG}" alt="" width="1500" height="1000" decoding="async"></div><i class="au-sun"></i><p class="au-vt mw-f" style="--d:1.4s">Estudio Aurora · 2025</p>
   <div class="au-txt"><p class="au-k mw-f" style="--d:.5s">Asistentes y automatización</p><h4 class="au-h"><span class="mw-w" style="--d:.7s">Un asistente</span><span class="mw-w" style="--d:1s">que sí ayuda</span></h4>
    <p class="au-s mw-f" style="--d:1.5s">Responde, da seguimiento y avisa al equipo, con supervisión humana.</p><button type="button" class="au-l mw-f" style="--d:1.8s" ${go('contacto')}>Hablemos</button></div>
-  <div class="au-tc mw-f" style="--d:1.2s"><span>Escena 04</span><i><b></b></i><span>2025</span></div></div>
+  <div class="au-scr mw-f" style="--d:2s"><i></i><span>Desliza</span></div></div>
  ${ticker}
  <div class="au-sec au-intro"><p class="au-k rv">Estudio Aurora</p><p class="au-state rv">${words('Construimos asistentes que atienden, dan seguimiento y avisan a tu equipo. Hablan como tu negocio, saben cuándo pedir ayuda y siempre hay una persona al final de la conversación.')}</p>
   <div class="au-stats">${stat(24, 0, '/7', 'atención sin pausas')}${stat(1, 0, ' min', 'primera respuesta, o menos')}${stat(100, 0, ' %', 'con supervisión humana')}${stat(12, 0, '+', 'herramientas que conectamos')}</div></div>
@@ -53,7 +53,7 @@ ${nav}
  <div class="au-sec"><div class="au-sh"><div><p class="au-k rv">Casos</p><h3 class="au-t2 rv">Ejemplos de lo que hacemos</h3></div>${btn('casos', 'au-ln', 'Ver casos')}</div>
   <div class="au-cs">${casos.map(([c, t, , , m]) => `<article class="rv" ${go('casos')}><small>${c}</small><b>${t}</b><div>${m.map(([a, b]) => `<p><i>${a}</i>${b}</p>`).join('')}</div></article>`).join('')}</div></div>
  <div class="au-sec au-faq"><p class="au-k rv">Dudas frecuentes</p><div class="au-fq">${faq.map(([q, a]) => `<div class="rv"><b>${q}</b><span>${a}</span></div>`).join('')}</div></div>
- <div class="au-cta rv"><h3>¿Qué tarea te quitaría el día?</h3><p>Cuéntanos cómo atiendes hoy. Te respondemos en un día hábil.</p>${btn('contacto', 'au-btn', 'Escríbenos')}</div>
+ <div class="au-cta rv"><svg class="au-en" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 8A42 42 0 1 1 22 20" pathLength="1"/></svg><h3>¿Qué tarea te quitaría el día?</h3><p>Cuéntanos cómo atiendes hoy. Te respondemos en un día hábil.</p>${btn('contacto', 'au-btn', 'Escríbenos')}</div>
  ${foot}
 </section>
 
@@ -70,14 +70,14 @@ ${nav}
 <section class="au-v au-casos">${hdr('Casos', 'Ejemplos de lo que hacemos', 'Casos ilustrativos, con datos de ejemplo, de cómo se ve un asistente trabajando en cada tipo de negocio.', '60% 70%')}
  <div class="au-body">${casos.map(([c, t, d, n, m], i) => `<article class="au-cb rv"><div class="au-cn"><em>0${i + 1}</em><small>${c}</small></div><div><h4>${t}</h4><p>${d}</p></div><div class="au-cm">${m.map(([a, b]) => `<p><b>${a}</b><span>${b}</span></p>`).join('')}</div></article>`).join('')}
  <p class="au-note rv">Cifras de ejemplo. Los resultados reales dependen de cada operación y los medimos juntos desde el inicio.</p></div>
- <div class="au-cta rv"><h3>¿Tu caso se parece a alguno?</h3><p>Cuéntanos y vemos qué conviene automatizar primero.</p>${btn('contacto', 'au-btn', 'Escríbenos')}</div>${foot}
+ <div class="au-cta rv"><svg class="au-en" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 8A42 42 0 1 1 22 20" pathLength="1"/></svg><h3>¿Tu caso se parece a alguno?</h3><p>Cuéntanos y vemos qué conviene automatizar primero.</p>${btn('contacto', 'au-btn', 'Escríbenos')}</div>${foot}
 </section>
 
 <section class="au-v au-nosotros">${hdr('Nosotros', 'Un estudio pequeño, con criterio', 'Somos un equipo chico de estrategia, ingeniería y diseño de conversaciones.', '10% 20%')}
  <div class="au-body"><p class="au-state au-st2 rv">${words('Creemos que un buen asistente no busca parecer una persona. Busca resolver rápido, decir la verdad sobre lo que sabe y llamar a alguien cuando hace falta.')}</p>
  <div class="au-prin">${prin.map(([n, t, d]) => `<div class="rv"><em>${n}</em><b>${t}</b><span>${d}</span></div>`).join('')}</div>
  <h3 class="au-t3 rv">El equipo</h3><div class="au-team">${team.map(([i, n, r]) => `<div class="rv"><i>${i}</i><b>${n}</b><span>${r}</span></div>`).join('')}</div></div>
- <div class="au-cta rv"><h3>Conozcámonos</h3><p>Una llamada de 30 minutos para entender tu operación.</p>${btn('contacto', 'au-btn', 'Escríbenos')}</div>${foot}
+ <div class="au-cta rv"><svg class="au-en" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 8A42 42 0 1 1 22 20" pathLength="1"/></svg><h3>Conozcámonos</h3><p>Una llamada de 30 minutos para entender tu operación.</p>${btn('contacto', 'au-btn', 'Escríbenos')}</div>${foot}
 </section>
 
 <section class="au-v au-contacto">${hdr('Contacto', 'Cuéntanos cómo atiendes hoy', 'Te respondemos en un día hábil, con una propuesta de por dónde empezar.', '40% 30%')}
