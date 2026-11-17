@@ -1,6 +1,6 @@
 /* «Ábaco»: sitio web, portada y panel. Modernismo suizo: papel hueso, tinta, rejilla fina, grotesca apretada y un solo acento (lima).
    Movimiento: líneas que se trazan, barras que crecen, cuentas de ábaco que se deslizan, cifras que suben; solo opacidad, transform y recortes. */
-.ab-web, .ab-brand, .ab-dash { --paper: #eeede8; --ink: #111214; --mu: rgba(17, 18, 20, 0.58); --ln: rgba(17, 18, 20, 0.14); --lime: #d4f23c; --sans: 'Inter Tight Variable', 'Inter Tight', system-ui, sans-serif; background: var(--paper); color: var(--ink); font-family: var(--sans); }
+.ab-web, .ab-brand, .ab-dash { --paper: #eeede8; --ink: #111214; --mu: rgba(17, 18, 20, 0.58); --ln: rgba(17, 18, 20, 0.14); --lime: #f0b56e; --sans: 'Inter Tight Variable', 'Inter Tight', system-ui, sans-serif; background: var(--paper); color: var(--ink); font-family: var(--sans); }
 .ab-web .mw-scroll { background: var(--paper); }
 :where(.ab-web, .ab-dash) button, :where(.ab-web) input, :where(.ab-web) textarea { font: inherit; color: inherit; } :where(.ab-web, .ab-dash) button { background: none; border: 0; padding: 0; cursor: pointer; text-align: inherit; }
 .ab-web h3, .ab-web h4 { font-family: var(--sans) !important; font-style: normal !important; font-weight: 600; letter-spacing: -0.035em; }
