@@ -1,6 +1,7 @@
 // Proyecto «Ábaco» (concepto): finanzas y operaciones para empresas medianas. Sitio web completo (Inicio, Soluciones, Casos, Nosotros, Contacto),
 // portada de marca (ábaco animado), tabla de contenido y panel interactivo en el reverso. Datos de ejemplo.
 // La raíz también es .mr-web: pestañas, desplazamiento, aparición (.rv), contadores y vista ampliada los resuelve marea-site.ts; lo propio, abaco-site.ts.
+const IMG = '/obra/p5.webp';
 const go = (t: string) => `data-int="wtab" data-t="${t}"`;
 const btn = (t: string, cls: string, label: string) => `<button type="button" class="${cls}" ${go(t)}>${label}</button>`;
 const tabs: [string, string][] = [['soluciones', 'Soluciones'], ['casos', 'Casos'], ['nosotros', 'Nosotros'], ['contacto', 'Contacto']];
@@ -10,7 +11,8 @@ const stat = (n: number, dec: number, suf: string, label: string) => `<div class
 const nav = `<div class="ab-nav mw-f" style="--d:.15s"><button type="button" class="ab-logo" ${go('inicio')}><i></i>ábaco</button><nav>${tabs.map(([k, t]) => btn(k, 'ab-t', t)).join('')}</nav></div>
 <button type="button" class="wn-ex" data-int="wex" aria-label="Ver en pantalla completa"><i></i>Entrar al sitio</button>`;
 const foot = `<footer class="ab-ft"><div class="ab-fg"><div><b>ábaco</b><p>Finanzas y operaciones<br>Ciudad de México</p></div><div><p class="ab-k">Sitio</p>${tabs.map(([k, t]) => btn(k, 'ab-fa', t)).join('')}</div><div><p class="ab-k">Escríbenos</p><span class="ab-fa">hola@abaco.example</span><span class="ab-fa">+52 55 0000 0000</span></div></div><b class="ab-big" aria-hidden="true">ábaco</b><p class="ab-leg">Concepto de HumanCorp · datos de ejemplo. La asesoría contable y fiscal la brinda un contador; la tecnología la respalda.</p></footer>`;
-const hdr = (k: string, t: string, p: string) => `<header class="ab-ph"><div class="ab-grid" aria-hidden="true"></div><p class="ab-k rv">${k}</p><h3 class="ab-t2 rv">${t}</h3>${p ? `<p class="ab-p rv">${p}</p>` : ''}</header>`;
+const ph = (pos: string) => `<div class="ab-phi"><img src="${IMG}" alt="" width="1500" height="1000" loading="lazy" decoding="async" style="--p:${pos}"></div>`;
+const hdr = (k: string, t: string, p: string, pos: string) => `<header class="ab-ph">${ph(pos)}<p class="ab-k rv">${k}</p><h3 class="ab-t2 rv">${t}</h3>${p ? `<p class="ab-p rv">${p}</p>` : ''}</header>`;
 
 const ticker = ['Facturación CFDI', 'Cobranza', 'Flujo de caja', 'Conciliación', 'Compras y gastos', 'Aprobaciones', 'Reportes', 'Cierre mensual'];
 const sol: [string, string, string, string[]][] = [
@@ -41,7 +43,8 @@ ${nav}
 <div class="mw-scroll">
 
 <section class="ab-v ab-inicio">
- <div class="ab-h0"><div class="ab-grid" aria-hidden="true"></div>
+ <div class="ab-h0"><div class="ab-hp"><img class="ab-img" src="${IMG}" alt="" width="1500" height="1000" decoding="async"></div><i class="ab-sh0"></i>
+  <svg class="ab-fl" viewBox="0 0 400 100" preserveAspectRatio="none" aria-hidden="true"><path class="ab-rt" pathLength="1" d="M0 80 C90 80 140 10 230 22 S340 60 400 6"/><circle r="2.2"><animateMotion dur="7s" repeatCount="indefinite" path="M0 80 C90 80 140 10 230 22 S340 60 400 6"/></circle></svg>
   <div class="ab-txt"><p class="ab-k mw-f" style="--d:.4s"><i class="ab-pulse"></i>Finanzas y operaciones</p><h4 class="ab-h"><span class="mw-w" style="--d:.6s">Las cuentas,</span><span class="mw-w" style="--d:.85s">en orden.</span></h4>
    <p class="ab-s mw-f" style="--d:1.4s">Facturación, cobranza, flujo de caja y procesos en un solo lugar, para que decidas con calma y tu equipo deje de perseguir hojas de cálculo.</p>
    <div class="ab-cta2 mw-f" style="--d:1.7s">${btn('contacto', 'ab-btn dark', 'Agenda una llamada')}${btn('soluciones', 'ab-btn', 'Ver soluciones')}</div></div>
@@ -68,7 +71,7 @@ ${nav}
  ${foot}
 </section>
 
-<section class="ab-v ab-soluciones">${hdr('Soluciones', 'Seis módulos que se hablan entre sí', 'Empieza con uno y suma los demás. Todo comparte los mismos datos, así que no se captura dos veces.')}
+<section class="ab-v ab-soluciones">${hdr('Soluciones', 'Seis módulos que se hablan entre sí', 'Empieza con uno y suma los demás. Todo comparte los mismos datos, así que no se captura dos veces.', '20% 60%')}
  <div class="ab-body">${sol.map(([n, t, d, l]) => `<article class="ab-sb rv"><div><em>${n}</em><h4>${t}</h4><p>${d}</p></div><ul>${l.map((x) => `<li>${x}</li>`).join('')}</ul></article>`).join('')}
  <h3 class="ab-t3 rv">Qué incluye cada nivel</h3>
  <table class="ab-tbl rv"><thead><tr><th></th><th>Inicio</th><th>Operación</th><th>A medida</th></tr></thead><tbody>${tiers.map(([a, b, c, d]) => `<tr><th>${a}</th><td>${b}</td><td>${c}</td><td>${d}</td></tr>`).join('')}</tbody></table>
@@ -77,20 +80,20 @@ ${nav}
  ${foot}
 </section>
 
-<section class="ab-v ab-casos">${hdr('Casos', 'Empresas que se ordenaron', 'Casos ilustrativos, con datos de ejemplo, de cómo trabajamos con distintos tipos de empresa.')}
+<section class="ab-v ab-casos">${hdr('Casos', 'Empresas que se ordenaron', 'Casos ilustrativos, con datos de ejemplo, de cómo trabajamos con distintos tipos de empresa.', '55% 50%')}
  <div class="ab-body">${casos.map(([c, t, d, m], i) => `<article class="ab-cb rv"><div class="ab-cn"><em>0${i + 1}</em><small>${c}</small></div><div><h4>${t}</h4><p>${d}</p></div><div class="ab-cm">${m.map(([a, b]) => `<p><b>${a}</b><span>${b}</span></p>`).join('')}</div></article>`).join('')}
  <p class="ab-note rv">Casos y cifras de ejemplo.</p></div>
  <div class="ab-ctab rv"><h3>¿Tu empresa se parece a alguna?</h3><p>Cuéntanos cómo trabajas hoy y vemos por dónde empezar.</p>${btn('contacto', 'ab-btn dark', 'Escríbenos')}</div>${foot}
 </section>
 
-<section class="ab-v ab-nosotros">${hdr('Nosotros', 'Un equipo que ordena', 'Somos un equipo pequeño de operaciones, finanzas y diseño de producto.')}
+<section class="ab-v ab-nosotros">${hdr('Nosotros', 'Un equipo que ordena', 'Somos un equipo pequeño de operaciones, finanzas y diseño de producto.', '75% 45%')}
  <div class="ab-body"><p class="ab-state ab-st2 rv">${words('Creemos que una empresa funciona mejor cuando cada persona sabe qué sigue. Por eso diseñamos herramientas simples y las acompañamos hasta que se usan.')}</p>
  <div class="ab-prin">${prin.map(([n, t, d]) => `<div class="rv"><em>${n}</em><b>${t}</b><span>${d}</span></div>`).join('')}</div>
  <h3 class="ab-t3 rv">El equipo</h3><div class="ab-team">${team.map(([i, n, r]) => `<div class="rv"><i>${i}</i><b>${n}</b><span>${r}</span></div>`).join('')}</div></div>
  <div class="ab-ctab rv"><h3>Conozcámonos</h3><p>Una llamada de 30 minutos para hablar de tu operación.</p>${btn('contacto', 'ab-btn dark', 'Escríbenos')}</div>${foot}
 </section>
 
-<section class="ab-v ab-contacto">${hdr('Contacto', 'Cuéntanos cómo trabajas hoy', 'Te respondemos en un día hábil con una propuesta de por dónde empezar.')}
+<section class="ab-v ab-contacto">${hdr('Contacto', 'Cuéntanos cómo trabajas hoy', 'Te respondemos en un día hábil con una propuesta de por dónde empezar.', '40% 30%')}
  <div class="ab-body"><div class="ab-cg"><div class="ab-form"><p class="ab-lb">¿Qué quieres ordenar?</p><div class="ab-chips">${['Facturación', 'Cobranza', 'Flujo de caja', 'Compras', 'No lo sé aún'].map((c) => `<button type="button" data-int="abchip">${c}</button>`).join('')}</div>
   <div class="ab-flds"><input type="text" placeholder="Nombre" aria-label="Nombre" /><input type="text" placeholder="Correo o WhatsApp" aria-label="Contacto" /></div><textarea placeholder="Cuéntanos qué se hace a mano hoy" aria-label="Mensaje"></textarea>
   <button type="button" class="ab-btn dark" data-int="absend">Enviar mensaje</button><div class="ab-ok"><b>Gracias, recibimos tu mensaje.</b><span>Esta es una demostración: no se envió nada, pero así se vería la confirmación.</span></div></div>
@@ -102,8 +105,9 @@ ${nav}
 
 // ---------- identidad: portada con un ábaco que se arma ----------
 const rods = [3, 1, 4, 2, 5].map((n, r) => `<g class="ab-rod" style="--r:${r}"><line x1="10" x2="190" y1="${18 + r * 16}" y2="${18 + r * 16}"/>${Array.from({ length: 6 }, (_, b) => `<circle class="${b < n ? 'on' : ''}" style="--b:${b}" cx="${24 + b * 12 + (b < n ? 0 : 70)}" cy="${18 + r * 16}" r="5"/>`).join('')}</g>`).join('');
-const brand = `<div class="pg ab-brand" data-rp="light"><div class="ab-grid" aria-hidden="true"></div>
+const brand = `<div class="pg ab-brand" data-rp="dark">
 <div class="ab-bt mw-f" style="--d:.2s"><span>Manual de marca</span><span>Made by <b><i class="wl">Human</i><i class="ws">Corp</i></b></span></div>
+<div class="ab-bp"><img class="ab-img" src="${IMG}" alt="" width="1500" height="1000" decoding="async"></div><i class="ab-sh0"></i>
 <svg class="ab-bs" viewBox="0 0 200 100" aria-hidden="true">${rods}</svg>
 <div class="ab-bw mw-f" style="--d:.5s"><b>ábaco</b><span>Finanzas y operaciones · sistema de gestión para empresas</span></div></div>`;
 

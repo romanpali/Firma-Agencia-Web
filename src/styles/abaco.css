@@ -117,3 +117,27 @@
 .ab-c1 svg { height: 2.6em; } .ab-c2 { top: 8.4em; width: 8.6em; } .ab-c3 { left: 0; bottom: 0; width: 7.6em; } .ab-ring { bottom: -0.6em; width: 4.6em; height: 4.6em; }
 .mr-ex .ab-c1 svg { height: 3.4em; } .mr-ex .ab-ring { width: 8em; height: 8em; bottom: -1em; } .mr-ex .ab-c3 { left: 1em; bottom: 0.5em; }
 .ab-ring { opacity: 0; } .mr-ex .ab-ring { opacity: 1; }
+/* fotografía a sangre (el avión al atardecer): portada del sitio, cabeceras y portada de marca */
+.ab-hp, .ab-bp, .ab-phi { position: absolute; inset: 0; overflow: hidden; background: #26364f; } .ab-img, .ab-phi img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: var(--p, 40% 60%); }
+.ab-sh0 { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(10, 16, 28, 0.78), rgba(10, 16, 28, 0.25) 62%, transparent), linear-gradient(0deg, rgba(10, 16, 28, 0.45), transparent 40%); }
+.js .ab-hp, .js .ab-bp { clip-path: inset(0 100% 0 0); } .js .live .ab-hp, .js .obm-card.in .ab-hp, .js .live .ab-bp, .js .obm-card.in .ab-bp, .mr-ex .ab-hp { clip-path: inset(0); transition: clip-path 1.8s cubic-bezier(0.7, 0, 0.2, 1) 0.1s; }
+.js .ab-img { transform: scale(1.22) translateX(2%); } .js .live .ab-img, .js .obm-card.in .ab-img, .mr-ex .ab-img { transform: none; transition: transform 16s cubic-bezier(0.2, 0.5, 0.2, 1); }
+.js .ab-phi { animation: abWipe 1.6s cubic-bezier(0.7, 0, 0.2, 1) 0.1s both; } @keyframes abWipe { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0); } }
+.ab-h0 { background: #26364f; color: #fff; } .ab-h0 .ab-k, .ab-h0 .ab-s, .ab-h0 .ab-h { color: #fff; } .ab-h0 .ab-s { color: rgba(255, 255, 255, 0.82); } .ab-h0 .ab-k { color: rgba(255, 255, 255, 0.85); }
+.ab-h0 .ab-btn { color: #fff; box-shadow: inset 0 0 0 0.09em rgba(255, 255, 255, 0.85); } .ab-h0 .ab-btn:hover { background: #fff; color: var(--ink); } .ab-h0 .ab-btn.dark { background: var(--lime); color: var(--ink); box-shadow: none; } .ab-h0 .ab-btn.dark:hover { background: #fff; }
+.ab-h0 .ab-pulse { box-shadow: 0 0 0 0.08em #fff; }
+.ab-txt, .ab-vis { z-index: 2; } .ab-card { box-shadow: 0 0 0 0.06em var(--ink), 0.45em 0.45em 0 rgba(10, 16, 28, 0.85); }
+/* ruta de vuelo: línea que se traza y un punto que la recorre */
+.ab-fl { position: absolute; z-index: 1; left: 0; right: 0; top: 2.4em; width: 100%; height: 11em; overflow: visible; } .ab-rt { fill: none; stroke: rgba(255, 255, 255, 0.7); stroke-width: 1.2; stroke-dasharray: 0.012 0.012; vector-effect: non-scaling-stroke; } .ab-fl circle { fill: var(--lime); } .js .ab-fl { opacity: 0; } .js .live .ab-fl, .js .obm-card.in .ab-fl, .mr-ex .ab-fl { opacity: 1; transition: opacity 1.4s ease 1.8s; }
+.mr-ex .ab-fl { height: 14em; }
+/* menú sobre la foto mientras no se ha desplazado */
+.ab-web:not([data-sc]) .ab-nav { color: #fff; } .ab-web:not([data-sc]) .ab-logo i { background: #fff; box-shadow: 0.75em 0 0 #fff, 1.5em 0 0 var(--lime); } .ab-web:not([data-sc]) .ab-t { opacity: 0.85; } .ab-web:not([data-sc]) .ab-t:hover { opacity: 1; }
+.ab-web[data-tab='inicio']:not([data-sc]) .ab-t::after { display: none; }
+/* cabeceras interiores */
+.ab-ph { color: #fff; padding-top: 9em; padding-bottom: 3.6em; } .ab-ph .ab-sh0 { display: block; } .ab-ph::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(10, 16, 28, 0.78), rgba(10, 16, 28, 0.3) 70%, transparent); } .ab-ph > *:not(.ab-phi) { z-index: 2; } .ab-ph .ab-k, .ab-ph .ab-p { color: rgba(255, 255, 255, 0.85); } .ab-ph .ab-t2 { color: #fff; }
+.js .ab-web .ab-ph .rv::before { display: none; }
+/* portada de marca */
+.ab-brand { background: #26364f; color: #fff; } .ab-bt, .ab-bt b { color: rgba(255, 255, 255, 0.85); z-index: 2; } .ab-bw b { color: #fff; } .ab-bw span { color: rgba(255, 255, 255, 0.8); } .ab-rod line { stroke: rgba(255, 255, 255, 0.55); } .ab-rod circle { fill: #fff; stroke: none; } .ab-rod circle.on { fill: var(--lime); } .ab-bs { z-index: 1; opacity: 0.95; }
+.ab-ph > .ab-phi { position: absolute; z-index: 0; } .ab-ph > *:not(.ab-phi) { position: relative; }
+.ab-h0 .ab-card .ab-k { color: var(--mu); } .ab-h0 .ab-card b, .ab-h0 .ab-card .ab-up { color: var(--ink); } .ab-h0 .ab-card small { color: var(--mu); } .ab-h0 .ab-c2 small { color: rgba(17, 18, 20, 0.7); }
+.ab-ring circle { stroke: #fff; }
