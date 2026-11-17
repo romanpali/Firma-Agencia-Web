@@ -1,0 +1,106 @@
+---
+// «HumanCorp AI»: asistente discreto de la web. Un botón pequeño abajo a la derecha abre un panel de cristal con una conversación de ejemplo
+// (respuestas guionizadas sobre servicios, paquetes, obra y contacto; no es un modelo en vivo). Sin dependencias.
+const spark = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8z"/></svg>';
+---
+
+<div class="hca" data-hca data-open="0">
+  <button type="button" class="hca-fab" data-hca-fab aria-label="Abrir HumanCorp AI" aria-expanded="false">
+    <i set:html={spark}></i><span>Pregúntale a HumanCorp</span>
+  </button>
+  <section class="hca-p" role="dialog" aria-label="HumanCorp AI" aria-hidden="true">
+    <header><div class="hca-id"><i set:html={spark}></i><div><b>HumanCorp <em>AI</em></b><small><u></u>En línea · respuestas de ejemplo</small></div></div><button type="button" class="hca-x" data-hca-close aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></header>
+    <div class="hca-m" data-hca-msgs aria-live="polite">
+      <div class="hca-hi"><h3>Hola, soy HumanCorp AI.</h3><p>Te ayudo a encontrar el servicio, el paquete o la página que necesitas.</p></div>
+      <div class="hca-sg" data-hca-sg></div>
+    </div>
+    <form class="hca-in" data-hca-form><input type="text" placeholder="Escribe tu pregunta…" aria-label="Pregunta" autocomplete="off" /><button type="submit" aria-label="Enviar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button></form>
+    <p class="hca-f">Asistente de demostración · para algo concreto, <a href="/contacto">escríbenos</a>.</p>
+  </section>
+</div>
+
+<script>
+  type Link = [string, string];
+  type Ans = { re: RegExp; t: string; l?: Link[] };
+  const ANS: Ans[] = [
+    { re: /servici|qu[eé] hacen|ofrecen|hacen/i, t: 'Trabajamos en ocho áreas: diseño e identidad, desarrollo digital, marketing, ventas y CRM, IA y automatización, finanzas y contable, operaciones y personas, y datos e infraestructura. Puedes pedir una sola o varias conectadas.', l: [['Ver servicios', '/servicios']] },
+    { re: /paquet|precio|cuesta|costo|cotiz|tarifa/i, t: 'Tenemos paquetes para empezar con claridad. El precio final depende del alcance, así que lo mejor es revisar los paquetes y, si quieres, pedir una cotización a tu medida.', l: [['Ver paquetes', '/paquetes'], ['Pedir cotización', '/contacto']] },
+    { re: /contab|fiscal|impuesto|sat|factur|cfdi|contador/i, t: 'La asesoría contable y fiscal la brinda nuestro Director de Administración y Finanzas (contador) y su área, con el respaldo de nuestra tecnología. Lo jurídico y la seguridad especializada los resolvemos con profesionales aliados.', l: [['Contable y fiscal', '/asesoria-contable-y-fiscal']] },
+    { re: /obra|proyecto|ejemplo|portafolio|trabajo|caso/i, t: 'En Obra puedes recorrer cinco proyectos de ejemplo: identidad, sitios web y paneles. También puedes armar una vista de tu propio sitio y verla generarse.', l: [['Ver la obra', '/obra'], ['Arma tu proyecto', '/arma-tu-proyecto']] },
+    { re: /sitio|p[aá]gina web|web|tienda|ecommerce|landing/i, t: 'Diseñamos sitios corporativos, landings y tiendas en línea. Si quieres ver cómo podría quedar el tuyo, prueba el configurador: eliges el tipo de negocio y se genera una propuesta.', l: [['Arma tu proyecto', '/arma-tu-proyecto']] },
+    { re: /ia\b|inteligencia|automat|agente|chat/i, t: 'Integramos IA y automatización donde ayudan: respuestas a clientes, avisos, reportes y tareas repetidas. Siempre con una persona al tanto y sin prometer lo que no está implementado.', l: [['Servicios', '/servicios']] },
+    { re: /diagn[oó]stic|qu[eé] tan|evaluar|revisar mi/i, t: 'El diagnóstico es una revisión breve y gratuita de qué tan conectada está tu empresa. Te da un punto de partida claro.', l: [['Hacer el diagnóstico', '/diagnostico']] },
+    { re: /contact|hablar|llam|correo|whats|agendar|tel[eé]fono|reuni/i, t: 'Con gusto. Puedes escribirnos a info@humancorp.co, llamar al +52 999 123 4567 o dejar tus datos para que te contactemos.', l: [['Ir a contacto', '/contacto']] },
+    { re: /qui[eé]nes|nosotros|equipo|empresa/i, t: 'Somos un equipo de diseño, tecnología y operaciones empresariales. Nuestra idea es simple: todo lo que hace funcionar a una empresa, conectado bajo un solo estándar.', l: [['Conócenos', '/nosotros']] },
+    { re: /cu[aá]nto tarda|tiempo|plazo|entrega/i, t: 'Depende del alcance: un sitio sencillo puede estar en pocas semanas y los proyectos más amplios se calendarizan por etapas. Te damos fechas claras antes de empezar.', l: [['Pedir una propuesta', '/contacto']] },
+    { re: /hola|buen[oa]s|qu[eé] tal|hey/i, t: 'Hola. ¿Qué te gustaría resolver: un sitio, una marca, tus procesos o tus números?' },
+  ];
+  const SG = ['¿Qué servicios ofrecen?', '¿Cuánto cuesta un sitio web?', 'Quiero ver ejemplos', 'Necesito ayuda contable'];
+  const root = document.querySelector<HTMLElement>('[data-hca]');
+  if (root) {
+    const fab = root.querySelector<HTMLElement>('[data-hca-fab]')!, panel = root.querySelector<HTMLElement>('.hca-p')!;
+    const msgs = root.querySelector<HTMLElement>('[data-hca-msgs]')!, sg = root.querySelector<HTMLElement>('[data-hca-sg]')!;
+    const form = root.querySelector<HTMLFormElement>('[data-hca-form]')!, input = form.querySelector<HTMLInputElement>('input')!;
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const spark = fab.querySelector('i')!.innerHTML;
+    sg.innerHTML = SG.map((q) => `<button type="button" data-q="${q}">${q}</button>`).join('');
+    const set = (on: boolean) => { root.dataset.open = on ? '1' : '0'; panel.setAttribute('aria-hidden', String(!on)); fab.setAttribute('aria-expanded', String(on)); if (on) setTimeout(() => input.focus({ preventScroll: true }), 350); };
+    fab.addEventListener('click', () => set(root.dataset.open !== '1'));
+    root.querySelector('[data-hca-close]')!.addEventListener('click', () => set(false));
+    addEventListener('keydown', (e) => { if (e.key === 'Escape') set(false); });
+    const bottom = () => { msgs.scrollTop = msgs.scrollHeight; };
+    const ask = (q: string) => {
+      q = q.trim(); if (!q) return; root.classList.add('talk'); input.value = '';
+      const me = document.createElement('div'); me.className = 'hca-me'; me.textContent = q; msgs.appendChild(me);
+      const bot = document.createElement('div'); bot.className = 'hca-bot'; bot.innerHTML = `<i>${spark}</i><div><span class="hca-dots"><u></u><u></u><u></u></span></div>`; msgs.appendChild(bot); bottom();
+      const hit = ANS.find((a) => a.re.test(q));
+      const text = hit ? hit.t : 'No tengo una respuesta exacta para eso, pero el equipo sí. Cuéntanos qué necesitas y te respondemos con una propuesta clara.';
+      const links = hit?.l || [['Escribir al equipo', '/contacto']] as Link[];
+      const box = bot.querySelector('div')!; bottom();
+      setTimeout(() => {
+        box.innerHTML = '<p></p>'; const p = box.querySelector('p')!; let n = 0;
+        const fin = () => { box.insertAdjacentHTML('beforeend', `<div class="hca-ln">${links.map(([l, h]) => `<a href="${h}">${l}<i>↗</i></a>`).join('')}</div>`); bottom(); };
+        if (reduced) { p.textContent = text; fin(); return; }
+        const t = setInterval(() => { p.textContent = text.slice(0, (n += 2)); bottom(); if (n >= text.length) { clearInterval(t); p.textContent = text; fin(); } }, 16);
+      }, reduced ? 0 : 750);
+    };
+    form.addEventListener('submit', (e) => { e.preventDefault(); ask(input.value); });
+    sg.addEventListener('click', (e) => { const b = (e.target as HTMLElement).closest<HTMLElement>('[data-q]'); if (b) ask(b.dataset.q!); });
+  }
+</script>
+
+<style is:global>
+  .hca { --ink: #0b0c0f; position: fixed; right: 20px; bottom: 20px; z-index: 90; font-family: 'Inter Tight Variable', system-ui, sans-serif; }
+  .hca button { font: inherit; }
+  .hca-fab { display: flex; align-items: center; gap: 9px; height: 46px; padding: 0 18px 0 14px; border: 0; border-radius: 99px; cursor: pointer; color: #fff; font-size: 13.5px; font-weight: 500; letter-spacing: -0.01em; background: rgba(14, 17, 28, 0.62); -webkit-backdrop-filter: blur(18px) saturate(1.4); backdrop-filter: blur(18px) saturate(1.4); box-shadow: 0 14px 34px -12px rgba(0, 0, 0, 0.55), inset 0 0 0 1px rgba(255, 255, 255, 0.2); transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.3s, max-width 0.4s; max-width: 260px; overflow: hidden; white-space: nowrap; }
+  .hca-fab:hover { transform: translateY(-2px); } .hca-fab i { display: grid; place-items: center; width: 18px; height: 18px; color: #9db8ff; } .hca-fab i svg { width: 18px; height: 18px; }
+  .hca[data-open='1'] .hca-fab { opacity: 0; pointer-events: none; transform: scale(0.9); }
+  .hca-p { position: absolute; right: 0; bottom: 0; display: flex; flex-direction: column; width: min(380px, calc(100vw - 32px)); height: min(560px, calc(100svh - 40px)); border-radius: 26px; overflow: hidden; color: #f2f3f7; background: rgba(12, 14, 22, 0.82); -webkit-backdrop-filter: blur(28px) saturate(1.5); backdrop-filter: blur(28px) saturate(1.5); box-shadow: 0 40px 90px -24px rgba(0, 0, 0, 0.7), inset 0 0 0 1px rgba(255, 255, 255, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.25); transform-origin: 100% 100%; opacity: 0; transform: translateY(14px) scale(0.92); visibility: hidden; transition: opacity 0.35s ease, transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0s 0.5s; }
+  .hca[data-open='1'] .hca-p { opacity: 1; transform: none; visibility: visible; transition: opacity 0.35s ease, transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0s; }
+  .hca-p::before { content: ""; position: absolute; left: -30%; top: -30%; width: 90%; height: 60%; background: radial-gradient(closest-side, rgba(70, 110, 255, 0.35), transparent); pointer-events: none; animation: hcaB 14s ease-in-out infinite alternate; } @keyframes hcaB { to { transform: translate3d(30%, 20%, 0); } }
+  .hca-p header { position: relative; display: flex; align-items: center; justify-content: space-between; padding: 16px 16px 12px 18px; box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08); }
+  .hca-id { display: flex; align-items: center; gap: 12px; } .hca-id > i { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 12px; background: linear-gradient(135deg, #6b9bff, #b48cff); color: #fff; } .hca-id > i svg { width: 19px; height: 19px; }
+  .hca-id b { display: block; font-size: 15px; font-weight: 600; letter-spacing: -0.02em; } .hca-id em { font-style: normal; font-weight: 300; opacity: 0.75; } .hca-id small { display: flex; align-items: center; gap: 6px; margin-top: 2px; font-size: 11.5px; color: rgba(242, 243, 247, 0.55); } .hca-id small u { width: 6px; height: 6px; border-radius: 50%; background: #34d399; box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.2); }
+  .hca-x { display: grid; place-items: center; width: 34px; height: 34px; padding: 0; border: 0; border-radius: 50%; background: rgba(255, 255, 255, 0.08); color: inherit; cursor: pointer; } .hca-x svg { width: 16px; height: 16px; }
+  .hca-m { position: relative; flex: 1; overflow-y: auto; padding: 18px 18px 8px; display: flex; flex-direction: column; gap: 14px; scrollbar-width: none; } .hca-m::-webkit-scrollbar { display: none; }
+  .hca-hi h3 { font-size: 24px; font-weight: 500; line-height: 1.1; letter-spacing: -0.04em; background: linear-gradient(90deg, #fff, #b9c9ff); -webkit-background-clip: text; background-clip: text; color: transparent; } .hca-hi p { margin: 8px 0 0; font-size: 14px; line-height: 1.5; color: rgba(242, 243, 247, 0.62); }
+  .hca-sg { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; } .hca-sg button { padding: 12px 15px; border: 0; border-radius: 14px; text-align: left; color: #f2f3f7; font-size: 13.5px; cursor: pointer; background: rgba(255, 255, 255, 0.06); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1); transition: background 0.25s, transform 0.25s; } .hca-sg button:hover { background: rgba(255, 255, 255, 0.12); transform: translateX(3px); }
+  .hca.talk .hca-hi, .hca.talk .hca-sg { display: none; }
+  .hca-me { align-self: flex-end; max-width: 84%; padding: 10px 14px; border-radius: 18px 18px 4px 18px; font-size: 14px; line-height: 1.4; background: #f2f3f7; color: #0b0c0f; animation: hcaIn 0.4s ease both; }
+  .hca-bot { display: flex; gap: 10px; align-items: flex-start; animation: hcaIn 0.4s ease both; } .hca-bot > i { flex: none; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 9px; background: linear-gradient(135deg, #6b9bff, #b48cff); color: #fff; } .hca-bot > i svg { width: 14px; height: 14px; }
+  .hca-bot > div { flex: 1; min-width: 0; } .hca-bot p { margin: 2px 0 0; font-size: 14px; line-height: 1.55; color: rgba(242, 243, 247, 0.92); }
+  .hca-dots { display: flex; gap: 4px; padding-top: 10px; } .hca-dots u { width: 6px; height: 6px; border-radius: 50%; background: #9db8ff; animation: hcaD 1s ease-in-out infinite; } .hca-dots u:nth-child(2) { animation-delay: 0.15s; } .hca-dots u:nth-child(3) { animation-delay: 0.3s; } @keyframes hcaD { 0%, 100% { opacity: 0.25; transform: translateY(0); } 50% { opacity: 1; transform: translateY(-3px); } }
+  .hca-ln { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; } .hca-ln a { display: inline-flex; align-items: center; gap: 6px; padding: 8px 13px; border-radius: 99px; font-size: 12.5px; font-weight: 500; text-decoration: none; color: #0b0c0f; background: #fff; animation: hcaIn 0.45s ease both; } .hca-ln a i { font-style: normal; opacity: 0.6; }
+  @keyframes hcaIn { from { opacity: 0; transform: translateY(8px); } }
+  .hca-in { display: flex; align-items: center; gap: 8px; margin: 8px 14px 0; padding: 6px 6px 6px 16px; border-radius: 99px; background: rgba(255, 255, 255, 0.08); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14); transition: box-shadow 0.25s; } .hca-in:focus-within { box-shadow: inset 0 0 0 1px rgba(157, 184, 255, 0.7); }
+  .hca-in input { flex: 1; min-width: 0; border: 0; outline: 0; background: none; color: #fff; font: 400 14.5px 'Inter Tight Variable', system-ui, sans-serif; padding: 8px 0; } .hca-in input::placeholder { color: rgba(242, 243, 247, 0.4); }
+  .hca-in button { display: grid; place-items: center; width: 38px; height: 38px; padding: 0; border: 0; border-radius: 50%; background: #fff; color: #0b0c0f; cursor: pointer; } .hca-in button svg { width: 17px; height: 17px; }
+  .hca-f { margin: 0; padding: 10px 18px 14px; text-align: center; font-size: 11px; color: rgba(242, 243, 247, 0.4); } .hca-f a { color: rgba(242, 243, 247, 0.7); text-decoration: underline; text-underline-offset: 2px; }
+  @media (max-width: 640px) {
+    .hca { right: 14px; bottom: 14px; }
+    .hca-fab { width: 46px; padding: 0; justify-content: center; } .hca-fab span { display: none; }
+    .hca-p { position: fixed; right: 0; bottom: 0; left: 0; width: auto; height: min(78svh, 640px); border-radius: 26px 26px 0 0; }
+    body:has([data-obs]) .hca { bottom: 92px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .hca-p::before { animation: none; } .hca-p, .hca-fab { transition: none; } }
+</style>
