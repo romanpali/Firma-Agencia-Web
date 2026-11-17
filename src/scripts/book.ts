@@ -202,6 +202,7 @@ export function mountBook(o: Mount) {
     const range = Math.max(1, sec.offsetHeight - o.viewH());
     o.scrollTo(o.secTop() + (0.05 + (t / N) * 0.88) * range + (t > 0 && t < N ? 2 : 0));
   };
+  let clk: { leaf: HTMLElement | null; n: number; t: number } = { leaf: null, n: 0, t: 0 };
   book.addEventListener('click', (ev) => {
     const el = ev.target as HTMLElement;
     if (el.closest('a, button, input, [data-int]')) return; // controles del sitio de Marea: no voltean la hoja (el resto del sitio sí)
@@ -209,6 +210,12 @@ export function mountBook(o: Mount) {
     if (g) { go(+g.dataset.bkGo!); return; }
     const leaf = el.closest<HTMLElement>('.bw-leaf');
     if (!leaf) return;
+    if (el.closest('.mr-web')) { // el sitio: la hoja pasa con tres clics seguidos o con un clic en su borde derecho
+      const r = leaf.getBoundingClientRect(), now = performance.now();
+      clk = clk.leaf === leaf && now - clk.t < 800 ? { leaf, n: clk.n + 1, t: now } : { leaf, n: 1, t: now };
+      if (!(clk.n >= 3 || ev.clientX > r.right - r.width * 0.1)) return;
+      clk.n = 0;
+    }
     const k = +leaf.dataset.k!, a = L[k] ? (leaf.style.transform.match(/rotateY\((-?[\d.]+)deg\)/)?.[1] ?? '0') : '0';
     go(Math.abs(parseFloat(a)) > 90 ? k : k + 1);
   });
