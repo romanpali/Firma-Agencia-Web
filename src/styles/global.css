@@ -757,8 +757,9 @@ html[data-tr]::after { content: ""; position: fixed; inset: 0; z-index: 100000; 
 html.intro { overflow: hidden; }
 html.intro .hc-intro { position: fixed; inset: 0; z-index: 200000; display: grid; place-items: center; background: #fff; color: #0b0c0f; }
 .hci-in { position: relative; display: flex; flex-direction: column; align-items: center; }
-.hci-w { position: relative; display: flex; gap: 0.3em; font-size: clamp(2.1rem, 9.4vw, 4.4rem); letter-spacing: 0.04em; line-height: 1; } .hci-w span { display: block; clip-path: inset(0 100% 0 0); animation: hciR 1.1s cubic-bezier(0.6, 0, 0.2, 1) forwards; } .hci-l { font-weight: 300; animation-delay: 0.35s !important; } .hci-s { font-weight: 600; animation-delay: 0.6s !important; }
-.hc-intro.out { animation: hciBg 0.9s cubic-bezier(0.7, 0, 0.2, 1) forwards; } .hc-intro.out .hci-in { animation: hciUpOut 0.55s ease forwards; }
+.hci-w { position: relative; display: flex; gap: 0.3em; font-size: clamp(1.9rem, 8vw, 2.6rem); letter-spacing: 0.04em; line-height: 1; } .hci-w span { display: block; clip-path: inset(0 100% 0 0); animation: hciR 1.1s cubic-bezier(0.6, 0, 0.2, 1) forwards; } .hci-l { font-weight: 300; animation-delay: 0.35s !important; } .hci-s { font-weight: 600; animation-delay: 0.6s !important; }
+.hc-intro.out { animation: hciFadeBg 0.9s ease forwards; } .hc-intro.out .hci-in { animation: hciFadeIn 0.6s ease forwards; }
+@keyframes hciFadeBg { to { opacity: 0; } } @keyframes hciFadeIn { to { opacity: 0; transform: scale(0.97); } }
 @keyframes hciR { to { clip-path: inset(-0.1em); } } @keyframes hciLine { 0% { transform: scaleX(0); transform-origin: left; } 45% { transform: scaleX(1); transform-origin: left; } 55% { transform: scaleX(1); transform-origin: right; } 100% { transform: scaleX(0); transform-origin: right; } }
 @keyframes hciDot { to { transform: none; } } @keyframes hciFade { to { opacity: 1; } } @keyframes hciBar { to { transform: none; } }
 @keyframes hciBg { from { clip-path: inset(0); } to { clip-path: inset(0 0 100% 0); } } @keyframes hciUpOut { to { opacity: 0; transform: translateY(-14px); } }
@@ -775,3 +776,11 @@ html.intro .hc-intro { position: fixed; inset: 0; z-index: 200000; display: grid
   .hm-cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; } .hm-cta a { display: inline-flex; align-items: center; justify-content: center; height: 48px; padding: 0 22px; border-radius: 99px; font-size: 14.5px; font-weight: 500; text-decoration: none; } .hm-cta .p { background: #fff; color: #0b0c0f; } .hm-cta .s { color: #fff; background: rgba(255, 255, 255, 0.1); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.45); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
   @media (prefers-reduced-motion: reduce) { .hm-bg { animation: none; } }
 }
+
+/* con el menú abierto la página no se pinta (evita que la escena 3D se vea por encima y que se trabe) */
+html.menu-open main, html.menu-open .hc-snow { visibility: hidden; }
+
+/* Servicios en laptops bajas: toda la hoja se reduce proporcionalmente para que quepa completa */
+@media (min-width: 768px) and (max-height: 840px) { .sheet { --z: 0.84; zoom: var(--z); top: calc(100px / var(--z)) !important; height: calc((100svh - 116px) / var(--z)) !important; min-height: 0 !important; margin-bottom: calc((var(--n) * 48svh + 16px) / var(--z)) !important; } .sheet:last-child, .sheet[data-last] { margin-bottom: 0 !important; } }
+@media (min-width: 768px) and (max-height: 720px) { .sheet { --z: 0.74; } }
+@media (min-width: 768px) and (max-height: 620px) { .sheet { --z: 0.64; } }

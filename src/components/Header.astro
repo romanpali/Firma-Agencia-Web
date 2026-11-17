@@ -100,6 +100,7 @@ const pill = 'hdr-pill rounded-full border border-white/20 bg-white/10 px-5 py-3
 
 <Agendar />
 <script is:inline>try{if(sessionStorage.getItem("hc-tr")){sessionStorage.removeItem("hc-tr");var d=document.documentElement;d.setAttribute("data-tr","");setTimeout(function(){d.removeAttribute("data-tr")},1500)}}catch(e){}</script>
+<script is:inline>try{if('scrollRestoration' in history)history.scrollRestoration='manual';if(!location.hash)scrollTo(0,0);addEventListener('pageshow',function(e){if(e.persisted&&!location.hash)scrollTo(0,0)})}catch(e){}</script>
 <script is:inline>try{var l=localStorage.getItem("hc-lang"),q=/[?&]lang=en/.test(location.search),n=((navigator.languages&&navigator.languages[0])||navigator.language||"es").toLowerCase();if(q||l==="en"||(!l&&n.indexOf("en")===0))document.documentElement.classList.add("i18n-wait")}catch(e){}</script>
 <script>
   import '../scripts/i18n';
@@ -114,6 +115,7 @@ const pill = 'hdr-pill rounded-full border border-white/20 bg-white/10 px-5 py-3
   const reducedM = matchMedia('(prefers-reduced-motion: reduce)').matches;
   let hideT = 0;
   // Apertura: un círculo de luz crece desde el botón y las piezas entran en cascada con un fundido; al cerrar se repliega al mismo punto.
+  let pageT = 0;
   const set = (on: boolean) => {
     clearTimeout(hideT);
     const r = open.getBoundingClientRect();
@@ -136,6 +138,7 @@ const pill = 'hdr-pill rounded-full border border-white/20 bg-white/10 px-5 py-3
     open.setAttribute('aria-expanded', String(on));
     menu.classList.toggle('is-open', on);
     document.documentElement.style.overflow = on ? 'hidden' : '';
+    clearTimeout(pageT); if (on) pageT = window.setTimeout(() => document.documentElement.classList.add('menu-open'), reducedM ? 0 : 900); else document.documentElement.classList.remove('menu-open');
     if (!on) { input.value = ''; showResults(''); }
   };
   // Buscador
