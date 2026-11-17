@@ -43,8 +43,8 @@ function expand(root: HTMLElement) {
   ex.innerHTML = `<button type="button" class="mr-exx" aria-label="Salir">${svg('x')}</button><div class="mr-exw">${root.outerHTML}</div><p class="mr-exh">Esc para salir</p>`;
   const box = ex.querySelector<HTMLElement>('.mr-exw')!, site = box.querySelector<HTMLElement>('.mr-web')!;
   site.querySelectorAll('.rv').forEach((e) => e.classList.remove('in'));
-  // pantalla completa como un sitio normal: texto de tamaño de lectura (≈ 62 em de ancho), no la hoja ampliada
-  const fit = () => { const w = innerWidth, h = innerHeight, fs = Math.max(9, Math.min(w / 62, h / 34)); box.style.fontSize = `${fs}px`; site.style.setProperty('--hh', `${h / fs}em`); };
+  // pantalla completa como un sitio normal: texto de tamaño de lectura fijo en px (como una página real: crece con el zoom del navegador), solo se reduce si la ventana es muy angosta
+  const fit = () => { const w = innerWidth, h = innerHeight, fs = Math.min(17, w / 40); box.style.fontSize = `${fs}px`; site.style.setProperty('--hh', `${h / fs}em`); };
   const key = (e: KeyboardEvent) => { if (e.key === 'Escape') close(); };
   const fsc = () => { if (!document.fullscreenElement) close(); };
   const close = () => { ex.remove(); removeEventListener('resize', fit); removeEventListener('keydown', key); document.removeEventListener('fullscreenchange', fsc); document.documentElement.style.overflow = ''; if (document.fullscreenElement) document.exitFullscreen?.().catch(() => {}); };

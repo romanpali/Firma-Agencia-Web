@@ -245,3 +245,10 @@
 /* botón de entrar: pequeño, abajo a la derecha, como una insignia */
 .wn-ex { top: auto; bottom: 1.2em; right: 1.4em; font-size: 0.42em; }
 .mr-web .mw-h, .mr-web .mw-h span { font-family: inherit; font-style: normal; }
+
+/* pantalla completa: el cursor del sistema (el círculo de la página queda debajo de la pantalla completa) */
+html.has-cursor .mr-ex, html.has-cursor .mr-ex *:not(input):not(textarea):not(select):not(.zz) { cursor: default !important; }
+html.has-cursor .mr-ex button:not(.zz), html.has-cursor .mr-ex [data-int]:not(.zz), html.has-cursor .mr-ex a:not(.zz) { cursor: pointer !important; }
+html.has-cursor .mr-ex input:not(.zz) { cursor: text !important; }
+.mr-ex .mw-hero .mw-h { font-size: 4.4em; } .mr-ex .mw-hero { width: 40em; } .mr-ex .mw-side { width: 15em; }
+.mr-exh { top: auto; bottom: 1.2rem; }
