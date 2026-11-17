@@ -271,3 +271,44 @@
 .obv-app.ic button svg { width: 21px; height: 21px; flex: none; }
 .obv-app.ic button span { max-width: 0; margin: 0; overflow: hidden; opacity: 0; white-space: nowrap; transition: max-width 0.45s cubic-bezier(0.2, 0.7, 0.2, 1), opacity 0.3s, margin 0.45s; }
 .obv-app.ic button.on { padding: 0 16px 0 14px; background: #fff; color: #0b0c0f; } .obv-app.ic button.on span { max-width: 120px; margin-left: 8px; opacity: 1; }
+
+/* ===== paneles como aplicación: pantalla completa, sin marcos ===== */
+.obv-st[data-dash='1'] { margin: 0; border-radius: 0; }
+.obv-st[data-app='marea'] { background: linear-gradient(180deg, #dfe2e5, #eceeef 45%, #f6d2bd); }
+.obv-st[data-app='trama'], .obv-st[data-app='hikari'] { background: #f5f4f1; } .obv-st[data-app='hikari'] { background: #f7f5f0; }
+.obv-st[data-app='abaco'] { background: #0b0c11; }
+.obv-dashw { margin: 0 !important; border-radius: 0 !important; min-height: 100%; display: flex; flex-direction: column; overflow: visible !important; }
+.obv-dashw > .pg { flex: 1; display: flex; flex-direction: column; background: transparent !important; padding: 0 16px 24px !important; }
+.obv-ah { position: sticky; top: 0; z-index: 6; padding: 16px 18px 10px; color: #111; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); background: color-mix(in srgb, currentColor 0%, transparent); }
+.obv-dashw[data-app='marea'] .obv-ah { background: rgba(223, 226, 229, 0.82); } .obv-dashw[data-app='trama'] .obv-ah { background: rgba(245, 244, 241, 0.86); } .obv-dashw[data-app='hikari'] .obv-ah { background: rgba(247, 245, 240, 0.86); } .obv-dashw[data-app='abaco'] .obv-ah { background: rgba(11, 12, 17, 0.8); color: #eceef3; }
+.obv-ah, .obv-dashw:has(.ab-dash) .obv-ah { }
+.obv-dashw[data-app='abaco'] .obv-ah i { background: #eceef3; color: #0b0c10; } .obv-dashw:not([data-app='abaco']) .obv-ah i { background: #111; color: #fff; }
+.obv-ah b { font-size: 26px; }
+/* chat de Marea */
+.obv-dashw .mr-dash .md-app, .obv-dashw .md-main, .obv-dashw .mr-dash .mv-inicio { background: transparent; box-shadow: none; position: relative !important; display: flex; flex-direction: column; flex: 1; min-height: 0; }
+.obv-dashw .mv-inicio > :not(.obv-chat) { display: none !important; }
+.obv-chat { display: flex; flex-direction: column; flex: 1; min-height: calc(100svh - 330px); }
+.oc-msgs { flex: 1; display: flex; flex-direction: column; gap: 14px; padding: 18px 2px 8px; }
+.oc-hi { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 18px 0 6px; } .oc-hi i { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: #fff; box-shadow: 0 10px 24px -10px rgba(20, 24, 43, 0.4); } .oc-hi i svg { width: 26px; height: 26px; color: #14182b; }
+.oc-hi h3 { margin-top: 16px; font-size: 26px; font-weight: 600; letter-spacing: -0.04em; color: #14182b; } .oc-hi p { margin: 6px 0 0; font-size: 14px; color: rgba(20, 24, 43, 0.55); }
+.oc-sg { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; } .oc-sg button { display: block; padding: 14px 16px; border: 0; border-radius: 16px; background: rgba(255, 255, 255, 0.85); text-align: left; color: #14182b; font: inherit; box-shadow: 0 8px 20px -14px rgba(20, 24, 43, 0.5); cursor: pointer; } .oc-sg b { display: block; font-size: 15px; font-weight: 600; } .oc-sg span { display: block; margin-top: 2px; font-size: 12.5px; color: rgba(20, 24, 43, 0.55); }
+.obv-chat.talk .oc-hi, .obv-chat.talk .oc-sg { display: none; }
+.oc-me { align-self: flex-end; max-width: 82%; padding: 11px 15px; border-radius: 18px 18px 4px 18px; background: #14182b; color: #fff; font-size: 14px; line-height: 1.4; animation: obvIn 0.4s ease both; }
+.oc-bot { display: flex; gap: 10px; align-items: flex-start; animation: obvIn 0.4s ease both; } .oc-bot > i { flex: none; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #fff; } .oc-bot > i svg { width: 16px; height: 16px; color: #14182b; }
+.oc-bot > div { flex: 1; min-width: 0; color: #14182b; } .oc-bot p { margin: 4px 0 0; font-size: 14px; line-height: 1.5; }
+.oc-card { display: inline-block; margin: 10px 8px 0 0; padding: 12px 14px; border-radius: 14px; background: rgba(255, 255, 255, 0.9); box-shadow: 0 8px 20px -14px rgba(20, 24, 43, 0.5); animation: obvIn 0.5s ease both; } .oc-card b { display: block; font-size: 20px; letter-spacing: -0.03em; } .oc-card span { font-size: 12px; color: rgba(20, 24, 43, 0.55); }
+.oc-dots { display: flex; gap: 4px; padding-top: 10px; } .oc-dots u { width: 7px; height: 7px; border-radius: 50%; background: #14182b; animation: tzDot 1s ease-in-out infinite; } .oc-dots u:nth-child(2) { animation-delay: 0.15s; } .oc-dots u:nth-child(3) { animation-delay: 0.3s; }
+@keyframes obvIn { from { opacity: 0; transform: translateY(8px); } }
+.oc-in { position: sticky; bottom: 76px; z-index: 5; display: flex; align-items: center; gap: 8px; margin-top: 10px; padding: 6px 6px 6px 18px; border-radius: 999px; background: #fff; box-shadow: 0 12px 30px -12px rgba(20, 24, 43, 0.5), 0 0 0 1px rgba(20, 24, 43, 0.06); }
+.oc-in input { flex: 1; min-width: 0; border: 0; outline: 0; background: none; font: inherit; font-size: 15px; color: #14182b; } .oc-in input::placeholder { color: rgba(20, 24, 43, 0.4); }
+.oc-in button { display: grid; place-items: center; width: 40px; height: 40px; border: 0; border-radius: 50%; background: #14182b; color: #fff; cursor: pointer; } .oc-in button svg { width: 18px; height: 18px; }
+/* chat de Trama a pantalla completa */
+.obv-dashw .td-ai { height: auto; min-height: calc(100svh - 330px); } .obv-dashw .td-thread { background: transparent; padding: 10px 0; overflow: visible; }
+.obv-dashw .td-sug { grid-template-columns: 1fr !important; } .obv-dashw .td-sug button { background: #fff; border-radius: 16px; box-shadow: 0 8px 20px -14px rgba(0, 0, 0, 0.4); }
+.obv-dashw .td-in { position: sticky; bottom: 76px; z-index: 5; margin-top: 10px; padding: 6px 6px 6px 18px; box-shadow: 0 12px 30px -12px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(0, 0, 0, 0.06); } .obv-dashw .td-in input { font-size: 15px; } .obv-dashw .td-send { width: 40px; height: 40px; }
+.obv-dashw .td-top { display: none; }
+.obv-dashw .md-main, .obv-dashw .mr-dash .md-app { padding: 0 !important; }
+.oc-hi { padding: 4px 0 0; } .oc-hi i { width: 44px; height: 44px; } .oc-hi h3 { margin-top: 10px; font-size: 24px; }
+.oc-sg { gap: 6px; margin-top: 6px; } .oc-sg button { padding: 11px 15px; } .oc-sg span { display: none; }
+.obv-dashw .td-hello { padding-top: 4px; } .obv-dashw .td-hello h4 { font-size: 22px; } .obv-dashw .td-sug { margin-top: 10px; gap: 6px; } .obv-dashw .td-sug button { padding: 11px 15px; } .obv-dashw .td-sug span { display: none; }
+.obv-dashw .mr-dash .mv { position: relative !important; inset: auto !important; left: auto !important; right: auto !important; width: auto !important; margin: 0 !important; padding: 0 !important; }
