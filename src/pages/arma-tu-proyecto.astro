@@ -242,11 +242,28 @@ const idleImgs = ['/configurador/c5.webp', '/configurador/c1.webp', '/configurad
             <div class="mt-10 grid gap-4 @2xl:grid-cols-3" data-services></div>
           </section>
 
+          <section data-sec="proyectos" class="sec px-[clamp(20px,5cqw,72px)] py-[clamp(52px,8cqw,110px)]">
+            <div class="flex items-end justify-between gap-4"><div><p class="sr text-[12px] uppercase tracking-[0.2em] opacity-55">Proyectos</p><h2 class="sr mt-3 max-w-[16ch] text-[clamp(1.6rem,4.2cqw,3.4rem)] leading-[1.05] tracking-[-0.04em]" style="font-weight:var(--hw)">Trabajo que se ve.</h2></div><span class="sr hidden text-[13px] opacity-55 @2xl:block">Ejemplos ilustrativos</span></div>
+            <div class="mt-10 grid gap-4 @2xl:grid-cols-[1.4fr_1fr]" data-proj></div>
+          </section>
+
+          <section data-sec="nosotros" class="sec sec2 px-[clamp(20px,5cqw,72px)] py-[clamp(52px,8cqw,110px)]">
+            <p class="sr text-[12px] uppercase tracking-[0.2em] opacity-55">Quiénes somos</p>
+            <div class="mt-5 grid items-end gap-8 @3xl:grid-cols-[1.2fr_1fr]"><h2 data-h-about class="sr max-w-[20ch] text-[clamp(1.5rem,3.6cqw,3rem)] leading-[1.08] tracking-[-0.04em]" style="font-weight:var(--hw)"></h2>
+            <p data-about class="sr max-w-[30rem] text-[clamp(13px,1.3cqw,16px)] leading-relaxed opacity-70"></p></div>
+            <div class="mt-12 grid grid-cols-2 gap-6 @3xl:grid-cols-4" data-stats></div>
+          </section>
+
           <section data-sec="proceso" class="sec sec2 px-[clamp(20px,5cqw,72px)] py-[clamp(52px,8cqw,110px)]">
             <p class="sr text-[12px] uppercase tracking-[0.2em] opacity-55">Cómo trabajamos</p>
             <div class="mt-8 grid gap-8 @2xl:grid-cols-3">
               {[['01', 'Escuchamos', 'Conocemos lo que necesitas y cómo trabajas.'], ['02', 'Diseñamos', 'Armamos una propuesta clara, a tu medida.'], ['03', 'Entregamos', 'Lo ponemos en marcha y te acompañamos.']].map(([n, t, d], i) => <div class="sr border-t pt-5" style={`border-color:color-mix(in srgb,currentColor 18%,transparent);--sd:${i * 0.12}s`}><span class="text-[13px] opacity-50">{n}</span><h3 class="mt-4 text-[1.35rem] tracking-[-0.03em]" style="font-weight:var(--hw)">{t}</h3><p class="mt-2 text-[14.5px] leading-relaxed opacity-65">{d}</p></div>)}
             </div>
+          </section>
+
+          <section data-sec="testimonios" class="sec px-[clamp(20px,5cqw,72px)] py-[clamp(52px,8cqw,110px)]">
+            <p class="sr text-[12px] uppercase tracking-[0.2em] opacity-55">Lo que dicen</p>
+            <div class="mt-8 grid gap-4 @2xl:grid-cols-3" data-reviews></div>
           </section>
 
           <section data-sec="faq" class="sec px-[clamp(20px,5cqw,72px)] py-[clamp(52px,8cqw,110px)]">
@@ -402,6 +419,8 @@ const idleImgs = ['/configurador/c5.webp', '/configurador/c1.webp', '/configurad
       const rng = (seed) => () => { seed = (seed + 0x6D2B79F5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
       const pick = (r, arr) => arr[Math.floor(r() * arr.length)];
 
+      const ARQ = [['/configurador/arq-1.webp', '50% 62%', 'Casa en la colina'], ['/configurador/arq-2.webp', '50% 55%', 'Sala frente al mar'], ['/configurador/arq-3.webp', '50% 58%', 'Terraza y alberca']];
+      let bgIx = Math.floor(Math.random() * 3);
       const S = { name: '', city: 'Mérida, Yucatán', desc: '', type: 'pequena', site: 'landing', giro: 'moda' };
       let G = null, phase = 'idle', dirty = false, token = 0, roll = 0, last = null;
 
@@ -421,7 +440,7 @@ const idleImgs = ['/configurador/c5.webp', '/configurador/c1.webp', '/configurad
           if (last && last.tpl === o.tpl && r() < 0.75) o.tpl = o.tpl === 'a' ? 'b' : 'a';
           o.theme = o.tpl === 'b' ? 'oscuro' : 'claro';
         }
-        o.secs = S.site === 'landing' ? ['servicios', 'contacto'] : ['servicios', 'proceso', 'faq', 'contacto'];
+        o.secs = S.site === 'landing' ? ['servicios', 'proyectos', 'contacto'] : ['servicios', 'proyectos', 'nosotros', 'proceso', 'testimonios', 'faq', 'contacto'];
         return o;
       };
 
@@ -453,7 +472,7 @@ const idleImgs = ['/configurador/c5.webp', '/configurador/c1.webp', '/configurad
       let cartN = 0, toastT = 0;
       const drawShop = (nm) => {
         const D = SHOP[G.giro];
-        const photo = G.giro === 'moda' || G.giro === 'belleza' ? ['/configurador/retrato.webp', '55% 22%'] : ['/configurador/valle.webp', '50% 60%'];
+        const photo = G.giro === 'moda' || G.giro === 'belleza' ? ['/configurador/retrato.webp', '55% 22%'] : ARQ[G.bg ?? 0];
         $$('[data-sh-img]').forEach((im) => { im.src = photo[0]; im.style.objectPosition = photo[1]; });
         $$('[data-hero]').forEach((h) => (h.hidden = +h.dataset.hero !== G.hero));
         set('[data-sh-eyebrow]', S.desc.trim() || D.eyebrow);
@@ -561,6 +580,8 @@ const idleImgs = ['/configurador/c5.webp', '/configurador/c1.webp', '/configurad
         site.style.cssText += `;--a:${P.a};--b:${P.b};--ink:${P.ink};--bg:${P.bg};--on:${on};--rad:${rad};--hw:${hw};--sfont:${FONT[G.font]};--spd:1;--par:1`;
         site.dataset.theme = G.theme; site.dataset.anim = 'suave';
         $$('[data-d]').forEach((el) => (el.hidden = el.dataset.d !== G.tpl));
+        const BG = ARQ[G.bg ?? 0];
+        $$('[data-d="a"] img.kb, [data-d="b"] img.kb').forEach((im) => { im.src = BG[0]; im.style.objectPosition = BG[1]; });
         const shop = G.tpl === 'c', gal = G.tpl === 'd', own = shop || gal;
         $$('[data-sec]').forEach((x) => (x.hidden = own || !G.secs.includes(x.dataset.sec)));
         $$('[data-common]').forEach((x) => (x.hidden = own));
@@ -586,6 +607,18 @@ const idleImgs = ['/configurador/c5.webp', '/configurador/c1.webp', '/configurad
           $('[data-faq]').innerHTML = c.faq.map(([q, an], i) => `<details class="sr faq border-t py-4" ${i === 0 ? 'open' : ''} style="--sd:${i * 0.1}s"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-[1.05rem] tracking-[-0.015em]">${q}<i class="faq-i grid size-7 shrink-0 place-items-center rounded-full border border-current/30 text-[15px] leading-none not-italic">+</i></summary><p class="mt-3 max-w-[40rem] text-[14.5px] leading-relaxed opacity-65">${an.replace('{city}', esc(city))}</p></details>`).join('');
           const mq = [...c.sv.map((x) => x[0]), ...c.nav.slice(1)];
           $('[data-marquee]').innerHTML = mq.concat(mq).map((t) => `<span class="text-[clamp(1.1rem,2.6cqw,2.2rem)] tracking-[-0.03em]" style="font-weight:var(--hw)">${t}</span><i class="size-2 rounded-full" style="background:var(--a)"></i>`).join('');
+          const ST = { pequena: ['Un negocio de barrio, con la calidad de uno grande.', 'Hacemos que cada cliente se sienta atendido. Trabajamos con pocas personas y mucho cuidado en los detalles.', [['8', 'años de oficio'], ['1,200', 'clientes atendidos'], ['4.9', 'valoración promedio'], ['100%', 'trato directo']]], crecimiento: ['Crecer sin perder el orden.', 'Ayudamos a equipos en expansión a ordenar procesos, datos y herramientas para que escalar no sea un caos.', [['40+', 'equipos acompañados'], ['3x', 'más rápido en operación'], ['12', 'procesos conectados'], ['24 h', 'respuesta de soporte']]], consolidada: ['Una operación, un estándar.', 'Integramos áreas, datos y seguridad bajo un mismo lenguaje, con acompañamiento en cada etapa.', [['15', 'áreas integradas'], ['99.9%', 'disponibilidad'], ['6', 'ciudades'], ['300+', 'usuarios activos']]] };
+          const stt = ST[G.type] || ST.pequena;
+          set('[data-h-about]', stt[0]); set('[data-about]', `${nm}: ${stt[1]}`);
+          $('[data-stats]').innerHTML = stt[2].map(([n, l], i) => `<div class="sr border-t pt-4" style="--sd:${i * 0.1}s;border-color:color-mix(in srgb,currentColor 20%,transparent)"><b class="block text-[clamp(1.6rem,3.6cqw,3rem)] tracking-[-0.04em]" style="font-weight:var(--hw)">${n}</b><span class="mt-1 block text-[13px] opacity-60">${l}</span></div>`).join('');
+          const order = [G.bg ?? 0, ((G.bg ?? 0) + 1) % 3, ((G.bg ?? 0) + 2) % 3];
+          $('[data-proj]').innerHTML = order.map((k, i) => `<figure class="sr group relative overflow-hidden ${i === 0 ? '@2xl:row-span-2' : ''}" style="--sd:${i * 0.1}s;border-radius:calc(var(--rad) + 14px)"><img src="${ARQ[k][0]}" alt="" loading="lazy" decoding="async" class="size-full min-h-[200px] object-cover transition-transform duration-[1400ms] group-hover:scale-105" style="object-position:${ARQ[k][1]};aspect-ratio:${i === 0 ? '4/5' : '16/10'}" /><figcaption class="absolute inset-x-0 bottom-0 flex items-end justify-between bg-gradient-to-t from-black/70 to-transparent p-5 text-white"><span><b class="block text-[15px] font-medium">${ARQ[k][2]}</b><small class="text-[12px] opacity-75">${esc(nm)} · 202${4 + i}</small></span><i class="grid size-9 place-items-center rounded-full bg-white/90 text-[#14161a] not-italic">↗</i></figcaption></figure>`).join('');
+          const RV = [['Entendieron lo que necesitábamos desde la primera llamada. Todo salió a tiempo y se ve muy bien.', 'Mariana R.', 'Directora'], ['Pasamos de tener todo disperso a un solo lugar. Nuestros clientes lo notaron enseguida.', 'Luis T.', 'Fundador'], ['Cercanos, claros y rápidos. Nos acompañaron hasta que todo funcionó.', 'Sofía A.', 'Operaciones']];
+          $('[data-reviews]').innerHTML = RV.map(([q, n, r], i) => `<figure class="sr card p-7" style="--sd:${i * 0.1}s;border-radius:calc(var(--rad) + 18px)"><i class="text-[13px] not-italic tracking-[0.2em]" style="color:var(--a)">★★★★★</i><blockquote class="mt-4 text-[1.02rem] leading-snug tracking-[-0.015em]">“${q}”</blockquote><figcaption class="mt-5 text-[13px]"><b class="font-medium">${n}</b><span class="opacity-55"> · ${r}</span></figcaption></figure>`).join('');
+          const goTo = (sel) => { const t = sel ? site.querySelector(`[data-sec="${sel}"]:not([hidden])`) : null; site.scrollTo({ top: t ? t.offsetTop - 70 : 0, behavior: 'smooth' }); };
+          const NAVTO = ['', 'servicios', G.secs.includes('nosotros') ? 'nosotros' : 'proyectos', 'contacto'];
+          $$('[data-nav] span, [data-nav2] > span').forEach((el, i) => { el.style.cursor = 'pointer'; el.onclick = () => goTo(NAVTO[i]); });
+          $$('[data-navcta]').forEach((el) => { el.style.cursor = 'pointer'; el.onclick = () => goTo('contacto'); });
           if (G.tpl === 'a') drawHeading('[data-ha]', c.pre, c.words, '', false); else { drawBubbles(nm, G.type); drawHeading('[data-hb]', c.pre, c.words, '', false); }
         }
         site.scrollTop = 0; site.classList.remove('scrolled');
@@ -603,6 +636,7 @@ const idleImgs = ['/configurador/c5.webp', '/configurador/c1.webp', '/configurad
         const my = ++token;
         roll = again ? roll + 1 : 0;
         const next = { ...S, ...compose() };
+        bgIx = (bgIx + 1 + Math.floor(Math.random() * (ARQ.length - 1))) % ARQ.length; next.bg = bgIx;
         G = next; last = next; dirty = false;
         clearInterval(fanTimer); stopRot();
         const P = PALS[G.pal];
