@@ -37,7 +37,7 @@
 
 /* ---------- hero ---------- */
 .wh { position: relative; height: var(--hh, 26.7em); overflow: hidden; background: var(--deep); color: #fff; }
-.mw-photo { position: absolute; inset: -2%; background: url('/obra/marea-lago-uhd.webp') 22% 100% / auto 128%; translate: 0 calc(var(--sy, 0) * 0.15px); }
+.mw-photo { position: absolute; inset: -2%; background: url('/obra/marea-lago-uhd.webp') 22% 100% / cover no-repeat; translate: 0 calc(var(--sy, 0) * 0.15px); }
 .js .mw-photo { transform: scale(1.08); } .js .live .mw-photo { transform: scale(1); transition: transform 9s cubic-bezier(0.2, 0.6, 0.2, 1); }
 .mw-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(16, 28, 50, 0.34), transparent 24%), linear-gradient(0deg, rgba(16, 28, 50, 0.72), transparent 54%); }
 .mw-hero { position: absolute; left: 2.6em; bottom: 2.6em; width: 24em; }

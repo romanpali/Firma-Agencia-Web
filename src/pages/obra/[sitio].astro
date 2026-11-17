@@ -50,7 +50,7 @@ const { n, html } = Astro.props;
       import '../../scripts/au-site';
       import '../../scripts/abaco-site';
       const box = document.querySelector<HTMLElement>('.mr-exw')!, site = box.querySelector<HTMLElement>('.mr-web')!;
-      const fit = () => { const w = innerWidth, h = innerHeight - 70, fs = Math.min(w / 40, Math.max(22, w / 65)); box.style.fontSize = `${fs}px`; site.style.setProperty('--hh', `${h / fs}em`); };
+      const fit = () => { const w = innerWidth, h = innerHeight - 70, fs = Math.min(w / 40, Math.max(22, w / 65), h / 26.7); box.style.fontSize = `${fs}px`; site.style.setProperty('--hh', `${h / fs}em`); };
       fit(); addEventListener('resize', fit);
     </script>
   </body>
