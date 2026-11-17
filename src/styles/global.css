@@ -827,3 +827,8 @@ html[data-menu-on] main * { animation-play-state: paused !important; }
 /* Servicios: al quedar atrás, cada hoja se oscurece con capas de opacidad (se componen en la GPU; una variable heredada recalculaba todo el subárbol). */
 .dim-l, .dim-o { position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; will-change: opacity; }
 .dim-l { z-index: -1; background: #dedaf6; } .dim-o { z-index: 60; background: rgba(2, 3, 26, 0.5); }
+
+#como-trabajamos[data-away='1'] * { animation-play-state: paused !important; }
+
+/* Pantalla de entrada: lo de abajo espera quieto (sus animaciones arrancan al revelarse) */
+html.intro main * , html.intro main *::before, html.intro main *::after { animation-play-state: paused !important; }
