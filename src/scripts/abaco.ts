@@ -8,8 +8,7 @@ const tabs: [string, string][] = [['soluciones', 'Soluciones'], ['casos', 'Casos
 const words = (s: string) => s.split(' ').map((w, i) => `<span style="--w:${i}">${w}</span>`).join(' ');
 const stat = (n: number, dec: number, suf: string, label: string) => `<div class="rv"><b><span data-count="${n}" data-dec="${dec}">${n.toFixed(dec)}</span>${suf}</b><small>${label}</small></div>`;
 
-const nav = `<div class="ab-nav mw-f" style="--d:.15s"><button type="button" class="ab-logo" ${go('inicio')}><i></i>ábaco</button><nav>${tabs.map(([k, t]) => btn(k, 'ab-t', t)).join('')}</nav></div>
-<button type="button" class="wn-ex" data-int="wex" aria-label="Ver en pantalla completa"><i></i>Entrar al sitio</button>`;
+const nav = `<div class="ab-nav mw-f" style="--d:.15s"><button type="button" class="ab-logo" ${go('inicio')}><i></i>ábaco</button><nav>${tabs.map(([k, t]) => btn(k, 'ab-t', t)).join('')}</nav></div>`;
 const foot = `<footer class="ab-ft"><div class="ab-fg"><div><b>ábaco</b><p>Finanzas y operaciones<br>Ciudad de México</p></div><div><p class="ab-k">Sitio</p>${tabs.map(([k, t]) => btn(k, 'ab-fa', t)).join('')}</div><div><p class="ab-k">Escríbenos</p><span class="ab-fa">hola@abaco.example</span><span class="ab-fa">+52 55 0000 0000</span></div></div><b class="ab-big" aria-hidden="true">ábaco</b><p class="ab-leg">Concepto de HumanCorp · datos de ejemplo. La asesoría contable y fiscal la brinda un contador; la tecnología la respalda.</p></footer>`;
 const ph = (pos: string) => `<div class="ab-phi"><img src="${IMG}" alt="" width="1500" height="1000" loading="lazy" decoding="async" style="--p:${pos}"></div>`;
 const hdr = (k: string, t: string, p: string, pos: string) => `<header class="ab-ph">${ph(pos)}<p class="ab-k rv">${k}</p><h3 class="ab-t2 rv">${t}</h3>${p ? `<p class="ab-p rv">${p}</p>` : ''}</header>`;

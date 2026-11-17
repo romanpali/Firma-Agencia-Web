@@ -46,25 +46,6 @@ function init(root: HTMLElement) {
   root.addEventListener('input', (ev) => { const i = ev.target as HTMLInputElement; if (i.tagName === 'INPUT') i.setAttribute('value', i.value); });
 }
 
-function expand(root: HTMLElement) {
-  if (document.querySelector('.mr-ex')) return;
-  const ex = document.createElement('div'); ex.className = 'mr-ex live';
-  ex.innerHTML = `<button type="button" class="mr-exx" aria-label="Salir">${svg('x')}</button><div class="mr-exw">${root.outerHTML}</div><p class="mr-exh">Esc para salir</p>`;
-  const box = ex.querySelector<HTMLElement>('.mr-exw')!, site = box.querySelector<HTMLElement>('.mr-web')!;
-  site.querySelectorAll('.rv').forEach((e) => e.classList.remove('in'));
-  // pantalla completa como un sitio normal: texto de tamaño de lectura fijo en px (como una página real: crece con el zoom del navegador), solo se reduce si la ventana es muy angosta
-  const fit = () => { const w = innerWidth, h = innerHeight, fs = Math.min(22, w / 40); box.style.fontSize = `${fs}px`; site.style.setProperty('--hh', `${h / fs}em`); };
-  const key = (e: KeyboardEvent) => { if (e.key === 'Escape') close(); };
-  const fsc = () => { if (!document.fullscreenElement) close(); };
-  const close = () => { ex.remove(); removeEventListener('resize', fit); removeEventListener('keydown', key); document.removeEventListener('fullscreenchange', fsc); document.documentElement.style.overflow = ''; if (document.fullscreenElement) document.exitFullscreen?.().catch(() => {}); };
-  fit(); addEventListener('resize', fit); addEventListener('keydown', key);
-  ex.addEventListener('click', (e) => { if ((e.target as HTMLElement).closest('.mr-exx')) close(); });
-  document.documentElement.style.overflow = 'hidden';
-  document.body.appendChild(ex);
-  ex.requestFullscreen?.().then(() => document.addEventListener('fullscreenchange', fsc)).catch(() => {});
-  init(site); sync(site);
-}
-
 function act(t: HTMLElement, root: HTMLElement) {
   const d = root.dataset, k = t.dataset.int, sc = root.querySelector<HTMLElement>('.mw-scroll');
   if (k === 'wtab') { if (sc) toSection(sc, t.dataset.t!); }
@@ -77,7 +58,6 @@ function act(t: HTMLElement, root: HTMLElement) {
     setAll(root, '[data-sum=code]', `MAR-${100 + Math.floor(Math.random() * 900)}`);
     d.done = '1';
   } else if (k === 'wreset') { root.removeAttribute('data-done'); }
-  else if (k === 'wex') { location.href = `/obra/${root.classList.contains('tz-web') ? 'trama' : root.classList.contains('au-web') ? 'hikari' : root.classList.contains('ab-web') ? 'abaco' : 'marea'}`; return; }
   sync(root); dirty(root);
 }
 

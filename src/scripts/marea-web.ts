@@ -13,8 +13,7 @@ type Crop = [number, number, number, string?];
 const C: Record<string, Crop> = { casa: [27, 56, 2.1], pino: [4, 58, 2.3], reflejo: [24, 82, 2.4], cerros: [62, 44, 1.5], cielo: [86, 22, 1.3], agua: [72, 86, 1.5], lago: [50, 55, 1], sala: [50, 50, 1, 'sala'], comedor: [50, 50, 1, 'comedor'], cocina: [50, 50, 1, 'cocina'], pasillo: [50, 50, 1, 'pasillo'], recamara: [50, 50, 1, 'recamara'], bano: [50, 50, 1, 'bano'], biblioteca: [50, 50, 1, 'biblioteca'] };
 const im = (c: Crop, cls = '') => `<div class="im ${cls}"><img src="${c[3] ? `/obra/marea/${c[3]}.webp` : '/obra/marea-lago-uhd.webp'}" alt="" loading="lazy" decoding="async" style="--x:${c[0]}%;--y:${c[1]}%;--z:${c[2]}"></div>`;
 
-const nav = `<div class="mw-nav mw-f" style="--d:.15s"><button type="button" class="wn-logo" ${go('inicio')}>marea<sup>®</sup></button><div class="wn-r"><nav>${tabs.map(([k, t]) => btn(k, 'wn-t', t)).join('')}</nav><button type="button" class="wn-cta" ${go('reservar')}>Reservar</button></div></div>
-<button type="button" class="wn-ex" data-int="wex" aria-label="Ver en pantalla completa"><i></i>Entrar al sitio</button>`;
+const nav = `<div class="mw-nav mw-f" style="--d:.15s"><button type="button" class="wn-logo" ${go('inicio')}>marea<sup>®</sup></button><div class="wn-r"><nav>${tabs.map(([k, t]) => btn(k, 'wn-t', t)).join('')}</nav><button type="button" class="wn-cta" ${go('reservar')}>Reservar</button></div></div>`;
 
 const foot = `<footer class="wf"><div class="wf-t"><div class="wf-l"><b>Marea</b><p>Estancias junto al lago<br>Camino al Muelle 12, Valle de Bravo<br>Estado de México</p></div>
 <div class="wf-m"><p>Sitio</p>${tabs.map(([k, t]) => btn(k, 'wf-a', t)).join('')}${btn('reservar', 'wf-a', 'Reservar')}</div>

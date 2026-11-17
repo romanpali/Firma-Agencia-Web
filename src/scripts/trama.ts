@@ -43,7 +43,6 @@ const brand = `<div class="pg tz-brand" data-rp="light"><div class="tzb-bg"></di
 const go = (t: string) => `data-int="wtab" data-t="${t}"`;
 const tabsN: [string, string][] = [['mujer', 'Mujer'], ['hombre', 'Hombre'], ['studio', 'Lookbook']];
 const nav = `<div class="tz-nav mw-f" style="--d:.1s"><nav>${tabsN.map(([k, t]) => `<button type="button" class="tz-t" ${go(k)} data-t="${k}">${t}</button>`).join('')}</nav><button type="button" class="tz-logo" ${go('inicio')}>TRAMA</button><div class="tz-r"><span>Buscar</span><span>Cuenta</span><button type="button" data-int="tbag" class="tz-cb">Cesta (<i data-cn>0</i>)</button></div></div>
-<button type="button" class="wn-ex" data-int="wex" aria-label="Ver en pantalla completa"><i></i>Entrar al sitio</button>
 <aside class="tz-bag"><div class="tz-bh"><b>Cesta (<i data-cn>0</i>)</b><button type="button" data-int="tbag" aria-label="Cerrar">${svg('x')}</button></div><ul class="tz-bl"></ul><p class="tz-be">Tu cesta está vacía.</p>
 <div class="tz-bf"><div><span>Subtotal</span><b data-tot>$0</b></div><button type="button" class="tz-bb" data-int="tbuy">Tramitar pedido</button><small>Envío gratis desde $1,200 · Cambios en 30 días</small></div>
 <div class="tz-bd"><i>${svg('check')}</i><h4>¡Gracias por tu compra!</h4><p>Pedido TR-<span data-code>2041</span>. Te avisamos por correo cuando salga.</p><button type="button" data-int="tbag">Seguir comprando</button></div></aside>`;

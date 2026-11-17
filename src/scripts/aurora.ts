@@ -8,8 +8,7 @@ const tabs: [string, string][] = [['servicios', 'Servicios'], ['casos', 'Casos']
 const photo = (pos: string, z = 1, cls = '') => `<div class="au-im ${cls}"><img src="${IMG}" alt="" width="1500" height="1000" loading="lazy" decoding="async" style="--p:${pos};--z:${z}"></div>`;
 const words = (s: string) => s.split(' ').map((w, i) => `<span style="--w:${i}">${w}</span>`).join(' ');
 
-const nav = `<div class="au-nav mw-f" style="--d:.15s"><button type="button" class="au-logo" ${go('inicio')}>Hikari Estudio</button><nav>${tabs.map(([k, t]) => btn(k, 'au-t', t)).join('')}</nav></div>
-<button type="button" class="wn-ex" data-int="wex" aria-label="Ver en pantalla completa"><i></i>Entrar al sitio</button>`;
+const nav = `<div class="au-nav mw-f" style="--d:.15s"><button type="button" class="au-logo" ${go('inicio')}>Hikari Estudio</button><nav>${tabs.map(([k, t]) => btn(k, 'au-t', t)).join('')}</nav></div>`;
 const foot = `<footer class="au-ft"><div class="au-fg"><div><b>Hikari Estudio</b><p>Diseño y fotografía<br>Ciudad de México</p></div><div><p class="au-k">Sitio</p>${tabs.map(([k, t]) => btn(k, 'au-fa', t)).join('')}</div><div><p class="au-k">Escríbenos</p><span class="au-fa">hola@hikari.example</span><span class="au-fa">+52 55 0000 0000</span></div></div><b class="au-big" aria-hidden="true">hikari</b><p class="au-cp">Concepto de HumanCorp · Datos de ejemplo</p></footer>`;
 const hdr = (k: string, t: string, p: string, pos: string) => `<header class="au-ph">${photo(pos, 1.6, 'au-phi')}<div><p class="au-k rv">${k}</p><h3 class="au-t2 rv">${t}</h3>${p ? `<p class="au-p rv">${p}</p>` : ''}</div></header>`;
 
