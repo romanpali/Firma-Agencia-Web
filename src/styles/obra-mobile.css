@@ -390,3 +390,64 @@
 .obv-dashw { min-height: 100svh; }
 .obv-st:not([data-site]):not([data-dash='1']) .obv-pg { margin: 0 12px; }
 .obv-st:not([data-site]):not([data-dash='1']) .obv-hint { margin: 14px 0 0; }
+
+/* ===== paneles: barra de pestañas de aplicación (icono + etiqueta, 4 + «Más») y hoja de perfil ===== */
+.obv-st[data-dash='1'] { --bar: rgba(255, 255, 255, 0.9); --barx: #111; --bart: rgba(17, 17, 17, 0.5); --pill: rgba(17, 17, 17, 0.09); --sh-bg: rgba(250, 250, 252, 0.9); --sh-x: #111; --sh-m: rgba(17, 17, 17, 0.55); --sh-ln: rgba(17, 17, 17, 0.08); --sh-i: rgba(17, 17, 17, 0.05); }
+.obv-st[data-app='abaco'], .obv-st[data-app='marea']:has(.mr-dash[data-view='inicio']) { --bar: rgba(30, 31, 36, 0.92); --barx: #fff; --bart: rgba(255, 255, 255, 0.55); --pill: rgba(255, 255, 255, 0.16); --sh-bg: rgba(30, 31, 36, 0.92); --sh-x: #f2f2f4; --sh-m: rgba(255, 255, 255, 0.55); --sh-ln: rgba(255, 255, 255, 0.09); --sh-i: rgba(255, 255, 255, 0.07); }
+.obv-st[data-dash='1'] .obv-app.ic { position: fixed; left: 10px; right: 10px; bottom: 68px; transform: none; width: auto; max-width: none; margin: 0; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 0; padding: 7px 4px 6px; border-radius: 24px; overflow: visible; background: var(--bar); box-shadow: 0 14px 34px -12px rgba(0, 0, 0, 0.45), inset 0 0 0 1px rgba(128, 128, 128, 0.16); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); }
+.obv-st[data-dash='1'] .obv-app.ic button { display: flex; flex-direction: column; align-items: center; gap: 3px; min-width: 0; height: auto; padding: 0; border-radius: 0; background: transparent !important; color: var(--bart); font: 500 10.5px 'Inter Tight Variable', system-ui, sans-serif; letter-spacing: 0; transition: color 0.3s; }
+.obv-st[data-dash='1'] .obv-app.ic button i { display: grid; place-items: center; width: 54px; height: 30px; border-radius: 15px; transition: background 0.35s, transform 0.35s; } .obv-st[data-dash='1'] .obv-app.ic button svg { width: 21px; height: 21px; }
+.obv-st[data-dash='1'] .obv-app.ic button span { max-width: none; margin: 0; opacity: 1; overflow: visible; }
+.obv-st[data-dash='1'] .obv-app.ic button.on { color: var(--barx); padding: 0; background: transparent !important; } .obv-st[data-dash='1'] .obv-app.ic button.on i { background: var(--pill); } .obv-st[data-dash='1'] .obv-app.ic button.on span { font-weight: 600; }
+.obv-st[data-dash='1'] .obv-app.ic button:active i { transform: scale(0.92); }
+.oc-in, .obv-dashw .td-in { bottom: 152px; }
+/* chat de Marea: solo en la vista de inicio */
+.obv-dashw .mr-dash .md-app, .obv-dashw .md-main { display: flex; flex-direction: column; flex: 1; min-height: 0; }
+.obv-dashw .mr-dash .mv-inicio { display: none !important; } .obv-dashw .mr-dash[data-view='inicio'] .mv-inicio { display: flex !important; flex-direction: column; flex: 1; }
+.obv-ah { padding-top: max(34px, env(safe-area-inset-top)); }
+.obv-av { display: grid; place-items: center; width: 40px; height: 40px; padding: 0; border: 0; border-radius: 50%; background: #111; color: #fff; font: 600 15px 'Inter Tight Variable', system-ui, sans-serif; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.obv-dashw[data-app='marea']:has(.mr-dash[data-view='inicio']) .obv-av { background: linear-gradient(135deg, #6b9bff, #b48cff 60%, #ff9ec0); } .obv-dashw[data-app='abaco'] .obv-av { background: #eceef3; color: #0b0c10; }
+.obv-dashw[data-app='marea']:not(:has(.mr-dash[data-view='inicio'])) .obv-ah { background: rgba(223, 226, 229, 0.82); }
+/* vistas de Marea (ventas, finanzas, calendario, automatización, datos): tarjetas apiladas a todo el ancho */
+.obv-dashw .mr-dash .mv { padding: 6px 0 0 !important; } .obv-dashw .mr-dash .mv h5 { margin: 0 0 6px; font-size: 20px; }
+.obv-dashw .mr-dash .mv > *, .obv-dashw .mr-dash .mv [class*='-kpi'], .obv-dashw .mr-dash .mv [class*='-grid'] { max-width: 100%; }
+/* hoja de perfil */
+.obv-sh { position: fixed; inset: 0; z-index: 90; pointer-events: none; }
+.obv-sh-bg { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.45); opacity: 0; transition: opacity 0.4s; }
+.obv-sh-p { position: absolute; left: 0; right: 0; bottom: 0; max-height: 86svh; overflow-y: auto; padding: 8px 18px 32px; border-radius: 28px 28px 0 0; background: var(--sh-bg); color: var(--sh-x); -webkit-backdrop-filter: blur(30px) saturate(1.4); backdrop-filter: blur(30px) saturate(1.4); box-shadow: 0 -20px 60px -20px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.25); transform: translateY(104%); transition: transform 0.55s cubic-bezier(0.2, 0.8, 0.2, 1); font-family: 'Inter Tight Variable', system-ui, sans-serif; }
+.obv-sh.on { pointer-events: all; } .obv-sh.on .obv-sh-bg { opacity: 1; } .obv-sh.on .obv-sh-p { transform: none; }
+.obv-sh-g { display: block; width: 40px; height: 4px; margin: 4px auto 14px; border-radius: 4px; background: var(--sh-m); opacity: 0.5; }
+.obv-sh-h { display: flex; align-items: center; gap: 14px; padding: 6px 2px 4px; } .obv-sh-a { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: linear-gradient(135deg, #6b9bff, #b48cff 60%, #ff9ec0); color: #fff; font-size: 20px; font-weight: 600; }
+.obv-sh-h strong { display: block; font-size: 18px; font-weight: 600; letter-spacing: -0.02em; } .obv-sh-h span { display: block; margin-top: 2px; font-size: 13px; color: var(--sh-m); }
+.obv-sh-t { margin: 20px 4px 8px; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--sh-m); }
+.obv-sh-l { margin: 0; padding: 0; list-style: none; border-radius: 18px; overflow: hidden; background: var(--sh-i); } .obv-sh-l li + li { box-shadow: 0 -1px 0 var(--sh-ln); }
+.obv-sh-l button { display: flex; align-items: center; gap: 14px; width: 100%; padding: 14px 16px; border: 0; background: transparent; color: inherit; font: inherit; font-size: 15px; text-align: left; cursor: pointer; -webkit-tap-highlight-color: transparent; } .obv-sh-l button svg { flex: none; width: 21px; height: 21px; opacity: 0.8; } .obv-sh-l button span { flex: 1; } .obv-sh-l button u { text-decoration: none; opacity: 0.4; font-size: 20px; }
+.obv-sh-l.sw .tg u { position: relative; width: 44px; height: 26px; border-radius: 26px; background: var(--sh-ln); opacity: 1; transition: background 0.3s; } .obv-sh-l.sw .tg u b { position: absolute; left: 3px; top: 3px; width: 20px; height: 20px; border-radius: 50%; background: #fff; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); transition: transform 0.3s; } .obv-sh-l.sw .tg.on u { background: #34c759; } .obv-sh-l.sw .tg.on u b { transform: translateX(18px); }
+.obv-sh-out { display: block; width: 100%; margin-top: 18px; padding: 14px; border: 0; border-radius: 16px; background: var(--sh-i); color: #ff453a; font: 600 15px 'Inter Tight Variable', system-ui, sans-serif; cursor: pointer; } .obv-sh-f { margin: 12px 0 0; text-align: center; font-size: 11.5px; color: var(--sh-m); }
+
+/* Marea: vistas del panel con el diseño de escritorio reordenado para pantalla angosta */
+.obv-dashw .mr-dash .mv { position: relative !important; inset: auto !important; display: none; }
+.obv-dashw .mr-dash[data-view='ventas'] .mv-ventas, .obv-dashw .mr-dash[data-view='finanzas'] .mv-finanzas, .obv-dashw .mr-dash[data-view='calendario'] .mv-calendario, .obv-dashw .mr-dash[data-view='datos'] .mv-datos, .obv-dashw .mr-dash[data-view='automatizacion'] .mv-automatizacion { display: block !important; animation: obvIn 0.45s ease both; }
+.obv-dashw .mr-dash .mv { font-size: 17px; }
+.obv-dashw .mv-k { grid-template-columns: 1fr 1fr; gap: 10px; } .obv-dashw .mv-k > div { padding: 16px; border-radius: 20px; } .obv-dashw .mv-k b { font-size: 1.6em; } .obv-dashw .mv-k small { font-size: 0.78em; } .obv-dashw .mv-k i { font-size: 0.72em; }
+.obv-dashw .mv-k:not(.mv-k4) > div:last-child:nth-child(odd) { grid-column: 1 / -1; }
+.obv-dashw .mv-box, .obv-dashw .mf, .obv-dashw .md-srv, .obv-dashw .mo { border-radius: 20px; margin-top: 12px; padding: 14px; }
+.obv-dashw .mf li b { font-size: 0.9em; } .obv-dashw .mf li span { font-size: 0.78em; } .obv-dashw .mf li em { font-size: 0.72em; }
+.obv-dashw .md-srv { padding: 4px 14px; } .obv-dashw .md-srv li { grid-template-columns: auto 1fr auto; font-size: 0.9em; padding: 12px 0; gap: 10px; } .obv-dashw .md-srv li span { grid-column: 2; grid-row: 2; font-size: 0.82em; } .obv-dashw .md-srv li em { grid-row: 1 / 3; grid-column: 3; }
+.obv-dashw .mo { overflow-x: auto; scrollbar-width: none; } .obv-dashw .mo-d, .obv-dashw .mo-g { min-width: 30em; font-size: 15px; } .obv-dashw .mo-g { grid-template-rows: repeat(4, 4.6em); }
+.obv-dashw .mc-head, .obv-dashw .mv > header, .obv-dashw .mv > div:first-child { }
+.obv-chat { flex: 1; } .oc-in { margin-top: auto; }
+.obv-dashw[data-app='marea']:has(.mr-dash[data-view='inicio']) { padding-bottom: 150px; }
+
+/* título repetido de cada vista: ya lo muestra el encabezado */
+.obv-dashw .mv-h { justify-content: flex-end; } .obv-dashw .mv-h h5 { display: none; }
+/* Marea: el punto activo toma un degradado azul de cielo (el de la portada de Ábaco) */
+@media (max-width: 700px) {
+  .obs-tab button:first-child.on i { background: linear-gradient(135deg, #a9c8ff, #4f7fe0 55%, #2a4a94); box-shadow: inset 0 0 0 1.4px rgba(190, 214, 255, 0.9), 0 0 0 4px rgba(79, 127, 224, 0.28); }
+  .ob-m[data-obs]:has(.obs-bg[data-th='0'].on) .obs-eye i { background: linear-gradient(135deg, #a9c8ff, #4f7fe0); }
+  html, body { overflow-x: clip; max-width: 100%; } html::-webkit-scrollbar, body::-webkit-scrollbar { display: none; width: 0; }
+  .ob-m[data-obs] { contain: paint; }
+}
+.obv-dashw .td-o { padding: 8px 14px; } .obv-dashw .td-o table { font-size: 12.5px; width: 100%; } .obv-dashw .td-o td:nth-child(3) { display: none; } .obv-dashw .td-o td { padding: 12px 6px 12px 0; } .obv-dashw .td-o td:last-child { text-align: right; padding-right: 0; }
+.obv-dashw .td-inv li { display: grid !important; grid-template-columns: 44px 1fr auto; grid-template-areas: 'p n b' 'p i r'; gap: 4px 12px; align-items: center; padding: 12px 0; } .obv-dashw .td-inv .tz-ph { grid-area: p; width: 44px; height: 56px; } .obv-dashw .td-inv li span { grid-area: n; font-size: 14px; } .obv-dashw .td-inv li b { grid-area: b; font-size: 16px; } .obv-dashw .td-inv li i { grid-area: i; width: auto; } .obv-dashw .td-inv li button { grid-area: r; justify-self: end; padding: 7px 12px; font-size: 12px; border-radius: 99px; }
+.obv-dashw .td-m header p, .obv-dashw .td-m header h4, .obv-dashw .td-vw > header { display: none; }

@@ -7,13 +7,13 @@ const CAROUSEL = '.ab-svc, .ab-cs, .ab-tl, .ab-prin, .ab-team, .au-svc, .au-cs, 
 function adapt(root: HTMLElement) {
   const px = (v: string) => parseFloat(v) || 0;
   root.querySelectorAll<HTMLElement>('*').forEach((el) => {
-    if (el.closest('svg') || el.closest('.obv-app') || el.closest('.obv-chat')) return;
+    if (el.closest('svg') || el.closest('.obv-app') || el.closest('.obv-chat') || el.closest('.mr-dash')) return;
     const cs = getComputedStyle(el);
     if (el.matches(CAROUSEL)) {
       // fila de tarjetas: carrusel horizontal con imán, como en una app
       Object.assign(el.style, { display: 'grid', gridTemplateColumns: 'none', gridAutoFlow: 'column', gridAutoColumns: '78%', gap: '14px', overflowX: 'auto', scrollSnapType: 'x mandatory', scrollbarWidth: 'none', paddingBottom: '6px' });
       [...el.children].forEach((c) => { (c as HTMLElement).style.scrollSnapAlign = 'start'; });
-    } else if (cs.display === 'grid' && cs.gridTemplateColumns.split(' ').length > 1 && !el.matches('.mw-book, .mw-cond, .tz-nav, .tz-cl2 > li, .tz-mi > li, .tz-opt > button, .tz-st')) {
+    } else if (cs.display === 'grid' && cs.gridTemplateColumns.split(' ').length > 1 && !el.matches('.mw-book, .mw-cond, .tz-nav, .tz-cl2 > li, .tz-mi > li, .tz-opt > button, .tz-st, .td-inv li, .td-inv')) {
       const short = el.querySelector(':scope > .tz-p') !== null || (el.children.length >= 4 && [...el.children].every((c) => (c.textContent || '').length < 70));
       el.style.gridTemplateColumns = `repeat(auto-fit, minmax(min(100%, ${short ? 7.5 : 11.5}em), 1fr))`; el.style.gridTemplateRows = 'none';
       [...el.children].forEach((c) => { (c as HTMLElement).style.gridColumn = 'auto'; (c as HTMLElement).style.gridRow = 'auto'; });
@@ -86,14 +86,47 @@ function dashBar(stage: HTMLElement, w: HTMLElement, brand: string) {
   if (kind === 'trama') { const i = items.findIndex((it) => /asistente/i.test(it.label)); if (i > 0) items.unshift(items.splice(i, 1)[0]); items[0]?.el.click(); }
   if (kind === 'marea') { if (items[0]) items[0].label = 'Asistente'; buildChat(root); }
   const head = document.createElement('div'); head.className = 'obv-ah';
-  head.innerHTML = `<div><small>${brand}</small><b></b></div><i>${brand[0]}</i>`;
+  head.innerHTML = `<div><small>${brand}</small><b></b></div><button type="button" class="obv-av" aria-label="Perfil y configuración">${brand[0]}</button>`;
   w.prepend(head);
   if (!items.length) { head.querySelector('b')!.textContent = 'Panel'; return; }
+  const MAIN = items.length > 5 ? 4 : items.length, main = items.slice(0, MAIN), rest = items.slice(MAIN);
   const bar = document.createElement('nav'); bar.className = 'obv-app ic';
-  items.forEach((it) => { const t = document.createElement('button'); t.type = 'button'; t.innerHTML = `${it.icon}<span>${it.label}</span>`; t.addEventListener('click', () => { it.el.click(); stage.scrollTop = 0; }); bar.appendChild(t); });
+  const mk = (icon: string, label: string, fn: () => void) => { const t = document.createElement('button'); t.type = 'button'; t.innerHTML = `<i>${icon}</i><span>${label}</span>`; t.addEventListener('click', fn); bar.appendChild(t); return t; };
+  main.forEach((it) => mk(it.icon, it.label, () => { it.el.click(); stage.scrollTop = 0; }));
+  const MORE = '<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg>';
+  const sheet = profileSheet(stage, kind, brand, rest.map((it) => ({ icon: it.icon, label: it.label, go: () => { it.el.click(); stage.scrollTop = 0; } })));
+  if (rest.length) mk(MORE, 'Más', () => sheet.open());
+  head.querySelector('.obv-av')!.addEventListener('click', () => sheet.open());
   stage.appendChild(bar);
-  const sync = () => { const k = Math.max(0, items.findIndex((it) => it.on())); bar.querySelectorAll<HTMLElement>('button').forEach((b, i) => b.classList.toggle('on', i === k)); head.querySelector('b')!.textContent = items[k].label; const act = bar.querySelectorAll<HTMLElement>('button')[k]; act?.scrollIntoView({ inline: 'center', block: 'nearest' }); };
+  const btns = [...bar.querySelectorAll<HTMLElement>('button')];
+  const sync = () => {
+    const k = items.findIndex((it) => it.on()), inMain = k >= 0 && k < MAIN;
+    btns.forEach((b, i) => b.classList.toggle('on', inMain ? i === k : rest.length > 0 && i === MAIN));
+    head.querySelector('b')!.textContent = items[Math.max(0, k)].label;
+  };
   sync(); new MutationObserver(sync).observe(root, { attributes: true, subtree: true, attributeFilter: ['class', 'data-v', 'data-view'] });
+}
+
+// Hoja de perfil: secciones que no caben en la barra, cuenta y ajustes (de ejemplo)
+function profileSheet(stage: HTMLElement, kind: string, brand: string, rest: { icon: string; label: string; go: () => void }[]) {
+  const names: Record<string, [string, string]> = { marea: ['Sofía Reyes', 'Administradora'], trama: ['Sofía Reyes', 'Dueña de la tienda'], abaco: ['Valeria Rojas', 'Dirección de operaciones'], hikari: ['Aiko Mora', 'Dirección del estudio'] };
+  const [nm, role] = names[kind] || names.marea;
+  const I = (d: string) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+  const acct: [string, string][] = [['Mi perfil', I('<circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/>')], ['Notificaciones', I('<path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 21h4"/>')], ['Equipo y permisos', I('<circle cx="9" cy="8" r="3.5"/><path d="M2 20c.8-3.4 3.4-5 7-5s6.2 1.6 7 5M17 4.5a3.5 3.5 0 0 1 0 7M22 20c-.4-2.4-1.6-4-3.6-4.8"/>')], ['Ayuda', I('<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 .9-1 1.7M12 17h.01"/>')]];
+  const el = document.createElement('div'); el.className = 'obv-sh'; el.dataset.app = kind;
+  el.innerHTML = `<i class="obv-sh-bg"></i><div class="obv-sh-p"><i class="obv-sh-g"></i>
+<div class="obv-sh-h"><b class="obv-sh-a">${nm[0]}</b><div><strong>${nm}</strong><span>${role} · ${brand}</span></div></div>
+${rest.length ? `<p class="obv-sh-t">Secciones</p><ul class="obv-sh-l">${rest.map((r, i) => `<li><button type="button" data-s="${i}">${r.icon}<span>${r.label}</span><u>›</u></button></li>`).join('')}</ul>` : ''}
+<p class="obv-sh-t">Cuenta</p><ul class="obv-sh-l">${acct.map(([t, ic]) => `<li><button type="button">${ic}<span>${t}</span><u>›</u></button></li>`).join('')}</ul>
+<p class="obv-sh-t">Configuración</p><ul class="obv-sh-l sw">${['Avisos en el teléfono', 'Resumen diario por correo', 'Modo compacto'].map((t, i) => `<li><button type="button" class="tg${i < 2 ? ' on' : ''}"><span>${t}</span><u><b></b></u></button></li>`).join('')}</ul>
+<button type="button" class="obv-sh-out">Cerrar sesión</button><p class="obv-sh-f">Demostración · no se guarda nada</p></div>`;
+  stage.appendChild(el);
+  const open = () => el.classList.add('on'), shut = () => el.classList.remove('on');
+  el.querySelector('.obv-sh-bg')!.addEventListener('click', shut); el.querySelector('.obv-sh-g')!.addEventListener('click', shut);
+  el.querySelectorAll<HTMLElement>('[data-s]').forEach((b) => b.addEventListener('click', () => { shut(); setTimeout(() => rest[+b.dataset.s!].go(), 200); }));
+  el.querySelectorAll<HTMLElement>('.tg').forEach((b) => b.addEventListener('click', () => b.classList.toggle('on')));
+  el.querySelector('.obv-sh-out')!.addEventListener('click', shut);
+  return { open };
 }
 
 // Menú del sitio: icono de hamburguesa en su barra; abre una pantalla completa con los enlaces en grande (cada sitio con su estilo)
