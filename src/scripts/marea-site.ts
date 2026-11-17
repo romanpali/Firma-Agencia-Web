@@ -101,9 +101,10 @@ function glide(sc: HTMLElement, y: number) {
   };
   requestAnimationFrame(step);
 }
-// El sitio es una sola página larga: los botones llevan a su sección
+// Cada sección es su propia página: los botones cambian de página
 function toSection(sc: HTMLElement, name: string) {
-  const el = sc.querySelector<HTMLElement>(`.wv-${name}`); if (el) glide(sc, el.offsetTop);
+  const root = sc.closest<HTMLElement>('.mr-web')!;
+  tgt.delete(sc); root.dataset.tab = name; sc.scrollTop = 0;
 }
 
 // Rueda del ratón sobre el sitio (dentro del libro): el navegador no desplaza contenedores dentro de una escena 3D, así que se hace a mano,

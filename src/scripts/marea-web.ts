@@ -70,7 +70,7 @@ const days = ['Sáb 14', 'Dom 15', 'Lun 16', 'Mar 17', 'Mié 18', 'Jue 19', 'Vie
 const hours: [string, string, boolean][] = [['07:00', '2 lugares', false], ['09:00', '4 lugares', false], ['11:00', 'Lleno', true], ['17:00', '5 lugares', false]];
 const chip = (g_: string, v: string, label: string, sub = '', full = false) => `<button type="button" class="wk${full ? ' full' : ''}" data-int="wpick" data-g="${g_}" data-v="${v}">${label}${sub ? `<small>${sub}</small>` : ''}</button>`;
 
-export const webHTML = `<div class="pg mr-web" data-rp="dark" data-fil="todo" data-nivel="principiante" data-dia="0" data-hora="07:00" data-pax="2" data-cart="0" data-total="0">
+export const webHTML = `<div class="pg mr-web" data-rp="dark" data-tab="inicio" data-fil="todo" data-nivel="principiante" data-dia="0" data-hora="07:00" data-pax="2" data-cart="0" data-total="0">
 ${nav}
 <div class="mw-scroll">
 
@@ -78,15 +78,16 @@ ${nav}
  <div class="wh"><i class="mw-photo"></i><i class="mw-shade"></i>
   <div class="mw-hero">
    <p class="mw-k mw-f" style="--d:.5s"><i></i>Escuela de surf · Puerto Escondido</p>
-   <h4 class="mw-h"><span class="mw-w" style="--d:.65s">Aprende a</span><span class="mw-w mw-it" style="--d:.95s"><span class="mw-rot"><span class="mw-r" style="--i:0">leer el mar.</span><span class="mw-r" style="--i:1">encontrar tu ola.</span><span class="mw-r" style="--i:2">perder el miedo.</span><span class="mw-r" style="--i:3">volver al agua.</span></span></span></h4>
+   <h4 class="mw-h"><span class="mw-w" style="--d:.65s">Aprende a</span><span class="mw-w mw-it" style="--d:.95s"><span class="mw-rot"><span class="mw-r" style="--i:0"><i style="--k:0">l</i><i style="--k:1">e</i><i style="--k:2">e</i><i style="--k:3">r</i><i style="--k:4">&nbsp;</i><i style="--k:5">e</i><i style="--k:6">l</i><i style="--k:7">&nbsp;</i><i style="--k:8">m</i><i style="--k:9">a</i><i style="--k:10">r</i><i style="--k:11">.</i></span><span class="mw-r" style="--i:1"><i style="--k:0">e</i><i style="--k:1">n</i><i style="--k:2">c</i><i style="--k:3">o</i><i style="--k:4">n</i><i style="--k:5">t</i><i style="--k:6">r</i><i style="--k:7">a</i><i style="--k:8">r</i><i style="--k:9">&nbsp;</i><i style="--k:10">t</i><i style="--k:11">u</i><i style="--k:12">&nbsp;</i><i style="--k:13">o</i><i style="--k:14">l</i><i style="--k:15">a</i><i style="--k:16">.</i></span><span class="mw-r" style="--i:2"><i style="--k:0">p</i><i style="--k:1">e</i><i style="--k:2">r</i><i style="--k:3">d</i><i style="--k:4">e</i><i style="--k:5">r</i><i style="--k:6">&nbsp;</i><i style="--k:7">e</i><i style="--k:8">l</i><i style="--k:9">&nbsp;</i><i style="--k:10">m</i><i style="--k:11">i</i><i style="--k:12">e</i><i style="--k:13">d</i><i style="--k:14">o</i><i style="--k:15">.</i></span><span class="mw-r" style="--i:3"><i style="--k:0">v</i><i style="--k:1">o</i><i style="--k:2">l</i><i style="--k:3">v</i><i style="--k:4">e</i><i style="--k:5">r</i><i style="--k:6">&nbsp;</i><i style="--k:7">a</i><i style="--k:8">l</i><i style="--k:9">&nbsp;</i><i style="--k:10">a</i><i style="--k:11">g</i><i style="--k:12">u</i><i style="--k:13">a</i><i style="--k:14">.</i></span></span></span></h4>
    <p class="mw-s mw-f" style="--d:1.4s">Clases para todos los niveles, con equipo incluido y grupos reducidos.</p>
    <div class="mw-cta mw-f" style="--d:1.6s">${btn('reservar', 'wb wb-l', 'Reservar clase')}${btn('clases', 'wb-g', 'Ver clases →')}</div>
   </div>
   <div class="mw-cond mw-f" style="--d:1.2s"><small>Mar hoy</small><div><b>1.2 m</b><span>Oleaje</span></div><div><b>14 s</b><span>Periodo</span></div><div><b>27 °</b><span>Agua</span></div></div>
   <div class="mw-book mw-f" style="--d:1.85s" ${go('reservar')}><div><small>Nivel</small><b>Principiante</b></div><div><small>Fecha</small><b>Sáb 14 · 07:00</b></div><div><small>Personas</small><b>2 personas</b></div><i>Buscar horarios</i></div>
-  <p class="mw-hint mw-f" style="--d:2.2s">Desplázate</p>
  </div>
  <div class="wlt wfw"><div class="wsx wfeat"><div class="rv"><i>${svg('check')}</i><b>Equipo incluido</b><span>Tabla, licra y protector.</span></div><div class="rv"><i>${svg('crm')}</i><b>Grupos de máx. 6</b><span>Atención real de tu instructor.</span></div><div class="rv"><i>${svg('cal')}</i><b>Reserva en línea</b><span>Elige día y hora en un minuto.</span></div></div></div>
+
+ ${foot}
 </section>
 
 <section class="wv wv-clases wlt"><div class="wsx wtop"><p class="wk-o rv">Clases</p><h3 class="wt rv">Elige tu <em>nivel.</em></h3><p class="ws-p rv">Todas incluyen tabla, licra y protector solar. Si el mar no está seguro, reprogramamos sin costo.</p>
@@ -94,24 +95,32 @@ ${nav}
  <div class="wsch rv"><p class="wk-o">Horarios de la semana</p><div>${[['07:00', 'Principiantes · Intermedio'], ['09:00', 'Clases privadas · Niños'], ['11:00', 'Niños · Principiantes'], ['17:00', 'Atardecer · Intermedio']].map(([h, t]) => `<p><b>${h}</b><span>${t}</span></p>`).join('')}</div></div></div>
 <div class="wwave" aria-hidden="true"><svg viewBox="0 0 800 150" preserveAspectRatio="none"><path d="M0 70c60-34 120-34 180 0s120 34 180 0 120-34 180 0 120 34 180 0 60-17 80-8V150H0z" fill="#8b9fb8" opacity=".35"/><path d="M0 92c70-30 130-30 200 0s130 30 200 0 130-30 200 0 130 30 200 0V150H0z" fill="#0a1f36" opacity=".9"/><path d="M0 118c80-24 140-24 220 0s140 24 220 0 140-24 220 0 120 20 140 14V150H0z" fill="#06111f"/></svg>
 <svg class="wwave-b" viewBox="0 0 60 150" aria-hidden="true"><path d="M30 4C44 28 48 70 46 112c-1 20-8 32-16 36-8-4-15-16-16-36C12 70 16 28 30 4z" fill="#fbf9f4" stroke="#0a1f36" stroke-width="1.2"/><path d="M30 14v124" stroke="#0a1f36" stroke-width="1.4" opacity=".5"/><path d="M18 96c8 4 16 4 24 0" stroke="#ff9a62" stroke-width="2" fill="none"/><path d="M24 138l-3 9 6-4zM36 138l3 9-6-4z" fill="#0a1f36"/></svg></div>
+
+ ${foot}
 </section>
 
 <section class="wv wv-experiencias wlt"><div class="wsx wtop"><p class="wk-o rv">Experiencias</p><h3 class="wt rv">Más que una <em>clase.</em></h3><p class="ws-p rv">Jornadas pensadas para disfrutar el mar con calma, solos, en pareja o con tu equipo.</p>
- <div class="wcol">${exps.map(expRow).join('')}</div></div></section>
+ <div class="wcol">${exps.map(expRow).join('')}</div></div>
+ ${foot}
+</section>
 
 <section class="wv wv-tienda wlt"><div class="wsx wtop">
  <div class="wsh"><div><p class="wk-o rv">Tienda · Marea Goods</p><h3 class="wt rv">Hecho para el agua,<br><em>y para después.</em></h3></div>
  <p class="wcartb rv">Carrito<b><i data-cart-n>0</i> · <i data-cart-t>$0</i></b></p></div>
  <div class="wfil rv">${filtros.map(([k, t]) => `<button type="button" class="wf-c" data-int="wfil" data-f="${k}">${t}</button>`).join('')}</div>
  <div class="wshop">${prods.map(prodCard).join('')}</div>
- <div class="wship rv"><p>Envíos a todo México</p><p>Cambios en 30 días</p><p>Pago seguro</p></div></div></section>
+ <div class="wship rv"><p>Envíos a todo México</p><p>Cambios en 30 días</p><p>Pago seguro</p></div></div>
+ ${foot}
+</section>
 
 <section class="wv wv-nosotros wlt"><div class="wsx wtop"><p class="wk-o rv">Nosotros</p><h3 class="wt rv">Una escuela <em>hecha en el agua.</em></h3>
  <div class="wnos"><p class="ws-p rv">Marea nació para enseñar a surfear sin presión: con grupos pequeños, equipo cuidado y un mar que se respeta. Nos importa más que disfrutes tu primera ola que la cantidad de clases que tomes.</p><i class="wnos-ph ph2 rv"></i></div>
  <div class="wvals">${vals.map(([n, t, d]) => `<div class="rv"><em>${n}</em><b>${t}</b><span>${d}</span></div>`).join('')}</div>
  <p class="wk-o rv" style="margin-top:2.6em">El equipo</p>
  <div class="wteam">${team.map(([i, n, r, c]) => `<div class="rv"><i class="av-${c}">${i}</i><b>${n}</b><span>${r}</span></div>`).join('')}</div>
- <div class="wloc rv"><div><p class="wk-o">Dónde estamos</p><b>Playa Carrizalillo, Puerto Escondido</b><span>Todos los días de 6:30 a 19:00 · hola@marea.example</span></div>${btn('reservar', 'wb wb-l', 'Reservar clase')}</div></div></section>
+ <div class="wloc rv"><div><p class="wk-o">Dónde estamos</p><b>Playa Carrizalillo, Puerto Escondido</b><span>Todos los días de 6:30 a 19:00 · hola@marea.example</span></div>${btn('reservar', 'wb wb-l', 'Reservar clase')}</div></div>
+ ${foot}
+</section>
 
 <section class="wv wv-reservar"><div class="wsx wtop"><p class="wk-o rv">Reservar</p><h3 class="wt rv">Reserva tu <em>lugar.</em></h3>
  <div class="wres">
