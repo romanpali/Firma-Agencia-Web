@@ -28,6 +28,9 @@ const projs: Proj[] = [
   { n: 'Hikari Estudio', leaves: auroraLeaves(hcBack, hcBack), pieces: auroraPieces, cat: 'Diseño y fotografía', y: 2025, hl: 'Imágenes con calma', d: 'Identidad, sitio web y portafolio de un estudio de diseño y fotografía, con pocos elementos y mucho espacio.', tags: ['Identidad', 'Sitio web', 'Fotografía'], art: 7, dark: false, layout: 1, img: '/obra/p4.webp' },
   { n: 'Ábaco', leaves: abacoLeaves(), pieces: abacoPieces, cat: 'Finanzas y operaciones', y: 2025, hl: 'Las cuentas, en orden', d: 'Identidad, sitio web y panel de facturas, cobranza y aprobaciones para ordenar las finanzas y operaciones de una empresa.', tags: ['Identidad', 'Sitio web', 'Panel de operación'], art: 6, dark: true, layout: 1, img: '/obra/p5.webp' },
 ];
+// Celular: la baraja usa estas cuatro portadas verticales (sin Casa Lumbre)
+const mimg: Record<string, string> = { Marea: '/obra/m/marea.webp', Trama: '/obra/m/trama.webp', 'Hikari Estudio': '/obra/m/hikari.webp', 'Ábaco': '/obra/m/abaco.webp' };
+const mprojs = projs.filter((p) => mimg[p.n]);
 const { leaves, end } = pagesFor(projs, { brand: 'HumanCorp', mail: 'info@humancorp.co', mailHref: '/contacto', year: 2026, endTitle: 'Diseño, tecnología y operaciones empresariales', contentsTitle: 'Contenido' });
 const leavesHtml = leavesMarkup(leaves);
 ---
@@ -76,16 +79,16 @@ const leavesHtml = leavesMarkup(leaves);
 
       <!-- Celular: una baraja de cartas que se desliza a la izquierda (sin libro 3D). Al tocar una carta se abre el proyecto a pantalla completa (scripts/obra-mobile.ts). -->
       <section class="ob-m" data-obs data-tone="dark">
-        <div class="obs-bgs" aria-hidden="true">{projs.map((_, i) => <i class={`obs-bg${i === 0 ? ' on' : ''}`} data-th={i}><b></b><b></b></i>)}<s class="obs-grain"></s></div>
+        <div class="obs-bgs" aria-hidden="true">{mprojs.map((_, i) => <i class={`obs-bg${i === 0 ? ' on' : ''}`} data-th={projs.indexOf(_)}><img src={mimg[_.n]} alt="" decoding="async" /><b></b><b></b></i>)}<s class="obs-grain"></s></div>
         <header class="obs-head">
-          <div class="obs-row"><p class="obs-eye"><i></i>Obra selecta · 2026</p><p class="obs-cnt"><span data-obs-n>01</span><em> / 0{projs.length}</em></p></div>
-          <h2 class="obs-title" data-obs-title aria-live="polite">{projs[0].n}</h2>
-          <p class="obs-sub" data-obs-sub>{projs[0].cat} · {projs[0].y}</p>
+          <div class="obs-row"><p class="obs-eye"><i></i>Obra selecta · 2026</p><p class="obs-cnt"><span data-obs-n>01</span><em> / 0{mprojs.length}</em></p></div>
+          <h2 class="obs-title" data-obs-title aria-live="polite">{mprojs[0].n}</h2>
+          <p class="obs-sub" data-obs-sub>{mprojs[0].cat} · {mprojs[0].y}</p>
         </header>
         <div class="obs-deck" data-obs-deck>
-          {projs.map((p, i) => (
-            <article class="obs-card" data-i={i} data-th={i} data-n={p.n} data-cat={p.cat} data-y={p.y} data-hl={p.hl} data-d={p.d} data-tags={p.tags.join('|')} data-img={p.img}>
-              <img src={p.img} alt="" width="900" height="1200" loading={i < 2 ? 'eager' : 'lazy'} decoding="async" draggable="false" />
+          {mprojs.map((p, i) => (
+            <article class="obs-card" data-i={i} data-th={projs.indexOf(p)} data-n={p.n} data-cat={p.cat} data-y={p.y} data-hl={p.hl} data-d={p.d} data-tags={p.tags.join('|')} data-img={mimg[p.n]}>
+              <img src={mimg[p.n]} alt="" width="900" height="1200" loading={i < 2 ? 'eager' : 'lazy'} decoding="async" draggable="false" />
               <i class="obs-shade"></i>
               <b class="obs-num">{`0${i + 1}`}</b>
               <div class="obs-meta"><p>{p.hl}</p><span class="obs-go"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
@@ -94,9 +97,9 @@ const leavesHtml = leavesMarkup(leaves);
         </div>
         <p class="obs-hint"><i></i><span>Desliza para ver más · toca para abrir</span></p>
         <nav class="obs-tab" aria-label="Proyectos">
-          {projs.map((p, i) => <button type="button" data-go={i} class={i === 0 ? 'on' : ''}><i></i><span>{p.n.split(' ')[0]}</span></button>)}
+          {mprojs.map((p, i) => <button type="button" data-go={i} class={i === 0 ? 'on' : ''}><i></i><span>{p.n.split(' ')[0]}</span></button>)}
         </nav>
-        {projs.map((p, i) => (
+        {mprojs.map((p, i) => (
           <template data-p={i}>
             {(p.pieces || []).map((pc) => <figure class="obm-pc"><div class="obm-pg" set:html={pc.h}></div><figcaption>{pc.t}</figcaption></figure>)}
           </template>

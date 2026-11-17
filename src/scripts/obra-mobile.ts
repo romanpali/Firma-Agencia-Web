@@ -62,7 +62,7 @@ function close() {
 
 function show(o: HTMLElement, pieces: { t: string; el: HTMLElement; site: boolean }[], k: number) {
   const stage = o.querySelector<HTMLElement>('.obv-st')!;
-  stage.innerHTML = ''; stage.dataset.site = pieces[k].site ? '1' : '';
+  stage.innerHTML = ''; stage.dataset.site = pieces[k].site ? '1' : ''; stage.dataset.dash = '';
   const node = pieces[k].el.cloneNode(true) as HTMLElement;
   node.querySelectorAll<HTMLElement>('[data-ready], [data-tready]').forEach((e) => { delete e.dataset.ready; delete e.dataset.tready; });
   delete node.dataset.ready; delete node.dataset.tready;
@@ -70,11 +70,18 @@ function show(o: HTMLElement, pieces: { t: string; el: HTMLElement; site: boolea
     stage.appendChild(node); node.classList.add('live');
     stage.style.fontSize = '19px';
   } else {
-    const w = document.createElement('div'); w.className = 'obv-pg live';
-    const fit = (innerWidth - 24) / 40, zoom = /panel/i.test(pieces[k].t), fs = zoom ? Math.max(15, fit) : fit; w.style.fontSize = `${fs}px`;
-    w.appendChild(node); stage.appendChild(w);
-    const hint = document.createElement('p'); hint.className = 'obv-hint'; hint.textContent = fs > fit + 0.5 ? 'Desliza hacia los lados para ver todo' : '';
-    stage.appendChild(hint);
+    const zoom = /panel/i.test(pieces[k].t);
+    const w = document.createElement('div');
+    if (zoom) {
+      // panel: diseño móvil (una columna, a todo el ancho, se desliza hacia abajo)
+      stage.dataset.dash = '1'; w.className = 'obv-dashw live'; w.style.fontSize = '16px';
+      w.appendChild(node); stage.appendChild(w);
+      requestAnimationFrame(() => adapt(w));
+    } else {
+      stage.dataset.dash = ''; w.className = 'obv-pg live';
+      const fit = (innerWidth - 24) / 40; w.style.fontSize = `${fit}px`;
+      w.appendChild(node); stage.appendChild(w);
+    }
   }
   stage.scrollTop = 0; stage.scrollLeft = 0;
   o.querySelectorAll<HTMLElement>('.obv-tb button').forEach((b, i) => b.classList.toggle('on', i === k));
@@ -96,11 +103,11 @@ const wire = (o: HTMLElement) => {
   addEventListener('keydown', function esc(e) { if (e.key === 'Escape') { close(); removeEventListener('keydown', esc); } });
   ov = o; requestAnimationFrame(() => requestAnimationFrame(() => o.classList.add('on')));
 };
-const bar = (i: number, name: string, sub: string) => `<header class="obv-bar"><button type="button" class="obv-back" aria-label="Volver"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button><div><b>${name}</b><small class="obv-tt">${sub}</small></div><em>0${i + 1} / 05</em></header>`;
+const bar = (i: number, name: string, sub: string) => `<header class="obv-bar"><button type="button" class="obv-back" aria-label="Volver"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button><div><b>${name}</b><small class="obv-tt">${sub}</small></div><em>0${i + 1} / 0${document.querySelectorAll('.obs-card').length}</em></header>`;
 
 function detail(c: HTMLElement, i: number, x: number, y: number) {
   const o = document.createElement('div');
-  o.className = 'obv obv-dt'; o.dataset.th = String(i); origin(o, x, y);
+  o.className = 'obv obv-dt'; o.dataset.th = c.dataset.th!; origin(o, x, y);
   const tags = (c.dataset.tags || '').split('|').map((t) => `<li>${t}</li>`).join('');
   o.innerHTML = `${bar(i, c.dataset.n!, c.dataset.cat!)}<div class="obv-st obv-dtb"><div class="obv-hero"><img src="${c.dataset.img}" alt="" /></div><div class="obv-tx"><h3>${c.dataset.hl}</h3><p>${c.dataset.d}</p><ul>${tags}</ul><a class="obv-cta" href="/contacto">Quiero algo así</a></div></div>`;
   document.body.appendChild(o); document.documentElement.style.overflow = 'hidden'; wire(o);
@@ -116,7 +123,7 @@ export function openProject(i: number, x = innerWidth / 2, y = innerHeight * 0.5
   if (!pieces.length) { detail(c, i, x, y); return; }
   const first = Math.max(0, pieces.findIndex((p) => p.site));
   const o = document.createElement('div');
-  o.className = 'obv'; o.dataset.th = String(i); origin(o, x, y);
+  o.className = 'obv'; o.dataset.th = c.dataset.th!; origin(o, x, y);
   o.innerHTML = `${bar(i, c.dataset.n!, '')}<div class="obv-st"></div><nav class="obv-tb">${pieces.map((p) => `<button type="button">${p.t}</button>`).join('')}</nav>`;
   document.body.appendChild(o);
   document.documentElement.style.overflow = 'hidden';

@@ -150,3 +150,36 @@
   @media (prefers-reduced-motion: reduce) { .obs-bg b, .obs-hint i::after, .obs-eye i { animation: none; } .js .obs-head > *, .js .obs-hint, .js .obs-tab, .js .obs-deck { opacity: 1; transform: none; } }
 }
 @media (max-width: 700px) { .obs-deck { margin-top: 12px; height: min(54svh, 450px); } .obs-hint { padding-bottom: 6px; } }
+
+/* fondo del hero de celular: la portada vertical de cada proyecto, desenfocada y en movimiento lento */
+@media (max-width: 700px) {
+  .obs-bg > img { position: absolute; inset: -5%; width: 110%; height: 110%; object-fit: cover; opacity: 0.55; filter: blur(3px) saturate(1.1); animation: obsK 24s ease-in-out infinite alternate; }
+  @keyframes obsK { from { transform: scale(1) translate3d(0, 0, 0); } to { transform: scale(1.12) translate3d(-2%, -1.5%, 0); } }
+  .obs-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(7, 8, 12, 0.6), rgba(7, 8, 12, 0.18) 38%, rgba(7, 8, 12, 0.78)); }
+  .obs-bg b { opacity: 0.7; }
+  @media (prefers-reduced-motion: reduce) { .obs-bg > img { animation: none; } }
+}
+/* paneles en diseño móvil */
+.obv-st[data-dash='1'] { overflow: auto; }
+.obv-dashw { margin: 0 8px 14px; border-radius: 18px; overflow: hidden; }
+.obv-dashw > .pg { position: relative !important; inset: auto !important; width: auto !important; height: auto !important; min-height: calc(100svh - 190px); padding: 18px 16px 70px !important; overflow: visible !important; }
+.obv-dashw * { min-width: 0; }
+.obv-dashw .bk-pn { display: none; }
+/* Marea: panel con asistente */
+.obv-dashw .mr-dash .md-app { position: relative; inset: auto; flex-direction: column; border-radius: 18px; }
+.obv-dashw .md-side { width: auto; padding: 14px 12px 10px; } .obv-dashw .md-side > p, .obv-dashw .md-user { display: none; } .obv-dashw .md-logo { margin-bottom: 8px; }
+.obv-dashw .md-side ul { flex-direction: row; overflow-x: auto; gap: 6px; scrollbar-width: none; } .obv-dashw .md-side li { flex: none; font-size: 13px; padding: 10px 14px; }
+.obv-dashw .md-hist, .obv-dashw .md-tgl { display: none !important; }
+.obv-dashw .md-main { position: relative; min-height: 60svh; padding: 4px 14px 24px; }
+/* Trama */
+.obv-dashw .tz-dash { display: block; }
+.obv-dashw .td-s { display: flex; align-items: center; gap: 6px; overflow-x: auto; padding: 12px; scrollbar-width: none; box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08); } .obv-dashw .td-s b { flex: none; margin: 0 8px 0 0; font-size: 12px; } .obv-dashw .td-s small { display: none; }
+.obv-dashw .td-s button { flex: none; width: auto; padding: 10px 14px; border-radius: 99px; font-size: 13px; } .obv-dashw .td-s svg { width: 16px; height: 16px; }
+.obv-dashw .td-m { padding: 16px 14px 24px; } .obv-dashw .td-g { grid-template-columns: 1fr; }
+.obv-dashw .td-o { overflow-x: auto; }
+/* Hikari y Ábaco */
+.obv-dashw .au-dash, .obv-dashw .ab-dash { padding: 18px 16px 70px !important; }
+.obv-dashw .ad-vl { display: none; } .obv-dashw .ad-in { position: relative; margin-top: 16px; } .obv-dashw .ad-tr { min-height: 0; }
+.obv-dashw .ab-dash header { flex-wrap: wrap; gap: 10px; } .obv-dashw .ab-dk { grid-template-columns: 1fr 1fr; } .obv-dashw .ab-dash nav { overflow-x: auto; }
+.obv-dashw .md-side ul, .obv-dashw .td-s, .obv-dashw .ab-dash nav { flex-wrap: nowrap !important; }
+.obv-dashw .ab-r, .obv-dashw .ab-dls > div { font-size: 12px; }
