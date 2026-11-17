@@ -744,11 +744,11 @@ img, picture, video, canvas { pointer-events: none; -webkit-user-drag: none; use
 html.i18n-wait body { opacity: 0; }
 
 /* transición hacia «Arma tu proyecto»: círculo de tinta que crece desde el clic y, al llegar, una cortina que se levanta */
-.tr-cover { position: fixed; inset: 0; z-index: 100000; display: grid; place-items: center; background: #0a0706; clip-path: circle(0 at var(--x) var(--y)); animation: trIn 0.8s cubic-bezier(0.7, 0, 0.2, 1) forwards; pointer-events: all; }
-.tr-t { grid-area: 1 / 1; font-size: 13px; letter-spacing: 0.32em; text-transform: uppercase; color: #fff; opacity: 0; animation: trT 0.5s ease 0.55s forwards; }
-.tr-l { grid-area: 1 / 1; align-self: center; margin-top: 46px; width: 120px; height: 1px; background: rgba(255, 255, 255, 0.7); transform: scaleX(0); transform-origin: left; animation: trL 0.55s cubic-bezier(0.6, 0, 0.2, 1) 0.6s forwards; }
+.tr-cover { position: fixed; inset: 0; z-index: 100000; background: #fff; color: #0b0c0f; clip-path: circle(0 at var(--x) var(--y)); animation: trIn 0.8s cubic-bezier(0.7, 0, 0.2, 1) forwards; pointer-events: all; }
+.tr-a { position: absolute; left: 0; right: 0; top: 34px; text-align: center; font-size: 17px; letter-spacing: 0.04em; opacity: 0; animation: trT 0.5s ease 0.5s forwards; } .tr-a b { font-weight: 600; }
+.tr-b { position: absolute; left: 0; right: 0; bottom: 34px; text-align: center; font-size: 11.5px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(11, 12, 15, 0.6); opacity: 0; animation: trT 0.5s ease 0.6s forwards; } .tr-b em { font-style: normal; margin-left: 6px; padding: 3px 8px; border-radius: 99px; background: #0033ff; color: #fff; letter-spacing: 0.12em; }
 @keyframes trIn { to { clip-path: circle(150vmax at var(--x) var(--y)); } } @keyframes trT { to { opacity: 1; } } @keyframes trL { to { transform: none; } }
-html[data-tr]::after { content: ""; position: fixed; inset: 0; z-index: 100000; background: #0a0706; pointer-events: none; animation: trOut 0.9s cubic-bezier(0.7, 0, 0.2, 1) 0.2s forwards; }
+html[data-tr]::after { content: ""; position: fixed; inset: 0; z-index: 100000; background: #fff; pointer-events: none; animation: trOut 0.9s cubic-bezier(0.7, 0, 0.2, 1) 0.2s forwards; }
 @keyframes trOut { from { clip-path: inset(0); } to { clip-path: inset(0 0 100% 0); } }
 @media (prefers-reduced-motion: reduce) { html[data-tr]::after { display: none; } }
 
