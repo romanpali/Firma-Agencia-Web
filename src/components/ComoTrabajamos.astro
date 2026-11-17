@@ -145,9 +145,6 @@ const G = '#cfc4ff', V = '#5b7bff', W = '#f4f2ff';
     put(track, 'opacity', clamp((ct - 0.5) / 0.5).toFixed(3));
     put(label, 'opacity', clamp((ct - 0.6) / 0.4).toFixed(3));
     if (reduced) return;
-    // fuera de pantalla las animaciones de los dibujos SVG se pausan (cada fotograma de un SVG animado recalcula el diseño)
-    const away = y + vh * 1.2 < m.top || y > m.top + m.height + vh * 0.2;
-    if (away !== (root.dataset.away === '1')) root.dataset.away = away ? '1' : '';
     if (y + vh < m.top || y > m.top + m.height) return;
     const p = clamp((y - m.top - vh * LEAD) / Math.max(1, m.height - vh * (LEAD + 1.5)));
     // cada paso se sostiene y el cambio al siguiente es rápido: nunca quedan dos pasos a medias, uno sobre otro

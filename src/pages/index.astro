@@ -8,8 +8,6 @@ import Audience from '../components/Audience.astro';
 import Contact from '../components/Contact.astro';
 import ScrollFx from '../components/ScrollFx.astro';
 import Header from '../components/Header.astro';
-import interLatin from '@fontsource-variable/inter-tight/files/inter-tight-latin-wght-normal.woff2?url';
-import sansLatin from '@fontsource-variable/google-sans-flex/files/google-sans-flex-latin-wght-normal.woff2?url';
 ---
 
 <!doctype html>
@@ -19,8 +17,6 @@ import sansLatin from '@fontsource-variable/google-sans-flex/files/google-sans-f
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Diseño, tecnología y operaciones empresariales." />
     <script is:inline>document.documentElement.classList.add('js');try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('intro')}catch(e){}</script>
-    <link rel="preload" as="font" type="font/woff2" href={interLatin} crossorigin />
-    <link rel="preload" as="font" type="font/woff2" href={sansLatin} crossorigin />
     <link rel="preload" as="image" href="/horizon.webp" type="image/webp" />
     <title>HumanCorp — Diseño, tecnología y operaciones empresariales</title>
   </head>
@@ -38,6 +34,6 @@ import sansLatin from '@fontsource-variable/google-sans-flex/files/google-sans-f
       <Contact />
     </main>
     <ScrollFx />
-    <script is:inline>(function(){var d=document.documentElement;if(!d.classList.contains('intro'))return;var el=document.querySelector('.hc-intro');setTimeout(function(){el.classList.add('out')},1400);setTimeout(function(){d.classList.remove('intro');el.remove()},2150)})()</script>
+    <script is:inline>(function(){var d=document.documentElement;if(!d.classList.contains('intro'))return;var el=document.querySelector('.hc-intro');setTimeout(function(){el.classList.add('out')},2100);setTimeout(function(){d.classList.remove('intro');el.remove()},3300)})()</script>
   </body>
 </html>

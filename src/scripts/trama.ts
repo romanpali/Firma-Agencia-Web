@@ -22,7 +22,7 @@ const money = (n: number) => `$${n.toLocaleString('es-MX')}`;
 const SZ = ['XS', 'S', 'M', 'L', 'XL'];
 const byId = (id: string) => P_.find((p) => p.id === id)!;
 const src = (id: string) => `/obra/trama/${id}.webp`;
-const img = (id: string, cls = 'tz-img') => `<img class="${cls}" src="${src(id)}" alt="" width="687" height="1024" loading="lazy" decoding="async">`;
+const img = (id: string, cls = 'tz-img') => `<img class="${cls}" src="${src(id)}" alt="" width="687" height="1024" decoding="async">`;
 const ph = (p: P, cls = '') => `<div class="tz-ph ${cls}">${img(p.id)}</div>`;
 const tile = (p: P) => `<article class="tz-p rv" data-int="tpdp" data-id="${p.id}" data-k="${p.k}" data-n="${p.n}" data-p="${p.p}" data-sx="${p.sx}" data-kn="${p.kn}" data-col="${p.col}" data-comp="${p.comp}" data-d="${p.d}">
 ${ph(p)}${p.tag ? `<span class="tz-tag">${p.tag}</span>` : ''}<div class="tz-qs"><small>Añadir rápido</small><div>${SZ.map((s) => `<button type="button" data-int="tadd" data-id="${p.id}" data-s="${s}">${s}</button>`).join('')}</div></div>

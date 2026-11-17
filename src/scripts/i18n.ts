@@ -1,8 +1,6 @@
 // Cambio de idioma (español ⇄ inglés) sin duplicar páginas: se sustituye el texto exacto por su traducción (data/en.ts).
 // El idioma queda en localStorage («hc-lang»); al cambiarlo se recarga la página para que todo (incluido el JavaScript de cada sección) arranque en ese idioma.
-// El diccionario (≈100 KB) solo se descarga cuando la página se muestra en inglés.
-let EN: Record<string, string> = {};
-let EN_RE: [RegExp, string][] = [];
+import { EN, EN_RE } from '../data/en';
 
 const KEY = 'hc-lang';
 const get = (): 'es' | 'en' => {
@@ -77,10 +75,9 @@ document.addEventListener('click', (e) => {
   const u = new URL(location.href); u.searchParams.delete('lang'); location.href = u.toString();
 });
 
-const init = async () => {
+const init = () => {
   mark();
   if (lang !== 'en') { document.documentElement.classList.remove('i18n-wait'); return; }
-  const d = await import('../data/en'); EN = d.EN; EN_RE = d.EN_RE;
   document.documentElement.lang = 'en';
   const ti = tr(document.title); if (ti) document.title = ti;
   walk(document.body);

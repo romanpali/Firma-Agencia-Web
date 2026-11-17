@@ -219,13 +219,10 @@ const areaPacks = [area(0, 'creativa', 'HC-A01', 0), area(1, 'creativa', 'HC-A02
       const AREA = 0.48; // alto de pantalla de scroll por área (debe coincidir con el CSS)
 
       const rigs = sheets.map((sheet) => {
-        const dimL = document.createElement('i'), dimO = document.createElement('i');
-        dimL.className = 'dim-l'; dimO.className = 'dim-o'; dimL.setAttribute('aria-hidden', 'true'); dimO.setAttribute('aria-hidden', 'true');
-        sheet.prepend(dimL); sheet.append(dimO);
         const scenes = [...sheet.querySelectorAll<HTMLElement>('[data-scene]')];
         const pns = scenes.map((sc) => sc.querySelector<HTMLElement>('[data-pn]')!);
         return {
-          sheet, dimL, dimO, scenes, pns, n: scenes.length,
+          sheet, scenes, pns, n: scenes.length,
           counts: pns.map((pn) => countsOf(pn)),
           lastQ: scenes.map(() => -1),
           btns: [...sheet.querySelectorAll<HTMLButtonElement>('[data-area]')],
@@ -273,7 +270,7 @@ const areaPacks = [area(0, 'creativa', 'HC-A01', 0), area(1, 'creativa', 'HC-A02
           if (arrive > 0.5 && k > cur) cur = k;
           if (wide.matches && !reduced.matches) {
             put(r.sheet, 'transform', `translate3d(0,${(-22 * depth).toFixed(1)}px,0) scale(${(1 - 0.04 * depth).toFixed(4)})`);
-            const dm = clamp(depth).toFixed(3); put(r.dimL, 'opacity', dm); put(r.dimO, 'opacity', dm);
+            put(r.sheet, '--dim', clamp(depth).toFixed(3));
             put(r.sheet, 'opacity', (1 - clamp((depth - 2) / 0.8)).toFixed(3));
           }
           depth += arrive;

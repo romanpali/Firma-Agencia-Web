@@ -3,13 +3,9 @@
 export type Frame = (t: number, y: number, vh: number) => void;
 
 const subs: Frame[] = [];
-let gated = false;
 let running = false;
 const tick = (t: number) => {
-  const d = document.documentElement;
-  // Mientras corre la pantalla de entrada (o el menú está abierto) la página de abajo no se actualiza: así el logo anima sin tirones.
-  if (!d.hasAttribute('data-menu-on') && !d.classList.contains('intro')) { const y = scrollY, vh = innerHeight; if (gated) { gated = false; remeasure(); } for (const f of subs) f(t, y, vh); }
-  else gated = true;
+  if (!document.documentElement.hasAttribute('data-menu-on')) { const y = scrollY, vh = innerHeight; for (const f of subs) f(t, y, vh); }
   if (document.hidden) running = false;
   else requestAnimationFrame(tick);
 };
