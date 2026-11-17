@@ -89,45 +89,38 @@ function show(o: HTMLElement, pieces: { t: string; el: HTMLElement; site: boolea
   requestAnimationFrame(() => stage.querySelectorAll('.rv').forEach((e) => e.classList.remove('in')));
 }
 
-function detail(card: HTMLElement, i: number, name: string) {
-  const img = card.querySelector<HTMLImageElement>(':scope > img')?.src || '';
-  const tags = [...card.querySelectorAll('.obm-bot li')].map((l) => `<li>${l.textContent}</li>`).join('');
-  const o = document.createElement('div');
-  o.className = 'obv obv-dt'; o.dataset.th = String(i);
-  o.innerHTML = `<header class="obv-bar"><button type="button" class="obv-back" aria-label="Volver"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button><div><b>${name}</b><small>${card.querySelector('.obm-top em')?.textContent || ''}</small></div><em>0${i + 1} / 05</em></header>
-<div class="obv-st obv-dtb"><div class="obv-hero"><img src="${img}" alt="" /></div><div class="obv-tx"><h3>${card.querySelector('.obm-bot h3')?.textContent || ''}</h3><p>${card.querySelector('.obm-d')?.textContent || ''}</p><ul>${tags}</ul><a class="obv-cta" href="/contacto">Quiero algo así</a></div></div>`;
-  document.body.appendChild(o); document.documentElement.style.overflow = 'hidden';
+const card = (i: number) => document.querySelector<HTMLElement>(`.obs-card[data-i="${i}"]`)!;
+const origin = (o: HTMLElement, x: number, y: number) => { o.style.setProperty('--ox', `${x}px`); o.style.setProperty('--oy', `${y}px`); };
+const wire = (o: HTMLElement) => {
   o.querySelector('.obv-back')!.addEventListener('click', close);
   addEventListener('keydown', function esc(e) { if (e.key === 'Escape') { close(); removeEventListener('keydown', esc); } });
   ov = o; requestAnimationFrame(() => requestAnimationFrame(() => o.classList.add('on')));
+};
+const bar = (i: number, name: string, sub: string) => `<header class="obv-bar"><button type="button" class="obv-back" aria-label="Volver"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button><div><b>${name}</b><small class="obv-tt">${sub}</small></div><em>0${i + 1} / 05</em></header>`;
+
+function detail(c: HTMLElement, i: number, x: number, y: number) {
+  const o = document.createElement('div');
+  o.className = 'obv obv-dt'; o.dataset.th = String(i); origin(o, x, y);
+  const tags = (c.dataset.tags || '').split('|').map((t) => `<li>${t}</li>`).join('');
+  o.innerHTML = `${bar(i, c.dataset.n!, c.dataset.cat!)}<div class="obv-st obv-dtb"><div class="obv-hero"><img src="${c.dataset.img}" alt="" /></div><div class="obv-tx"><h3>${c.dataset.hl}</h3><p>${c.dataset.d}</p><ul>${tags}</ul><a class="obv-cta" href="/contacto">Quiero algo así</a></div></div>`;
+  document.body.appendChild(o); document.documentElement.style.overflow = 'hidden'; wire(o);
 }
 
-function open(i: number) {
+export function openProject(i: number, x = innerWidth / 2, y = innerHeight * 0.55) {
   if (ov) return;
-  const card = document.getElementById(`obra-${i + 1}`)!;
-  const name = card.querySelector('.obm-name')?.textContent?.split(' · ')[0] || '';
-  const pieces = [...card.querySelectorAll<HTMLElement>('.obm-pc')].map((f) => {
+  const c = card(i), tpl = document.querySelector<HTMLTemplateElement>(`template[data-p="${i}"]`)!;
+  const pieces = [...tpl.content.querySelectorAll<HTMLElement>('.obm-pc')].map((f) => {
     const el = f.querySelector<HTMLElement>('.obm-pg > *')!;
     return { t: f.querySelector(':scope > figcaption')!.textContent || '', el, site: !!el.querySelector('.mw-scroll') || el.classList.contains('mr-web') };
   });
-  if (!pieces.length) { detail(card, i, name); return; }
+  if (!pieces.length) { detail(c, i, x, y); return; }
   const first = Math.max(0, pieces.findIndex((p) => p.site));
   const o = document.createElement('div');
-  o.className = 'obv'; o.dataset.th = String(i);
-  o.innerHTML = `<header class="obv-bar"><button type="button" class="obv-back" aria-label="Volver"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button><div><b>${name}</b><small class="obv-tt"></small></div><em>0${i + 1} / 05</em></header>
-<div class="obv-st"></div>
-<nav class="obv-tb">${pieces.map((p) => `<button type="button">${p.t}</button>`).join('')}</nav>
-<i class="obv-ln"></i>`;
+  o.className = 'obv'; o.dataset.th = String(i); origin(o, x, y);
+  o.innerHTML = `${bar(i, c.dataset.n!, '')}<div class="obv-st"></div><nav class="obv-tb">${pieces.map((p) => `<button type="button">${p.t}</button>`).join('')}</nav>`;
   document.body.appendChild(o);
   document.documentElement.style.overflow = 'hidden';
   show(o, pieces, first);
   o.querySelectorAll<HTMLElement>('.obv-tb button').forEach((b, k) => b.addEventListener('click', () => show(o, pieces, k)));
-  o.querySelector('.obv-back')!.addEventListener('click', close);
-  addEventListener('keydown', function esc(e) { if (e.key === 'Escape') { close(); removeEventListener('keydown', esc); } });
-  ov = o; requestAnimationFrame(() => requestAnimationFrame(() => o.classList.add('on')));
+  wire(o);
 }
-
-document.addEventListener('click', (ev) => {
-  const b = (ev.target as HTMLElement).closest<HTMLElement>('[data-obm-open]');
-  if (b && !b.closest('.obv')) { ev.preventDefault(); open(+b.dataset.obmOpen!); }
-});

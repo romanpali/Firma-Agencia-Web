@@ -74,44 +74,33 @@ const leavesHtml = leavesMarkup(leaves);
         </div>
       </section>
 
-      <!-- Celular: experiencia propia, sin libro 3D. Portada, y cinco tarjetas a pantalla casi completa que se apilan al bajar. -->
-      <section class="ob-m" data-obm data-tone="dark">
-        <header class="obm-hero">
-          <i class="obm-win" aria-hidden="true"></i>
-          <canvas class="obm-snow" data-snow aria-hidden="true"></canvas>
-          <p class="obm-eye"><i></i>Obra selecta · 2026</p>
-          <h2 class="obm-title"><span>Cinco</span> <span>proyectos,</span> <em>cinco formas de hacerlo.</em></h2>
-          <p class="obm-sub">Identidad, sitios y paneles de ejemplo. Toca uno para verlo a fondo.</p>
-          <div class="obm-orb" aria-hidden="true">
-            <svg viewBox="0 0 200 200"><circle class="r1" cx="100" cy="100" r="86" pathLength="1" /><circle class="r2" cx="100" cy="100" r="58" pathLength="1" /><circle class="r3" cx="100" cy="100" r="30" pathLength="1" />
-              <g class="spin">{[0, 1, 2, 3, 4].map((k) => <circle class="dot" cx={100 + 86 * Math.cos((k * 72 - 90) * Math.PI / 180)} cy={100 + 86 * Math.sin((k * 72 - 90) * Math.PI / 180)} r="3.2" />)}</g></svg>
-            <b>05</b>
-          </div>
-          <a class="obm-cue" href="#obra-1"><span>Desliza</span><i></i></a>
+      <!-- Celular: una baraja de cartas que se desliza a la izquierda (sin libro 3D). Al tocar una carta se abre el proyecto a pantalla completa (scripts/obra-mobile.ts). -->
+      <section class="ob-m" data-obs data-tone="dark">
+        <div class="obs-bgs" aria-hidden="true">{projs.map((_, i) => <i class={`obs-bg${i === 0 ? ' on' : ''}`} data-th={i}><b></b><b></b></i>)}<s class="obs-grain"></s></div>
+        <header class="obs-head">
+          <div class="obs-row"><p class="obs-eye"><i></i>Obra selecta · 2026</p><p class="obs-cnt"><span data-obs-n>01</span><em> / 0{projs.length}</em></p></div>
+          <h2 class="obs-title" data-obs-title aria-live="polite">{projs[0].n}</h2>
+          <p class="obs-sub" data-obs-sub>{projs[0].cat} · {projs[0].y}</p>
         </header>
-        <div class="obm-stack">
+        <div class="obs-deck" data-obs-deck>
           {projs.map((p, i) => (
-            <article class={`obm-card${p.pieces ? ' obm-case' : ''}`} data-th={i} data-obm-card id={`obra-${i + 1}`} style={`--i:${i}`}>
-              {p.pieces ? <i class="obm-mesh" aria-hidden="true"></i> : <img src={p.img} alt="" width="1200" height="800" loading={i === 0 ? 'eager' : 'lazy'} decoding="async" />}
-              <i class="obm-dim" aria-hidden="true"></i>
-              <div class="obm-top"><b>{`0${i + 1}`}<small> / 0{projs.length}</small></b><em>{p.cat}</em></div>
-              {p.pieces && (
-                <div class="obm-pieces" aria-label={`Piezas del proyecto ${p.n}`}>
-                  {p.pieces.map((pc) => (
-                    <figure class="obm-pc"><div class="obm-pg" set:html={pc.h}></div><figcaption>{pc.t}</figcaption></figure>
-                  ))}
-                </div>
-              )}
-              <div class="obm-bot">
-                <p class="obm-name">{p.n} · {p.y}</p>
-                <h3>{p.hl}</h3>
-                <p class="obm-d">{p.d}</p>
-                <ul>{p.tags.map((t) => <li>{t}</li>)}</ul>
-                <div class="obm-act"><button type="button" class="obm-open" data-obm-open={i}>Ver más a fondo <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button><a class="obm-cta" href="/contacto">Quiero algo así</a></div>
-              </div>
+            <article class="obs-card" data-i={i} data-th={i} data-n={p.n} data-cat={p.cat} data-y={p.y} data-hl={p.hl} data-d={p.d} data-tags={p.tags.join('|')} data-img={p.img}>
+              <img src={p.img} alt="" width="900" height="1200" loading={i < 2 ? 'eager' : 'lazy'} decoding="async" draggable="false" />
+              <i class="obs-shade"></i>
+              <b class="obs-num">{`0${i + 1}`}</b>
+              <div class="obs-meta"><p>{p.hl}</p><span class="obs-go"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
             </article>
           ))}
         </div>
+        <p class="obs-hint"><i></i><span>Desliza para ver más · toca para abrir</span></p>
+        <nav class="obs-tab" aria-label="Proyectos">
+          {projs.map((p, i) => <button type="button" data-go={i} class={i === 0 ? 'on' : ''}><i></i><span>{p.n.split(' ')[0]}</span></button>)}
+        </nav>
+        {projs.map((p, i) => (
+          <template data-p={i}>
+            {(p.pieces || []).map((pc) => <figure class="obm-pc"><div class="obm-pg" set:html={pc.h}></div><figcaption>{pc.t}</figcaption></figure>)}
+          </template>
+        ))}
       </section>
 
       <section data-tone="dark" class="relative px-6 py-[14svh] text-center md:px-10" style="background:linear-gradient(#0a0706,#00033D)">
@@ -135,7 +124,7 @@ const leavesHtml = leavesMarkup(leaves);
       import '../scripts/trama-dash';
       import '../scripts/au-site';
       import '../scripts/abaco-site';
-      import '../scripts/obra-mobile';
+      import '../scripts/obra-deck';
       const main = document.querySelector<HTMLElement>('main')!;
       const sec = document.querySelector<HTMLElement>('[data-book]')!;
       const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
