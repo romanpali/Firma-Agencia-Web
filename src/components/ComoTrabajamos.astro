@@ -12,10 +12,10 @@ const steps = [
 const G = '#cfc4ff', V = '#5b7bff', W = '#f4f2ff';
 ---
 
-<section id="como-trabajamos" data-tone="dark" class="pointer-events-none relative z-10 -mt-[100lvh] font-goog text-[#f4efe6]">
+<section id="como-trabajamos" data-tone="dark" class="pointer-events-none relative z-10 -mt-[190lvh] font-goog text-[#f4efe6]">
   <div data-ct class="h-[calc(900vh+90svh)]">
     <div data-ct-stage class="sticky top-0 h-lvh overflow-hidden">
-      <div data-ct-bg class="absolute inset-0 opacity-0" style="mask-image:linear-gradient(to bottom,transparent 0,#000 28svh);-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 28svh)"><i class="absolute inset-0" style="background:linear-gradient(165deg,#00033D 0%,#0600AB 52%,#2a1fb8 80%,#4a35d8 100%)"></i>
+      <div data-ct-bg class="absolute inset-0 opacity-0 will-change-[opacity]"><i class="absolute inset-0" style="background:linear-gradient(165deg,#00033D 0%,#0600AB 52%,#2a1fb8 80%,#4a35d8 100%)"></i>
       <i class="ct-o ct-o1 absolute"></i><i class="ct-o ct-o2 absolute"></i><i class="ct-o ct-o3 absolute"></i>
       <i class="ct-stars absolute inset-0"></i>
       <i class="grain absolute inset-0 opacity-[.1]"></i></div>
@@ -24,7 +24,7 @@ const G = '#cfc4ff', V = '#5b7bff', W = '#f4f2ff';
         <linearGradient id="ctf" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset="1" stop-color="#fff" stop-opacity=".04"/></linearGradient>
         <linearGradient id="cts" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".75"/><stop offset=".5" stop-color="#fff" stop-opacity=".12"/><stop offset="1" stop-color="#977DFF" stop-opacity=".5"/></linearGradient>
       </defs></svg>
-      <p class="absolute inset-x-0 top-[86px] z-20 text-center text-[15px] text-[#f4efe6]/55">Cómo trabajamos</p>
+      <p data-ct-label class="absolute inset-x-0 top-[86px] z-20 text-center text-[15px] text-[#f4efe6]/55">Cómo trabajamos</p>
 
       <div data-ct-track class="absolute inset-0 flex will-change-transform" style="width:800vw">
         {steps.map((s, i) => (
@@ -121,7 +121,7 @@ const G = '#cfc4ff', V = '#5b7bff', W = '#f4f2ff';
 </section>
 
 <script>
-  import { onFrame, measure, put, clamp, smooth, dissolveOut } from '../scripts/frame';
+  import { onFrame, measure, put, clamp, smooth, dissolveOut, crossProgress } from '../scripts/frame';
   const root = document.querySelector<HTMLElement>('#como-trabajamos')!;
   const sec = root.querySelector<HTMLElement>('[data-ct]')!;
   const track = root.querySelector<HTMLElement>('[data-ct-track]')!;
@@ -131,6 +131,7 @@ const G = '#cfc4ff', V = '#5b7bff', W = '#f4f2ff';
   const m = measure(sec);
   const bg = root.querySelector<HTMLElement>('[data-ct-bg]')!;
   const stageEl = root.querySelector<HTMLElement>('[data-ct-stage]')!;
+  const label = root.querySelector<HTMLElement>('[data-ct-label]')!;
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) dissolveOut(stageEl, document.getElementById('cierre')!);
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const LEAD = 0.9, MAXV = 2.2; // el capítulo ya está fijo sobre el anterior (aparece en su lugar); MAXV = pasos por segundo como máximo
@@ -138,9 +139,11 @@ const G = '#cfc4ff', V = '#5b7bff', W = '#f4f2ff';
   if (reduced) slides.forEach((s) => s.el.style.setProperty('--q', '1'));
   onFrame((t, y, vh) => {
     root.toggleAttribute('data-tone-off', y - m.top < vh * 0.5);
-    const bo = reduced ? 1 : clamp((y - m.top) / (vh * 0.85));
-    put(bg, 'opacity', bo.toFixed(3));
-    put(track, 'opacity', Math.max(0, (bo - 0.55) / 0.45).toFixed(3));
+    // fundido cruzado con el capítulo anterior (que baja a la vez): el fondo sube sin máscara y el contenido llega al final
+    const ct = reduced ? 1 : crossProgress(y, m.top, vh);
+    put(bg, 'opacity', (reduced ? 1 : smooth(clamp((ct - 0.05) / 0.6))).toFixed(3));
+    put(track, 'opacity', clamp((ct - 0.5) / 0.5).toFixed(3));
+    put(label, 'opacity', clamp((ct - 0.6) / 0.4).toFixed(3));
     if (reduced) return;
     if (y + vh < m.top || y > m.top + m.height) return;
     const p = clamp((y - m.top - vh * LEAD) / Math.max(1, m.height - vh * (LEAD + 1.5)));

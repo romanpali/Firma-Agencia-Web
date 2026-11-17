@@ -72,3 +72,17 @@ export const dissolveOut = (stage: HTMLElement, next: HTMLElement, zoom = 0.06, 
     put(stage, 'transform', `scale(${(1 + zoom * t).toFixed(4)})`);
   });
 };
+
+// Fundido cruzado limpio entre dos capítulos: el que sale baja de opacidad (con un acercamiento mínimo) mientras el siguiente sube.
+// Solo toca opacidad y transform (se componen en la GPU), así que no repinta nada. Devuelve el avance 0–1 de la transición.
+export const crossProgress = (y: number, top: number, vh: number) => clamp((y - top) / (vh * 0.9));
+export const crossOut = (stage: HTMLElement, next: HTMLElement, zoom = 0.035) => {
+  const n = measure(next);
+  stage.style.willChange = 'opacity, transform';
+  onFrame((_t, y, vh) => {
+    const t = crossProgress(y, n.top, vh);
+    if (t <= 0) { put(stage, 'opacity', '1'); put(stage, 'transform', 'none'); return; }
+    put(stage, 'opacity', (1 - smooth(clamp((t - 0.15) / 0.6))).toFixed(3));
+    put(stage, 'transform', `translate3d(0,0,0) scale(${(1 + zoom * t).toFixed(4)})`);
+  });
+};
