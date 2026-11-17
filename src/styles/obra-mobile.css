@@ -183,3 +183,8 @@
 .obv-dashw .ab-dash header { flex-wrap: wrap; gap: 10px; } .obv-dashw .ab-dk { grid-template-columns: 1fr 1fr; } .obv-dashw .ab-dash nav { overflow-x: auto; }
 .obv-dashw .md-side ul, .obv-dashw .td-s, .obv-dashw .ab-dash nav { flex-wrap: nowrap !important; }
 .obv-dashw .ab-r, .obv-dashw .ab-dls > div { font-size: 12px; }
+/* Trama: carrito y pago en celular */
+.obv-st[data-site] .tz-ckh { flex-direction: column; align-items: flex-start; gap: 1em; } .obv-st[data-site] .tz-st { gap: 1.4em; overflow-x: auto; max-width: 100%; }
+.obv-st[data-site] .tz-ck { padding: 6em 20px 0; } .obv-st[data-site] .tz-ac { flex-wrap: wrap; } .obv-st[data-site] .tz-b2 { font-size: 0.8em; }
+.obv-st[data-site] .tz-ckr { position: static; }
+.obv-st[data-site] .tz-cl2 li { grid-template-columns: 4em 1fr auto; }

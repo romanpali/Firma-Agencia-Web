@@ -44,7 +44,7 @@ const go = (t: string) => `data-int="wtab" data-t="${t}"`;
 const tabsN: [string, string][] = [['mujer', 'Mujer'], ['hombre', 'Hombre'], ['studio', 'Lookbook']];
 const nav = `<div class="tz-nav mw-f" style="--d:.1s"><nav>${tabsN.map(([k, t]) => `<button type="button" class="tz-t" ${go(k)} data-t="${k}">${t}</button>`).join('')}</nav><button type="button" class="tz-logo" ${go('inicio')}>TRAMA</button><div class="tz-r"><span>Buscar</span><span>Cuenta</span><button type="button" data-int="tbag" class="tz-cb">Cesta (<i data-cn>0</i>)</button></div></div>
 <aside class="tz-bag"><div class="tz-bh"><b>Cesta (<i data-cn>0</i>)</b><button type="button" data-int="tbag" aria-label="Cerrar">${svg('x')}</button></div><ul class="tz-bl"></ul><p class="tz-be">Tu cesta está vacía.</p>
-<div class="tz-bf"><div><span>Subtotal</span><b data-tot>$0</b></div><button type="button" class="tz-bb" data-int="tbuy">Tramitar pedido</button><small>Envío gratis desde $1,200 · Cambios en 30 días</small></div>
+<div class="tz-bf"><div><span>Subtotal</span><b data-tot>$0</b></div><button type="button" class="tz-bb" data-int="tcart">Ver carrito y pagar</button><small>Envío gratis desde $1,200 · Cambios en 30 días</small></div>
 <div class="tz-bd"><i>${svg('check')}</i><h4>¡Gracias por tu compra!</h4><p>Pedido TR-<span data-code>2041</span>. Te avisamos por correo cuando salga.</p><button type="button" data-int="tbag">Seguir comprando</button></div></aside>`;
 
 const cat = (t: string, sx: string, id: string) => `<article class="tz-cat rv" ${go(sx.toLowerCase())}>${ph(byId(id))}<div class="tz-cl"><b>${t}</b><span>Ver colección</span></div></article>`;
@@ -63,7 +63,57 @@ const scene = ([k, t, d, ids]: (typeof scenes)[number]) => `<div class="tz-sc rv
 const serv: [string, string][] = [['Envío gratis', 'En pedidos desde $1,200'], ['Cambios en 30 días', 'En tienda o por mensajería'], ['Pago seguro', 'Tarjeta, transferencia y efectivo'], ['Recoge en tienda', 'Listo en 2 horas']];
 const foot = `<footer class="tz-ft"><div class="tz-fg"><div><p class="tz-k">Ayuda</p>${['Pedidos y envíos', 'Cambios y devoluciones', 'Guía de tallas', 'Contacto'].map((x) => `<span>${x}</span>`).join('')}</div><div><p class="tz-k">Tienda</p>${tabsN.map(([k, t]) => `<button type="button" ${go(k)}>${t}</button>`).join('')}</div><div><p class="tz-k">Síguenos</p><span>Instagram</span><span>TikTok</span><span>Pinterest</span></div><div class="tz-nl"><p class="tz-k">Boletín</p><p>Novedades y ediciones nuevas, una vez al mes.</p><div><input type="text" placeholder="Tu correo" aria-label="Correo" /><button type="button">Suscribirme</button></div></div></div><b class="tz-big" aria-hidden="true">TRAMA</b><p class="tz-cp">Concepto de HumanCorp · Datos de ejemplo</p></footer>`;
 
-export const siteHTML = `<div class="pg mr-web tz-web" data-rp="light" data-tab="inicio" data-fil="todo" data-bag="[]">
+
+// ---------- carrito y pago (de ejemplo): carrito → envío → pago → compra realizada ----------
+const steps = [['cart', 'Carrito'], ['ship', 'Envío'], ['pay', 'Pago'], ['done', 'Listo']];
+const field = (k: string, label: string, ph: string, extra = '') => `<label class="tz-fd${extra}"><span>${label}</span><input type="text" data-ck="${k}" placeholder="${ph}" autocomplete="off" /></label>`;
+const checkout = `<div class="tz-ck">
+<div class="tz-ckh"><p class="tz-k">Mi carrito</p><h2 class="tz-t2">Tu pedido</h2>
+ <ol class="tz-st">${steps.map(([k, t], i) => `<li data-k="${k}"><i>${i + 1}</i><span>${t}</span></li>`).join('')}<u><b></b></u></ol></div>
+<div class="tz-ckg">
+ <div class="tz-ckm">
+  <div class="tz-pn tz-pn-cart">
+   <div class="tz-free"><p><span data-free>Te faltan $1,200 para el envío gratis</span></p><u><b data-freebar></b></u></div>
+   <ul class="tz-cl2"></ul>
+   <div class="tz-empty"><i>${svg('x')}</i><b>Tu carrito está vacío</b><span>Agrega algo de la colección y vuelve aquí.</span><button type="button" class="tz-b2" ${go('mujer')}>Ver colección</button></div>
+   <div class="tz-code"><input type="text" data-ck="code" placeholder="Código de descuento" autocomplete="off" /><button type="button" data-int="tcode">Aplicar</button><small data-codemsg>Prueba con TRAMA10</small></div>
+   <div class="tz-ac"><button type="button" class="tz-b2 ghost" ${go('mujer')}>← Seguir comprando</button><button type="button" class="tz-b2" data-int="tstep" data-s="ship">Continuar al envío</button></div>
+  </div>
+  <div class="tz-pn tz-pn-ship">
+   <h3>Datos de envío</h3>
+   <div class="tz-ff">${field('nom', 'Nombre completo', 'Sofía Reyes')}${field('mail', 'Correo', 'sofia@correo.com')}${field('tel', 'Teléfono', '55 0000 0000')}${field('cp', 'Código postal', '06600')}${field('dir', 'Calle y número', 'Av. Álvaro Obregón 120', ' wide')}${field('ciu', 'Ciudad', 'Ciudad de México', ' wide')}</div>
+   <h3>Método de envío</h3>
+   <div class="tz-opt">${[['std', 'Estándar', '2 a 4 días hábiles', 'Gratis desde $1,200'], ['exp', 'Express', 'Mañana antes de las 7 pm', '$199'], ['pick', 'Recoger en tienda', 'Listo en 2 horas', 'Gratis']].map(([k, t, d, p]) => `<button type="button" data-int="tship" data-o="${k}"><i></i><span><b>${t}</b><small>${d}</small></span><em>${p}</em></button>`).join('')}</div>
+   <p class="tz-err" data-err>Completa tu nombre, correo y dirección para continuar.</p>
+   <div class="tz-ac"><button type="button" class="tz-b2 ghost" data-int="tstep" data-s="cart">← Carrito</button><button type="button" class="tz-b2" data-int="tstep" data-s="pay">Continuar al pago</button></div>
+  </div>
+  <div class="tz-pn tz-pn-pay">
+   <h3>Forma de pago</h3>
+   <div class="tz-pm">${[['card', 'Tarjeta'], ['spei', 'Transferencia'], ['cash', 'Efectivo en tienda']].map(([k, t]) => `<button type="button" data-int="tpm" data-m="${k}">${t}</button>`).join('')}</div>
+   <div class="tz-pc tz-pc-card">
+    <div class="tz-cc"><i></i><b data-cc="num">•••• •••• •••• ••••</b><div><span><small>Titular</small><em data-cc="nom">NOMBRE APELLIDO</em></span><span><small>Vence</small><em data-cc="exp">MM/AA</em></span></div></div>
+    <div class="tz-ff">${field('cnum', 'Número de tarjeta', '4242 4242 4242 4242', ' wide')}${field('cnom', 'Nombre en la tarjeta', 'Sofía Reyes', ' wide')}${field('cexp', 'Vencimiento', 'MM/AA')}${field('ccvv', 'CVV', '123')}</div>
+   </div>
+   <div class="tz-pc tz-pc-spei"><p>Te mostramos una CLABE de ejemplo al confirmar. El pedido se aparta por 24 horas.</p><b>0123 4567 8901 2345 67</b></div>
+   <div class="tz-pc tz-pc-cash"><p>Pagas en cualquier tienda de conveniencia con una referencia. El pedido se aparta por 48 horas.</p><b>Ref. TR-<span data-code>2042</span>-00</b></div>
+   <p class="tz-err" data-perr>Completa los datos de la tarjeta para pagar.</p>
+   <p class="tz-secure">${svg('check')}Pago de demostración: no se cobra ni se guarda ningún dato.</p>
+   <div class="tz-ac"><button type="button" class="tz-b2 ghost" data-int="tstep" data-s="ship">← Envío</button><button type="button" class="tz-b2 pay" data-int="tpay"><span>Pagar <b data-tot2>$0</b></span><u></u></button></div>
+  </div>
+  <div class="tz-pn tz-pn-done">
+   <svg class="tz-ok" viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="40" r="34" pathLength="1" /><path d="M26 41l10 10 19-21" pathLength="1" /></svg>
+   <p class="tz-k">Pedido TR-<span data-code>2042</span></p><h2 class="tz-t2">Compra realizada</h2>
+   <p class="tz-dn">Gracias, <span data-nm>Sofía</span>. Te enviamos la confirmación a <b data-ml>tu correo</b>. Llegará <b data-eta>en 2 a 4 días hábiles</b>.</p>
+   <div class="tz-dl"><div><small>Total pagado</small><b data-paid>$0</b></div><div><small>Envío</small><b data-shn>Estándar</b></div><div><small>Pago</small><b data-pmn>Tarjeta</b></div></div>
+   <div class="tz-ac c"><button type="button" class="tz-b2" data-int="tnew">Seguir comprando</button></div>
+  </div>
+ </div>
+ <aside class="tz-ckr"><h3>Resumen</h3><ul class="tz-mi"></ul>
+  <dl><div><dt>Subtotal</dt><dd data-sub>$0</dd></div><div class="dsc"><dt>Descuento</dt><dd data-disc>−$0</dd></div><div><dt>Envío</dt><dd data-shp>Gratis</dd></div><div class="tot"><dt>Total</dt><dd data-tot2>$0</dd></div></dl>
+  <p class="tz-sf">${svg('check')}Pago seguro · Cambios en 30 días</p></aside>
+</div></div>`;
+
+export const siteHTML = `<div class="pg mr-web tz-web" data-rp="light" data-tab="inicio" data-fil="todo" data-bag="[]" data-step="cart" data-ship="std" data-pm="card">
 ${nav}
 <div class="mw-scroll">
 
@@ -88,6 +138,7 @@ ${nav}
 <section class="tz-v tz-studio"><div class="tz-ph0"><p class="tz-k rv">Lookbook</p><h2 class="tz-t2 rv">Tres ediciones, una misma calle</h2></div>${scenes.map(scene).join('')}${foot}</section>
 
 <section class="tz-v tz-prod"></section>
+<section class="tz-v tz-carrito">${checkout}${foot}</section>
 
 </div></div>`;
 
