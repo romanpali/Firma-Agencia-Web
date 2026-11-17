@@ -41,11 +41,12 @@ function idScreen(stage: HTMLElement, o: HTMLElement) {
   stage.innerHTML = `<div class="idv"><img class="idv-i" src="${img}" alt="" /><i class="idv-s"></i>${own ? '' : `<div class="idv-t"><span>Manual de marca</span><span>Made by <b>HumanCorp</b></span></div><div class="idv-w"><b>${n.split(' ')[0].toLowerCase()}</b><span>${hl}</span></div>`}</div>`;
 }
 
-// Proyecto: «Lo que se hizo» como lista de entregables, a pantalla completa
+// Proyecto: «Lo que se hizo», con la identidad blanca de la página de escritorio, adaptada a celular
 function prScreen(stage: HTMLElement, o: HTMLElement, el: HTMLElement) {
   const rows = [...el.querySelectorAll<HTMLElement>('.pc-r li')].map((li) => ({ n: li.querySelector('em')?.textContent || '', t: li.querySelector('b')?.textContent || '', d: li.querySelector('span')?.textContent || '' }));
   const title = el.querySelector('.pc-l h4')?.textContent || 'Lo que se hizo', count = el.querySelector('.pc-l p')?.textContent || '', foot = el.querySelector('.pc-f')?.textContent || '';
-  stage.innerHTML = `<div class="prv"><i class="prv-b"></i><p class="prv-k"><span>Proyecto</span><em>${o.dataset.name || ''}</em></p><h2>${title}</h2><p class="prv-c">${count}</p>
+  const tag = el.querySelector('.pc-top > span')?.textContent || `Proyecto ${o.dataset.name || ''}`;
+  stage.innerHTML = `<div class="prv"><div class="prv-top"><b><span>HUMAN</span> CORP</b><em>${tag}</em></div><h2>${title}</h2><p class="prv-c">${count}</p>
 <ol>${rows.map((r, i) => `<li style="--i:${i}"><em>${r.n}</em><div><b>${r.t}</b><span>${r.d}</span></div><u></u></li>`).join('')}</ol><p class="prv-f">${foot}</p></div>`;
 }
 
@@ -151,7 +152,7 @@ function profileSheet(stage: HTMLElement, kind: string, brand: string, rest: { i
   el.innerHTML = `<i class="obv-sh-bg"></i><div class="obv-sh-p"><i class="obv-sh-g"></i>
 <div class="obv-sh-h"><b class="obv-sh-a">${nm[0]}</b><div><strong>${nm}</strong><span>${role} · ${brand}</span></div></div>
 ${rest.length ? `<p class="obv-sh-t">Secciones</p><ul class="obv-sh-l">${rest.map((r, i) => `<li><button type="button" data-s="${i}">${r.icon}<span>${r.label}</span><u>›</u></button></li>`).join('')}</ul>` : ''}
-<p class="obv-sh-t">Cuenta</p><ul class="obv-sh-l">${acct.map(([t, ic]) => `<li><button type="button">${ic}<span>${t}</span><u>›</u></button></li>`).join('')}</ul>
+<p class="obv-sh-t">Cuenta</p><ul class="obv-sh-l">${acct.map(([t, ic], i) => `<li><button type="button" data-a="${i}">${ic}<span>${t}</span><u>›</u></button></li>`).join('')}</ul>
 <p class="obv-sh-t">Configuración</p><ul class="obv-sh-l sw">${['Avisos en el teléfono', 'Resumen diario por correo', 'Modo compacto'].map((t, i) => `<li><button type="button" class="tg${i < 2 ? ' on' : ''}"><span>${t}</span><u><b></b></u></button></li>`).join('')}</ul>
 <button type="button" class="obv-sh-out">Cerrar sesión</button><p class="obv-sh-f">Demostración · no se guarda nada</p></div>`;
   stage.appendChild(el);
@@ -160,7 +161,73 @@ ${rest.length ? `<p class="obv-sh-t">Secciones</p><ul class="obv-sh-l">${rest.ma
   el.querySelectorAll<HTMLElement>('[data-s]').forEach((b) => b.addEventListener('click', () => { shut(); setTimeout(() => rest[+b.dataset.s!].go(), 200); }));
   el.querySelectorAll<HTMLElement>('.tg').forEach((b) => b.addEventListener('click', () => b.classList.toggle('on')));
   el.querySelector('.obv-sh-out')!.addEventListener('click', shut);
+  el.querySelectorAll<HTMLElement>('[data-a]').forEach((b) => b.addEventListener('click', () => subScreen(el, kind, nm, role, brand, +b.dataset.a!)));
   return { open };
+}
+
+// Pantallas de la hoja de perfil: Mi perfil, Notificaciones, Equipo y permisos y Ayuda (de ejemplo)
+function subScreen(sheet: HTMLElement, kind: string, nm: string, role: string, brand: string, i: number) {
+  const titles = ['Mi perfil', 'Notificaciones', 'Equipo y permisos', 'Ayuda de HumanCorp'];
+  const mail = `${nm.split(' ')[0].toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')}@${brand.split(' ')[0].toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')}.example`;
+  const notes: Record<string, [string, string, string][]> = {
+    marea: [['Nueva reserva', 'Casa de cristal · 2 noches · Vie 14', 'Hace 5 min'], ['Pago recibido', '$9,600 de Boda Márquez', 'Hace 1 h'], ['Aviso enviado', 'Instrucciones de llegada a Mariana', 'Hoy'], ['Factura por emitir', '4 pendientes por $23,700', 'Ayer']],
+    trama: [['Nuevo pedido', 'TR-2043 · Chamarra varsity · $1,899', 'Hace 3 min'], ['Stock bajo', 'Plumífero rojo · M quedan 12', 'Hace 40 min'], ['Campaña', 'Lookbook edición 02 · retorno 6.1x', 'Hoy'], ['Reseña nueva', '5 estrellas en Chaleco acolchado', 'Ayer']],
+    abaco: [['Factura pagada', 'A-1045 · Café Nube · $6,200', 'Hace 8 min'], ['Por aprobar', 'Compra de equipo · Clínica Alba', 'Hace 2 h'], ['Cobranza', '3 facturas vencen esta semana', 'Hoy'], ['Reporte listo', 'Cierre de octubre disponible', 'Ayer']],
+    hikari: [['Entrega aprobada', 'Café Nube · identidad y empaque', 'Hace 12 min'], ['Mensaje nuevo', 'Cerámica Tierra Viva pregunta por la galería', 'Hace 1 h'], ['Sesión mañana', 'Retrato del equipo · 10:00', 'Hoy'], ['Archivo listo', 'Manual de marca en PDF', 'Ayer']],
+  };
+  const team: [string, string, string][] = [[nm, 'Administradora', 'A'], ['Hugo Mena', 'Editor', 'H'], ['Paula Ríos', 'Editor', 'P'], ['Andrés Lozano', 'Solo lectura', 'L']];
+  const RL = ['Administradora', 'Editor', 'Solo lectura'];
+  let body = '';
+  if (i === 0) body = `<div class="sh-pf"><b>${nm[0]}</b><strong>${nm}</strong><span>${role}</span></div>
+<label class="sh-f"><small>Nombre</small><input type="text" value="${nm}" /></label><label class="sh-f"><small>Correo</small><input type="text" value="${mail}" /></label><label class="sh-f"><small>Teléfono</small><input type="text" value="55 1234 5678" /></label><label class="sh-f"><small>Idioma</small><input type="text" value="Español (México)" /></label>
+<button type="button" class="sh-btn" data-save>Guardar cambios</button>`;
+  else if (i === 1) body = `<ul class="sh-nt">${(notes[kind] || notes.marea).map(([t, d, h], k) => `<li class="${k < 2 ? 'new' : ''}"><i></i><div><b>${t}</b><span>${d}</span></div><em>${h}</em></li>`).join('')}</ul><button type="button" class="sh-btn ghost" data-read>Marcar todo como leído</button>`;
+  else if (i === 2) body = `<ul class="sh-tm">${team.map(([n, r, a]) => `<li><b class="a">${a}</b><div><strong>${n}</strong><span>${n.toLowerCase().split(' ')[0].normalize('NFD').replace(/[̀-ͯ]/g, '')}@${brand.split(' ')[0].toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')}.example</span></div><button type="button" class="rl" data-r="${RL.indexOf(r)}">${r}</button></li>`).join('')}</ul><button type="button" class="sh-btn" data-inv>Invitar a una persona</button><p class="sh-nt2">Toca el rol para cambiarlo. Las personas con «Solo lectura» no pueden editar.</p>`;
+  else body = `<div class="sh-hp"><i></i><div><b>Soporte de HumanCorp</b><span>Respondemos en menos de 1 día hábil</span></div></div>
+<div class="sh-ac"><a href="https://wa.me/5200000000000" target="_blank" rel="noopener"><b>WhatsApp</b><span>+52 55 0000 0000</span></a><a href="mailto:info@humancorp.co"><b>Correo</b><span>info@humancorp.co</span></a><a href="/contacto"><b>Agendar llamada</b><span>30 minutos con el equipo</span></a></div>
+<p class="obv-sh-t">Preguntas frecuentes</p><div class="sh-fq">${[['¿Cómo cambio mi contraseña?', 'En Mi perfil puedes pedir un enlace para restablecerla. Te llega por correo.'], ['¿Puedo agregar a mi equipo?', 'Sí. En Equipo y permisos invitas personas y eliges qué pueden ver o editar.'], ['¿Dónde están mis datos?', 'En servidores con respaldo diario. Si necesitas más detalle, escríbenos.']].map(([q, a]) => `<details><summary>${q}</summary><p>${a}</p></details>`).join('')}</div>
+<p class="sh-nt2"><i class="ok"></i>Todos los servicios operando · Demostración</p>`;
+  const sc = document.createElement('div'); sc.className = 'obv-sh-s';
+  sc.innerHTML = `<div class="sh-h"><button type="button" class="sh-b" aria-label="Volver"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button><b>${titles[i]}</b></div><div class="sh-c">${body}</div>`;
+  sheet.appendChild(sc); requestAnimationFrame(() => requestAnimationFrame(() => sc.classList.add('on')));
+  const back = () => { sc.classList.remove('on'); setTimeout(() => sc.remove(), 450); };
+  sc.querySelector('.sh-b')!.addEventListener('click', back);
+  sc.querySelector('[data-save]')?.addEventListener('click', (e) => { const b = e.currentTarget as HTMLElement; b.textContent = 'Guardado ✓'; b.classList.add('done'); setTimeout(() => { b.textContent = 'Guardar cambios'; b.classList.remove('done'); }, 1800); });
+  sc.querySelector('[data-read]')?.addEventListener('click', () => sc.querySelectorAll('.sh-nt li').forEach((l) => l.classList.remove('new')));
+  sc.querySelectorAll<HTMLElement>('.sh-nt li').forEach((l) => l.addEventListener('click', () => l.classList.remove('new')));
+  sc.querySelectorAll<HTMLElement>('.rl').forEach((b) => b.addEventListener('click', () => { const n = (+b.dataset.r! + 1) % RL.length; b.dataset.r = String(n); b.textContent = RL[n]; }));
+  sc.querySelector('[data-inv]')?.addEventListener('click', () => { const ul = sc.querySelector('.sh-tm')!; ul.insertAdjacentHTML('beforeend', `<li><b class="a">N</b><div><strong>Nueva persona</strong><span>Invitación enviada</span></div><button type="button" class="rl" data-r="2">Solo lectura</button></li>`); const last = ul.lastElementChild!.querySelector<HTMLElement>('.rl')!; last.addEventListener('click', () => { const n = (+last.dataset.r! + 1) % RL.length; last.dataset.r = String(n); last.textContent = RL[n]; }); });
+}
+
+// Inicio de sesión de ejemplo: se escriben solos el usuario y la contraseña, se entra y aparece el dashboard
+const USERS: Record<string, string> = { marea: 'sofia.reyes@marea.example', trama: 'sofia@trama.example', hikari: 'aiko@hikari.example', abaco: 'valeria@abaco.example' };
+function loginScreen(o: HTMLElement, stage: HTMLElement, key: string, done: () => void) {
+  const n = o.dataset.name || '', img = o.dataset.img || '';
+  const user = USERS[key] || 'usuario@ejemplo.com';
+  const l = document.createElement('div'); l.className = 'lgv'; l.dataset.th = o.dataset.th || '0';
+  l.innerHTML = `<img class="lgv-i" src="${img}" alt="" /><i class="lgv-s"></i>
+<form class="lgv-f"><div class="lgv-m"><i></i><i></i><i></i><i></i></div><p class="lgv-n">${n.toUpperCase().split('').join(' ')}</p>
+<label class="lgv-in"><input type="text" placeholder="Usuario" autocomplete="off" /></label><label class="lgv-in"><input type="text" placeholder="Contraseña" autocomplete="off" /></label>
+<button type="submit" class="lgv-b"><span>Ingresar</span><u></u></button><a href="#" class="lgv-l">¿Olvidaste tu contraseña?</a><a href="/contacto" class="lgv-l">Crea tu cuenta y contáctanos</a></form><i class="lgv-wipe"></i>`;
+  o.appendChild(l); requestAnimationFrame(() => l.classList.add('on'));
+  const [u, pw] = [...l.querySelectorAll<HTMLInputElement>('input')];
+  let fin = false; const timers: number[] = [];
+  const at = (ms: number, fn: () => void) => { timers.push(window.setTimeout(fn, ms)); };
+  const go = () => {
+    if (fin) return; fin = true; timers.forEach(clearTimeout);
+    u.value = user; pw.value = '••••••••••'; l.classList.add('busy');
+    at(900, () => { l.classList.add('out'); done(); });
+    at(2000, () => l.remove());
+  };
+  const type = (inp: HTMLInputElement, text: string, t0: number, step: number) => { [...text].forEach((_, i) => at(t0 + i * step, () => { if (!fin) inp.value = text.slice(0, i + 1); })); return t0 + text.length * step; };
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduced) { go(); } else {
+    const t1 = type(u, user, 1100, 55); const t2 = type(pw, '••••••••••', t1 + 350, 70);
+    at(t2 + 400, () => l.classList.add('press')); at(t2 + 700, go);
+  }
+  l.querySelector('form')!.addEventListener('submit', (e) => { e.preventDefault(); go(); });
+  l.querySelector('.lgv-l')!.addEventListener('click', (e) => e.preventDefault());
+  return () => { fin = true; timers.forEach(clearTimeout); l.remove(); };
 }
 
 // Menú del sitio: icono de hamburguesa en su barra; abre una pantalla completa con los enlaces en grande (cada sitio con su estilo)
@@ -198,6 +265,7 @@ function close() {
 
 function show(o: HTMLElement, pieces: { t: string; dash?: boolean; el: HTMLElement; site: boolean }[], k: number) {
   const stage = o.querySelector<HTMLElement>('.obv-st')!;
+  (o as any).__lg?.(); (o as any).__lg = null;
   stage.innerHTML = ''; stage.removeAttribute('data-scr'); stage.removeAttribute('data-site'); stage.removeAttribute('data-dash'); stage.removeAttribute('data-app'); if (pieces[k].site) stage.dataset.site = '1';
   const node = pieces[k].el.cloneNode(true) as HTMLElement;
   node.querySelectorAll<HTMLElement>('[data-ready], [data-tready]').forEach((e) => { delete e.dataset.ready; delete e.dataset.tready; });
@@ -216,6 +284,12 @@ function show(o: HTMLElement, pieces: { t: string; dash?: boolean; el: HTMLEleme
       w.appendChild(node); stage.appendChild(w);
       requestAnimationFrame(() => adapt(w));
       dashBar(stage, w, (o.dataset.name || ''));
+      const lk = o.dataset.th || '0';
+      if (!(o.dataset.in || '').split(',').includes(lk)) {
+        const key = /marea/i.test(o.dataset.name || '') ? 'marea' : /trama/i.test(o.dataset.name || '') ? 'trama' : /hikari/i.test(o.dataset.name || '') ? 'hikari' : 'abaco';
+        w.classList.add('wait'); (o as any).__lg?.();
+        (o as any).__lg = loginScreen(o, stage, key, () => { o.dataset.in = `${o.dataset.in || ''},${lk}`; w.classList.remove('wait'); w.classList.add('enter'); });
+      }
     } else {
       w.className = 'obv-pg live';
       const fit = (innerWidth - 24) / 40; w.style.fontSize = `${fit}px`;
