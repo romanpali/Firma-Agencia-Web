@@ -781,6 +781,6 @@ html.intro .hc-intro { position: fixed; inset: 0; z-index: 200000; display: grid
 html.menu-open main, html.menu-open .hc-snow { visibility: hidden; }
 
 /* Servicios en laptops bajas: toda la hoja se reduce proporcionalmente para que quepa completa */
-@media (min-width: 768px) and (max-height: 840px) { .sheet { --z: 0.84; zoom: var(--z); top: calc(100px / var(--z)) !important; height: calc((100svh - 116px) / var(--z)) !important; min-height: 0 !important; margin-bottom: calc((var(--n) * 48svh + 16px) / var(--z)) !important; } .sheet:last-child, .sheet[data-last] { margin-bottom: 0 !important; } }
-@media (min-width: 768px) and (max-height: 720px) { .sheet { --z: 0.74; } }
-@media (min-width: 768px) and (max-height: 620px) { .sheet { --z: 0.64; } }
+@media (min-width: 768px) and (max-height: 840px) { article.sheet { --z: 0.84; zoom: var(--z); top: calc(100px / var(--z)) !important; height: calc((100svh - 116px) / var(--z)) !important; min-height: 0 !important; margin-bottom: calc((var(--n) * 48svh + 16px) / var(--z)) !important; } article.sheet:last-child, article.sheet[data-last] { margin-bottom: 0 !important; } }
+@media (min-width: 768px) and (max-height: 720px) { article.sheet { --z: 0.74; } }
+@media (min-width: 768px) and (max-height: 620px) { article.sheet { --z: 0.64; } }
