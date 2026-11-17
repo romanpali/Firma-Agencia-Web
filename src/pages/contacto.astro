@@ -30,13 +30,17 @@ const label = 'block text-[12.5px] font-medium text-white/75';
     </div>
     <Header />
     <main class="relative z-10 overflow-x-clip">
-      <section data-tone="dark" class="px-6 pb-[10svh] pt-[19svh] md:px-10 md:pt-[22svh]">
+      <section data-tone="dark" class="px-5 pb-[8svh] pt-[15svh] sm:px-6 md:px-10 md:pb-[10svh] md:pt-[22svh]">
         <div class="mx-auto grid min-h-[60svh] max-w-[1180px] gap-14 md:grid-cols-12 md:gap-10">
           <div class="flex flex-col md:col-span-5">
             <p data-reveal class="text-[13px] font-medium uppercase tracking-[0.14em] text-white/65">Contacto</p>
-            <h1 data-words class="mt-5 font-goog text-[clamp(2.8rem,6vw,5.6rem)] font-light leading-[1] tracking-[-0.05em]">Hablemos de tu empresa</h1>
+            <h1 data-words class="mt-5 font-goog text-[clamp(2.5rem,11vw,5.6rem)] font-light leading-[1] tracking-[-0.05em]">Hablemos de tu empresa</h1>
             <p data-reveal style="--i:1" class="mt-6 max-w-[27rem] text-[16px] leading-relaxed text-white/75">Cuéntanos qué necesitas: diseño, tecnología, administración o asesoría contable y fiscal. Te respondemos para agendar una llamada de descubrimiento.</p>
-            <ul class="mt-auto space-y-3 pt-14">
+            <div data-reveal style="--i:2" class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <button type="button" data-agendar class="inline-flex items-center justify-center gap-3 rounded-full bg-white px-7 py-4 text-[15px] font-medium text-[#0b0c0f] shadow-[0_18px_40px_-14px_rgba(10,8,60,.7)] transition-transform active:scale-[0.98]"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M8 3v4M16 3v4M3.5 10h17"/></svg>Agendar una llamada</button>
+              <a href="#formulario" class="text-center text-[14px] text-white/70 underline underline-offset-4 md:hidden">o escríbenos un mensaje</a>
+            </div>
+            <ul class="mt-auto space-y-3 pt-10 md:pt-14">
               {info.map(([t, v, href, d], k) => (
                 <li data-reveal style={`--i:${k}`}>
                   {href ? (
@@ -49,8 +53,8 @@ const label = 'block text-[12.5px] font-medium text-white/75';
             </ul>
           </div>
 
-          <div data-reveal style="--i:1" class="md:col-span-7 md:col-start-6 lg:col-span-6 lg:col-start-7">
-            <form name="contacto" method="POST" action="/contacto" data-netlify="true" netlify-honeypot="bot-field" data-form class="rounded-[28px] border border-white/20 bg-white/[.09] p-6 shadow-[0_40px_90px_-40px_rgba(0,0,40,.8)] backdrop-blur-xl md:p-8">
+          <div id="formulario" data-reveal style="--i:1" class="scroll-mt-24 md:col-span-7 md:col-start-6 lg:col-span-6 lg:col-start-7">
+            <form name="contacto" method="POST" action="/contacto" data-netlify="true" netlify-honeypot="bot-field" data-form class="rounded-[28px] border border-white/20 bg-white/[.09] p-6 shadow-[0_40px_90px_-40px_rgba(0,0,40,.8)] backdrop-blur-xl max-md:rounded-[24px] max-md:p-5 md:p-8">
               <input type="hidden" name="form-name" value="contacto" />
               <p class="hidden"><label>No llenar: <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
               <div class="grid gap-5 md:grid-cols-2">
@@ -68,7 +72,7 @@ const label = 'block text-[12.5px] font-medium text-white/75';
                 </div>
               </fieldset>
               <label class={`${label} mt-5`}>Mensaje<textarea class={`${field} min-h-[130px] resize-y`} name="mensaje" rows="5" required placeholder="Cuéntanos sobre tu empresa y qué necesitas"></textarea></label>
-              <div class="mt-6 flex flex-wrap items-center gap-4">
+              <div class="mt-6 flex flex-wrap items-center gap-4 max-md:sticky max-md:bottom-0 max-md:z-10 max-md:-mx-5 max-md:-mb-5 max-md:rounded-b-[24px] max-md:bg-[#00033D]/75 max-md:px-5 max-md:py-4 max-md:backdrop-blur-xl">
                 <button type="submit" class="inline-flex items-center gap-3 rounded-full bg-white px-7 py-3.5 text-[15px] font-medium text-[#0b0c0f] transition-transform hover:scale-[1.03] active:scale-[0.98] disabled:opacity-60" data-send>Enviar mensaje <span aria-hidden="true">→</span></button>
                 <p class="text-[12.5px] text-white/55" data-status role="status" aria-live="polite">Responderemos a tu correo.</p>
               </div>
