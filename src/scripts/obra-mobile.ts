@@ -34,6 +34,26 @@ function adapt(root: HTMLElement) {
   });
 }
 
+// Panel como una app: encabezado con la vista actual y barra de pestañas inferior con iconos
+const ICON = { grid: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>', doc: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></svg>', ok: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg>' };
+function dashBar(stage: HTMLElement, w: HTMLElement, brand: string) {
+  const root = w.querySelector<HTMLElement>('.pg'); if (!root) return;
+  type It = { el: HTMLElement; label: string; icon: string; on: () => boolean };
+  let items: It[] = [];
+  if (root.classList.contains('mr-dash')) items = [...root.querySelectorAll<HTMLElement>('.md-side li')].map((el) => ({ el, label: el.querySelector('span')?.textContent || '', icon: el.querySelector('svg')?.outerHTML || '', on: () => el.classList.contains('on') }));
+  else if (root.classList.contains('tz-dash')) items = [...root.querySelectorAll<HTMLElement>('.td-s button')].map((el) => ({ el, label: (el.textContent || '').trim(), icon: el.querySelector('svg')?.outerHTML || '', on: () => root.dataset.v === el.dataset.v }));
+  else if (root.classList.contains('ab-dash')) items = [...root.querySelectorAll<HTMLElement>('header nav button')].map((el, i) => ({ el, label: (el.textContent || '').trim(), icon: [ICON.grid, ICON.doc, ICON.ok][i] || '', on: () => root.dataset.v === el.dataset.k }));
+  const head = document.createElement('div'); head.className = 'obv-ah';
+  head.innerHTML = `<div><small>${brand}</small><b></b></div><i>${brand[0]}</i>`;
+  w.prepend(head);
+  if (!items.length) { head.querySelector('b')!.textContent = 'Panel'; return; }
+  const bar = document.createElement('nav'); bar.className = 'obv-app ic';
+  items.forEach((it) => { const t = document.createElement('button'); t.type = 'button'; t.innerHTML = `${it.icon}<span>${it.label}</span>`; t.addEventListener('click', () => { it.el.click(); stage.scrollTop = 0; }); bar.appendChild(t); });
+  stage.appendChild(bar);
+  const sync = () => { const k = Math.max(0, items.findIndex((it) => it.on())); bar.querySelectorAll<HTMLElement>('button').forEach((b, i) => b.classList.toggle('on', i === k)); head.querySelector('b')!.textContent = items[k].label; const act = bar.querySelectorAll<HTMLElement>('button')[k]; act?.scrollIntoView({ inline: 'center', block: 'nearest' }); };
+  sync(); new MutationObserver(sync).observe(root, { attributes: true, subtree: true, attributeFilter: ['class', 'data-v', 'data-view'] });
+}
+
 // Barra de pestañas inferior (como una app): replica los botones del menú del sitio
 function appBar(stage: HTMLElement, root: HTMLElement) {
   const nav = root.querySelector<HTMLElement>('.mw-nav, .tz-nav, .au-nav, .ab-nav');
@@ -77,6 +97,7 @@ function show(o: HTMLElement, pieces: { t: string; el: HTMLElement; site: boolea
       stage.dataset.dash = '1'; w.className = 'obv-dashw live'; w.style.fontSize = '16px';
       w.appendChild(node); stage.appendChild(w);
       requestAnimationFrame(() => adapt(w));
+      dashBar(stage, w, (o.querySelector('.obv-bar b')?.textContent || '').trim());
     } else {
       stage.dataset.dash = ''; w.className = 'obv-pg live';
       const fit = (innerWidth - 24) / 40; w.style.fontSize = `${fit}px`;

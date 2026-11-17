@@ -37,10 +37,9 @@ ${nav}
 <div class="mw-scroll">
 
 <section class="au-v au-inicio">
- <div class="au-h0"><i class="au-vl"></i><div class="au-hp"><img class="au-img" src="${IMG}" alt="" width="1500" height="1000" decoding="async"></div><p class="au-vt mw-f" style="--d:1.4s">Hikari Estudio · 2025</p>
-  <div class="au-txt"><p class="au-k mw-f" style="--d:.5s">Diseño y fotografía</p><h4 class="au-h"><span class="mw-w" style="--d:.7s">Imágenes</span><span class="mw-w" style="--d:1s">con calma</span></h4>
-   <p class="au-s mw-f" style="--d:1.5s">Un estudio pequeño de diseño y fotografía. Hacemos marcas, imágenes y sitios con pocos elementos y mucho cuidado.</p><button type="button" class="au-l mw-f" style="--d:1.8s" ${go('contacto')}>Hablemos</button></div>
-  <div class="au-scr mw-f" style="--d:2s"><i></i><span>Desliza</span></div></div>
+ <div class="au-h0 au-hb"><div class="au-hp"><img class="au-img" src="${IMG}" alt="" width="1500" height="1000" decoding="async"></div><i class="au-bv"></i>
+  <div class="au-bw mw-f" style="--d:.5s"><b>hikari</b><span>光 · Estudio de diseño y fotografía</span></div>
+  <div class="au-scr mw-f" style="--d:1.4s"><i></i><span>Desliza</span></div></div>
  ${ticker}
  <div class="au-sec au-intro"><p class="au-k rv">Hikari · 光</p><p class="au-state rv">${words('Somos un estudio de diseño y fotografía. Creemos que una buena imagen dice poco y lo dice bien: luz natural, espacio para respirar y una sola idea por encuadre.')}</p>
   <div class="au-stats">${stat(12, 0, '', 'años de oficio')}${stat(120, 0, '+', 'proyectos realizados')}${stat(6, 0, '', 'personas en el estudio')}${stat(3, 0, '', 'ciudades donde hemos trabajado')}</div></div>

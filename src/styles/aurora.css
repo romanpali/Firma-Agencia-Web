@@ -137,3 +137,7 @@
 
 .ad-sw.on b, .ad-m .m-a::before { background: #1b1b1a; }
 .au-dash[data-c='0'] .ad-l li:nth-child(1) button, .au-dash[data-c='1'] .ad-l li:nth-child(2) button, .au-dash[data-c='2'] .ad-l li:nth-child(3) button, .au-dash[data-c='3'] .ad-l li:nth-child(4) button, .au-dash[data-c='4'] .ad-l li:nth-child(5) button { box-shadow: inset 0.14em 0 0 #1b1b1a; }
+/* portada del sitio = la del manual de marca (foto a sangre, «hikari» y la línea en japonés); solo se suma el menú */
+.au-hb .au-bw { z-index: 2; bottom: 3.6em; } .au-hb .au-bw b { font-size: 5.4em; }
+.au-web[data-tab='inicio']:not([data-sc]) .au-nav { color: #fff; } .au-web[data-tab='inicio']:not([data-sc]) .au-logo { color: #fff; }
+.au-hb .au-bv { z-index: 1; }

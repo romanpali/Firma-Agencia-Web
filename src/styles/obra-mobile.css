@@ -188,3 +188,34 @@
 .obv-st[data-site] .tz-ck { padding: 6em 20px 0; } .obv-st[data-site] .tz-ac { flex-wrap: wrap; } .obv-st[data-site] .tz-b2 { font-size: 0.8em; }
 .obv-st[data-site] .tz-ckr { position: static; }
 .obv-st[data-site] .tz-cl2 li { grid-template-columns: 4em 1fr auto; }
+
+/* portadas verticales como fondo del hero de cada sitio en celular */
+.obv-st[data-site] .mw-photo { background-image: url('/obra/m/marea.webp'); background-position: 50% 60%; }
+.obv-st[data-site] .tz-hp .tz-img { content: url('/obra/m/trama.webp'); object-position: 50% 40%; }
+.obv-st[data-site] .au-hb .au-img { content: url('/obra/m/hikari.webp'); object-position: 50% 50%; } .obv-st[data-site] .au-hb .au-bw, .obv-st[data-site] .au-hb .au-bv { display: none; }
+.obv-st[data-site] .ab-img { content: url('/obra/m/abaco.webp'); object-position: 50% 50%; }
+.obv-st[data-site] .ab-h0 { min-height: 0; height: auto; padding: 0 0 1.6em; display: block; }
+.obv-st[data-site] .ab-hp, .obv-st[data-site] .ab-sh0 { bottom: auto; height: calc(100svh - 150px); }
+.obv-st[data-site] .ab-txt { min-height: calc(100svh - 150px); display: flex; flex-direction: column; justify-content: flex-end; padding: 0 18px 22px; }
+.obv-st[data-site] .ab-txt > :not(.ab-cta2) { display: none; }
+.obv-st[data-site] .ab-vis { margin: 0 18px; position: relative; }
+.obv-st[data-site] .ab-fl { display: none; }
+
+/* paneles como app: encabezado + barra de pestañas con iconos */
+.obv-dashw { position: relative; }
+.obv-ah { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px 4px; color: #111; } .obv-ah small { display: block; font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.55; } .obv-ah b { display: block; margin-top: 2px; font-size: 22px; font-weight: 600; letter-spacing: -0.03em; }
+.obv-ah i { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: #111; color: #fff; font-style: normal; font-size: 14px; font-weight: 600; }
+.obv-dashw:has(.ab-dash) .obv-ah { color: #eceef3; } .obv-dashw:has(.ab-dash) .obv-ah i { background: #eceef3; color: #0b0c10; }
+.obv-st[data-dash='1'] .obv-app { position: sticky; bottom: 10px; left: auto; right: auto; margin: 0 10px 10px; z-index: 30; }
+.obv-app.ic { overflow-x: auto; scrollbar-width: none; gap: 0; } .obv-app.ic::-webkit-scrollbar { display: none; }
+.obv-app.ic button { flex: none; min-width: 68px; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 9px 8px 8px; font-size: 10.5px; } .obv-app.ic svg { width: 20px; height: 20px; }
+.obv-dashw .md-side, .obv-dashw .td-s, .obv-dashw .ab-dash header nav { display: none !important; }
+.obv-dashw .mr-dash .md-app { background: transparent; box-shadow: none; } .obv-dashw .md-main { padding-top: 0; }
+.obv-dashw > .pg { padding-top: 6px !important; }
+/* portadas sin tanto velo */
+.obv-st[data-site] .au-h0 .au-hp::after { display: none; } .obv-st[data-site] .au-scr, .obv-st[data-site] .au-vt { display: none; }
+.obv-st[data-site] .ab-sh0 { background: linear-gradient(0deg, #090a0e 0%, transparent 34%), linear-gradient(180deg, rgba(7, 8, 12, 0.45), transparent 24%); }
+.obv-ah, .obv-dashw:has(.ab-dash) .obv-ah { color: #fff; } .obv-ah i, .obv-dashw:has(.ab-dash) .obv-ah i { background: #fff; color: #0b0c10; }
+.obv-dashw .md-in { position: relative !important; left: auto !important; right: auto !important; bottom: auto !important; margin: 14px 0 0; }
+.obv-dashw .mv-inicio { position: relative !important; height: auto !important; padding-bottom: 12px; }
+.obv-dashw .mr-dash[data-view='inicio'] .mv-inicio { display: flex !important; flex-direction: column; } .obv-dashw .mc-welcome { position: relative !important; inset: auto !important; padding: 26px 0 8px; } .obv-dashw .md-in { order: 9; }
