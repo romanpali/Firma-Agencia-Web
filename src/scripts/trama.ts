@@ -71,7 +71,7 @@ ${nav}
 <section class="tz-v tz-inicio">
  <div class="tz-hero"><div class="tz-ht"><p class="tz-k mw-f" style="--d:.3s">Colección invierno · 26</p><h2 class="tz-h"><span class="mw-w" style="--d:.45s">Urban</span><span class="mw-w" style="--d:.7s">Edit 01</span></h2><p class="tz-hs mw-f" style="--d:1s">Capas oversize, colores fuertes y básicos que se combinan solos. Hecha para caminar la ciudad.</p>
    <div class="tz-hl mw-f" style="--d:1.2s"><button type="button" ${go('mujer')}>Ver mujer</button><button type="button" ${go('hombre')}>Ver hombre</button></div></div>
-  <div class="tz-hp mw-f" style="--d:.2s">${img('h6')}${img('m5')}</div></div>
+  <div class="tz-hp"><img class="tz-img" src="/obra/trama/hero.webp" alt="" width="2048" height="1144" decoding="async"><i></i></div></div>
  <div class="tz-cats">${cat('Mujer', 'Mujer', 'm2')}${cat('Hombre', 'Hombre', 'h3')}</div>
  <div class="tz-sec"><div class="tz-sh"><p class="tz-k rv">Novedades</p><button type="button" class="tz-ln" ${go('mujer')}>Ver todo</button></div><div class="tz-row">${['h6', 'm1', 'm2', 'm5'].map((i) => tile(byId(i))).join('')}</div></div>
  ${looks}

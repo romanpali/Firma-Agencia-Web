@@ -113,3 +113,11 @@
 
 .td-g .td-o, .td-g .td-ia { margin-top: 0; } .td-g .td-ia { flex-direction: column; gap: 0.6em; }
 .td-o td { white-space: nowrap; } .td-g .td-ia { padding: 0.8em 0.9em; }
+
+/* hero: fotografía a sangre con el texto encima */
+.tz-hero { display: block; position: relative; background: #2a2622; color: #fff; }
+.tz-hp { position: absolute; inset: 0; display: block; clip-path: none !important; } .tz-hp .tz-img { object-position: 50% 45%; } .tz-hp i { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(10, 8, 6, 0.72), rgba(10, 8, 6, 0.05) 55%), linear-gradient(180deg, rgba(10, 8, 6, 0.4), transparent 22%); }
+.js .tz-hp .tz-img { transform: scale(1.08); } .js .live .tz-hp .tz-img, .js .obm-card.in .tz-hp .tz-img { transform: none; transition: transform 9s cubic-bezier(0.2, 0.6, 0.2, 1); }
+.tz-hero .tz-ht { position: absolute; left: 0; bottom: 0; padding: 0 2.6em 3em; } .tz-hero .tz-k, .tz-hero .tz-hs { color: rgba(255, 255, 255, 0.82); } .tz-hl button { box-shadow: 0 0.12em 0 #fff; }
+.tz-web[data-tab='inicio']:not([data-sc]) .tz-nav { color: #fff; }
+.tz-hero .tz-ht { z-index: 2; }
