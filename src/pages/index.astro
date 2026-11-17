@@ -16,7 +16,7 @@ import Header from '../components/Header.astro';
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Diseño, tecnología y operaciones empresariales." />
-    <script is:inline>document.documentElement.classList.add('js');try{if(!sessionStorage.getItem('hc-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('intro')}catch(e){}</script>
+    <script is:inline>document.documentElement.classList.add('js');try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('intro')}catch(e){}</script>
     <link rel="preload" as="image" href="/horizon.webp" type="image/webp" />
     <title>HumanCorp — Diseño, tecnología y operaciones empresariales</title>
   </head>
@@ -34,6 +34,6 @@ import Header from '../components/Header.astro';
       <Contact />
     </main>
     <ScrollFx />
-    <script is:inline>(function(){var d=document.documentElement;if(!d.classList.contains('intro'))return;try{sessionStorage.setItem('hc-intro','1')}catch(e){}var el=document.querySelector('.hc-intro');setTimeout(function(){el.classList.add('out')},2100);setTimeout(function(){d.classList.remove('intro');el.remove()},3300)})()</script>
+    <script is:inline>(function(){var d=document.documentElement;if(!d.classList.contains('intro'))return;var el=document.querySelector('.hc-intro');setTimeout(function(){el.classList.add('out')},2100);setTimeout(function(){d.classList.remove('intro');el.remove()},3300)})()</script>
   </body>
 </html>
