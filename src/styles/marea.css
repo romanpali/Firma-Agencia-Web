@@ -123,14 +123,14 @@
 /* Obra «HumanCorp»: primero una página blanca (Mauricio y la contabilidad); después, con un barrido, la pantalla negra con el nombre */
 .hc-pg { overflow: hidden; background: #f4f1ea; color: #15161a; }
 .hc-intro { position: absolute; inset: 0; display: flex; align-items: center; gap: 2.6em; padding: 0 3em; }
-.hc-ph { width: 12em; height: 15em; flex: none; object-fit: cover; border-radius: 0.9em; filter: grayscale(1) contrast(1.05); box-shadow: 0 1.4em 2.4em -1.4em rgba(0, 0, 0, 0.5); }
+.hc-ph { width: 12em; height: 15em; flex: none; object-fit: cover; border-radius: 0.9em; box-shadow: 0 1.4em 2.4em -1.4em rgba(0, 0, 0, 0.5); }
 .hc-tx { max-width: 21em; } .hc-k { font-size: 0.55em; letter-spacing: 0.24em; text-transform: uppercase; opacity: 0.5; }
 .hc-tx h4 { margin-top: 1em; font-size: 1.55em; font-weight: 500; line-height: 1.08; letter-spacing: -0.045em; }
 .hc-p { margin-top: 1.2em; font-size: 0.66em; line-height: 1.65; opacity: 0.68; } .hc-tx small { display: block; margin-top: 1.6em; font-size: 0.52em; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.5; }
 .hc-blk { position: absolute; inset: 0; display: grid; place-items: center; background: #000; color: #fff; clip-path: inset(100% 0 0 0); }
 .hc-blk.hc-on { clip-path: none; }
 .hc-wm { font-size: 2.2em; font-weight: 400; letter-spacing: 0.03em; white-space: nowrap; } .hc-wm i { font-style: normal; } .hc-l { font-weight: 300; } .hc-s { font-weight: 600; }
-.js .seen .hc-intro > * { animation: hcIn 0.7s ease both; } .js .seen .hc-ph { animation-delay: 0.05s; } .js .seen .hc-tx { animation-delay: 0.2s; }
+
 .js .seen .hc-blk:not(.hc-on) { animation: hcWipe 1.5s cubic-bezier(0.76, 0, 0.24, 1) 6.5s both; }
 .js .seen .hc-blk:not(.hc-on) .hc-wm { animation: hcWm 1.8s ease 7.4s both; }
 .js .hc-blk:not(.hc-on) .hc-wm { opacity: 0; }

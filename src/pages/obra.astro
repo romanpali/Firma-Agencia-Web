@@ -16,7 +16,7 @@ import { auroraLeaves, auroraPieces } from '../scripts/aurora';
 
 const hcWm = `<b class="hc-wm"><i class="hc-l">HUMAN</i> <i class="hc-s">CORP</i></b>`;
 const hcBack = `<div class="pg hc-pg" data-rp="dark"><div class="hc-blk hc-on">${hcWm}</div></div>`;
-const hcFront = `<div class="pg hc-pg" data-rp="light"><div class="hc-intro"><img class="hc-ph" src="/team/mauricio.jpg" alt="Mauricio Pali, Director de Administración y Finanzas" width="640" height="641" loading="lazy" /><div class="hc-tx"><p class="hc-k">Contabilidad</p><h4>Tus cuentas, en manos de quien dirige nuestras finanzas.</h4><p class="hc-p">Mauricio Pali, contador y Director de Administración y Finanzas, y su área llevan tu contabilidad y tu asesoría fiscal, con el respaldo de nuestra tecnología. Lo jurídico lo resolvemos con profesionales aliados.</p><small>Mauricio Pali · Administración y Finanzas</small></div></div><div class="hc-blk">${hcWm}</div></div>`;
+const hcFront = `<div class="pg hc-pg" data-rp="light"><div class="hc-intro"><img class="hc-ph" src="/team/mauricio-bn.webp" alt="Mauricio Pali, Director de Administración y Finanzas" width="640" height="641" decoding="sync" /><div class="hc-tx"><p class="hc-k">Contabilidad</p><h4>Tus cuentas, en manos de quien dirige nuestras finanzas.</h4><p class="hc-p">Mauricio Pali, contador y Director de Administración y Finanzas, y su área llevan tu contabilidad y tu asesoría fiscal, con el respaldo de nuestra tecnología. Lo jurídico lo resolvemos con profesionales aliados.</p><small>Mauricio Pali · Administración y Finanzas</small></div></div><div class="hc-blk">${hcWm}</div></div>`;
 // Proyectos ilustrativos (nombres ficticios): ejemplos de lo que HumanCorp construye en cada división.
 const projs: Proj[] = [
   { n: 'Marea', leaves: mareaLeaves(), pieces: mareaPieces, cat: 'Identidad, web y panel con IA', y: 2026, hl: 'Un lugar para bajar el ritmo', d: 'Identidad, sitio web, reservas en línea y un panel con asistente de IA para unas estancias boutique junto a un lago.', tags: ['Identidad', 'Sitio web', 'Reservas en línea', 'Panel con IA'], art: 0, dark: true, layout: 1, img: '/obra/marea-lago-uhd.webp' },
@@ -128,6 +128,7 @@ const leavesHtml = leavesMarkup(leaves);
       import '../scripts/marea-site';
       import '../scripts/trama-site';
       import '../scripts/trama-dash';
+      import '../scripts/au-site';
       const main = document.querySelector<HTMLElement>('main')!;
       const sec = document.querySelector<HTMLElement>('[data-book]')!;
       const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
