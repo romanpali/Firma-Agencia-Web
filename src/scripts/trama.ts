@@ -100,7 +100,13 @@ const stock: [string, string, number][] = [['h6', 'Plumífero rojo · M', 12], [
 const sw = (on = true) => `<button type="button" class="td-sw${on ? ' on' : ''}" data-int="dsw" aria-label="Activar o desactivar"><i></i></button>`;
 const customers: [string, number, string, string][] = [['Mariana Reyes', 7, '$9,840', 'VIP'], ['Andrés Pérez', 4, '$4,290', ''], ['Lucía Fuentes', 3, '$3,100', ''], ['Diego Salas', 5, '$6,720', 'VIP'], ['Paula Cruz', 2, '$2,160', 'Nueva']];
 const camps: [string, string, string, string, boolean][] = [['Plumíferos de temporada', 'Instagram · Reels', '$4,200', '4.8x', true], ['Recupera tu cesta', 'Correo automático', '$300', '9.2x', true], ['Lookbook edición 02', 'TikTok', '$2,800', '2.4x', false]];
-const dnav: [string, string, string][] = [['resumen', 'Resumen', 'crm'], ['pedidos', 'Pedidos', 'bag'], ['productos', 'Productos', 'clip'], ['inventario', 'Inventario', 'dat'], ['clientes', 'Clientes', 'crm'], ['campanas', 'Campañas', 'bolt'], ['asistente', 'Asistente', 'ia']];
+const dnav: [string, string, string][] = [['resumen', 'Resumen', 'crm'], ['pedidos', 'Pedidos', 'bag'], ['productos', 'Productos', 'clip'], ['inventario', 'Inventario', 'dat'], ['clientes', 'Clientes', 'crm'], ['campanas', 'Campañas', 'bolt'], ['automatizaciones', 'Automatizaciones', 'ops'], ['asistente', 'Asistente', 'ia']];
+const FLOWS: [string, string[], number, string, boolean][] = [
+  ['Recupera tu cesta', ['Cesta abandonada · 1 h', 'Correo con la foto de la prenda', 'Cupón de 10 % a las 24 h'], 128, 'Cesta recuperada · Mariana R.', true],
+  ['Confirmación de pedido', ['Pedido pagado', 'WhatsApp con el resumen', 'Aviso al almacén'], 421, 'Pedido TR-2042 confirmado', true],
+  ['Alerta de inventario', ['Stock menor a 15 piezas', 'Aviso al asistente', 'Pedido sugerido al proveedor'], 6, 'Plumífero rojo · M, stock bajo', true],
+  ['Reseña después de la compra', ['Pedido entregado + 5 días', 'Correo pidiendo reseña'], 212, 'Reseña solicitada · Diego S.', false],
+];
 const FIL = ['todo', 'Pagado', 'Preparando', 'Enviado', 'Entregado'];
 const dash = `<div class="pg tz-dash" data-rp="light" data-v="resumen" data-of="todo" data-r="0"><aside class="td-s"><b>TRAMA<small>Panel</small></b>${dnav.map(([k, t, i]) => `<button type="button" data-int="dnav" data-v="${k}">${svg(i)}${t}</button>`).join('')}</aside>
 <main class="td-m">
@@ -125,6 +131,10 @@ const dash = `<div class="pg tz-dash" data-rp="light" data-v="resumen" data-of="
 
 <section class="td-vw v-campanas"><header><div><p>Marketing</p><h4>Campañas</h4></div><i class="td-pill">Activa o pausa con el interruptor</i></header>
 <div class="td-cp">${camps.map(([a, b, c, d, on]) => `<div class="td-c"><b>${a}</b><span>${b}</span><div><small>Inversión</small><em>${c}</em></div><div><small>Retorno</small><em>${d}</em></div><div class="td-pr"><small data-on>${on ? 'Activa' : 'Pausada'}</small>${sw(on)}</div></div>`).join('')}</div></section>
+
+<section class="td-vw v-automatizaciones"><header><div><p>Flujos que trabajan solos</p><h4>Automatizaciones</h4></div><i class="td-pill">Prueba un flujo con «Probar»</i></header>
+<div class="td-fls">${FLOWS.map(([t, ch, n, lg, on]) => `<div class="td-fl${on ? '' : ' off'}" data-log="${lg}"><div class="td-ft"><b>${t}</b><small><span data-c>${n}</span> ejecuciones esta semana</small></div><div class="td-fc">${ch.map((c) => `<em>${c}</em>`).join('<u>→</u>')}</div><button type="button" class="td-try" data-int="dflow">Probar</button>${sw(on)}</div>`).join('')}</div>
+<div class="td-c td-lg"><h6>Actividad reciente</h6><ul class="td-log"><li><time>hace 2 min</time>Cesta recuperada · Lucía F.</li><li><time>hace 9 min</time>Pedido TR-2041 confirmado</li></ul></div></section>
 
 <section class="td-vw v-asistente"><div class="td-ai"><div class="td-top"><span><i>${svg('ia')}</i>Asistente Trama</span><em>Respuestas de ejemplo</em></div>
 <div class="td-thread"><div class="td-hello"><i>${svg('ia')}</i><h4>¿En qué te ayudo, Sofía?</h4><p>Pregunta por ventas, inventario o campañas.</p>

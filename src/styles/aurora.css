@@ -1,0 +1,27 @@
+/* «Estudio Aurora»: portada cinematográfica y ficha. Fotografía a sangre, tipografía fina, un solo acento de luz fría. */
+.au-hero, .au-det { overflow: hidden; background: #05080f; color: #fff; }
+.au-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 68% 30%; }
+.js .au-hero .au-img { transform: scale(1.2); } .js .live .au-hero .au-img, .js .obm-card.in .au-hero .au-img { transform: none; transition: transform 18s cubic-bezier(0.2, 0.5, 0.2, 1); }
+.au-vig { position: absolute; inset: 0; background: radial-gradient(120% 90% at 70% 40%, transparent 30%, rgba(3, 6, 12, 0.72)), linear-gradient(90deg, rgba(3, 6, 12, 0.82), rgba(3, 6, 12, 0.15) 62%, transparent), linear-gradient(0deg, rgba(3, 6, 12, 0.6), transparent 40%); }
+.au-grain { position: absolute; inset: 0; opacity: 0.16; mix-blend-mode: overlay; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+.au-streak { position: absolute; left: -30%; right: -30%; top: 47%; height: 0.07em; opacity: 0; background: linear-gradient(90deg, transparent, rgba(150, 195, 255, 0.85), transparent); box-shadow: 0 0 1.2em rgba(120, 170, 255, 0.6); }
+.js .live .au-streak, .js .obm-card.in .au-streak { animation: auStreak 11s ease-in-out 2.4s infinite; }
+@keyframes auStreak { 0% { opacity: 0; transform: translateX(-22%); } 25% { opacity: 0.8; } 60% { opacity: 0.8; } 100% { opacity: 0; transform: translateX(22%); } }
+.au-top { position: absolute; z-index: 2; left: 2.6em; right: 2.6em; top: 2em; display: flex; justify-content: space-between; font-size: 0.55em; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255, 255, 255, 0.82); }
+.au-txt { position: absolute; z-index: 2; left: 2.6em; bottom: 3.6em; max-width: 21em; }
+.au-k { font-size: 0.5em; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(160, 200, 255, 0.9); }
+.au-h { margin-top: 1em; font-family: inherit; font-style: normal; font-weight: 300; font-size: 3.5em; line-height: 1; letter-spacing: -0.055em; }
+.au-s { margin-top: 1.3em; max-width: 24em; font-size: 0.64em; line-height: 1.6; color: rgba(255, 255, 255, 0.72); }
+.au-l { display: inline-block; margin-top: 1.8em; font-size: 0.5em; letter-spacing: 0.2em; text-transform: uppercase; padding-bottom: 0.5em; box-shadow: 0 0.1em 0 rgba(255, 255, 255, 0.85); }
+.au-tc { position: absolute; z-index: 2; left: 2.6em; right: 2.6em; bottom: 1.4em; display: flex; align-items: center; gap: 1.2em; font-size: 0.46em; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255, 255, 255, 0.6); } .au-tc i { flex: 1; height: 0.07em; background: rgba(255, 255, 255, 0.2); position: relative; overflow: hidden; } .au-tc b { position: absolute; inset: 0; background: rgba(255, 255, 255, 0.85); transform: scaleX(0); transform-origin: left; }
+.js .live .au-tc b, .js .obm-card.in .au-tc b { animation: auProg 9s linear 1.8s infinite; } @keyframes auProg { to { transform: scaleX(1); } }
+.au-hero .bk-pn, .au-det .bk-pn { z-index: 3; color: #fff; }
+/* ficha */
+.au-img2 { object-position: 82% 28%; width: 62%; left: auto; right: 0; } .au-vig2 { position: absolute; inset: 0; background: linear-gradient(90deg, #05080f 38%, rgba(5, 8, 15, 0.35) 70%, rgba(5, 8, 15, 0.15)), linear-gradient(0deg, rgba(5, 8, 15, 0.7), transparent 40%); }
+.au-dt { position: absolute; z-index: 2; left: 2.6em; bottom: 3em; width: 21em; } .au-no { font-size: 0.55em; letter-spacing: 0.2em; color: rgba(160, 200, 255, 0.9); }
+.au-dt h5 { margin-top: 0.8em; font-size: 2.6em; font-weight: 300; line-height: 1; letter-spacing: -0.055em; font-family: inherit; font-style: normal; } .au-dt .au-k { margin-top: 1.2em; } .au-dt .au-s { margin-top: 1em; }
+.au-tg { display: flex; align-items: center; gap: 0.9em; margin-top: 1.6em; font-size: 0.52em; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255, 255, 255, 0.8); } .au-tg i { width: 0.35em; height: 0.35em; border-radius: 50%; background: rgba(160, 200, 255, 0.9); }
+.au-st { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2em; margin-top: 2em; } .au-st > div { padding-top: 0.9em; box-shadow: 0 -0.07em 0 rgba(255, 255, 255, 0.3); } .au-st b { display: block; font-size: 1.25em; font-weight: 300; letter-spacing: -0.04em; } .au-st span { display: block; margin-top: 0.3em; font-size: 0.5em; line-height: 1.4; color: rgba(255, 255, 255, 0.6); }
+@media (prefers-reduced-motion: reduce) { .js .au-hero .au-img { transform: none !important; transition: none !important; } .au-streak, .au-tc b { animation: none !important; } }
+.pg.au-hero .au-h, .pg.au-hero .au-h span, .pg.au-det h5 { font-family: inherit !important; font-style: normal !important; }
+.au-tc { right: 5em; }

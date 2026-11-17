@@ -42,12 +42,17 @@ function act(t: HTMLElement, r: HTMLElement) {
     const tr = t.closest('tr')!, cur = tr.dataset.st || 'Pagado', next = FLOW[(FLOW.indexOf(cur) + 1) % FLOW.length];
     tr.dataset.st = next; t.textContent = next; t.className = `td-st s-${next}`;
   } else if (k === 'dsw') {
-    const on = t.classList.toggle('on'); const lb = t.parentElement!.querySelector('small'); if (lb) lb.textContent = t.closest('.td-cp') ? (on ? 'Activa' : 'Pausada') : 'Visible en la tienda';
+    const on = t.classList.toggle('on'); const lb = t.closest('.td-pr') ? t.parentElement!.querySelector('small') : null; t.closest('.td-fl')?.classList.toggle('off', !on); if (lb) lb.textContent = t.closest('.td-cp') ? (on ? 'Activa' : 'Pausada') : 'Visible en la tienda';
     t.closest('.td-pc')?.classList.toggle('off', !on);
   } else if (k === 'dstk') {
     const li = t.closest<HTMLElement>('li')!, v = +(li.dataset.s || 0) + 24; li.dataset.s = String(v);
     li.querySelector('b')!.textContent = String(v); (li.querySelector('i') as HTMLElement).style.setProperty('--v', `${Math.min(100, v)}%`); li.classList.toggle('low', v < 20);
     t.textContent = 'Pedido enviado'; setTimeout(() => { t.textContent = 'Reabastecer'; dirty(r); }, 1400);
+  } else if (k === 'dflow') {
+    const row = t.closest<HTMLElement>('.td-fl')!; if (row.classList.contains('off') || row.classList.contains('run')) return;
+    row.classList.add('run'); const c = row.querySelector('[data-c]')!; c.textContent = String(+c.textContent!.replace(/,/g, '') + 1);
+    const log = r.querySelector('.td-log')!; log.insertAdjacentHTML('afterbegin', `<li class="new"><time>ahora</time>${row.dataset.log}</li>`); while (log.children.length > 2) log.lastElementChild!.remove();
+    setTimeout(() => { row.classList.remove('run'); dirty(r); }, 2600);
   } else if (k === 'dask') ask(r, t.dataset.t!);
   else if (k === 'dsend') { const i = r.querySelector<HTMLInputElement>('.td-in input')!; const v = i.value.trim(); if (v) { i.value = ''; i.removeAttribute('value'); ask(r, v); } }
   dirty(r);
