@@ -21,7 +21,7 @@ const frags = [
 ---
 
 <section id="construccion" data-tone="light" data-titles={JSON.stringify(titles)} class="pointer-events-none relative z-10 -mt-[190svh] font-goog text-[#202124]">
-  <div data-process class="h-[calc(910vh+90svh)]">
+  <div data-process class="h-[calc(100lvh*3.4)]">
     <div data-process-inner class="sticky top-0 h-lvh overflow-hidden" style="--fade:#fff">
       <i data-white class="absolute inset-0 bg-white opacity-0" style="mask-image:linear-gradient(to bottom,transparent 0,#000 28svh);-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 28svh)" aria-hidden="true"></i>
       <div data-night class="pointer-events-none absolute inset-0 opacity-0" aria-hidden="true">
@@ -84,9 +84,6 @@ const frags = [
   const whiteEl = inner.querySelector<HTMLElement>('[data-white]')!;
   const fogs = [...inner.querySelectorAll<HTMLElement>('[data-fog]')];
   let nightOn = false;
-  // en celular el capítulo es negro desde el principio (sin la página blanca)
-  const dark0 = matchMedia('(max-width: 700px)').matches;
-  if (dark0) { whiteEl.style.background = '#000'; inner.classList.add('ps-night'); inner.style.setProperty('--fade', '#000'); root.dataset.tone = 'dark'; }
   const W = 640, H = 400, GAP = 40;
 
   // ---- layout: panels on a grid, camera stops, data bus between them
@@ -136,6 +133,10 @@ const frags = [
   };
   layout();
   addEventListener('resize', layout);
+  // al volver a la página (caché del navegador) o al terminar de cargar, se recalcula la escena para no mostrar paneles fuera de lugar
+  addEventListener('load', layout);
+  addEventListener('pageshow', (e) => { if ((e as PageTransitionEvent).persisted) { layout(); rr = target = tAuto = 0; } });
+  new ResizeObserver(layout).observe(inner);
 
   // ---- loose pieces
   const fx = frs.map((el, i) => ({ el, x: +el.dataset.x! / 100, y: +el.dataset.y! / 100, r: +el.dataset.r!, z: +el.dataset.z!, ph: i * 1.7 }));
@@ -144,10 +145,15 @@ const frags = [
 
   // ---- scroll → timeline u in [0, LAST]
   const EXTRA = 1.2, HOLD = 2; // extra scroll spent on the website module (search result, then the site)
-  let target = 0, rr = 0, u = 0, shown = -1, ecoOn = false, lastTime = 0, paused = false; const MAXV = 2.4; // pasos por segundo (la línea de tiempo completa dura unos 4.5 s como mínimo)
+  let target = 0, rr = 0, u = 0, shown = -1, ecoOn = false, lastTime = 0, paused = false; const MAXV = 3; // pasos por segundo (la línea de tiempo completa dura unos 4.5 s como mínimo)
+  // La animación corre sola (por tiempo), no por scroll: empieza cuando el capítulo llega a la pantalla y avanza a AUTO pasos por segundo.
+  // Mientras no termine, la página no deja pasar de la escena (así siempre se ve completa); al subir se reinicia.
+  const GOAL = LAST + EXTRA, AUTO = 1.15;
+  let started = false, tAuto = 0, pinEnd = 0;
   const read = (y: number, vh: number) => {
-    const p = clamp((y - sm0.top - vh * LEAD) / Math.max(1, sm0.height - vh * (LEAD + 1.65)));
-    target = reduced ? LAST + EXTRA : clamp(p * (LAST + EXTRA + 0.6) - 0.3, 0, LAST + EXTRA);
+    started = y >= sm0.top + vh * LEAD - (started ? vh * 0.3 : 0);
+    pinEnd = sm0.top + sm0.height - vh * 1.02;
+    if (reduced) target = GOAL;
   };
   const setTitle = (i: number) => {
     titleEl.classList.add('out');
@@ -159,6 +165,7 @@ const frags = [
     // Control de velocidad: la animación sigue al scroll con suavizado, pero nunca avanza más rápido que MAXV pasos por segundo
     // (si te alejas mucho, el tope sube poco a poco para no quedarse atrás). Así, por rápido que bajes, cada paso se alcanza a ver.
     const dt = Math.min(64, time - lastTime || 16); lastTime = time;
+    if (!reduced) { tAuto = started ? Math.min(GOAL, tAuto + (dt / 1000) * AUTO) : Math.max(0, tAuto - (dt / 1000) * AUTO * 4); target = tAuto; }
     if (reduced) rr = target;
     else {
       const gap = target - rr;
@@ -207,9 +214,9 @@ const frags = [
     // cinematic night: the chapter leaves the white page as soon as the building starts
     const nt = sm(clamp((u - 0.25) / 0.9));
     put(night, 'opacity', nt.toFixed(3));
-    const base = dark0 ? 0 : 255, ch = Math.round(base + (2 - base) * nt), cg = Math.round(base + (3 - base) * nt), cb = Math.round(base + (26 - base) * nt);
+    const ch = Math.round(255 + (2 - 255) * nt), cg = Math.round(255 + (3 - 255) * nt), cb = Math.round(255 + (26 - 255) * nt);
     put(inner, '--fade', `rgb(${ch}, ${cg}, ${cb})`);
-    if ((nt > 0.5) !== nightOn) { nightOn = nt > 0.5; inner.classList.toggle('ps-night', nightOn || dark0); root.dataset.tone = nightOn || dark0 ? 'dark' : 'light'; }
+    if ((nt > 0.5) !== nightOn) { nightOn = nt > 0.5; inner.classList.toggle('ps-night', nightOn); root.dataset.tone = nightOn ? 'dark' : 'light'; }
     // subtitle
     const idx = clamp(Math.round(u), 0, LAST);
     if (idx !== shown) { if (shown >= 0) setTitle(idx); else titleEl.textContent = titles[idx]; shown = idx; }
@@ -229,6 +236,7 @@ const frags = [
       put(whiteEl, 'opacity', wo);
       fogs.forEach((f, k) => put(f, 'opacity', k === 0 ? clamp((+wo - 0.9) / 0.1).toFixed(3) : wo));
       read(y, vh);
+      if (started && tAuto < GOAL && y > pinEnd) scrollTo(0, pinEnd);
       // only animate while the chapter is on screen (or still settling after leaving)
       const away = y + vh * 1.5 < sm0.top || y - vh * 0.5 > sm0.top + sm0.height;
       if (away !== paused) { paused = away; root.classList.toggle('ps-away', away); try { away ? bus.pauseAnimations() : bus.unpauseAnimations(); } catch {} if (away) rr = target; }
