@@ -7,7 +7,7 @@ const CAROUSEL = '.ab-svc, .ab-cs, .ab-tl, .ab-prin, .ab-team, .au-svc, .au-cs, 
 function adapt(root: HTMLElement) {
   const px = (v: string) => parseFloat(v) || 0;
   root.querySelectorAll<HTMLElement>('*').forEach((el) => {
-    if (el.closest('svg') || el.closest('.obv-app')) return;
+    if (el.closest('svg') || el.closest('.obv-app') || el.closest('.obv-chat')) return;
     const cs = getComputedStyle(el);
     if (el.matches(CAROUSEL)) {
       // fila de tarjetas: carrusel horizontal con imán, como en una app
@@ -45,21 +45,27 @@ const REPLIES: [RegExp, string, string[]?][] = [
 ];
 function buildChat(root: HTMLElement) {
   const host = root.querySelector<HTMLElement>('.mv-inicio'); if (!host || host.querySelector('.obv-chat')) return;
-  const g = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8z"/></svg>';
+  const G = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8z"/></svg>';
   const c = document.createElement('div'); c.className = 'obv-chat';
-  c.innerHTML = `<div class="oc-msgs"><div class="oc-hi"><i>${g}</i><h3>Bienvenida, Sofía.</h3><p>¿En qué te ayudo hoy?</p></div><div class="oc-sg">${['Resumen de ventas|Cómo van las estancias', 'Facturas por emitir|Pendientes de cobro', 'Automatizar avisos|Recordatorios a huéspedes'].map((x) => { const [t, d] = x.split('|'); return `<button type="button" data-q="${t}"><b>${t}</b><span>${d}</span></button>`; }).join('')}</div></div>
-<form class="oc-in"><input type="text" placeholder="Pregunta algo o escribe una instrucción…" aria-label="Mensaje" /><button type="submit" aria-label="Enviar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button></form>`;
+  const I = { chart: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>', doc: '<path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/>', bolt: '<path d="M13 2 4 14h7l-1 8 9-12h-7z"/>', cal: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>' };
+  const sug: [string, string][] = [['Resumen de ventas de la semana', I.chart], ['Facturas por emitir', I.doc], ['Automatizar avisos a huéspedes', I.bolt], ['Ocupación de octubre', I.cal]];
+  const ic = (d: string) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+  c.innerHTML = `<div class="oc-msgs"><div class="oc-hi"><h3><span>Hola, Sofía</span></h3><p>¿Por dónde empezamos?</p></div>
+<div class="oc-sg">${sug.map(([t, d]) => `<button type="button" data-q="${t}"><b>${t}</b><i>${ic(d)}</i></button>`).join('')}</div></div>
+<form class="oc-in"><input type="text" placeholder="Pregúntale a Marea IA" aria-label="Mensaje" />
+<div class="oc-bar"><button type="button" class="oc-pl" aria-label="Adjuntar">${ic('<path d="M12 5v14M5 12h14"/>')}</button><span class="oc-tool">${ic('<path d="M4 6h16M4 12h10M4 18h6"/>')}Herramientas</span><i></i><button type="button" class="oc-mic" aria-label="Voz">${ic('<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>')}</button><button type="submit" class="oc-go" aria-label="Enviar">${ic('<path d="M12 19V5M5 12l7-7 7 7"/>')}</button></div></form>
+<p class="oc-fine">Marea IA puede equivocarse. Respuestas de ejemplo.</p>`;
   host.appendChild(c);
   const msgs = c.querySelector<HTMLElement>('.oc-msgs')!, input = c.querySelector<HTMLInputElement>('input')!;
   const ask = (q: string) => {
     if (!q.trim()) return; c.classList.add('talk');
     const me = document.createElement('div'); me.className = 'oc-me'; me.textContent = q; msgs.appendChild(me);
-    const bot = document.createElement('div'); bot.className = 'oc-bot'; bot.innerHTML = `<i>${g}</i><div><span class="oc-dots"><u></u><u></u><u></u></span></div>`; msgs.appendChild(bot);
+    const bot = document.createElement('div'); bot.className = 'oc-bot'; bot.innerHTML = `<i>${G}</i><div><span class="oc-dots"><u></u><u></u><u></u></span></div>`; msgs.appendChild(bot);
     const hit = REPLIES.find(([re]) => re.test(q)); const text = hit ? hit[1] : 'Lo reviso y te aviso en unos segundos. Mientras tanto, puedo prepararte un resumen de ventas, facturas o avisos a huéspedes.';
     const box = bot.querySelector('div')!; input.value = '';
     setTimeout(() => {
       box.innerHTML = '<p></p>'; const p = box.querySelector('p')!; let n = 0;
-      const t = setInterval(() => { p.textContent = text.slice(0, ++n); msgs.scrollTop = msgs.scrollHeight; if (n >= text.length) { clearInterval(t); (hit?.[2] || []).forEach((k) => { const [a, b] = k.split('|'); box.insertAdjacentHTML('beforeend', `<div class="oc-card"><b>${a}</b><span>${b}</span></div>`); }); const st = c.closest<HTMLElement>('.obv-st'); if (st) st.scrollTop = st.scrollHeight; } }, 16);
+      const t = setInterval(() => { p.textContent = text.slice(0, ++n); msgs.scrollTop = msgs.scrollHeight; if (n >= text.length) { clearInterval(t); box.insertAdjacentHTML('beforeend', '<div class="oc-act"><i></i><i></i><i></i><i></i></div>'); (hit?.[2] || []).forEach((k) => { const [a, b] = k.split('|'); box.insertAdjacentHTML('beforeend', `<div class="oc-card"><b>${a}</b><span>${b}</span></div>`); }); const st = c.closest<HTMLElement>('.obv-st'); if (st) st.scrollTop = st.scrollHeight; } }, 16);
     }, 900);
     const st = c.closest<HTMLElement>('.obv-st'); if (st) requestAnimationFrame(() => (st.scrollTop = st.scrollHeight));
   };
