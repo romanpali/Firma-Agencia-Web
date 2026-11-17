@@ -119,3 +119,23 @@
 .mf-flows { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4em; margin-top: 0.55em; font-size: 0.52em; } .mf-flows small { margin-right: 0.4em; font-size: 1em; opacity: 0.55; }
 .mf-flows span { display: flex; align-items: center; gap: 0.6em; padding: 0.45em 0.9em; border-radius: 99em; background: #fff; box-shadow: inset 0 0 0 0.07em rgba(20, 24, 43, 0.12); } .mf-flows i { width: 0.8em; height: 0.8em; border-radius: 50%; background: #3fb581; } .mf-flows span.off { opacity: 0.55; } .mf-flows span.off i { background: rgba(20, 24, 43, 0.3); }
 .mb-by2 { text-transform: none; letter-spacing: 0.06em; } .mb-by2 b { margin-left: 0.4em; font-weight: 500; font-size: 1.15em; letter-spacing: 0.02em; } .mb-by2 i { font-style: normal; } .mb-by2 .wl { font-weight: 300; } .mb-by2 .ws { font-weight: 600; }
+
+/* Obra «HumanCorp»: primero una página blanca (Mauricio y la contabilidad); después, con un barrido, la pantalla negra con el nombre */
+.hc-pg { overflow: hidden; background: #f4f1ea; color: #15161a; }
+.hc-intro { position: absolute; inset: 0; display: flex; align-items: center; gap: 2.6em; padding: 0 3em; }
+.hc-ph { width: 12em; height: 15em; flex: none; object-fit: cover; border-radius: 0.9em; filter: grayscale(1) contrast(1.05); box-shadow: 0 1.4em 2.4em -1.4em rgba(0, 0, 0, 0.5); }
+.hc-tx { max-width: 21em; } .hc-k { font-size: 0.55em; letter-spacing: 0.24em; text-transform: uppercase; opacity: 0.5; }
+.hc-tx h4 { margin-top: 1em; font-size: 1.55em; font-weight: 500; line-height: 1.08; letter-spacing: -0.045em; }
+.hc-p { margin-top: 1.2em; font-size: 0.66em; line-height: 1.65; opacity: 0.68; } .hc-tx small { display: block; margin-top: 1.6em; font-size: 0.52em; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.5; }
+.hc-blk { position: absolute; inset: 0; display: grid; place-items: center; background: #000; color: #fff; clip-path: inset(100% 0 0 0); }
+.hc-blk.hc-on { clip-path: none; }
+.hc-wm { font-size: 2.2em; font-weight: 400; letter-spacing: 0.03em; white-space: nowrap; } .hc-wm i { font-style: normal; } .hc-l { font-weight: 300; } .hc-s { font-weight: 600; }
+.js .live .hc-intro > * { animation: hcIn 1s ease both; } .js .live .hc-ph { animation-delay: 0.2s; } .js .live .hc-tx { animation-delay: 0.45s; }
+.js .live .hc-blk:not(.hc-on) { animation: hcWipe 1.5s cubic-bezier(0.76, 0, 0.24, 1) 6.5s both; }
+.js .live .hc-blk:not(.hc-on) .hc-wm { animation: hcWm 1.8s ease 7.4s both; }
+.js .hc-blk:not(.hc-on) .hc-wm { opacity: 0; }
+@keyframes hcIn { from { opacity: 0; filter: blur(0.4em); } }
+@keyframes hcWipe { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0); } }
+@keyframes hcWm { from { opacity: 0; letter-spacing: 0.3em; filter: blur(0.3em); } to { opacity: 1; letter-spacing: 0.03em; filter: blur(0); } }
+@media (prefers-reduced-motion: reduce) { .js .live .hc-blk:not(.hc-on), .js .live .hc-blk:not(.hc-on) .hc-wm { animation: none; } }
+.hc-tx h4 { font-family: inherit; font-style: normal; }
