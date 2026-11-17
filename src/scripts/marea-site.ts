@@ -77,7 +77,7 @@ function act(t: HTMLElement, root: HTMLElement) {
     setAll(root, '[data-sum=code]', `MAR-${100 + Math.floor(Math.random() * 900)}`);
     d.done = '1';
   } else if (k === 'wreset') { root.removeAttribute('data-done'); }
-  else if (k === 'wex') { expand(root); return; }
+  else if (k === 'wex') { location.href = `/obra/${root.classList.contains('tz-web') ? 'trama' : root.classList.contains('au-web') ? 'hikari' : root.classList.contains('ab-web') ? 'abaco' : 'marea'}`; return; }
   sync(root); dirty(root);
 }
 

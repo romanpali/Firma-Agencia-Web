@@ -1,0 +1,57 @@
+---
+import '../../styles/global.css';
+import Header from '../../components/Header.astro';
+import '../../styles/marea.css';
+import '../../styles/marea-web.css';
+import '../../styles/trama.css';
+import '../../styles/aurora.css';
+import '../../styles/abaco.css';
+import { webHTML } from '../../scripts/marea-web';
+import { siteHTML as tramaSite } from '../../scripts/trama';
+import { siteHTML as hikariSite } from '../../scripts/aurora';
+import { siteHTML as abacoSite } from '../../scripts/abaco';
+
+export function getStaticPaths() {
+  return [
+    { params: { sitio: 'marea' }, props: { n: 'Marea', html: webHTML } },
+    { params: { sitio: 'trama' }, props: { n: 'Trama', html: tramaSite } },
+    { params: { sitio: 'hikari' }, props: { n: 'Hikari Estudio', html: hikariSite } },
+    { params: { sitio: 'abaco' }, props: { n: 'Ábaco', html: abacoSite } },
+  ];
+}
+const { n, html } = Astro.props;
+---
+<!doctype html>
+<html lang="es-MX">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={`${n}: sitio web de ejemplo diseñado por HumanCorp.`} />
+    <meta name="robots" content="noindex" />
+    <script is:inline>document.documentElement.classList.add('js')</script>
+    <title>{n} — Obra — HumanCorp</title>
+  </head>
+  <body class="bg-[#0a0706] font-sans text-white">
+    <Header />
+    <style is:global>
+      [data-nav]::before { display: none; }
+      body { overflow: hidden; }
+      .mr-ex.mr-pg { top: 4.4rem; z-index: 10; animation: none; }
+      .mr-back { position: fixed; left: 1.2rem; bottom: 1.2rem; z-index: 20; padding: 0.7em 1.2em; font-size: 13px; color: #fff; border-radius: 99em; background: rgba(10, 7, 6, 0.78); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); text-decoration: none; transition: background 0.3s, color 0.3s; }
+      .mr-back:hover { background: #fff; color: #0a0706; }
+    </style>
+    <main class="mr-ex mr-pg live" data-pg>
+      <div class="mr-exw" set:html={html}></div>
+    </main>
+    <a class="mr-back" href="/obra">← Volver a la obra</a>
+    <script>
+      import '../../scripts/marea-site';
+      import '../../scripts/trama-site';
+      import '../../scripts/au-site';
+      import '../../scripts/abaco-site';
+      const box = document.querySelector<HTMLElement>('.mr-exw')!, site = box.querySelector<HTMLElement>('.mr-web')!;
+      const fit = () => { const w = innerWidth, h = innerHeight - 70, fs = Math.min(22, w / 40); box.style.fontSize = `${fs}px`; site.style.setProperty('--hh', `${h / fs}em`); };
+      fit(); addEventListener('resize', fit);
+    </script>
+  </body>
+</html>
