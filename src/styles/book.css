@@ -311,3 +311,9 @@
   .js .obm-card.in .obm-bot > :nth-child(4) { transition-delay: 0.3s; } .js .obm-card.in .obm-bot > :nth-child(5) { transition-delay: 0.4s; }
   @media (prefers-reduced-motion: reduce) { .obm-card { transform: none; } .js .obm-top, .js .obm-bot > * { transition: none; } }
 }
+
+/* Obra: un velo oscuro cubre la escena hasta que el libro está acomodado y cargaron sus imágenes, y se desvanece */
+.js .ob-book { position: relative; }
+.js .ob-book::after { content: ""; position: absolute; inset: 0; z-index: 50; background: #05070d; pointer-events: none; transition: opacity 0.9s ease; }
+.js .ob-book.ob-ready::after { opacity: 0; }
+@media (prefers-reduced-motion: reduce) { .js .ob-book::after { transition: none; } }

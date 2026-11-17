@@ -174,8 +174,15 @@ const leavesHtml = leavesMarkup(leaves);
 
       // Temporada navideña: se cargan solo las imágenes de la versión visible y cae nieve detrás de la ventana (solo mientras está a la vista).
       const mobile = matchMedia('(max-width: 700px)').matches;
+      // La escena se muestra cuando el libro ya está acomodado y las imágenes de la temporada cargaron (antes se veía armándose: hojas amontonadas y objetos sin imagen).
+      const loads: Promise<void>[] = [];
+      setTimeout(() => Promise.race([Promise.all(loads), new Promise((r) => setTimeout(r, 1600))]).then(() => requestAnimationFrame(() => requestAnimationFrame(() => sec.classList.add('ob-ready')))), 0);
       if (xmas) {
-        document.querySelectorAll<HTMLImageElement>('img[data-xm-src]').forEach((im) => { if (!!im.closest('.ob-m') === mobile) im.src = im.dataset.xmSrc!; });
+        document.querySelectorAll<HTMLImageElement>('img[data-xm-src]').forEach((im) => {
+          if (!!im.closest('.ob-m') !== mobile) return;
+          loads.push(new Promise<void>((r) => { im.addEventListener('load', () => r(), { once: true }); im.addEventListener('error', () => r(), { once: true }); }));
+          im.src = im.dataset.xmSrc!;
+        });
         document.querySelectorAll<HTMLCanvasElement>('[data-snow]').forEach((snow) => {
           const ctx = snow.getContext('2d'); if (!ctx || reduced) return;
           let fl: { x: number; y: number; r: number; v: number; s: number; a: number }[] = [], w = 0, h = 0, on = false, id = 0, last = 0;
