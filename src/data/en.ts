@@ -11,7 +11,7 @@ import { P7, P7_RE } from './en-p7';
 const BASE: Record<string, string> = {
   'HumanCorp — Diseño, tecnología y operaciones empresariales': 'HumanCorp — Design, technology and business operations', 'Contacto — HumanCorp': 'Contact — HumanCorp',
   // menú y encabezado
-  'Servicios': 'Services', 'Las 8 divisiones': 'The 8 divisions', 'Diseño e identidad': 'Design & identity', 'Desarrollo digital': 'Digital development',
+  'Inicio': 'Home', 'Servicios': 'Services', 'Las 8 divisiones': 'The 8 divisions', 'Diseño e identidad': 'Design & identity', 'Desarrollo digital': 'Digital development',
   'Marketing y crecimiento': 'Marketing & growth', 'Ventas y CRM': 'Sales & CRM', 'IA y automatización': 'AI & automation', 'Finanzas, contable y fiscal': 'Finance, accounting & tax',
   'Operaciones y personas': 'Operations & people', 'Datos e infraestructura': 'Data & infrastructure', 'Ver todos los servicios →': 'See all services →', 'Herramientas': 'Tools',
   'Arma tu proyecto (beta)': 'Build your project (beta)', 'Personaliza un sitio y mira cómo se genera.': 'Customize a site and watch it get built.',
