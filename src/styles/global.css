@@ -733,3 +733,10 @@ img, picture, video, canvas { pointer-events: none; -webkit-user-drag: none; use
 }
 .is-open.is-picking .menu-link.is-picked, .is-open.is-picking [data-results] li.is-picked { opacity: 1; filter: none; transform: scale(1.05); transition: transform 0.7s cubic-bezier(.32, .72, 0, 1), opacity 0.4s ease, filter 0.4s ease; }
 @media (prefers-reduced-motion: reduce) { .is-open.is-picking .menu-link, .is-open.is-picking [data-results] li { transition: none !important; } }
+
+/* configurador en celular: el botón de la flecha gira según el estado del menú inferior */
+.sheet [data-chev] { transition: transform 0.5s cubic-bezier(0.32, 0.72, 0, 1); }
+.sheet[data-s='mid'] [data-chev], .sheet[data-s='full'] [data-chev] { transform: rotate(180deg); }
+.sheet-arrow:active { transform: translateX(-50%) scale(0.94); }
+[data-scroller]::before { content: ""; display: block; height: 1.5rem; } [data-scroller]::after { content: ""; display: block; height: 2rem; }
+@media (min-width: 1024px) { [data-scroller]::before { height: 1.75rem; } }

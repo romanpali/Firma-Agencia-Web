@@ -36,7 +36,7 @@ const idleImgs = ['/configurador/c5.webp', '/configurador/c1.webp', '/configurad
     <title>Personaliza tu sitio (beta) — HumanCorp</title>
   </head>
   <body class="overflow-hidden bg-white font-sans text-[#14161a]">
-    <div class="grid h-svh grid-rows-[44svh_minmax(0,1fr)] lg:grid-cols-[minmax(0,1fr)_470px] lg:grid-rows-1">
+    <div class="grid h-svh grid-rows-[minmax(0,1fr)] lg:grid-cols-[minmax(0,1fr)_470px] lg:grid-rows-1">
       <!-- Escenario -->
       <section data-stage class="relative overflow-hidden bg-white" aria-label="Vista previa de tu sitio">
         <a href="/" aria-label="Volver al inicio" class="absolute left-4 top-4 z-30 grid size-11 place-items-center rounded-full bg-white/80 text-[#14161a] shadow-[0_8px_24px_-12px_rgba(0,0,0,.5)] backdrop-blur-md transition-transform hover:scale-105 lg:left-7 lg:top-7"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a>
@@ -44,7 +44,7 @@ const idleImgs = ['/configurador/c5.webp', '/configurador/c1.webp', '/configurad
         <span data-pill hidden class="absolute right-4 top-[78px] z-30 rounded-full bg-white/85 px-4 py-2 text-[12px] text-[#14161a] shadow-[0_8px_24px_-12px_rgba(0,0,0,.4)] backdrop-blur-md lg:right-7 lg:top-[84px]"></span>
 
         <!-- En espera: abanico de tarjetas -->
-        <div data-idle class="@container absolute inset-0 overflow-hidden text-[#14161a] transition-[opacity,filter] duration-700" style="background:radial-gradient(75% 65% at 50% 40%,#ffffff,#eef0f6 80%)">
+        <div data-idle class="@container absolute inset-0 max-lg:bottom-[var(--sh,0px)] overflow-hidden text-[#14161a] transition-[opacity,filter] duration-700" style="background:radial-gradient(75% 65% at 50% 40%,#ffffff,#eef0f6 80%)">
           <i class="pointer-events-none absolute left-1/2 top-[18%] h-[60%] w-[70%] -translate-x-1/2 rounded-full opacity-[.22] blur-[90px]" style="background:radial-gradient(circle,#977dff,transparent 70%)" aria-hidden="true"></i>
           <div class="absolute inset-0 flex flex-col items-center justify-center px-6">
             <span class="grid size-12 place-items-center rounded-full border border-black/20 text-[15px] font-semibold tracking-wider">H</span>
@@ -58,7 +58,7 @@ const idleImgs = ['/configurador/c5.webp', '/configurador/c1.webp', '/configurad
         </div>
 
         <!-- Generando -->
-        <div data-gen class="pointer-events-none absolute inset-0 z-10 grid place-items-center opacity-0 transition-opacity duration-500" style="--a:#F6B370;--b:#2F3A9E">
+        <div data-gen class="pointer-events-none absolute inset-0 max-lg:bottom-[var(--sh,0px)] z-10 grid place-items-center opacity-0 transition-opacity duration-500" style="--a:#F6B370;--b:#2F3A9E">
           <div class="gen-card relative aspect-[16/11] w-[min(72%,680px)] overflow-hidden rounded-[36px] bg-white shadow-[0_40px_90px_-40px_rgba(0,0,0,.6)]">
             <i class="gen-blob gen-b1 absolute"></i><i class="gen-blob gen-b2 absolute"></i><i class="gen-blob gen-b3 absolute"></i>
             <i class="gen-shine absolute inset-0"></i><i class="grain absolute inset-0 opacity-[.18]"></i>
@@ -276,8 +276,9 @@ const idleImgs = ['/configurador/c5.webp', '/configurador/c1.webp', '/configurad
       </section>
 
       <!-- Panel de personalización -->
-      <aside class="flex min-h-0 flex-col overflow-hidden border-t border-white/10 bg-white lg:border-l lg:border-t-0">
-        <div data-scroller class="min-h-0 flex-1 overflow-y-auto px-6 pb-8 pt-6 lg:px-10 lg:pt-7">
+      <aside data-sheet class="sheet flex min-h-0 flex-col overflow-hidden bg-white max-lg:fixed max-lg:inset-x-0 max-lg:bottom-0 max-lg:z-40 max-lg:h-[54svh] max-lg:rounded-t-[28px] max-lg:shadow-[0_-30px_80px_-30px_rgba(10,12,40,.5)] lg:border-l lg:border-t-0 lg:border-white/10">
+        <div data-grab class="grid h-9 shrink-0 touch-none place-items-center lg:hidden"><i class="h-1 w-10 rounded-full bg-black/15"></i></div>
+        <div data-scroller class="min-h-0 flex-1 overflow-y-auto px-6 lg:px-10">
           <div class="flex items-center justify-between text-[12px] text-black/45"><a href="/" class="tracking-wide"><span class="font-light">HUMAN</span> <span class="font-semibold">CORP</span></a><a href="/contacto" class="hover:text-black">Contacto</a></div>
           <h1 class="mt-8 flex items-center gap-3 font-goog text-[1.9rem] font-light uppercase tracking-[0.16em]">Tu sitio<span class="rounded-full bg-[#0033FF] px-3 py-1 font-sans text-[11px] font-medium tracking-[0.14em] text-white">Beta</span></h1>
           <p class="mt-2 max-w-[24rem] text-[13px] leading-relaxed text-black/55">Es una versión beta: estamos probándola. Cuéntanos lo básico de tu negocio y generamos una propuesta visual inicial de tu sitio, que afinamos juntos.</p>
@@ -302,7 +303,8 @@ const idleImgs = ['/configurador/c5.webp', '/configurador/c1.webp', '/configurad
           <p class="mt-6 text-[11.5px] leading-relaxed text-black/40">No incluye precios. Con tu propuesta preparamos una cotización por escrito, con alcance, entregables, tiempos e inversión.</p>
         </div>
 
-        <div class="bg-white px-6 py-4 shadow-[0_-12px_30px_-26px_rgba(0,0,0,.35)] lg:px-10 lg:py-5">
+        <div data-foot class="shrink-0 bg-white px-6 pb-4 pt-1 shadow-[0_-12px_30px_-26px_rgba(0,0,0,.35)] lg:px-10 lg:py-5">
+          <button type="button" data-sheet-toggle aria-label="Mostrar u ocultar el menú" class="mx-auto mb-1 grid h-7 w-16 touch-none place-items-center text-black/40 lg:hidden"><svg data-chev width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg></button>
           <button type="button" data-generate class="gen-btn w-full rounded-full px-7 py-4 text-[15px] font-medium text-white transition-transform hover:scale-[1.01] active:scale-[0.98] disabled:opacity-60">Generar mi sitio</button>
           <div data-after hidden class="flex gap-3">
             <button type="button" data-reroll class="flex items-center justify-center gap-2 rounded-full bg-[#f5f5f7] px-6 py-4 text-[14.5px] font-medium text-[#14161a] transition-colors hover:bg-[#ebebef]"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h4l10 8h4M3 16h4l3-2.4M14 9.6L17 8h4M18 5l3 3-3 3M18 13l3 3-3 3"/></svg>Otra propuesta</button>
@@ -312,6 +314,7 @@ const idleImgs = ['/configurador/c5.webp', '/configurador/c1.webp', '/configurad
       </aside>
     </div>
 
+    <button type="button" data-sheet-arrow aria-label="Mostrar el menú" class="sheet-arrow fixed bottom-[max(16px,env(safe-area-inset-bottom))] left-1/2 z-40 grid size-12 -translate-x-1/2 touch-none place-items-center rounded-full bg-white/80 text-[#14161a] opacity-0 shadow-[0_12px_30px_-12px_rgba(0,0,0,.5)] backdrop-blur-xl transition-[opacity,transform] duration-500 lg:hidden"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg></button>
     <Cursor />
     <script define:vars={{ types, sites, giros }}>
       const $ = (s) => document.querySelector(s);
@@ -335,7 +338,7 @@ const idleImgs = ['/configurador/c5.webp', '/configurador/c1.webp', '/configurad
       });
       layoutFan();
       const fanTimer = reduced ? 0 : setInterval(() => { pos0 = (pos0 + 1) % cards.length; layoutFan(); }, 2600);
-      $('[data-focus-name]').addEventListener('click', () => { $('[data-in-name]').focus(); });
+      $('[data-focus-name]').addEventListener('click', () => { window.__sheetTo?.('mid'); $('[data-in-name]').focus(); });
 
 
       /* ---------- Datos ---------- */
@@ -604,7 +607,7 @@ const idleImgs = ['/configurador/c5.webp', '/configurador/c1.webp', '/configurad
         clearInterval(fanTimer); stopRot();
         const P = PALS[G.pal];
         const gen = $('[data-gen]'); gen.style.setProperty('--a', P.a); gen.style.setProperty('--b', P.b);
-        phase = 'loading'; renderPanel();
+        phase = 'loading'; renderPanel(); window.__sheetTo?.('closed');
         $('[data-pill]').hidden = true;
         $('[data-scroller]').scrollTo({ top: 0, behavior: 'smooth' });
         const idle = $('[data-idle]'); idle.style.opacity = '0'; idle.style.filter = 'blur(14px)'; idle.style.pointerEvents = 'none';
@@ -627,7 +630,7 @@ const idleImgs = ['/configurador/c5.webp', '/configurador/c1.webp', '/configurad
         drawSite();
         $('[data-gen]').style.opacity = '0';
         site.classList.remove('gen-hidden'); void site.offsetWidth; site.classList.add('gen-in');
-        phase = 'done'; renderPanel();
+        phase = 'done'; renderPanel(); window.__sheetTo?.('dock');
         const pill = $('[data-pill]'); pill.textContent = `Propuesta ${roll + 1} · ${TPL_NAME[G.tpl]}`; pill.hidden = false;
       };
 
@@ -646,6 +649,50 @@ const idleImgs = ['/configurador/c5.webp', '/configurador/c1.webp', '/configurad
       const bind = (sel, key) => $(sel).addEventListener('input', (e) => { S[key] = e.target.value; if (phase === 'done') dirty = true; renderPanel(); });
       bind('[data-in-name]', 'name'); bind('[data-in-city]', 'city'); bind('[data-in-desc]', 'desc');
       renderPanel();
+
+      /* ---------- Menú inferior (celular): se desliza, se minimiza y queda una flecha ---------- */
+      const sheet = $('[data-sheet]'), foot = $('[data-foot]'), arrow = $('[data-sheet-arrow]');
+      const mq = matchMedia('(max-width: 1023px)');
+      const H = () => innerHeight * 0.86;
+      const grab = $('[data-grab]');
+      const vis = { closed: () => 0, dock: () => grab.offsetHeight + foot.offsetHeight, mid: () => Math.min(H(), innerHeight * 0.54), full: () => H() };
+      const ORDER = ['closed', 'dock', 'mid', 'full'];
+      let st = 'mid';
+      const to = (s, anim = true) => {
+        st = s;
+        if (!mq.matches) { sheet.style.height = ''; sheet.style.transition = ''; document.documentElement.style.removeProperty('--sh'); return; }
+        sheet.style.transition = anim && !reduced ? 'height .65s cubic-bezier(.32,.72,0,1)' : 'none';
+        sheet.style.height = `${vis[s]()}px`;
+        document.documentElement.style.setProperty('--sh', `${s === 'full' ? vis.mid() : vis[s]()}px`);
+        sheet.dataset.s = s;
+        arrow.style.opacity = s === 'closed' ? '1' : '0'; arrow.style.pointerEvents = s === 'closed' ? 'auto' : 'none';
+      };
+      window.__sheetTo = (s) => to(s);
+      const near = (v, dir) => {
+        const hs = ORDER.map((k) => vis[k]());
+        let i = hs.reduce((b, h, k) => (Math.abs(h - v) < Math.abs(hs[b] - v) ? k : b), 0);
+        if (dir) { const cur = ORDER.indexOf(st); i = dir > 0 ? Math.max(i, Math.min(3, cur + 1)) : Math.min(i, Math.max(0, cur - 1)); }
+        return ORDER[i];
+      };
+      let g = null;
+      const down = (e) => { g = { y: e.clientY, v0: vis[st](), t: performance.now(), moved: false, el: e.currentTarget }; g.el.setPointerCapture?.(e.pointerId); sheet.style.transition = 'none'; };
+      const move = (e) => {
+        if (!g) return; const dy = e.clientY - g.y; if (Math.abs(dy) > 4) g.moved = true;
+        const v = Math.max(0, Math.min(H(), g.v0 - dy)); sheet.style.height = `${v}px`; g.v = v;
+      };
+      const up = (e) => {
+        if (!g) return; const gg = g; g = null;
+        if (!gg.moved) { toggle(); return; }
+        const speed = (gg.y - e.clientY) / Math.max(1, performance.now() - gg.t);
+        to(near(gg.v ?? gg.v0, Math.abs(speed) > 0.45 ? Math.sign(speed) : 0));
+      };
+      const toggle = () => to(st === 'closed' ? 'mid' : st === 'dock' ? 'mid' : 'closed');
+      [$('[data-grab]'), $('[data-sheet-toggle]'), arrow].forEach((el) => { el.addEventListener('pointerdown', down); el.addEventListener('pointermove', move); el.addEventListener('pointerup', up); el.addEventListener('pointercancel', () => { g = null; to(st); }); });
+      // el arrastre desde el botón flotante: la hoja sube desde abajo
+      arrow.addEventListener('pointerdown', () => { if (g) g.v0 = 0; });
+      mq.addEventListener('change', () => to(st, false));
+      addEventListener('resize', () => to(st, false));
+      to('mid', false);
     </script>
     <script>
       import { pagesFor, leavesMarkup, mountBook } from '../scripts/book';
