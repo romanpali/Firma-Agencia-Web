@@ -129,9 +129,9 @@ function close() {
   setTimeout(() => o.remove(), 450);
 }
 
-function show(o: HTMLElement, pieces: { t: string; el: HTMLElement; site: boolean }[], k: number) {
+function show(o: HTMLElement, pieces: { t: string; dash?: boolean; el: HTMLElement; site: boolean }[], k: number) {
   const stage = o.querySelector<HTMLElement>('.obv-st')!;
-  stage.innerHTML = ''; stage.dataset.site = pieces[k].site ? '1' : ''; stage.dataset.dash = '';
+  stage.innerHTML = ''; stage.removeAttribute('data-site'); stage.removeAttribute('data-dash'); stage.removeAttribute('data-app'); if (pieces[k].site) stage.dataset.site = '1';
   const node = pieces[k].el.cloneNode(true) as HTMLElement;
   node.querySelectorAll<HTMLElement>('[data-ready], [data-tready]').forEach((e) => { delete e.dataset.ready; delete e.dataset.tready; });
   delete node.dataset.ready; delete node.dataset.tready;
@@ -139,29 +139,28 @@ function show(o: HTMLElement, pieces: { t: string; el: HTMLElement; site: boolea
     stage.appendChild(node); node.classList.add('live');
     stage.style.fontSize = '19px';
   } else {
-    const zoom = /panel/i.test(pieces[k].t);
+    const zoom = !!pieces[k].dash;
     const w = document.createElement('div');
     if (zoom) {
       // panel: diseño móvil (una columna, a todo el ancho, se desliza hacia abajo)
       stage.dataset.dash = '1'; w.className = 'obv-dashw live'; w.style.fontSize = '16px';
       w.appendChild(node); stage.appendChild(w);
       requestAnimationFrame(() => adapt(w));
-      dashBar(stage, w, (o.querySelector('.obv-bar b')?.textContent || '').trim());
+      dashBar(stage, w, (o.dataset.name || ''));
     } else {
-      stage.dataset.dash = ''; w.className = 'obv-pg live';
+      w.className = 'obv-pg live';
       const fit = (innerWidth - 24) / 40; w.style.fontSize = `${fit}px`;
       w.appendChild(node); stage.appendChild(w);
     }
   }
   stage.scrollTop = 0; stage.scrollLeft = 0;
-  o.querySelectorAll<HTMLElement>('.obv-tb button').forEach((b, i) => b.classList.toggle('on', i === k));
-  o.querySelector<HTMLElement>('.obv-tt')!.textContent = pieces[k].t;
+  o.querySelectorAll<HTMLElement>('.obv-tb button[data-k]').forEach((b) => b.classList.toggle('on', +b.dataset.k! === k));
   dispatchEvent(new Event('mw-boot'));
   if (pieces[k].site) {
     const root = node.classList.contains('mr-web') ? node : node.querySelector<HTMLElement>('.mr-web')!;
     const run = () => requestAnimationFrame(() => adapt(root));
     run(); new MutationObserver(run).observe(root, { attributes: true, attributeFilter: ['data-tab'] });
-    siteMenu(stage, root, (o.querySelector('.obv-bar b')?.textContent || '').trim());
+    siteMenu(stage, root, (o.dataset.name || ''));
   }
   requestAnimationFrame(() => stage.querySelectorAll('.rv').forEach((e) => e.classList.remove('in')));
 }
@@ -188,16 +187,18 @@ export function openProject(i: number, x = innerWidth / 2, y = innerHeight * 0.5
   const c = card(i), tpl = document.querySelector<HTMLTemplateElement>(`template[data-p="${i}"]`)!;
   const pieces = [...tpl.content.querySelectorAll<HTMLElement>('.obm-pc')].map((f) => {
     const el = f.querySelector<HTMLElement>('.obm-pg > *')!;
-    return { t: f.querySelector(':scope > figcaption')!.textContent || '', el, site: !!el.querySelector('.mw-scroll') || el.classList.contains('mr-web') };
+    const cap = f.querySelector(':scope > figcaption')!.textContent || '';
+    return { t: /panel/i.test(cap) ? 'Dashboard' : cap, dash: /panel/i.test(cap), el, site: !!el.querySelector('.mw-scroll') || el.classList.contains('mr-web') };
   });
   if (!pieces.length) { detail(c, i, x, y); return; }
   const first = Math.max(0, pieces.findIndex((p) => p.site));
   const o = document.createElement('div');
   o.className = 'obv'; o.dataset.th = c.dataset.th!; origin(o, x, y);
-  o.innerHTML = `${bar(i, c.dataset.n!, '')}<div class="obv-st"></div><nav class="obv-tb">${pieces.map((p) => `<button type="button">${p.t}</button>`).join('')}</nav>`;
+  o.dataset.name = c.dataset.n!;
+  o.innerHTML = `<div class="obv-st"></div><nav class="obv-tb"><button type="button" class="obv-back" aria-label="Volver"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>${pieces.map((p, n) => `<button type="button" data-k="${n}">${p.t}</button>`).join('')}</nav>`;
   document.body.appendChild(o);
   document.documentElement.style.overflow = 'hidden';
   show(o, pieces, first);
-  o.querySelectorAll<HTMLElement>('.obv-tb button').forEach((b, k) => b.addEventListener('click', () => show(o, pieces, k)));
+  o.querySelectorAll<HTMLElement>('.obv-tb button[data-k]').forEach((b) => b.addEventListener('click', () => show(o, pieces, +b.dataset.k!)));
   wire(o);
 }
