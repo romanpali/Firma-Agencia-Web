@@ -21,7 +21,7 @@ import Header from '../components/Header.astro';
     <title>HumanCorp — Diseño, tecnología y operaciones empresariales</title>
   </head>
   <body class="bg-[#08090c] font-sans text-white">
-    <div class="hc-intro" aria-hidden="true"><div class="hci-in"><b class="hci-w"><span class="hci-l">HUMAN</span><span class="hci-s">CORP</span></b><i class="hci-ln"></i><p class="hci-t">Diseño · Tecnología · Operaciones</p></div><i class="hci-bar"><u></u></i></div>
+    <div class="hc-intro" aria-hidden="true"><div class="hci-in"><b class="hci-w"><span class="hci-l">HUMAN</span><span class="hci-s">CORP</span></b></div></div>
     <Header />
     <main class="overflow-x-clip">
       <Hero />
@@ -34,6 +34,6 @@ import Header from '../components/Header.astro';
       <Contact />
     </main>
     <ScrollFx />
-    <script is:inline>(function(){var d=document.documentElement;if(!d.classList.contains('intro'))return;try{sessionStorage.setItem('hc-intro','1')}catch(e){}var el=document.querySelector('.hc-intro');setTimeout(function(){el.classList.add('out')},2500);setTimeout(function(){d.classList.remove('intro');el.remove()},3500)})()</script>
+    <script is:inline>(function(){var d=document.documentElement;if(!d.classList.contains('intro'))return;try{sessionStorage.setItem('hc-intro','1')}catch(e){}var el=document.querySelector('.hc-intro');setTimeout(function(){el.classList.add('out')},2100);setTimeout(function(){d.classList.remove('intro');el.remove()},3300)})()</script>
   </body>
 </html>

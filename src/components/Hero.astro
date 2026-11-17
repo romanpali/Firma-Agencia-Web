@@ -36,9 +36,13 @@ const tiles = Array.from({ length: N }, (_, k) => ({ k, arm: k % ARMS, idx: Math
       <!-- celular: la seda de escritorio de fondo; etiqueta arriba, titular abajo a la izquierda, texto y botón -->
       <div class="hm md:hidden">
       <div class="hh-field" aria-hidden="true">{tiles.slice(0, 1).map((t) => <u class="hh-t" data-arm={t.arm} data-idx={t.idx} data-off={t.off}><b class="hh-s"></b><b class="hh-b"></b></u>)}</div>
-      <div class="hm-top hf-rise" style="--d:.1s"><span>Diseño · Tecnología · Operaciones</span><span>2026</span></div>
+      <div class="hm-vis hf-rise" style="--d:.2s" aria-hidden="true">
+        <svg class="hm-rg" viewBox="0 0 300 300"><circle class="r1" cx="150" cy="150" r="138" pathLength="1" /><circle class="r2" cx="150" cy="150" r="98" pathLength="1" /><circle class="r3" cx="150" cy="150" r="58" pathLength="1" /><path class="ax" d="M150 4v292M4 150h292" pathLength="1" /></svg>
+        <div class="hm-orb o1"><span><i></i>Diseño</span></div><div class="hm-orb o2"><span><i></i>Tecnología</span></div><div class="hm-orb o3"><span><i></i>Operaciones</span></div>
+        <div class="hm-core"><b>HC</b><small>Un estándar</small></div>
+        <div class="hm-chip c1"><b>03</b><span>divisiones</span></div><div class="hm-chip c2"><b>1</b><span>equipo</span></div>
+      </div>
       <div class="hm-mid">
-        <p class="hm-k hf-rise" style="--d:.2s"><i></i>Un solo equipo, un mismo criterio</p>
         <h1 class="hm-h"><span class="sr-only">HumanCorp: </span>
           <span class="block overflow-hidden pb-[0.1em]"><span class="hf-up block" style="--d:.3s">Todo conectado.</span></span>
           <em class="block overflow-hidden pb-[0.1em]"><span class="hf-up block" style="--d:.44s">Bajo un solo</span></em>
@@ -47,6 +51,7 @@ const tiles = Array.from({ length: N }, (_, k) => ({ k, arm: k % ARMS, idx: Math
         <p class="hm-p hf-rise" style="--d:.7s">Diseño, tecnología y operaciones empresariales, organizadas para que tu empresa funcione con claridad.</p>
         <div class="hm-cta hf-rise" style="--d:.85s"><a class="p" href="/servicios">Conocer servicios</a><a class="s" href="/arma-tu-proyecto">Arma tu proyecto</a></div>
       </div>
+      <div class="hm-tk hf-rise" style="--d:1s" aria-hidden="true"><div>{[0, 1].map(() => names.map((n) => <span>{n}</span>))}</div></div>
       </div>
     </div>
   </section>
