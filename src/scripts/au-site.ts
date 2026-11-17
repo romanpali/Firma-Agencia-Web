@@ -22,11 +22,11 @@ document.addEventListener('click', (ev) => {
   if (!t || !r || t.closest('.lc')) return;
   ev.stopPropagation();
   if (t.dataset.int === 'adsel') r.dataset.c = t.dataset.i!;
-  else if (t.dataset.int === 'adag') { const on = t.classList.toggle('on'); r.toggleAttribute('data-off', !on); t.querySelector('span')!.textContent = on ? 'Agente activo' : 'Agente en pausa'; }
+  else if (t.dataset.int === 'adag') { const on = t.classList.toggle('on'); r.toggleAttribute('data-off', !on); t.querySelector('span')!.textContent = on ? 'Agenda abierta' : 'Agenda en pausa'; }
   else {
-    const tr = t.closest<HTMLElement>('.ad-t')!; tr.classList.add('taken'); t.textContent = 'Conversación tuya';
-    tr.querySelector('.ad-th span')!.textContent = 'Atendida por una persona'; tr.querySelector('.ad-m')!.insertAdjacentHTML('beforeend', '<p class="m-n">Tomaste la conversación · el agente quedó en pausa aquí</p>');
-    const li = r.querySelector(`[data-int=adsel][data-i="${tr.dataset.i}"] em`); if (li) { li.textContent = 'Con una persona'; li.className = 's-on'; }
+    const tr = t.closest<HTMLElement>('.ad-t')!; tr.classList.add('taken'); t.textContent = 'Entrega aprobada';
+    tr.querySelector('.ad-th span')!.textContent = 'Aprobada'; tr.querySelector('.ad-m')!.insertAdjacentHTML('beforeend', '<p class="m-n">Aprobaste la entrega · pasa a producción</p>');
+    const li = r.querySelector(`[data-int=adsel][data-i="${tr.dataset.i}"] em`); if (li) { li.textContent = 'Aprobada'; li.className = 's-on'; }
   }
   dirty(r);
 });

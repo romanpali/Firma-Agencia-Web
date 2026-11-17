@@ -102,5 +102,22 @@ const contents = `<div class="pg lt pc mr-case au-case"><div class="pc-top"><b><
 <p class="pc-f">Hikari Estudio · diseño y fotografía · concepto, datos de ejemplo</p><span class="bk-pn">16</span></div>`;
 
 // la hoja del sitio lleva por reverso la pantalla negra de HumanCorp (la pasa la página de obra)
-export const auroraLeaves = (black: string): { f: string; b: string }[] => [{ f: brand, b: contents }, { f: siteHTML, b: black }];
-export const auroraPieces = [{ t: 'Identidad', h: brand }, { t: 'Proyecto', h: contents }, { t: 'Sitio web', h: siteHTML }];
+// ---------- panel del estudio (reverso del sitio): interactivo, lógica en au-site.ts ----------
+type Msg = [string, string];
+const convs: [string, string, string, string, Msg[]][] = [
+  ['Cerámica Tierra Viva', 'Sesión de producto · 24 piezas', 'En edición', 'on', [['u', '¿Cómo va la selección de fotos?'], ['a', 'Ya van 18 de 24 retocadas. El jueves te llega la galería para elegir.'], ['u', 'Perfecto, la reviso ese día.']]],
+  ['Café Nube', 'Identidad y empaque', 'Por aprobar', 'hu', [['u', 'Me encantó la segunda propuesta de logotipo.'], ['a', 'Quedó lista la versión final con sus variantes. Falta tu aprobación para pasar a producción.'], ['n', 'Entrega pendiente · archivos listos para revisar']]],
+  ['Casa Hoshi', 'Sitio web de huéspedes', 'En diseño', 'on', [['u', '¿Podemos ver la página de habitaciones?'], ['a', 'Sí, mañana te comparto el prototipo con las tres habitaciones y la galería.']]],
+  ['Librería Pino', 'Retrato del equipo', 'Entregado', 'ok', [['u', 'Las fotos del equipo quedaron muy bien.'], ['a', 'Gracias. Ya tienes la galería final y los archivos para web e impresión.']]],
+  ['Taller Marea', 'Libro de marca', 'Por aprobar', 'hu', [['u', 'Falta ajustar los tonos del manual.'], ['a', 'Ya los ajusté. Revisa las páginas 12 a 16 y, si todo está bien, lo mandamos a imprenta.'], ['n', 'Entrega pendiente · manual en PDF listo']]],
+];
+const adk: [string, string][] = [['9', 'proyectos activos'], ['3', 'entregas esta semana'], ['2', 'por aprobar'], ['14', 'sesiones este mes']];
+const dash = `<div class="pg au-dash" data-rp="light" data-c="0"><i class="ad-vl"></i>
+<header><div><p class="au-k">Panel</p><h4>Proyectos</h4></div><button type="button" class="ad-sw on" data-int="adag"><span>Agenda abierta</span><i><b></b></i></button></header>
+<div class="ad-k">${adk.map(([a, b]) => `<div><b>${a}</b><small>${b}</small></div>`).join('')}</div>
+<div class="ad-g"><ul class="ad-l">${convs.map(([n, q, st, c], i) => `<li><button type="button" data-int="adsel" data-i="${i}"><b>${n}</b><span>${q}</span><em class="s-${c}">${st}</em></button></li>`).join('')}</ul>
+<div class="ad-tr">${convs.map(([n, , st, c, m], i) => `<div class="ad-t" data-i="${i}"><div class="ad-th"><b>${n}</b><span class="s-${c}">${st}</span>${c === 'hu' ? `<button type="button" class="ad-take" data-int="adtake">Aprobar entrega</button>` : ''}</div><div class="ad-m">${m.map(([w, t]) => `<p class="m-${w}">${t}</p>`).join('')}</div></div>`).join('')}
+<div class="ad-in"><span>Escribe un mensaje…</span><i>↑</i></div></div></div><span class="bk-pn">18</span></div>`;
+
+export const auroraLeaves = (black: string, mid: string): { f: string; b: string }[] => [{ f: brand, b: contents }, { f: siteHTML, b: dash }, { f: mid, b: black }];
+export const auroraPieces = [{ t: 'Identidad', h: brand }, { t: 'Proyecto', h: contents }, { t: 'Sitio web', h: siteHTML }, { t: 'Panel', h: dash }];
