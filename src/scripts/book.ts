@@ -213,7 +213,7 @@ export function mountBook(o: Mount) {
     if (g) { go(+g.dataset.bkGo!); return; }
     const leaf = el.closest<HTMLElement>('.bw-leaf');
     if (!leaf) return;
-    if (el.closest('.mr-web')) { // el sitio: la hoja pasa con tres clics seguidos o con un clic en su borde derecho
+    if (el.closest('.mr-web, .tz-dash')) { // el sitio y el panel de Trama: la hoja pasa con tres clics seguidos o con un clic en su borde derecho
       const r = leaf.getBoundingClientRect(), now = performance.now();
       clk = clk.leaf === leaf && now - clk.t < 800 ? { leaf, n: clk.n + 1, t: now } : { leaf, n: 1, t: now };
       if (!(clk.n >= 3 || ev.clientX > r.right - r.width * 0.1)) return;
