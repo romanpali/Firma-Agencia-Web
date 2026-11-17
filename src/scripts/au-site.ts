@@ -14,3 +14,19 @@ document.addEventListener('input', (ev) => {
   if (!i.closest?.('.au-web')) return;
   if (i.tagName === 'INPUT') i.setAttribute('value', i.value); else if (i.tagName === 'TEXTAREA') i.textContent = i.value;
 });
+
+// Panel de agentes: elegir una conversación, tomarla (pasa a una persona) y activar o pausar el agente.
+document.addEventListener('click', (ev) => {
+  const t = (ev.target as HTMLElement).closest<HTMLElement>('[data-int=adsel], [data-int=adtake], [data-int=adag]');
+  const r = t?.closest<HTMLElement>('.au-dash');
+  if (!t || !r || t.closest('.lc')) return;
+  ev.stopPropagation();
+  if (t.dataset.int === 'adsel') r.dataset.c = t.dataset.i!;
+  else if (t.dataset.int === 'adag') { const on = t.classList.toggle('on'); r.toggleAttribute('data-off', !on); t.querySelector('span')!.textContent = on ? 'Agente activo' : 'Agente en pausa'; }
+  else {
+    const tr = t.closest<HTMLElement>('.ad-t')!; tr.classList.add('taken'); t.textContent = 'Conversación tuya';
+    tr.querySelector('.ad-th span')!.textContent = 'Atendida por una persona'; tr.querySelector('.ad-m')!.insertAdjacentHTML('beforeend', '<p class="m-n">Tomaste la conversación · el agente quedó en pausa aquí</p>');
+    const li = r.querySelector(`[data-int=adsel][data-i="${tr.dataset.i}"] em`); if (li) { li.textContent = 'Con una persona'; li.className = 's-on'; }
+  }
+  dirty(r);
+});

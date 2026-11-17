@@ -90,10 +90,34 @@ ${nav}
 
 </div></div>`;
 
-const st: [string, string][] = [['24/7', 'atención sin pausas'], ['< 1 min', 'tiempo de primera respuesta'], ['100 %', 'con supervisión humana']];
-const det = `<div class="pg au-det" data-rp="dark"><img class="au-img au-img2" src="${IMG}" alt="" width="1500" height="1000" decoding="async"><i class="au-vig2"></i><i class="au-grain"></i>
-<div class="au-top"><span>Estudio Aurora</span><span>Proyecto · 2025</span></div>
-<div class="au-dt"><span class="au-no">04</span><h5>Estudio Aurora</h5><p class="au-k">Asistentes y automatización · 2025</p><p class="au-s">Sitio web de un estudio de asistentes de IA: servicios, casos, equipo y contacto, con una portada cinematográfica.</p>
-<p class="au-tg">Sitio web<i></i>Marca<i></i>Contenido</p><div class="au-st">${st.map(([a, b]) => `<div><b>${a}</b><span>${b}</span></div>`).join('')}</div></div><span class="bk-pn">14</span></div>`;
-export const auroraLeaves = (): { f: string; b: string }[] => [{ f: siteHTML, b: det }];
-export const auroraPieces = [{ t: 'Sitio web', h: siteHTML }, { t: 'Proyecto', h: det }];
+// ---------- identidad: portada con la fotografía a sangre ----------
+const brand = `<div class="pg au-brand" data-rp="dark"><img class="au-img" src="${IMG}" alt="" width="1500" height="1000" decoding="async"><i class="au-bv"></i>
+<div class="au-bt mw-f" style="--d:.2s"><span>Manual de marca</span><span>Made by <b><i class="wl">Human</i><i class="ws">Corp</i></b></span></div>
+<i class="au-sun mw-f" style="--d:.9s"></i><div class="au-bw mw-f" style="--d:.5s"><b>aurora</b><span>Asistentes y automatización · Estudio</span></div></div>`;
+
+// ---------- tabla de contenido ----------
+const hd: [string, string][] = [['Identidad de marca', 'Logotipo y manual'], ['Portada cinematográfica', 'Fotografía a sangre y movimiento'], ['Sitio web', '5 secciones navegables'], ['Servicios y niveles', 'Qué hacemos y cómo se ve'], ['Casos', 'Ejemplos con cifras'], ['Formulario de contacto', 'Con confirmación'], ['Panel de agentes', 'Conversaciones y traspaso'], ['Datos e infraestructura', 'Respaldos y monitoreo']];
+const contents = `<div class="pg lt pc mr-case au-case"><div class="pc-top"><b><span class="wl">HUMAN</span> <span class="ws">CORP</span></b><span>Proyecto Estudio Aurora · 2025</span></div>
+<div class="pc-l"><h4>Lo que se hizo</h4><p>${hd.length} entregables</p></div>
+<ul class="pc-r">${hd.map(([t, d], n) => `<li><div class="pc-i"><em>${String(n + 1).padStart(2, '0')}</em><b>${t}</b><i></i><span>${d}</span></div></li>`).join('')}</ul>
+<p class="pc-f">Estudio Aurora · asistentes de IA · concepto, datos de ejemplo</p><span class="bk-pn">16</span></div>`;
+
+// ---------- panel de agentes (reverso del sitio): interactivo, lógica en au-site.ts ----------
+type Msg = [string, string];
+const convs: [string, string, string, string, Msg[]][] = [
+  ['Mariana R.', '¿Tienen horario el sábado?', 'Resuelta', 'ok', [['u', '¿Tienen horario el sábado?'], ['a', 'Sí, el sábado atendemos de 9:00 a 14:00. ¿Quieres que te aparte un lugar?'], ['u', 'A las 11, por favor.'], ['a', 'Listo, quedaste a las 11:00. Te mando un recordatorio un día antes.']]],
+  ['Andrés P.', 'Necesito corregir una factura', 'Pasó a persona', 'hu', [['u', 'Necesito corregir una factura.'], ['a', 'Eso lo revisa una persona de nuestro equipo. Ya le avisé y te escribirá hoy.'], ['n', 'Pasó a persona · resumen enviado al equipo']]],
+  ['Lucía F.', '¿Cuánto cuesta el nivel avanzado?', 'Activa', 'on', [['u', '¿Cuánto cuesta el nivel avanzado?'], ['a', 'Depende del alcance: agentes, canales y flujos. Una llamada de 30 minutos nos basta para darte una cotización clara.'], ['u', '¿Puedo agendarla esta semana?']]],
+  ['Diego S.', 'Quiero agendar una llamada', 'Resuelta', 'ok', [['u', 'Quiero agendar una llamada.'], ['a', 'Claro. Tengo el jueves a las 10:00 o el viernes a las 12:00.'], ['u', 'El jueves.'], ['a', 'Agendado. Te llegará la invitación por correo.']]],
+  ['Paula C.', 'Mi pedido no llegó', 'Pasó a persona', 'hu', [['u', 'Mi pedido no llegó.'], ['a', 'Lamento eso. Lo reviso con una persona del equipo para darte una respuesta hoy.'], ['n', 'Pasó a persona · resumen enviado al equipo']]],
+];
+const adk: [string, string][] = [['128', 'conversaciones hoy'], ['71 %', 'resueltas por el agente'], ['29', 'pasaron a una persona'], ['38 s', 'primera respuesta']];
+const dash = `<div class="pg au-dash" data-rp="light" data-c="0"><i class="ad-vl"></i>
+<header><div><p class="au-k">Panel</p><h4>Agentes</h4></div><button type="button" class="ad-sw on" data-int="adag"><span>Agente activo</span><i><b></b></i></button></header>
+<div class="ad-k">${adk.map(([a, b]) => `<div><b>${a}</b><small>${b}</small></div>`).join('')}</div>
+<div class="ad-g"><ul class="ad-l">${convs.map(([n, q, st, c], i) => `<li><button type="button" data-int="adsel" data-i="${i}"><b>${n}</b><span>${q}</span><em class="s-${c}">${st}</em></button></li>`).join('')}</ul>
+<div class="ad-tr">${convs.map(([n, , st, c, m], i) => `<div class="ad-t" data-i="${i}"><div class="ad-th"><b>${n}</b><span class="s-${c}">${st}</span>${c === 'hu' ? `<button type="button" class="ad-take" data-int="adtake">Tomar la conversación</button>` : ''}</div><div class="ad-m">${m.map(([w, t]) => `<p class="m-${w}">${t}</p>`).join('')}</div></div>`).join('')}
+<div class="ad-in"><span>Escribe una respuesta…</span><i>↑</i></div></div></div><span class="bk-pn">18</span></div>`;
+
+export const auroraLeaves = (): { f: string; b: string }[] => [{ f: brand, b: contents }, { f: siteHTML, b: dash }];
+export const auroraPieces = [{ t: 'Identidad', h: brand }, { t: 'Proyecto', h: contents }, { t: 'Sitio web', h: siteHTML }, { t: 'Panel', h: dash }];
