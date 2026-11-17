@@ -9,9 +9,9 @@ const tiles = Array.from({ length: N }, (_, k) => ({ k, arm: k % ARMS, idx: Math
 
 <div data-hero-wrap data-tone="dark" class="relative z-10 h-[190svh]">
   <section data-hero class="sticky top-0 h-lvh min-h-[600px] overflow-hidden text-white">
-    <div data-hero-bg class="absolute inset-0 bg-black md:bg-[#1f4cb8] will-change-[opacity,transform]">
-      <canvas id="hero-canvas" class="absolute inset-0 hidden size-full md:block" aria-hidden="true"></canvas>
-      <div class="pointer-events-none absolute inset-0 hidden bg-black/20 md:block"></div>
+    <div data-hero-bg class="absolute inset-0 bg-[#1f4cb8] will-change-[opacity,transform]">
+      <canvas id="hero-canvas" class="absolute inset-0 size-full" aria-hidden="true"></canvas>
+      <div class="pointer-events-none absolute inset-0 bg-black/20"></div>
       <div class="pointer-events-none absolute inset-x-0 top-0 h-[12%] bg-gradient-to-b from-black/90 to-transparent"></div>
       <div class="pointer-events-none absolute inset-0" style="background:linear-gradient(to bottom,transparent 60%,rgba(2,8,36,.5))"></div>
     </div>
@@ -33,26 +33,20 @@ const tiles = Array.from({ length: N }, (_, k) => ({ k, arm: k % ARMS, idx: Math
         <div class="hf-tick"><div class="hf-track">{[0, 1].map(() => names.map((n) => <span>{n}</span>))}</div></div>
       </div>
       </div>
-      <!-- celular: mosaicos en espiral de fondo y una composición formal -->
+      <!-- celular: la seda de escritorio de fondo; etiqueta arriba, titular abajo a la izquierda, texto y botón -->
       <div class="hm md:hidden">
-      <div class="hh-field pointer-events-none absolute left-1/2 top-1/2" aria-hidden="true">
-        {tiles.map((t) => (
-          <u class="hh-t" data-arm={t.arm} data-idx={t.idx} data-off={t.off}><b class="hh-s" style={`background-image:url(/hero/t${t.img}.webp)`}></b><b class="hh-b" style={`background-image:url(/hero/t${t.img}-b.webp)`}></b></u>
-        ))}
-      </div>
-      <div class="pointer-events-none absolute inset-0" style="background:linear-gradient(180deg,rgba(3,5,14,.82),rgba(3,5,14,.5) 38%,rgba(3,5,14,.72) 70%,rgba(3,5,14,.95))" aria-hidden="true"></div>
-      <i class="hm-fr" aria-hidden="true"></i><i class="hm-vl" aria-hidden="true"></i>
-      <div class="hm-top hf-rise" style="--d:.1s"><span><i></i>Diseño · Tecnología · Operaciones</span><span>2026</span></div>
+      <div class="hh-field" aria-hidden="true">{tiles.slice(0, 1).map((t) => <u class="hh-t" data-arm={t.arm} data-idx={t.idx} data-off={t.off}><b class="hh-s"></b><b class="hh-b"></b></u>)}</div>
+      <div class="hm-top hf-rise" style="--d:.1s"><span>Diseño · Tecnología · Operaciones</span><span>2026</span></div>
       <div class="hm-mid">
+        <p class="hm-k hf-rise" style="--d:.2s"><i></i>Un solo equipo, un mismo criterio</p>
         <h1 class="hm-h"><span class="sr-only">HumanCorp: </span>
-          <span class="block overflow-hidden pb-[0.1em]"><span class="hf-up block" style="--d:.2s">Todo conectado.</span></span>
-          <em class="block overflow-hidden pb-[0.1em]"><span class="hf-up block" style="--d:.34s">Bajo un solo</span></em>
-          <em class="block overflow-hidden pb-[0.1em]"><span class="hf-up block" style="--d:.46s">estándar.</span></em>
+          <span class="block overflow-hidden pb-[0.1em]"><span class="hf-up block" style="--d:.3s">Todo conectado.</span></span>
+          <em class="block overflow-hidden pb-[0.1em]"><span class="hf-up block" style="--d:.44s">Bajo un solo</span></em>
+          <em class="block overflow-hidden pb-[0.1em]"><span class="hf-up block" style="--d:.58s">estándar.</span></em>
         </h1>
-        <p class="hm-p hf-rise" style="--d:.55s">Diseño, tecnología y operaciones empresariales, con un solo equipo y un mismo criterio.</p>
-        <div class="hm-cta hf-rise" style="--d:.7s"><a class="p" href="/servicios">Conocer servicios</a><a class="s" href="/arma-tu-proyecto">Arma tu proyecto</a></div>
+        <p class="hm-p hf-rise" style="--d:.7s">Diseño, tecnología y operaciones empresariales, organizadas para que tu empresa funcione con claridad.</p>
+        <div class="hm-cta hf-rise" style="--d:.85s"><a class="p" href="/servicios">Conocer servicios</a><a class="s" href="/arma-tu-proyecto">Arma tu proyecto</a></div>
       </div>
-      <div class="hm-idx hf-rise" style="--d:.9s"><div><b>01</b><span>Diseño</span></div><div><b>02</b><span>Tecnología</span></div><div><b>03</b><span>Operaciones</span></div></div>
       </div>
     </div>
   </section>
@@ -124,7 +118,7 @@ void main(){
 
   // The silk is a slow, soft gradient: render it small (about 0.7 MP) and at ~40 fps; the scroll motion stays at full refresh rate.
   let draw: ((t: number) => void) | null = null;
-  const gl = mobile ? null : canvas.getContext('webgl', { antialias: false, alpha: false, powerPreference: 'high-performance' });
+  const gl = canvas.getContext('webgl', { antialias: false, alpha: false, powerPreference: 'high-performance' });
   if (gl) {
     const sh = (type: number, src: string) => { const s = gl.createShader(type)!; gl.shaderSource(s, src); gl.compileShader(s); return s; };
     const prog = gl.createProgram()!;
@@ -167,6 +161,6 @@ void main(){
     put(bg, 'transform', `scale(${(1 + p * 0.06).toFixed(4)})`);
     put(text, 'opacity', (1 - smooth(clamp(p / 0.55))).toFixed(3));
     put(text, 'transform', `translate3d(0, ${(-p * vh * 0.12).toFixed(1)}px, 0) scale(${(1 + p * 0.05).toFixed(4)})`);
-    if (mobile) { if (!reduced) paintTiles(t / 1000); } else if (draw && !reduced && t - last > 24) { last = t; draw(t / 1000); }
+    if (draw && !reduced && t - last > 24) { last = t; draw(t / 1000); }
   });
 </script>
