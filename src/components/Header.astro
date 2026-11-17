@@ -98,9 +98,11 @@ const pill = 'hdr-pill rounded-full border border-white/20 bg-white/10 px-5 py-3
 </div>
 
 <Agendar />
+<script is:inline>try{if(sessionStorage.getItem("hc-tr")){sessionStorage.removeItem("hc-tr");var d=document.documentElement;d.setAttribute("data-tr","");setTimeout(function(){d.removeAttribute("data-tr")},1500)}}catch(e){}</script>
 <script is:inline>try{var l=localStorage.getItem("hc-lang"),q=/[?&]lang=en/.test(location.search),n=((navigator.languages&&navigator.languages[0])||navigator.language||"es").toLowerCase();if(q||l==="en"||(!l&&n.indexOf("en")===0))document.documentElement.classList.add("i18n-wait")}catch(e){}</script>
 <script>
   import '../scripts/i18n';
+  import '../scripts/transition';
   const nav = document.querySelector<HTMLElement>('[data-nav]')!;
   let sr = 0;
   const mark = () => { sr = 0; nav.toggleAttribute('data-scrolled', scrollY > 24); };
