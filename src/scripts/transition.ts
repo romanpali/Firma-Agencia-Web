@@ -9,9 +9,9 @@ document.addEventListener('click', (ev) => {
   const r = a.getBoundingClientRect(), x = ev.clientX || r.left + r.width / 2, y = ev.clientY || r.top + r.height / 2;
   const c = document.createElement('div');
   c.className = 'tr-cover'; c.style.setProperty('--x', `${x}px`); c.style.setProperty('--y', `${y}px`);
-  c.innerHTML = '<span class="tr-a"><span class="font-light">HUMAN</span> <b>CORP</b></span><span class="tr-b">HumanCorp · Previsualice your project <em>Beta</em></span>';
+  c.innerHTML = '<div class="tr-c"><span class="tr-a"><span class="font-light">HUMAN</span> <b>CORP</b></span><span class="tr-b">Previsualice your project <em>Beta</em></span></div>';
   document.body.appendChild(c);
   try { sessionStorage.setItem('hc-tr', '1'); } catch { /* sin almacenamiento: la página abre sin cortina */ }
-  setTimeout(() => { location.href = a.href; }, 1050);
+  setTimeout(() => { location.href = a.href; }, 1300);
 });
 addEventListener('pageshow', (e) => { if ((e as PageTransitionEvent).persisted) document.querySelector('.tr-cover')?.remove(); });
