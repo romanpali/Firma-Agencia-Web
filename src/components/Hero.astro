@@ -7,7 +7,7 @@ const N = 24, ARMS = 3;
 const tiles = Array.from({ length: N }, (_, k) => ({ k, arm: k % ARMS, idx: Math.floor(k / ARMS), img: k + 1, off: [-10, 6, -4, 12, -8, 5, -12, 9, -2, 10][k % 10] }));
 ---
 
-<div data-hero-wrap data-tone="dark" class="relative z-10 h-[190svh] max-md:h-[115svh]">
+<div data-hero-wrap data-tone="dark" class="relative z-10 h-[190svh] max-md:h-[200svh]">
   <section data-hero class="sticky top-0 h-lvh min-h-[600px] overflow-hidden text-white">
     <div data-hero-bg class="absolute inset-0 bg-[#05070f] md:bg-[#1f4cb8] will-change-[opacity,transform]">
       <canvas id="hero-canvas" class="absolute inset-0 hidden size-full md:block" aria-hidden="true"></canvas>
