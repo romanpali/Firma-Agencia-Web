@@ -200,10 +200,15 @@ const leavesHtml = leavesMarkup(leaves);
           const tick = (now: number) => {
             const dt = Math.min(0.05, (now - (last || now)) / 1000); last = now;
             ctx.clearRect(0, 0, w, h); ctx.fillStyle = '#fff';
-            for (const f of fl) {
-              f.y += f.v * dt; f.s += dt * 0.8; f.x += Math.sin(f.s) * f.r * 6 * dt;
-              if (f.y > h + 4) { f.y = -4; f.x = Math.random() * w; }
-              ctx.globalAlpha = f.a; ctx.beginPath(); ctx.arc(f.x, f.y, f.r, 0, 6.283); ctx.fill();
+            // un solo trazo por nivel de opacidad (en vez de uno por copo)
+            for (let q = 0; q < 4; q++) {
+              ctx.globalAlpha = 0.25 + q * 0.2; ctx.beginPath();
+              for (const f of fl) {
+                if (q === 0) { f.y += f.v * dt; f.s += dt * 0.8; f.x += Math.sin(f.s) * f.r * 6 * dt; if (f.y > h + 4) { f.y = -4; f.x = Math.random() * w; } }
+                if (Math.min(3, Math.floor(f.a * 4)) !== q) continue;
+                ctx.moveTo(f.x + f.r, f.y); ctx.arc(f.x, f.y, f.r, 0, 6.283);
+              }
+              ctx.fill();
             }
             id = on ? requestAnimationFrame(tick) : 0;
           };

@@ -130,6 +130,7 @@ const frags = [
     });
     const pulses = P.map((d, i) => `<circle r="5" fill="#fff" class="pulse"><animateMotion dur="${3 + i * 0.7}s" begin="${i * 0.5}s" repeatCount="indefinite" path="${d}"/></circle>`).join('');
     bus.innerHTML = L.join('') + N.join('') + pulses;
+    try { bus.pauseAnimations(); } catch {} root.classList.add('ps-away'); // arranca quieto; se activa al llegar al capítulo
   };
   layout();
   addEventListener('resize', layout);
@@ -145,7 +146,7 @@ const frags = [
 
   // ---- scroll → timeline u in [0, LAST]
   const EXTRA = 1.2, HOLD = 2; // extra scroll spent on the website module (search result, then the site)
-  let target = 0, rr = 0, u = 0, shown = -1, ecoOn = false, lastTime = 0, paused = false; const MAXV = 3.4; // pasos por segundo (la línea de tiempo completa dura unos 4.5 s como mínimo)
+  let target = 0, rr = 0, u = 0, shown = -1, ecoOn = false, lastTime = 0, paused = true; const MAXV = 3.4; // pasos por segundo (la línea de tiempo completa dura unos 4.5 s como mínimo)
   const read = (y: number, vh: number) => {
     const p = clamp((y - sm0.top - vh * LEAD) / Math.max(1, sm0.height - vh * (LEAD + 1.65 + 0.9)));
     target = reduced ? LAST + EXTRA : clamp(p * (LAST + EXTRA + 0.6) - 0.3, 0, LAST + EXTRA);
@@ -232,7 +233,8 @@ const frags = [
       fogs.forEach((f, k) => put(f, 'opacity', k === 0 ? clamp((+wo - 0.9) / 0.1).toFixed(3) : wo));
       read(y, vh);
       // only animate while the chapter is on screen (or still settling after leaving)
-      const away = y + vh * 1.5 < sm0.top || y - vh * 0.5 > sm0.top + sm0.height;
+      // una vez armado, el capítulo solo se anima cuando ya se ve (antes del fundido su opacidad es 0)
+      const away = (ready ? y < sm0.top + vh * 0.08 : y + vh * 1.5 < sm0.top) || y - vh * 0.5 > sm0.top + sm0.height;
       if (!ready && !away) { layout(); read(y, vh); rr = target; render(time); ready = true; root.style.visibility = ''; }
       if (!ready) return;
       if (away !== paused) { paused = away; root.classList.toggle('ps-away', away); try { away ? bus.pauseAnimations() : bus.unpauseAnimations(); } catch {} if (away) rr = target; }
