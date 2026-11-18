@@ -47,7 +47,7 @@ export function mountSilk(canvas: HTMLCanvasElement, visible: () => boolean, red
   const draw = (t: number) => { gl.uniform1f(uT, t); gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); };
   const fit = () => {
     const w = canvas.clientWidth, h = canvas.clientHeight;
-    const k = Math.min(1, Math.sqrt(0.6e6 / Math.max(1, w * h)));
+    const k = Math.min(1, Math.sqrt(0.4e6 / Math.max(1, w * h)));
     canvas.width = Math.max(1, Math.round(w * k)); canvas.height = Math.max(1, Math.round(h * k));
     gl.viewport(0, 0, canvas.width, canvas.height);
     gl.uniform2f(uRes, canvas.width, canvas.height);

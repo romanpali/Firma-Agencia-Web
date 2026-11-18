@@ -137,7 +137,7 @@ void main(){
       draw = (t: number) => { ptr.x += (ptr.tx - ptr.x) * 0.06; ptr.y += (ptr.ty - ptr.y) * 0.06; gl.uniform2f(uM, ptr.x, ptr.y); gl.uniform1f(uT, t); gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); };
       const fit = () => {
         const w = canvas.clientWidth, h = canvas.clientHeight;
-        const k = Math.min(1, Math.sqrt(0.7e6 / Math.max(1, w * h)));
+        const k = Math.min(1, Math.sqrt(0.4e6 / Math.max(1, w * h)));
         canvas.width = Math.max(1, Math.round(w * k));
         canvas.height = Math.max(1, Math.round(h * k));
         gl.viewport(0, 0, canvas.width, canvas.height);

@@ -315,7 +315,7 @@ i.live { animation: livePulse 1.6s ease-in-out infinite; }
 
 /* /servicios: escenario inmersivo y áreas */
 .stage-bg { background: radial-gradient(90% 80% at 15% 0%, color-mix(in srgb, var(--sa) 75%, #0b0d2c), transparent 65%), radial-gradient(80% 70% at 100% 100%, color-mix(in srgb, var(--sb) 65%, #0b0d2c), transparent 65%), #0a0c2b; }
-.stage-orb { background: radial-gradient(circle, color-mix(in srgb, var(--sb) 60%, transparent), transparent 65%); filter: blur(10px); animation: stOrb 14s ease-in-out infinite alternate; }
+.stage-orb { background: radial-gradient(circle, color-mix(in srgb, var(--sb) 60%, transparent), transparent 65%); animation: stOrb 14s ease-in-out infinite alternate; }
 .stage-orb2 { background: radial-gradient(circle, color-mix(in srgb, var(--sa) 55%, transparent), transparent 65%); animation-duration: 18s; animation-direction: alternate-reverse; }
 @keyframes stOrb { to { translate: 8% -10%; scale: 1.15; } }
 .stage-panel { transform-origin: 50% 50%; }
