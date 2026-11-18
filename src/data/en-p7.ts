@@ -14,6 +14,17 @@ export const P7: Record<string, string> = {
   'Cuéntanos qué necesitas y armamos una propuesta a tu medida. También puedes personalizar una vista de tu sitio.': 'Tell us what you need and we’ll put together a proposal tailored to you. You can also customize a preview of your site.', 'Armar mi proyecto (beta)': 'Build my project (beta)',
   'Identidad, sitio web, reservas en línea y un panel con asistente de IA para unas estancias boutique junto a un lago.': 'Identity, website, online booking and an AI-assistant dashboard for a boutique lakeside stay.', 'Un lugar para bajar el ritmo': 'A place to slow down', 'Fechas y confirmación': 'Dates and confirmation', 'Consultas y reservas': 'Inquiries and bookings', 'Disponibilidad por noche': 'Availability by night', 'Marea · estancias junto al lago · concepto, datos de ejemplo': 'Marea · lakeside stays · concept, sample data', 'Presencia que se encuentra': 'A presence that gets found', 'Un sitio rápido y claro, pensado para aparecer en su ciudad y recibir contactos.': 'A fast, clear site built to show up in its city and bring in leads.',
   'Proyectos que': 'Projects you', 'puedes': 'can', 'explorar': 'explore', 'puedes explorar': 'can explore',
+  // Celular: «Qué hacemos» y «Cómo trabajamos»
+  '+12 K seguidores': '+12 K followers', 'Ajustes acordados · 3 de 3': 'Agreed adjustments · 3 of 3', 'Con supervisión humana': 'With human oversight',
+  'Contenido consistente con tu identidad, publicado con orden.': 'Content consistent with your identity, published in an orderly way.', 'Contrato firmado': 'Signed contract', 'Datos': 'Data', 'En llamada': 'On a call',
+  'Fotos': 'Photos', 'Hoja de cálculo': 'Spreadsheet', 'Hojas sueltas, chats, archivos y herramientas que no se hablan entre sí.': 'Loose sheets, chats, files and tools that don’t talk to each other.', 'Nota': 'Note',
+  'Presupuesto_v3': 'Budget_v3', 'Procesos, tareas y equipos coordinados, con avance a la vista.': 'Processes, tasks and teams coordinated, with progress in plain sight.',
+  'Prospectos y oportunidades con seguimiento en un solo lugar.': 'Leads and opportunities tracked in one place.', 'Publicación programada': 'Scheduled post', 'Redes': 'Social', 'Respaldo': 'Backup', 'Tarea': 'Task',
+  'Tareas repetitivas automatizadas, con supervisión humana.': 'Repetitive tasks automated, with human oversight.', 'Todo conectado bajo un solo estándar.': 'Everything connected under a single standard.',
+  'Tu información y tus sistemas organizados, respaldados y monitoreados.': 'Your information and systems organized, backed up and monitored.',
+  'Tus números en orden, con la asesoría de nuestro Director de Administración y Finanzas.': 'Your numbers in order, with advice from our Director of Administration and Finance.',
+  'Un sitio web claro, rápido y a la medida de tu negocio.': 'A clear, fast website tailored to your business.', 'Una identidad clara: nombre, logotipo, color y tipografía.': 'A clear identity: name, logo, color and typography.',
+  'en oportunidades': 'in opportunities', '$ 134 mil': '$ 134 K',
   'Diseño web': 'Web design', 'SEO local': 'Local SEO', 'Cubierta': 'Cover',
 };
 export const P7_RE: [RegExp, string][] = [[/^Obra (\d+) de (\d+)$/, 'Work $1 of $2']];

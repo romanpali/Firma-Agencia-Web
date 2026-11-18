@@ -12,7 +12,7 @@ const steps = [
 const G = '#cfc4ff', V = '#5b7bff', W = '#f4f2ff';
 ---
 
-<section id="como-trabajamos" data-tone="dark" class="pointer-events-none relative z-10 -mt-[190lvh] font-goog text-[#f4efe6]">
+<section id="como-trabajamos" data-tone="dark" class="pointer-events-none relative z-10 -mt-[190lvh] hidden font-goog text-[#f4efe6] md:block">
   <div data-ct class="h-[calc(900vh+90svh)]">
     <div data-ct-stage class="sticky top-0 h-lvh overflow-hidden">
       <div data-ct-bg class="absolute inset-0 opacity-0 will-change-[opacity]"><i class="absolute inset-0" style="background:linear-gradient(165deg,#00033D 0%,#0600AB 52%,#2a1fb8 80%,#4a35d8 100%)"></i>
@@ -122,6 +122,8 @@ const G = '#cfc4ff', V = '#5b7bff', W = '#f4f2ff';
 
 <script>
   import { onFrame, measure, put, clamp, smooth, dissolveOut, crossProgress } from '../scripts/frame';
+  // En celular esta sección es otra (ver ProcessMobile): no se monta la escena de escritorio.
+  if (matchMedia('(min-width: 768px)').matches) {
   const root = document.querySelector<HTMLElement>('#como-trabajamos')!;
   const sec = root.querySelector<HTMLElement>('[data-ct]')!;
   const track = root.querySelector<HTMLElement>('[data-ct-track]')!;
@@ -171,4 +173,5 @@ const G = '#cfc4ff', V = '#5b7bff', W = '#f4f2ff';
     dots.forEach((d, i) => d.classList.toggle('on', pos > i - 0.5));
     segs.forEach((s, i) => put(s, 'transform', `scaleX(${clamp(pos - i).toFixed(3)})`));
   });
+  }
 </script>

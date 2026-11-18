@@ -20,7 +20,7 @@ const frags = [
 ];
 ---
 
-<section id="construccion" data-tone="light" data-titles={JSON.stringify(titles)} class="pointer-events-none relative z-10 -mt-[190svh] font-goog text-[#202124]" style="visibility:hidden">
+<section id="construccion" data-tone="light" data-titles={JSON.stringify(titles)} class="pointer-events-none relative z-10 -mt-[190svh] hidden font-goog text-[#202124] md:block" style="visibility:hidden">
   <div data-process class="h-[calc(560vh+90svh+90lvh)]">
     <div data-process-inner class="sticky top-0 h-lvh overflow-hidden" style="--fade:#fff">
       <i data-white class="absolute inset-0 bg-white opacity-0" style="mask-image:linear-gradient(to bottom,transparent 0,#000 28svh);-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 28svh)" aria-hidden="true"></i>
@@ -62,6 +62,8 @@ const frags = [
 
 <script>
   import { onFrame, measure, put, clamp as _c, lerp as _l, smooth as _s, countsOf, paintCounts, dissolveOut, crossOut } from '../scripts/frame';
+  // En celular esta sección es otra (ver ProcessMobile): no se monta la escena de escritorio.
+  if (matchMedia('(min-width: 768px)').matches) {
   const frameMath = { clamp: _c, lerp: _l, smooth: _s };
   const root = document.querySelector<HTMLElement>('#construccion')!;
   const sec = root.querySelector<HTMLElement>('[data-process]')!;
@@ -241,5 +243,6 @@ const frags = [
       if (away) return;
       render(time);
     });
+  }
   }
 </script>
