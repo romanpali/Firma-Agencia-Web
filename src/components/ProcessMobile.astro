@@ -39,7 +39,7 @@ const dots = (n: number) => Array.from({ length: n }, (_, i) => i);
   <div class="pm-pin">
     <div class="pm-bgl a" aria-hidden="true"><i class="pm-o1"></i><i class="pm-o2"></i></div>
     <div class="pm-bgl b" aria-hidden="true"><i class="pm-o1"></i><i class="pm-o2"></i></div>
-    <i class="pm-grid" aria-hidden="true"></i><i class="pm-vg" aria-hidden="true"></i>
+    <i class="pm-vg" aria-hidden="true"></i>
     <i data-bar class="pm-bar" aria-hidden="true"></i>
     <p class="pm-eye pm-ea">Qué hacemos</p><p class="pm-eye pm-eb">Cómo trabajamos</p>
 
@@ -280,7 +280,7 @@ const dots = (n: number) => Array.from({ length: n }, (_, i) => i);
   /* --- armazón --- */
   /* La escena empieza encima del hero (margen negativo) y se funde con él: no sube desde abajo. Primero 100svh de fundido, luego un tramo por paso y al final 100svh en que la siguiente sección sube y lo cubre. */
   .pm { position: relative; z-index: 12; margin-top: -200svh; height: calc(300svh + var(--n) * 64svh); color: #f4f5ff; pointer-events: none; }
-  .pm-pin { position: sticky; top: 0; height: 100svh; overflow: hidden; contain: layout paint; background: #02031a; }
+  .pm-pin { position: sticky; top: 0; height: 100lvh; overflow: hidden; contain: layout paint; background: #02031a; }
   .js .pm-pin { opacity: 0; }
   .pm-bgl { position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity 0.9s ease; }
   .pm-bgl.a { background: radial-gradient(110% 85% at 50% 40%, #0b1280 0%, #060b4a 42%, #02031a 100%); }
@@ -296,7 +296,7 @@ const dots = (n: number) => Array.from({ length: n }, (_, i) => i);
   .pm-bar { position: absolute; left: 0; top: 0; right: 0; height: 3px; z-index: 5; transform: scaleX(0); transform-origin: 0 50%; background: linear-gradient(90deg, #0033ff, #977dff); }
   .pm-eye { position: absolute; left: 0; right: 0; top: 86px; z-index: 3; text-align: center; font-size: 15px; letter-spacing: -0.01em; color: rgba(244, 245, 255, 0.55); opacity: 0; transition: opacity 0.6s ease; }
   .pm-pin:not(.pb) .pm-ea, .pm-pin.pb .pm-eb { opacity: 1; }
-  .pm-s { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2.4rem; padding: 112px 22px 88px; opacity: 0; visibility: hidden; transform: translate3d(0, 36px, 0); transition: opacity 0.4s ease, transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0s 0.6s; }
+  .pm-s { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2.4rem; padding: 112px 22px calc(88px + 100lvh - 100svh); opacity: 0; visibility: hidden; transform: translate3d(0, 36px, 0); transition: opacity 0.4s ease, transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0s 0.6s; }
   .pm-s.past { transform: translate3d(0, -36px, 0); }
   .pm-s.on { opacity: 1; visibility: visible; transform: none; transition: opacity 0.5s ease 0.1s, transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) 0.1s, visibility 0s; }
   .pm-vis { --u: min(4.15vw, 17px); position: relative; flex: none; width: calc(var(--u) * 22); height: calc(var(--u) * 16); font-size: var(--u); }
@@ -307,7 +307,7 @@ const dots = (n: number) => Array.from({ length: n }, (_, i) => i);
   .pm-txt p { margin-top: 12px; font-size: 15px; line-height: 1.5; color: rgba(244, 245, 255, 0.66); }
   .pm-gh { position: absolute; right: -2vw; top: 14svh; z-index: 0; font-size: 46vw; font-weight: 200; line-height: 1; letter-spacing: -0.06em; color: transparent; -webkit-text-stroke: 1px rgba(220, 215, 255, 0.2); pointer-events: none; opacity: 0; transform: translate3d(0, 24px, 0); transition: opacity 0.7s ease 0.15s, transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) 0.15s; }
   .pm-s.on .pm-gh { opacity: 1; transform: none; }
-  .pm-rail { position: absolute; left: 0; right: 0; bottom: calc(28px + env(safe-area-inset-bottom)); z-index: 4; display: flex; justify-content: center; gap: 7px; opacity: 0; transition: opacity 0.6s ease; }
+  .pm-rail { position: absolute; left: 0; right: 0; bottom: calc(28px + 100lvh - 100svh + env(safe-area-inset-bottom)); z-index: 4; display: flex; justify-content: center; gap: 7px; opacity: 0; transition: opacity 0.6s ease; }
   .pm-pin:not(.pb) .pm-ra, .pm-pin.pb .pm-rb { opacity: 1; }
   .pm-rail i { width: 6px; height: 6px; border-radius: 50%; background: rgba(255, 255, 255, 0.25); transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.4s; }
   .pm-rail i.on { background: #fff; transform: scale(1.7); }
