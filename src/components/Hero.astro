@@ -9,29 +9,28 @@ const tiles = Array.from({ length: N }, (_, k) => ({ k, arm: k % ARMS, idx: Math
 
 <div data-hero-wrap data-tone="dark" class="relative z-10 h-[190svh] max-md:h-[200svh]">
   <section data-hero class="sticky top-0 h-lvh min-h-[600px] overflow-hidden text-white">
-    <div data-hero-bg class="absolute inset-0 bg-[#05070f] md:bg-[#1f4cb8] will-change-[opacity,transform]">
-      <canvas id="hero-canvas" class="absolute inset-0 hidden size-full md:block" aria-hidden="true"></canvas>
-      <div class="pointer-events-none absolute inset-0 hidden bg-black/20 md:block"></div>
-      <div class="pointer-events-none absolute inset-x-0 top-0 h-[12%] bg-gradient-to-b from-black/90 to-transparent"></div>
-      <div class="pointer-events-none absolute inset-0" style="background:linear-gradient(to bottom,transparent 60%,rgba(2,8,36,.5))"></div>
+    <div data-hero-bg class="absolute inset-0 bg-[#05070f] md:bg-[#08090c] will-change-[opacity,transform]">
+      <canvas id="hero-canvas" class="hidden" aria-hidden="true"></canvas>
+      <!-- escritorio: fotografía a sangre dentro de un marco con esquinas redondeadas -->
+      <div class="hd-fr hidden md:block" aria-hidden="true">
+        <img class="hd-bg" src="/hero/desierto.webp" alt="" width="1143" height="2000" decoding="async" fetchpriority="high" />
+        <i class="hd-sh"></i><i class="hd-gr grain"></i>
+        {[12, 24, 33, 47, 58, 69, 78, 90, 40, 64].map((x, k) => <i class="hd-pt" style={`left:${x}%;--d:${-k * 2.3}s;--s:${11 + (k % 4) * 3}s;--t:${58 + (k * 7) % 34}%`}></i>)}
+      </div>
+      <div class="pointer-events-none absolute inset-x-0 top-0 h-[12%] bg-gradient-to-b from-black/90 to-transparent md:hidden"></div>
+      <div class="pointer-events-none absolute inset-0 md:hidden" style="background:linear-gradient(to bottom,transparent 60%,rgba(2,8,36,.5))"></div>
     </div>
 
     <div data-hero-text class="absolute inset-0 will-change-[opacity,transform]">
-      <!-- escritorio: seda con la marca al centro -->
-      <div class="absolute inset-0 hidden flex-col items-center justify-center px-6 text-center md:flex">
-      <h1 class="overflow-hidden pb-[0.12em] text-[clamp(3.2rem,7.4vw,7rem)] leading-[0.95] tracking-[-0.035em]" aria-label="HumanCorp">
-        <span class="hf-up block" style="--d:.25s"><span class="font-light">HUMAN</span> <span class="font-semibold">CORP</span></span>
-      </h1>
-      <p class="hf-rise mt-6 max-w-[32rem] text-[clamp(1.05rem,1.35vw,1.4rem)] font-medium leading-[1.5] tracking-tight text-white/90 text-balance" style="--d:.45s">
-        Todo lo que hace funcionar a una empresa, conectado bajo un solo <em class="hf-em">estándar</em>.
-      </p>
-      <div class="hf-rise mt-9 flex justify-center gap-3" style="--d:.62s">
-        <a href="/servicios" class="rounded-full bg-white px-7 py-3.5 text-[15px] font-medium text-[#0b0c0f] transition-transform hover:scale-[1.03]">Conocer servicios</a>
-        <a href="/arma-tu-proyecto" class="rounded-full border border-white/45 px-7 py-3.5 text-[15px] transition-colors hover:bg-white/10">Arma tu proyecto</a>
-      </div>
-      <div class="hf-rise absolute inset-x-0 bottom-[3.5%] z-10" style="--d:1s" aria-hidden="true">
-        <div class="hf-tick"><div class="hf-track">{[0, 1].map(() => names.map((n) => <span>{n}</span>))}</div></div>
-      </div>
+      <!-- escritorio: palabra gigante abajo a la izquierda, texto y botón a la derecha -->
+      <div class="hd hidden md:block">
+        <h1 class="hd-wm" aria-label="HumanCorp">
+          <span class="block overflow-hidden"><span class="hf-up block" style="--d:.25s"><span class="hd-l">Human</span><span class="hd-b">Corp</span><sup>*</sup></span></span>
+        </h1>
+        <div class="hd-rt">
+          <p class="hf-rise" style="--d:.55s">Todo lo que hace funcionar a una empresa, conectado bajo un solo estándar. Diseño, tecnología y operaciones empresariales para que tu empresa funcione con claridad.</p>
+          <div class="hf-rise hd-cta" style="--d:.7s"><a class="hd-p" href="/servicios">Conocer servicios<i><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></i></a><a class="hd-s" href="/arma-tu-proyecto">Arma tu proyecto</a></div>
+        </div>
       </div>
       <!-- celular: la seda de escritorio de fondo; etiqueta arriba, titular abajo a la izquierda, texto y botón -->
       <div class="hm md:hidden">
@@ -128,6 +127,29 @@ const tiles = Array.from({ length: N }, (_, k) => ({ k, arm: k % ARMS, idx: Math
   }
 </style>
 
+<style is:global>
+  @media (min-width: 768px) {
+    .hd-fr { position: absolute; inset: 12px; border-radius: 24px; overflow: hidden; background: #0b0a08; }
+    .hd-bg { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; object-position: 50% 74%; animation: hdK 34s ease-in-out infinite alternate; }
+    @keyframes hdK { from { transform: scale(1.04); } to { transform: scale(1.14) translate3d(-1.2%, -1.2%, 0); } }
+    .hd-sh { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8, 7, 6, 0.72), rgba(8, 7, 6, 0) 24%), linear-gradient(0deg, rgba(8, 7, 6, 0.86), rgba(8, 7, 6, 0) 52%), radial-gradient(120% 90% at 50% 50%, transparent 55%, rgba(0, 0, 0, 0.4)); }
+    .hd-gr { position: absolute; inset: 0; opacity: 0.16; }
+    .hd-pt { position: absolute; top: var(--t); width: 3px; height: 3px; border-radius: 50%; background: #ffd9a0; opacity: 0; animation: hdPt var(--s) linear infinite; animation-delay: var(--d); }
+    @keyframes hdPt { 0% { transform: translate3d(0, 0, 0); opacity: 0; } 15% { opacity: 0.75; } 85% { opacity: 0.5; } 100% { transform: translate3d(7vw, -16vh, 0); opacity: 0; } }
+    .hd { position: absolute; inset: 0; pointer-events: none; }
+    .hd-wm { position: absolute; left: 3.6vw; bottom: 5.5vh; font-size: min(13.4vw, 26vh * 1.9); line-height: 0.88; letter-spacing: -0.06em; color: #efe8d8; white-space: nowrap; }
+    .hd-wm .hf-up { padding-bottom: 0.06em; } .hd-l { font-weight: 300; } .hd-b { font-weight: 600; }
+    .hd-wm sup { position: relative; top: 0.02em; vertical-align: top; margin-left: 0.04em; font-size: 0.34em; font-weight: 400; letter-spacing: 0; }
+    .hd-rt { position: absolute; right: 4.2vw; bottom: 7vh; width: min(23vw, 350px); pointer-events: auto; }
+    .hd-rt p { font-size: clamp(12px, 0.95vw, 14.5px); line-height: 1.45; color: rgba(239, 232, 216, 0.82); }
+    .hd-cta { display: flex; align-items: center; gap: 18px; margin-top: 22px; }
+    .hd-p { display: inline-flex; align-items: center; gap: 12px; height: 46px; padding: 0 6px 0 20px; border-radius: 99px; background: #efe8d8; color: #14110d; font-size: 14.5px; font-weight: 500; text-decoration: none; white-space: nowrap; transition: transform 0.3s; }
+    .hd-p i { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: #14110d; color: #efe8d8; } .hd-p:hover { transform: scale(1.03); }
+    .hd-s { font-size: 14px; color: rgba(239, 232, 216, 0.85); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: rgba(239, 232, 216, 0.35); white-space: nowrap; } .hd-s:hover { color: #fff; }
+    @media (prefers-reduced-motion: reduce) { .hd-bg, .hd-pt { animation: none; } }
+  }
+</style>
+
 <script>
   import { onFrame, put, clamp, smooth } from '../scripts/frame';
   const canvas = document.getElementById('hero-canvas') as HTMLCanvasElement;
@@ -194,7 +216,7 @@ void main(){
 
   // The silk is a slow, soft gradient: render it small (about 0.7 MP) and at ~40 fps; the scroll motion stays at full refresh rate.
   let draw: ((t: number) => void) | null = null;
-  const gl = mobile ? null : canvas.getContext('webgl', { antialias: false, alpha: false, powerPreference: 'high-performance' });
+  const gl: WebGLRenderingContext | null = null; // el hero de escritorio ahora es fotográfico: ya no hay seda WebGL
   if (gl) {
     const sh = (type: number, src: string) => { const s = gl.createShader(type)!; gl.shaderSource(s, src); gl.compileShader(s); return s; };
     const prog = gl.createProgram()!;
