@@ -32,49 +32,20 @@ const tiles = Array.from({ length: N }, (_, k) => ({ k, arm: k % ARMS, idx: Math
           <div class="hf-rise hd-cta" style="--d:.7s"><a class="hd-p" href="/servicios">Conocer servicios<i><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></i></a><a class="hd-s" href="/arma-tu-proyecto">Arma tu proyecto</a></div>
         </div>
       </div>
-      <!-- celular: la seda de escritorio de fondo; etiqueta arriba, titular abajo a la izquierda, texto y botón -->
+      <!-- celular: tablero inclinado de proyectos que se desliza despacio, nombre al centro -->
       <div class="hm md:hidden">
-      <div class="hm-art" aria-hidden="true">
-        {[0, 1, 2, 3].map((k) => <i class={`hm-gl g${k}`} style={`--k:${k}`}></i>)}
-        <svg class="hm-rg" viewBox="0 0 400 400"><circle cx="200" cy="200" r="196" /><circle cx="200" cy="200" r="150" class="d" /><circle cx="338" cy="110" r="3.2" class="dot" /><circle cx="62" cy="290" r="2.4" class="dot" /></svg>
-        {[8, 22, 35, 48, 61, 74, 86, 15, 55].map((x, k) => <i class="hm-pt" style={`left:${x}%;--d:${-k * 1.7}s;--s:${9 + (k % 4) * 2}s`}></i>)}
-        <div class="hm-st">
-          <div class="hm-sp sl" style="--x:-54vw;--a:52deg;--ac:#e8a24a;--d:0s">
-            <div class="sp-h"><span>Contabilidad</span><em>Mar</em></div>
-            <b>$ 411 mil</b><small>Gastos del mes</small>
-            <div class="sp-b">{[50, 70, 42, 84, 60, 92].map((h, j) => <i style={`height:${h}%;--j:${j}`}></i>)}</div>
-            <p><span>Facturas</span><b>126</b></p><p><span>Conciliadas</span><b>94 %</b></p>
-          </div>
-          <div class="hm-sp sr" style="--x:54vw;--a:-52deg;--ac:#1fbf93;--d:-4.5s">
-            <div class="sp-h"><span>Marketing</span><em>Mar</em></div>
-            <b>4.2 %</b><small>CTR · 3 campañas</small>
-            <svg viewBox="0 0 100 40" preserveAspectRatio="none"><path d="M0 32 C16 30 22 20 36 22 S60 10 72 12 S90 5 100 2" fill="none" stroke="#1fbf93" stroke-width="1.8" vector-effect="non-scaling-stroke"/><path d="M0 36 C20 34 30 30 48 31 S80 24 100 20" fill="none" stroke="#c9d3df" stroke-width="1.4" vector-effect="non-scaling-stroke"/></svg>
-            <p><span>Alcance</span><b>84 K</b></p><p><span>Leads</span><b>38</b></p>
-          </div>
-          <div class="hm-sp hm-cd" style="--x:0px;--a:0deg">
-            <div class="cd-h"><b>Panel HumanCorp</b><em>Hoy</em></div>
-            <div class="cd-t">{['Ventas', 'Contabilidad', 'Marketing', 'IA'].map((t, k) => <span style={`--k:${k}`}><i></i><em class="t">{t}</em></span>)}</div>
-            <div class="cd-m cd-c" style="--k:0;--ac:#3a6bff"><small>Ingresos</small><b>$ 1.28 M</b><u>▲ 8.1 %</u>
-              <svg viewBox="0 0 100 36" preserveAspectRatio="none"><defs><linearGradient id="hmA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a6bff" stop-opacity=".28"/><stop offset="1" stop-color="#3a6bff" stop-opacity="0"/></linearGradient></defs><path d="M0 30 C14 28 20 20 32 22 S54 10 66 9 S88 4 100 1 V36 H0Z" fill="url(#hmA)"/><path d="M0 30 C14 28 20 20 32 22 S54 10 66 9 S88 4 100 1" fill="none" stroke="#3a6bff" stroke-width="1.6" vector-effect="non-scaling-stroke"/></svg>
-            </div>
-            <div class="cd-g">
-              <div class="cd-c" style="--k:1;--ac:#e8a24a"><small>Contabilidad</small><b>94 %</b><span>facturas conciliadas</span><i class="cd-p"><s></s></i></div>
-              <div class="cd-c" style="--k:2;--ac:#1fbf93"><small>Marketing</small><b>4.2 %</b><span>CTR · 3 campañas</span><div class="cd-b">{[40, 62, 48, 80, 66].map((h, j) => <i style={`height:${h}%;--j:${j}`}></i>)}</div></div>
-              <div class="cd-c" style="--k:3;--ac:#f0617d"><small>IA</small><b>1,284</b><span>tareas automatizadas</span><div class="cd-y"><i></i><i></i><i></i></div></div>
-            </div>
-          </div>
+        <div class="hs" aria-hidden="true"><div class="hs-b"><div class="hs-c c0"><div class="hs-s"><img src="/hero/s-marea.webp" alt="" decoding="async" /><img src="/hero/s-c1.webp" alt="" decoding="async" /><img src="/hero/s-fuji.webp" alt="" decoding="async" /><img src="/hero/s-hikari.webp" alt="" decoding="async" /><img src="/hero/s-r1.webp" alt="" decoding="async" /><img src="/hero/s-marea.webp" alt="" decoding="async" /><img src="/hero/s-c1.webp" alt="" decoding="async" /><img src="/hero/s-fuji.webp" alt="" decoding="async" /><img src="/hero/s-hikari.webp" alt="" decoding="async" /><img src="/hero/s-r1.webp" alt="" decoding="async" /></div></div><div class="hs-c c1"><div class="hs-s"><img src="/hero/s-trama.webp" alt="" decoding="async" /><img src="/hero/s-ret.webp" alt="" decoding="async" /><img src="/hero/s-des.webp" alt="" decoding="async" /><img src="/hero/s-arq1.webp" alt="" decoding="async" /><img src="/hero/s-abaco.webp" alt="" decoding="async" /><img src="/hero/s-trama.webp" alt="" decoding="async" /><img src="/hero/s-ret.webp" alt="" decoding="async" /><img src="/hero/s-des.webp" alt="" decoding="async" /><img src="/hero/s-arq1.webp" alt="" decoding="async" /><img src="/hero/s-abaco.webp" alt="" decoding="async" /></div></div><div class="hs-c c2"><div class="hs-s"><img src="/hero/s-r2.webp" alt="" decoding="async" /><img src="/hero/s-c2.webp" alt="" decoding="async" /><img src="/hero/s-valle.webp" alt="" decoding="async" /><img src="/hero/s-r3.webp" alt="" decoding="async" /><img src="/hero/s-r2.webp" alt="" decoding="async" /><img src="/hero/s-c2.webp" alt="" decoding="async" /><img src="/hero/s-valle.webp" alt="" decoding="async" /><img src="/hero/s-r3.webp" alt="" decoding="async" /></div></div></div></div>
+        <i class="hm-sh" aria-hidden="true"></i>
+        <div class="hs-mid">
+          <h1 class="hs-h"><span class="sr-only">HumanCorp: Todo conectado. Bajo un solo estándar.</span>
+            <span class="block overflow-hidden pb-[0.08em]" aria-hidden="true"><span class="hf-up block" style="--d:.3s"><span class="hs-l">Human</span><span class="hs-b2">Corp</span></span></span>
+          </h1>
+          <p class="hs-t hf-rise" style="--d:.55s" aria-hidden="true">Todo conectado. Bajo un solo estándar.</p>
         </div>
-      </div>
-      <i class="hm-sh" aria-hidden="true"></i>
-      <div class="hm-mid">
-        <p class="hm-k hf-rise" style="--d:.2s">Un estándar para toda tu empresa</p>
-        <h1 class="hm-h"><span class="sr-only">HumanCorp: </span>
-          <span class="block overflow-hidden pb-[0.1em]"><span class="hf-up block" style="--d:.3s">Todo conectado.</span></span>
-          <span class="block overflow-hidden pb-[0.1em]"><span class="hf-up block" style="--d:.44s">Bajo un solo estándar.</span></span>
-        </h1>
-        <p class="hm-p hf-rise" style="--d:.65s">Diseño, tecnología y operaciones empresariales, organizadas para que tu empresa funcione con claridad.</p>
-        <div class="hm-cta hf-rise" style="--d:.8s"><a class="p" href="/servicios">Conocer servicios</a><a class="s" href="/arma-tu-proyecto">Arma tu proyecto</a></div>
-      </div>
+        <div class="hs-bot">
+          <div class="hm-cta hf-rise" style="--d:.75s"><a class="p" href="/servicios">Conocer servicios</a><a class="s" href="/arma-tu-proyecto">Arma tu proyecto</a></div>
+          <p class="hs-f hf-rise" style="--d:.9s">Diseño, tecnología y operaciones empresariales, organizadas para que tu empresa funcione con claridad.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -83,47 +54,23 @@ const tiles = Array.from({ length: N }, (_, k) => ({ k, arm: k % ARMS, idx: Math
 
 <style is:global>
   @media (max-width: 767px) {
-    .hm-art { position: absolute; inset: 0; overflow: hidden; pointer-events: none; --cw: 72vw; }
-    /* luz de color que cambia despacio con el módulo activo (solo opacidad) */
-    .hm-gl { position: absolute; left: 50%; top: 30%; width: 140vw; height: 140vw; margin: -70vw 0 0 -70vw; border-radius: 50%; opacity: 0; animation: hmGl 14.4s ease-in-out infinite both; animation-delay: calc(var(--k) * 3.6s); }
-    .hm-gl.g0 { background: radial-gradient(circle, rgba(58, 107, 255, 0.45), transparent 60%); } .hm-gl.g1 { background: radial-gradient(circle, rgba(232, 162, 74, 0.4), transparent 60%); }
-    .hm-gl.g2 { background: radial-gradient(circle, rgba(31, 191, 147, 0.36), transparent 60%); } .hm-gl.g3 { background: radial-gradient(circle, rgba(240, 97, 125, 0.38), transparent 60%); }
-    @keyframes hmGl { 0% { opacity: 0; } 5% { opacity: 1; } 22% { opacity: 1; } 29% { opacity: 0; } 100% { opacity: 0; } }
-    .hm-rg { position: absolute; left: 50%; top: 30%; width: 132vw; height: 132vw; margin: -66vw 0 0 -66vw; animation: hmRot 90s linear infinite; }
-    .hm-rg circle { fill: none; stroke: rgba(255, 255, 255, 0.12); stroke-width: 0.7; } .hm-rg .d { stroke-dasharray: 2 7; stroke: rgba(255, 255, 255, 0.2); } .hm-rg .dot { fill: #fff; stroke: none; opacity: 0.8; }
-    @keyframes hmRot { to { transform: rotate(360deg); } }
-    .hm-pt { position: absolute; bottom: 8%; width: 2px; height: 2px; border-radius: 50%; background: #fff; opacity: 0; animation: hmPt var(--s) linear infinite; animation-delay: var(--d); }
-    @keyframes hmPt { 0% { transform: translate3d(0, 0, 0); opacity: 0; } 15% { opacity: 0.7; } 85% { opacity: 0.5; } 100% { transform: translate3d(0, -70svh, 0); opacity: 0; } }
-    /* pantallas en arco: la central de frente y dos laterales de canto que se mecen */
-    .hm-st { position: absolute; left: 0; right: 0; top: 12%; height: calc(var(--cw) * 1.3); perspective: 850px; perspective-origin: 50% 42%; }
-    .hm-sp { position: absolute; left: 50%; top: 0; width: var(--cw); height: calc(var(--cw) * 1.1); margin-left: calc(var(--cw) / -2); border-radius: calc(var(--cw) * 0.07); background: linear-gradient(165deg, #ffffff, #eef0f6); color: #11141c; padding: 6%; font-size: calc(var(--cw) * 0.038); box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.5), 0 40px 70px -24px rgba(0, 0, 0, 0.95); overflow: hidden; }
-    .hm-sp.sl, .hm-sp.sr { width: calc(var(--cw) * 0.72); height: calc(var(--cw) * 0.95); margin-left: calc(var(--cw) * -0.36); top: 12%; transform: translate3d(var(--x), 0, -120px) rotateY(var(--a)); animation: hmSw 9s ease-in-out infinite alternate; animation-delay: var(--d); }
-    .hm-sp.sl::after, .hm-sp.sr::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0, 0, 0, 0.5), transparent 45%, rgba(0, 0, 0, 0.5)); }
-    @keyframes hmSw { to { transform: translate3d(calc(var(--x) * 0.9), -8px, -90px) rotateY(calc(var(--a) * 0.82)); } }
-    .hm-cd { z-index: 2; animation: hmIn 1.3s cubic-bezier(0.2, 0.8, 0.2, 1) 0.35s both, hmFl 7s ease-in-out 1.7s infinite alternate; }
-    @keyframes hmIn { from { opacity: 0; transform: translate3d(0, 46px, 0) scale(0.94); } to { opacity: 1; transform: none; } }
-    @keyframes hmFl { from { transform: none; } to { transform: translate3d(0, -8px, 0); } }
-    /* contenido de los paneles */
-    .sp-h, .cd-h { display: flex; justify-content: space-between; align-items: center; font-size: 0.9em; font-weight: 500; color: #5b6275; } .sp-h em, .cd-h em { font-style: normal; font-size: 0.85em; padding: 0.2em 0.7em; border-radius: 99px; background: #e8ebf3; }
-    .hm-sp.sl > b, .hm-sp.sr > b { display: block; margin-top: 0.9em; font-size: 2em; font-weight: 500; letter-spacing: -0.04em; line-height: 1; } .hm-sp.sl > small, .hm-sp.sr > small { display: block; margin-top: 0.4em; font-size: 0.85em; color: var(--ac); font-weight: 500; }
-    .sp-b { display: flex; align-items: flex-end; gap: 0.5em; height: 28%; margin-top: 1em; } .sp-b i { flex: 1; border-radius: 0.35em 0.35em 0.1em 0.1em; background: linear-gradient(180deg, var(--ac), rgba(232, 162, 74, 0.2)); }
-    .hm-sp.sr svg { display: block; width: 100%; height: 26%; margin-top: 1em; overflow: visible; }
-    .hm-sp.sl p, .hm-sp.sr p { display: flex; justify-content: space-between; margin-top: 0.8em; font-size: 0.85em; color: #5b6275; } .hm-sp.sl p b, .hm-sp.sr p b { color: #11141c; font-weight: 500; }
-    .hm-sp.sl p:first-of-type, .hm-sp.sr p:first-of-type { padding-top: 0.7em; border-top: 1px solid #e4e7ef; margin-top: 1em; }
-    .cd-t { display: flex; gap: 0.4em; margin-top: 0.8em; } .cd-t span { position: relative; flex: 1; text-align: center; font-size: 0.78em; font-weight: 500; padding: 0.55em 0; color: #5b6275; } .cd-t span i { position: absolute; inset: 0; border-radius: 99px; background: #dfe5ff; opacity: 0; animation: hmTab 14.4s ease-in-out infinite both; animation-delay: calc(var(--k) * 3.6s); z-index: 0; } .cd-t span { z-index: 0; }
-    .cd-t em.t { position: relative; font-style: normal; }
-    @keyframes hmTab { 0% { opacity: 0; } 4% { opacity: 1; } 22% { opacity: 1; } 28% { opacity: 0; } 100% { opacity: 0; } }
-    .cd-c { position: relative; border-radius: 1.1em; background: #fff; box-shadow: 0 0 0 1px #e4e7ef, 0 10px 18px -14px rgba(20, 30, 60, 0.4); padding: 0.9em; display: flex; flex-direction: column; }
-    .cd-c::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: 0 0 0 2px var(--ac); opacity: 0; animation: hmTab 14.4s ease-in-out infinite both; animation-delay: calc(var(--k) * 3.6s); }
-    .cd-c small { font-size: 0.82em; color: #5b6275; font-weight: 500; } .cd-c b { font-size: 1.7em; font-weight: 500; letter-spacing: -0.04em; line-height: 1.1; margin-top: 0.2em; font-variant-numeric: tabular-nums; } .cd-c span, .cd-c u { font-size: 0.78em; color: #7a8194; text-decoration: none; } .cd-c u { color: #1fa56a; font-weight: 600; }
-    .cd-m { margin-top: 0.7em; height: 31%; } .cd-m svg { position: absolute; left: 0.9em; right: 0.9em; bottom: 0.7em; width: calc(100% - 1.8em); height: 40%; overflow: visible; }
-    .cd-m b { font-size: 2em; }
-    .cd-g { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5em; margin-top: 0.6em; height: calc(37% - 0.3em); } .cd-g .cd-c { padding: 0.7em; } .cd-g .cd-c b { font-size: 1.35em; } .cd-g .cd-c span { line-height: 1.15; }
-    .cd-p { display: block; height: 0.4em; border-radius: 99px; background: #e8ebf3; margin-top: auto; overflow: hidden; } .cd-p s { display: block; height: 100%; width: 94%; background: var(--ac); border-radius: 99px; }
-    .cd-b { display: flex; align-items: flex-end; gap: 0.25em; height: 1.8em; margin-top: auto; } .cd-b i { flex: 1; border-radius: 0.2em; background: var(--ac); transform-origin: 50% 100%; animation: cdBr 3s ease-in-out infinite alternate; animation-delay: calc(var(--j) * -0.5s); } @keyframes cdBr { from { transform: scaleY(0.6); } to { transform: scaleY(1); } }
-    .cd-y { display: flex; gap: 0.3em; margin-top: auto; } .cd-y i { width: 0.5em; height: 0.5em; border-radius: 50%; background: var(--ac); animation: hmTy 1.2s ease-in-out infinite; opacity: 0.35; } .cd-y i:nth-child(2) { animation-delay: 0.15s; } .cd-y i:nth-child(3) { animation-delay: 0.3s; } @keyframes hmTy { 50% { opacity: 1; } }
-    .hm-sh { background: linear-gradient(180deg, rgba(3, 5, 14, 0.35), transparent 18%, transparent 52%, rgba(3, 5, 14, 0.85) 70%, rgba(3, 5, 14, 0.96)) !important; }
-    @media (prefers-reduced-motion: reduce) { .hm-art * { animation: none !important; } .hm-gl.g0 { opacity: 1; } .hm-cd { opacity: 1; } }
+    .hm { padding: 0; justify-content: flex-start; }
+    .hs { position: absolute; inset: 0; overflow: hidden; background: #05070d; animation: hsIn 1.4s ease 0.2s both; }
+    @keyframes hsIn { from { opacity: 0; } to { opacity: 1; } }
+    .hs-b { position: absolute; left: -28vw; top: -12%; width: 156vw; height: 124%; display: flex; gap: 3.4vw; transform: rotate(-9deg); }
+    .hs-c { flex: 1; min-width: 0; overflow: hidden; }
+    .hs-s { display: flex; flex-direction: column; gap: 3.4vw; animation: hsUp 70s linear infinite; }
+    .hs-c.c1 .hs-s { animation-name: hsDn; animation-duration: 84s; } .hs-c.c2 .hs-s { animation-duration: 76s; }
+    .hs-s img { display: block; width: 100%; height: auto; max-width: none; border-radius: 3.4vw; flex: none; }
+    @keyframes hsUp { to { transform: translate3d(0, -50%, 0); } } @keyframes hsDn { from { transform: translate3d(0, -50%, 0); } to { transform: translate3d(0, 0, 0); } }
+    .hm-sh { background: radial-gradient(70% 22% at 50% 44%, rgba(3, 5, 12, 0.72), transparent 100%), linear-gradient(180deg, rgba(3, 5, 12, 0.55), rgba(3, 5, 12, 0.1) 24%, rgba(3, 5, 12, 0.25) 52%, rgba(3, 5, 12, 0.88) 74%, #03050c) !important; }
+    .hs-mid { position: absolute; left: 0; right: 0; top: 40%; z-index: 3; text-align: center; padding: 0 24px; }
+    .hs-h { font-size: clamp(3.1rem, 17vw, 4.6rem); line-height: 1; letter-spacing: -0.055em; color: #fff; } .hs-l { font-weight: 300; } .hs-b2 { font-weight: 700; }
+    .hs-t { margin-top: 12px; font-size: 15px; font-weight: 500; letter-spacing: -0.01em; color: rgba(255, 255, 255, 0.88); }
+    .hs-bot { position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; padding: 0 24px calc(34px + env(safe-area-inset-bottom)); text-align: center; }
+    .hs-bot .hm-cta { justify-content: center; margin-top: 0; }
+    .hs-f { max-width: 21rem; margin: 20px auto 0; font-size: 13px; line-height: 1.5; color: rgba(255, 255, 255, 0.62); }
+    @media (prefers-reduced-motion: reduce) { .hs-s { animation: none; } .hs { animation: none; } }
   }
 </style>
 
