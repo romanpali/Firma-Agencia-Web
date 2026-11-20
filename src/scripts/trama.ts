@@ -25,7 +25,7 @@ const src = (id: string) => `/obra/trama/${id}.webp`;
 const img = (id: string, cls = 'tz-img') => `<img class="${cls}" src="${src(id)}" alt="" width="687" height="1024" decoding="async">`;
 const ph = (p: P, cls = '') => `<div class="tz-ph ${cls}">${img(p.id)}</div>`;
 const tile = (p: P) => `<article class="tz-p rv" data-int="tpdp" data-id="${p.id}" data-k="${p.k}" data-n="${p.n}" data-p="${p.p}" data-sx="${p.sx}" data-kn="${p.kn}" data-col="${p.col}" data-comp="${p.comp}" data-d="${p.d}">
-${ph(p)}${p.tag ? `<span class="tz-tag">${p.tag}</span>` : ''}<div class="tz-qs"><small>Añadir rápido</small><div>${SZ.map((s) => `<button type="button" data-int="tadd" data-id="${p.id}" data-s="${s}">${s}</button>`).join('')}</div></div>
+${ph(p)}${p.tag ? `<span class="tz-tag">${p.tag}</span>` : ''}
 <div class="tz-pi"><div><b>${p.n}</b><span>${p.col}</span></div><em>${money(p.p)}</em></div></article>`;
 const fil = (sx: string) => {
   const m = new Map<string, string>(); P_.filter((p) => p.sx === sx).forEach((p) => { if (!m.has(p.k)) m.set(p.k, p.kn); });
@@ -60,7 +60,7 @@ const scenes: [string, string, string, string[]][] = [
 ];
 const scene = ([k, t, d, ids]: (typeof scenes)[number]) => `<div class="tz-sc rv"><div class="tz-stage">${trio(ids)}</div><div class="tz-sd"><p class="tz-k">${k}</p><h3>${t}</h3><p>${d}</p><div class="tz-mini">${ids.map((id) => `<button type="button" data-int="tpdp" data-id="${id}"><b>${byId(id).n}</b><span>${money(byId(id).p)}</span></button>`).join('')}</div></div></div>`;
 
-const serv: [string, string][] = [['Envío gratis', 'En pedidos desde $1,200'], ['Cambios en 30 días', 'En tienda o por mensajería'], ['Pago seguro', 'Tarjeta, transferencia y efectivo'], ['Recoge en tienda', 'Listo en 2 horas']];
+const serv: [string, string][] = [['Envío gratis', 'En pedidos desde $1,200'], ['Cambios en 30 días', 'En tienda o por mensajería'], ['Pago seguro', 'Tarjeta, PayPal, Mercado Pago y OXXO Pay'], ['Recoge en tienda', 'Listo en 2 horas']];
 const foot = `<footer class="tz-ft"><div class="tz-fg"><div><p class="tz-k">Ayuda</p>${['Pedidos y envíos', 'Cambios y devoluciones', 'Guía de tallas', 'Contacto'].map((x) => `<span>${x}</span>`).join('')}</div><div><p class="tz-k">Tienda</p>${tabsN.map(([k, t]) => `<button type="button" ${go(k)}>${t}</button>`).join('')}</div><div><p class="tz-k">Síguenos</p><span>Instagram</span><span>TikTok</span><span>Pinterest</span></div><div class="tz-nl"><p class="tz-k">Boletín</p><p>Novedades y ediciones nuevas, una vez al mes.</p><div><input type="text" placeholder="Tu correo" aria-label="Correo" /><button type="button">Suscribirme</button></div></div></div><b class="tz-big" aria-hidden="true">TRAMA</b><p class="tz-cp">Concepto de HumanCorp · Datos de ejemplo</p></footer>`;
 
 
@@ -89,7 +89,7 @@ const checkout = `<div class="tz-ck">
   </div>
   <div class="tz-pn tz-pn-pay">
    <h3>Forma de pago</h3>
-   <div class="tz-wl"><button type="button" class="pp" data-int="twallet" data-n="PayPal">Pay<b>Pal</b></button><button type="button" class="gp" data-int="twallet" data-n="Google Pay"><b>G</b>&nbsp;Pay</button><button type="button" class="ap" data-int="twallet" data-n="Apple Pay">&#63743;&nbsp;Pay</button></div>
+   <div class="tz-wl"><button type="button" class="pp" data-int="twallet" data-n="PayPal">Pay<b>Pal</b></button><button type="button" class="gp" data-int="twallet" data-n="Google Pay"><b>G</b>&nbsp;Pay</button><button type="button" class="ap" data-int="twallet" data-n="Apple Pay">&#63743;&nbsp;Pay</button><button type="button" class="mp" data-int="twallet" data-n="Mercado Pago">mercado pago</button><button type="button" class="ox" data-int="twallet" data-n="OXXO Pay">OXXO<small>Pay</small></button></div>
    <p class="tz-wn" data-wn></p><p class="tz-or">o paga con</p>
    <div class="tz-pm">${[['card', 'Tarjeta'], ['spei', 'Transferencia'], ['cash', 'Efectivo en tienda']].map(([k, t]) => `<button type="button" data-int="tpm" data-m="${k}">${t}</button>`).join('')}</div>
    <div class="tz-pc tz-pc-card">

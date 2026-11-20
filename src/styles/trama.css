@@ -73,10 +73,10 @@
 .tz-sc:nth-of-type(odd) { grid-template-columns: 1fr 1.7fr; } .tz-sc:nth-of-type(odd) .tz-stage { order: 2; }
 
 /* ---------- ficha de producto ---------- */
-.tz-pd { display: grid; grid-template-columns: 1.6fr 1fr; gap: 0.4em; padding: 0 0.4em; }
+.tz-pd { display: grid; grid-template-columns: 1.6fr 1fr; gap: 0.4em; padding: 3.9em 0.4em 0; }
 .tz-pgl { display: grid; grid-template-columns: 1fr 1fr; gap: 0.3em; padding-top: 0; } .tz-gc { transition: none; }
-.tz-gc .tz-img { transition: none; } .tz-gc.c1 .tz-img { transform: scale(1.9); transform-origin: 50% 16%; } .tz-gc.c2 .tz-img { transform: scale(1.9); transform-origin: 50% 90%; } .tz-gc.c3 .tz-img { transform: scale(1.7); transform-origin: 50% 52%; }
-.tz-pa { position: sticky; top: 0; align-self: start; padding: 5.4em 1.6em 2em; } .tz-bk { font-size: 0.5em; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mu); } .tz-bk:hover { color: #111; }
+.tz-gc .tz-img { transition: none; } .tz-gc.c1 .tz-img { transform: scale(1.6); transform-origin: 50% 9%; } .tz-gc.c2 .tz-img { transform: scale(1.9); transform-origin: 50% 90%; } .tz-gc.c3 .tz-img { transform: scale(1.45); transform-origin: 50% 22%; }
+.tz-pa { position: sticky; top: 4em; align-self: start; padding: 1.4em 1.6em 2em; } .tz-bk { font-size: 0.5em; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mu); } .tz-bk:hover { color: #111; }
 .tz-pa h2 { margin-top: 0.8em; font-size: 1.5em; font-weight: 500; letter-spacing: -0.045em; line-height: 1.05; } .tz-pr { display: block; margin-top: 0.7em; font-size: 0.8em; font-weight: 400; } .tz-pdsc { margin-top: 1em; font-size: 0.6em; line-height: 1.6; color: var(--mu); }
 .tz-lb2 { margin-top: 1.8em; font-size: 0.5em; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mu); } .tz-lb2 b { color: #111; font-weight: 500; } .tz-lb2 u { float: right; text-underline-offset: 0.3em; }
 .tz-sz { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.3em; margin-top: 0.8em; } .tz-sz button { padding: 0.9em 0; text-align: center !important; font-size: 0.56em; box-shadow: inset 0 0 0 0.07em var(--ln); } .tz-sz button:hover { box-shadow: inset 0 0 0 0.1em #111; } .tz-sz button.on { background: #111; color: #fff; box-shadow: none; }
@@ -220,3 +220,5 @@
 .tz-wl { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5em; margin-bottom: 1em; } .tz-wl button { display: flex; align-items: center; justify-content: center; height: 3.4em; border-radius: 0.6em; font-size: 0.62em; font-weight: 600; cursor: pointer; box-shadow: inset 0 0 0 0.08em var(--ln); background: #fff; transition: transform 0.25s; } .tz-wl button:hover { transform: translateY(-0.15em); }
 .tz-wl .pp { color: #003087; font-style: italic; font-weight: 700; } .tz-wl .pp b { color: #009cde; font-weight: 700; } .tz-wl .gp { color: #3c4043; } .tz-wl .gp b { color: #4285f4; font-size: 1.15em; } .tz-wl .ap { background: #000; color: #fff; box-shadow: none; }
 .tz-wn { min-height: 1.2em; margin: 0 0 0.8em; font-size: 0.56em; color: var(--mu); } .tz-or { margin: 0 0 0.9em; font-size: 0.56em; color: var(--mu); text-align: center; }
+
+.tz-wl .mp { background: #009ee3; color: #fff; box-shadow: none; letter-spacing: -0.01em; } .tz-wl .ox { background: #e1251b; color: #ffd400; box-shadow: none; letter-spacing: 0.04em; font-weight: 800; } .tz-wl .ox small { color: #fff; font-weight: 500; letter-spacing: 0; margin-left: 0.4em; font-size: 0.8em; }

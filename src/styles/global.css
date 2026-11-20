@@ -832,3 +832,13 @@ html[data-menu-on] main * { animation-play-state: paused !important; }
 
 /* Pantalla de entrada: lo de abajo espera quieto (sus animaciones arrancan al revelarse) */
 html.intro main * , html.intro main *::before, html.intro main *::after { animation-play-state: paused !important; }
+
+/* tarjetas del héroe «Retrato» */
+.site .bub.fcd { width: auto; aspect-ratio: auto; }
+.site .fc { display: flex; flex-direction: column; gap: calc(0.25cqw); padding: calc(1.1cqw) calc(1.7cqw); border-radius: calc(1.5cqw); background: #fff; color: #14161a; box-shadow: 0 calc(2.2cqw) calc(4cqw) calc(-2cqw) rgba(0, 0, 0, 0.5); animation: fcBob calc(6s * var(--spd, 1)) ease-in-out infinite alternate; animation-delay: var(--dl, 0s); white-space: nowrap; }
+.site .fc b { font-size: calc(3cqw); font-weight: 500; letter-spacing: -0.04em; line-height: 1; background: linear-gradient(120deg, var(--a), var(--b)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.site .fc small { font-size: calc(1.15cqw); color: #5b6070; font-weight: 500; }
+.site .fc-c, .site .fc-p { flex-direction: row; align-items: center; gap: calc(1cqw); } .site .fc-c { background: #14161a; } .site .fc-c small, .site .fc-c u { color: #fff; text-decoration: none; font-size: calc(1.2cqw); }
+.site .fc-c i { width: calc(0.8cqw); height: calc(0.8cqw); border-radius: 50%; background: #3ddc97; }
+.site .fc-av { display: flex; } .site .fc-av i { width: calc(2.2cqw); height: calc(2.2cqw); margin-left: calc(-0.6cqw); border-radius: 50%; border: calc(0.3cqw) solid #fff; background: linear-gradient(135deg, var(--a), var(--b)); } .site .fc-av i:first-child { margin-left: 0; } .site .fc-av i:nth-child(2) { filter: hue-rotate(60deg); } .site .fc-av i:nth-child(3) { filter: hue-rotate(140deg); }
+@keyframes fcBob { to { transform: translateY(calc(-0.9cqw)); } }
