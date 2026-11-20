@@ -9,7 +9,8 @@ const tileOf = (r: HTMLElement, id: string) => r.querySelector<HTMLElement>(`.tz
 const setAll = (r: HTMLElement, sel: string, v: string) => r.querySelectorAll(sel).forEach((e) => { if (e.textContent !== v) e.textContent = v; });
 
 const SHIP: Record<string, [string, string]> = { std: ['Estándar', 'en 2 a 4 días hábiles'], exp: ['Express', 'mañana antes de las 7 pm'], pick: ['Recoger en tienda', 'en 2 horas, en tienda'] };
-const PM: Record<string, string> = { card: 'Tarjeta', spei: 'Transferencia', cash: 'Efectivo en tienda' };
+const PM: Record<string, string> = { card: 'Tarjeta', spei: 'Transferencia', cash: 'Efectivo en tienda', apple: 'Apple Pay', google: 'Google Pay', paypal: 'PayPal', amazon: 'Amazon Pay', shop: 'Shop Pay', mp: 'Mercado Pago', oxxo: 'OXXO Pay' };
+const WCARD: Record<string, string> = { apple: 'Visa •••• 4242', google: 'Mastercard •••• 8890', paypal: 'Saldo PayPal', amazon: 'Amex •••• 1007', shop: 'Visa •••• 4242', mp: 'Dinero en cuenta', oxxo: 'Referencia en tienda' };
 function totals(r: HTMLElement, sub: number) {
   const disc = r.dataset.promo ? Math.round(sub * 0.1) : 0, o = r.dataset.ship || 'std';
   const ship = !sub ? 0 : o === 'exp' ? 199 : o === 'pick' ? 0 : sub - disc >= 1200 ? 0 : 99;
@@ -75,7 +76,25 @@ function act(t: HTMLElement, r: HTMLElement) {
   else if (k === 'tcart') { delete d.bagOpen; d.step = 'cart'; toTab(r, 'carrito'); render(r); }
   else if (k === 'tship') { d.ship = t.dataset.o!; render(r); }
   else if (k === 'tpm') { d.pm = t.dataset.m!; delete d.perr; }
-  else if (k === 'twallet') { const m = r.querySelector<HTMLElement>('[data-wn]'); if (m) m.textContent = `${t.dataset.n}: método de demostración, no está conectado.`; r.querySelectorAll('.tz-wl button').forEach((b) => b.classList.toggle('on', b === t)); }
+  else if (k === 'twallet') {
+    const n = t.dataset.k!, set = (q: string, v: string) => { const e = r.querySelector<HTMLElement>(q); if (e) e.textContent = v; };
+    const bag = read(r); let sub = 0; bag.forEach(([id, , q]) => { const tl = tileOf(r, id); if (tl) sub += +(tl.dataset.p || 0) * q; });
+    const T = totals(r, sub), o = d.ship || 'std';
+    set('[data-ps-wl]', t.dataset.n!); set('[data-ps-cd]', WCARD[n]); set('[data-ps-sh]', SHIP[o][0]); set('[data-ps-tt]', money(T.total));
+    set('[data-ps-ad]', r.querySelector<HTMLInputElement>('[data-ck=dir]')?.value || 'Tu dirección');
+    set('[data-ps-bt]', n === 'apple' ? 'Confirmar con Face ID' : n === 'oxxo' ? 'Generar referencia' : `Pagar con ${t.dataset.n}`);
+    const lg = r.querySelector('[data-ps-lg]'); if (lg) lg.innerHTML = t.innerHTML;
+    d.sheet = n; delete d.ph; r.querySelector('[data-ps]')?.setAttribute('aria-hidden', 'false');
+  }
+  else if (k === 'tsheetx') { if (d.ph === 'auth') return; delete d.sheet; delete d.ph; r.querySelector('[data-ps]')?.setAttribute('aria-hidden', 'true'); }
+  else if (k === 'tsheetgo') {
+    if (d.ph) return; d.ph = 'auth';
+    setTimeout(() => { d.ph = 'ok'; }, 1150);
+    setTimeout(() => {
+      d.pm = d.sheet || 'card'; delete d.sheet; delete d.ph; r.querySelector('[data-ps]')?.setAttribute('aria-hidden', 'true');
+      const pb = r.querySelector<HTMLElement>('[data-int=tpay]'); if (pb) act(pb, r);
+    }, 1900);
+  }
   else if (k === 'tcode') {
     const v = (r.querySelector<HTMLInputElement>('[data-ck=code]')?.value || '').trim().toUpperCase(), m = r.querySelector('[data-codemsg]')!;
     if (v === 'TRAMA10') { d.promo = '1'; m.textContent = 'Código aplicado: 10 % de descuento'; } else { delete d.promo; m.textContent = v ? 'Ese código no es válido' : 'Prueba con TRAMA10'; }

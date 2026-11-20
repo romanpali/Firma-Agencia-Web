@@ -43,6 +43,17 @@ const brand = `<div class="pg tz-brand" data-rp="light"><div class="tzb-bg"></di
 const go = (t: string) => `data-int="wtab" data-t="${t}"`;
 const tabsN: [string, string][] = [['mujer', 'Mujer'], ['hombre', 'Hombre'], ['studio', 'Lookbook']];
 const nav = `<div class="tz-nav mw-f" style="--d:.1s"><nav>${tabsN.map(([k, t]) => `<button type="button" class="tz-t" ${go(k)} data-t="${k}">${t}</button>`).join('')}</nav><button type="button" class="tz-logo" ${go('inicio')}>TRAMA</button><div class="tz-r"><span>Buscar</span><span>Cuenta</span><button type="button" data-int="tbag" class="tz-cb">Cesta (<i data-cn>0</i>)</button></div></div>
+<div class="tz-ps" data-ps aria-hidden="true"><i class="tz-pb" data-int="tsheetx"></i><div class="tz-pp" role="dialog" aria-label="Pago">
+ <u class="tz-pg"></u>
+ <div class="tz-pq"><div class="tz-pl" data-ps-lg></div><div><b>Trama</b><small>trama.mx · pago de demostración</small></div><button type="button" data-int="tsheetx" aria-label="Cerrar">${svg('x')}</button></div>
+ <div class="tz-pr"><div class="tz-pw"><div class="tz-pm1"><small data-ps-wl>Método</small><b data-ps-cd>Visa •••• 4242</b></div><i class="tz-ch"></i></div>
+ <div class="tz-pw"><small>Enviar a</small><b data-ps-ad>Tu dirección</b></div>
+ <div class="tz-pw"><small>Entrega</small><b data-ps-sh>Estándar</b></div>
+ <div class="tz-pw tz-pt"><small>Total</small><b data-ps-tt>$0</b></div></div>
+ <div class="tz-pv"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 17v-4a3 3 0 0 1 3-3h4M31 10h4a3 3 0 0 1 3 3v4M38 31v4a3 3 0 0 1-3 3h-4M17 38h-4a3 3 0 0 1-3-3v-4"/><path d="M18 19v3M30 19v3M24 19v7h-2M18 31c3 3 9 3 12 0"/></svg><span class="sc"></span><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span></div>
+ <button type="button" class="tz-pk" data-int="tsheetgo"><span data-ps-bt>Confirmar con Face ID</span></button>
+ <small class="tz-pf">Demostración: no se conecta con ningún banco.</small>
+</div></div>
 <aside class="tz-bag"><div class="tz-bh"><b>Cesta (<i data-cn>0</i>)</b><button type="button" data-int="tbag" aria-label="Cerrar">${svg('x')}</button></div><ul class="tz-bl"></ul><p class="tz-be">Tu cesta está vacía.</p>
 <div class="tz-bf"><div><span>Subtotal</span><b data-tot>$0</b></div><button type="button" class="tz-bb" data-int="tcart">Ver carrito y pagar</button><small>Envío gratis desde $1,200 · Cambios en 30 días</small></div>
 <div class="tz-bd"><i>${svg('check')}</i><h4>¡Gracias por tu compra!</h4><p>Pedido TR-<span data-code>2041</span>. Te avisamos por correo cuando salga.</p><button type="button" data-int="tbag">Seguir comprando</button></div></aside>`;
@@ -89,8 +100,8 @@ const checkout = `<div class="tz-ck">
   </div>
   <div class="tz-pn tz-pn-pay">
    <h3>Forma de pago</h3>
-   <div class="tz-wl"><button type="button" class="pp" data-int="twallet" data-n="PayPal">Pay<b>Pal</b></button><button type="button" class="gp" data-int="twallet" data-n="Google Pay"><b>G</b>&nbsp;Pay</button><button type="button" class="ap" data-int="twallet" data-n="Apple Pay">&#63743;&nbsp;Pay</button><button type="button" class="mp" data-int="twallet" data-n="Mercado Pago">mercado pago</button><button type="button" class="ox" data-int="twallet" data-n="OXXO Pay">OXXO<small>Pay</small></button></div>
-   <p class="tz-wn" data-wn></p><p class="tz-or">o paga con</p>
+   <div class="tz-wl"><button type="button" class="ap" data-int="twallet" data-k="apple" data-n="Apple Pay" aria-label="Pagar con Apple Pay"><span class="lg">&#63743;</span><span>Pay</span></button><button type="button" class="gp" data-int="twallet" data-k="google" data-n="Google Pay" aria-label="Pagar con Google Pay"><span class="lg"><b>G</b></span><span>Pay</span></button><button type="button" class="pp" data-int="twallet" data-k="paypal" data-n="PayPal" aria-label="Pagar con PayPal"><span class="lg">P</span><span>Pay<b>Pal</b></span></button><button type="button" class="az" data-int="twallet" data-k="amazon" data-n="Amazon Pay" aria-label="Pagar con Amazon Pay"><span>amazon</span><span class="s">pay</span></button><button type="button" class="sp" data-int="twallet" data-k="shop" data-n="Shop Pay" aria-label="Pagar con Shop Pay"><span>shop</span><span class="tg">Pay</span></button><button type="button" class="mp" data-int="twallet" data-k="mp" data-n="Mercado Pago" aria-label="Pagar con Mercado Pago"><span>mercado pago</span></button><button type="button" class="ox" data-int="twallet" data-k="oxxo" data-n="OXXO Pay" aria-label="Pagar con OXXO Pay"><span>OXXO</span><span class="s">Pay</span></button></div>
+   <p class="tz-wn">Pago rápido de demostración: no se cobra nada.</p><p class="tz-or">o paga con</p>
    <div class="tz-pm">${[['card', 'Tarjeta'], ['spei', 'Transferencia'], ['cash', 'Efectivo en tienda']].map(([k, t]) => `<button type="button" data-int="tpm" data-m="${k}">${t}</button>`).join('')}</div>
    <div class="tz-pc tz-pc-card">
     <div class="tz-cc"><i></i><b data-cc="num">•••• •••• •••• ••••</b><div><span><small>Titular</small><em data-cc="nom">NOMBRE APELLIDO</em></span><span><small>Vence</small><em data-cc="exp">MM/AA</em></span></div></div>
