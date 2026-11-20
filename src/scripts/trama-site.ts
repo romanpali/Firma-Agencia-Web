@@ -82,7 +82,7 @@ function act(t: HTMLElement, r: HTMLElement) {
     const T = totals(r, sub), o = d.ship || 'std';
     set('[data-ps-wl]', t.dataset.n!); set('[data-ps-cd]', WCARD[n]); set('[data-ps-sh]', SHIP[o][0]); set('[data-ps-tt]', money(T.total));
     set('[data-ps-ad]', r.querySelector<HTMLInputElement>('[data-ck=dir]')?.value || 'Tu dirección');
-    set('[data-ps-bt]', n === 'apple' ? 'Confirmar con Face ID' : n === 'oxxo' ? 'Generar referencia' : `Pagar con ${t.dataset.n}`);
+    set('[data-ps-bt]', n === 'apple' ? (r.closest('.obv-st') ? 'Confirmar con Face ID' : 'Confirmar con Touch ID') : n === 'oxxo' ? 'Generar referencia' : `Pagar con ${t.dataset.n}`);
     const lg = r.querySelector('[data-ps-lg]'); if (lg) lg.innerHTML = t.innerHTML;
     d.sheet = n; delete d.ph; r.querySelector('[data-ps]')?.setAttribute('aria-hidden', 'false');
   }
@@ -107,7 +107,7 @@ function act(t: HTMLElement, r: HTMLElement) {
     delete d.err; d.step = to; const sc = r.querySelector<HTMLElement>('.mw-scroll'); if (sc) sc.scrollTop = 0;
   }
   else if (k === 'tpay') {
-    const v = (key: string) => (r.querySelector<HTMLInputElement>(`[data-ck=${key}]`)?.value || '').replace(/\s/g, '');
+    const v = (key: string) => { const els = [...r.querySelectorAll<HTMLInputElement>(`[data-ck=${key}]`)]; return ((els.find((x) => x.offsetParent) || els[0])?.value || '').replace(/\s/g, ''); };
     if ((d.pm || 'card') === 'card' && !(v('cnum').length >= 13 && v('cexp').length >= 5 && v('ccvv').length >= 3)) { d.perr = '1'; dirty(r); return; }
     delete d.perr; d.busy = '1';
     setTimeout(() => {

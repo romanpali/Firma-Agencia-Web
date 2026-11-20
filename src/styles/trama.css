@@ -250,27 +250,13 @@
 .tz-pl:has(img) { background: none !important; box-shadow: none !important; padding: 0; min-width: 0; height: 2.6em; font-size: 1em; } .tz-pl img { height: 100%; width: auto; border-radius: 0.5em; }
 .tz-pq { flex-wrap: wrap; } .tz-pl:has(img) { order: -1; flex: 0 0 100%; width: 100%; height: auto; margin-bottom: 0.3em; } .tz-pl img { display: block; width: 100%; height: auto; }
 
-/* encabezado, pasos y métodos de pago (referencia de checkout) */
-.tz-ck { padding-top: 5.6em; }
-.tz-ckh { display: block; } .tz-hb { display: flex; align-items: center; justify-content: space-between; padding-bottom: 1em; } .tz-hb b { font-size: 0.9em; font-weight: 600; letter-spacing: 0.02em; } .tz-hb span { display: inline-flex; align-items: center; gap: 0.5em; font-size: 0.62em; font-weight: 500; } .tz-hb svg { width: 1.3em; height: 1.3em; }
-.tz-ckh::after { content: ""; display: block; height: 0.07em; background: var(--ln); }
-.tz-st { justify-content: center; gap: 0; padding: 1.3em 0 0; font-size: 0.58em; } .tz-st u { display: none; }
-.tz-st { width: 100%; } .tz-st li + li { flex: 1 1 auto; } .tz-st span { white-space: nowrap; } .tz-st li + li::before { content: ""; flex: 1; min-width: 1em; height: 0.1em; margin: 0 0.9em; background: rgba(17, 17, 17, 0.14); transition: background 0.5s; }
-.tz-st i { background: #ececea; box-shadow: none !important; color: #555; }
-.tz-web[data-step='ship'] .tz-st li:nth-child(-n+2) i, .tz-web[data-step='pay'] .tz-st li:nth-child(-n+3) i, .tz-web[data-step='done'] .tz-st li i { background: #1c1512; color: #fff; }
-.tz-web[data-step='ship'] .tz-st li:nth-child(2)::before, .tz-web[data-step='pay'] .tz-st li:nth-child(-n+3)::before, .tz-web[data-step='done'] .tz-st li::before { background: #1c1512; }
-.tz-wl { display: grid; grid-template-columns: repeat(auto-fit, minmax(8.4em, 1fr)); gap: 0.55em; margin-bottom: 0.9em; }
-.tz-wl button { height: 3.3em; padding: 0; border-radius: 0.7em; overflow: hidden; background: #fff; box-shadow: inset 0 0 0 0.08em var(--ln); cursor: pointer; font-size: 0.74em; transition: box-shadow 0.25s, transform 0.2s; } .tz-wl button:active { transform: scale(0.98); }
-.tz-wl button img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.tz-wl .tz-mc { display: flex; align-items: center; justify-content: center; gap: 0.55em; font-weight: 600; font-size: 0.74em; } .tz-wl .tz-mc svg { width: 1.5em; height: 1.5em; }
-.tz-wl .tz-mc.on { background: #f4f2ee; box-shadow: inset 0 0 0 0.14em #1c1512; }
-.tz-pc-w { display: none; } 
-.tz-sf { display: grid; gap: 1.1em; } .tz-sl { display: block; } .tz-sl > span { display: block; margin-bottom: 0.45em; font-size: 1.2em; font-weight: 500; color: #30313d; }
-.tz-sg { border-radius: 0.6em; box-shadow: 0 0.08em 0.2em rgba(0, 0, 0, 0.08), 0 0 0 0.07em #e0e0e6; background: #fff; overflow: hidden; }
-.tz-sn, .tz-sr { position: relative; display: flex; align-items: center; } .tz-sr { box-shadow: inset 0 0.07em 0 #e0e0e6; } .tz-web .tz-sr input[data-ck] { width: 50%; } .tz-web .tz-sr input[data-ck] + input { box-shadow: inset 0.07em 0 0 #e0e0e6; }
-.tz-web .tz-sf input[data-ck] { width: 100%; padding: 0.95em 1em; border: 0; border-radius: 0; box-shadow: none; outline: 0; background: transparent; font: inherit; font-size: 1.3em; color: #30313d; } .tz-sf input[data-ck]::placeholder { color: #a3a3ad; }
-.tz-web .tz-sl:not(:first-child) input[data-ck] { border-radius: 0.6em; box-shadow: 0 0.08em 0.2em rgba(0, 0, 0, 0.08), 0 0 0 0.07em #e0e0e6; background: #fff; }
-.tz-sg:focus-within, .tz-web .tz-sl:not(:first-child) input[data-ck]:focus { box-shadow: 0 0 0 0.07em #635bff, 0 0 0 0.25em rgba(99, 91, 255, 0.22); }
-.tz-sn em { position: absolute; right: 1em; display: flex; gap: 0.35em; align-items: center; font-style: normal; pointer-events: none; } .tz-sn em b { display: inline-grid; place-items: center; height: 1.5em; padding: 0 0.4em; border-radius: 0.25em; font-size: 0.5em; font-weight: 800; letter-spacing: 0.02em; } .tz-sn .v { background: #1a1f71; color: #fff; font-style: italic; } .tz-sn .a { background: #2e77bb; color: #fff; } .tz-sn .m { background: #fff; box-shadow: inset 0 0 0 0.12em #e0e0e6; padding: 0 0.3em; } .tz-sn .m i { width: 1em; height: 1em; border-radius: 50%; background: #eb001b; } .tz-sn .m i + i { margin-left: -0.4em; background: rgba(247, 158, 27, 0.9); }
-.tz-sr svg { position: absolute; right: 1em; width: 1.4em; height: 1.4em; color: #a3a3ad; pointer-events: none; }
-.tz-so { display: flex; align-items: center; justify-content: space-between; padding: 0.95em 1em; border-radius: 0.6em; background: #fff; box-shadow: 0 0.08em 0.2em rgba(0, 0, 0, 0.08), 0 0 0 0.07em #e0e0e6; font-size: 1.3em; color: #30313d; } .tz-so i { width: 0.5em; height: 0.5em; border-right: 0.13em solid #8a8a94; border-bottom: 0.13em solid #8a8a94; transform: rotate(45deg) translate(-0.1em, -0.1em); }
+/* pago rápido en PC: tres botones; la hoja de pago es un cuadro centrado */
+.tz-wl { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.55em; margin-bottom: 0.9em; }
+.tz-wl button { height: 3.4em; padding: 0; border-radius: 0.7em; overflow: hidden; background: #fff; box-shadow: inset 0 0 0 0.08em var(--ln); cursor: pointer; font-size: 0.74em; transition: transform 0.2s, filter 0.2s; } .tz-wl button:hover { filter: brightness(1.06); transform: translateY(-0.12em); } .tz-wl button img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.tz-wl .tz-mc, .tz-pc-s, .tz-hb { display: none !important; }
+.tz-wn { min-height: 1.2em; margin: 0 0 0.8em; font-size: 0.56em; color: var(--mu); } .tz-or { margin: 0 0 0.9em; font-size: 0.56em; color: var(--mu); text-align: center; }
+.tz-ps { align-items: center; } .tz-pp { width: min(92%, 22em); padding: 1em 1.3em 1.3em; border-radius: 1.3em; opacity: 0; transform: translateY(1.6em) scale(0.96); transition: transform 0.45s cubic-bezier(0.2, 0.9, 0.2, 1), opacity 0.3s; font-size: 0.95em; box-shadow: 0 2em 4em -1.4em rgba(0, 0, 0, 0.55); }
+.tz-web[data-sheet] .tz-pp { opacity: 1; transform: none; } .tz-pg { display: none; } .tz-pv .fc { display: none; }
+.tz-pq { flex-wrap: nowrap; } .tz-pl:has(img) { order: 0; flex: 0 0 6.2em; width: 6.2em; margin: 0; } .tz-pl img { height: auto; }
+.tz-web .tz-pk { display: flex; align-items: center; justify-content: center; text-align: center; }
+.tz-pr { margin-top: 0.2em; } .tz-pv { height: 3.4em; margin: 0.3em 0 0; } .tz-pv svg { width: 2.2em; height: 2.2em; }
