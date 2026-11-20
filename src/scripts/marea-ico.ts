@@ -21,6 +21,8 @@ const ico: Record<string, string> = {
   check: '<path d="M5 12.500l4.500 4.500L19 7.500"/>',
   bolt: '<path d="M13 3L5 13.5h6L10 21l8-10.5h-6z"/>',
   x: '<path d="M6 6l12 12M18 6L6 18"/>',
+  lock: '<rect x="5" y="10.5" width="14" height="9.5" rx="2"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/>',
+  card: '<rect x="3" y="5.5" width="18" height="13" rx="2.500"/><path d="M3 10h18M7 15h3"/>',
   panel: '<rect x="3.5" y="4.5" width="17" height="15" rx="3"/><path d="M14.5 4.5v15"/>',
   plus: '<path d="M12 5v14M5 12h14"/>',
 };

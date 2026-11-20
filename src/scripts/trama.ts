@@ -79,8 +79,8 @@ const foot = `<footer class="tz-ft"><div class="tz-fg"><div><p class="tz-k">Ayud
 const steps = [['cart', 'Carrito'], ['ship', 'Envío'], ['pay', 'Pago'], ['done', 'Listo']];
 const field = (k: string, label: string, ph: string, extra = '') => `<label class="tz-fd${extra}"><span>${label}</span><input type="text" data-ck="${k}" placeholder="${ph}" autocomplete="off" /></label>`;
 const checkout = `<div class="tz-ck">
-<div class="tz-ckh"><p class="tz-k">Mi carrito</p><h2 class="tz-t2">Tu pedido</h2>
- <ol class="tz-st">${steps.map(([k, t], i) => `<li data-k="${k}"><i>${i + 1}</i><span>${t}</span></li>`).join('')}<u><b></b></u></ol></div>
+<div class="tz-ckh"><div class="tz-hb"><b>Checkout</b><span>${svg('lock')}Pago seguro</span></div>
+ <ol class="tz-st">${steps.map(([k, t], i) => `<li data-k="${k}"><i>${i + 1}</i><span>${t}</span></li>`).join('')}</ol></div>
 <div class="tz-ckg">
  <div class="tz-ckm">
   <div class="tz-pn tz-pn-cart">
@@ -100,15 +100,17 @@ const checkout = `<div class="tz-ck">
   </div>
   <div class="tz-pn tz-pn-pay">
    <h3>Forma de pago</h3>
-   <div class="tz-wl"><button type="button" class="ap" data-int="twallet" data-k="apple" data-n="Apple Pay" aria-label="Pagar con Apple Pay"><img src="/pay/apple.webp" alt="Apple Pay" width="1167" height="151" decoding="async"></button><button type="button" class="gp" data-int="twallet" data-k="google" data-n="Google Pay" aria-label="Pagar con Google Pay"><img src="/pay/google.webp" alt="Google Pay" width="1167" height="151" decoding="async"></button><button type="button" class="pp" data-int="twallet" data-k="paypal" data-n="PayPal" aria-label="Pagar con PayPal"><img src="/pay/paypal.webp" alt="PayPal" width="1167" height="151" decoding="async"></button><button type="button" class="az" data-int="twallet" data-k="amazon" data-n="Amazon Pay" aria-label="Pagar con Amazon Pay"><img src="/pay/amazon.webp" alt="Amazon Pay" width="1167" height="151" decoding="async"></button><button type="button" class="sp" data-int="twallet" data-k="shop" data-n="Shop Pay" aria-label="Pagar con Shop Pay"><img src="/pay/shop.webp" alt="Shop Pay" width="1167" height="151" decoding="async"></button><button type="button" class="mp" data-int="twallet" data-k="mp" data-n="Mercado Pago" aria-label="Pagar con Mercado Pago"><span>mercado pago</span></button><button type="button" class="ox" data-int="twallet" data-k="oxxo" data-n="OXXO Pay" aria-label="Pagar con OXXO Pay"><span>OXXO</span><span class="s">Pay</span></button></div>
-   <p class="tz-wn">Pago rápido de demostración: no se cobra nada.</p><p class="tz-or">o paga con</p>
-   <div class="tz-pm">${[['card', 'Tarjeta'], ['spei', 'Transferencia'], ['cash', 'Efectivo en tienda']].map(([k, t]) => `<button type="button" data-int="tpm" data-m="${k}">${t}</button>`).join('')}</div>
-   <div class="tz-pc tz-pc-card">
-    <div class="tz-cc"><i></i><b data-cc="num">•••• •••• •••• ••••</b><div><span><small>Titular</small><em data-cc="nom">NOMBRE APELLIDO</em></span><span><small>Vence</small><em data-cc="exp">MM/AA</em></span></div></div>
-    <div class="tz-ff">${field('cnum', 'Número de tarjeta', '4242 4242 4242 4242', ' wide')}${field('cnom', 'Nombre en la tarjeta', 'Sofía Reyes', ' wide')}${field('cexp', 'Vencimiento', 'MM/AA')}${field('ccvv', 'CVV', '123')}</div>
-   </div>
-   <div class="tz-pc tz-pc-spei"><p>Te mostramos una CLABE de ejemplo al confirmar. El pedido se aparta por 24 horas.</p><b>0123 4567 8901 2345 67</b></div>
-   <div class="tz-pc tz-pc-cash"><p>Pagas en cualquier tienda de conveniencia con una referencia. El pedido se aparta por 48 horas.</p><b>Ref. TR-<span data-code>2042</span>-00</b></div>
+   <div class="tz-wl"><button type="button" class="tz-mc" data-int="tpm" data-m="card">${svg('card')}Tarjeta</button><button type="button" class="w-apple" data-int="twallet" data-k="apple" data-n="Apple Pay" aria-label="Pagar con Apple Pay"><img src="/pay/apple.webp" alt="Apple Pay" width="1167" height="151" decoding="async"></button><button type="button" class="w-google" data-int="twallet" data-k="google" data-n="Google Pay" aria-label="Pagar con Google Pay"><img src="/pay/google.webp" alt="Google Pay" width="1167" height="151" decoding="async"></button><button type="button" class="w-paypal" data-int="twallet" data-k="paypal" data-n="PayPal" aria-label="Pagar con PayPal"><img src="/pay/paypal.webp" alt="PayPal" width="1167" height="151" decoding="async"></button><button type="button" class="w-amazon" data-int="twallet" data-k="amazon" data-n="Amazon Pay" aria-label="Pagar con Amazon Pay"><img src="/pay/amazon.webp" alt="Amazon Pay" width="1167" height="151" decoding="async"></button><button type="button" class="w-shop" data-int="twallet" data-k="shop" data-n="Shop Pay" aria-label="Pagar con Shop Pay"><img src="/pay/shop.webp" alt="Shop Pay" width="1167" height="151" decoding="async"></button><button type="button" class="w-mp" data-int="twallet" data-k="mp" data-n="Mercado Pago" aria-label="Pagar con Mercado Pago"><img src="/pay/mp.svg" alt="Mercado Pago" width="1167" height="151" decoding="async"></button><button type="button" class="w-oxxo" data-int="twallet" data-k="oxxo" data-n="OXXO Pay" aria-label="Pagar con OXXO Pay"><img src="/pay/oxxo.svg" alt="OXXO Pay" width="1167" height="151" decoding="async"></button></div>
+   <p class="tz-wn">Pago de demostración: no se cobra nada.</p>
+   <div class="tz-pc tz-pc-card"><div class="tz-sf">
+    <div class="tz-sl"><span>Información de la tarjeta</span>
+     <div class="tz-sg"><div class="tz-sn"><input type="text" data-ck="cnum" inputmode="numeric" placeholder="1234 1234 1234 1234" autocomplete="off" aria-label="Número de tarjeta" /><em><b class="v">VISA</b><b class="m"><i></i><i></i></b><b class="a">AMEX</b></em></div>
+     <div class="tz-sr"><input type="text" data-ck="cexp" inputmode="numeric" placeholder="MM / AA" autocomplete="off" aria-label="Vencimiento" /><input type="text" data-ck="ccvv" inputmode="numeric" placeholder="CVC" autocomplete="off" aria-label="CVC" /><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 9.5h19M15 14.5h3"/></svg></div></div></div>
+    <label class="tz-sl"><span>Nombre en la tarjeta</span><input type="text" data-ck="cnom" placeholder="Sofía Reyes" autocomplete="off" /></label>
+    <label class="tz-sl"><span>País o región</span><div class="tz-so">México<i></i></div></label>
+   </div></div>
+   <div class="tz-pc tz-pc-w"><p>Elige el botón de tu billetera y confirma en la hoja de pago.</p></div>
+   
    <p class="tz-err" data-perr>Completa los datos de la tarjeta para pagar.</p>
    <p class="tz-secure">${svg('check')}Pago de demostración: no se cobra ni se guarda ningún dato.</p>
    <div class="tz-ac"><button type="button" class="tz-b2 ghost" data-int="tstep" data-s="ship">← Envío</button><button type="button" class="tz-b2 pay" data-int="tpay"><span>Pagar <b data-tot2>$0</b></span><u></u></button></div>
