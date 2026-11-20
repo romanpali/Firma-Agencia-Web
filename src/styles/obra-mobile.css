@@ -557,7 +557,7 @@
 .obv-st[data-site] .tz-fd span { font-size: 11px; } .obv-st[data-site] .tz-web input[data-ck], .obv-st[data-site] .tz-fd input { font-size: 16px; padding: 12px 0; }
 .obv-st[data-site] .tz-ff { gap: 14px 12px; }
 .obv-st[data-site] .tz-opt button { padding: 14px; border-radius: 12px; } .obv-st[data-site] .tz-opt b { font-size: 14px; } .obv-st[data-site] .tz-opt small { font-size: 12px; } .obv-st[data-site] .tz-opt em { font-size: 13px; }
-.obv-st[data-site] .tz-wl { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; gap: 8px; margin-bottom: 10px; } .obv-st[data-site] .tz-wl button { height: 46px; font-size: 13px; border-radius: 10px; } .obv-st[data-site] .tz-wl .tz-mc { gap: 6px; font-size: 13px; } .obv-st[data-site] .tz-wl .tz-mc svg { width: 18px; height: 18px; }
+.obv-st[data-site] .tz-wl { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 8px; margin-bottom: 10px; } .obv-st[data-site] .tz-wl button { height: 46px; font-size: 13px; border-radius: 10px; } .obv-st[data-site] .tz-wl .tz-mc { gap: 6px; font-size: 13px; } .obv-st[data-site] .tz-wl .tz-mc svg { width: 18px; height: 18px; }
 .obv-st[data-site] .tz-wn { font-size: 12px; margin: 0 0 18px; }
 .obv-st[data-site] .tz-sf { gap: 16px; margin-top: 4px; } .obv-st[data-site] .tz-sl > span { font-size: 13px; margin-bottom: 6px; }
 .obv-st[data-site] .tz-web .tz-sf input[data-ck], .obv-st[data-site] .tz-sf input[data-ck] { font-size: 16px; padding: 14px; height: 50px; } .obv-st[data-site] .tz-so { font-size: 16px; padding: 14px; height: 50px; }
