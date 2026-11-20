@@ -1,6 +1,7 @@
 // Proyecto «Trama» (concepto): ecommerce de moda urbana tipo Zara, con fotografía de modelos. Identidad, tienda navegable (producto, talla, cesta), panel de tienda con asistente.
 // Cada pieza es una página del libro (40em × 26.7em), en HTML/CSS. Estilos en styles/trama.css; la lógica de la tienda, en trama-site.ts (clics delegados por data-int="t…").
 import { svg } from './marea-ico';
+import { tramaDash } from './mdash';
 
 // ---------- catálogo (una foto por prenda: /public/obra/trama/<id>.webp) ----------
 type P = { id: string; n: string; p: number; sx: 'Mujer' | 'Hombre'; k: string; kn: string; tag?: string; d: string; comp: string; col: string };
@@ -214,5 +215,5 @@ const caseHTML = `<div class="pg lt pc mr-case tr-case"><div class="pc-top"><b><
 <ul class="pc-r">${hd.map(([t, d], n) => `<li><div class="pc-i"><em>${String(n + 1).padStart(2, '0')}</em><b>${t}</b><i></i><span>${d}</span></div></li>`).join('')}</ul>
 <p class="pc-f">Trama · ecommerce de moda · concepto, datos de ejemplo</p><span class="bk-pn">10</span></div>`;
 
-export const tramaLeaves = (): { f: string; b: string }[] => [{ f: brand, b: caseHTML }, { f: siteHTML, b: dash }];
-export const tramaPieces = [{ t: 'Identidad', h: brand }, { t: 'Proyecto', h: caseHTML }, { t: 'Tienda', h: siteHTML }, { t: 'Panel', h: dash }];
+export const tramaLeaves = (): { f: string; b: string }[] => [{ f: brand, b: caseHTML }, { f: siteHTML, b: tramaDash }];
+export const tramaPieces = [{ t: 'Identidad', h: brand }, { t: 'Proyecto', h: caseHTML }, { t: 'Tienda', h: siteHTML }, { t: 'Panel', h: tramaDash }];

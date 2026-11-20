@@ -9,6 +9,7 @@ const ctls = new WeakMap<HTMLElement, Ctl>();
 function chat(root: HTMLElement): Ctl {
   const q = <T extends HTMLElement>(s: string) => root.querySelector<T>(s)!;
   const field = q('.mc-field'), txt = q('.mc-t'), user = q('.mc-user'), uText = q('.mc-user span'), typing = q('.mc-typing');
+  const P = root.dataset.prompt || PROMPT;
   const blocks = [...root.querySelectorAll<HTMLElement>('.mc-b')];
   let run = 0, vis = false;
   const wait = (ms: number, id: number) => new Promise<boolean>((r) => setTimeout(() => r(id === run), ms));
@@ -16,15 +17,15 @@ function chat(root: HTMLElement): Ctl {
     root.classList.remove('mc-on'); field.classList.remove('mc-typed'); txt.textContent = ''; uText.textContent = '';
     user.classList.remove('show'); typing.classList.remove('show'); blocks.forEach((b) => b.classList.remove('show'));
   };
-  const final = () => { root.classList.add('mc-on'); uText.textContent = PROMPT; user.classList.add('show'); blocks.forEach((b) => b.classList.add('show')); };
+  const final = () => { root.classList.add('mc-on'); uText.textContent = P; user.classList.add('show'); blocks.forEach((b) => b.classList.add('show')); };
   async function play() {
     const id = ++run; reset();
     if (reduced) { final(); return; }
     if (!(await wait(1600, id))) return;
     field.classList.add('mc-typed');
-    for (let i = 1; i <= PROMPT.length; i++) { txt.textContent = PROMPT.slice(0, i); if (!(await wait(26 + Math.random() * 22, id))) return; }
+    for (let i = 1; i <= P.length; i++) { txt.textContent = P.slice(0, i); if (!(await wait(26 + Math.random() * 22, id))) return; }
     if (!(await wait(450, id))) return;
-    root.classList.add('mc-on'); field.classList.remove('mc-typed'); txt.textContent = ''; uText.textContent = PROMPT; user.classList.add('show');
+    root.classList.add('mc-on'); field.classList.remove('mc-typed'); txt.textContent = ''; uText.textContent = P; user.classList.add('show');
     if (!(await wait(600, id))) return;
     typing.classList.add('show');
     if (!(await wait(1300, id))) return;

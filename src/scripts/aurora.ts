@@ -1,3 +1,4 @@
+import { hikariDash } from './mdash';
 // Proyecto «Hikari Estudio» (concepto): estudio de diseño y fotografía. Sitio web completo (Inicio, Servicios, Casos, Nosotros, Contacto), portada de marca y tabla de contenido.
 // La raíz del sitio también es .mr-web, así que las pestañas, el desplazamiento, la aparición (.rv), los contadores y la vista ampliada los resuelve marea-site.ts;
 // el formulario, au-site.ts. Estilos en styles/aurora.css (minimalismo japonés: papel claro, serif ligera, líneas finas que se trazan).
@@ -117,5 +118,5 @@ const dash = `<div class="pg au-dash" data-rp="light" data-c="0"><i class="ad-vl
 <div class="ad-tr">${convs.map(([n, , st, c, m], i) => `<div class="ad-t" data-i="${i}"><div class="ad-th"><b>${n}</b><span class="s-${c}">${st}</span>${c === 'hu' ? `<button type="button" class="ad-take" data-int="adtake">Aprobar entrega</button>` : ''}</div><div class="ad-m">${m.map(([w, t]) => `<p class="m-${w}">${t}</p>`).join('')}</div></div>`).join('')}
 <div class="ad-in"><span>Escribe un mensaje…</span><i>↑</i></div></div></div><span class="bk-pn">18</span></div>`;
 
-export const auroraLeaves = (black: string, mid: string): { f: string; b: string }[] => [{ f: brand, b: contents }, { f: siteHTML, b: dash }, { f: mid, b: black }];
-export const auroraPieces = [{ t: 'Identidad', h: brand }, { t: 'Proyecto', h: contents }, { t: 'Sitio web', h: siteHTML }, { t: 'Panel', h: dash }];
+export const auroraLeaves = (black: string, mid: string): { f: string; b: string }[] => [{ f: brand, b: contents }, { f: siteHTML, b: hikariDash }, { f: mid, b: black }];
+export const auroraPieces = [{ t: 'Identidad', h: brand }, { t: 'Proyecto', h: contents }, { t: 'Sitio web', h: siteHTML }, { t: 'Panel', h: hikariDash }];

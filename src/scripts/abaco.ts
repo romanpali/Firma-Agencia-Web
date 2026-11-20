@@ -1,3 +1,4 @@
+import { abacoDash } from './mdash';
 // Proyecto «Ábaco» (concepto): finanzas y operaciones para empresas medianas. Sitio web completo (Inicio, Soluciones, Casos, Nosotros, Contacto),
 // portada de marca (ábaco animado), tabla de contenido y panel interactivo en el reverso. Datos de ejemplo.
 // La raíz también es .mr-web: pestañas, desplazamiento, aparición (.rv), contadores y vista ampliada los resuelve marea-site.ts; lo propio, abaco-site.ts.
@@ -127,5 +128,5 @@ const dash = `<div class="pg ab-dash" data-rp="light" data-v="res"><header><b cl
 <div class="ab-dv ab-dapr"><p class="ab-k">Solicitudes pendientes</p>${aps.map(([t, a, w]) => `<div class="ab-ap"><div><b>${t}</b><span>${a}</span><small>${w}</small></div><div class="ab-ab"><button type="button" data-int="abok">Aprobar</button><button type="button" data-int="abno">Rechazar</button></div><em></em></div>`).join('')}</div>
 <span class="bk-pn">22</span></div>`;
 
-export const abacoLeaves = (): { f: string; b: string }[] => [{ f: brand, b: contents }, { f: siteHTML, b: dash }];
-export const abacoPieces = [{ t: 'Identidad', h: brand }, { t: 'Proyecto', h: contents }, { t: 'Sitio web', h: siteHTML }, { t: 'Panel', h: dash }];
+export const abacoLeaves = (): { f: string; b: string }[] => [{ f: brand, b: contents }, { f: siteHTML, b: abacoDash }];
+export const abacoPieces = [{ t: 'Identidad', h: brand }, { t: 'Proyecto', h: contents }, { t: 'Sitio web', h: siteHTML }, { t: 'Panel', h: abacoDash }];

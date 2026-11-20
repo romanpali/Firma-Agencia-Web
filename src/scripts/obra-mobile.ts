@@ -1,3 +1,4 @@
+import { CHATS } from './mdash';
 // Obra en celular: «Ver más a fondo» abre el proyecto en una pantalla propia (como «Arma tu proyecto»).
 // Abajo, una barra con las piezas (identidad, proyecto, sitio web, panel); el sitio web se recorre completo deslizando.
 let ov: HTMLElement | null = null;
@@ -59,21 +60,22 @@ const REPLIES: [RegExp, string, string[]?][] = [
   [/aviso|recordat|automat|whats/i, 'Puedo enviar un recordatorio 24 horas antes del check-in por WhatsApp y correo. Quedaría activo para las ocho estancias.', ['24 h|Antes del check-in']],
   [/ocupa|reserva|noche/i, 'La ocupación de octubre va en 78 %. Los fines de semana están casi llenos; el martes y el miércoles tienen lugar.', ['78 %|Ocupación de octubre']],
 ];
-function buildChat(root: HTMLElement) {
+function buildChat(root: HTMLElement, kind = 'marea') {
+  const cf = CHATS[kind];
   const host = root.querySelector<HTMLElement>('.mv-inicio'); if (!host || host.querySelector('.obv-chat')) return;
   const G = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8z"/></svg>';
   const ic = (d: string) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
   const I = { chart: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>', doc: '<path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/>', bolt: '<path d="M13 2 4 14h7l-1 8 9-12h-7z"/>', cal: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>', img: '<rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.8"/><path d="m21 16-5-5-8 9"/>', search: '<circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/>', pen: '<path d="M4 20h4L19 9l-4-4L4 16z"/>', clip: '<path d="M20 11 12 19a5 5 0 0 1-7-7l8-8a3.3 3.3 0 0 1 5 5l-8 8a1.7 1.7 0 0 1-2.5-2.5L15 7"/>' };
-  const sug: [string, string][] = [['Resumen de ventas de la semana', I.chart], ['Facturas por emitir', I.doc], ['Automatizar avisos a huéspedes', I.bolt], ['Ocupación de octubre', I.cal]];
-  const TOOLS: [string, string, string][] = [['Crear imagen', I.img, 'Genera una imagen para tus redes'], ['Investigar', I.search, 'Busca y resume información'], ['Escribir un informe', I.pen, 'Redacta un resumen con tus datos'], ['Analizar un archivo', I.clip, 'Sube una foto o documento y pregunta']];
+  const sug: [string, string][] = cf ? cf.sug.map(([t, k]) => [t, (I as Record<string, string>)[k]]) : [['Resumen de ventas de la semana', I.chart], ['Facturas por emitir', I.doc], ['Automatizar avisos a huéspedes', I.bolt], ['Ocupación de octubre', I.cal]];
+  const TOOLS: [string, string, string][] = [['Crear imagen', I.img, cf ? cf.res : 'Genera una imagen para tus redes'], ['Investigar', I.search, 'Busca y resume información'], ['Escribir un informe', I.pen, 'Redacta un resumen con tus datos'], ['Analizar un archivo', I.clip, 'Sube una foto o documento y pregunta']];
   const c = document.createElement('div'); c.className = 'obv-chat';
-  c.innerHTML = `<div class="oc-msgs"><div class="oc-hi"><h3><span>Hola, Sofía</span></h3><p>¿Por dónde empezamos?</p></div>
+  c.innerHTML = `<div class="oc-msgs"><div class="oc-hi"><h3><span>${cf ? cf.hi : 'Hola, Sofía'}</span></h3><p>${cf ? cf.sub : '¿Por dónde empezamos?'}</p></div>
 <div class="oc-sg">${sug.map(([t, d]) => `<button type="button" data-q="${t}"><b>${t}</b><i>${ic(d)}</i></button>`).join('')}</div></div>
-<form class="oc-in"><div class="oc-ch"></div><input type="text" placeholder="Pregúntale a Marea IA" aria-label="Mensaje" />
+<form class="oc-in"><div class="oc-ch"></div><input type="text" placeholder="${cf ? cf.ph : 'Pregúntale a Marea IA'}" aria-label="Mensaje" />
 <div class="oc-bar"><button type="button" class="oc-pl" aria-label="Subir imágenes">${ic('<path d="M12 5v14M5 12h14"/>')}</button><button type="button" class="oc-tool">${ic('<path d="M4 6h16M4 12h10M4 18h6"/>')}Herramientas</button><i></i><button type="button" class="oc-mic" aria-label="Voz">${ic('<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>')}</button><button type="submit" class="oc-go" aria-label="Enviar">${ic('<path d="M12 19V5M5 12l7-7 7 7"/>')}</button></div>
 <input type="file" accept="image/*" multiple hidden class="oc-file" />
 <div class="oc-menu"><p>Herramientas</p>${TOOLS.map(([t, d, h], i) => `<button type="button" data-t="${i}">${ic(d)}<span><b>${t}</b><small>${h}</small></span></button>`).join('')}</div></form>
-<p class="oc-fine">Marea IA puede equivocarse. Respuestas de ejemplo.</p>`;
+<p class="oc-fine">${cf ? cf.fine : 'Marea IA puede equivocarse. Respuestas de ejemplo.'}</p>`;
   host.appendChild(c);
   const msgs = c.querySelector<HTMLElement>('.oc-msgs')!, input = c.querySelector<HTMLInputElement>('input[type=text]')!, form = c.querySelector<HTMLElement>('.oc-in')!;
   const file = c.querySelector<HTMLInputElement>('.oc-file')!, chips = c.querySelector<HTMLElement>('.oc-ch')!, menu = c.querySelector<HTMLElement>('.oc-menu')!;
@@ -95,8 +97,8 @@ function buildChat(root: HTMLElement) {
     if (q) me.querySelector('span')!.textContent = q;
     msgs.appendChild(me);
     const bot = document.createElement('div'); bot.className = 'oc-bot'; bot.innerHTML = `<i>${G}</i><div><span class="oc-dots"><u></u><u></u><u></u></span></div>`; msgs.appendChild(bot);
-    const hit = REPLIES.find(([re]) => re.test(q));
-    const text = pics.length ? `Recibí ${pics.length === 1 ? 'tu imagen' : `tus ${pics.length} imágenes`}. ${used === 'Crear imagen' ? 'Puedo usarla como referencia para crear una versión nueva para tus redes. ¿Qué estilo prefieres?' : 'Se ve una buena base para una publicación de Marea: luz cálida y mucho espacio. ¿Quieres que prepare un texto y un horario para publicarla?'}` : used === 'Investigar' ? 'Lo investigo y te resumo lo más importante en un momento. Mientras tanto: el mejor horario para publicar en Valle de Bravo es entre 7 y 9 pm.' : used === 'Escribir un informe' ? 'Listo el borrador: ventas de la semana $48,320, ocupación 78 % y 3 reservas por confirmar. ¿Lo envío por correo?' : hit ? hit[1] : 'Lo reviso y te aviso en unos segundos. Mientras tanto, puedo prepararte un resumen de ventas, facturas o avisos a huéspedes.';
+    const hit = (cf ? cf.rep.map(([re, t, c]) => [new RegExp(re, 'i'), t, c] as [RegExp, string, string[]?]) : REPLIES).find(([re]) => re.test(q));
+    const text = pics.length ? `Recibí ${pics.length === 1 ? 'tu imagen' : `tus ${pics.length} imágenes`}. ${used === 'Crear imagen' ? 'Puedo usarla como referencia para crear una versión nueva para tus redes. ¿Qué estilo prefieres?' : (cf ? cf.img : 'Se ve una buena base para una publicación de Marea: luz cálida y mucho espacio. ¿Quieres que prepare un texto y un horario para publicarla?')}` : used === 'Investigar' ? (cf ? cf.inv : 'Lo investigo y te resumo lo más importante en un momento. Mientras tanto: el mejor horario para publicar en Valle de Bravo es entre 7 y 9 pm.') : used === 'Escribir un informe' ? (cf ? cf.rpt : 'Listo el borrador: ventas de la semana $48,320, ocupación 78 % y 3 reservas por confirmar. ¿Lo envío por correo?') : hit ? hit[1] : (cf ? cf.fb : 'Lo reviso y te aviso en unos segundos. Mientras tanto, puedo prepararte un resumen de ventas, facturas o avisos a huéspedes.');
     const box = bot.querySelector('div')!; input.value = '';
     setTimeout(() => {
       box.innerHTML = '<p></p>'; const p = box.querySelector('p')!; let n = 0;
@@ -115,11 +117,11 @@ function dashBar(stage: HTMLElement, w: HTMLElement, brand: string) {
   if (root.classList.contains('mr-dash')) items = [...root.querySelectorAll<HTMLElement>('.md-side li')].map((el) => ({ el, label: el.querySelector('span')?.textContent || '', icon: el.querySelector('svg')?.outerHTML || '', on: () => el.classList.contains('on') }));
   else if (root.classList.contains('tz-dash')) items = [...root.querySelectorAll<HTMLElement>('.td-s button')].map((el) => ({ el, label: (el.textContent || '').trim(), icon: el.querySelector('svg')?.outerHTML || '', on: () => root.dataset.v === el.dataset.v }));
   else if (root.classList.contains('ab-dash')) items = [...root.querySelectorAll<HTMLElement>('header nav button')].map((el, i) => ({ el, label: (el.textContent || '').trim(), icon: [ICON.grid, ICON.doc, ICON.ok][i] || '', on: () => root.dataset.v === el.dataset.k }));
-  const kind = root.classList.contains('mr-dash') ? 'marea' : root.classList.contains('tz-dash') ? 'trama' : root.classList.contains('ab-dash') ? 'abaco' : 'hikari';
-  w.dataset.app = kind; stage.dataset.app = kind;
+  const kind = root.dataset.tm || (root.classList.contains('mr-dash') ? 'marea' : root.classList.contains('tz-dash') ? 'trama' : root.classList.contains('ab-dash') ? 'abaco' : 'hikari');
+  w.dataset.app = kind; stage.dataset.app = kind; if (root.dataset.tm) stage.dataset.tm = kind;
   // el chat va primero
   if (kind === 'trama') { const i = items.findIndex((it) => /asistente/i.test(it.label)); if (i > 0) items.unshift(items.splice(i, 1)[0]); items[0]?.el.click(); }
-  if (kind === 'marea') { if (items[0]) items[0].label = 'Asistente'; buildChat(root); }
+  if (root.classList.contains('mr-dash')) { if (items[0]) items[0].label = 'Asistente'; buildChat(root, kind); }
   const head = document.createElement('div'); head.className = 'obv-ah';
   head.innerHTML = `<div><small>${brand}</small><b></b></div><button type="button" class="obv-av" aria-label="Perfil y configuración">${brand[0]}</button>`;
   w.prepend(head);
@@ -135,6 +137,7 @@ function dashBar(stage: HTMLElement, w: HTMLElement, brand: string) {
   stage.appendChild(bar);
   const btns = [...bar.querySelectorAll<HTMLElement>('button')];
   const sync = () => {
+    const dk = kind !== 'marea' || root.dataset.view === 'inicio'; stage.toggleAttribute('data-dk', dk); w.toggleAttribute('data-dk', dk);
     const k = items.findIndex((it) => it.on()), inMain = k >= 0 && k < MAIN;
     btns.forEach((b, i) => b.classList.toggle('on', inMain ? i === k : rest.length > 0 && i === MAIN));
     head.querySelector('b')!.textContent = items[Math.max(0, k)].label;
@@ -266,7 +269,7 @@ function close() {
 function show(o: HTMLElement, pieces: { t: string; dash?: boolean; el: HTMLElement; site: boolean }[], k: number) {
   const stage = o.querySelector<HTMLElement>('.obv-st')!;
   (o as any).__lg?.(); (o as any).__lg = null;
-  stage.innerHTML = ''; stage.removeAttribute('data-scr'); stage.removeAttribute('data-site'); stage.removeAttribute('data-dash'); stage.removeAttribute('data-app'); if (pieces[k].site) stage.dataset.site = '1';
+  stage.innerHTML = ''; stage.removeAttribute('data-scr'); stage.removeAttribute('data-site'); stage.removeAttribute('data-dash'); stage.removeAttribute('data-app'); stage.removeAttribute('data-tm'); stage.removeAttribute('data-dk'); if (pieces[k].site) stage.dataset.site = '1';
   const node = pieces[k].el.cloneNode(true) as HTMLElement;
   node.querySelectorAll<HTMLElement>('[data-ready], [data-tready]').forEach((e) => { delete e.dataset.ready; delete e.dataset.tready; });
   delete node.dataset.ready; delete node.dataset.tready;

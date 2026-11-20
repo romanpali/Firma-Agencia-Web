@@ -1,0 +1,34 @@
+/* Paneles con asistente de IA de Trama, Hikari y Ábaco: misma estructura que Marea, en oscuro y con paleta propia.
+   Variables: --bg fondo, --pn tarjetas, --p2 tarjetas elevadas, --tx texto, --mu texto atenuado, --ln líneas, --ac acento, --g1..g3 degradado del saludo. */
+.mr-dash[data-tm='trama'], .obv-st[data-tm='trama'] { --bg: #141012; --pn: #1f181c; --p2: #2a2026; --sd: #191317; --tx: #f2eaed; --mu: rgba(242, 234, 237, 0.56); --ln: rgba(255, 255, 255, 0.08); --ac: #f0709b; --g1: #ff9ab8; --g2: #e0527f; --g3: #ffc2a1; --pg: linear-gradient(160deg, #20131a, #4a1f32 70%, #7a2d4a); }
+.mr-dash[data-tm='hikari'], .obv-st[data-tm='hikari'] { --bg: #14110d; --pn: #1e1913; --p2: #2a2219; --sd: #181410; --tx: #f3ece1; --mu: rgba(243, 236, 225, 0.56); --ln: rgba(255, 255, 255, 0.08); --ac: #f0b45a; --g1: #ffd27a; --g2: #ff9a5c; --g3: #ffe3b0; --pg: linear-gradient(160deg, #1c150d, #3a2713 70%, #6b4520); }
+.mr-dash[data-tm='abaco'], .obv-st[data-tm='abaco'] { --bg: #0d1412; --pn: #151f1c; --p2: #1d2a26; --sd: #101916; --tx: #e8f1ee; --mu: rgba(232, 241, 238, 0.56); --ln: rgba(255, 255, 255, 0.08); --ac: #46d19b; --g1: #6ee7b7; --g2: #38bdf8; --g3: #bef264; --pg: linear-gradient(160deg, #0b1512, #12332a 70%, #1c5a47); }
+
+.md-gl { display: inline-block; flex: none; width: 1em; height: 1em; font-style: normal; } .md-gl svg { display: block; width: 100%; height: 100%; }
+.mr-dash[data-tm] .md-logo .md-gl { font-size: 1.2em; color: var(--ac); } .mr-dash[data-tm] .mc-av .md-gl { font-size: 1em; }
+
+.mr-dash[data-tm] { background: var(--pg); color: var(--tx); }
+.mr-dash[data-tm] .md-app { background: var(--bg); box-shadow: 0 1.6em 3em -1.4em rgba(0, 0, 0, 0.7); }
+.mr-dash[data-tm] .md-side { background: var(--sd); }
+.mr-dash[data-tm] .md-side > p, .mr-dash[data-tm] .md-user span, .mr-dash[data-tm] .md-sub, .mr-dash[data-tm] .md-hist li span, .mr-dash[data-tm] .md-find, .mr-dash[data-tm] .mv-k small, .mr-dash[data-tm] .mp-k span, .mr-dash[data-tm] .mf li span, .mr-dash[data-tm] .mc-rows span, .mr-dash[data-tm] .mc-ol span, .mr-dash[data-tm] .mc-ph, .mr-dash[data-tm] .mv-k4 i { color: var(--mu); }
+.mr-dash[data-tm] .md-side li { color: var(--mu); } .mr-dash[data-tm] .md-side li.on { background: var(--p2); color: var(--tx); box-shadow: inset 0 0 0 0.06em var(--ln); }
+.mr-dash[data-tm] .md-user { background: rgba(255, 255, 255, 0.05); } .mr-dash[data-tm] .md-user i { background: linear-gradient(135deg, var(--g1), var(--g2)); color: #140f10; }
+.mr-dash[data-tm] .mc-welcome h5 { background: linear-gradient(90deg, var(--g1), var(--g2) 60%, var(--g3)); -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: 500; }
+.mr-dash[data-tm] .md-cards > div, .mr-dash[data-tm] .mv-k > div, .mr-dash[data-tm] .mv-box, .mr-dash[data-tm] .mf, .mr-dash[data-tm] .mo, .mr-dash[data-tm] .md-srv, .mr-dash[data-tm] .mc-rows { background: var(--pn); box-shadow: inset 0 0 0 0.06em var(--ln); }
+.mr-dash[data-tm] .md-cards svg { color: var(--ac); }
+.mr-dash[data-tm] .mc-user span { background: var(--p2); color: var(--tx); } .mr-dash[data-tm] .mc-av { background: var(--pn); color: var(--ac); box-shadow: inset 0 0 0 0.07em var(--ln); }
+.mr-dash[data-tm] .mc-typing i { background: var(--ac); } .mr-dash[data-tm] .mc-rows em { color: var(--ac); }
+.mr-dash[data-tm] .mc-rows > div, .mr-dash[data-tm] .mf li, .mr-dash[data-tm] .mv-list li, .mr-dash[data-tm] .md-srv li, .mr-dash[data-tm] .md-hist li { box-shadow: 0 -0.07em 0 var(--ln); } .mr-dash[data-tm] .mc-rows > div:first-child, .mr-dash[data-tm] .mf li:first-child, .mr-dash[data-tm] .mv-list li:first-child, .mr-dash[data-tm] .md-hist li:first-child { box-shadow: none; }
+.mr-dash[data-tm] .mc-ol li > i { background: color-mix(in srgb, var(--ac) 20%, transparent); color: var(--ac); } .mr-dash[data-tm] .mc-chips span, .mr-dash[data-tm] .mf-flows span, .mr-dash[data-tm] .md-in > div span { background: var(--pn); box-shadow: inset 0 0 0 0.07em var(--ln); color: var(--tx); }
+.mr-dash[data-tm] .md-in { background: var(--pn); box-shadow: inset 0 0 0 0.06em var(--ln); } .mr-dash[data-tm] .mc-t { color: var(--tx); } .mr-dash[data-tm] .mc-caret { background: var(--tx); }
+.mr-dash[data-tm] .md-in > div i, .mr-dash[data-tm] .md-new { background: var(--tx); color: var(--bg); }
+.mr-dash[data-tm] .md-hist { background: var(--pn); box-shadow: inset 0 0 0 0.06em var(--ln); } .mr-dash[data-tm] .md-hist h6 i, .mr-dash[data-tm] .md-tgl { background: var(--p2); box-shadow: none; color: var(--tx); }
+.mr-dash[data-tm] .md-find { box-shadow: inset 0 0 0 0.07em var(--ln); }
+.mr-dash[data-tm] .md-hist li i { background: linear-gradient(135deg, var(--g1), var(--g2)); } .mr-dash[data-tm] .md-hist li i.c2 { background: linear-gradient(135deg, var(--g3), var(--g1)); } .mr-dash[data-tm] .md-hist li i.c3 { background: linear-gradient(135deg, var(--g2), var(--g3)); }
+.mr-dash[data-tm] .mv-h em { background: rgba(255, 255, 255, 0.07); } .mr-dash[data-tm] .mv-k i { color: var(--ac); } .mr-dash[data-tm] .mv-k4 i { color: var(--mu); }
+.mr-dash[data-tm] .mp-k i { color: var(--ac); }
+.mr-dash[data-tm] .mp-c { background: rgba(255, 255, 255, 0.035); } .mr-dash[data-tm] .mp-k { background: var(--p2); box-shadow: none; }
+.mr-dash[data-tm] .mv-bt i { background: var(--ac); } .mr-dash[data-tm] .mv-bt i.l2 { background: var(--g3); } .mr-dash[data-tm] .mv-box { color: var(--mu); } .mr-dash[data-tm] .mv-bt { color: var(--tx); }
+.mr-dash[data-tm] .ch-a { stroke: var(--ac); } .mr-dash[data-tm] .ch-b { stroke: var(--g3); } .mr-dash[data-tm] .ch-f { fill: color-mix(in srgb, var(--ac) 16%, transparent); }
+.mr-dash[data-tm] .mf-i { background: rgba(255, 255, 255, 0.07); color: var(--ac); } .mr-dash[data-tm] .mf-i.call, .mr-dash[data-tm] .mf-i.ag { color: var(--g3); }
+.mr-dash[data-tm] .e1 { background: color-mix(in srgb, var(--g1) 22%, var(--pn)); } .mr-dash[data-tm] .e2 { background: color-mix(in srgb, var(--g2) 22%, var(--pn)); } .mr-dash[data-tm] .e3 { background: color-mix(in srgb, var(--g3) 22%, var(--pn)); } .mr-dash[data-tm] .e4 { background: rgba(63, 181, 129, 0.22); } .mr-dash[data-tm] .e5 { background: rgba(224, 82, 82, 0.22); }
