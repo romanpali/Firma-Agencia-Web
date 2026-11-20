@@ -25,6 +25,7 @@ export const P7: Record<string, string> = {
   'Tus números en orden, con la asesoría de nuestro Director de Administración y Finanzas.': 'Your numbers in order, with advice from our Director of Administration and Finance.',
   'Un sitio web claro, rápido y a la medida de tu negocio.': 'A clear, fast website tailored to your business.', 'Una identidad clara: nombre, logotipo, color y tipografía.': 'A clear identity: name, logo, color and typography.',
   'en oportunidades': 'in opportunities', '$ 134 mil': '$ 134 K',
+  'Áreas · elige una para ver su vista previa': 'Areas · pick one to see its preview', 'Ver paquetes': 'See packages', 'Más': 'More', 'Business OS': 'Business OS',
   'Diseño web': 'Web design', 'SEO local': 'Local SEO', 'Cubierta': 'Cover',
 };
 export const P7_RE: [RegExp, string][] = [[/^Obra (\d+) de (\d+)$/, 'Work $1 of $2']];
