@@ -46,7 +46,7 @@ function pdp(r: HTMLElement, id: string) {
   if (r.dataset.tab !== 'producto') r.dataset.from = r.dataset.tab || 'inicio';
   const seen = new Set<string>([id]);
   const more = [...r.querySelectorAll<HTMLElement>('.tz-mujer .tz-p, .tz-hombre .tz-p')].filter((x) => x.dataset.sx === d.sx && !seen.has(x.dataset.id!) && (seen.add(x.dataset.id!), true)).slice(0, 4);
-  r.querySelector('.tz-prod')!.innerHTML = `<div class="tz-pd"><div class="tz-pgl">${['c0', 'c1', 'c2', 'c3'].map((c) => `<div class="tz-ph tz-pc ${c}">${fig}</div>`).join('')}</div>
+  r.querySelector('.tz-prod')!.innerHTML = `<div class="tz-pd"><div class="tz-pgl">${['c0', 'c1', 'c2', 'c3'].map((c) => `<div class="tz-ph tz-gc ${c}">${fig}</div>`).join('')}</div>
 <aside class="tz-pa"><button type="button" class="tz-bk" data-int="tback">← Volver</button><p class="tz-k">${d.sx} · ${d.kn}</p><h2>${d.n}</h2><b class="tz-pr">${money(+d.p!)}</b><p class="tz-pdsc">${d.d}</p>
 <p class="tz-lb2">Color <b>${d.col}</b></p>
 <p class="tz-lb2">Talla <u>Guía de tallas</u></p><div class="tz-sz">${['XS', 'S', 'M', 'L', 'XL'].map((s) => `<button type="button" data-int="tsz" data-s="${s}">${s}</button>`).join('')}</div>
@@ -75,6 +75,7 @@ function act(t: HTMLElement, r: HTMLElement) {
   else if (k === 'tcart') { delete d.bagOpen; d.step = 'cart'; toTab(r, 'carrito'); render(r); }
   else if (k === 'tship') { d.ship = t.dataset.o!; render(r); }
   else if (k === 'tpm') { d.pm = t.dataset.m!; delete d.perr; }
+  else if (k === 'twallet') { const m = r.querySelector<HTMLElement>('[data-wn]'); if (m) m.textContent = `${t.dataset.n}: método de demostración, no está conectado.`; r.querySelectorAll('.tz-wl button').forEach((b) => b.classList.toggle('on', b === t)); }
   else if (k === 'tcode') {
     const v = (r.querySelector<HTMLInputElement>('[data-ck=code]')?.value || '').trim().toUpperCase(), m = r.querySelector('[data-codemsg]')!;
     if (v === 'TRAMA10') { d.promo = '1'; m.textContent = 'Código aplicado: 10 % de descuento'; } else { delete d.promo; m.textContent = v ? 'Ese código no es válido' : 'Prueba con TRAMA10'; }

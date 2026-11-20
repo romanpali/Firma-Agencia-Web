@@ -89,6 +89,8 @@ const checkout = `<div class="tz-ck">
   </div>
   <div class="tz-pn tz-pn-pay">
    <h3>Forma de pago</h3>
+   <div class="tz-wl"><button type="button" class="pp" data-int="twallet" data-n="PayPal">Pay<b>Pal</b></button><button type="button" class="gp" data-int="twallet" data-n="Google Pay"><b>G</b>&nbsp;Pay</button><button type="button" class="ap" data-int="twallet" data-n="Apple Pay">&#63743;&nbsp;Pay</button></div>
+   <p class="tz-wn" data-wn></p><p class="tz-or">o paga con</p>
    <div class="tz-pm">${[['card', 'Tarjeta'], ['spei', 'Transferencia'], ['cash', 'Efectivo en tienda']].map(([k, t]) => `<button type="button" data-int="tpm" data-m="${k}">${t}</button>`).join('')}</div>
    <div class="tz-pc tz-pc-card">
     <div class="tz-cc"><i></i><b data-cc="num">•••• •••• •••• ••••</b><div><span><small>Titular</small><em data-cc="nom">NOMBRE APELLIDO</em></span><span><small>Vence</small><em data-cc="exp">MM/AA</em></span></div></div>

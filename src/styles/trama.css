@@ -74,8 +74,8 @@
 
 /* ---------- ficha de producto ---------- */
 .tz-pd { display: grid; grid-template-columns: 1.6fr 1fr; gap: 0.4em; padding: 0 0.4em; }
-.tz-pgl { display: grid; grid-template-columns: 1fr 1fr; gap: 0.3em; padding-top: 0; } .tz-pc { transition: none; }
-.tz-pc .tz-img { transition: none; } .tz-pc.c1 .tz-img { transform: scale(1.9); transform-origin: 50% 16%; } .tz-pc.c2 .tz-img { transform: scale(1.9); transform-origin: 50% 90%; } .tz-pc.c3 .tz-img { transform: scale(1.7); transform-origin: 50% 52%; }
+.tz-pgl { display: grid; grid-template-columns: 1fr 1fr; gap: 0.3em; padding-top: 0; } .tz-gc { transition: none; }
+.tz-gc .tz-img { transition: none; } .tz-gc.c1 .tz-img { transform: scale(1.9); transform-origin: 50% 16%; } .tz-gc.c2 .tz-img { transform: scale(1.9); transform-origin: 50% 90%; } .tz-gc.c3 .tz-img { transform: scale(1.7); transform-origin: 50% 52%; }
 .tz-pa { position: sticky; top: 0; align-self: start; padding: 5.4em 1.6em 2em; } .tz-bk { font-size: 0.5em; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mu); } .tz-bk:hover { color: #111; }
 .tz-pa h2 { margin-top: 0.8em; font-size: 1.5em; font-weight: 500; letter-spacing: -0.045em; line-height: 1.05; } .tz-pr { display: block; margin-top: 0.7em; font-size: 0.8em; font-weight: 400; } .tz-pdsc { margin-top: 1em; font-size: 0.6em; line-height: 1.6; color: var(--mu); }
 .tz-lb2 { margin-top: 1.8em; font-size: 0.5em; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mu); } .tz-lb2 b { color: #111; font-weight: 500; } .tz-lb2 u { float: right; text-underline-offset: 0.3em; }
@@ -215,3 +215,8 @@
 .tz-dl { display: flex; justify-content: center; gap: 3em; margin-top: 2.4em; padding-top: 1.6em; box-shadow: 0 -0.07em 0 var(--ln); } .tz-dl small { display: block; font-size: 0.5em; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mu); } .tz-dl b { display: block; margin-top: 0.3em; font-size: 0.8em; font-weight: 500; }
 .js .tz-pn-done .tz-ok, .js .tz-ckg { opacity: 1; }
 @media (prefers-reduced-motion: reduce) { .tz-ok circle, .tz-ok path { stroke-dashoffset: 0 !important; animation: none !important; } }
+
+/* pago rápido (solo de demostración) */
+.tz-wl { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5em; margin-bottom: 1em; } .tz-wl button { display: flex; align-items: center; justify-content: center; height: 3.4em; border-radius: 0.6em; font-size: 0.62em; font-weight: 600; cursor: pointer; box-shadow: inset 0 0 0 0.08em var(--ln); background: #fff; transition: transform 0.25s; } .tz-wl button:hover { transform: translateY(-0.15em); }
+.tz-wl .pp { color: #003087; font-style: italic; font-weight: 700; } .tz-wl .pp b { color: #009cde; font-weight: 700; } .tz-wl .gp { color: #3c4043; } .tz-wl .gp b { color: #4285f4; font-size: 1.15em; } .tz-wl .ap { background: #000; color: #fff; box-shadow: none; }
+.tz-wn { min-height: 1.2em; margin: 0 0 0.8em; font-size: 0.56em; color: var(--mu); } .tz-or { margin: 0 0 0.9em; font-size: 0.56em; color: var(--mu); text-align: center; }
