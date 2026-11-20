@@ -546,3 +546,23 @@
 .sh-hp { display: flex; align-items: center; gap: 14px; padding: 16px; border-radius: 20px; background: var(--sh-i); } .sh-hp i { flex: none; width: 46px; height: 46px; border-radius: 14px; background: #111; background-image: linear-gradient(135deg, #6b9bff, #b48cff); } .sh-hp b { display: block; font-size: 16px; } .sh-hp span { display: block; margin-top: 2px; font-size: 13px; color: var(--sh-m); }
 .sh-ac { margin-top: 12px; border-radius: 18px; overflow: hidden; background: var(--sh-i); } .sh-ac a { display: block; padding: 14px 16px; color: inherit; text-decoration: none; } .sh-ac a + a { box-shadow: 0 -1px 0 var(--sh-ln); } .sh-ac b { display: block; font-size: 15px; } .sh-ac span { font-size: 13px; color: var(--sh-m); }
 .sh-fq details { margin-bottom: 8px; border-radius: 16px; background: var(--sh-i); } .sh-fq summary { padding: 14px 16px; font-size: 14.5px; font-weight: 500; cursor: pointer; list-style: none; } .sh-fq summary::-webkit-details-marker { display: none; } .sh-fq p { margin: 0; padding: 0 16px 14px; font-size: 13.5px; line-height: 1.5; color: var(--sh-m); }
+
+/* Trama · checkout pensado para celular: una columna, campos grandes, métodos en 3 columnas y barra de pago fija */
+.obv-st[data-site] .tz-ck { padding: 76px 16px 0; }
+.obv-st[data-site] .tz-hb { padding-bottom: 12px; } .obv-st[data-site] .tz-hb b { font-size: 15px; } .obv-st[data-site] .tz-hb span { font-size: 12px; }
+.obv-st[data-site] .tz-st { font-size: 12px; padding: 14px 0 0; overflow: visible; } .obv-st[data-site] .tz-st i { width: 24px; height: 24px; font-size: 12px; } .obv-st[data-site] .tz-st li span { display: none; } .obv-st[data-site] .tz-st li + li::before { min-width: 12px; margin: 0 8px; }
+.tz-web[data-step='cart'] .tz-st li[data-k='cart'] span, .tz-web[data-step='ship'] .tz-st li[data-k='ship'] span, .tz-web[data-step='pay'] .tz-st li[data-k='pay'] span, .tz-web[data-step='done'] .tz-st li[data-k='done'] span { display: inline !important; margin-left: 6px; font-weight: 600; }
+.obv-st[data-site] .tz-ckg { margin-top: 18px; gap: 20px; }
+.obv-st[data-site] .tz-pn h3 { font-size: 16px; font-weight: 600; margin: 4px 0 12px; }
+.obv-st[data-site] .tz-fd span { font-size: 11px; } .obv-st[data-site] .tz-web input[data-ck], .obv-st[data-site] .tz-fd input { font-size: 16px; padding: 12px 0; }
+.obv-st[data-site] .tz-ff { gap: 14px 12px; }
+.obv-st[data-site] .tz-opt button { padding: 14px; border-radius: 12px; } .obv-st[data-site] .tz-opt b { font-size: 14px; } .obv-st[data-site] .tz-opt small { font-size: 12px; } .obv-st[data-site] .tz-opt em { font-size: 13px; }
+.obv-st[data-site] .tz-wl { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; gap: 8px; margin-bottom: 10px; } .obv-st[data-site] .tz-wl button { height: 46px; font-size: 13px; border-radius: 10px; } .obv-st[data-site] .tz-wl .tz-mc { gap: 6px; font-size: 13px; } .obv-st[data-site] .tz-wl .tz-mc svg { width: 18px; height: 18px; }
+.obv-st[data-site] .tz-wn { font-size: 12px; margin: 0 0 18px; }
+.obv-st[data-site] .tz-sf { gap: 16px; margin-top: 4px; } .obv-st[data-site] .tz-sl > span { font-size: 13px; margin-bottom: 6px; }
+.obv-st[data-site] .tz-web .tz-sf input[data-ck], .obv-st[data-site] .tz-sf input[data-ck] { font-size: 16px; padding: 14px; height: 50px; } .obv-st[data-site] .tz-so { font-size: 16px; padding: 14px; height: 50px; }
+.obv-st[data-site] .tz-sn em b { font-size: 9px; } .obv-st[data-site] .tz-sn .a { display: none; } .obv-st[data-site] .tz-sr svg { width: 20px; height: 20px; }
+.obv-st[data-site] .tz-secure { font-size: 12px; } .obv-st[data-site] .tz-err { font-size: 12px; }
+.obv-st[data-site] .tz-pn-ship .tz-ac, .obv-st[data-site] .tz-pn-pay .tz-ac { position: sticky; bottom: 84px; z-index: 6; flex-wrap: nowrap; gap: 10px; margin: 20px -6px 0; padding: 10px; border-radius: 18px; background: rgba(255, 255, 255, 0.96); box-shadow: 0 12px 30px -12px rgba(0, 0, 0, 0.4), 0 0 0 1px #ececec; }
+.obv-st[data-site] .tz-ac .ghost { flex: none; font-size: 13px; padding: 0 6px; } .obv-st[data-site] .tz-ac .tz-b2:not(.ghost) { flex: 1; display: flex; align-items: center; justify-content: center; height: 50px; border-radius: 14px; font-size: 15px; background: #1c1512; color: #fff; }
+.obv-st[data-site] .tz-ac .tz-b2.pay span { font-size: 15px; }
